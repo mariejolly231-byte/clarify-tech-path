@@ -14,7 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      workshop_responses: {
+        Row: {
+          ai_level: number | null
+          ai_usage: string[]
+          created_at: string
+          goals: string[]
+          id: string
+          nocode_level: number | null
+          repetitive_task: string | null
+          tools_automation: string | null
+          tools_tested: string[]
+        }
+        Insert: {
+          ai_level?: number | null
+          ai_usage?: string[]
+          created_at?: string
+          goals?: string[]
+          id?: string
+          nocode_level?: number | null
+          repetitive_task?: string | null
+          tools_automation?: string | null
+          tools_tested?: string[]
+        }
+        Update: {
+          ai_level?: number | null
+          ai_usage?: string[]
+          created_at?: string
+          goals?: string[]
+          id?: string
+          nocode_level?: number | null
+          repetitive_task?: string | null
+          tools_automation?: string | null
+          tools_tested?: string[]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
