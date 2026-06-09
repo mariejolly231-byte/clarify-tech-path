@@ -14,7 +14,7 @@ export const SECTIONS = [
 ];
 
 export function SideNav() {
-  const [active, setActive] = useState("ouverture");
+  const [active, setActive] = useState("sondage");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
