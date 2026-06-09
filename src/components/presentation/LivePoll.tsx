@@ -5,20 +5,35 @@ import { supabase } from "@/integrations/supabase/client";
 
 type Response = {
   id: string;
+  nocode_def: string[] | null;
+  ai_def: string[] | null;
   nocode_level: number | null;
   ai_level: number | null;
   ai_usage: string[];
   tools_automation: string | null;
   tools_tested: string[];
+  tools_other: string | null;
   goals: string[];
   repetitive_task: string | null;
   created_at: string;
 };
 
 const TOOLS = [
-  "ChatGPT", "Claude", "Perplexity", "Make", "n8n",
-  "Notion", "Airtable", "Zapier", "Lovable", "Autre",
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Copilot",
+  "Perplexity",
+  "Make",
+  "n8n",
+  "Zapier",
+  "Notion",
+  "Airtable",
+  "Softr",
+  "Lovable",
+  "Autre",
 ];
+
 const GOALS = [
   "Du temps",
   "De la régularité",
@@ -66,15 +81,21 @@ export function LivePoll() {
   const formUrl = origin ? `${origin}/sondage` : "";
   const total = responses.length;
 
-  const avgNocode = avg(responses.map((r) => r.nocode_level).filter(Boolean) as number[]);
-  const avgAi = avg(responses.map((r) => r.ai_level).filter(Boolean) as number[]);
+  const nocodeDefs = countItems(responses.flatMap((r) => r.nocode_def ?? []));
+  const aiDefs = countItems(responses.flatMap((r) => r.ai_def ?? []));
 
   const toolsCount = countItems(responses.flatMap((r) => r.tools_tested ?? []));
   const goalsCount = countItems(responses.flatMap((r) => r.goals ?? []));
+
   const tasks = responses
     .map((r) => r.repetitive_task)
     .filter((t): t is string => !!t)
     .slice(0, 8);
+
+  const otherTools = responses
+    .map((r) => r.tools_other)
+    .filter((t): t is string => !!t)
+    .slice(0, 10);
 
   return (
     <Section
@@ -130,8 +151,16 @@ export function LivePoll() {
         {/* Live results */}
         <div className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
-            <Gauge label="Niveau no-code" value={avgNocode} />
-            <Gauge label="Niveau IA générative" value={avgAi} />
+            <RankBlock
+              title="Définitions du no-code"
+              data={nocodeDefs}
+              total={total}
+            />
+            <RankBlock
+              title="Définitions de l'IA générative"
+              data={aiDefs}
+              total={total}
+            />
           </div>
 
           <RankBlock
@@ -140,6 +169,24 @@ export function LivePoll() {
             total={total}
             knownKeys={TOOLS}
           />
+
+          {otherTools.length > 0 && (
+            <div className="rounded-2xl border border-border bg-card p-5">
+              <div className="mb-3 text-[11px] uppercase tracking-[0.2em] text-primary">
+                Autres outils précisés
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {otherTools.map((t, i) => (
+                  <span
+                    key={i}
+                    className="rounded-md border border-border bg-stone-soft px-3 py-1.5 text-xs text-foreground/85"
+                  >
+                    « {t} »
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
 
           <RankBlock
             title="Ce qu'on aimerait gagner"
@@ -177,42 +224,10 @@ export function LivePoll() {
   );
 }
 
-function avg(arr: number[]) {
-  if (!arr.length) return 0;
-  return arr.reduce((a, b) => a + b, 0) / arr.length;
-}
-
 function countItems(items: string[]) {
   const m = new Map<string, number>();
   for (const it of items) m.set(it, (m.get(it) ?? 0) + 1);
   return m;
-}
-
-function Gauge({ label, value }: { label: string; value: number }) {
-  const pct = (value / 5) * 100;
-  return (
-    <div className="rounded-2xl border border-border bg-card p-5">
-      <div className="flex items-baseline justify-between">
-        <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-          {label}
-        </div>
-        <div className="font-mono text-2xl text-primary">
-          {value ? value.toFixed(1) : "–"}
-          <span className="text-sm text-muted-foreground"> / 5</span>
-        </div>
-      </div>
-      <div className="mt-4 h-2 overflow-hidden rounded-full bg-stone-soft">
-        <div
-          className="h-full rounded-full bg-primary transition-all duration-500"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-      <div className="mt-2 flex justify-between font-mono text-[10px] text-muted-foreground">
-        <span>1 découvre</span>
-        <span>5 maîtrise</span>
-      </div>
-    </div>
-  );
 }
 
 function RankBlock({
@@ -224,13 +239,16 @@ function RankBlock({
   title: string;
   data: Map<string, number>;
   total: number;
-  knownKeys: string[];
+  knownKeys?: string[];
 }) {
-  const entries = knownKeys
-    .map((k) => [k, data.get(k) ?? 0] as const)
+  let entries = knownKeys
+    ? knownKeys.map((k) => [k, data.get(k) ?? 0] as const)
+    : Array.from(data.entries());
+
+  entries = entries
     .sort((a, b) => b[1] - a[1])
     .filter(([, v]) => v > 0)
-    .slice(0, 6);
+    .slice(0, 8);
 
   return (
     <div className="rounded-2xl border border-border bg-card p-5">
@@ -243,7 +261,7 @@ function RankBlock({
             const pct = total ? (v / total) * 100 : 0;
             return (
               <li key={k} className="flex items-center gap-3">
-                <div className="w-32 shrink-0 text-xs text-foreground/80">{k}</div>
+                <div className="w-32 shrink-0 text-xs text-foreground/80 leading-tight">{k}</div>
                 <div className="relative h-5 flex-1 overflow-hidden rounded-md bg-stone-soft">
                   <div
                     className="h-full rounded-md bg-primary/70 transition-all duration-500"

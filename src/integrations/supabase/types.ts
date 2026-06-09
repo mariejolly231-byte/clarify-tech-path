@@ -16,36 +16,45 @@ export type Database = {
     Tables: {
       workshop_responses: {
         Row: {
+          ai_def: string[]
           ai_level: number | null
           ai_usage: string[]
           created_at: string
           goals: string[]
           id: string
+          nocode_def: string[]
           nocode_level: number | null
           repetitive_task: string | null
           tools_automation: string | null
+          tools_other: string | null
           tools_tested: string[]
         }
         Insert: {
+          ai_def?: string[]
           ai_level?: number | null
           ai_usage?: string[]
           created_at?: string
           goals?: string[]
           id?: string
+          nocode_def?: string[]
           nocode_level?: number | null
           repetitive_task?: string | null
           tools_automation?: string | null
+          tools_other?: string | null
           tools_tested?: string[]
         }
         Update: {
+          ai_def?: string[]
           ai_level?: number | null
           ai_usage?: string[]
           created_at?: string
           goals?: string[]
           id?: string
+          nocode_def?: string[]
           nocode_level?: number | null
           repetitive_task?: string | null
           tools_automation?: string | null
+          tools_other?: string | null
           tools_tested?: string[]
         }
         Relationships: []

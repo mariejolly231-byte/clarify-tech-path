@@ -14,20 +14,25 @@ export const Route = createFileRoute("/sondage")({
   component: SondagePage,
 });
 
-const LEVEL_LABELS_NOCODE = [
-  "Je découvre totalement",
-  "J'en ai entendu parler mais je ne vois pas bien",
-  "Je comprends le principe",
-  "J'ai déjà testé un ou plusieurs outils",
-  "Je l'utilise déjà dans mon activité",
+const NOCODE_DEFS = [
+  "Créer des sites ou apps sans écrire de code",
+  "Automatiser des tâches avec des outils visuels (Zapier, Make…)",
+  "Des plateformes qui remplacent parfois un développeur",
+  "Faire des pages web simples sans technique",
+  "Je ne sais pas trop",
+  "Autre",
 ];
-const LEVEL_LABELS_AI = [
-  "Je découvre totalement",
-  "J'ai testé sans vraiment comprendre",
-  "Je vois à quoi ça peut servir",
-  "Je l'utilise parfois",
-  "Je l'utilise régulièrement avec méthode",
+
+const AI_DEFS = [
+  "Des outils qui écrivent du texte (emails, articles…)",
+  "Des outils qui créent des images ou vidéos",
+  "Des chatbots / assistants conversationnels",
+  "Des algorithmes qui apprennent et s’améliorent seuls",
+  "Un peu de tout ça à la fois",
+  "Je ne sais pas trop",
+  "Autre",
 ];
+
 const AI_USAGE = [
   "Je ne l'utilise pas",
   "Recherche d'idées",
@@ -38,16 +43,30 @@ const AI_USAGE = [
   "Assistant au quotidien",
   "Je ne sais pas vraiment si mon outil utilise de l'IA",
 ];
+
 const AUTO_LEVELS = [
   "Non",
   "Oui, sans automatisation",
   "Oui, quelques automatisations simples",
   "Oui, régulièrement",
 ];
+
 const TOOLS = [
-  "ChatGPT", "Claude", "Perplexity", "Make", "n8n",
-  "Notion", "Airtable", "Zapier", "Lovable", "Autre",
+  "ChatGPT",
+  "Claude",
+  "Gemini",
+  "Copilot",
+  "Perplexity",
+  "Make",
+  "n8n",
+  "Zapier",
+  "Notion",
+  "Airtable",
+  "Softr",
+  "Lovable",
+  "Autre",
 ];
+
 const GOALS = [
   "Du temps",
   "De la régularité",
@@ -63,11 +82,14 @@ function SondagePage() {
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
 
-  const [nocode, setNocode] = useState<number | null>(null);
-  const [ai, setAi] = useState<number | null>(null);
+  const [nocode, setNocode] = useState<string[]>([]);
+  const [nocodeOther, setNocodeOther] = useState("");
+  const [ai, setAi] = useState<string[]>([]);
+  const [aiOther, setAiOther] = useState("");
   const [aiUsage, setAiUsage] = useState<string[]>([]);
   const [autoUse, setAutoUse] = useState<string>("");
   const [toolsTested, setToolsTested] = useState<string[]>([]);
+  const [toolsOther, setToolsOther] = useState("");
   const [goals, setGoals] = useState<string[]>([]);
   const [task, setTask] = useState("");
 
@@ -77,17 +99,30 @@ function SondagePage() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!nocode || !ai) {
+    if (!nocode.length || !ai.length) {
       toast.error("Merci de répondre aux deux premières questions.");
       return;
     }
     setSubmitting(true);
+
+    const nocodePayload = nocode.map((v) =>
+      v === "Autre" && nocodeOther.trim()
+        ? `Autre : ${nocodeOther.trim().slice(0, 200)}`
+        : v,
+    );
+    const aiPayload = ai.map((v) =>
+      v === "Autre" && aiOther.trim()
+        ? `Autre : ${aiOther.trim().slice(0, 200)}`
+        : v,
+    );
+
     const { error } = await supabase.from("workshop_responses").insert({
-      nocode_level: nocode,
-      ai_level: ai,
+      nocode_def: nocodePayload,
+      ai_def: aiPayload,
       ai_usage: aiUsage,
       tools_automation: autoUse || null,
       tools_tested: toolsTested,
+      tools_other: toolsTested.includes("Autre") && toolsOther.trim() ? toolsOther.trim().slice(0, 200) : null,
       goals: goals,
       repetitive_task: task.trim() ? task.trim().slice(0, 500) : null,
     });
@@ -139,21 +174,45 @@ function SondagePage() {
         </div>
 
         <form onSubmit={onSubmit} className="space-y-5">
-          <ScaleCard
+          <MultiCard
             n={1}
-            title="Aujourd'hui, comment évalues-tu ta compréhension du no-code ?"
-            labels={LEVEL_LABELS_NOCODE}
+            title="Pour toi, qu'est-ce que c'est le no-code ?"
+            options={NOCODE_DEFS}
             value={nocode}
-            onChange={setNocode}
+            onToggle={(v) => toggle(nocode, v, setNocode)}
           />
+          {nocode.includes("Autre") && (
+            <div className="-mt-3 rounded-b-2xl border border-t-0 border-border bg-card px-6 pb-6">
+              <input
+                type="text"
+                value={nocodeOther}
+                onChange={(e) => setNocodeOther(e.target.value)}
+                placeholder="Précise ta réponse…"
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none"
+                maxLength={200}
+              />
+            </div>
+          )}
 
-          <ScaleCard
+          <MultiCard
             n={2}
-            title="Aujourd'hui, comment évalues-tu ta compréhension de l'IA générative ?"
-            labels={LEVEL_LABELS_AI}
+            title="Pour toi, qu'est-ce que c'est l'IA générative ?"
+            options={AI_DEFS}
             value={ai}
-            onChange={setAi}
+            onToggle={(v) => toggle(ai, v, setAi)}
           />
+          {ai.includes("Autre") && (
+            <div className="-mt-3 rounded-b-2xl border border-t-0 border-border bg-card px-6 pb-6">
+              <input
+                type="text"
+                value={aiOther}
+                onChange={(e) => setAiOther(e.target.value)}
+                placeholder="Précise ta réponse…"
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none"
+                maxLength={200}
+              />
+            </div>
+          )}
 
           <MultiCard
             n={3}
@@ -179,6 +238,18 @@ function SondagePage() {
             onToggle={(v) => toggle(toolsTested, v, setToolsTested)}
             chips
           />
+          {toolsTested.includes("Autre") && (
+            <div className="-mt-3 rounded-b-2xl border border-t-0 border-border bg-card px-6 pb-6">
+              <input
+                type="text"
+                value={toolsOther}
+                onChange={(e) => setToolsOther(e.target.value)}
+                placeholder="Quel(s) outil(s) ?"
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none"
+                maxLength={200}
+              />
+            </div>
+          )}
 
           <MultiCard
             n={6}
@@ -227,41 +298,20 @@ function CardHeader({ n, title }: { n: number; title: string }) {
   );
 }
 
-function ScaleCard({
-  n, title, labels, value, onChange,
-}: {
-  n: number; title: string; labels: string[]; value: number | null; onChange: (v: number) => void;
-}) {
-  return (
-    <div className="rounded-2xl border border-border bg-card p-6">
-      <CardHeader n={n} title={title} />
-      <div className="mt-5 grid grid-cols-5 gap-2">
-        {[1, 2, 3, 4, 5].map((v) => (
-          <button
-            key={v}
-            type="button"
-            onClick={() => onChange(v)}
-            className={`flex h-12 items-center justify-center rounded-md border font-mono text-lg transition ${
-              value === v
-                ? "border-primary bg-primary text-primary-foreground"
-                : "border-border bg-stone-soft text-foreground hover:border-primary/40"
-            }`}
-          >
-            {v}
-          </button>
-        ))}
-      </div>
-      <div className="mt-3 min-h-[1.5rem] text-center text-sm text-muted-foreground">
-        {value ? labels[value - 1] : "Sélectionne une note de 1 à 5"}
-      </div>
-    </div>
-  );
-}
-
 function MultiCard({
-  n, title, options, value, onToggle, chips,
+  n,
+  title,
+  options,
+  value,
+  onToggle,
+  chips,
 }: {
-  n: number; title: string; options: string[]; value: string[]; onToggle: (v: string) => void; chips?: boolean;
+  n: number;
+  title: string;
+  options: string[];
+  value: string[];
+  onToggle: (v: string) => void;
+  chips?: boolean;
 }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-6">
@@ -293,9 +343,17 @@ function MultiCard({
 }
 
 function SingleCard({
-  n, title, options, value, onChange,
+  n,
+  title,
+  options,
+  value,
+  onChange,
 }: {
-  n: number; title: string; options: string[]; value: string; onChange: (v: string) => void;
+  n: number;
+  title: string;
+  options: string[];
+  value: string;
+  onChange: (v: string) => void;
 }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-6">
