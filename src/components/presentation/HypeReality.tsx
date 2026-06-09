@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import { AdoptionCurve } from "./Infographics";
 
 const COLS = [
   {
@@ -52,6 +53,10 @@ export function HypeReality() {
           </div>
         ))}
       </div>
+
+      <AdoptionCurve />
+
+
 
       <blockquote className="mx-auto mt-14 max-w-3xl border-l-4 border-primary bg-card px-7 py-6 text-center font-serif text-2xl leading-snug text-foreground md:text-3xl">
         « Le problème n'est pas seulement l'outil.

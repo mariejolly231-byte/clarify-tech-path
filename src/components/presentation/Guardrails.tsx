@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import { RgpdCompass } from "./Infographics";
 
 const LIGHTS = [
   {
@@ -93,6 +94,9 @@ export function Guardrails() {
           ))}
         </ul>
       </div>
+
+      <RgpdCompass />
     </Section>
+
   );
 }
