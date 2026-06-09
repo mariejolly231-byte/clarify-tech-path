@@ -105,27 +105,27 @@ function SondagePage() {
     }
     setSubmitting(true);
 
-    const payload: Record<string, unknown> = {
-      nocode_def: nocode,
-      ai_def: ai,
+    const nocodePayload = nocode.map((v) =>
+      v === "Autre" && nocodeOther.trim()
+        ? `Autre : ${nocodeOther.trim().slice(0, 200)}`
+        : v,
+    );
+    const aiPayload = ai.map((v) =>
+      v === "Autre" && aiOther.trim()
+        ? `Autre : ${aiOther.trim().slice(0, 200)}`
+        : v,
+    );
+
+    const { error } = await supabase.from("workshop_responses").insert({
+      nocode_def: nocodePayload,
+      ai_def: aiPayload,
       ai_usage: aiUsage,
       tools_automation: autoUse || null,
       tools_tested: toolsTested,
+      tools_other: toolsTested.includes("Autre") && toolsOther.trim() ? toolsOther.trim().slice(0, 200) : null,
       goals: goals,
       repetitive_task: task.trim() ? task.trim().slice(0, 500) : null,
-    };
-
-    if (nocode.includes("Autre") && nocodeOther.trim()) {
-      payload.nocode_other = nocodeOther.trim().slice(0, 200);
-    }
-    if (ai.includes("Autre") && aiOther.trim()) {
-      payload.ai_other = aiOther.trim().slice(0, 200);
-    }
-    if (toolsTested.includes("Autre") && toolsOther.trim()) {
-      payload.tools_other = toolsOther.trim().slice(0, 200);
-    }
-
-    const { error } = await supabase.from("workshop_responses").insert(payload);
+    });
     setSubmitting(false);
     if (error) {
       toast.error("Oups, impossible d'enregistrer la réponse.");
