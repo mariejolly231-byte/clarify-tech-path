@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SideNav } from "@/components/presentation/SideNav";
+import { LivePoll } from "@/components/presentation/LivePoll";
 import { Opening } from "@/components/presentation/Opening";
 import { About } from "@/components/presentation/About";
 import { Vocabulary } from "@/components/presentation/Vocabulary";
