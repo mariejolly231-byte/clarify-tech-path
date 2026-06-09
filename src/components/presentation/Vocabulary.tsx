@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Section } from "./Section";
+import { IkeaAnalogy } from "./Infographics";
 
 const TERMS = [
   {
