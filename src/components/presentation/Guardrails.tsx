@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import { RgpdCompass } from "./Infographics";
 
 const LIGHTS = [
   {
