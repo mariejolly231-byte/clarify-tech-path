@@ -1,89 +1,33 @@
 // SVG infographics — style aligned with Summit Flow tokens.
 // All colors use CSS variables (var(--color-*)) so they follow the theme.
+import ikeaAsset from "@/assets/ikea-analogy.png.asset.json";
 
 /* ---------- 1. Analogie IKEA : No-code / Low-code / Code ---------- */
 export function IkeaAnalogy() {
-  const LEVELS = [
-    {
-      tag: "No-code",
-      title: "Le meuble en kit",
-      body: "On assemble des éléments préconçus. La notice guide, le résultat est rapide.",
-      ex: "Airtable, Notion, Make, Lovable.",
-      tone: "sage",
-    },
-    {
-      tag: "Low-code",
-      title: "Le « IKEA hack »",
-      body: "On part du kit, on ajoute un peu de code pour s'adapter à une contrainte précise.",
-      ex: "Bubble + script, n8n + JS, Strapi.",
-      tone: "sand",
-    },
-    {
-      tag: "Code",
-      title: "Le meuble d'artisan",
-      body: "On choisit le bois, les dimensions, le design. Contrôle total, temps long.",
-      ex: "Application sur-mesure, logiciel critique.",
-      tone: "primary",
-    },
-  ];
-
-  const toneClass: Record<string, string> = {
-    sage: "border-accent bg-accent/40",
-    sand: "border-sand bg-sand/40",
-    primary: "border-primary/30 bg-primary/[0.04]",
-  };
-
   return (
-    <div className="mt-12 rounded-2xl border border-border bg-card p-7">
-      <div className="mb-1 text-[11px] uppercase tracking-[0.2em] text-primary">
-        Une analogie utile
+    <figure className="mt-12 overflow-hidden rounded-2xl border border-border bg-card p-5 md:p-7">
+      <figcaption className="mb-5">
+        <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
+          Une analogie utile
+        </div>
+        <h3 className="mt-1 font-serif text-2xl text-foreground">
+          No-code, low-code, code —{" "}
+          <span className="text-primary">trois façons de construire la même solution.</span>
+        </h3>
+      </figcaption>
+      <div className="overflow-hidden rounded-xl bg-stone-soft">
+        <img
+          src={ikeaAsset.url}
+          alt="Infographie : No-code (assembler un kit), Low-code (IKEA hack), Code (artisan), avec un tableau comparatif rapidité, flexibilité, technicité."
+          className="block h-auto w-full"
+          loading="lazy"
+        />
       </div>
-      <h3 className="font-serif text-2xl text-foreground">
-        No-code, low-code, code — pensez meuble.
-      </h3>
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
-        {LEVELS.map((l) => (
-          <div key={l.tag} className={`rounded-xl border p-5 ${toneClass[l.tone]}`}>
-            <FurnitureIcon variant={l.tag} />
-            <div className="mt-4 text-[10px] uppercase tracking-[0.2em] text-primary">{l.tag}</div>
-            <div className="mt-1 font-serif text-lg text-foreground">{l.title}</div>
-            <p className="mt-2 text-sm leading-relaxed text-foreground/80">{l.body}</p>
-            <div className="mt-3 text-xs italic text-foreground/65">{l.ex}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function FurnitureIcon({ variant }: { variant: string }) {
-  const stroke = "var(--color-primary)";
-  if (variant === "No-code") {
-    return (
-      <svg viewBox="0 0 80 60" className="h-14 w-20" fill="none" stroke={stroke} strokeWidth="1.5">
-        <rect x="10" y="10" width="60" height="40" rx="2" />
-        <line x1="10" y1="25" x2="70" y2="25" />
-        <line x1="10" y1="40" x2="70" y2="40" />
-        <line x1="40" y1="10" x2="40" y2="50" />
-      </svg>
-    );
-  }
-  if (variant === "Low-code") {
-    return (
-      <svg viewBox="0 0 80 60" className="h-14 w-20" fill="none" stroke={stroke} strokeWidth="1.5">
-        <rect x="10" y="10" width="60" height="40" rx="2" />
-        <line x1="10" y1="30" x2="70" y2="30" />
-        <line x1="40" y1="10" x2="40" y2="30" />
-        <path d="M55 35 l10 10 M65 35 l-10 10" stroke="var(--color-warn)" />
-      </svg>
-    );
-  }
-  return (
-    <svg viewBox="0 0 80 60" className="h-14 w-20" fill="none" stroke={stroke} strokeWidth="1.5">
-      <path d="M12 50 L40 12 L68 50 Z" />
-      <path d="M22 50 L40 26 L58 50" />
-      <circle cx="40" cy="42" r="3" />
-    </svg>
+      <p className="mt-4 max-w-3xl text-sm text-muted-foreground">
+        Même résultat possible — mais l'effort, la flexibilité et le niveau technique
+        changent du tout au tout. On choisit selon le besoin, pas selon la mode.
+      </p>
+    </figure>
   );
 }
 
