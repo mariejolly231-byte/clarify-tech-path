@@ -39,6 +39,7 @@ function Presentation() {
       <SideNav />
       <main className="md:pl-72">
         <div className="pt-14 md:pt-0">
+          <LivePoll />
           <Opening />
           <About />
           <Vocabulary />
