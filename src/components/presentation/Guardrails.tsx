@@ -94,6 +94,9 @@ export function Guardrails() {
           ))}
         </ul>
       </div>
+
+      <RgpdCompass />
     </Section>
+
   );
 }
