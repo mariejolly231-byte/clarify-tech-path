@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import logoAsset from "@/assets/summit-flow-logo.png.asset.json";
 
 export const SECTIONS = [
+  { id: "sondage", label: "Tour de table live", num: "00" },
   { id: "ouverture", label: "Ouverture", num: "01" },
   { id: "qui", label: "Qui je suis", num: "02" },
   { id: "tri", label: "Le grand tri des mots", num: "03" },
