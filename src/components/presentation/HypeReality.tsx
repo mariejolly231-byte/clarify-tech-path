@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import { AdoptionCurve } from "./Infographics";
 
 const COLS = [
   {
