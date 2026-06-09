@@ -73,6 +73,10 @@ export function Decide() {
         ))}
       </div>
 
+      <DecisionMatrix />
+
+
+
       <blockquote className="mt-12 border-l-4 border-warn bg-card px-7 py-5 font-serif text-xl leading-snug text-foreground md:text-2xl">
         « Automatiser un mauvais processus le rend surtout plus rapide…
         <span className="text-warn"> à dysfonctionner.</span> »
