@@ -85,6 +85,8 @@ export function Vocabulary() {
         <span className="font-medium text-primary">L'agent choisit davantage comment avancer.</span>{" "}
         Le no-code permet d'assembler ces briques.
       </div>
+
+      <IkeaAnalogy />
     </Section>
   );
 }
