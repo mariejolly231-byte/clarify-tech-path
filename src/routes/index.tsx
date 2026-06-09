@@ -4,7 +4,9 @@ import { LivePoll } from "@/components/presentation/LivePoll";
 import { Opening } from "@/components/presentation/Opening";
 import { About } from "@/components/presentation/About";
 import { Vocabulary } from "@/components/presentation/Vocabulary";
+import { Settings } from "@/components/presentation/Settings";
 import { HypeReality } from "@/components/presentation/HypeReality";
+import { Framing } from "@/components/presentation/Framing";
 import { Decide } from "@/components/presentation/Decide";
 import { Quiz } from "@/components/presentation/Quiz";
 import { Guardrails } from "@/components/presentation/Guardrails";
@@ -43,7 +45,9 @@ function Presentation() {
           <Opening />
           <About />
           <Vocabulary />
+          <Settings />
           <HypeReality />
+          <Framing />
           <Decide />
           <Quiz />
           <Guardrails />
