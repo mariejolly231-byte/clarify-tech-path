@@ -49,7 +49,7 @@ export function Quiz() {
   return (
     <Section
       id="jeu"
-      num="06"
+      num="08"
       eyebrow="Jeu interactif"
       tint="sage"
       title={<>Assistant, workflow, agent — <span className="text-primary">ou aucun des trois ?</span></>}

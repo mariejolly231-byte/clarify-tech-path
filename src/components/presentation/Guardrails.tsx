@@ -53,7 +53,7 @@ export function Guardrails() {
   return (
     <Section
       id="gardefous"
-      num="07"
+      num="09"
       eyebrow="Garde-fous"
       title={<>Aller vite, oui. <span className="text-primary">Aller au mur, non.</span></>}
     >
