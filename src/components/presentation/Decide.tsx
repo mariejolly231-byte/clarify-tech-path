@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import { DecisionMatrix } from "./Infographics";
 
 const QUADRANTS = [
   {
