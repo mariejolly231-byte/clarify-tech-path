@@ -41,7 +41,7 @@ export function Decide() {
   return (
     <Section
       id="avant"
-      num="05"
+      num="07"
       eyebrow="Avant d'automatiser"
       title={<>Décider, <span className="text-primary">avant</span> d'outiller.</>}
     >

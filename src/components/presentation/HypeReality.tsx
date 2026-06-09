@@ -39,7 +39,7 @@ export function HypeReality() {
   return (
     <Section
       id="hype"
-      num="04"
+      num="05"
       eyebrow="La hype vs la réalité"
       tint="sand"
       title={<>Oui, ça accélère. <span className="text-primary">Non, tout n'est pas mature.</span></>}

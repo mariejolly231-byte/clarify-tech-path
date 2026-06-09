@@ -31,7 +31,7 @@ export function Takeaway() {
   return (
     <Section
       id="emporter"
-      num="08"
+      num="10"
       eyebrow="Ce que vous emportez"
       tint="sand"
       title={<>Un regard plus clair, et <span className="text-primary">un premier usage utile</span>.</>}
