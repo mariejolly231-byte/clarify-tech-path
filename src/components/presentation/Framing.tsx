@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import outilOrga from "@/assets/outil-organisation.png.asset.json";
 
 const QUESTIONS = [
   {
