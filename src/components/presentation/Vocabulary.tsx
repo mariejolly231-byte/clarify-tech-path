@@ -1,5 +1,6 @@
 import { Section } from "./Section";
 import { IkeaAnalogy } from "./Infographics";
+import { HumanVsAI } from "./HumanVsAI";
 import troisFacons from "@/assets/trois-facons-aide.png.asset.json";
 import commentIA from "@/assets/comment-fonctionne-ia.png.asset.json";
 import commentIAApprend from "@/assets/comment-ia-apprend.png.asset.json";
