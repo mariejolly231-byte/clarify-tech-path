@@ -65,8 +65,8 @@ export function Vocabulary() {
     <Section
       id="tri"
       num="03"
-      eyebrow="No code, IA, gloubi-boulga, késako ?"
-      title={<>On range le vocabulaire <span className="text-primary">avant</span> de ranger les outils.</>}
+      eyebrow="Section 03"
+      title={<>No code, IA, gloubi-boulga, <span className="text-primary">késako ?</span></>}
     >
       {/* BLOC 1 — Pause cerveau / IA */}
       <div className="mb-14 rounded-2xl border border-border bg-card p-7 shadow-sm animate-fade-in">
