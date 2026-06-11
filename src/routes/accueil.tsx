@@ -63,7 +63,7 @@ const PARTICIPANTS: Participant[] = [
 
 function AccueilPage() {
   const [highlight, setHighlight] = useState<number | null>(null);
-  const [now, setNow] = useState(() => new Date());
+  const [heure, setHeure] = useState<string>("");
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -73,11 +73,12 @@ function AccueilPage() {
   }, []);
 
   useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000 * 30);
+    const update = () =>
+      setHeure(new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }));
+    update();
+    const t = setInterval(update, 1000 * 30);
     return () => clearInterval(t);
   }, []);
-
-  const heure = now.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[oklch(0.985_0.006_220)] text-foreground">
