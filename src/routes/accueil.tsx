@@ -80,90 +80,79 @@ function AccueilPage() {
   const heure = now.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[oklch(0.985_0.006_220)] text-foreground">
+    <div className="relative min-h-screen overflow-hidden bg-[oklch(0.98_0.005_220)] text-foreground">
       {/* Soft atmospheric background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-32 -top-32 h-[36rem] w-[36rem] rounded-full bg-[oklch(0.92_0.04_220)] opacity-60 blur-3xl" />
-        <div className="absolute -right-40 top-40 h-[40rem] w-[40rem] rounded-full bg-[oklch(0.94_0.03_180)] opacity-50 blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 h-[28rem] w-[28rem] rounded-full bg-[oklch(0.95_0.025_80)] opacity-50 blur-3xl" />
-        {/* Floating particles */}
-        {Array.from({ length: 14 }).map((_, i) => (
-          <span
-            key={i}
-            className="absolute block rounded-full bg-white/70 shadow-[0_0_18px_rgba(255,255,255,0.7)]"
-            style={{
-              width: `${4 + (i % 4) * 2}px`,
-              height: `${4 + (i % 4) * 2}px`,
-              left: `${(i * 73) % 100}%`,
-              top: `${(i * 41) % 100}%`,
-              animation: `floaty ${10 + (i % 5) * 2}s ease-in-out ${i * 0.4}s infinite`,
-            }}
-          />
-        ))}
+        <div className="absolute -left-40 -top-40 h-[42rem] w-[42rem] rounded-full bg-[oklch(0.93_0.025_220)] opacity-50 blur-3xl" />
+        <div className="absolute -right-48 top-48 h-[44rem] w-[44rem] rounded-full bg-[oklch(0.95_0.02_180)] opacity-40 blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 h-[32rem] w-[32rem] rounded-full bg-[oklch(0.96_0.018_80)] opacity-35 blur-3xl" />
       </div>
 
       {/* Hero */}
-      <header className="px-6 pb-10 pt-16 text-center md:px-16 md:pt-24">
-        <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-[oklch(0.85_0.02_220)] bg-white/70 px-4 py-1.5 text-[11px] uppercase tracking-[0.22em] text-primary backdrop-blur-sm">
+      <header className="px-6 pb-12 pt-16 text-center md:px-16 md:pt-20">
+        <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-[oklch(0.88_0.015_220)] bg-white/60 px-4 py-1.5 text-[10px] uppercase tracking-[0.32em] text-primary backdrop-blur-sm">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-          Atelier en cours d'installation
+          Atelier · Accueil
         </div>
 
-        <h1 className="mx-auto mt-7 max-w-5xl text-5xl leading-[1.05] tracking-tight text-foreground md:text-7xl lg:text-[5.5rem]">
+        <h1 className="mx-auto mt-8 max-w-5xl font-serif text-[2.75rem] font-light leading-[1.05] tracking-tight text-foreground md:text-6xl lg:text-[4.75rem]">
           Bienvenue.
           <br />
           <span className="text-primary">IA &amp; no-code</span>
-          <span className="text-foreground/80"> pour entreprendre plus simplement.</span>
+          <span className="text-foreground/75"> pour entreprendre plus simplement.</span>
         </h1>
 
-        <p className="mx-auto mt-7 max-w-2xl text-lg text-muted-foreground md:text-xl">
-          Les esprits s'échauffent, les samoyèdes aussi. <br className="hidden md:block" />
-          Installez-vous, on démarre tout doucement.
+        <div className="mx-auto mt-8 h-px w-24 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+
+        <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">
+          Installez-vous confortablement. <br className="hidden md:block" />
+          L'atelier commence dans quelques instants.
         </p>
       </header>
 
       {/* Grid */}
-      <section className="px-6 pb-24 md:px-16">
-        <div className="mx-auto grid max-w-[1500px] grid-cols-2 gap-5 sm:grid-cols-3 md:gap-6 lg:grid-cols-5 xl:grid-cols-6">
+      <section className="px-6 pb-20 md:px-12 lg:px-16">
+        <div className="mx-auto grid max-w-[1600px] grid-cols-2 gap-4 sm:grid-cols-3 md:gap-5 lg:grid-cols-5 xl:grid-cols-6">
           {PARTICIPANTS.map((p, i) => {
             const isHighlight = highlight === i;
             return (
               <article
                 key={`${p.prenom}-${p.nom}`}
                 className={[
-                  "group relative flex flex-col items-center rounded-3xl border border-white/80 bg-white/70 p-4 text-center backdrop-blur-md transition-all duration-500",
-                  "shadow-[0_8px_30px_-12px_rgba(30,60,90,0.18)] hover:-translate-y-1.5 hover:shadow-[0_22px_50px_-18px_rgba(30,60,90,0.30)]",
-                  isHighlight ? "-translate-y-1.5 ring-2 ring-primary/40 shadow-[0_22px_50px_-18px_rgba(30,60,90,0.35)]" : "",
+                  "group relative flex flex-col items-center rounded-2xl border border-[oklch(0.92_0.008_220)] bg-white/85 p-5 text-center backdrop-blur-md transition-all duration-500",
+                  "shadow-[0_4px_24px_-12px_rgba(20,40,70,0.10)] hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(20,40,70,0.22)] hover:border-primary/30",
+                  isHighlight ? "-translate-y-1 border-primary/40 shadow-[0_18px_40px_-18px_rgba(20,40,70,0.26)]" : "",
                 ].join(" ")}
                 style={{
-                  animation: `cardIn 0.8s ease-out ${i * 0.06}s both`,
+                  animation: `cardIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.05}s both`,
                 }}
               >
-                <div className="relative mb-3 h-28 w-28 md:h-32 md:w-32">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[oklch(0.94_0.03_220)] to-[oklch(0.96_0.02_180)]" />
+                <div className="relative mb-4 h-24 w-24 md:h-28 md:w-28">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[oklch(0.95_0.018_220)] to-[oklch(0.97_0.012_180)] ring-1 ring-inset ring-white/80" />
                   <img
                     src={p.image}
-                    alt={`Samoyède — ${p.activite}`}
-                    width={256}
-                    height={256}
+                    alt={`Portrait — ${p.activite}`}
+                    width={224}
+                    height={224}
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-105"
+                    className="absolute inset-0 h-full w-full object-contain transition-transform duration-700 group-hover:scale-[1.04]"
                     style={{
-                      animation: `bobble ${5 + (i % 4)}s ease-in-out ${i * 0.2}s infinite`,
+                      animation: `bobble ${7 + (i % 4)}s ease-in-out ${i * 0.25}s infinite`,
                     }}
                   />
                 </div>
 
-                <h3 className="text-[15px] font-medium leading-tight text-foreground md:text-base">
-                  {p.prenom} <span className="font-semibold">{p.nom}</span>
+                <h3 className="font-serif text-[18px] font-normal leading-tight tracking-tight text-foreground md:text-[20px]">
+                  {p.prenom} <span className="font-medium">{p.nom}</span>
                 </h3>
-                <p className="mt-1 text-[12px] leading-snug text-muted-foreground md:text-[13px]">
+                <div className="mx-auto mt-2 h-px w-8 bg-primary/25" />
+                <p className="mt-2 text-[13px] leading-snug text-muted-foreground md:text-[14px]">
                   {p.activite}
                 </p>
 
                 <div
                   className={[
-                    "pointer-events-none absolute inset-x-3 -bottom-2 translate-y-2 rounded-xl bg-primary px-3 py-1.5 text-[11px] font-medium text-primary-foreground opacity-0 shadow-lg transition-all duration-300",
+                    "pointer-events-none absolute inset-x-4 -bottom-2 translate-y-2 rounded-lg bg-foreground px-3 py-1.5 text-[11px] font-medium tracking-wide text-background opacity-0 shadow-lg transition-all duration-300",
                     "group-hover:-translate-y-1 group-hover:opacity-100",
                     isHighlight ? "-translate-y-1 opacity-100" : "",
                   ].join(" ")}
@@ -177,12 +166,12 @@ function AccueilPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/60 bg-white/40 px-6 py-6 backdrop-blur-md md:px-16">
-        <div className="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
+      <footer className="border-t border-[oklch(0.92_0.008_220)] bg-white/50 px-6 py-6 backdrop-blur-md md:px-16">
+        <div className="mx-auto flex max-w-[1600px] flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
           <div className="text-sm text-muted-foreground">
-            <span className="text-foreground">Début de l'atelier à 9h</span> · Installez-vous, on démarre bientôt.
+            <span className="text-foreground">Début de l'atelier à 9h</span> · merci de votre présence.
           </div>
-          <div className="font-mono text-xs uppercase tracking-[0.22em] text-primary">
+          <div className="font-mono text-[11px] uppercase tracking-[0.32em] text-primary">
             Summit Flow · {heure}
           </div>
         </div>
@@ -190,16 +179,12 @@ function AccueilPage() {
 
       <style>{`
         @keyframes cardIn {
-          0% { opacity: 0; transform: translateY(24px) scale(0.96); }
+          0% { opacity: 0; transform: translateY(18px) scale(0.985); }
           100% { opacity: 1; transform: translateY(0) scale(1); }
         }
         @keyframes bobble {
           0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-6px); }
-        }
-        @keyframes floaty {
-          0%, 100% { transform: translate(0, 0); opacity: 0.55; }
-          50% { transform: translate(10px, -18px); opacity: 0.95; }
+          50% { transform: translateY(-4px); }
         }
       `}</style>
     </div>
