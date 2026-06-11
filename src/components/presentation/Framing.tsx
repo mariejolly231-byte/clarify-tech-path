@@ -92,6 +92,18 @@ export function Framing() {
         </p>
       </div>
 
+      {/* Infographie : l'outil ne remplace pas l'organisation */}
+      <figure className="mb-14 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <img
+          src={outilOrga.url}
+          alt="L'outil ne remplace pas l'organisation : diagnostic, fondation, levier"
+          className="w-full"
+        />
+        <figcaption className="border-t border-border bg-stone-soft px-6 py-3 text-center text-xs italic text-muted-foreground">
+          Bazar + technologie = bazar plus rapide &nbsp;·&nbsp; Processus clair + technologie = temps libéré.
+        </figcaption>
+      </figure>
+
       {/* Analogies */}
       <div className="mb-14 grid gap-4 md:grid-cols-3">
         {ANALOGIES.map((a) => (
