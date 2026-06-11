@@ -198,10 +198,7 @@ export function Vocabulary() {
             <div className="flex items-baseline justify-between">
               <span className="text-3xl" aria-hidden>{c.icon}</span>
               <span className="text-[10px] uppercase tracking-[0.2em] text-primary">Rôle</span>
-        </div>
-
-        <HumanVsAI />
-      </div>
+            </div>
             <h4 className="mt-3 font-serif text-2xl text-foreground">{c.k}</h4>
             <p className="mt-3 text-[15px] leading-relaxed text-foreground/90">
               « {c.def} »
