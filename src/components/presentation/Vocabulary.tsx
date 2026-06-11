@@ -1,6 +1,7 @@
 import { Section } from "./Section";
 import { IkeaAnalogy } from "./Infographics";
 import troisFacons from "@/assets/trois-facons-aide.png.asset.json";
+import commentIA from "@/assets/comment-fonctionne-ia.png.asset.json";
 
 const BRAIN = [
   "Apprend par expérience vécue",
@@ -138,6 +139,18 @@ export function Vocabulary() {
         <p className="mt-6 rounded-md bg-stone-soft px-4 py-3 text-xs italic text-foreground/75">
           Un LLM ne pense pas comme un cerveau humain : il prédit la suite la plus probable dans un contexte donné.
         </p>
+
+        {/* Infographie : Comment fonctionne une IA */}
+        <figure className="mt-8 overflow-hidden rounded-xl border border-border bg-background">
+          <img
+            src={commentIA.url}
+            alt="Comment fonctionne une IA : du carburant (données) au modèle, puis au prompt et à la réponse, avec les limites face au cerveau humain"
+            className="w-full"
+          />
+          <figcaption className="border-t border-border bg-stone-soft px-6 py-3 text-center text-xs italic text-muted-foreground">
+            Données → Modèle → Prompt &amp; Réponse &nbsp;·&nbsp; L'IA calcule, l'humain pense.
+          </figcaption>
+        </figure>
       </div>
 
       {/* BLOC 2 — Vocabulaire */}
