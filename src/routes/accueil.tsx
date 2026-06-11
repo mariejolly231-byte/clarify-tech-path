@@ -63,7 +63,7 @@ const PARTICIPANTS: Participant[] = [
 
 function AccueilPage() {
   const [highlight, setHighlight] = useState<number | null>(null);
-  const [now, setNow] = useState(() => new Date());
+  const [heure, setHeure] = useState<string>("");
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -73,20 +73,22 @@ function AccueilPage() {
   }, []);
 
   useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000 * 30);
+    const update = () =>
+      setHeure(
+        new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }),
+      );
+    update();
+    const t = setInterval(update, 1000 * 30);
     return () => clearInterval(t);
   }, []);
-
-  const heure = now.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[oklch(0.985_0.006_220)] text-foreground">
       {/* Soft atmospheric background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-32 -top-32 h-[36rem] w-[36rem] rounded-full bg-[oklch(0.92_0.04_220)] opacity-60 blur-3xl" />
-        <div className="absolute -right-40 top-40 h-[40rem] w-[40rem] rounded-full bg-[oklch(0.94_0.03_180)] opacity-50 blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 h-[28rem] w-[28rem] rounded-full bg-[oklch(0.95_0.025_80)] opacity-50 blur-3xl" />
-        {/* Floating particles */}
+        <div className="absolute -left-32 -top-32 h-[40rem] w-[40rem] rounded-full bg-[oklch(0.93_0.035_220)] opacity-55 blur-3xl" />
+        <div className="absolute -right-40 top-40 h-[44rem] w-[44rem] rounded-full bg-[oklch(0.95_0.028_180)] opacity-45 blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 h-[30rem] w-[30rem] rounded-full bg-[oklch(0.96_0.022_80)] opacity-45 blur-3xl" />
         {Array.from({ length: 14 }).map((_, i) => (
           <span
             key={i}
@@ -103,69 +105,77 @@ function AccueilPage() {
       </div>
 
       {/* Hero */}
-      <header className="px-6 pb-10 pt-16 text-center md:px-16 md:pt-24">
-        <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-[oklch(0.85_0.02_220)] bg-white/70 px-4 py-1.5 text-[11px] uppercase tracking-[0.22em] text-primary backdrop-blur-sm">
+      <header className="px-6 pb-12 pt-16 text-center md:px-16 md:pt-24">
+        <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-[oklch(0.86_0.02_220)] bg-white/70 px-4 py-1.5 text-[11px] uppercase tracking-[0.24em] text-primary backdrop-blur-sm">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
           Atelier en cours d'installation
         </div>
 
-        <h1 className="mx-auto mt-7 max-w-5xl text-5xl leading-[1.05] tracking-tight text-foreground md:text-7xl lg:text-[5.5rem]">
+        <h1 className="mx-auto mt-8 max-w-5xl text-5xl leading-[1.02] tracking-tight text-foreground md:text-7xl lg:text-[5.75rem]">
           Bienvenue.
           <br />
           <span className="text-primary">IA &amp; no-code</span>
           <span className="text-foreground/80"> pour entreprendre plus simplement.</span>
         </h1>
 
-        <p className="mx-auto mt-7 max-w-2xl text-lg text-muted-foreground md:text-xl">
-          Les esprits s'échauffent, les samoyèdes aussi. <br className="hidden md:block" />
-          Installez-vous, on démarre tout doucement.
+        <p className="mx-auto mt-8 max-w-2xl font-serif text-xl italic text-muted-foreground md:text-2xl">
+          Les esprits s'échauffent, les samoyèdes aussi.
         </p>
       </header>
 
+      {/* Section label */}
+      <div className="mx-auto mb-6 flex max-w-[1500px] items-center gap-4 px-6 md:px-16">
+        <span className="h-px flex-1 bg-border" />
+        <span className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+          La famille du jour · 17 participants
+        </span>
+        <span className="h-px flex-1 bg-border" />
+      </div>
+
       {/* Grid */}
-      <section className="px-6 pb-24 md:px-16">
-        <div className="mx-auto grid max-w-[1500px] grid-cols-2 gap-5 sm:grid-cols-3 md:gap-6 lg:grid-cols-5 xl:grid-cols-6">
+      <section className="px-6 pb-20 md:px-16">
+        <div className="mx-auto grid max-w-[1500px] grid-cols-2 gap-6 sm:grid-cols-3 md:gap-7 lg:grid-cols-4 xl:grid-cols-5">
           {PARTICIPANTS.map((p, i) => {
             const isHighlight = highlight === i;
             return (
               <article
                 key={`${p.prenom}-${p.nom}`}
                 className={[
-                  "group relative flex flex-col items-center rounded-3xl border border-white/80 bg-white/70 p-4 text-center backdrop-blur-md transition-all duration-500",
-                  "shadow-[0_8px_30px_-12px_rgba(30,60,90,0.18)] hover:-translate-y-1.5 hover:shadow-[0_22px_50px_-18px_rgba(30,60,90,0.30)]",
-                  isHighlight ? "-translate-y-1.5 ring-2 ring-primary/40 shadow-[0_22px_50px_-18px_rgba(30,60,90,0.35)]" : "",
+                  "group relative flex flex-col items-center overflow-hidden rounded-[28px] border border-white/90 bg-white/75 p-5 pb-6 text-center backdrop-blur-md transition-all duration-500",
+                  "shadow-[0_10px_36px_-16px_rgba(30,60,90,0.22)] hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-22px_rgba(30,60,90,0.32)]",
+                  isHighlight
+                    ? "-translate-y-1.5 ring-2 ring-primary/35 shadow-[0_28px_60px_-22px_rgba(30,60,90,0.35)]"
+                    : "",
                 ].join(" ")}
-                style={{
-                  animation: `cardIn 0.8s ease-out ${i * 0.06}s both`,
-                }}
+                style={{ animation: `cardIn 0.8s ease-out ${i * 0.06}s both` }}
               >
-                <div className="relative mb-3 h-28 w-28 md:h-32 md:w-32">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[oklch(0.94_0.03_220)] to-[oklch(0.96_0.02_180)]" />
+                <div className="relative mb-4 aspect-square w-full max-w-[180px]">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[oklch(0.96_0.018_220)] to-[oklch(0.97_0.014_180)]" />
+                  <div className="absolute inset-2 rounded-full ring-1 ring-inset ring-white/80" />
                   <img
                     src={p.image}
                     alt={`Samoyède — ${p.activite}`}
-                    width={256}
-                    height={256}
+                    width={360}
+                    height={360}
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-105"
-                    style={{
-                      animation: `bobble ${5 + (i % 4)}s ease-in-out ${i * 0.2}s infinite`,
-                    }}
+                    className="absolute inset-0 h-full w-full object-contain p-1 transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-105"
+                    style={{ animation: `bobble ${5 + (i % 4)}s ease-in-out ${i * 0.2}s infinite` }}
                   />
                 </div>
 
-                <h3 className="text-[15px] font-medium leading-tight text-foreground md:text-base">
-                  {p.prenom} <span className="font-semibold">{p.nom}</span>
+                <h3 className="font-serif text-[19px] leading-tight tracking-tight text-foreground md:text-[21px]">
+                  {p.prenom}{" "}
+                  <span className="font-medium text-foreground">{p.nom}</span>
                 </h3>
-                <p className="mt-1 text-[12px] leading-snug text-muted-foreground md:text-[13px]">
+                <p className="mt-1.5 line-clamp-2 min-h-[2.6em] px-1 text-[13px] leading-snug text-muted-foreground md:text-[14px]">
                   {p.activite}
                 </p>
 
                 <div
                   className={[
-                    "pointer-events-none absolute inset-x-3 -bottom-2 translate-y-2 rounded-xl bg-primary px-3 py-1.5 text-[11px] font-medium text-primary-foreground opacity-0 shadow-lg transition-all duration-300",
-                    "group-hover:-translate-y-1 group-hover:opacity-100",
-                    isHighlight ? "-translate-y-1 opacity-100" : "",
+                    "pointer-events-none absolute inset-x-4 bottom-3 translate-y-3 rounded-xl bg-primary/95 px-3 py-2 text-[12px] font-medium text-primary-foreground opacity-0 shadow-lg backdrop-blur-sm transition-all duration-300",
+                    "group-hover:translate-y-0 group-hover:opacity-100",
+                    isHighlight ? "translate-y-0 opacity-100" : "",
                   ].join(" ")}
                 >
                   {p.detail}
@@ -177,13 +187,13 @@ function AccueilPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/60 bg-white/40 px-6 py-6 backdrop-blur-md md:px-16">
+      <footer className="border-t border-white/60 bg-white/50 px-6 py-6 backdrop-blur-md md:px-16">
         <div className="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
           <div className="text-sm text-muted-foreground">
             <span className="text-foreground">Début de l'atelier à 9h</span> · Installez-vous, on démarre bientôt.
           </div>
-          <div className="font-mono text-xs uppercase tracking-[0.22em] text-primary">
-            Summit Flow · {heure}
+          <div className="font-mono text-xs uppercase tracking-[0.24em] text-primary">
+            Summit Flow{heure ? ` · ${heure}` : ""}
           </div>
         </div>
       </footer>
