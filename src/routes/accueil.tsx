@@ -63,113 +63,107 @@ const PARTICIPANTS: Participant[] = [
 
 function AccueilPage() {
   const [highlight, setHighlight] = useState<number | null>(null);
-  const [heure, setHeure] = useState<string | null>(null);
+  const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
     const t = setInterval(() => {
       setHighlight(Math.floor(Math.random() * PARTICIPANTS.length));
-    }, 4500);
+    }, 3800);
     return () => clearInterval(t);
   }, []);
 
   useEffect(() => {
-    const update = () =>
-      setHeure(
-        new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
-      );
-    update();
-    const t = setInterval(update, 30 * 1000);
+    const t = setInterval(() => setNow(new Date()), 1000 * 30);
     return () => clearInterval(t);
   }, []);
 
+  const heure = now.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[oklch(0.98_0.005_95)] text-foreground">
-      {/* Editorial atmosphere — subtle, no particles */}
+    <div className="relative min-h-screen overflow-hidden bg-[oklch(0.985_0.006_220)] text-foreground">
+      {/* Soft atmospheric background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-40 -top-40 h-[44rem] w-[44rem] rounded-full bg-[oklch(0.93_0.025_200)] opacity-50 blur-[120px]" />
-        <div className="absolute -right-48 top-1/3 h-[40rem] w-[40rem] rounded-full bg-[oklch(0.94_0.02_80)] opacity-40 blur-[120px]" />
-        <div
-          className="absolute inset-0 opacity-[0.035]"
-          style={{
-            backgroundImage:
-              "radial-gradient(oklch(0.2 0.02 220) 1px, transparent 1px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
+        <div className="absolute -left-32 -top-32 h-[36rem] w-[36rem] rounded-full bg-[oklch(0.92_0.04_220)] opacity-60 blur-3xl" />
+        <div className="absolute -right-40 top-40 h-[40rem] w-[40rem] rounded-full bg-[oklch(0.94_0.03_180)] opacity-50 blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 h-[28rem] w-[28rem] rounded-full bg-[oklch(0.95_0.025_80)] opacity-50 blur-3xl" />
+        {/* Floating particles */}
+        {Array.from({ length: 14 }).map((_, i) => (
+          <span
+            key={i}
+            className="absolute block rounded-full bg-white/70 shadow-[0_0_18px_rgba(255,255,255,0.7)]"
+            style={{
+              width: `${4 + (i % 4) * 2}px`,
+              height: `${4 + (i % 4) * 2}px`,
+              left: `${(i * 73) % 100}%`,
+              top: `${(i * 41) % 100}%`,
+              animation: `floaty ${10 + (i % 5) * 2}s ease-in-out ${i * 0.4}s infinite`,
+            }}
+          />
+        ))}
       </div>
 
       {/* Hero */}
-      <header className="px-8 pb-14 pt-20 text-center md:px-20 md:pt-28">
-        <div className="mx-auto inline-flex items-center gap-2.5 rounded-full border border-[oklch(0.85_0.015_220)] bg-white/60 px-4 py-1.5 text-[10px] uppercase tracking-[0.32em] text-primary backdrop-blur-sm">
-          <span className="h-1 w-1 animate-pulse rounded-full bg-primary" />
-          Atelier · 11 juin 2026
+      <header className="px-6 pb-10 pt-16 text-center md:px-16 md:pt-24">
+        <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-[oklch(0.85_0.02_220)] bg-white/70 px-4 py-1.5 text-[11px] uppercase tracking-[0.22em] text-primary backdrop-blur-sm">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+          Atelier en cours d'installation
         </div>
 
-        <h1 className="mx-auto mt-8 max-w-5xl font-serif text-5xl font-light leading-[1.02] tracking-[-0.025em] text-foreground md:text-7xl lg:text-[5.25rem]">
+        <h1 className="mx-auto mt-7 max-w-5xl text-5xl leading-[1.05] tracking-tight text-foreground md:text-7xl lg:text-[5.5rem]">
           Bienvenue.
           <br />
-          <span className="italic text-primary">IA &amp; no-code</span>
-          <span className="text-foreground/75">, pour entreprendre plus simplement.</span>
+          <span className="text-primary">IA &amp; no-code</span>
+          <span className="text-foreground/80"> pour entreprendre plus simplement.</span>
         </h1>
 
-        <div className="mx-auto mt-8 h-px w-24 bg-[oklch(0.7_0.02_220)] opacity-50" />
-
-        <p className="mx-auto mt-7 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          Installez-vous. Faites connaissance.<br className="hidden md:block" />
-          Nous démarrons dans quelques instants.
+        <p className="mx-auto mt-7 max-w-2xl text-lg text-muted-foreground md:text-xl">
+          Les esprits s'échauffent, les samoyèdes aussi. <br className="hidden md:block" />
+          Installez-vous, on démarre tout doucement.
         </p>
       </header>
 
       {/* Grid */}
-      <section className="px-6 pb-20 md:px-16">
-        <div className="mx-auto mb-10 flex max-w-[1600px] items-center gap-4">
-          <div className="h-px flex-1 bg-[oklch(0.85_0.01_220)]" />
-          <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground">
-            Les participantes &amp; participants
-          </span>
-          <div className="h-px flex-1 bg-[oklch(0.85_0.01_220)]" />
-        </div>
-
-        <div className="mx-auto grid max-w-[1600px] grid-cols-2 gap-4 sm:grid-cols-3 md:gap-5 lg:grid-cols-5 xl:grid-cols-6">
+      <section className="px-6 pb-24 md:px-16">
+        <div className="mx-auto grid max-w-[1500px] grid-cols-2 gap-5 sm:grid-cols-3 md:gap-6 lg:grid-cols-5 xl:grid-cols-6">
           {PARTICIPANTS.map((p, i) => {
             const isHighlight = highlight === i;
             return (
               <article
                 key={`${p.prenom}-${p.nom}`}
                 className={[
-                  "group relative flex flex-col items-center rounded-2xl border border-[oklch(0.9_0.008_220)] bg-white/75 px-5 pb-6 pt-7 text-center backdrop-blur-md transition-all duration-700",
-                  "shadow-[0_1px_2px_rgba(30,60,90,0.04),0_12px_32px_-18px_rgba(30,60,90,0.18)]",
-                  "hover:-translate-y-1 hover:border-[oklch(0.82_0.02_200)] hover:bg-white hover:shadow-[0_1px_2px_rgba(30,60,90,0.05),0_24px_50px_-22px_rgba(30,60,90,0.28)]",
-                  isHighlight
-                    ? "-translate-y-1 border-[oklch(0.78_0.04_195)] bg-white shadow-[0_1px_2px_rgba(30,60,90,0.05),0_24px_50px_-22px_rgba(30,60,90,0.32)]"
-                    : "",
+                  "group relative flex flex-col items-center rounded-3xl border border-white/80 bg-white/70 p-4 text-center backdrop-blur-md transition-all duration-500",
+                  "shadow-[0_8px_30px_-12px_rgba(30,60,90,0.18)] hover:-translate-y-1.5 hover:shadow-[0_22px_50px_-18px_rgba(30,60,90,0.30)]",
+                  isHighlight ? "-translate-y-1.5 ring-2 ring-primary/40 shadow-[0_22px_50px_-18px_rgba(30,60,90,0.35)]" : "",
                 ].join(" ")}
                 style={{
-                  animation: `cardIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.05}s both`,
+                  animation: `cardIn 0.8s ease-out ${i * 0.06}s both`,
                 }}
               >
-                <div className="relative mb-4 h-28 w-28 md:h-32 md:w-32">
-                  <div className="absolute inset-0 rounded-full bg-[oklch(0.96_0.012_200)] ring-1 ring-inset ring-[oklch(0.9_0.01_220)]" />
+                <div className="relative mb-3 h-28 w-28 md:h-32 md:w-32">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[oklch(0.94_0.03_220)] to-[oklch(0.96_0.02_180)]" />
                   <img
                     src={p.image}
-                    alt={`Portrait — ${p.activite}`}
+                    alt={`Samoyède — ${p.activite}`}
                     width={256}
                     height={256}
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-contain p-1.5 transition-transform duration-700 group-hover:scale-[1.04]"
+                    className="absolute inset-0 h-full w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-105"
+                    style={{
+                      animation: `bobble ${5 + (i % 4)}s ease-in-out ${i * 0.2}s infinite`,
+                    }}
                   />
                 </div>
 
-                <h3 className="font-serif text-[17px] font-normal leading-tight tracking-tight text-foreground md:text-[19px]">
-                  {p.prenom} {p.nom}
+                <h3 className="text-[15px] font-medium leading-tight text-foreground md:text-base">
+                  {p.prenom} <span className="font-semibold">{p.nom}</span>
                 </h3>
-                <p className="mt-2 text-[11px] uppercase leading-snug tracking-[0.12em] text-muted-foreground md:text-[12px]">
+                <p className="mt-1 text-[12px] leading-snug text-muted-foreground md:text-[13px]">
                   {p.activite}
                 </p>
 
                 <div
                   className={[
-                    "pointer-events-none absolute inset-x-4 -bottom-3 translate-y-2 rounded-md bg-foreground px-3 py-2 text-[11px] font-medium leading-snug text-background opacity-0 shadow-xl transition-all duration-500",
+                    "pointer-events-none absolute inset-x-3 -bottom-2 translate-y-2 rounded-xl bg-primary px-3 py-1.5 text-[11px] font-medium text-primary-foreground opacity-0 shadow-lg transition-all duration-300",
                     "group-hover:-translate-y-1 group-hover:opacity-100",
                     isHighlight ? "-translate-y-1 opacity-100" : "",
                   ].join(" ")}
@@ -183,28 +177,31 @@ function AccueilPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[oklch(0.9_0.008_220)] bg-white/50 px-6 py-7 backdrop-blur-md md:px-16">
-        <div className="mx-auto flex max-w-[1600px] flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
+      <footer className="border-t border-white/60 bg-white/40 px-6 py-6 backdrop-blur-md md:px-16">
+        <div className="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
           <div className="text-sm text-muted-foreground">
-            <span className="font-medium text-foreground">Ouverture de l'atelier à 9h</span>
-            <span className="mx-2 text-[oklch(0.8_0.01_220)]">·</span>
-            <span>Un café vous attend.</span>
+            <span className="text-foreground">Début de l'atelier à 9h</span> · Installez-vous, on démarre bientôt.
           </div>
-          <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.32em] text-primary">
-            <span>Summit Flow</span>
-            <span className="h-3 w-px bg-[oklch(0.8_0.02_200)]" />
-            <span suppressHydrationWarning>{heure ?? "—"}</span>
+          <div className="font-mono text-xs uppercase tracking-[0.22em] text-primary">
+            Summit Flow · {heure}
           </div>
         </div>
       </footer>
 
       <style>{`
         @keyframes cardIn {
-          0% { opacity: 0; transform: translateY(16px); }
-          100% { opacity: 1; transform: translateY(0); }
+          0% { opacity: 0; transform: translateY(24px) scale(0.96); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes bobble {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-6px); }
+        }
+        @keyframes floaty {
+          0%, 100% { transform: translate(0, 0); opacity: 0.55; }
+          50% { transform: translate(10px, -18px); opacity: 0.95; }
         }
       `}</style>
     </div>
   );
 }
-
