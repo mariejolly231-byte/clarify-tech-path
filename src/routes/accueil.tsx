@@ -63,7 +63,7 @@ const PARTICIPANTS: Participant[] = [
 
 function AccueilPage() {
   const [highlight, setHighlight] = useState<number | null>(null);
-  const [now, setNow] = useState(() => new Date());
+  const [heure, setHeure] = useState<string>("");
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -73,11 +73,12 @@ function AccueilPage() {
   }, []);
 
   useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000 * 30);
+    const update = () =>
+      setHeure(new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }));
+    update();
+    const t = setInterval(update, 1000 * 30);
     return () => clearInterval(t);
   }, []);
-
-  const heure = now.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[oklch(0.985_0.006_220)] text-foreground">
@@ -124,28 +125,28 @@ function AccueilPage() {
 
       {/* Grid */}
       <section className="px-6 pb-24 md:px-16">
-        <div className="mx-auto grid max-w-[1500px] grid-cols-2 gap-5 sm:grid-cols-3 md:gap-6 lg:grid-cols-5 xl:grid-cols-6">
+        <div className="mx-auto grid max-w-[1700px] grid-cols-2 gap-6 sm:grid-cols-3 md:gap-7 lg:grid-cols-5 xl:grid-cols-6">
           {PARTICIPANTS.map((p, i) => {
             const isHighlight = highlight === i;
             return (
               <article
                 key={`${p.prenom}-${p.nom}`}
                 className={[
-                  "group relative flex flex-col items-center rounded-3xl border border-white/80 bg-white/70 p-4 text-center backdrop-blur-md transition-all duration-500",
-                  "shadow-[0_8px_30px_-12px_rgba(30,60,90,0.18)] hover:-translate-y-1.5 hover:shadow-[0_22px_50px_-18px_rgba(30,60,90,0.30)]",
-                  isHighlight ? "-translate-y-1.5 ring-2 ring-primary/40 shadow-[0_22px_50px_-18px_rgba(30,60,90,0.35)]" : "",
+                  "group relative flex flex-col items-center rounded-3xl border border-white/80 bg-white/75 p-5 text-center backdrop-blur-md transition-all duration-500",
+                  "shadow-[0_10px_36px_-14px_rgba(30,60,90,0.20)] hover:-translate-y-1.5 hover:shadow-[0_26px_60px_-20px_rgba(30,60,90,0.32)]",
+                  isHighlight ? "-translate-y-1.5 ring-2 ring-primary/40 shadow-[0_26px_60px_-20px_rgba(30,60,90,0.38)]" : "",
                 ].join(" ")}
                 style={{
                   animation: `cardIn 0.8s ease-out ${i * 0.06}s both`,
                 }}
               >
-                <div className="relative mb-3 h-28 w-28 md:h-32 md:w-32">
+                <div className="relative mb-4 h-36 w-36 md:h-40 md:w-40">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[oklch(0.94_0.03_220)] to-[oklch(0.96_0.02_180)]" />
                   <img
                     src={p.image}
                     alt={`Samoyède — ${p.activite}`}
-                    width={256}
-                    height={256}
+                    width={320}
+                    height={320}
                     loading="lazy"
                     className="absolute inset-0 h-full w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-105"
                     style={{
@@ -154,12 +155,13 @@ function AccueilPage() {
                   />
                 </div>
 
-                <h3 className="text-[15px] font-medium leading-tight text-foreground md:text-base">
+                <h3 className="font-serif text-lg leading-tight tracking-tight text-foreground md:text-xl">
                   {p.prenom} <span className="font-semibold">{p.nom}</span>
                 </h3>
-                <p className="mt-1 text-[12px] leading-snug text-muted-foreground md:text-[13px]">
+                <p className="mt-1.5 text-sm leading-snug text-muted-foreground md:text-[15px]">
                   {p.activite}
                 </p>
+
 
                 <div
                   className={[
