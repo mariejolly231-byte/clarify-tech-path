@@ -174,7 +174,10 @@ export function Vocabulary() {
             </DialogContent>
           </Dialog>
         </div>
+
+        <HumanVsAI />
       </div>
+
 
       {/* BLOC 2 — Vocabulaire */}
       <div className="mb-10">
