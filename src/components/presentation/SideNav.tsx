@@ -5,7 +5,7 @@ export const SECTIONS = [
   { id: "sondage", label: "Tour de table live", num: "00" },
   { id: "ouverture", label: "Ouverture", num: "01" },
   { id: "qui", label: "Qui je suis", num: "02" },
-  { id: "tri", label: "Le grand tri des mots", num: "03" },
+  { id: "tri", label: "No code, IA, gloubi-boulga, késako ?", num: "03" },
   { id: "reglages", label: "Les réglages de l'IA", num: "04" },
   { id: "hype", label: "La hype vs la réalité", num: "05" },
   { id: "cadrage", label: "Le cadrage avant tout", num: "06" },
