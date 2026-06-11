@@ -154,6 +154,25 @@ export function Vocabulary() {
             Données → Modèle → Prompt &amp; Réponse &nbsp;·&nbsp; L'IA calcule, l'humain pense.
           </figcaption>
         </figure>
+
+        <div className="mt-5 flex justify-center">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" size="lg" className="gap-2">
+                <span aria-hidden>🔬</span>
+                Et techniquement, comment elle apprend ?
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-6xl p-0 overflow-hidden">
+              <DialogTitle className="sr-only">Comment une IA apprend techniquement</DialogTitle>
+              <img
+                src={commentIAApprend.url}
+                alt="Infographie technique : anatomie du réseau de neurones, propagation avant, ajustement des poids, prédiction et sortie"
+                className="w-full h-auto"
+              />
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
 
       {/* BLOC 2 — Vocabulaire */}
