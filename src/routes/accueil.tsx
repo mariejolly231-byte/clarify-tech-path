@@ -168,7 +168,7 @@ function AccueilPage() {
         </div>
 
         {/* Right column */}
-        <div className="flex flex-1 flex-col justify-between gap-1">
+        <div className="flex flex-1 flex-col justify-between gap-[2px]">
           {rightCol.map((p, idx) => (
             <ParticipantCard
               key={p.id}
