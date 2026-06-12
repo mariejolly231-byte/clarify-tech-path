@@ -149,7 +149,7 @@ export function LivePoll() {
             </span>
           </div>
 
-          <RespondentsAvatars responses={responses} />
+          
         </div>
 
         {/* Live results */}
