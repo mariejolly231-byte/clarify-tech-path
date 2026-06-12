@@ -148,6 +148,8 @@ export function LivePoll() {
               {total} réponse{total > 1 ? "s" : ""} reçue{total > 1 ? "s" : ""}
             </span>
           </div>
+
+          <RespondentsAvatars responses={responses} />
         </div>
 
         {/* Live results */}
