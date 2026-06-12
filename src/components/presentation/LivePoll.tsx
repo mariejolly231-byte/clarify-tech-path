@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { Section } from "./Section";
 import { supabase } from "@/integrations/supabase/client";
+import { PARTICIPANTS_BY_ID } from "@/lib/participants";
 
 type Response = {
   id: string;
+  participant_id: string | null;
   nocode_def: string[] | null;
   ai_def: string[] | null;
   nocode_level: number | null;
