@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { LivePoll } from "@/components/presentation/LivePoll";
+import { QRCodeSVG } from "qrcode.react";
 import { PARTICIPANTS, type Participant } from "@/lib/participants";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -10,8 +10,7 @@ export const Route = createFileRoute("/accueil")({
       { title: "Bienvenue — Atelier IA & no-code · Summit Flow" },
       {
         name: "description",
-        content:
-          "Écran d'accueil de l'atelier IA & no-code pour entrepreneurs.",
+        content: "Écran d'accueil de l'atelier IA & no-code pour entrepreneurs.",
       },
     ],
   }),
@@ -20,23 +19,29 @@ export const Route = createFileRoute("/accueil")({
 
 function AccueilPage() {
   const [heure, setHeure] = useState<string>("");
-  const [highlight, setHighlight] = useState<number | null>(null);
+  const [highlight, setHighlight] = useState<number>(0);
   const [responded, setResponded] = useState<Set<string>>(new Set());
+  const [origin, setOrigin] = useState("");
 
   useEffect(() => {
+    setOrigin(window.location.origin);
     const tick = () =>
       setHeure(
-        new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+        new Date().toLocaleTimeString("fr-FR", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       );
     tick();
     const t = setInterval(tick, 1000 * 30);
     return () => clearInterval(t);
   }, []);
 
+  // Cycle highlight through each card, one by one
   useEffect(() => {
     const t = setInterval(() => {
-      setHighlight(Math.floor(Math.random() * PARTICIPANTS.length));
-    }, 4200);
+      setHighlight((h) => (h + 1) % PARTICIPANTS.length);
+    }, 1600);
     return () => clearInterval(t);
   }, []);
 
@@ -62,18 +67,17 @@ function AccueilPage() {
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "workshop_responses" },
         (payload) => {
-          const pid = (payload.new as { participant_id: string | null }).participant_id;
-          if (pid) {
+          const pid = (payload.new as { participant_id: string | null })
+            .participant_id;
+          if (pid)
             setResponded((prev) => {
               const next = new Set(prev);
               next.add(pid);
               return next;
             });
-          }
         },
       )
       .subscribe();
-
     return () => {
       supabase.removeChannel(channel);
     };
@@ -83,8 +87,14 @@ function AccueilPage() {
     PARTICIPANTS.some((p) => p.id === id),
   ).length;
 
+  const formUrl = origin ? `${origin}/sondage` : "";
+
+  // Split 17 into two columns: 9 left, 8 right
+  const leftCol = PARTICIPANTS.slice(0, 9);
+  const rightCol = PARTICIPANTS.slice(9);
+
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[oklch(0.985_0.006_220)] text-foreground">
+    <div className="relative flex h-screen w-screen flex-col overflow-hidden bg-[oklch(0.985_0.006_220)] text-foreground">
       {/* Soft atmospheric background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -left-40 -top-40 h-[40rem] w-[40rem] rounded-full bg-[oklch(0.93_0.03_220)] opacity-50 blur-3xl" />
@@ -99,85 +109,104 @@ function AccueilPage() {
         />
       </div>
 
-      {/* Hero */}
-      <header className="px-8 pb-6 pt-10 text-center md:px-20 md:pt-12">
-        <div className="mx-auto inline-flex items-center gap-2.5 rounded-full border border-[oklch(0.88_0.015_220)] bg-white/80 px-5 py-2 text-[11px] font-medium uppercase tracking-[0.28em] text-primary shadow-sm backdrop-blur-sm">
+      {/* Compact hero */}
+      <header className="shrink-0 px-6 pt-4 text-center md:pt-5">
+        <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-[oklch(0.88_0.015_220)] bg-white/80 px-4 py-1.5 text-[10px] font-medium uppercase tracking-[0.28em] text-primary shadow-sm backdrop-blur-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Atelier · Summit Flow
         </div>
-
-        <h1 className="mx-auto mt-5 max-w-5xl text-4xl leading-[1.05] tracking-tight text-foreground md:text-5xl">
+        <h1 className="mx-auto mt-2 max-w-4xl text-2xl leading-tight tracking-tight md:text-3xl">
           Bienvenue.{" "}
           <span className="text-primary">IA &amp; no-code</span>
           <span className="text-foreground/75"> pour entreprendre plus simplement.</span>
         </h1>
-
-        <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
-          Installez-vous et lancez le tour de table — scannez, répondez, les résultats s'affichent en direct.
-        </p>
       </header>
 
-      {/* Sondage live (centré, large) */}
-      <section className="px-4 md:px-10">
-        <div className="mx-auto max-w-[1280px]">
-          <div className="rounded-3xl border border-[oklch(0.92_0.01_220)] bg-white/85 p-2 shadow-[0_30px_80px_-40px_rgba(30,60,90,0.35)] backdrop-blur-md">
-            <div className="overflow-hidden rounded-[20px]">
-              <LivePoll />
-            </div>
-          </div>
+      {/* Main stage: cards floating around centered QR */}
+      <main className="relative flex flex-1 items-center justify-center px-3 py-3 md:px-6">
+        {/* Left column */}
+        <div className="flex h-full flex-1 flex-col justify-between gap-1.5 py-1">
+          {leftCol.map((p, idx) => (
+            <ParticipantCard
+              key={p.id}
+              p={p}
+              idx={idx}
+              isHighlight={highlight === idx}
+              hasResponded={responded.has(p.id)}
+              floatVariant={idx % 3}
+            />
+          ))}
         </div>
-      </section>
 
-      {/* Tour de table — grille de samoyèdes */}
-      <section className="px-4 pb-16 pt-10 md:px-10">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
-            <div>
-              <div className="font-mono text-[11px] uppercase tracking-[0.28em] text-primary">
-                Tour de table
-              </div>
-              <h2 className="mt-1 font-serif text-2xl text-foreground md:text-3xl">
-                17 entrepreneurs autour de la table
-              </h2>
+        {/* Center: QR */}
+        <div className="mx-3 flex w-[340px] shrink-0 flex-col items-center md:mx-6 md:w-[380px]">
+          <div className="w-full rounded-3xl border border-[oklch(0.92_0.01_220)] bg-white/95 p-6 text-center shadow-[0_30px_80px_-40px_rgba(30,60,90,0.4)] backdrop-blur-md">
+            <div className="text-[11px] uppercase tracking-[0.28em] text-primary">
+              Scannez pour participer
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-[oklch(0.92_0.01_220)] bg-white/80 px-3 py-1.5 text-xs text-foreground/75 shadow-sm backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-go" />
-              <span className="font-mono">
+            <div className="mt-4 inline-flex items-center justify-center rounded-2xl bg-white p-3 ring-1 ring-[oklch(0.92_0.01_220)]">
+              {formUrl ? (
+                <QRCodeSVG
+                  value={formUrl}
+                  size={240}
+                  level="M"
+                  bgColor="#ffffff"
+                  fgColor="#1a3a3f"
+                />
+              ) : (
+                <div className="h-[240px] w-[240px]" />
+              )}
+            </div>
+            <p className="mt-4 text-sm text-foreground/80">
+              Scanne le QR code et choisis ton personnage pour démarrer.
+            </p>
+            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/[0.06] px-3 py-1.5">
+              <span className="h-2 w-2 rounded-full bg-go animate-pulse" />
+              <span className="font-mono text-xs text-foreground/80">
                 {totalResponded}/{PARTICIPANTS.length} ont répondu
               </span>
             </div>
           </div>
-
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-            {PARTICIPANTS.map((p, idx) => (
-              <ParticipantCard
-                key={p.id}
-                p={p}
-                idx={idx}
-                isHighlight={highlight === idx}
-                hasResponded={responded.has(p.id)}
-              />
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-[oklch(0.92_0.01_220)] bg-white/50 px-8 py-6 backdrop-blur-md md:px-16">
-        <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
-          <div className="text-sm text-muted-foreground">
-            <span className="font-medium text-foreground">Début à 9h</span> · Merci de votre présence.
-          </div>
-          <div className="font-mono text-xs uppercase tracking-[0.28em] text-primary">
-            Summit Flow{heure ? ` · ${heure}` : ""}
+          <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
+            Summit Flow{heure ? ` · ${heure}` : ""} · Début 9h
           </div>
         </div>
-      </footer>
+
+        {/* Right column */}
+        <div className="flex h-full flex-1 flex-col justify-between gap-1.5 py-1">
+          {rightCol.map((p, idx) => (
+            <ParticipantCard
+              key={p.id}
+              p={p}
+              idx={idx + leftCol.length}
+              isHighlight={highlight === idx + leftCol.length}
+              hasResponded={responded.has(p.id)}
+              floatVariant={(idx + 1) % 3}
+            />
+          ))}
+        </div>
+      </main>
 
       <style>{`
+        @keyframes floatA {
+          0%, 100% { transform: translate(0, 0); }
+          50% { transform: translate(6px, -5px); }
+        }
+        @keyframes floatB {
+          0%, 100% { transform: translate(0, 0); }
+          50% { transform: translate(-5px, 6px); }
+        }
+        @keyframes floatC {
+          0%, 100% { transform: translate(0, 0); }
+          50% { transform: translate(4px, 4px); }
+        }
         @keyframes cardIn {
-          0% { opacity: 0; transform: translateY(14px); }
+          0% { opacity: 0; transform: translateY(8px); }
           100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes glowPulse {
+          0%, 100% { box-shadow: 0 0 0 0 oklch(0.55 0.18 220 / 0.0), 0 8px 22px -14px rgba(30,60,90,0.5); }
+          50% { box-shadow: 0 0 0 4px oklch(0.55 0.18 220 / 0.18), 0 14px 30px -14px rgba(30,60,90,0.55); }
         }
       `}</style>
     </div>
@@ -189,61 +218,74 @@ function ParticipantCard({
   idx,
   isHighlight,
   hasResponded,
+  floatVariant,
 }: {
   p: Participant;
   idx: number;
   isHighlight: boolean;
   hasResponded: boolean;
+  floatVariant: number;
 }) {
+  const floatName = floatVariant === 0 ? "floatA" : floatVariant === 1 ? "floatB" : "floatC";
+  const dur = 6 + (idx % 4) * 0.8;
+  const delay = (idx % 5) * 0.4;
+
   return (
-    <li
-      className={[
-        "group relative flex flex-col items-center gap-2 rounded-2xl border bg-white/90 p-4 text-center backdrop-blur-md transition-all duration-500",
-        hasResponded
-          ? "border-go/45 bg-[oklch(0.97_0.04_150)]/70 shadow-[0_8px_24px_-14px_rgba(40,140,90,0.45)]"
-          : isHighlight
-            ? "-translate-y-0.5 border-primary/45 shadow-[0_18px_40px_-22px_rgba(30,60,90,0.45)]"
-            : "border-[oklch(0.92_0.01_220)] shadow-[0_4px_18px_-12px_rgba(30,60,90,0.18)]",
-      ].join(" ")}
+    <div
+      className="relative"
       style={{
-        animation: `cardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${idx * 0.035}s both`,
+        animation: `${floatName} ${dur}s ease-in-out ${delay}s infinite, cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${idx * 0.03}s both`,
       }}
     >
-      {hasResponded && (
-        <span className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-full bg-go/15 px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-wider text-go">
-          <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M2 6.5L5 9.5L10 3" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          OK
-        </span>
-      )}
-
-      <div className="relative h-20 w-20 shrink-0">
-        <div
-          className={[
-            "absolute inset-0 rounded-full bg-gradient-to-b from-[oklch(0.96_0.015_220)] to-[oklch(0.93_0.02_200)] shadow-inner transition",
-            hasResponded ? "ring-2 ring-go/40" : "",
-          ].join(" ")}
-        />
-        <img
-          src={p.image}
-          alt={`Portrait — ${p.prenom} ${p.nom}`}
-          width={160}
-          height={160}
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-contain p-1"
-        />
-      </div>
-
-      <div className="mt-1 min-w-0">
-        <div className="truncate font-serif text-[15px] leading-tight text-foreground">
-          {p.prenom} <span className="font-semibold">{p.nom}</span>
+      <div
+        className={[
+          "relative flex items-center gap-2.5 rounded-xl border bg-white/90 p-2 pr-3 backdrop-blur-md transition-all duration-500",
+          hasResponded
+            ? "border-go/50 bg-[oklch(0.97_0.04_150)]/80"
+            : isHighlight
+              ? "border-primary/60 bg-white"
+              : "border-[oklch(0.92_0.01_220)]",
+        ].join(" ")}
+        style={
+          isHighlight && !hasResponded
+            ? { animation: "glowPulse 1.6s ease-in-out" }
+            : undefined
+        }
+      >
+        <div className="relative h-12 w-12 shrink-0">
+          <div
+            className={[
+              "absolute inset-0 rounded-full bg-gradient-to-b from-[oklch(0.96_0.015_220)] to-[oklch(0.93_0.02_200)] transition",
+              hasResponded ? "ring-2 ring-go/50" : isHighlight ? "ring-2 ring-primary/60" : "",
+            ].join(" ")}
+          />
+          <img
+            src={p.image}
+            alt={`Portrait — ${p.prenom} ${p.nom}`}
+            width={96}
+            height={96}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-contain p-0.5"
+          />
         </div>
-        <div className="mx-auto mt-1.5 h-px w-6 bg-primary/30" />
-        <div className="mt-1.5 line-clamp-2 text-[12px] leading-snug text-muted-foreground">
-          {p.activite}
+
+        <div className="min-w-0 flex-1">
+          <div className="truncate font-serif text-[13px] leading-tight text-foreground">
+            {p.prenom} <span className="font-semibold">{p.nom}</span>
+          </div>
+          <div className="mt-0.5 line-clamp-2 text-[10.5px] leading-snug text-muted-foreground">
+            {p.activite}
+          </div>
         </div>
+
+        {hasResponded && (
+          <span className="absolute -right-1 -top-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-go text-white shadow-sm">
+            <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="3">
+              <path d="M2 6.5L5 9.5L10 3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+        )}
       </div>
-    </li>
+    </div>
   );
 }
