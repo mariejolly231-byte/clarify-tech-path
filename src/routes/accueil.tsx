@@ -234,7 +234,7 @@ function ParticipantCard({
     >
       <div
         className={[
-          "relative flex items-center gap-2 rounded-lg border bg-white/90 px-2 py-1 backdrop-blur-md transition-all duration-500",
+          "relative flex items-center gap-2.5 rounded-lg border bg-white/90 px-2.5 py-1.5 backdrop-blur-md transition-all duration-500",
           hasResponded
             ? "border-go/50 bg-[oklch(0.97_0.04_150)]/80"
             : isHighlight
@@ -247,7 +247,7 @@ function ParticipantCard({
             : undefined
         }
       >
-        <div className="relative h-9 w-9 shrink-0">
+        <div className="relative h-11 w-11 shrink-0">
           <div
             className={[
               "absolute inset-0 rounded-full bg-gradient-to-b from-[oklch(0.96_0.015_220)] to-[oklch(0.93_0.02_200)] transition",
@@ -257,18 +257,18 @@ function ParticipantCard({
           <img
             src={p.image}
             alt={`Portrait — ${p.prenom} ${p.nom}`}
-            width={72}
-            height={72}
+            width={88}
+            height={88}
             loading="lazy"
             className="absolute inset-0 h-full w-full object-contain p-0.5"
           />
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="truncate font-serif text-[12px] leading-tight text-foreground">
+          <div className="truncate font-serif text-[13px] leading-tight text-foreground">
             {p.prenom} <span className="font-semibold">{p.nom}</span>
           </div>
-          <div className="truncate text-[10px] leading-snug text-muted-foreground">
+          <div className="truncate text-[11px] leading-snug text-muted-foreground">
             {p.activite}
           </div>
         </div>
