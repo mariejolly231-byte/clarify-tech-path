@@ -1,7 +1,8 @@
-import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { PARTICIPANTS, PARTICIPANTS_BY_ID, type Participant } from "@/lib/participants";
 
 export const Route = createFileRoute("/sondage")({
   head: () => ({
@@ -13,6 +14,8 @@ export const Route = createFileRoute("/sondage")({
   }),
   component: SondagePage,
 });
+
+const STORAGE_KEY = "summitflow.participant_id";
 
 const NOCODE_DEFS = [
   "Créer des sites ou apps sans écrire de code",
@@ -78,7 +81,7 @@ const GOALS = [
 ];
 
 function SondagePage() {
-  const router = useRouter();
+  const [participantId, setParticipantId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
 
@@ -93,12 +96,32 @@ function SondagePage() {
   const [goals, setGoals] = useState<string[]>([]);
   const [task, setTask] = useState("");
 
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && PARTICIPANTS_BY_ID.has(saved)) setParticipantId(saved);
+    } catch {}
+  }, []);
+
+  const me = participantId ? PARTICIPANTS_BY_ID.get(participantId) ?? null : null;
+
   const toggle = (arr: string[], v: string, setter: (a: string[]) => void) => {
     setter(arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
   };
 
+  const onSelectParticipant = (p: Participant) => {
+    setParticipantId(p.id);
+    try {
+      localStorage.setItem(STORAGE_KEY, p.id);
+    } catch {}
+  };
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!participantId) {
+      toast.error("Sélectionne d'abord qui tu es.");
+      return;
+    }
     if (!nocode.length || !ai.length) {
       toast.error("Merci de répondre aux deux premières questions.");
       return;
@@ -117,6 +140,7 @@ function SondagePage() {
     );
 
     const { error } = await supabase.from("workshop_responses").insert({
+      participant_id: participantId,
       nocode_def: nocodePayload,
       ai_def: aiPayload,
       ai_usage: aiUsage,
@@ -134,12 +158,72 @@ function SondagePage() {
     setDone(true);
   };
 
+  // ÉCRAN 1 — Sélection du participant
+  if (!participantId) {
+    return (
+      <div className="min-h-screen bg-sand/40 px-4 py-10 md:py-16">
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-8 text-center">
+            <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
+              Avant qu'on démarre
+            </div>
+            <h1 className="mt-2 font-serif text-3xl text-foreground md:text-4xl">
+              Qui es-tu ?
+            </h1>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Choisis ton samoyède pour rejoindre le tour de table.
+            </p>
+          </div>
+
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+            {PARTICIPANTS.map((p) => (
+              <li key={p.id}>
+                <button
+                  type="button"
+                  onClick={() => onSelectParticipant(p)}
+                  className="group flex w-full flex-col items-center gap-2 rounded-2xl border border-border bg-card p-3 text-center shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+                >
+                  <div className="relative h-20 w-20 overflow-hidden rounded-full bg-gradient-to-b from-stone-soft to-accent/30 ring-1 ring-border">
+                    <img
+                      src={p.image}
+                      alt={`${p.prenom} ${p.nom}`}
+                      className="h-full w-full object-contain p-1"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="truncate text-sm font-medium text-foreground">
+                      {p.prenom} {p.nom}
+                    </div>
+                    <div className="mt-0.5 truncate text-[11px] text-muted-foreground">
+                      {p.activite}
+                    </div>
+                  </div>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    );
+  }
+
+  // ÉCRAN 3 — Confirmation (sans retour vers la présentation)
   if (done) {
     return (
       <div className="min-h-screen bg-sand/40 px-6 py-16">
         <div className="mx-auto max-w-xl rounded-2xl border border-border bg-card p-10 text-center shadow-sm">
+          {me && (
+            <div className="mx-auto mb-4 h-24 w-24 overflow-hidden rounded-full bg-gradient-to-b from-stone-soft to-accent/30 ring-1 ring-border">
+              <img
+                src={me.image}
+                alt={`${me.prenom} ${me.nom}`}
+                className="h-full w-full object-contain p-1"
+              />
+            </div>
+          )}
           <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
-            Merci !
+            Merci{me ? `, ${me.prenom}` : ""} !
           </div>
           <h1 className="mt-3 font-serif text-3xl text-foreground">
             Réponse enregistrée.
@@ -147,17 +231,12 @@ function SondagePage() {
           <p className="mt-3 text-muted-foreground">
             Tu peux poser ton téléphone — on regarde tout ça ensemble dans une minute.
           </p>
-          <button
-            onClick={() => router.navigate({ to: "/" })}
-            className="mt-6 rounded-md border border-border bg-stone-soft px-4 py-2 text-sm hover:bg-accent/40"
-          >
-            Retour à la présentation
-          </button>
         </div>
       </div>
     );
   }
 
+  // ÉCRAN 2 — Formulaire
   return (
     <div className="min-h-screen bg-sand/40 px-4 py-10 md:px-6 md:py-16">
       <div className="mx-auto max-w-2xl">
@@ -169,8 +248,37 @@ function SondagePage() {
             Tour de table express
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            7 questions, 2 minutes. Anonyme. Les résultats s'affichent en direct.
+            7 questions, 2 minutes. Les résultats s'affichent en direct.
           </p>
+
+          {me && (
+            <div className="mx-auto mt-5 inline-flex items-center gap-3 rounded-full border border-border bg-card px-3 py-1.5 shadow-sm">
+              <div className="h-9 w-9 overflow-hidden rounded-full bg-gradient-to-b from-stone-soft to-accent/30 ring-1 ring-border">
+                <img
+                  src={me.image}
+                  alt={`${me.prenom} ${me.nom}`}
+                  className="h-full w-full object-contain p-0.5"
+                />
+              </div>
+              <div className="text-left">
+                <div className="text-sm font-medium leading-tight">
+                  {me.prenom} {me.nom}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setParticipantId(null);
+                    try {
+                      localStorage.removeItem(STORAGE_KEY);
+                    } catch {}
+                  }}
+                  className="text-[11px] text-muted-foreground underline-offset-2 hover:underline"
+                >
+                  Ce n'est pas moi
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         <form onSubmit={onSubmit} className="space-y-5">

@@ -1,0 +1,1 @@
+ALTER TABLE public.workshop_responses ADD COLUMN IF NOT EXISTS participant_id text CHECK (participant_id IS NULL OR length(participant_id) <= 60);

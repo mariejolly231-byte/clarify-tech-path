@@ -24,6 +24,7 @@ export type Database = {
           id: string
           nocode_def: string[]
           nocode_level: number | null
+          participant_id: string | null
           repetitive_task: string | null
           tools_automation: string | null
           tools_other: string | null
@@ -38,6 +39,7 @@ export type Database = {
           id?: string
           nocode_def?: string[]
           nocode_level?: number | null
+          participant_id?: string | null
           repetitive_task?: string | null
           tools_automation?: string | null
           tools_other?: string | null
@@ -52,6 +54,7 @@ export type Database = {
           id?: string
           nocode_def?: string[]
           nocode_level?: number | null
+          participant_id?: string | null
           repetitive_task?: string | null
           tools_automation?: string | null
           tools_other?: string | null

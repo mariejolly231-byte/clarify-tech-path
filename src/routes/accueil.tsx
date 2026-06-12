@@ -1,24 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { LivePoll } from "@/components/presentation/LivePoll";
-
-import s01 from "@/assets/samoyedes/01-bador.png.asset.json";
-import s02 from "@/assets/samoyedes/02-bouchard.png.asset.json";
-import s03 from "@/assets/samoyedes/03-chadelle.png.asset.json";
-import s04 from "@/assets/samoyedes/04-davidoff.png.asset.json";
-import s05 from "@/assets/samoyedes/05-desousa.png.asset.json";
-import s06 from "@/assets/samoyedes/06-diaz.png.asset.json";
-import s07 from "@/assets/samoyedes/07-dumestier.png.asset.json";
-import s08 from "@/assets/samoyedes/08-duplouy.png.asset.json";
-import s09 from "@/assets/samoyedes/09-garciae.png.asset.json";
-import s10 from "@/assets/samoyedes/10-garciat.png.asset.json";
-import s11 from "@/assets/samoyedes/11-hwang.png.asset.json";
-import s12 from "@/assets/samoyedes/12-maffre.png.asset.json";
-import s13 from "@/assets/samoyedes/13-martin.png.asset.json";
-import s14 from "@/assets/samoyedes/14-portes.png.asset.json";
-import s15 from "@/assets/samoyedes/15-raymond.png.asset.json";
-import s16 from "@/assets/samoyedes/16-razes.png.asset.json";
-import s17 from "@/assets/samoyedes/17-zamore.png.asset.json";
+import { PARTICIPANTS, type Participant } from "@/lib/participants";
 
 export const Route = createFileRoute("/accueil")({
   head: () => ({
@@ -33,33 +16,6 @@ export const Route = createFileRoute("/accueil")({
   }),
   component: AccueilPage,
 });
-
-type Participant = {
-  prenom: string;
-  nom: string;
-  activite: string;
-  image: string;
-};
-
-const PARTICIPANTS: Participant[] = [
-  { prenom: "Anthony", nom: "Bador", activite: "Consultant recrutement", image: s01.url },
-  { prenom: "Emeline", nom: "Bouchard", activite: "Formation CSE, dirigeants & RH", image: s02.url },
-  { prenom: "Mickaël", nom: "Chadelle", activite: "Community manager & sites vitrine", image: s03.url },
-  { prenom: "Cyndia", nom: "Davidoff", activite: "Sophrologue — maladies inflammatoires", image: s04.url },
-  { prenom: "Cristiano", nom: "De Sousa Valente", activite: "Sites, apps & automatisation", image: s05.url },
-  { prenom: "Patricia", nom: "Diaz", activite: "Couturière — produits lavables", image: s06.url },
-  { prenom: "Florine Anne", nom: "Dumestier", activite: "Communication bien-être", image: s07.url },
-  { prenom: "Katéry Myriam", nom: "Duplouy", activite: "Illustratrice & coloriste", image: s08.url },
-  { prenom: "Emilie", nom: "Garcia", activite: "Gestion & coordination de projets", image: s09.url },
-  { prenom: "Tahidys", nom: "Garcia", activite: "Services à la personne", image: s10.url },
-  { prenom: "Soo Jin", nom: "Hwang", activite: "Traiteur asiatique en distributeur", image: s11.url },
-  { prenom: "Stéphany", nom: "Maffre", activite: "Legal design & copywriting", image: s12.url },
-  { prenom: "Fleur", nom: "Martin", activite: "Tapisserie d'ameublement", image: s13.url },
-  { prenom: "Jordi", nom: "Portes", activite: "Plateforme FLE — enseignement du français", image: s14.url },
-  { prenom: "Fabienne", nom: "Raymond", activite: "Coach professionnelle & formatrice", image: s15.url },
-  { prenom: "Michèle", nom: "Razes Lafont", activite: "Sublim'objets ML — flocage tout support", image: s16.url },
-  { prenom: "Gaëlle", nom: "Zamore", activite: "Soins minceur & bien-être à domicile", image: s17.url },
-];
 
 function AccueilPage() {
   const [heure, setHeure] = useState<string>("");
