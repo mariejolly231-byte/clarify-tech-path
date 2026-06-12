@@ -284,39 +284,3 @@ function RankBlock({
   );
 }
 
-function RespondentsAvatars({ responses }: { responses: Response[] }) {
-  const seen = new Set<string>();
-  const ordered: string[] = [];
-  for (const r of responses) {
-    if (r.participant_id && !seen.has(r.participant_id) && PARTICIPANTS_BY_ID.has(r.participant_id)) {
-      seen.add(r.participant_id);
-      ordered.push(r.participant_id);
-    }
-  }
-  if (ordered.length === 0) return null;
-  return (
-    <div className="mt-5 border-t border-border pt-4 text-left">
-      <div className="mb-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-        Ont répondu
-      </div>
-      <div className="flex flex-wrap gap-1.5">
-        {ordered.map((id) => {
-          const p = PARTICIPANTS_BY_ID.get(id)!;
-          return (
-            <div
-              key={id}
-              title={`${p.prenom} ${p.nom}`}
-              className="h-9 w-9 overflow-hidden rounded-full bg-gradient-to-b from-stone-soft to-accent/30 ring-1 ring-border"
-            >
-              <img
-                src={p.image}
-                alt={`${p.prenom} ${p.nom}`}
-                className="h-full w-full object-contain p-0.5"
-              />
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
