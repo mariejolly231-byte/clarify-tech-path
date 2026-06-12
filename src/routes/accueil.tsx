@@ -110,10 +110,9 @@ function AccueilPage() {
       </div>
 
       {/* Compact hero */}
-      <header className="shrink-0 px-6 pt-2 text-center">
-        <h1 className="mx-auto max-w-4xl text-lg leading-tight tracking-tight md:text-xl">
-          <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">Summit Flow ·</span>{" "}
-          Bienvenue. <span className="text-primary">IA &amp; no-code</span>
+      <header className="shrink-0 px-6 pt-1 text-center">
+        <h1 className="mx-auto max-w-4xl text-base leading-tight tracking-tight md:text-lg">
+          <span className="text-primary">IA &amp; no-code</span>
           <span className="text-foreground/75"> pour entreprendre plus simplement.</span>
         </h1>
       </header>
