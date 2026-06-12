@@ -119,9 +119,9 @@ function AccueilPage() {
       </header>
 
       {/* Main stage: cards floating around centered QR */}
-      <main className="relative flex flex-1 items-center justify-center px-3 py-3 md:px-6">
+      <main className="relative flex flex-1 items-stretch justify-center gap-2 px-3 py-2 md:px-4">
         {/* Left column */}
-        <div className="flex h-full flex-1 flex-col justify-between gap-1.5 py-1">
+        <div className="flex flex-1 flex-col justify-between gap-1">
           {leftCol.map((p, idx) => (
             <ParticipantCard
               key={p.id}
@@ -135,41 +135,41 @@ function AccueilPage() {
         </div>
 
         {/* Center: QR */}
-        <div className="mx-3 flex w-[340px] shrink-0 flex-col items-center md:mx-6 md:w-[380px]">
-          <div className="w-full rounded-3xl border border-[oklch(0.92_0.01_220)] bg-white/95 p-6 text-center shadow-[0_30px_80px_-40px_rgba(30,60,90,0.4)] backdrop-blur-md">
-            <div className="text-[11px] uppercase tracking-[0.28em] text-primary">
+        <div className="flex w-[300px] shrink-0 flex-col items-center justify-center md:w-[340px]">
+          <div className="w-full rounded-2xl border border-[oklch(0.92_0.01_220)] bg-white/95 p-4 text-center shadow-[0_30px_80px_-40px_rgba(30,60,90,0.4)] backdrop-blur-md">
+            <div className="text-[10px] uppercase tracking-[0.28em] text-primary">
               Scannez pour participer
             </div>
-            <div className="mt-4 inline-flex items-center justify-center rounded-2xl bg-white p-3 ring-1 ring-[oklch(0.92_0.01_220)]">
+            <div className="mt-3 inline-flex items-center justify-center rounded-xl bg-white p-2.5 ring-1 ring-[oklch(0.92_0.01_220)]">
               {formUrl ? (
                 <QRCodeSVG
                   value={formUrl}
-                  size={240}
+                  size={200}
                   level="M"
                   bgColor="#ffffff"
                   fgColor="#1a3a3f"
                 />
               ) : (
-                <div className="h-[240px] w-[240px]" />
+                <div className="h-[200px] w-[200px]" />
               )}
             </div>
-            <p className="mt-4 text-sm text-foreground/80">
-              Scanne le QR code et choisis ton personnage pour démarrer.
+            <p className="mt-3 text-xs text-foreground/80">
+              Scanne le QR et choisis ton personnage pour démarrer.
             </p>
-            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/[0.06] px-3 py-1.5">
-              <span className="h-2 w-2 rounded-full bg-go animate-pulse" />
-              <span className="font-mono text-xs text-foreground/80">
+            <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/[0.06] px-3 py-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-go animate-pulse" />
+              <span className="font-mono text-[10px] text-foreground/80">
                 {totalResponded}/{PARTICIPANTS.length} ont répondu
               </span>
             </div>
           </div>
-          <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
-            Summit Flow{heure ? ` · ${heure}` : ""} · Début 9h
+          <div className="mt-2 font-mono text-[9px] uppercase tracking-[0.28em] text-primary">
+            {heure ? `${heure} · ` : ""}Début 9h
           </div>
         </div>
 
         {/* Right column */}
-        <div className="flex h-full flex-1 flex-col justify-between gap-1.5 py-1">
+        <div className="flex flex-1 flex-col justify-between gap-1">
           {rightCol.map((p, idx) => (
             <ParticipantCard
               key={p.id}
