@@ -110,14 +110,10 @@ function AccueilPage() {
       </div>
 
       {/* Compact hero */}
-      <header className="shrink-0 px-6 pt-4 text-center md:pt-5">
-        <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-[oklch(0.88_0.015_220)] bg-white/80 px-4 py-1.5 text-[10px] font-medium uppercase tracking-[0.28em] text-primary shadow-sm backdrop-blur-sm">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          Atelier · Summit Flow
-        </div>
-        <h1 className="mx-auto mt-2 max-w-4xl text-2xl leading-tight tracking-tight md:text-3xl">
-          Bienvenue.{" "}
-          <span className="text-primary">IA &amp; no-code</span>
+      <header className="shrink-0 px-6 pt-2 text-center">
+        <h1 className="mx-auto max-w-4xl text-lg leading-tight tracking-tight md:text-xl">
+          <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">Summit Flow ·</span>{" "}
+          Bienvenue. <span className="text-primary">IA &amp; no-code</span>
           <span className="text-foreground/75"> pour entreprendre plus simplement.</span>
         </h1>
       </header>
