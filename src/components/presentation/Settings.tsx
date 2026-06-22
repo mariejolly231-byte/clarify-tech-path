@@ -56,6 +56,7 @@ const SETTINGS = [
   short: "Retrieval-Augmented Generation. L'IA va chercher dans vos documents les bons extraits avant de répondre.",
  analogy: "Un assistant qui va consulter les bons classeurs dans l'armoire avant de vous donner sa réponse.",
  tone: "primary",
+ link: { label: "Démo RAG — NotebookLM Summit Flow", href: "https://notebooklm.google.com/notebook/70814c9c-9f66-45ff-b80c-bb220df20bc6" },
  },
  {
  k: "Fine-tuning",
@@ -103,9 +104,20 @@ export function Settings() {
  <div className="text-[10px] uppercase tracking-[0.18em] text-primary">Analogie</div>
  <p className="mt-1 text-sm italic leading-relaxed text-foreground/75">{s.analogy}</p>
  </div>
+ {"link" in s && s.link && (
+ <a
+ href={s.link.href}
+ target="_blank"
+ rel="noreferrer"
+ className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/20"
+ >
+ <span aria-hidden>🔗</span> {s.link.label}
+ </a>
+ )}
  </div>
  ))}
  </div>
+
 
  <div className="mt-12 rounded-2xl border border-border bg-card p-7">
  <div className="mb-3 text-[11px] uppercase tracking-[0.2em] text-primary">

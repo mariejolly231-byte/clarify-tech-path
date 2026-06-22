@@ -84,10 +84,6 @@ export function FirstPath() {
  </p>
  </div>
 
- <p className="mt-6 text-xs italic text-muted-foreground">
- Note animatrice — Transition vers l'atelier groupes : montrer que ce qu'on vient de faire
- est exactement ce qu'ils vont concevoir pour leur propre cas.
- </p>
  </Section>
  );
 }

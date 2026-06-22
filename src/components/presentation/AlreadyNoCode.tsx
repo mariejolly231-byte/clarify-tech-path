@@ -25,9 +25,8 @@ export function AlreadyNoCode() {
  « Qui ici a déjà utilisé un logiciel pour structurer des données —
  un tableau, une liste, un fichier ? »
  </h3>
- <p className="mt-3 text-sm italic text-muted-foreground">
- Animatrice : laissez les mains se lever.
- </p>
+
+
 
  {!revealed && (
  <div className="mt-8 flex justify-center">
@@ -38,7 +37,7 @@ export function AlreadyNoCode() {
  )}
 
  {revealed && (
- <div className="mt-8 animate-fade-in space-y-6 border-t border-border pt-8">
+ <div className="mt-8 space-y-6 border-t border-border pt-8">
  <div className="text-[11px] uppercase tracking-[0.2em] text-primary">Temps 2 — Révélation</div>
  <p className="font-serif text-2xl leading-snug text-foreground md:text-3xl">
  <span className="text-primary">Excel, c'est du no-code.</span> Google Sheets aussi.
@@ -67,10 +66,11 @@ export function AlreadyNoCode() {
  <div className="inline-flex items-center gap-3 rounded-full border-2 border-primary bg-primary/[0.05] px-6 py-3">
  <span className="text-2xl" aria-hidden></span>
  <span className="font-serif text-lg text-primary">
- Certifié no-codeur sans le savoir
+ No-codeur sans le savoir
  </span>
  </div>
  </div>
+
  </div>
  )}
  </div>

@@ -50,11 +50,20 @@ export function Quiz() {
  tint="sage"
  title="Quel terrain pour quelle technique ?"
  >
+ <div className="mb-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+ <div className="inline-flex items-center gap-3 rounded-full border-2 border-primary bg-primary/[0.08] px-5 py-2.5 shadow-sm">
+ <span className="text-2xl" aria-hidden>🎮</span>
+ <span className="font-serif text-base font-semibold text-primary md:text-lg">
+ Jeu collectif — à vous de jouer
+ </span>
+ </div>
  <DurationBadge>⏱ 10 min · Quiz interactif</DurationBadge>
+ </div>
  <p className="mb-10 max-w-3xl text-base text-muted-foreground md:text-lg">
  Cinq scénarios. Pour chacun, tentez votre réponse — puis révélez la bonne catégorie.
  L'objectif n'est pas d'avoir tout juste, mais d'aiguiser le réflexe de tri.
  </p>
+
 
  <div className="grid gap-5 md:grid-cols-2">
  {SCEN.map((s, i) => {
