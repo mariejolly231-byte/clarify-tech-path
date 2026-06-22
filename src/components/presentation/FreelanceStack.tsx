@@ -50,10 +50,18 @@ export function FreelanceStack() {
  </ul>
  </div>
 
- <p className="mt-6 text-[15px] leading-relaxed text-foreground/90">
- → Je vous partage <span className="font-medium">mon lien</span> en fin d'atelier.
- </p>
- <p className="mt-2 text-sm italic text-muted-foreground">
+    <p className="mt-6 text-[15px] leading-relaxed text-foreground/90">
+     →{" "}
+     <a
+      href="https://www.freelance-stack.io?aff=244975"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="font-medium text-primary underline underline-offset-4 hover:no-underline"
+     >
+      Mon lien Freelance Stack
+     </a>
+    </p>
+    <p className="mt-2 text-sm italic text-muted-foreground">
  Si vous vous inscrivez via ce lien, même tarif pour vous,
  et un petit merci pour moi sans surcoût.
  </p>
