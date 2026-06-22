@@ -332,3 +332,137 @@ function Field({ label, value, warn }: { label: string; value: string; warn?: bo
  </div>
  );
 }
+
+type Tool = { name: string; slug?: string };
+type SolutionStep = { step: string; tool: string; slug?: string; what: string };
+type Solution = {
+ title: string;
+ members: string;
+ problem: string;
+ solution: string;
+ stack: Tool[];
+ steps: SolutionStep[];
+ result: string;
+};
+
+const SOLUTIONS: Solution[] = [
+ {
+  title: "Groupe 1 — Produire des livrables personnalisés rapidement",
+  members: "Mickaël · Stéphany · Katéry · Michèle",
+  problem:
+   "Chaque livrable repart de zéro alors que 70% du contenu est identique d'un client à l'autre.",
+  solution: "Système de génération de livrables sur gabarit.",
+  stack: [
+   { name: "Airtable", slug: "airtable" },
+   { name: "Claude", slug: "anthropic" },
+   { name: "ChatGPT", slug: "openai" },
+   { name: "Make", slug: "make" },
+   { name: "Google Docs", slug: "googledocs" },
+   { name: "Canva", slug: "canva" },
+   { name: "Adobe Express", slug: "adobe" },
+  ],
+  steps: [
+   { step: "Stocker les infos clients", tool: "Airtable", slug: "airtable",
+    what: "Une fiche par client avec tous les paramètres (nom, couleurs, ton, format)." },
+   { step: "Générer le contenu", tool: "Claude / ChatGPT (API)", slug: "anthropic",
+    what: "Prompt avec les variables Airtable injectées automatiquement." },
+   { step: "Automatiser la chaîne", tool: "Make", slug: "make",
+    what: "Airtable → Claude → Google Docs → email client." },
+   { step: "Créer les visuels", tool: "Canva API / Adobe Express", slug: "canva",
+    what: "Templates avec variables dynamiques (Michèle, Katéry)." },
+  ],
+  result:
+   "Un nouveau brief client → le livrable V1 est généré en 3 minutes au lieu de 45. Le client reçoit un PDF à valider, automatiquement.",
+ },
+ {
+  title: "Groupe 2 — Gérer plannings, stocks et commandes physiques",
+  members: "Patricia · Fleur · Soo-Jin · Tahidys",
+  problem:
+   "Les infos sont éparpillées entre WhatsApp, un carnet, un fichier Excel et la mémoire — une commande peut tomber dans les cracks.",
+  solution:
+   "Base de données centralisée + formulaires terrain + alertes automatiques.",
+  stack: [
+   { name: "Airtable", slug: "airtable" },
+   { name: "Tally" },
+   { name: "Fillout" },
+   { name: "Make", slug: "make" },
+   { name: "Notion", slug: "notion" },
+   { name: "Google Calendar", slug: "googlecalendar" },
+  ],
+  steps: [
+   { step: "Centraliser commandes et stocks", tool: "Airtable", slug: "airtable",
+    what: "Vues « commandes en cours », « stock matières », « planning semaine »." },
+   { step: "Saisie rapide client ou terrain", tool: "Tally / Fillout",
+    what: "Formulaire sur téléphone → directement dans Airtable." },
+   { step: "Alertes automatiques", tool: "Make", slug: "make",
+    what: "Stock < seuil → SMS/email. Commande J-2 → rappel client auto." },
+   { step: "Planning intervenants (Tahidys)", tool: "Notion + Google Calendar", slug: "notion",
+    what: "Chaque intervenant voit son planning, les absences remontent." },
+  ],
+  result:
+   "Plus aucune commande oubliée. Stock visible en temps réel. Les rappels clients partent seuls.",
+ },
+ {
+  title: "Groupe 3 — Accompagner des personnes dans la durée",
+  members: "Cyndia · Fabienne · Jordi · Gaëlle",
+  problem:
+   "Les notes de suivi sont éparpillées (cahier, email, tête) — retrouver « où en est Marie » prend 10 minutes avant chaque séance.",
+  solution: "CRM de suivi personnalisé + assistant IA de synthèse.",
+  stack: [
+   { name: "Notion", slug: "notion" },
+   { name: "Fireflies" },
+   { name: "Claude", slug: "anthropic" },
+   { name: "Make", slug: "make" },
+   { name: "Softr" },
+   { name: "Airtable", slug: "airtable" },
+   { name: "Brevo", slug: "brevo" },
+  ],
+  steps: [
+   { step: "Fiche de suivi par personne", tool: "Notion", slug: "notion",
+    what: "Une page par client/patient/apprenant : historique, objectifs, notes." },
+   { step: "Prise de notes rapide", tool: "Fireflies / Notion AI",
+    what: "Enregistrement de la séance → résumé auto → ajout dans la fiche." },
+   { step: "Synthèse avant séance", tool: "Claude + Notion API (Make)", slug: "anthropic",
+    what: "« Résume-moi les 3 dernières séances de Marie en 5 points » → 10 sec." },
+   { step: "Suivi progression (Jordi)", tool: "Softr sur Airtable", slug: "airtable",
+    what: "Portail apprenant : chaque élève voit sa progression, ses exercices." },
+   { step: "Relance fidélisation (Gaëlle)", tool: "Brevo", slug: "brevo",
+    what: "Séquence email auto à J+30, J+60 après le dernier soin." },
+  ],
+  result:
+   "Préparation d'une séance : 15 min → 2 min. Chaque personne accompagnée se sent réellement suivie.",
+ },
+ {
+  title: "Groupe 4 — Qualifier et gérer des relations professionnelles multiples",
+  members: "Anthony · Emeline · Emilie · Cristiano · Florine-Anne",
+  problem:
+   "Les demandes arrivent de partout (email, LinkedIn, WhatsApp, téléphone) — rien n'est dans le même endroit et des relances tombent à l'eau.",
+  solution: "Pipeline de qualification automatisé + CRM léger.",
+  stack: [
+   { name: "Tally" },
+   { name: "Airtable", slug: "airtable" },
+   { name: "Make", slug: "make" },
+   { name: "Claude", slug: "anthropic" },
+   { name: "Fireflies" },
+   { name: "Notion", slug: "notion" },
+   { name: "Brevo", slug: "brevo" },
+   { name: "Google Docs", slug: "googledocs" },
+  ],
+  steps: [
+   { step: "Capturer toutes les demandes", tool: "Tally",
+    what: "Un formulaire de contact unique → tout arrive au même endroit." },
+   { step: "Centraliser et prioriser", tool: "Airtable", slug: "airtable",
+    what: "Pipeline visuel (Kanban) : Nouveau → Qualifié → En cours → Terminé." },
+   { step: "Qualifier automatiquement (Anthony)", tool: "Make + Claude", slug: "anthropic",
+    what: "CV reçu → Claude extrait les compétences → fiche candidate créée." },
+   { step: "Comptes-rendus (Emeline/Emilie)", tool: "Fireflies + Make + Notion", slug: "notion",
+    what: "Réunion enregistrée → résumé + actions → envoyés aux participants." },
+   { step: "Relances automatiques", tool: "Brevo", slug: "brevo",
+    what: "Prospect sans réponse à J+5 → email de relance personnalisé." },
+   { step: "Propositions commerciales", tool: "Make + Google Docs", slug: "googledocs",
+    what: "Variables Airtable → proposition pré-remplie → envoyée pour signature." },
+  ],
+  result:
+   "Aucun prospect ne tombe dans l'oubli. Les comptes-rendus s'écrivent seuls. Le pipeline est visible en 30 secondes.",
+ },
+];
