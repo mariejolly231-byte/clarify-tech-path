@@ -10,7 +10,7 @@ import { Framing } from "@/components/presentation/Framing";
 import { Decide } from "@/components/presentation/Decide";
 import { Quiz } from "@/components/presentation/Quiz";
 import { Guardrails } from "@/components/presentation/Guardrails";
-import { Takeaway } from "@/components/presentation/Takeaway";
+import { Backpack } from "@/components/presentation/Backpack";
 import { AlreadyNoCode } from "@/components/presentation/AlreadyNoCode";
 import { History } from "@/components/presentation/History";
 import { ToolsMap } from "@/components/presentation/ToolsMap";
@@ -69,7 +69,7 @@ function Presentation() {
           <Workshop />
           <FirstAutomation />
           <FreelanceStack />
-          <Takeaway />
+          <Backpack />
         </div>
       </main>
     </div>
