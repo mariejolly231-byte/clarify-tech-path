@@ -95,6 +95,7 @@ function SondagePage() {
   const [toolsOther, setToolsOther] = useState("");
   const [goals, setGoals] = useState<string[]>([]);
   const [task, setTask] = useState("");
+  const [consent, setConsent] = useState(false);
 
   useEffect(() => {
     try {
