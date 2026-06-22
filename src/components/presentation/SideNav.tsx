@@ -20,14 +20,14 @@ const NAV_GROUPS: NavGroup[] = [
     label: "D'où ça vient — où on en est",
     subtitle: "Le contexte pour comprendre pourquoi maintenant, pas dans 2 ans.",
     firstId: "deja-no-code",
-    ids: ["deja-no-code", "histoire", "etat-de-l-art"],
+    ids: ["deja-no-code", "histoire", "etat-de-l-art", "hype"],
   },
   {
     act: "Partie 2",
     label: "Comprendre les outils",
     subtitle: "Ce que c'est, comment ça marche, ce que ça ne fait pas.",
     firstId: "tri",
-    ids: ["tri", "humain-vs-ia", "reglages", "limites", "hype", "outils", "bon-sac"],
+    ids: ["tri", "humain-vs-ia", "reglages", "limites", "outils", "bon-sac"],
   },
   {
     act: "Partie 3",

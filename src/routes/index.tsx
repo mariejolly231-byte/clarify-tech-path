@@ -66,6 +66,7 @@ function Presentation() {
           <AlreadyNoCode />
           <History />
           <StateOfArt />
+          <HypeReality />
           {/* Pause avant le lexique */}
           <Pause minutes={15} />
           {/* Partie 2 — Comprendre les outils */}
@@ -73,9 +74,9 @@ function Presentation() {
           <HumanVsAI />
           <Settings />
           <Limits />
-          <HypeReality />
           <ToolsMap />
           <RightBackpack />
+
           {/* Partie 3 — Passer à l'action avec méthode */}
           <Framing />
           <Decide />
