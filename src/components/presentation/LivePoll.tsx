@@ -138,6 +138,14 @@ export function LivePoll() {
           <div className="mt-4 font-mono text-xs break-all text-muted-foreground">
             {formUrl ? formUrl.replace(/^https?:\/\//, "") : ""}
           </div>
+          <a
+            href="/registre"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-block text-[11px] text-muted-foreground underline-offset-2 hover:text-primary hover:underline"
+          >
+            Vos données sont traitées conformément au RGPD — voir /registre
+          </a>
           <div
             className={`mt-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/[0.06] px-3 py-1.5 text-sm transition ${
               pulse ? "scale-105 bg-primary/15" : ""
