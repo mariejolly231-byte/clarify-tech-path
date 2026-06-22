@@ -74,8 +74,9 @@ function Presentation() {
           <HumanVsAI />
           <Settings />
           <Limits />
-          <ToolsMap />
           <RightBackpack />
+          <ToolsMap />
+
 
           {/* Partie 3 — Passer à l'action avec méthode */}
           <Framing />
