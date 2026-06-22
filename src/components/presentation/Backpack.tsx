@@ -523,16 +523,11 @@ Choisis : manuel / assisté IA / automatisé.
  <pre className="mt-2 whitespace-pre-wrap font-sans text-sm leading-relaxed text-foreground/85">
  {step.body}
  </pre>
- {"qr" in step && step.qr && (
- <a
- href={step.qr}
- target="_blank"
- rel="noopener noreferrer"
- className="mt-3 inline-block text-sm font-medium text-primary hover:underline"
- >
- Guide MCP → {step.qr}
- </a>
- )}
+  {"qr" in step && step.qr && (
+    <span className="mt-3 inline-flex items-center gap-1.5 rounded-md border border-dashed border-primary/40 bg-background/60 px-2.5 py-1 text-[11px] text-muted-foreground">
+      <span aria-hidden>🔗</span> QR à ajouter — Guide MCP
+    </span>
+  )}
  </div>
  </div>
  </div>
@@ -596,16 +591,22 @@ Choisis : manuel / assisté IA / automatisé.
  <div className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
  Outils · {c.tools}
  </div>
- {c.link && (
- <a
- href={c.link.href}
- target="_blank"
- rel="noopener noreferrer"
- className="inline-block text-xs font-medium text-primary hover:underline"
- >
- {c.link.label} →
- </a>
- )}
+  {c.link && (
+    c.link.href.startsWith("[") ? (
+      <span className="inline-flex items-center gap-1.5 rounded-md border border-dashed border-primary/40 bg-background/60 px-2.5 py-1 text-[11px] text-muted-foreground">
+        <span aria-hidden>🔗</span> Lien à ajouter — {c.link.label}
+      </span>
+    ) : (
+      <a
+        href={c.link.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block text-xs font-medium text-primary hover:underline"
+      >
+        {c.link.label} →
+      </a>
+    )
+  )}
  </div>
  </details>
  ))}

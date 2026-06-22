@@ -11,7 +11,7 @@ export function FreelanceStack() {
  <Section
  id="refuge"
  num="17"
- eyebrow="Acte 5 · On marche"
+ eyebrow="Acte 4 · Passer à l'action"
  title="Connecter sa boussole au terrain"
  tint="sand"
  >

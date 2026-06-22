@@ -14,7 +14,7 @@ export function Checklist() {
  <Section
  id="checklist"
  num="15c"
- eyebrow="Acte 4 · Sécuriser la cordée"
+ eyebrow="Acte 4 · Passer à l'action"
  title="La check-list du randonneur prudent"
  >
  <div className="rounded-2xl border border-border bg-stone-soft p-7">

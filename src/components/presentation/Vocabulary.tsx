@@ -1,5 +1,5 @@
 import { Section } from "./Section";
-import { IkeaAnalogy } from "./Infographics";
+// IkeaAnalogy retiré : remplacé par un placeholder visible.
 import troisFacons from "@/assets/trois-facons-aide.png.asset.json";
 import commentIA from "@/assets/comment-fonctionne-ia.png.asset.json";
 import commentIAApprend from "@/assets/comment-ia-apprend.png.asset.json";
@@ -223,16 +223,12 @@ export function Vocabulary() {
  </div>
  <p className="mt-1 text-sm text-foreground/80">{c.ex}</p>
  </div>
- {c.demo && (
- <a
- href={c.demo.href}
- target="_blank"
- rel="noopener noreferrer"
- className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/30 bg-background px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
- >
- {c.demo.label} <span aria-hidden>→</span>
- </a>
- )}
+              {c.demo && (
+                <div className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-dashed border-primary/40 bg-background/60 px-3 py-2 text-xs text-muted-foreground">
+                  <span aria-hidden>🔗</span>
+                  <span>Lien à ajouter — {c.demo.label.trim()}</span>
+                </div>
+              )}
  </div>
  ))}
  </div>
@@ -249,7 +245,13 @@ export function Vocabulary() {
  </figcaption>
  </figure>
 
- <IkeaAnalogy />
+  <div
+    role="img"
+    aria-label="Emplacement infographie : No-code, Low-code, Code"
+    className="mt-12 flex h-[300px] items-center justify-center rounded-2xl border-2 border-dashed border-border bg-stone-soft/60 px-6 text-center text-sm text-muted-foreground"
+  >
+    📍 Emplacement infographie — No-code / Low-code / Code — à intégrer
+  </div>
 
  {/* Chute */}
  <blockquote className="mx-auto mt-14 max-w-3xl border-l-4 border-primary bg-card px-7 py-6 text-center font-serif text-2xl leading-snug text-foreground md:text-3xl">

@@ -38,7 +38,7 @@ export function FirstPath() {
  <Section
  id="assembler-sentier"
  num="17b"
- eyebrow="Acte 5 · On marche"
+ eyebrow="Acte 4 · Passer à l'action"
  title="Assembler son premier sentier"
  >
  <p className="mb-10 text-base italic text-muted-foreground">

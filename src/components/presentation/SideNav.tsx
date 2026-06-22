@@ -46,22 +46,16 @@ export const NAV_GROUPS: NavGroup[] = [
   },
   {
     act: "Acte 4",
-    title: "Sécuriser la cordée",
+    title: "Passer à l'action",
     entries: [
       { id: "gardefous", label: "Les garde-fous du randonneur" },
       { id: "classer-donnee", label: "Classer sa donnée avant de choisir" },
       { id: "checklist", label: "La check-list du randonneur prudent" },
       { id: "suis-je-en-regle", label: "Et moi — suis-je en règle ?" },
-    ],
-  },
-  {
-    act: "Acte 5",
-    title: "On marche",
-    entries: [
       { id: "raccourci", label: "Premier pas — le pense-bête vocal" },
       { id: "mcp", label: "Connecter sa boussole au terrain" },
       { id: "assembler-sentier", label: "Assembler son premier sentier" },
-      { id: "atelier", label: "A vous de tracer le sentier" },
+      { id: "atelier", label: "À vous de tracer le sentier" },
     ],
   },
   {
