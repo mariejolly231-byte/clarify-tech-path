@@ -80,6 +80,7 @@ function Presentation() {
 
 
           {/* Partie 3 — Passer à l'action avec méthode */}
+          <AssoExample />
           <Framing />
           <Decide />
           <Quiz />
