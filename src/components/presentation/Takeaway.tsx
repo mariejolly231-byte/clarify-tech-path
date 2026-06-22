@@ -110,12 +110,12 @@ export function Takeaway() {
  Fondatrice Summit Flow
  </div>
  <ul className="mx-auto mt-5 grid max-w-sm gap-2 text-sm">
- <li>
- <span className="text-muted-foreground">Email · </span>
- <a href="[LIEN_EMAIL_PLACEHOLDER]" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
- [LIEN_EMAIL_PLACEHOLDER]
- </a>
- </li>
+   <li>
+    <span className="text-muted-foreground">Email · </span>
+    <a href="mailto:contact@summitflow.fr" className="text-primary hover:underline">
+     contact@summitflow.fr
+    </a>
+   </li>
  <li>
  <span className="text-muted-foreground">Site · </span>
  <a href="[LIEN_SITE_PLACEHOLDER]" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
