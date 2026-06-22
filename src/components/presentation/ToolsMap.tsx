@@ -1,7 +1,7 @@
 import { Section } from "./Section";
 
 type Tool = { name: string; usage: string; price: string; multi?: boolean; deal?: string };
-type Cat = { icon: string; title: string; metaphor: string; tools: Tool[] };
+type Cat = { title: string; metaphor: string; tools: Tool[] };
 
 const CATEGORIES: Cat[] = [
  {
