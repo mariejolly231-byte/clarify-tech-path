@@ -436,7 +436,7 @@ export function Backpack() {
               Ce qu'on a construit ensemble aujourd'hui
             </h3>
           </div>
-          <div className="hidden text-5xl md:block" aria-hidden>🐾</div>
+          
         </div>
         <ul className="space-y-3">
           {CHECKLIST.map((item) => (
