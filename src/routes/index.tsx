@@ -53,22 +53,28 @@ function Presentation() {
           <LivePoll />
           <Opening />
           <About />
-          <Vocabulary />
+          {/* Acte 1 — Vous êtes déjà équipés */}
           <AlreadyNoCode />
           <History />
           <StateOfArt />
+          <Vocabulary />
+          {/* Acte 2 — Comprendre le terrain */}
+          <Settings />
+          <Limits />
+          <HypeReality />
+          {/* Acte 3 — Choisir son chemin */}
           <ToolsMap />
           <RightBackpack />
-          <Settings />
-          <HypeReality />
-          <Limits />
           <Framing />
           <Decide />
           <Quiz />
+          {/* Acte 4 — Sécuriser la cordée */}
           <Guardrails />
-          <Workshop />
+          {/* Acte 5 — On marche */}
           <FirstAutomation />
+          <Workshop />
           <FreelanceStack />
+          {/* Le refuge */}
           <Backpack />
         </div>
       </main>
