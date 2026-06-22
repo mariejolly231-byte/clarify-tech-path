@@ -48,9 +48,9 @@ export function Mcp() {
   return (
     <Section
       id="mcp"
-      num="17a"
-      eyebrow="Partie 4 · On fait"
-      title="Connecter sa boussole au terrain"
+      num="13"
+      eyebrow="Partie 2 · Comprendre les outils"
+      title="Un premier pas vers l'assistance augmentée"
     >
       <DurationBadge>⏱ 15 min · Démo live</DurationBadge>
       <p className="mb-10 text-base italic text-muted-foreground">
