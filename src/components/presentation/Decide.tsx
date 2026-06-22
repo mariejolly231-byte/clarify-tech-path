@@ -18,6 +18,10 @@ const QUADRANTS = [
     color: "border-primary/40 bg-primary/[0.05]",
     when: "Fréquent, répétitif, règles stables, faible enjeu de jugement, données encadrées.",
     ex: "Recevoir un formulaire → créer une ligne → envoyer un mail de confirmation.",
+    demos: [
+      { label: "🧾 Démo — Gestion factures Evolbee", href: "[LIEN_EVOLBEE]" },
+      { label: "📊 Démo — Notes de frais Make + Airtable", href: "[LIEN_NOTES_FRAIS]" },
+    ],
   },
   {
     k: "Ne pas traiter maintenant",
