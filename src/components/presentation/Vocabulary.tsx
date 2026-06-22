@@ -56,6 +56,7 @@ const CARDS = [
     def: "Je donne un objectif, des outils et un cadre. Le système peut enchaîner plusieurs étapes avec une certaine autonomie.",
     ex: "Analyser une demande, chercher des infos, proposer une action, puis attendre validation.",
     tone: "primary",
+    demo: { label: "📓 Démo RAG — NotebookLM Summit Flow", href: "[LIEN_NOTEBOOKLM]" },
   },
   {
     k: "API",
@@ -226,6 +227,16 @@ export function Vocabulary() {
               </div>
               <p className="mt-1 text-sm text-foreground/80">{c.ex}</p>
             </div>
+            {c.demo && (
+              <a
+                href={c.demo.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/30 bg-background px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
+              >
+                {c.demo.label} <span aria-hidden>→</span>
+              </a>
+            )}
           </div>
         ))}
       </div>

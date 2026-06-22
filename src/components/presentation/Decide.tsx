@@ -18,6 +18,10 @@ const QUADRANTS = [
     color: "border-primary/40 bg-primary/[0.05]",
     when: "Fréquent, répétitif, règles stables, faible enjeu de jugement, données encadrées.",
     ex: "Recevoir un formulaire → créer une ligne → envoyer un mail de confirmation.",
+    demos: [
+      { label: "🧾 Démo — Gestion factures Evolbee", href: "[LIEN_EVOLBEE]" },
+      { label: "📊 Démo — Notes de frais Make + Airtable", href: "[LIEN_NOTES_FRAIS]" },
+    ],
   },
   {
     k: "Ne pas traiter maintenant",
@@ -68,6 +72,21 @@ export function Decide() {
             <p className="mt-1 text-sm leading-relaxed text-foreground/85">{q.when}</p>
             <div className="mt-4 text-[11px] uppercase tracking-[0.2em] text-primary">Exemple</div>
             <p className="mt-1 text-sm italic text-foreground/75">{q.ex}</p>
+            {"demos" in q && q.demos && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {q.demos.map((d) => (
+                  <a
+                    key={d.href}
+                    href={d.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-md border border-primary/30 bg-background px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
+                  >
+                    {d.label} <span aria-hidden>→</span>
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>

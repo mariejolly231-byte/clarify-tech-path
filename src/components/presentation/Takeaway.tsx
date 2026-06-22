@@ -70,6 +70,73 @@ export function Takeaway() {
         </p>
       </div>
 
+      {/* Encart avis Google */}
+      <div className="mt-12 mx-auto max-w-xl rounded-2xl border border-border bg-card p-7 text-center shadow-sm">
+        <h3 className="font-serif text-xl text-foreground md:text-2xl">
+          Cet atelier vous a été utile ?
+        </h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          Laissez un avis Google — ça prend 30 secondes
+          et ça aide Summit Flow à continuer.
+        </p>
+        <div className="mt-5 flex justify-center">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https%3A%2F%2Fg.page%2Fr%2FCd3n9A6xcSVuEAE%2Freview"
+            alt="QR code — Laisser un avis Google Summit Flow"
+            className="h-44 w-44 rounded-md border border-border bg-background p-2"
+          />
+        </div>
+        <a
+          href="https://g.page/r/Cd3n9A6xcSVuEAE/review"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+        >
+          Laisser un avis <span aria-hidden>→</span>
+        </a>
+      </div>
+
+      {/* Contact final */}
+      <div className="mt-10 mx-auto max-w-xl rounded-2xl border border-primary/20 bg-accent/40 p-7 text-center">
+        <img
+          src={logoAsset.url}
+          alt="Summit Flow"
+          className="mx-auto h-14 w-14 rounded-full ring-1 ring-border"
+        />
+        <div className="mt-3 font-serif text-lg text-foreground">
+          Marie Jolly
+        </div>
+        <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+          Fondatrice Summit Flow
+        </div>
+        <ul className="mx-auto mt-5 grid max-w-sm gap-2 text-sm">
+          <li>
+            <span className="text-muted-foreground">Email · </span>
+            <a href="[LIEN_EMAIL_PLACEHOLDER]" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              [LIEN_EMAIL_PLACEHOLDER]
+            </a>
+          </li>
+          <li>
+            <span className="text-muted-foreground">Site · </span>
+            <a href="[LIEN_SITE_PLACEHOLDER]" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              [LIEN_SITE_PLACEHOLDER]
+            </a>
+          </li>
+          <li>
+            <span className="text-muted-foreground">LinkedIn · </span>
+            <a href="[LIEN_LINKEDIN_PLACEHOLDER]" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              [LIEN_LINKEDIN_PLACEHOLDER]
+            </a>
+          </li>
+          <li>
+            <span className="text-muted-foreground">Téléphone · </span>
+            <a href="[LIEN_TEL_PLACEHOLDER]" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              [LIEN_TEL_PLACEHOLDER]
+            </a>
+          </li>
+        </ul>
+      </div>
+
       <footer className="mt-16 flex flex-col items-center gap-3 border-t border-border pt-10 text-center">
         <img src={logoAsset.url} alt="Summit Flow" className="h-12 w-12 rounded-full ring-1 ring-border" />
         <div className="font-serif text-base text-primary">Summit Flow</div>
