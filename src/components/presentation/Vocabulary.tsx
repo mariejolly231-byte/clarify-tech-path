@@ -223,16 +223,12 @@ export function Vocabulary() {
  </div>
  <p className="mt-1 text-sm text-foreground/80">{c.ex}</p>
  </div>
- {c.demo && (
- <a
- href={c.demo.href}
- target="_blank"
- rel="noopener noreferrer"
- className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/30 bg-background px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
- >
- {c.demo.label} <span aria-hidden>→</span>
- </a>
- )}
+              {c.demo && (
+                <div className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-dashed border-primary/40 bg-background/60 px-3 py-2 text-xs text-muted-foreground">
+                  <span aria-hidden>🔗</span>
+                  <span>Lien à ajouter — {c.demo.label.trim()}</span>
+                </div>
+              )}
  </div>
  ))}
  </div>
