@@ -207,76 +207,85 @@ export function DecisionMatrix() {
 
 /* ---------- 4. Boussole RGPD : classification des données C0 → C3 ---------- */
 export function RgpdCompass() {
- const RINGS = [
- {
- level: "C0",
- label: "Public",
- desc: "Communication, site web, contenus marketing.",
- r: 95,
- fill: "var(--color-accent)",
- text: "var(--color-sage-foreground)",
- },
- {
- level: "C1",
- label: "Interne",
- desc: "Notes, brouillons, données non personnelles.",
- r: 72,
- fill: "var(--color-sand)",
- text: "var(--color-sand-foreground)",
- },
- {
- level: "C2",
- label: "Restreint",
- desc: "Données client, devis, contrats.",
- r: 48,
- fill: "var(--color-caution)",
- text: "var(--color-foreground)",
- },
- {
- level: "C3",
- label: "Sensible",
- desc: "Santé, RH, juridique, identité.",
- r: 26,
- fill: "var(--color-warn)",
- text: "var(--color-warn-foreground)",
- },
- ];
+  const RINGS = [
+    {
+      level: "C0",
+      label: "Public",
+      desc: "Contenus déjà publiés, librement diffusables.",
+      examples:
+        "Site web, plaquettes, posts réseaux sociaux, communiqués, vidéos publiques.",
+      r: 95,
+      fill: "var(--color-accent)",
+      text: "var(--color-sage-foreground)",
+    },
+    {
+      level: "C1",
+      label: "Interne",
+      desc: "Usage interne, sans donnée personnelle identifiable.",
+      examples:
+        "Notes de réunion, brouillons, procédures, modèles de documents, statistiques agrégées anonymes.",
+      r: 72,
+      fill: "var(--color-sand)",
+      text: "var(--color-sand-foreground)",
+    },
+    {
+      level: "C2",
+      label: "Restreint",
+      desc: "Données personnelles ou commerciales identifiantes.",
+      examples:
+        "Nom, prénom, email, téléphone, adresse, devis, contrats, factures, échanges client.",
+      r: 48,
+      fill: "var(--color-caution)",
+      text: "var(--color-foreground)",
+    },
+    {
+      level: "C3",
+      label: "Sensible",
+      desc: "Données protégées : risque juridique fort si fuite.",
+      examples:
+        "Santé, RH (paie, évaluations), pièces d'identité, RIB, données bancaires, dossiers juridiques, données de mineurs.",
+      r: 26,
+      fill: "var(--color-warn)",
+      text: "var(--color-warn-foreground)",
+    },
+  ];
 
- return (
- <div className="mt-12 grid gap-8 rounded-2xl border border-border bg-card p-7 md:grid-cols-[260px_1fr] md:items-center">
- <div className="mx-auto">
- <svg viewBox="-120 -120 240 240" className="h-56 w-56">
- {RINGS.map((r) => (
- <circle
- key={r.level}
- cx="0"
- cy="0"
- r={r.r}
- fill={r.fill}
- stroke="var(--color-card)"
- strokeWidth="2"
- />
- ))}
- {RINGS.map((r, i) => {
- const prev = i === 0 ? 110 : RINGS[i - 1].r;
- const y = -((prev + r.r) / 2) + 4;
- return (
- <text
- key={r.level}
- x="0"
- y={y}
- textAnchor="middle"
- fontSize="10"
- fontFamily="ui-monospace, monospace"
- fill={r.text}
- style={{ letterSpacing: "0.15em" }}
- >
- {r.level}
- </text>
- );
- })}
- </svg>
- </div>
+  return (
+    <div className="mt-12 grid gap-8 rounded-2xl border border-border bg-card p-7 md:grid-cols-[260px_1fr] md:items-center">
+      <div className="mx-auto">
+        <svg viewBox="-120 -120 240 240" className="h-56 w-56">
+          {RINGS.map((r) => (
+            <circle
+              key={r.level}
+              cx="0"
+              cy="0"
+              r={r.r}
+              fill={r.fill}
+              stroke="var(--color-card)"
+              strokeWidth="2"
+            />
+          ))}
+          {RINGS.map((r, i) => {
+            const inner = i < RINGS.length - 1 ? RINGS[i + 1].r : 0;
+            const y = -((r.r + inner) / 2) + 3;
+            return (
+              <text
+                key={r.level}
+                x="0"
+                y={y}
+                textAnchor="middle"
+                fontSize="10"
+                fontFamily="ui-monospace, monospace"
+                fill={r.text}
+                style={{ letterSpacing: "0.15em" }}
+              >
+                {r.level}
+              </text>
+            );
+          })}
+        </svg>
+      </div>
+
 
  <div>
  <div className="mb-1 text-[11px] uppercase tracking-[0.2em] text-primary">
