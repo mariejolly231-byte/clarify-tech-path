@@ -201,6 +201,104 @@ export function Workshop() {
  </Accordion>
  </div>
 
+
+ {/* Temps 4 — Pistes de solutions par groupe */}
+ <div className="mt-14">
+  <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
+   Temps 4 — Pistes de solutions no-code & IA
+  </div>
+  <h3 className="mt-2 font-serif text-2xl text-foreground md:text-3xl">
+   Une stack possible par groupe
+  </h3>
+  <p className="mt-2 max-w-2xl text-sm italic text-muted-foreground">
+   Pas une vérité — un point de départ concret. À adapter selon le terrain.
+  </p>
+
+  <div className="mt-6 space-y-6">
+   {SOLUTIONS.map((s) => (
+    <div key={s.title} className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+     <div className="flex flex-wrap items-baseline justify-between gap-3">
+      <h4 className="font-serif text-lg text-foreground md:text-xl">{s.title}</h4>
+      <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+       {s.members}
+      </span>
+     </div>
+
+     <div className="mt-3 rounded-md border-l-2 border-warn/60 bg-warn/[0.06] px-4 py-3 text-sm text-foreground/85">
+      <span className="font-medium text-warn">Problème racine · </span>
+      {s.problem}
+     </div>
+
+     <div className="mt-4 rounded-md bg-stone-soft/50 px-4 py-3 text-sm text-foreground/90">
+      <span className="font-medium text-primary">Solution · </span>
+      {s.solution}
+     </div>
+
+     {/* Stack d'outils — chips logos */}
+     <div className="mt-4 flex flex-wrap gap-2">
+      {s.stack.map((t) => (
+       <span
+        key={t.name}
+        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/85"
+       >
+        {t.slug ? (
+         <img
+          src={`https://cdn.simpleicons.org/${t.slug}`}
+          alt=""
+          className="h-3.5 w-3.5"
+          loading="lazy"
+         />
+        ) : (
+         <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden />
+        )}
+        {t.name}
+       </span>
+      ))}
+     </div>
+
+     {/* Étapes */}
+     <div className="mt-5 overflow-hidden rounded-lg border border-border">
+      <table className="w-full text-sm">
+       <thead className="bg-stone-soft/60 text-left text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+        <tr>
+         <th className="px-4 py-2 font-medium">Étape</th>
+         <th className="px-4 py-2 font-medium">Outil</th>
+         <th className="px-4 py-2 font-medium">Ce que ça fait</th>
+        </tr>
+       </thead>
+       <tbody>
+        {s.steps.map((step, i) => (
+         <tr key={step.step} className={i % 2 === 0 ? "bg-background" : "bg-stone-soft/30"}>
+          <td className="px-4 py-3 align-top text-foreground/90">{step.step}</td>
+          <td className="px-4 py-3 align-top">
+           <div className="flex items-center gap-2">
+            {step.slug && (
+             <img
+              src={`https://cdn.simpleicons.org/${step.slug}`}
+              alt=""
+              className="h-4 w-4 shrink-0"
+              loading="lazy"
+             />
+            )}
+            <span className="font-medium text-primary">{step.tool}</span>
+           </div>
+          </td>
+          <td className="px-4 py-3 align-top text-foreground/80">{step.what}</td>
+         </tr>
+        ))}
+       </tbody>
+      </table>
+     </div>
+
+     <div className="mt-4 rounded-md border border-primary/20 bg-primary/[0.06] px-4 py-3 text-sm text-foreground/90">
+      <span className="font-medium text-primary">Résultat concret · </span>
+      {s.result}
+     </div>
+    </div>
+   ))}
+  </div>
+ </div>
+
  {/* Clôture atelier */}
  <div className="mt-10 rounded-2xl border border-primary/20 bg-accent/40 p-7 text-center">
  <h3 className="font-serif text-2xl text-foreground md:text-3xl">
@@ -234,3 +332,137 @@ function Field({ label, value, warn }: { label: string; value: string; warn?: bo
  </div>
  );
 }
+
+type Tool = { name: string; slug?: string };
+type SolutionStep = { step: string; tool: string; slug?: string; what: string };
+type Solution = {
+ title: string;
+ members: string;
+ problem: string;
+ solution: string;
+ stack: Tool[];
+ steps: SolutionStep[];
+ result: string;
+};
+
+const SOLUTIONS: Solution[] = [
+ {
+  title: "Groupe 1 — Produire des livrables personnalisés rapidement",
+  members: "Mickaël · Stéphany · Katéry · Michèle",
+  problem:
+   "Chaque livrable repart de zéro alors que 70% du contenu est identique d'un client à l'autre.",
+  solution: "Système de génération de livrables sur gabarit.",
+  stack: [
+   { name: "Airtable", slug: "airtable" },
+   { name: "Claude", slug: "anthropic" },
+   { name: "ChatGPT", slug: "openai" },
+   { name: "Make", slug: "make" },
+   { name: "Google Docs", slug: "googledocs" },
+   { name: "Canva", slug: "canva" },
+   { name: "Adobe Express", slug: "adobe" },
+  ],
+  steps: [
+   { step: "Stocker les infos clients", tool: "Airtable", slug: "airtable",
+    what: "Une fiche par client avec tous les paramètres (nom, couleurs, ton, format)." },
+   { step: "Générer le contenu", tool: "Claude / ChatGPT (API)", slug: "anthropic",
+    what: "Prompt avec les variables Airtable injectées automatiquement." },
+   { step: "Automatiser la chaîne", tool: "Make", slug: "make",
+    what: "Airtable → Claude → Google Docs → email client." },
+   { step: "Créer les visuels", tool: "Canva API / Adobe Express", slug: "canva",
+    what: "Templates avec variables dynamiques (Michèle, Katéry)." },
+  ],
+  result:
+   "Un nouveau brief client → le livrable V1 est généré en 3 minutes au lieu de 45. Le client reçoit un PDF à valider, automatiquement.",
+ },
+ {
+  title: "Groupe 2 — Gérer plannings, stocks et commandes physiques",
+  members: "Patricia · Fleur · Soo-Jin · Tahidys",
+  problem:
+   "Les infos sont éparpillées entre WhatsApp, un carnet, un fichier Excel et la mémoire — une commande peut tomber dans les cracks.",
+  solution:
+   "Base de données centralisée + formulaires terrain + alertes automatiques.",
+  stack: [
+   { name: "Airtable", slug: "airtable" },
+   { name: "Tally" },
+   { name: "Fillout" },
+   { name: "Make", slug: "make" },
+   { name: "Notion", slug: "notion" },
+   { name: "Google Calendar", slug: "googlecalendar" },
+  ],
+  steps: [
+   { step: "Centraliser commandes et stocks", tool: "Airtable", slug: "airtable",
+    what: "Vues « commandes en cours », « stock matières », « planning semaine »." },
+   { step: "Saisie rapide client ou terrain", tool: "Tally / Fillout",
+    what: "Formulaire sur téléphone → directement dans Airtable." },
+   { step: "Alertes automatiques", tool: "Make", slug: "make",
+    what: "Stock < seuil → SMS/email. Commande J-2 → rappel client auto." },
+   { step: "Planning intervenants (Tahidys)", tool: "Notion + Google Calendar", slug: "notion",
+    what: "Chaque intervenant voit son planning, les absences remontent." },
+  ],
+  result:
+   "Plus aucune commande oubliée. Stock visible en temps réel. Les rappels clients partent seuls.",
+ },
+ {
+  title: "Groupe 3 — Accompagner des personnes dans la durée",
+  members: "Cyndia · Fabienne · Jordi · Gaëlle",
+  problem:
+   "Les notes de suivi sont éparpillées (cahier, email, tête) — retrouver « où en est Marie » prend 10 minutes avant chaque séance.",
+  solution: "CRM de suivi personnalisé + assistant IA de synthèse.",
+  stack: [
+   { name: "Notion", slug: "notion" },
+   { name: "Fireflies" },
+   { name: "Claude", slug: "anthropic" },
+   { name: "Make", slug: "make" },
+   { name: "Softr" },
+   { name: "Airtable", slug: "airtable" },
+   { name: "Brevo", slug: "brevo" },
+  ],
+  steps: [
+   { step: "Fiche de suivi par personne", tool: "Notion", slug: "notion",
+    what: "Une page par client/patient/apprenant : historique, objectifs, notes." },
+   { step: "Prise de notes rapide", tool: "Fireflies / Notion AI",
+    what: "Enregistrement de la séance → résumé auto → ajout dans la fiche." },
+   { step: "Synthèse avant séance", tool: "Claude + Notion API (Make)", slug: "anthropic",
+    what: "« Résume-moi les 3 dernières séances de Marie en 5 points » → 10 sec." },
+   { step: "Suivi progression (Jordi)", tool: "Softr sur Airtable", slug: "airtable",
+    what: "Portail apprenant : chaque élève voit sa progression, ses exercices." },
+   { step: "Relance fidélisation (Gaëlle)", tool: "Brevo", slug: "brevo",
+    what: "Séquence email auto à J+30, J+60 après le dernier soin." },
+  ],
+  result:
+   "Préparation d'une séance : 15 min → 2 min. Chaque personne accompagnée se sent réellement suivie.",
+ },
+ {
+  title: "Groupe 4 — Qualifier et gérer des relations professionnelles multiples",
+  members: "Anthony · Emeline · Emilie · Cristiano · Florine-Anne",
+  problem:
+   "Les demandes arrivent de partout (email, LinkedIn, WhatsApp, téléphone) — rien n'est dans le même endroit et des relances tombent à l'eau.",
+  solution: "Pipeline de qualification automatisé + CRM léger.",
+  stack: [
+   { name: "Tally" },
+   { name: "Airtable", slug: "airtable" },
+   { name: "Make", slug: "make" },
+   { name: "Claude", slug: "anthropic" },
+   { name: "Fireflies" },
+   { name: "Notion", slug: "notion" },
+   { name: "Brevo", slug: "brevo" },
+   { name: "Google Docs", slug: "googledocs" },
+  ],
+  steps: [
+   { step: "Capturer toutes les demandes", tool: "Tally",
+    what: "Un formulaire de contact unique → tout arrive au même endroit." },
+   { step: "Centraliser et prioriser", tool: "Airtable", slug: "airtable",
+    what: "Pipeline visuel (Kanban) : Nouveau → Qualifié → En cours → Terminé." },
+   { step: "Qualifier automatiquement (Anthony)", tool: "Make + Claude", slug: "anthropic",
+    what: "CV reçu → Claude extrait les compétences → fiche candidate créée." },
+   { step: "Comptes-rendus (Emeline/Emilie)", tool: "Fireflies + Make + Notion", slug: "notion",
+    what: "Réunion enregistrée → résumé + actions → envoyés aux participants." },
+   { step: "Relances automatiques", tool: "Brevo", slug: "brevo",
+    what: "Prospect sans réponse à J+5 → email de relance personnalisé." },
+   { step: "Propositions commerciales", tool: "Make + Google Docs", slug: "googledocs",
+    what: "Variables Airtable → proposition pré-remplie → envoyée pour signature." },
+  ],
+  result:
+   "Aucun prospect ne tombe dans l'oubli. Les comptes-rendus s'écrivent seuls. Le pipeline est visible en 30 secondes.",
+ },
+];
