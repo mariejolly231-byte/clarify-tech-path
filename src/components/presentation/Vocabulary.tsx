@@ -87,7 +87,7 @@ export function Vocabulary() {
       id="tri"
       num="06"
       eyebrow="Acte 1 · Vous êtes déjà équipés"
-      title={<>No code, IA, gloubi-boulga, <span className="text-primary">késako ?</span></>}
+      title="Le lexique du randonneur"
     >
       {/* BLOC 1 — Pause cerveau / IA */}
       <div className="mb-14 rounded-2xl border border-border bg-card p-7 shadow-sm animate-fade-in">

@@ -12,11 +12,7 @@ export function FreelanceStack() {
       id="refuge"
       num="17"
       eyebrow="Acte 5 · On marche"
-      title={
-        <>
-          Un <span className="text-primary">bon plan</span> à emporter
-        </>
-      }
+      title="Connecter sa boussole au terrain"
       tint="sand"
     >
       <p className="mb-10 text-base italic text-muted-foreground">

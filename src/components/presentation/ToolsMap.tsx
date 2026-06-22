@@ -68,11 +68,7 @@ export function ToolsMap() {
       id="outils"
       num="11"
       eyebrow="Acte 3 · Choisir son chemin"
-      title={
-        <>
-          La <span className="text-primary">carte du territoire</span> no-code
-        </>
-      }
+      title="La carte des outils"
       tint="sage"
     >
       <p className="mb-10 text-base italic text-muted-foreground">

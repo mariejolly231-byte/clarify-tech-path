@@ -29,11 +29,7 @@ export function StateOfArt() {
       id="etat-de-l-art"
       num="05"
       eyebrow="Acte 1 · Vous êtes déjà équipés"
-      title={
-        <>
-          Où en est-on <span className="text-primary">vraiment en 2026</span> ?
-        </>
-      }
+      title="L'altitude en 2026"
     >
       <p className="mb-12 text-base italic text-muted-foreground">
         Pas une tendance. Un standard de fait — le no-code est désormais sur la carte.

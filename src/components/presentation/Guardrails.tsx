@@ -56,7 +56,7 @@ export function Guardrails() {
       id="gardefous"
       num="15"
       eyebrow="Acte 4 · Sécuriser la cordée"
-      title={<>Aller vite, oui. <span className="text-primary">Aller au mur, non.</span></>}
+      title="Les garde-fous du randonneur"
     >
       <RgpdSelfCheck />
 

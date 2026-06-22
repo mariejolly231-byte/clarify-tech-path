@@ -16,11 +16,7 @@ export function History() {
       id="histoire"
       num="04"
       eyebrow="Acte 1 · Vous êtes déjà équipés"
-      title={
-        <>
-          Comment le <span className="text-primary">no-code</span> a grandi
-        </>
-      }
+      title="30 ans de sentiers tracés"
     >
       <p className="mb-12 text-base italic text-muted-foreground">
         De l'Excel au Vibe Coding : la montée en altitude a pris 30 ans.

@@ -46,7 +46,7 @@ export function Decide() {
       id="avant"
       num="14"
       eyebrow="Acte 3 · Choisir son chemin"
-      title={<>Décider, <span className="text-primary">avant</span> d'outiller.</>}
+      title="Choisir sa voie"
     >
       <p className="mb-10 max-w-3xl text-base text-muted-foreground md:text-lg">
         Pour chaque tâche du quotidien, posez-vous quelques questions simples avant

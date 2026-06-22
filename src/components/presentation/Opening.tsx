@@ -8,12 +8,7 @@ export function Opening() {
       num="01"
       eyebrow="La carte du jour"
       tint="sand"
-      title={
-        <>
-          IA, no-code, automatisation :{" "}
-          <span className="text-primary">où ça aide vraiment</span> les entrepreneurs aujourd'hui.
-        </>
-      }
+      title="La carte du jour"
     >
       <p className="max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
         Comprendre, trier, prioriser — avant d'ajouter des outils.

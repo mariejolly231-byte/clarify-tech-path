@@ -40,12 +40,7 @@ export function Limits() {
       num="09"
       eyebrow="Acte 2 · Comprendre le terrain"
       tint="sand"
-      title={
-        <>
-          Les limites à anticiper —{" "}
-          <span className="text-primary">avant de se lancer</span>
-        </>
-      }
+      title="Les crevasses à éviter"
     >
       <p className="mb-12 text-base italic text-muted-foreground">
         Les outils accélèrent. Les pièges aussi. On regarde la météo avant de partir.

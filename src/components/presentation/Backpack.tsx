@@ -421,11 +421,7 @@ export function Backpack() {
       num="19"
       eyebrow="Le refuge"
       tint="sand"
-      title={
-        <>
-          Ce que vous repartez avec <span aria-hidden>🏔️</span>
-        </>
-      }
+      title="Ce que vous repartez dans le sac"
     >
       <p className="-mt-4 mb-12 text-base text-muted-foreground md:text-lg">
         Pas une liste de plus. Un vrai sac pour demain.

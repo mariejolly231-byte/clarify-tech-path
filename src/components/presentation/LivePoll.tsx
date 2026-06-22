@@ -106,11 +106,7 @@ export function LivePoll() {
       num="00"
       eyebrow="Le départ"
       tint="sage"
-      title={
-        <>
-          On commence par <span className="text-primary">vous</span>.
-        </>
-      }
+      title="Le départ — on se connaît"
     >
       <DurationBadge>⏱️ 15 min · Tour de table</DurationBadge>
       <p className="mb-10 max-w-2xl text-base text-muted-foreground md:text-lg">

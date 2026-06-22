@@ -23,12 +23,7 @@ export function FirstAutomation() {
       id="raccourci"
       num="16"
       eyebrow="Acte 5 · On marche"
-      title={
-        <>
-          Votre première automatisation —{" "}
-          <span className="text-primary">déjà dans votre poche</span>
-        </>
-      }
+      title="Premier pas — le pense-bête vocal"
     >
       <DurationBadge>⏱️ 10 min · Manipulation live</DurationBadge>
       <p className="mb-12 text-base italic text-muted-foreground">

@@ -71,11 +71,7 @@ export function Workshop() {
       id="atelier"
       num="18"
       eyebrow="Acte 5 · On marche"
-      title={
-        <>
-          Et vous, quel est <span className="text-primary">votre sentier</span> ?
-        </>
-      }
+      title="À vous de tracer le sentier"
       tint="sand"
     >
       <DurationBadge>⏱️ 30 min · Atelier groupes</DurationBadge>
