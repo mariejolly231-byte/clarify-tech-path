@@ -84,7 +84,7 @@ function Presentation() {
           <Framing />
           <Decide />
           <Quiz />
-          <Guardrails />
+          
           <DataClass />
           <Checklist />
           <SelfCheck />
