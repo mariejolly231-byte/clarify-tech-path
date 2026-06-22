@@ -1,6 +1,6 @@
 import { Section } from "./Section";
 import { RgpdCompass } from "./Infographics";
-import rgpdOutilsAsset from "@/assets/outils-no-code-rgpd.png.asset.json";
+import rgpdOutilsAsset from "@/assets/outils-no-code-rgpd-v2.png.asset.json";
 
 export function DataClass() {
   return (
