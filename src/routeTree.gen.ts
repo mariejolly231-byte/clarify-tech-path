@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SondageRouteImport } from './routes/sondage'
+import { Route as RegistreRouteImport } from './routes/registre'
 import { Route as AccueilRouteImport } from './routes/accueil'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SondageRoute = SondageRouteImport.update({
   id: '/sondage',
   path: '/sondage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistreRoute = RegistreRouteImport.update({
+  id: '/registre',
+  path: '/registre',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccueilRoute = AccueilRouteImport.update({
@@ -32,30 +38,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accueil': typeof AccueilRoute
+  '/registre': typeof RegistreRoute
   '/sondage': typeof SondageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accueil': typeof AccueilRoute
+  '/registre': typeof RegistreRoute
   '/sondage': typeof SondageRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accueil': typeof AccueilRoute
+  '/registre': typeof RegistreRoute
   '/sondage': typeof SondageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/accueil' | '/sondage'
+  fullPaths: '/' | '/accueil' | '/registre' | '/sondage'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/accueil' | '/sondage'
-  id: '__root__' | '/' | '/accueil' | '/sondage'
+  to: '/' | '/accueil' | '/registre' | '/sondage'
+  id: '__root__' | '/' | '/accueil' | '/registre' | '/sondage'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccueilRoute: typeof AccueilRoute
+  RegistreRoute: typeof RegistreRoute
   SondageRoute: typeof SondageRoute
 }
 
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/sondage'
       fullPath: '/sondage'
       preLoaderRoute: typeof SondageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registre': {
+      id: '/registre'
+      path: '/registre'
+      fullPath: '/registre'
+      preLoaderRoute: typeof RegistreRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/accueil': {
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccueilRoute: AccueilRoute,
+  RegistreRoute: RegistreRoute,
   SondageRoute: SondageRoute,
 }
 export const routeTree = rootRouteImport
