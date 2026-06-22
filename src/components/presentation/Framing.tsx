@@ -94,10 +94,20 @@ export function Framing() {
       {/* Analogies */}
       <div className="mb-14 grid gap-4 md:grid-cols-3">
         {ANALOGIES.map((a) => (
-          <div key={a.title} className="rounded-2xl border border-border bg-stone-soft p-6">
+          <div key={a.title} className="flex flex-col rounded-2xl border border-border bg-stone-soft p-6">
             <div className="text-3xl" aria-hidden>{a.icon}</div>
             <h3 className="mt-3 font-serif text-lg text-foreground">{a.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-foreground/80">{a.body}</p>
+            {"demo" in a && a.demo && (
+              <a
+                href={a.demo.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/30 bg-background px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
+              >
+                {a.demo.label} <span aria-hidden>→</span>
+              </a>
+            )}
           </div>
         ))}
       </div>
