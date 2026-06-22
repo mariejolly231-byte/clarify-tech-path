@@ -1,10 +1,11 @@
 import { Section } from "./Section";
-// IkeaAnalogy retiré : remplacé par un placeholder visible.
 import troisFacons from "@/assets/trois-facons-aide.png.asset.json";
+import troisFaconsConstruire from "@/assets/ikea-analogy.png.asset.json";
 import commentIA from "@/assets/comment-fonctionne-ia.png.asset.json";
 import commentIAApprend from "@/assets/comment-ia-apprend.png.asset.json";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+
 
 
 const BRAIN = [
@@ -35,9 +36,27 @@ const CARDS = [
  tone: "sage",
  },
  {
- k: "IA",
-  def: "J'utilise un système qui aide à générer, classer, résumer, analyser ou proposer.",
- ex: "Rédiger un brouillon, résumer un document, classer des demandes.",
+ k: "Vibe Coding",
+  def: "Je décris ce que je veux en langage naturel, l'IA génère le code à ma place.",
+ ex: "Lovable, Cursor, Bolt, v0 : je pilote, je valide, je n'écris pas une ligne.",
+ tone: "primary",
+ },
+ {
+ k: "SaaS",
+  def: "Un logiciel hébergé dans le cloud, que je paie à l'abonnement et que j'utilise via navigateur.",
+ ex: "Notion, Airtable, HubSpot, Make. Pas d'installation, pas de serveur à gérer.",
+ tone: "sage",
+ },
+ {
+ k: "Base de données",
+  def: "Un endroit structuré où je range mes informations en lignes et colonnes, avec des liens entre elles.",
+ ex: "Mes clients dans une table, mes commandes dans une autre, reliées entre elles.",
+ tone: "sand",
+ },
+ {
+ k: "CRM",
+  def: "Un outil qui centralise tous mes contacts, prospects, clients et l'historique des échanges.",
+ ex: "HubSpot, Brevo, Notion CRM. Je sais où en est chaque relation commerciale.",
  tone: "sand",
  },
  {
@@ -47,16 +66,21 @@ const CARDS = [
  tone: "sage",
  },
  {
- k: "Agent IA",
-  def: "Je donne un objectif, des outils et un cadre. Le système peut enchaîner plusieurs étapes avec une certaine autonomie.",
- ex: "Analyser une demande, chercher des infos, proposer une action, puis attendre validation.",
- tone: "primary",
- demo: { label: " Démo RAG — NotebookLM Summit Flow", href: "[LIEN_NOTEBOOKLM]" },
+ k: "Workflow",
+  def: "L'enchaînement précis d'étapes qui transforme un déclencheur en résultat.",
+ ex: "Nouveau lead → vérifier → ajouter au CRM → envoyer email de bienvenue → notifier l'équipe.",
+ tone: "sage",
+ },
+ {
+ k: "Webhook",
+  def: "Un signal envoyé automatiquement d'un outil à un autre quand un événement se produit.",
+ ex: "Stripe envoie un webhook à mon outil dès qu'un paiement réussit.",
+ tone: "sand",
  },
  {
  k: "API",
   def: "Je permets à deux outils de se parler directement, sans interface visuelle.",
- ex: "Ton formulaire envoie automatiquement les données vers ta base sans que tu copies-colles quoi que ce soit.",
+ ex: "Ton formulaire envoie automatiquement les données vers ta base sans copier-coller.",
  tone: "sand",
  },
  {
@@ -64,9 +88,41 @@ const CARDS = [
   def: "Je connecte une IA à tes outils réels — elle peut lire tes mails, ton agenda, tes fichiers et agir dessus à ta demande.",
  ex: "Tu demandes à Claude \"résume mes mails non lus\" — il le fait directement, sans copier-coller.",
  tone: "primary",
- duration: "⏱ 15 min · Démo animatrice",
+ duration: "⏱ 15 min · Démo live",
+ },
+ {
+ k: "LLM (Large Language Model)",
+  def: "Un modèle d'IA entraîné sur d'énormes quantités de texte qui prédit le mot suivant le plus probable.",
+ ex: "GPT-4, Claude, Mistral, Gemini. Le moteur derrière ChatGPT & co.",
+ tone: "primary",
+ },
+ {
+ k: "Prompt",
+  def: "L'instruction que j'écris à l'IA pour lui dire ce que je veux. Le résultat dépend directement de sa qualité.",
+ ex: "« Rédige un email de relance, ton chaleureux, 5 lignes max, pour un client qui n'a pas répondu depuis 10 jours. »",
+ tone: "sage",
+ },
+ {
+ k: "Assistant IA",
+  def: "Une IA qui répond à mes demandes une par une. Je garde la main, je valide chaque étape.",
+ ex: "ChatGPT, Claude. Je demande, il propose, je décide.",
+ tone: "primary",
+ },
+ {
+ k: "Agent IA",
+  def: "Je donne un objectif, des outils et un cadre. Le système enchaîne plusieurs étapes avec une certaine autonomie.",
+ ex: "Analyser une demande, chercher des infos, proposer une action, puis attendre validation.",
+ tone: "primary",
+ demo: { label: "Démo RAG — NotebookLM Summit Flow", href: "https://notebooklm.google.com/notebook/70814c9c-9f66-45ff-b80c-bb220df20bc6" },
+ },
+ {
+ k: "Hallucination",
+  def: "Quand l'IA invente une réponse avec aplomb — fausse, mais formulée comme si c'était vrai.",
+ ex: "Une fausse citation, une référence inventée, un chiffre plausible mais inexact. À toujours vérifier.",
+ tone: "warn",
  },
 ];
+
 
 const toneClass: Record<string, string> = {
  primary: "border-primary/30 bg-primary/[0.04]",
