@@ -17,7 +17,7 @@ export function About() {
  <img src={portrait.url} alt="Marie Jolly" className="aspect-[4/5] w-full object-cover" />
  </div>
  <div className="flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3">
- <img src={logoAsset.url} alt="" className="h-10 w-10 rounded-full" />
+ <img src={logoAsset.url} alt="" className="h-12 w-12 rounded-full" />
  <div className="text-xs leading-tight">
  <div className="font-serif text-base text-primary">Marie Jolly</div>
  <div className="text-muted-foreground">Fondatrice — Summit Flow</div>
