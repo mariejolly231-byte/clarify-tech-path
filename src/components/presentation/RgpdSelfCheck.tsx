@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
 import samoyede from "@/assets/samoyede-accusateur.png";
 
 export function RgpdSelfCheck() {
   const [revealed, setRevealed] = useState(false);
+  const [origin, setOrigin] = useState("");
+
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
+
+  const formUrl = origin ? `${origin}/sondage-conforme` : "/sondage-conforme";
 
   return (
     <div className="mb-12 rounded-2xl border border-border bg-card p-8 shadow-sm md:p-10">
@@ -98,27 +106,33 @@ export function RgpdSelfCheck() {
             « On corrige ça maintenant — scannez le QR code. »
           </div>
 
-          {/* QR CODE */}
+          {/* QR CODE vers le sondage corrigé */}
           <div className="mx-auto mt-8 max-w-md rounded-2xl border border-border bg-card p-6 text-center shadow-sm">
             <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
               Formulaire conforme — 30 secondes
             </div>
             <p className="mt-2 text-sm text-foreground/80">
-              Vos réponses du sondage initial sont conservées.
-              Il vous suffit de cocher votre consentement.
+              Tes réponses du sondage initial sont conservées.
+              Il te suffit de cocher ton consentement.
             </p>
-            <div className="mt-4 flex justify-center">
-              <img
-                src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=[URL_FORMULAIRE_CONFORME]"
-                alt="QR code vers formulaire RGPD conforme"
-                width={200}
-                height={200}
-                loading="lazy"
-                className="rounded-lg border border-border bg-white p-2"
-              />
+            <div className="mt-4 inline-flex items-center justify-center rounded-xl bg-white p-3 ring-1 ring-border">
+              {origin ? (
+                <QRCodeSVG
+                  value={formUrl}
+                  size={200}
+                  level="M"
+                  bgColor="#ffffff"
+                  fgColor="#1a3a3f"
+                />
+              ) : (
+                <div className="h-[200px] w-[200px]" />
+              )}
+            </div>
+            <div className="mt-3 font-mono text-xs break-all text-muted-foreground">
+              {formUrl.replace(/^https?:\/\//, "")}
             </div>
             <a
-              href="[URL_FORMULAIRE_CONFORME]"
+              href="/sondage-conforme"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-block text-sm font-medium text-primary hover:underline"
