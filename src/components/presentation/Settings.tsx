@@ -1,4 +1,12 @@
 import { Section } from "./Section";
+import { BookOpen, SlidersHorizontal, Users, Lightbulb } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 
 const SETTINGS = [
  {
@@ -115,7 +123,153 @@ export function Settings() {
  Pour un mail client : 0.2 à 0.4. Pour un brainstorming de slogans : 0.8 à 1.
  La règle : <span className="text-foreground">on baisse pour les tâches à risque, on monte pour la créativité</span>.
  </p>
- </div>
- </Section>
- );
+  </div>
+
+      <Separator className="my-12" />
+
+      <Accordion type="single" collapsible>
+        <AccordionItem value="technique" className="border-0">
+          <AccordionTrigger className="hover:no-underline rounded-2xl border border-primary/20 bg-card px-6 py-5 text-left text-base font-medium">
+            <span className="flex items-center gap-2 font-serif text-xl text-foreground">
+              <span aria-hidden>🔬</span>
+              Et techniquement — comment le modèle apprend ?
+            </span>
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className="mt-6 space-y-12">
+              <div>
+                <h3 className="mb-3 font-serif text-xl text-foreground">L'entraînement : lire pour apprendre à prédire</h3>
+                <p className="mb-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                  Un LLM n'est pas programmé avec des règles. Il apprend en lisant des milliards de textes et en s'entraînant à prédire le mot suivant — des milliards de fois. C'est tout. Et c'est suffisant pour faire émerger une compréhension apparente du langage.
+                </p>
+                <div className="grid gap-4 md:grid-cols-3">
+                  <div className="flex flex-col rounded-xl border border-border bg-background p-5">
+                    <BookOpen className="mb-3 h-5 w-5 text-primary" />
+                    <h4 className="font-serif text-base text-foreground">1. Pré-entraînement</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+                      Le modèle lit des milliards de textes (web, livres, code). Pour chaque phrase, certains mots sont masqués. Le modèle doit les deviner. Il se trompe → il ajuste ses paramètres → il réessaie.
+                    </p>
+                  </div>
+                  <div className="flex flex-col rounded-xl border border-border bg-background p-5">
+                    <SlidersHorizontal className="mb-3 h-5 w-5 text-primary" />
+                    <h4 className="font-serif text-base text-foreground">2. Fine-tuning supervisé</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+                      Des humains notent les réponses (bon/mauvais/mieux). Le modèle ajuste ses milliards de paramètres pour produire des réponses jugées meilleures. C'est l'étape RLHF.
+                    </p>
+                  </div>
+                  <div className="flex flex-col rounded-xl border border-border bg-background p-5">
+                    <Users className="mb-3 h-5 w-5 text-primary" />
+                    <h4 className="font-serif text-base text-foreground">3. RLHF (Reinforcement Learning from Human Feedback)</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+                      Des annotateurs humains comparent des paires de réponses. Le modèle apprend à maximiser le score humain — pas seulement la prédiction statistique. C'est ce qui rend les LLMs 'utiles'.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="mb-3 font-serif text-xl text-foreground">Les paramètres : les millions de curseurs</h3>
+                <p className="mb-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                  Un LLM est un réseau de neurones artificiels avec des milliards de paramètres — des valeurs numériques ajustées pendant l'entraînement. GPT-4 : ~1 800 milliards de paramètres estimés. Claude 3 : non divulgué. Mistral 7B : 7 milliards (tient sur un laptop).
+                </p>
+                <div className="overflow-hidden rounded-xl border border-border">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-border bg-muted/50">
+                        <th className="px-4 py-3 text-left font-medium text-muted-foreground">Modèle</th>
+                        <th className="px-4 py-3 text-left font-medium text-muted-foreground">Paramètres estimés</th>
+                        <th className="px-4 py-3 text-left font-medium text-muted-foreground">Ce que ça implique</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-border">
+                        <td className="px-4 py-3 font-medium text-foreground">Mistral 7B</td>
+                        <td className="px-4 py-3 text-foreground/80">7 milliards</td>
+                        <td className="px-4 py-3 text-foreground/80">Tourne en local sur un bon laptop</td>
+                      </tr>
+                      <tr className="border-b border-border">
+                        <td className="px-4 py-3 font-medium text-foreground">LLaMA 3 70B</td>
+                        <td className="px-4 py-3 text-foreground/80">70 milliards</td>
+                        <td className="px-4 py-3 text-foreground/80">GPU professionnel nécessaire</td>
+                      </tr>
+                      <tr className="border-b border-border">
+                        <td className="px-4 py-3 font-medium text-foreground">GPT-4</td>
+                        <td className="px-4 py-3 text-foreground/80">~1 800 Mds (estimé)</td>
+                        <td className="px-4 py-3 text-foreground/80">Clusters de serveurs Microsoft</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3 font-medium text-foreground">Claude 3 Sonnet</td>
+                        <td className="px-4 py-3 text-foreground/80">Non divulgué</td>
+                        <td className="px-4 py-3 text-foreground/80">Infrastructure Anthropic dédiée</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="mt-3 text-xs italic text-muted-foreground">
+                  Plus de paramètres ≠ toujours meilleur. Mistral 7B sur certaines tâches bat des modèles 10x plus grands. L'architecture et l'entraînement comptent autant que la taille.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="mb-3 font-serif text-xl text-foreground">La rétropropagation : apprendre de ses erreurs</h3>
+                <div className="mb-6 rounded-xl border border-warn/20 bg-warn/5 p-5">
+                  <div className="flex items-start gap-3">
+                    <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-warn" />
+                    <p className="text-sm leading-relaxed text-foreground/85">
+                      Imaginez un étudiant qui révise avec des flash cards. Il voit une question → donne une réponse → voit si c'est juste → corrige légèrement sa compréhension → passe à la suivante. Répété 300 milliards de fois, c'est la rétropropagation.
+                    </p>
+                  </div>
+                </div>
+                <div className="space-y-2 rounded-xl border border-border bg-muted/30 p-5 font-mono text-sm text-foreground/85">
+                  <p>Étape 1 — Forward pass : le modèle génère une prédiction</p>
+                  <p>Étape 2 — Calcul de l'erreur : on mesure l'écart avec la bonne réponse</p>
+                  <p>Étape 3 — Backward pass : l'erreur remonte dans le réseau, chaque paramètre est ajusté d'une fraction infinitésimale</p>
+                  <p className="text-primary">→ Répété des milliards de fois = le modèle 'apprend'</p>
+                </div>
+                <p className="mt-3 text-xs text-muted-foreground">
+                  Ce processus est terminé avant que vous utilisiez le modèle. Quand vous chattez avec Claude ou ChatGPT, le modèle ne s'entraîne plus en temps réel — il prédit uniquement.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="mb-3 font-serif text-xl text-foreground">L'attention : comprendre le sens en contexte</h3>
+                <p className="mb-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                  La révolution des LLMs modernes vient de l'architecture Transformer (2017, Google — article 'Attention Is All You Need'). Le mécanisme clé : l'attention.
+                </p>
+                <div className="mb-6 rounded-xl border border-border bg-background p-6">
+                  <p className="mb-4 text-center text-base leading-relaxed text-foreground">
+                    <span className="text-foreground/60">La</span>{' '}
+                    <span className="rounded bg-primary/10 px-1.5 py-0.5 font-medium text-primary">banque</span>{' '}
+                    <span className="text-foreground/60">a refusé le prêt parce qu'</span>{' '}
+                    <span className="rounded bg-primary/10 px-1.5 py-0.5 font-medium text-primary">elle</span>{' '}
+                    <span className="text-foreground/60">était en faillite.</span>
+                  </p>
+                  <div className="flex items-center justify-center gap-2 text-sm text-primary">
+                    <span>elle</span>
+                    <span>→</span>
+                    <span>banque</span>
+                  </div>
+                  <p className="mt-3 text-center text-xs text-muted-foreground">
+                    L'attention permet au modèle de savoir à quoi réfère chaque mot dans son contexte — même à 10 000 tokens de distance.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-primary/20 bg-primary/[0.04] p-5">
+                  <p className="text-sm leading-relaxed text-foreground/85">
+                    En résumé : <span className="font-medium text-foreground">Transformer</span> = architecture | <span className="font-medium text-foreground">Attention</span> = mécanisme clé | <span className="font-medium text-foreground">Paramètres</span> = ce qui est ajusté | <span className="font-medium text-foreground">Rétropropagation</span> = comment ils s'ajustent | <span className="font-medium text-foreground">RLHF</span> = pourquoi les réponses sont utiles, pas juste probables
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-center text-xs text-muted-foreground">
+                📚 Pour aller plus loin :{' '}
+                <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noreferrer" className="underline hover:text-foreground">Attention Is All You Need</a> (Vaswani et al., 2017) ·{' '}
+                <a href="https://huggingface.co/learn/llm-course/fr/chapter1/4" target="_blank" rel="noreferrer" className="underline hover:text-foreground">Hugging Face LLM Course (fr)</a> ·{' '}
+                <a href="https://developers.google.com/machine-learning/crash-course/llm/transformers?hl=fr" target="_blank" rel="noreferrer" className="underline hover:text-foreground">Google ML Crash Course</a>
+              </p>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+  </Section>
+  );
 }
