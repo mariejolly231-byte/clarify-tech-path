@@ -5,69 +5,69 @@ type NavEntry = { id?: string; label: string };
 type NavGroup = { act?: string; title: string; entries: NavEntry[]; preface?: boolean };
 
 export const NAV_GROUPS: NavGroup[] = [
- {
- title: "Avant le départ",
- preface: true,
- entries: [
- { id: "sondage", label: "Le départ — on se connaît" },
- { id: "ouverture", label: "La carte du jour" },
- { id: "qui", label: "Le guide" },
- ],
- },
- {
- act: "Acte 1",
- title: "Vous êtes déjà équipés",
- entries: [
- { id: "deja-no-code", label: "Vous avez déjà chaussé les crampons" },
- { id: "histoire", label: "30 sentiers tracés" },
- { id: "etat-de-l-art", label: "L'altitude en 2026" },
- { id: "tri", label: "Le lexique du randonneur" },
- ],
- },
- {
- act: "Acte 2",
- title: "Comprendre le terrain",
- entries: [
- { label: "Cerveau et boussole" },
- { id: "reglages", label: "Sous le capot de la boussole" },
- { id: "limites", label: "Les crevasses à éviter" },
- { id: "hype", label: "La météo vs la réalité" },
- ],
- },
- {
- act: "Acte 3",
- title: "Choisir son chemin",
- entries: [
- { id: "outils", label: "La carte des outils" },
- { id: "bon-sac", label: "Le bon sac, pas le plus lourd" },
- { id: "cadrage", label: "Poser la carte avant de partir" },
- { id: "avant", label: "Choisir sa voie" },
- ],
- },
- {
- act: "Acte 4",
- title: "Sécuriser la cordée",
- entries: [
- { id: "gardefous", label: "Les garde-fous du randonneur" },
- { id: "classer-donnee", label: "Classer sa donnée avant de choisir" },
- { id: "checklist", label: "La check-list du randonneur prudent" },
- { id: "suis-je-en-regle", label: "Et moi — suis-je en règle ?" },
- ],
- },
- {
- act: "Acte 5",
- title: "On marche",
- entries: [
- { id: "raccourci", label: "Premier pas — le pense-bête vocal" },
- { id: "refuge", label: "Connecter sa boussole au terrain" },
- { id: "assembler-sentier", label: "Assembler son premier sentier" },
- { id: "atelier", label: "À vous de tracer le sentier" },
- ],
- },
- {
- title: "Le refuge",
- entries: [{ id: "emporter", label: "Ce que vous repartez dans le sac" }],
- },
+  {
+    title: "Avant le départ",
+    preface: true,
+    entries: [
+      { id: "sondage", label: "Le départ — on se connaît" },
+      { id: "ouverture", label: "La carte du jour" },
+      { id: "qui", label: "Le guide" },
+    ],
+  },
+  {
+    act: "Acte 1",
+    title: "Vous êtes déjà équipés",
+    entries: [
+      { id: "deja-no-code", label: "Vous avez déjà chaussé les crampons" },
+      { id: "histoire", label: "30 ans de sentiers tracés" },
+      { id: "etat-de-l-art", label: "L'altitude en 2026" },
+      { id: "tri", label: "Le lexique du randonneur" },
+    ],
+  },
+  {
+    act: "Acte 2",
+    title: "Comprendre le terrain",
+    entries: [
+      { label: "Cerveau et boussole" },
+      { id: "reglages", label: "Sous le capot de la boussole" },
+      { id: "limites", label: "Les crevasses à éviter" },
+      { id: "hype", label: "La météo vs la réalité" },
+    ],
+  },
+  {
+    act: "Acte 3",
+    title: "Choisir son chemin",
+    entries: [
+      { id: "outils", label: "La carte des outils" },
+      { id: "bon-sac", label: "Le bon sac, pas le plus lourd" },
+      { id: "cadrage", label: "Poser la carte avant de partir" },
+      { id: "avant", label: "Choisir sa voie" },
+    ],
+  },
+  {
+    act: "Acte 4",
+    title: "Sécuriser la cordée",
+    entries: [
+      { id: "gardefous", label: "Les garde-fous du randonneur" },
+      { id: "classer-donnee", label: "Classer sa donnée avant de choisir" },
+      { id: "checklist", label: "La check-list du randonneur prudent" },
+      { id: "suis-je-en-regle", label: "Et moi — suis-je en règle ?" },
+    ],
+  },
+  {
+    act: "Acte 5",
+    title: "On marche",
+    entries: [
+      { id: "raccourci", label: "Premier pas — le pense-bête vocal" },
+      { id: "mcp", label: "Connecter sa boussole au terrain" },
+      { id: "assembler-sentier", label: "Assembler son premier sentier" },
+      { id: "atelier", label: "A vous de tracer le sentier" },
+    ],
+  },
+  {
+    title: "Le refuge",
+    entries: [{ id: "emporter", label: "Ce que vous repartez dans le sac" }],
+  },
 ];
 
 const ALL_IDS = NAV_GROUPS.flatMap((g) =>
