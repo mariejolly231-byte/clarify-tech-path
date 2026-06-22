@@ -122,7 +122,7 @@ export function SideNav() {
             <img
               src={logoAsset.url}
               alt="Summit Flow"
-              className="h-16 w-16 rounded-full ring-1 ring-border"
+              className="h-28 w-28 rounded-full ring-1 ring-border"
             />
             <div className="leading-tight">
               <div className="font-serif text-lg text-primary">Summit Flow</div>
