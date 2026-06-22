@@ -96,7 +96,7 @@ export function SideNav() {
         <div className="flex items-center gap-2">
           <img src={logoAsset.url} alt="Summit Flow" className="h-8 w-8 rounded-full" />
           <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-            Atelier Summit Flow
+            Atelier · Summit Flow
           </span>
         </div>
         <button
