@@ -10,6 +10,9 @@ import { Framing } from "@/components/presentation/Framing";
 import { Decide } from "@/components/presentation/Decide";
 import { Quiz } from "@/components/presentation/Quiz";
 import { Guardrails } from "@/components/presentation/Guardrails";
+import { DataClass } from "@/components/presentation/DataClass";
+import { Checklist } from "@/components/presentation/Checklist";
+import { SelfCheck } from "@/components/presentation/SelfCheck";
 import { Backpack } from "@/components/presentation/Backpack";
 import { AlreadyNoCode } from "@/components/presentation/AlreadyNoCode";
 import { History } from "@/components/presentation/History";
@@ -18,6 +21,7 @@ import { RightBackpack } from "@/components/presentation/RightBackpack";
 import { Workshop } from "@/components/presentation/Workshop";
 import { FirstAutomation } from "@/components/presentation/FirstAutomation";
 import { FreelanceStack } from "@/components/presentation/FreelanceStack";
+import { FirstPath } from "@/components/presentation/FirstPath";
 import { StateOfArt } from "@/components/presentation/StateOfArt";
 import { Limits } from "@/components/presentation/Limits";
 
@@ -70,10 +74,14 @@ function Presentation() {
           <Quiz />
           {/* Acte 4 — Sécuriser la cordée */}
           <Guardrails />
+          <DataClass />
+          <Checklist />
+          <SelfCheck />
           {/* Acte 5 — On marche */}
           <FirstAutomation />
-          <Workshop />
           <FreelanceStack />
+          <FirstPath />
+          <Workshop />
           {/* Le refuge */}
           <Backpack />
         </div>
