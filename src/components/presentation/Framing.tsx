@@ -139,29 +139,6 @@ export function Framing() {
         </div>
       </div>
 
-      {/* La décision finale */}
-      <div className="rounded-2xl border border-border bg-card p-7">
-        <div className="mb-1 text-[11px] uppercase tracking-[0.2em] text-primary">
-          La décision finale
-        </div>
-        <h3 className="font-serif text-2xl text-foreground">
-          Et seulement après, on choisit la voie.
-        </h3>
-        <div className="mt-6 grid gap-3 md:grid-cols-4">
-          {DECISIONS.map((d) => (
-            <div key={d.k} className={`rounded-xl border p-5 ${toneClass[d.tone]}`}>
-              <div className="font-serif text-lg">{d.k}</div>
-              <p className="mt-2 text-sm leading-relaxed text-foreground/80">{d.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <blockquote className="mt-12 border-l-4 border-warn bg-card px-7 py-5 font-serif text-xl leading-snug text-foreground md:text-2xl">
-        « L'IA ne sauvera pas un processus désorganisé.
-        <br />
-        <span className="text-warn">Elle en fera juste un désordre plus rapide.</span> »
-      </blockquote>
     </Section>
   );
 }
