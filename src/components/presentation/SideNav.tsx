@@ -10,13 +10,13 @@ type NavGroup = {
 
 const NAV_GROUPS: NavGroup[] = [
   {
-    label: "Avant le depart",
+    label: "Avant le départ",
     firstId: "sondage",
     ids: ["sondage", "ouverture", "qui"],
   },
   {
     act: "Acte 1",
-    label: "Vous etes deja equipes",
+    label: "Vous êtes déjà équipés",
     firstId: "deja-no-code",
     ids: ["deja-no-code", "histoire", "etat-de-l-art", "tri", "humain-vs-ia"],
   },
@@ -34,7 +34,7 @@ const NAV_GROUPS: NavGroup[] = [
   },
   {
     act: "Acte 4",
-    label: "Passer a l'action",
+    label: "Passer à l'action",
     firstId: "gardefous",
     ids: [
       "gardefous",
