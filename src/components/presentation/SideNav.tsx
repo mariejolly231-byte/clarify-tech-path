@@ -155,6 +155,11 @@ export function SideNav() {
                       </span>
                     )}
                     <span className="block font-serif text-[13px]">{group.label}</span>
+                    {group.subtitle && (
+                      <span className="mt-1 block text-[11px] leading-snug text-muted-foreground">
+                        {group.subtitle}
+                      </span>
+                    )}
                   </a>
                 </div>
               );
