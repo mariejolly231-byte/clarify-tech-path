@@ -132,24 +132,6 @@ export function Mcp() {
         ))}
       </div>
 
-      <div className="mt-14 grid items-center gap-6 rounded-2xl border-2 border-primary/40 bg-primary/[0.06] p-8 md:grid-cols-[1fr,auto]">
-        <div>
-          <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
-            À toi de jouer — chez toi, ce soir
-          </div>
-          <h3 className="mt-2 font-serif text-2xl text-foreground md:text-3xl">
-            Guide pas à pas — 3 chemins, 5 minutes de config
-          </h3>
-          <p className="mt-3 text-[15px] leading-relaxed text-foreground/85">
-            Claude, ChatGPT ou Gemini. Choisis ton chemin, scanne, branche
-            ta première IA à tes mails.
-          </p>
-        </div>
-        <div className="flex h-32 w-32 flex-col items-center justify-center gap-1 rounded-xl border border-dashed border-primary/40 bg-background text-center text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-          <span aria-hidden className="text-base">🔗</span>
-          <span>QR à ajouter</span>
-        </div>
-      </div>
 
     </Section>
   );
