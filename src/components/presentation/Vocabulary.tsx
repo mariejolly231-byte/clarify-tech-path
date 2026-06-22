@@ -1,7 +1,7 @@
 import { Section } from "./Section";
 import troisFacons from "@/assets/trois-facons-aide.png.asset.json";
 import troisFaconsConstruire from "@/assets/ikea-analogy.png.asset.json";
-import commentIA from "@/assets/comment-fonctionne-ia.png.asset.json";
+
 import commentIAApprend from "@/assets/comment-ia-apprend.png.asset.json";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
