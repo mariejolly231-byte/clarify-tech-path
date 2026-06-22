@@ -127,6 +127,10 @@ function SondagePage() {
       toast.error("Merci de répondre aux deux premières questions.");
       return;
     }
+    if (!consent) {
+      toast.error("Merci d'accepter le traitement de tes données.");
+      return;
+    }
     setSubmitting(true);
 
     const nocodePayload = nocode.map((v) =>
