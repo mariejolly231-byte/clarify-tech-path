@@ -50,7 +50,7 @@ function RegistrePage() {
             <p>
               Email :{" "}
               <span className="font-mono text-sm text-primary">
-                [EMAIL_PLACEHOLDER]
+                contact@summitflow.fr
               </span>
             </p>
             <p>
@@ -98,7 +98,7 @@ function RegistrePage() {
             <p className="mt-2">
               Contact :{" "}
               <span className="font-mono text-sm text-primary">
-                [EMAIL_PLACEHOLDER]
+                contact@summitflow.fr
               </span>
             </p>
             <p>Objet du mail : « Droits RGPD — Atelier BGE juin 2025 »</p>
