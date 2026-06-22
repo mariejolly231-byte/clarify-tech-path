@@ -25,6 +25,8 @@ import { Mcp } from "@/components/presentation/Mcp";
 import { FirstPath } from "@/components/presentation/FirstPath";
 import { Workshop } from "@/components/presentation/Workshop";
 import { Backpack } from "@/components/presentation/Backpack";
+import { Pause } from "@/components/presentation/Pause";
+import { NavPager } from "@/components/presentation/NavPager";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -49,27 +51,11 @@ export const Route = createFileRoute("/")({
   component: Presentation,
 });
 
-function Pause() {
-  return (
-    <div
-      aria-hidden
-      className="border-b border-border/60 bg-stone-soft/40 px-6 py-10 md:px-16"
-    >
-      <div className="mx-auto flex max-w-5xl items-center gap-4 text-muted-foreground">
-        <span className="h-px flex-1 bg-border" />
-        <span className="font-mono text-[11px] uppercase tracking-[0.24em]">
-          Pause · 15 minutes
-        </span>
-        <span className="h-px flex-1 bg-border" />
-      </div>
-    </div>
-  );
-}
-
 function Presentation() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SideNav />
+      <NavPager />
       <main className="md:pl-72">
         <div className="pt-14 md:pt-0">
           {/* Avant le départ */}
@@ -80,6 +66,8 @@ function Presentation() {
           <AlreadyNoCode />
           <History />
           <StateOfArt />
+          {/* Pause avant le lexique */}
+          <Pause minutes={15} />
           {/* Partie 2 — Comprendre les outils */}
           <Vocabulary />
           <HumanVsAI />
@@ -88,8 +76,6 @@ function Presentation() {
           <HypeReality />
           <ToolsMap />
           <RightBackpack />
-          {/* Pause (hors sommaire) */}
-          <Pause />
           {/* Partie 3 — Passer à l'action avec méthode */}
           <Framing />
           <Decide />
