@@ -98,7 +98,7 @@ export function SideNav() {
       {/* Mobile bar */}
       <div className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between border-b border-border bg-background/85 px-4 py-3 backdrop-blur md:hidden">
         <div className="flex items-center gap-2">
-          <img src={logoAsset.url} alt="Summit Flow" className="h-14 w-14 rounded-full" />
+          <img src={logoAsset.url} alt="Summit Flow" className="h-10 w-10 rounded-full" />
           <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
             Atelier · Summit Flow
           </span>
@@ -122,7 +122,7 @@ export function SideNav() {
             <img
               src={logoAsset.url}
               alt="Summit Flow"
-              className="h-24 w-24 rounded-full ring-1 ring-border"
+              className="h-16 w-16 rounded-full ring-1 ring-border"
             />
             <div className="leading-tight">
               <div className="font-serif text-lg text-primary">Summit Flow</div>
