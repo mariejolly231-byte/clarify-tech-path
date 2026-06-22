@@ -93,16 +93,12 @@ export function Framing() {
  {ANALOGIES.map((a) => (
  <div key={a.title} className="flex flex-col rounded-2xl border border-border bg-stone-soft p-6"> <h3 className="mt-3 font-serif text-lg text-foreground">{a.title}</h3>
  <p className="mt-2 text-sm leading-relaxed text-foreground/80">{a.body}</p>
- {"demo" in a && a.demo && (
- <a
- href={a.demo.href}
- target="_blank"
- rel="noopener noreferrer"
- className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/30 bg-background px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/10"
- >
- {a.demo.label} <span aria-hidden>→</span>
- </a>
- )}
+  {"demo" in a && a.demo && (
+    <div className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-dashed border-primary/40 bg-background/60 px-3 py-2 text-xs text-muted-foreground">
+      <span aria-hidden>🔗</span>
+      <span>Lien à ajouter — {a.demo.label.trim()}</span>
+    </div>
+  )}
  </div>
  ))}
  </div>
