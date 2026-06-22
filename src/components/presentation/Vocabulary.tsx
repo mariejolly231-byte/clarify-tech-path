@@ -215,17 +215,6 @@ export function Vocabulary() {
  Un LLM ne pense pas comme un cerveau humain : il prédit la suite la plus probable dans un contexte donné.
  </p>
 
- {/* Infographie : Comment fonctionne une IA */}
- <figure className="mt-8 overflow-hidden rounded-xl border border-border bg-background">
- <img
- src={commentIA.url}
- alt="Comment fonctionne une IA : du carburant (données) au modèle, puis au prompt et à la réponse, avec les limites face au cerveau humain"
- className="w-full"
- />
- <figcaption className="border-t border-border bg-stone-soft px-6 py-3 text-center text-xs italic text-muted-foreground">
- Données → Modèle → Prompt &amp; Réponse &nbsp;·&nbsp; L'IA calcule, l'humain pense.
- </figcaption>
- </figure>
 
  <div className="mt-5 flex justify-center">
  <Dialog>
