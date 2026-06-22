@@ -53,22 +53,41 @@ export function FirstAutomation() {
  </p>
  </div>
 
- {/* Étape 2 */}
- <div className="mt-8 rounded-2xl border border-accent bg-accent/40 p-7">
- <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
- Étape 2 — Sur iPhone : l'app Raccourcis
- </div>
- <ol className="mt-5 space-y-3">
- {STEPS_IPHONE.map((s, i) => (
- <li key={s} className="flex gap-4 text-[15px] leading-relaxed text-foreground/90">
- <span className="font-mono text-lg font-medium text-primary">{i + 1}.</span>
- <span>{s}</span>
- </li>
- ))}
- </ol>
- <p className="mt-6 rounded-md bg-background/70 px-4 py-3 text-sm italic text-foreground/80">
- Résultat : tu appuies → tu parles → c'est enregistré.
- </p>
+ {/* Étape 2 — tutos côte à côte */}
+ <div className="mt-8 grid gap-6 md:grid-cols-2">
+  <div className="rounded-2xl border border-accent bg-accent/40 p-7">
+   <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
+    Étape 2a — Sur iPhone : l'app Raccourcis
+   </div>
+   <ol className="mt-5 space-y-3">
+    {STEPS_IPHONE.map((s, i) => (
+     <li key={s} className="flex gap-4 text-[15px] leading-relaxed text-foreground/90">
+      <span className="font-mono text-lg font-medium text-primary">{i + 1}.</span>
+      <span>{s}</span>
+     </li>
+    ))}
+   </ol>
+   <p className="mt-6 rounded-md bg-background/70 px-4 py-3 text-sm italic text-foreground/80">
+    Résultat : tu appuies → tu parles → c'est enregistré.
+   </p>
+  </div>
+
+  <div className="rounded-2xl border border-accent bg-accent/40 p-7">
+   <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
+    Étape 2b — Sur Android : Routines Google Assistant
+   </div>
+   <ol className="mt-5 space-y-3">
+    {STEPS_ANDROID.map((s, i) => (
+     <li key={s} className="flex gap-4 text-[15px] leading-relaxed text-foreground/90">
+      <span className="font-mono text-lg font-medium text-primary">{i + 1}.</span>
+      <span>{s}</span>
+     </li>
+    ))}
+   </ol>
+   <p className="mt-6 rounded-md bg-background/70 px-4 py-3 text-sm italic text-foreground/80">
+    Résultat : tu dis la phrase → c'est noté dans Keep ou ton app.
+   </p>
+  </div>
  </div>
 
  {/* Étape 3 */}
