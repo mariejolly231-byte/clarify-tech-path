@@ -101,7 +101,7 @@ export function Takeaway() {
  <img
  src={logoAsset.url}
  alt="Summit Flow"
- className="mx-auto h-14 w-14 rounded-full ring-1 ring-border"
+ className="mx-auto h-28 w-28 rounded-full ring-1 ring-border"
  />
  <div className="mt-3 font-serif text-lg text-foreground">
  Marie Jolly
