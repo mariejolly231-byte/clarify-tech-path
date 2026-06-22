@@ -10,8 +10,8 @@ export function RightBackpack() {
   return (
     <Section
       id="bon-sac"
-      num="03·D"
-      eyebrow="Frugalité"
+      num="12"
+      eyebrow="Acte 3 · Choisir son chemin"
       title={
         <>
           Le bon sac, pas le sac le <span className="text-primary">plus lourd</span>

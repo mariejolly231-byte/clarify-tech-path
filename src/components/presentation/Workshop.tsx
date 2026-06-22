@@ -69,8 +69,8 @@ export function Workshop() {
   return (
     <Section
       id="atelier"
-      num="09·A"
-      eyebrow="Atelier collectif"
+      num="18"
+      eyebrow="Acte 5 · On marche"
       title={
         <>
           Et vous, quel est <span className="text-primary">votre sentier</span> ?

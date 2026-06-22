@@ -66,8 +66,8 @@ export function ToolsMap() {
   return (
     <Section
       id="outils"
-      num="03·C"
-      eyebrow="Carte du territoire"
+      num="11"
+      eyebrow="Acte 3 · Choisir son chemin"
       title={
         <>
           La <span className="text-primary">carte du territoire</span> no-code

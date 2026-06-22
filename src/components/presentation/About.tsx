@@ -10,7 +10,7 @@ const POSTURE = [
 
 export function About() {
   return (
-    <Section id="qui" num="02" eyebrow="Qui je suis" title="Une double culture industrie + tech.">
+    <Section id="qui" num="02" eyebrow="Le guide" title="Le guide">
       <div className="grid gap-12 md:grid-cols-[300px_1fr] md:gap-16">
         <div className="space-y-5">
           <div className="overflow-hidden rounded-2xl border border-border shadow-sm">

@@ -85,8 +85,8 @@ export function Vocabulary() {
   return (
     <Section
       id="tri"
-      num="03"
-      eyebrow="Section 03"
+      num="06"
+      eyebrow="Acte 1 · Vous êtes déjà équipés"
       title={<>No code, IA, gloubi-boulga, <span className="text-primary">késako ?</span></>}
     >
       {/* BLOC 1 — Pause cerveau / IA */}

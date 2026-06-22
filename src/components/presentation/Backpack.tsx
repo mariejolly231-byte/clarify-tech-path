@@ -418,8 +418,8 @@ export function Backpack() {
   return (
     <Section
       id="emporter"
-      num="10"
-      eyebrow="Ce que vous repartez avec"
+      num="19"
+      eyebrow="Le refuge"
       tint="sand"
       title={
         <>

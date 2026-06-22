@@ -44,8 +44,8 @@ export function Decide() {
   return (
     <Section
       id="avant"
-      num="07"
-      eyebrow="Avant d'automatiser"
+      num="14"
+      eyebrow="Acte 3 · Choisir son chemin"
       title={<>Décider, <span className="text-primary">avant</span> d'outiller.</>}
     >
       <p className="mb-10 max-w-3xl text-base text-muted-foreground md:text-lg">

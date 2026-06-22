@@ -37,8 +37,8 @@ export function Limits() {
   return (
     <Section
       id="limites"
-      num="05·B"
-      eyebrow="Avant de monter"
+      num="09"
+      eyebrow="Acte 2 · Comprendre le terrain"
       tint="sand"
       title={
         <>

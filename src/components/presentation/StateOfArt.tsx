@@ -27,8 +27,8 @@ export function StateOfArt() {
   return (
     <Section
       id="etat-de-l-art"
-      num="03·B+"
-      eyebrow="État de l'art"
+      num="05"
+      eyebrow="Acte 1 · Vous êtes déjà équipés"
       title={
         <>
           Où en est-on <span className="text-primary">vraiment en 2026</span> ?

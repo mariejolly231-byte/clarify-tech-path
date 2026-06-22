@@ -54,8 +54,8 @@ export function Guardrails() {
   return (
     <Section
       id="gardefous"
-      num="09"
-      eyebrow="Garde-fous"
+      num="15"
+      eyebrow="Acte 4 · Sécuriser la cordée"
       title={<>Aller vite, oui. <span className="text-primary">Aller au mur, non.</span></>}
     >
       <RgpdSelfCheck />

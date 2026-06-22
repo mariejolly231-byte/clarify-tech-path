@@ -6,7 +6,7 @@ export function Opening() {
     <Section
       id="ouverture"
       num="01"
-      eyebrow="Ouverture"
+      eyebrow="La carte du jour"
       tint="sand"
       title={
         <>

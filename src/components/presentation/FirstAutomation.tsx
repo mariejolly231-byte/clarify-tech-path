@@ -21,8 +21,8 @@ export function FirstAutomation() {
   return (
     <Section
       id="raccourci"
-      num="09·B"
-      eyebrow="Pratique immédiate"
+      num="16"
+      eyebrow="Acte 5 · On marche"
       title={
         <>
           Votre première automatisation —{" "}

@@ -104,7 +104,7 @@ export function LivePoll() {
     <Section
       id="sondage"
       num="00"
-      eyebrow="Tour de table live"
+      eyebrow="Le départ"
       tint="sage"
       title={
         <>

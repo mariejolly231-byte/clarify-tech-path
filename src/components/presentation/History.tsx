@@ -14,8 +14,8 @@ export function History() {
   return (
     <Section
       id="histoire"
-      num="03·B"
-      eyebrow="Un peu d'histoire"
+      num="04"
+      eyebrow="Acte 1 · Vous êtes déjà équipés"
       title={
         <>
           Comment le <span className="text-primary">no-code</span> a grandi
