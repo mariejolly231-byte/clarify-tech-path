@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SondageConformeRouteImport } from './routes/sondage-conforme'
 import { Route as SondageRouteImport } from './routes/sondage'
 import { Route as RegistreRouteImport } from './routes/registre'
 import { Route as AccueilRouteImport } from './routes/accueil'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SondageConformeRoute = SondageConformeRouteImport.update({
+  id: '/sondage-conforme',
+  path: '/sondage-conforme',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SondageRoute = SondageRouteImport.update({
   id: '/sondage',
   path: '/sondage',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/accueil': typeof AccueilRoute
   '/registre': typeof RegistreRoute
   '/sondage': typeof SondageRoute
+  '/sondage-conforme': typeof SondageConformeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accueil': typeof AccueilRoute
   '/registre': typeof RegistreRoute
   '/sondage': typeof SondageRoute
+  '/sondage-conforme': typeof SondageConformeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,20 @@ export interface FileRoutesById {
   '/accueil': typeof AccueilRoute
   '/registre': typeof RegistreRoute
   '/sondage': typeof SondageRoute
+  '/sondage-conforme': typeof SondageConformeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/accueil' | '/registre' | '/sondage'
+  fullPaths: '/' | '/accueil' | '/registre' | '/sondage' | '/sondage-conforme'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/accueil' | '/registre' | '/sondage'
-  id: '__root__' | '/' | '/accueil' | '/registre' | '/sondage'
+  to: '/' | '/accueil' | '/registre' | '/sondage' | '/sondage-conforme'
+  id:
+    | '__root__'
+    | '/'
+    | '/accueil'
+    | '/registre'
+    | '/sondage'
+    | '/sondage-conforme'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +82,18 @@ export interface RootRouteChildren {
   AccueilRoute: typeof AccueilRoute
   RegistreRoute: typeof RegistreRoute
   SondageRoute: typeof SondageRoute
+  SondageConformeRoute: typeof SondageConformeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sondage-conforme': {
+      id: '/sondage-conforme'
+      path: '/sondage-conforme'
+      fullPath: '/sondage-conforme'
+      preLoaderRoute: typeof SondageConformeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sondage': {
       id: '/sondage'
       path: '/sondage'
@@ -107,6 +130,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccueilRoute: AccueilRoute,
   RegistreRoute: RegistreRoute,
   SondageRoute: SondageRoute,
+  SondageConformeRoute: SondageConformeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
