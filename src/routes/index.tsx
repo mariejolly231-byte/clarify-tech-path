@@ -77,6 +77,7 @@ function Presentation() {
           <Limits />
           <RightBackpack />
           <ToolsMap />
+          <Mcp />
 
 
           {/* Partie 3 — Passer à l'action avec méthode */}
@@ -90,7 +91,6 @@ function Presentation() {
           <SelfCheck />
           {/* Partie 4 — On fait */}
           <FirstAutomation />
-          <Mcp />
           <FirstPath />
           <Workshop />
           {/* Le refuge */}
