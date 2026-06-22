@@ -14,6 +14,7 @@ import { HypeReality } from "@/components/presentation/HypeReality";
 import { ToolsMap } from "@/components/presentation/ToolsMap";
 import { RightBackpack } from "@/components/presentation/RightBackpack";
 import { Framing } from "@/components/presentation/Framing";
+import { AssoExample } from "@/components/presentation/AssoExample";
 import { Decide } from "@/components/presentation/Decide";
 import { Quiz } from "@/components/presentation/Quiz";
 import { Guardrails } from "@/components/presentation/Guardrails";
