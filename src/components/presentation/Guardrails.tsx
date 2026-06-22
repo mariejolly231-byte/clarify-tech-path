@@ -1,5 +1,6 @@
 import { Section } from "./Section";
 import { RgpdCompass } from "./Infographics";
+import { RgpdSelfCheck } from "./RgpdSelfCheck";
 
 const LIGHTS = [
   {
@@ -57,6 +58,8 @@ export function Guardrails() {
       eyebrow="Garde-fous"
       title={<>Aller vite, oui. <span className="text-primary">Aller au mur, non.</span></>}
     >
+      <RgpdSelfCheck />
+
       <div className="grid gap-4 md:grid-cols-3">
         {LIGHTS.map((l) => (
           <div key={l.label} className="rounded-2xl border border-border bg-card p-6 shadow-sm">
