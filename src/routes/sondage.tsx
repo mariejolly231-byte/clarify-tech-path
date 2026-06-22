@@ -95,6 +95,7 @@ function SondagePage() {
   const [toolsOther, setToolsOther] = useState("");
   const [goals, setGoals] = useState<string[]>([]);
   const [task, setTask] = useState("");
+  const [consent, setConsent] = useState(false);
 
   useEffect(() => {
     try {
@@ -124,6 +125,10 @@ function SondagePage() {
     }
     if (!nocode.length || !ai.length) {
       toast.error("Merci de répondre aux deux premières questions.");
+      return;
+    }
+    if (!consent) {
+      toast.error("Merci d'accepter le traitement de tes données.");
       return;
     }
     setSubmitting(true);
@@ -382,10 +387,43 @@ function SondagePage() {
             </div>
           </div>
 
+          <div className="rounded-2xl border border-primary/20 bg-primary/[0.06] p-5">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl leading-none" aria-hidden>🐾</span>
+              <div className="space-y-3 text-sm text-foreground/85">
+                <p>
+                  En répondant à ce sondage, tu acceptes que tes données
+                  (prénom, nom, activité, réponses) soient utilisées par
+                  Summit Flow pour animer cet atelier et adapter son contenu.
+                  Aucun usage commercial. Suppression sous 30 jours.
+                </p>
+                <a
+                  href="/registre"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-primary underline-offset-2 hover:underline"
+                >
+                  En savoir plus sur le traitement de vos données →
+                </a>
+                <label className="flex cursor-pointer items-start gap-2 pt-1">
+                  <input
+                    type="checkbox"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    className="mt-0.5 h-4 w-4 cursor-pointer accent-primary"
+                  />
+                  <span className="font-medium text-foreground">
+                    J'ai compris et j'accepte
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+
           <button
             type="submit"
-            disabled={submitting}
-            className="w-full rounded-md bg-primary px-6 py-4 text-base font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90 disabled:opacity-50"
+            disabled={submitting || !consent}
+            className="w-full rounded-md bg-primary px-6 py-4 text-base font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {submitting ? "Envoi…" : "Envoyer ma réponse"}
           </button>
