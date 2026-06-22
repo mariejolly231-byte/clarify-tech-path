@@ -18,6 +18,8 @@ import { RightBackpack } from "@/components/presentation/RightBackpack";
 import { Workshop } from "@/components/presentation/Workshop";
 import { FirstAutomation } from "@/components/presentation/FirstAutomation";
 import { FreelanceStack } from "@/components/presentation/FreelanceStack";
+import { StateOfArt } from "@/components/presentation/StateOfArt";
+import { Limits } from "@/components/presentation/Limits";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -54,10 +56,12 @@ function Presentation() {
           <Vocabulary />
           <AlreadyNoCode />
           <History />
+          <StateOfArt />
           <ToolsMap />
           <RightBackpack />
           <Settings />
           <HypeReality />
+          <Limits />
           <Framing />
           <Decide />
           <Quiz />
