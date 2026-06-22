@@ -211,7 +211,7 @@ export function HumanVsAI() {
  <Section
  id="humain-vs-ia"
  num="07"
- eyebrow="Acte 1 · Jeu collectif"
+ eyebrow="Partie 2 · Comprendre les outils"
  title="Un pas humain, un pas machine"
  tint="sage"
  >

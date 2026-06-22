@@ -11,7 +11,7 @@ export function RightBackpack() {
  <Section
  id="bon-sac"
  num="12"
- eyebrow="Acte 3 · Choisir son chemin"
+ eyebrow="Partie 2 · Comprendre les outils"
  title="Le bon sac, pas le plus lourd"
  >
  <p className="mb-10 text-base italic text-muted-foreground">

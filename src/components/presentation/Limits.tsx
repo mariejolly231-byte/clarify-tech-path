@@ -32,7 +32,7 @@ export function Limits() {
  <Section
  id="limites"
  num="09"
- eyebrow="Acte 2 · Comprendre le terrain"
+ eyebrow="Partie 2 · Comprendre les outils"
  tint="sand"
  title="Les crevasses à éviter"
  >

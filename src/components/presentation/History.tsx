@@ -15,7 +15,7 @@ export function History() {
  <Section
  id="histoire"
  num="04"
- eyebrow="Acte 1 · Vous êtes déjà équipés"
+ eyebrow="Partie 1 · D'où ça vient — où on en est"
  title="30 ans de sentiers tracés"
  >
  <p className="mb-12 text-base italic text-muted-foreground">

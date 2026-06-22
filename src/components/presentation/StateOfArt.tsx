@@ -28,7 +28,7 @@ export function StateOfArt() {
  <Section
  id="etat-de-l-art"
  num="05"
- eyebrow="Acte 1 · Vous êtes déjà équipés"
+ eyebrow="Partie 1 · D'où ça vient — où on en est"
  title="L'altitude en 2026"
  >
  <p className="mb-12 text-base italic text-muted-foreground">
