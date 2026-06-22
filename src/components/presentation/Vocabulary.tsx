@@ -52,7 +52,9 @@ const CARDS = [
   def: "Un endroit structuré où je range mes informations en lignes et colonnes, avec des liens entre elles.",
  ex: "Mes clients dans une table, mes commandes dans une autre, reliées entre elles.",
  tone: "sand",
+ demo: { label: "Exemple Notion — Association la Trésorerie Numérique", href: "https://silver-papyrus-4c0.notion.site/Association-la-tr-so-Num-rique-30a44f68064780b4b947ee1f5f037c14" },
  },
+
  {
  k: "CRM",
   def: "Un outil qui centralise tous mes contacts, prospects, clients et l'historique des échanges.",
