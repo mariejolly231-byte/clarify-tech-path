@@ -67,8 +67,6 @@ function Presentation() {
           <History />
           <StateOfArt />
           <HypeReality />
-          {/* Pause avant le lexique */}
-          <Pause minutes={15} />
           {/* Partie 2 — Comprendre les outils */}
           <Vocabulary />
           <HumanVsAI />
@@ -79,6 +77,8 @@ function Presentation() {
           <Mcp />
 
 
+          {/* Pause avant la Partie 3 */}
+          <Pause minutes={15} />
           {/* Partie 3 — Passer à l'action avec méthode */}
           <AssoExample />
           <Framing />
