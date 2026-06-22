@@ -31,23 +31,6 @@ export function FirstAutomation() {
  On le construit ensemble, maintenant.
  </p>
 
- {/* Stepper */}
- <ol className="grid gap-4 md:grid-cols-4">
- {[
- { num: "01", title: "L'idée", body: null },
- { num: "02", title: "Sur iPhone", body: null },
- { num: "03", title: "Selon ton système", body: null },
- { num: "04", title: "Aller plus loin", body: null },
- ].map((s) => (
- <li
- key={s.num}
- className="rounded-xl border border-primary/30 bg-primary/[0.04] p-4"
- >
- <div className="font-mono text-xs text-primary">Étape {s.num}</div>
- <div className="mt-1 font-serif text-lg text-foreground">{s.title}</div>
- </li>
- ))}
- </ol>
 
  {/* Étape 1 */}
  <div className="mt-12 rounded-2xl border border-border bg-card p-7 shadow-sm">
