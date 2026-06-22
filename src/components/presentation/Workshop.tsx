@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import { DurationBadge } from "./Badge";
 import {
   Accordion,
   AccordionContent,
@@ -77,6 +78,7 @@ export function Workshop() {
       }
       tint="sand"
     >
+      <DurationBadge>⏱️ 30 min · Atelier groupes</DurationBadge>
       <p className="mb-12 text-base italic text-muted-foreground">
         4 groupes · 30 minutes · un vrai problème business · une vraie piste de solution.
       </p>

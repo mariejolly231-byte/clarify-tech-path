@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { Section } from "./Section";
+import { DurationBadge } from "./Badge";
 import { supabase } from "@/integrations/supabase/client";
 
 
@@ -111,6 +112,7 @@ export function LivePoll() {
         </>
       }
     >
+      <DurationBadge>⏱️ 15 min · Tour de table</DurationBadge>
       <p className="mb-10 max-w-2xl text-base text-muted-foreground md:text-lg">
         Scanne le QR code, réponds en 2 minutes. Les résultats apparaissent ici,
         en direct, pour qu'on cale l'atelier sur votre réalité.

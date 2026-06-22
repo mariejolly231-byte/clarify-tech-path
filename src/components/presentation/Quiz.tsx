@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Section } from "./Section";
+import { DurationBadge } from "./Badge";
 
 type Cat = "assistant" | "workflow" | "agent" | "aucun";
 
@@ -49,6 +50,7 @@ export function Quiz() {
       tint="sage"
       title={<>Assistant, workflow, agent — <span className="text-primary">ou aucun des trois ?</span></>}
     >
+      <DurationBadge>⏱️ 10 min · Quiz interactif</DurationBadge>
       <p className="mb-10 max-w-3xl text-base text-muted-foreground md:text-lg">
         Cinq scénarios. Pour chacun, tentez votre réponse — puis révélez la bonne catégorie.
         L'objectif n'est pas d'avoir tout juste, mais d'aiguiser le réflexe de tri.
