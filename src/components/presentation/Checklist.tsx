@@ -117,11 +117,21 @@ export function Checklist() {
       <Separator className="my-12" />
 
       {/* ——— RGPD FAQ ——— */}
-      <div className="space-y-14">
-        <h3 className="flex items-center gap-2 font-serif text-2xl text-foreground">
-          <span aria-hidden>🛡️</span>
-          Les questions RGPD que vos clients poseront — et vos réponses
-        </h3>
+      <details className="group space-y-14">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-xl border border-border bg-card px-5 py-4 font-serif text-xl text-foreground shadow-sm transition hover:bg-accent">
+          <span className="flex items-center gap-2">
+            <span aria-hidden>🛡️</span>
+            Les questions RGPD que vos clients poseront — et vos réponses
+          </span>
+          <span
+            aria-hidden
+            className="text-2xl leading-none text-primary transition-transform group-open:rotate-45"
+          >
+            +
+          </span>
+        </summary>
+        <div className="mt-8 space-y-14">
+
 
         {/* A — Entraînement */}
         <div id="rgpd-faq">
