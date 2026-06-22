@@ -122,6 +122,7 @@ export function Workshop() {
 
       {/* Temps 3 */}
       <div>
+      <div id="atelier-idees">
         <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
           Temps 3 — Exemples d'idées par profil
         </div>
