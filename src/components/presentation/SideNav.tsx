@@ -6,12 +6,18 @@ export const SECTIONS = [
   { id: "ouverture", label: "Ouverture", num: "01" },
   { id: "qui", label: "Qui je suis", num: "02" },
   { id: "tri", label: "No code, IA, gloubi-boulga, késako ?", num: "03" },
+  { id: "deja-no-code", label: "Déjà no-codeur sans le savoir", num: "03·A" },
+  { id: "histoire", label: "Un peu d'histoire", num: "03·B" },
+  { id: "outils", label: "Carte des outils", num: "03·C" },
+  { id: "bon-sac", label: "Le bon sac", num: "03·D" },
   { id: "reglages", label: "Les réglages de l'IA", num: "04" },
   { id: "hype", label: "La hype vs la réalité", num: "05" },
   { id: "cadrage", label: "Le cadrage avant tout", num: "06" },
   { id: "avant", label: "Avant d'automatiser", num: "07" },
   { id: "jeu", label: "Jeu interactif", num: "08" },
   { id: "gardefous", label: "Garde-fous", num: "09" },
+  { id: "atelier", label: "Atelier — Votre sentier", num: "09·A" },
+  { id: "raccourci", label: "Première automatisation", num: "09·B" },
   { id: "emporter", label: "Ce que vous emportez", num: "10" },
 ];
 

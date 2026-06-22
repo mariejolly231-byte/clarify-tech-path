@@ -11,6 +11,12 @@ import { Decide } from "@/components/presentation/Decide";
 import { Quiz } from "@/components/presentation/Quiz";
 import { Guardrails } from "@/components/presentation/Guardrails";
 import { Takeaway } from "@/components/presentation/Takeaway";
+import { AlreadyNoCode } from "@/components/presentation/AlreadyNoCode";
+import { History } from "@/components/presentation/History";
+import { ToolsMap } from "@/components/presentation/ToolsMap";
+import { RightBackpack } from "@/components/presentation/RightBackpack";
+import { Workshop } from "@/components/presentation/Workshop";
+import { FirstAutomation } from "@/components/presentation/FirstAutomation";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,12 +51,18 @@ function Presentation() {
           <Opening />
           <About />
           <Vocabulary />
+          <AlreadyNoCode />
+          <History />
+          <ToolsMap />
+          <RightBackpack />
           <Settings />
           <HypeReality />
           <Framing />
           <Decide />
           <Quiz />
           <Guardrails />
+          <Workshop />
+          <FirstAutomation />
           <Takeaway />
         </div>
       </main>
