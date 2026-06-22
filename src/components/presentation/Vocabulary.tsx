@@ -113,6 +113,12 @@ const CARDS = [
   def: "Je donne un objectif, des outils et un cadre. Le système enchaîne plusieurs étapes avec une certaine autonomie.",
  ex: "Analyser une demande, chercher des infos, proposer une action, puis attendre validation.",
  tone: "primary",
+ },
+ {
+ k: "RAG (Retrieval-Augmented Generation)",
+  def: "L'IA va chercher dans tes propres documents les bons extraits avant de répondre — plutôt que d'improviser depuis sa mémoire.",
+ ex: "Tu lui donnes ta base de connaissances ; elle répond en citant tes vrais contenus, pas des généralités.",
+ tone: "primary",
  demo: { label: "Démo RAG — NotebookLM Summit Flow", href: "https://notebooklm.google.com/notebook/70814c9c-9f66-45ff-b80c-bb220df20bc6" },
  },
  {
