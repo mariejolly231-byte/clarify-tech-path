@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import logoAsset from "@/assets/summit-flow-logo.png.asset.json";
 
-type NavEntry = { id: string; label: string };
-type NavGroup = { act?: string; title: string; entries: NavEntry[] };
+type NavEntry = { id?: string; label: string };
+type NavGroup = { act?: string; title: string; entries: NavEntry[]; preface?: boolean };
 
 export const NAV_GROUPS: NavGroup[] = [
   {
-    title: "Ouverture",
+    title: "Avant le départ",
+    preface: true,
     entries: [
       { id: "sondage", label: "Le départ — on se connaît" },
       { id: "ouverture", label: "La carte du jour" },
@@ -18,7 +19,7 @@ export const NAV_GROUPS: NavGroup[] = [
     title: "Vous êtes déjà équipés",
     entries: [
       { id: "deja-no-code", label: "Vous avez déjà chaussé les crampons" },
-      { id: "histoire", label: "30 ans de sentiers tracés" },
+      { id: "histoire", label: "30 sentiers tracés" },
       { id: "etat-de-l-art", label: "L'altitude en 2026" },
       { id: "tri", label: "Le lexique du randonneur" },
     ],
@@ -27,6 +28,7 @@ export const NAV_GROUPS: NavGroup[] = [
     act: "Acte 2",
     title: "Comprendre le terrain",
     entries: [
+      { label: "Cerveau et boussole" },
       { id: "reglages", label: "Sous le capot de la boussole" },
       { id: "limites", label: "Les crevasses à éviter" },
       { id: "hype", label: "La météo vs la réalité" },
@@ -45,7 +47,12 @@ export const NAV_GROUPS: NavGroup[] = [
   {
     act: "Acte 4",
     title: "Sécuriser la cordée",
-    entries: [{ id: "gardefous", label: "Les garde-fous du randonneur" }],
+    entries: [
+      { id: "gardefous", label: "Les garde-fous du randonneur" },
+      { id: "classer-donnee", label: "Classer sa donnée avant de choisir" },
+      { id: "checklist", label: "La check-list du randonneur prudent" },
+      { id: "suis-je-en-regle", label: "Et moi — suis-je en règle ?" },
+    ],
   },
   {
     act: "Acte 5",
@@ -53,6 +60,7 @@ export const NAV_GROUPS: NavGroup[] = [
     entries: [
       { id: "raccourci", label: "Premier pas — le pense-bête vocal" },
       { id: "refuge", label: "Connecter sa boussole au terrain" },
+      { id: "assembler-sentier", label: "Assembler son premier sentier" },
       { id: "atelier", label: "À vous de tracer le sentier" },
     ],
   },
@@ -62,7 +70,9 @@ export const NAV_GROUPS: NavGroup[] = [
   },
 ];
 
-const ALL_IDS = NAV_GROUPS.flatMap((g) => g.entries.map((e) => e.id));
+const ALL_IDS = NAV_GROUPS.flatMap((g) =>
+  g.entries.map((e) => e.id).filter((id): id is string => Boolean(id)),
+);
 
 export function SideNav() {
   const [active, setActive] = useState(ALL_IDS[0]);
@@ -123,40 +133,70 @@ export function SideNav() {
             </div>
           </a>
 
-          <nav className="mt-10 space-y-6">
-            {NAV_GROUPS.map((group) => (
-              <div key={group.title}>
-                <div className="mb-2 px-2">
-                  {group.act && (
-                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
-                      {group.act}
-                    </div>
+          <nav className="mt-10 space-y-5">
+            {NAV_GROUPS.map((group, gi) => {
+              const prev = NAV_GROUPS[gi - 1];
+              const showDivider =
+                gi > 0 && (group.preface || prev?.preface || group.act || !group.act);
+              return (
+                <div key={group.title}>
+                  {showDivider && (
+                    <div className="mb-4 h-px w-full bg-border/70" aria-hidden />
                   )}
-                  <div className="font-serif text-[13px] text-foreground">{group.title}</div>
+                  <div className="mb-2 px-2">
+                    {group.act && (
+                      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
+                        {group.act}
+                      </div>
+                    )}
+                    <div
+                      className={
+                        group.preface
+                          ? "font-serif text-[12px] text-muted-foreground"
+                          : "font-serif text-[13px] font-semibold text-foreground"
+                      }
+                    >
+                      {group.title}
+                    </div>
+                  </div>
+                  <ul className="space-y-0.5">
+                    {group.entries.map((s) => {
+                      const isActive = s.id && active === s.id;
+                      if (!s.id) {
+                        return (
+                          <li key={s.label}>
+                            <span
+                              className={`block rounded-md px-3 py-1.5 leading-snug ${
+                                group.preface ? "text-[12px]" : "text-[13px]"
+                              } text-muted-foreground/70`}
+                            >
+                              {s.label}
+                            </span>
+                          </li>
+                        );
+                      }
+                      return (
+                        <li key={s.id}>
+                          <a
+                            href={`#${s.id}`}
+                            onClick={() => setOpen(false)}
+                            className={`block rounded-md px-3 py-1.5 leading-snug transition-colors ${
+                              group.preface ? "text-[12px]" : "text-[13px]"
+                            } ${
+                              isActive
+                                ? "bg-accent text-accent-foreground"
+                                : "text-muted-foreground hover:text-foreground"
+                            }`}
+                          >
+                            {s.label}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
-                <ul className="space-y-0.5">
-                  {group.entries.map((s) => {
-                    const isActive = active === s.id;
-                    return (
-                      <li key={s.id}>
-                        <a
-                          href={`#${s.id}`}
-                          onClick={() => setOpen(false)}
-                          className={`flex items-baseline gap-2 rounded-md px-3 py-1.5 text-[13px] leading-snug transition-colors ${
-                            isActive
-                              ? "bg-accent text-accent-foreground"
-                              : "text-muted-foreground hover:text-foreground"
-                          }`}
-                        >
-                          <span className="text-muted-foreground/60">·</span>
-                          <span>{s.label}</span>
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
+              );
+            })}
           </nav>
         </div>
 
