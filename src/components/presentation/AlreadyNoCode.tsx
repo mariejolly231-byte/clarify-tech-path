@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Section } from "./Section";
 import { Button } from "@/components/ui/button";
+import { DurationBadge } from "./Badge";
 
 export function AlreadyNoCode() {
  const [revealed, setRevealed] = useState(false);
@@ -12,9 +13,11 @@ export function AlreadyNoCode() {
  title="Vous avez déjà chaussé les crampons"
  tint="sand"
  >
+ <DurationBadge>⏱ 5 min · Révélation</DurationBadge>
  <p className="mb-10 text-base italic text-muted-foreground">
- Spoiler : vous en utilisez déjà tous les jours.
+ Spoiler : vous utilisez déjà du no-code.
  </p>
+
 
  <div className="rounded-2xl border border-border bg-card p-8 shadow-sm md:p-10">
  <div className="text-[11px] uppercase tracking-[0.2em] text-primary">Temps 1 — Question</div>
