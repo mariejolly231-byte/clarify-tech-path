@@ -393,9 +393,11 @@ export function Checklist() {
             Cette checklist ne constitue pas un conseil juridique. Consultez votre DPO pour les cas complexes.
           </p>
         </div>
-      </div>
+        </div>
+      </details>
 
       <Separator className="my-12" />
+
     </Section>
   );
 }
