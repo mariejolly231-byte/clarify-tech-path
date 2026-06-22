@@ -10,6 +10,15 @@ const STEPS_IPHONE = [
  "Ajoute l'icône à l'écran d'accueil",
 ];
 
+const STEPS_ANDROID = [
+ 'Installe "Google Assistant" (déjà présent) ou "Tasker" / "Automate"',
+ 'Ouvre Google Assistant → "Routines" → Nouvelle routine',
+ 'Déclencheur : phrase vocale "Pense pas bête"',
+ 'Action : "Ajouter à la liste" Google Keep (ou note / rappel)',
+ 'Active "Ok Google" mains libres si besoin',
+ "Ajoute le widget Routine sur l'écran d'accueil",
+];
+
 const PLATFORMS = [
  { name: "iPhone / iPad", tool: "App Raccourcis (native)" },
  { name: "Android", tool: "Automate ou Google Assistant Routines" },
