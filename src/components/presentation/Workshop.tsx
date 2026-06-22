@@ -121,7 +121,6 @@ export function Workshop() {
       </div>
 
       {/* Temps 3 */}
-      <div>
       <div id="atelier-idees">
         <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
           Temps 3 — Exemples d'idées par profil
@@ -155,6 +154,24 @@ export function Workshop() {
             </AccordionItem>
           ))}
         </Accordion>
+      </div>
+
+      {/* Clôture atelier */}
+      <div className="mt-10 rounded-2xl border border-primary/20 bg-accent/40 p-7 text-center">
+        <h3 className="font-serif text-2xl text-foreground md:text-3xl">
+          On étudie <span className="text-primary">une idée ensemble</span>
+        </h3>
+        <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-foreground/85">
+          Vous avez une piste ? On la creuse en direct.
+          <br />
+          Retrouvez toutes les idées par profil ci-dessous.
+        </p>
+        <a
+          href="#atelier-idees"
+          className="mt-5 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90"
+        >
+          Voir les idées par participant <span aria-hidden>→</span>
+        </a>
       </div>
     </Section>
   );
