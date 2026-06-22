@@ -245,7 +245,13 @@ export function Vocabulary() {
  </figcaption>
  </figure>
 
- <IkeaAnalogy />
+  <div
+    role="img"
+    aria-label="Emplacement infographie : No-code, Low-code, Code"
+    className="mt-12 flex h-[300px] items-center justify-center rounded-2xl border-2 border-dashed border-border bg-stone-soft/60 px-6 text-center text-sm text-muted-foreground"
+  >
+    📍 Emplacement infographie — No-code / Low-code / Code — à intégrer
+  </div>
 
  {/* Chute */}
  <blockquote className="mx-auto mt-14 max-w-3xl border-l-4 border-primary bg-card px-7 py-6 text-center font-serif text-2xl leading-snug text-foreground md:text-3xl">
