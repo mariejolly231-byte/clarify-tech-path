@@ -71,6 +71,7 @@ const CARDS = [
     def: "Je connecte une IA à tes outils réels — elle peut lire tes mails, ton agenda, tes fichiers et agir dessus à ta demande.",
     ex: "Tu demandes à Claude \"résume mes mails non lus\" — il le fait directement, sans copier-coller.",
     tone: "primary",
+    duration: "⏱️ 15 min · Démo animatrice",
   },
 ];
 
@@ -218,6 +219,11 @@ export function Vocabulary() {
               <span className="text-[10px] uppercase tracking-[0.2em] text-primary">Rôle</span>
             </div>
             <h4 className="mt-3 font-serif text-2xl text-foreground">{c.k}</h4>
+            {"duration" in c && c.duration && (
+              <span className="mt-2 inline-flex w-fit items-center gap-1 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-[11px] font-medium text-primary">
+                {c.duration}
+              </span>
+            )}
             <p className="mt-3 text-[15px] leading-relaxed text-foreground/90">
               « {c.def} »
             </p>
