@@ -7,13 +7,9 @@ export function AlreadyNoCode() {
   return (
     <Section
       id="deja-no-code"
-      num="03·A"
-      eyebrow="Mise en jambes"
-      title={
-        <>
-          Avez-vous déjà utilisé un <span className="text-primary">outil no-code</span> ?
-        </>
-      }
+      num="03"
+      eyebrow="Acte 1 · Vous êtes déjà équipés"
+      title="Vous avez déjà chaussé les crampons"
       tint="sand"
     >
       <p className="mb-10 text-base italic text-muted-foreground">

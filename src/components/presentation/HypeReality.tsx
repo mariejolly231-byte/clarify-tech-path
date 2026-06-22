@@ -39,10 +39,10 @@ export function HypeReality() {
   return (
     <Section
       id="hype"
-      num="05"
-      eyebrow="La hype vs la réalité"
+      num="10"
+      eyebrow="Acte 2 · Comprendre le terrain"
       tint="sand"
-      title={<>Oui, ça accélère. <span className="text-primary">Non, tout n'est pas mature.</span></>}
+      title="La météo vs la réalité"
     >
       <div className="grid gap-4 md:grid-cols-4">
         {COLS.map((c) => (

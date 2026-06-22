@@ -45,10 +45,10 @@ export function Quiz() {
   return (
     <Section
       id="jeu"
-      num="08"
-      eyebrow="Jeu interactif"
+      num="Jeu"
+      eyebrow="Acte 3 · Jeu"
       tint="sage"
-      title={<>Assistant, workflow, agent — <span className="text-primary">ou aucun des trois ?</span></>}
+      title="Quel terrain pour quelle technique ?"
     >
       <DurationBadge>⏱️ 10 min · Quiz interactif</DurationBadge>
       <p className="mb-10 max-w-3xl text-base text-muted-foreground md:text-lg">

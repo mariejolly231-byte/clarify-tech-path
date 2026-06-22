@@ -418,14 +418,10 @@ export function Backpack() {
   return (
     <Section
       id="emporter"
-      num="10"
-      eyebrow="Ce que vous repartez avec"
+      num="19"
+      eyebrow="Le refuge"
       tint="sand"
-      title={
-        <>
-          Ce que vous repartez avec <span aria-hidden>🏔️</span>
-        </>
-      }
+      title="Ce que vous repartez dans le sac"
     >
       <p className="-mt-4 mb-12 text-base text-muted-foreground md:text-lg">
         Pas une liste de plus. Un vrai sac pour demain.
@@ -437,10 +433,10 @@ export function Backpack() {
           <div>
             <div className="text-[11px] uppercase tracking-[0.2em] text-primary">Bilan</div>
             <h3 className="mt-1 font-serif text-2xl text-foreground md:text-3xl">
-              ✅ Ce qu'on a construit ensemble aujourd'hui
+              Ce qu'on a construit ensemble aujourd'hui
             </h3>
           </div>
-          <div className="hidden text-5xl md:block" aria-hidden>🐾</div>
+          
         </div>
         <ul className="space-y-3">
           {CHECKLIST.map((item) => (
@@ -459,7 +455,7 @@ export function Backpack() {
         <div className="mb-6">
           <div className="text-[11px] uppercase tracking-[0.2em] text-primary">Mémo</div>
           <h3 className="mt-1 font-serif text-2xl text-foreground md:text-3xl">
-            🧠 Les réflexes à garder
+            Les réflexes à garder
           </h3>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
@@ -485,7 +481,7 @@ export function Backpack() {
         <div className="mb-6">
           <div className="text-[11px] uppercase tracking-[0.2em] text-primary">Action</div>
           <h3 className="mt-1 font-serif text-2xl text-foreground md:text-3xl">
-            📅 Cette semaine — 3 actions simples
+            Cette semaine — 3 actions simples
           </h3>
           <p className="mt-1 text-sm text-muted-foreground italic">Pas tout. Juste ça.</p>
         </div>
@@ -580,7 +576,7 @@ Choisis : manuel / assisté IA / automatisé.
         <div className="mb-6">
           <div className="text-[11px] uppercase tracking-[0.2em] text-primary">Ressources</div>
           <h3 className="mt-1 font-serif text-2xl text-foreground md:text-3xl">
-            🚀 Pour aller plus loin — à votre rythme
+            Pour aller plus loin — à votre rythme
           </h3>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
@@ -630,7 +626,7 @@ Choisis : manuel / assisté IA / automatisé.
         <div className="mb-6">
           <div className="text-[11px] uppercase tracking-[0.2em] text-primary">Personnalisé</div>
           <h3 className="mt-1 font-serif text-2xl text-foreground md:text-3xl">
-            🐾 Votre plan selon votre activité
+            Votre plan selon votre activité
           </h3>
           <p className="mt-1 text-sm text-muted-foreground">
             Retrouvez votre Samoyède — voici ce qu'on vous recommande en priorité.
@@ -711,7 +707,7 @@ Choisis : manuel / assisté IA / automatisé.
       <div className="rounded-2xl border border-primary/20 bg-accent/40 p-8 md:p-10">
         <div className="mb-8 text-center">
           <h3 className="font-serif text-2xl text-foreground md:text-3xl">
-            Pour aller plus loin ensemble 🏔️
+            Pour aller plus loin ensemble
           </h3>
           <p className="mx-auto mt-3 max-w-2xl text-base text-foreground/85">
             Ces outils vous intéressent mais vous voulez être accompagné·e pour les mettre en

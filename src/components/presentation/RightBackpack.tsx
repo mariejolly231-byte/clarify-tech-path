@@ -10,13 +10,9 @@ export function RightBackpack() {
   return (
     <Section
       id="bon-sac"
-      num="03·D"
-      eyebrow="Frugalité"
-      title={
-        <>
-          Le bon sac, pas le sac le <span className="text-primary">plus lourd</span>
-        </>
-      }
+      num="12"
+      eyebrow="Acte 3 · Choisir son chemin"
+      title="Le bon sac, pas le plus lourd"
     >
       <p className="mb-10 text-base italic text-muted-foreground">
         Un sac de rando de 15 ans — usé, réparé, fidèle — vaut mieux que cinq sacs neufs

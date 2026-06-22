@@ -63,9 +63,9 @@ export function Framing() {
   return (
     <Section
       id="cadrage"
-      num="06"
-      eyebrow="Le cadrage vient avant tout"
-      title={<>La première question n'est pas <span className="text-primary">« quel outil ? »</span></>}
+      num="13"
+      eyebrow="Acte 3 · Choisir son chemin"
+      title="Poser la carte avant de partir"
     >
       <div className="mb-12 rounded-2xl border-l-4 border-primary bg-card px-7 py-7 shadow-sm">
         <p className="font-serif text-2xl leading-snug text-foreground md:text-3xl">

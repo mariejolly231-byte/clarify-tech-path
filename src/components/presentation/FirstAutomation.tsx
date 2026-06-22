@@ -21,14 +21,9 @@ export function FirstAutomation() {
   return (
     <Section
       id="raccourci"
-      num="09·B"
-      eyebrow="Pratique immédiate"
-      title={
-        <>
-          Votre première automatisation —{" "}
-          <span className="text-primary">déjà dans votre poche</span>
-        </>
-      }
+      num="16"
+      eyebrow="Acte 5 · On marche"
+      title="Premier pas — le pense-bête vocal"
     >
       <DurationBadge>⏱️ 10 min · Manipulation live</DurationBadge>
       <p className="mb-12 text-base italic text-muted-foreground">

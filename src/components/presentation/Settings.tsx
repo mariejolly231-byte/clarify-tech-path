@@ -84,10 +84,10 @@ export function Settings() {
   return (
     <Section
       id="reglages"
-      num="04"
-      eyebrow="Les réglages de l'IA"
+      num="08"
+      eyebrow="Acte 2 · Comprendre le terrain"
       tint="sage"
-      title={<>Sous le capot, <span className="text-primary">quelques boutons</span> à connaître.</>}
+      title="Sous le capot de la boussole"
     >
       <p className="mb-10 max-w-3xl text-base text-muted-foreground md:text-lg">
         Pas besoin d'être ingénieur. Juste savoir quels curseurs existent

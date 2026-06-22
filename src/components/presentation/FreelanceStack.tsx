@@ -10,13 +10,9 @@ export function FreelanceStack() {
   return (
     <Section
       id="refuge"
-      num="09·C"
-      eyebrow="Avant de rentrer au refuge"
-      title={
-        <>
-          Un <span className="text-primary">bon plan</span> à emporter
-        </>
-      }
+      num="17"
+      eyebrow="Acte 5 · On marche"
+      title="Connecter sa boussole au terrain"
       tint="sand"
     >
       <p className="mb-10 text-base italic text-muted-foreground">
