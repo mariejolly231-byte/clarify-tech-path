@@ -19,12 +19,6 @@ const STEPS_ANDROID = [
  "Ajoute le widget Routine sur l'écran d'accueil",
 ];
 
-const PLATFORMS = [
- { name: "iPhone / iPad", tool: "App Raccourcis (native)" },
- { name: "Android", tool: "Automate ou Google Assistant Routines" },
- { name: "Mac", tool: "App Raccourcis (native depuis macOS Monterey)" },
- { name: "Windows", tool: "Power Automate Desktop (gratuit Microsoft)" },
-];
 
 export function FirstAutomation() {
  return (
@@ -90,19 +84,6 @@ export function FirstAutomation() {
   </div>
  </div>
 
- {/* Étape 3 */}
- <div className="mt-8">
- <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
- Étape 3 — Les équivalents selon ton système
- </div>
- <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
- {PLATFORMS.map((p) => (
- <div key={p.name} className="rounded-xl border border-border bg-card p-4"> <div className="mt-2 font-serif text-base text-foreground">{p.name}</div>
- <p className="mt-1 text-sm text-foreground/80">→ {p.tool}</p>
- </div>
- ))}
- </div>
- </div>
 
  {/* Étape 4 */}
  <div className="mt-8 rounded-2xl border border-border bg-card p-7 shadow-sm">
