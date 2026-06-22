@@ -5,6 +5,7 @@ type NavGroup = {
   label: string;
   firstId: string;
   act?: string;
+  subtitle?: string;
   ids: string[];
 };
 
@@ -15,37 +16,40 @@ const NAV_GROUPS: NavGroup[] = [
     ids: ["sondage", "ouverture", "qui"],
   },
   {
-    act: "Acte 1",
-    label: "Vous êtes déjà équipés",
+    act: "Partie 1",
+    label: "D'où ça vient — où on en est",
+    subtitle: "Le contexte pour comprendre pourquoi maintenant, pas dans 2 ans.",
     firstId: "deja-no-code",
-    ids: ["deja-no-code", "histoire", "etat-de-l-art", "tri", "humain-vs-ia"],
+    ids: ["deja-no-code", "histoire", "etat-de-l-art"],
   },
   {
-    act: "Acte 2",
-    label: "Comprendre le terrain",
-    firstId: "reglages",
-    ids: ["reglages", "limites", "hype"],
+    act: "Partie 2",
+    label: "Comprendre les outils",
+    subtitle: "Ce que c'est, comment ça marche, ce que ça ne fait pas.",
+    firstId: "tri",
+    ids: ["tri", "humain-vs-ia", "reglages", "limites", "hype", "outils", "bon-sac"],
   },
   {
-    act: "Acte 3",
-    label: "Choisir son chemin",
-    firstId: "outils",
-    ids: ["outils", "bon-sac", "cadrage", "avant", "jeu"],
-  },
-  {
-    act: "Acte 4",
-    label: "Passer à l'action",
-    firstId: "gardefous",
+    act: "Partie 3",
+    label: "Passer à l'action avec méthode",
+    subtitle: "Cadrer avant de choisir. Classer avant de brancher.",
+    firstId: "cadrage",
     ids: [
+      "cadrage",
+      "avant",
+      "jeu",
       "gardefous",
       "classer-donnee",
       "checklist",
       "suis-je-en-regle",
-      "raccourci",
-      "mcp",
-      "assembler-sentier",
-      "atelier",
     ],
+  },
+  {
+    act: "Partie 4",
+    label: "On fait",
+    subtitle: "Manipulations, démos et atelier sur un vrai problème business.",
+    firstId: "raccourci",
+    ids: ["raccourci", "mcp", "assembler-sentier", "atelier"],
   },
   {
     label: "Le refuge",
