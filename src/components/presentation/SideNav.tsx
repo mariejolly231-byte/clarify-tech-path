@@ -123,7 +123,7 @@ export function SideNav() {
             <div className="leading-tight">
               <div className="font-serif text-base text-primary">Summit Flow</div>
               <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                Atelier d acculturation
+                Atelier d'acculturation
               </div>
             </div>
           </a>
