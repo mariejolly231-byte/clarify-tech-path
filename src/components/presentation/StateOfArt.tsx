@@ -79,6 +79,9 @@ export function StateOfArt() {
         </div>
       ))}
     </div>
+  </div>
+
+
 
  <div className="mt-12 rounded-2xl border-2 border-warn/40 bg-warn/[0.08] p-7 shadow-sm">
  <div className="flex items-baseline gap-3">
