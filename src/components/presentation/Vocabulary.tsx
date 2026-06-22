@@ -56,6 +56,7 @@ const CARDS = [
     def: "Je donne un objectif, des outils et un cadre. Le système peut enchaîner plusieurs étapes avec une certaine autonomie.",
     ex: "Analyser une demande, chercher des infos, proposer une action, puis attendre validation.",
     tone: "primary",
+    demo: { label: "📓 Démo RAG — NotebookLM Summit Flow", href: "[LIEN_NOTEBOOKLM]" },
   },
   {
     k: "API",
