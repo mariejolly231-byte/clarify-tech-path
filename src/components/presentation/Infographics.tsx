@@ -294,22 +294,26 @@ export function RgpdCompass() {
  <h3 className="font-serif text-2xl text-foreground">
  Classer la donnée <span className="text-primary">avant</span> de choisir l'outil.
  </h3>
- <ul className="mt-5 space-y-3">
- {RINGS.map((r) => (
- <li key={r.level} className="flex items-start gap-3">
- <span
- className="mt-0.5 inline-flex h-6 w-9 shrink-0 items-center justify-center rounded-md font-mono text-[10px]"
- style={{ background: r.fill, color: r.text }}
- >
- {r.level}
- </span>
- <div className="text-sm">
- <span className="font-medium text-foreground">{r.label}.</span>{" "}
- <span className="text-foreground/75">{r.desc}</span>
- </div>
- </li>
- ))}
- </ul>
+        <ul className="mt-5 space-y-3">
+          {RINGS.map((r) => (
+            <li key={r.level} className="flex items-start gap-3">
+              <span
+                className="mt-0.5 inline-flex h-6 w-9 shrink-0 items-center justify-center rounded-md font-mono text-[10px]"
+                style={{ background: r.fill, color: r.text }}
+              >
+                {r.level}
+              </span>
+              <div className="text-sm">
+                <span className="font-medium text-foreground">{r.label}.</span>{" "}
+                <span className="text-foreground/75">{r.desc}</span>
+                <div className="mt-0.5 text-xs italic text-muted-foreground">
+                  Ex. : {r.examples}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+
  </div>
  </div>
  );
