@@ -23,7 +23,7 @@ export function FirstAutomation() {
  id="raccourci"
  num="16"
  eyebrow="Partie 4 · On fait"
- title="Premier pas — le pense-bête vocal"
+ title="Premier pas vers l'automatisation — le pense-bête vocal"
  >
  <DurationBadge>⏱ 10 min · Manipulation live</DurationBadge>
  <p className="mb-12 text-base italic text-muted-foreground">
