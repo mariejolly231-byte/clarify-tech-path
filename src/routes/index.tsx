@@ -17,7 +17,7 @@ import { Framing } from "@/components/presentation/Framing";
 import { AssoExample } from "@/components/presentation/AssoExample";
 import { Decide } from "@/components/presentation/Decide";
 import { Quiz } from "@/components/presentation/Quiz";
-import { Guardrails } from "@/components/presentation/Guardrails";
+
 import { DataClass } from "@/components/presentation/DataClass";
 import { Checklist } from "@/components/presentation/Checklist";
 import { SelfCheck } from "@/components/presentation/SelfCheck";
@@ -84,7 +84,7 @@ function Presentation() {
           <Framing />
           <Decide />
           <Quiz />
-          <Guardrails />
+          
           <DataClass />
           <Checklist />
           <SelfCheck />
