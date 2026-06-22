@@ -7,24 +7,59 @@ import {
  AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const PROFILES = [
- "Anthony Bador — Consultant recrutement",
- "Emeline Bouchard — Formation CSE, dirigeants et RH",
- "Mickaël Chadelle — Community manager, sites vitrine",
- "Cyndia Davidoff — Sophrologue (maladies inflammatoires)",
- "Cristiano De Sousa Valente — Sites, apps, automatisation",
- "Patricia Diaz — Couturière, produits lavables",
- "Florine-Anne Dumestier — Comm entreprises bien-être",
- "Katéry Duplouy — Illustratrice, coloriste",
- "Emilie Garcia — Gestion admin, commerciale, coordination",
- "Tahidys Garcia — Services à la personne",
- "Soo-Jin Hwang — Traiteur asiatique, distributeur automatique",
- "Stéphany Maffre — Legal design, écriture juridique, copywriting",
- "Fleur Martin — Tapisserie d'ameublement",
- "Jordi Portes — Plateforme FLE en ligne",
- "Fabienne Raymond — Coach professionnelle et formatrice",
- "Michèle Razès-Lafont — Sublim'objets ML, flocage tout support",
- "Gaëlle Zamore — Soins minceur et bien-être à domicile",
+type Group = {
+ title: string;
+ theme: string;
+ members: string[];
+ cas: string;
+};
+
+const GROUPS: Group[] = [
+ {
+  title: "Groupe 1 — Vendre & trouver des clients",
+  theme: "Visibilité, prospection, contenu commercial",
+  members: [
+   "Mickaël Chadelle — Community manager, sites vitrine",
+   "Florine-Anne Dumestier — Comm entreprises bien-être",
+   "Michèle Razès-Lafont — Sublim'objets ML, flocage",
+   "Gaëlle Zamore — Soins minceur et bien-être à domicile",
+  ],
+  cas: "Comment automatiser la création de contenu et la prospection quand on est seul(e) à gérer sa comm ?",
+ },
+ {
+  title: "Groupe 2 — Gérer, organiser, coordonner",
+  theme: "Admin, suivi client, coordination sans outil structuré",
+  members: [
+   "Emilie Garcia — Gestion admin, commerciale, coordination",
+   "Patricia Diaz — Couturière, produits lavables",
+   "Fleur Martin — Tapisserie d'ameublement",
+   "Katéry Duplouy — Illustratrice, coloriste",
+  ],
+  cas: "Comment structurer ses devis, commandes et suivi client sans y passer ses soirées ?",
+ },
+ {
+  title: "Groupe 3 — Former, accompagner, transmettre",
+  theme: "Création de contenus pédagogiques, suivi apprenants, offre de service",
+  members: [
+   "Emeline Bouchard — Formation CSE, dirigeants et RH",
+   "Fabienne Raymond — Coach professionnelle et formatrice",
+   "Jordi Portes — Plateforme FLE en ligne",
+   "Stéphany Maffre — Legal design, écriture juridique, copywriting",
+  ],
+  cas: "Comment produire plus de contenus de qualité et personnaliser l'accompagnement sans multiplier les heures ?",
+ },
+ {
+  title: "Groupe 4 — Accueillir, conseiller, fidéliser",
+  theme: "Relation client, prise en charge individualisée, présence locale",
+  members: [
+   "Anthony Bador — Consultant recrutement",
+   "Cyndia Davidoff — Sophrologue (maladies inflammatoires)",
+   "Tahidys Garcia — Services à la personne",
+   "Soo-Jin Hwang — Traiteur asiatique, distributeur automatique",
+   "Cristiano De Sousa Valente — Sites, apps, automatisation",
+  ],
+  cas: "Comment qualifier, orienter et fidéliser ses clients sans répondre manuellement à chaque demande ?",
+ },
 ];
 
 const QUESTIONS = [
