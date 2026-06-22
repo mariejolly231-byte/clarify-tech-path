@@ -69,6 +69,7 @@ function Presentation() {
           <HypeReality />
           {/* Partie 2 — Comprendre les outils */}
           <Vocabulary />
+          <Quiz />
           <HumanVsAI />
           <Settings />
           <Limits />
@@ -83,7 +84,6 @@ function Presentation() {
           <AssoExample />
           <Framing />
           <Decide />
-          <Quiz />
           
           <DataClass />
           <Checklist />
