@@ -28,7 +28,7 @@ export function RightBackpack() {
  <div className="absolute -top-3 right-8 h-10 w-3 rounded-full bg-primary/70" />
  {/* Poches étiquetées */}
  <div className="flex h-full flex-col justify-around gap-2">
- {[" Données", " Automatisations", " Apps & sites", " IA"].map((p) => (
+ {["Données", "Automatisations", "Apps & sites", "IA"].map((p) => (
  <div
  key={p}
  className="rounded-md border border-primary/40 bg-background/90 px-3 py-2 text-center text-xs font-medium text-foreground"
@@ -53,14 +53,14 @@ export function RightBackpack() {
  {TRAPS.map((t) => (
  <div
  key={t.title}
- className="flex items-start gap-4 rounded-xl border border-border bg-card p-4"
- > <div>
+ className="rounded-xl border border-border bg-card p-4"
+ >
  <div className="font-serif text-base text-foreground">{t.title}</div>
  <p className="text-sm text-foreground/80">{t.text}</p>
  </div>
- </div>
  ))}
  </div>
+
 
  <blockquote className="border-l-4 border-primary bg-stone-soft/60 px-6 py-5 font-serif text-xl leading-snug text-foreground md:text-2xl">
  Choisissez votre <span className="text-primary">trio de base</span>. Maîtrisez-le.
