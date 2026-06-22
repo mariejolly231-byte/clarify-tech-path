@@ -1,5 +1,6 @@
 import { Section } from "./Section";
 import histoireAsset from "@/assets/histoire-no-code-40ans.png.asset.json";
+import commentIA from "@/assets/comment-fonctionne-ia.png.asset.json";
 
 export function History() {
  return (
@@ -22,6 +23,18 @@ export function History() {
  />
  <figcaption className="border-t border-border bg-stone-soft px-6 py-3 text-center text-xs italic text-muted-foreground">
  40 ans de no-code en six camps — du tableur à l'humain orchestrateur d'agents.
+ </figcaption>
+ </figure>
+
+ {/* Infographie : Comment fonctionne une IA */}
+ <figure className="mt-10 overflow-hidden rounded-xl border border-border bg-background">
+ <img
+ src={commentIA.url}
+ alt="Comment fonctionne une IA : du carburant (données) au modèle, puis au prompt et à la réponse, avec les limites face au cerveau humain"
+ className="w-full"
+ />
+ <figcaption className="border-t border-border bg-stone-soft px-6 py-3 text-center text-xs italic text-muted-foreground">
+ Données → Modèle → Prompt &amp; Réponse &nbsp;·&nbsp; L'IA calcule, l'humain pense.
  </figcaption>
  </figure>
  </Section>
