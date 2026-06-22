@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import carteOutilsAsset from "@/assets/carte-outils-no-code-ia.png.asset.json";
 
 const TRAPS = [
  { title: "Le sac trop lourd", text: "Trop d'outils = fatigue et abandon" },
