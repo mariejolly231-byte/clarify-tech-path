@@ -793,7 +793,7 @@ Choisis : manuel / assisté IA / automatisé.
  <img
  src={logoAsset.url}
  alt="Summit Flow"
- className="h-12 w-12 rounded-full ring-1 ring-border"
+ className="h-28 w-28 rounded-full ring-1 ring-border"
  />
  <div className="font-serif text-base text-primary">Summit Flow</div>
  <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
