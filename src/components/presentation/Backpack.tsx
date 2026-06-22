@@ -732,7 +732,7 @@ Choisis : manuel / assisté IA / automatisé.
  <img
  src={logoAsset.url}
  alt="Summit Flow"
- className="mx-auto h-14 w-14 rounded-full ring-1 ring-border"
+ className="mx-auto h-24 w-24 rounded-full ring-1 ring-border"
  />
  <div className="mt-3 font-serif text-lg text-foreground">Marie Jolly — Summit Flow</div>
  <ul className="mx-auto mt-4 space-y-2 text-sm text-foreground/85">
