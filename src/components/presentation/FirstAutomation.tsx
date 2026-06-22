@@ -22,7 +22,7 @@ export function FirstAutomation() {
  <Section
  id="raccourci"
  num="16"
- eyebrow="Acte 5 · On marche"
+ eyebrow="Acte 4 · Passer à l'action"
  title="Premier pas — le pense-bête vocal"
  >
  <DurationBadge>⏱ 10 min · Manipulation live</DurationBadge>

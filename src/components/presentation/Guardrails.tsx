@@ -44,7 +44,7 @@ export function Guardrails() {
  <Section
  id="gardefous"
  num="15a"
- eyebrow="Acte 4 · Sécuriser la cordée"
+ eyebrow="Acte 4 · Passer à l'action"
  title="Les garde-fous du randonneur"
  >
  <div className="grid gap-4 md:grid-cols-3">

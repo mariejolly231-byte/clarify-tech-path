@@ -6,7 +6,7 @@ export function SelfCheck() {
  <Section
  id="suis-je-en-regle"
  num="15d"
- eyebrow="Acte 4 · Sécuriser la cordée"
+ eyebrow="Acte 4 · Passer à l'action"
  title="Et moi — suis-je en règle ?"
  >
  <RgpdSelfCheck />
