@@ -48,7 +48,7 @@ export function Mcp() {
   return (
     <Section
       id="mcp"
-      num="17b"
+      num="17a"
       eyebrow="Acte 5 · On marche"
       title="Connecter sa boussole au terrain"
     >
