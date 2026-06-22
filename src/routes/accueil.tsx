@@ -121,7 +121,8 @@ function AccueilPage() {
       {/* Main stage: cards floating around centered QR */}
       <main className="relative flex flex-1 items-stretch justify-center gap-2 px-3 py-2 md:px-4">
         {/* Left column */}
-        <div className="flex flex-1 flex-col justify-between gap-1">
+        <div className="flex flex-1 flex-col justify-between gap-2.5">
+
           {leftCol.map((p, idx) => (
             <ParticipantCard
               key={p.id}
@@ -169,7 +170,7 @@ function AccueilPage() {
         </div>
 
         {/* Right column */}
-        <div className="flex flex-1 flex-col justify-between gap-1">
+        <div className="flex flex-1 flex-col justify-between gap-2.5">
           {rightCol.map((p, idx) => (
             <ParticipantCard
               key={p.id}
@@ -235,12 +236,12 @@ function ParticipantCard({
     >
       <div
         className={[
-          "relative flex items-center gap-2 rounded-lg border bg-white/90 px-2 py-1 backdrop-blur-md transition-all duration-500",
+          "relative flex items-center gap-3 rounded-xl border bg-white/95 px-3 py-2 backdrop-blur-md transition-all duration-500",
           hasResponded
-            ? "border-go/50 bg-[oklch(0.97_0.04_150)]/80"
+            ? "border-go/60 bg-[oklch(0.97_0.04_150)]/90 shadow-[0_8px_22px_-14px_rgba(30,60,90,0.5)]"
             : isHighlight
-              ? "border-primary/60 bg-white"
-              : "border-[oklch(0.92_0.01_220)]",
+              ? "border-primary/70 bg-white shadow-[0_8px_22px_-14px_rgba(30,60,90,0.5)]"
+              : "border-[oklch(0.92_0.01_220)] shadow-[0_4px_14px_-10px_rgba(30,60,90,0.35)]",
         ].join(" ")}
         style={
           isHighlight && !hasResponded
@@ -248,35 +249,35 @@ function ParticipantCard({
             : undefined
         }
       >
-        <div className="relative h-9 w-9 shrink-0">
+        <div className="relative h-16 w-16 shrink-0">
           <div
             className={[
               "absolute inset-0 rounded-full bg-gradient-to-b from-[oklch(0.96_0.015_220)] to-[oklch(0.93_0.02_200)] transition",
-              hasResponded ? "ring-2 ring-go/50" : isHighlight ? "ring-2 ring-primary/60" : "",
+              hasResponded ? "ring-2 ring-go/60" : isHighlight ? "ring-2 ring-primary/70" : "ring-1 ring-[oklch(0.9_0.01_220)]",
             ].join(" ")}
           />
           <img
             src={p.image}
             alt={`Portrait — ${p.prenom} ${p.nom}`}
-            width={72}
-            height={72}
+            width={128}
+            height={128}
             loading="lazy"
             className="absolute inset-0 h-full w-full object-contain p-0.5"
           />
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="truncate font-serif text-[12px] leading-tight text-foreground">
+          <div className="truncate font-serif text-[15px] leading-tight text-foreground">
             {p.prenom} <span className="font-semibold">{p.nom}</span>
           </div>
-          <div className="truncate text-[10px] leading-snug text-muted-foreground">
+          <div className="truncate text-[12px] leading-snug text-muted-foreground">
             {p.activite}
           </div>
         </div>
 
         {hasResponded && (
-          <span className="absolute -right-1 -top-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-go text-white shadow-sm">
-            <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="3">
+          <span className="absolute -right-1.5 -top-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-go text-white shadow-sm">
+            <svg viewBox="0 0 12 12" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="3">
               <path d="M2 6.5L5 9.5L10 3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </span>
@@ -285,3 +286,4 @@ function ParticipantCard({
     </div>
   );
 }
+
