@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import carteOutilsAsset from "@/assets/carte-outils-no-code-ia.png.asset.json";
 
 type Tool = { name: string; usage: string; price: string; multi?: boolean; deal?: string; slug?: string };
 type Cat = { title: string; metaphor: string; tools: Tool[] };
