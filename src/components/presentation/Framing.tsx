@@ -50,6 +50,7 @@ const ANALOGIES = [
     icon: "🛤️",
     title: "On trace avant de bétonner",
     body: "On ne goudronne pas un chemin qu'on n'a jamais parcouru. D'abord le tracé, puis la route.",
+    demo: { label: "🗂 Démo — Tréso numérique Notion", href: "[LIEN_TRESO_NOTION]" },
   },
   {
     icon: "🌫️",
