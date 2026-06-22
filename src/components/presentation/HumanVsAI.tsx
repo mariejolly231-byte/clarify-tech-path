@@ -203,32 +203,30 @@ function RoundCard({ round }: { round: Round }) {
  );
 }
 
+import { Section } from "./Section";
+import { DurationBadge } from "./Badge";
+
 export function HumanVsAI() {
  return (
- <div className="mt-16 rounded-3xl border border-border bg-background p-6 md:p-10">
- <div className="mb-4 flex justify-end">
- <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
- ⏱ 10 min · Jeu collectif
- </span>
- </div>
- <div className="mb-8 text-center">
- <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
- Jeu d'atelier
- </div>
- <h3 className="mt-2 font-serif text-3xl text-foreground md:text-4xl">
- Humain vs IA : <span className="text-primary">même réponse, même raisonnement ?</span>
- </h3>
- <p className="mx-auto mt-3 max-w-2xl text-sm italic text-muted-foreground md:text-base">
+ <Section
+ id="humain-vs-ia"
+ num="07"
+ eyebrow="Acte 1 · Jeu collectif"
+ title="Un pas humain, un pas machine"
+ tint="sage"
+ >
+ <DurationBadge>⏱ 10 min · Jeu collectif</DurationBadge>
+ <p className="mx-auto mb-10 max-w-2xl text-center text-sm italic text-muted-foreground md:text-base">
  4 questions, 3 temps : je réfléchis, on interroge l'IA, on compare.
  Le but n'est pas de trouver la bonne réponse, mais de voir ce qui change.
  </p>
- </div>
 
  <div className="space-y-8">
  {ROUNDS.map((r) => (
  <RoundCard key={r.n} round={r} />
  ))}
  </div>
- </div>
+ </Section>
  );
 }
+

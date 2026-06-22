@@ -1,11 +1,11 @@
 import { Section } from "./Section";
 import { IkeaAnalogy } from "./Infographics";
-import { HumanVsAI } from "./HumanVsAI";
 import troisFacons from "@/assets/trois-facons-aide.png.asset.json";
 import commentIA from "@/assets/comment-fonctionne-ia.png.asset.json";
 import commentIAApprend from "@/assets/comment-ia-apprend.png.asset.json";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+
 
 const BRAIN = [
  "Apprend par expérience vécue",
@@ -185,10 +185,9 @@ export function Vocabulary() {
  </div>
  </div>
 
- <HumanVsAI />
-
 
  {/* BLOC 2 — Vocabulaire */}
+
  <div className="mb-10">
  <div className="mb-2 text-[11px] uppercase tracking-[0.2em] text-primary">
  On remet de l'ordre
