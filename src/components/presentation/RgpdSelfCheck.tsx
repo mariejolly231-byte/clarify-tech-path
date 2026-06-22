@@ -42,10 +42,9 @@ export function RgpdSelfCheck() {
  </div>
  </div>
 
- <p className="max-w-xl text-base text-foreground/85 md:text-lg">
- « Depuis le début de cet atelier, j'ai collecté vos données.
- Nom, prénom, activité. <strong>Suis-je en règle ?</strong> »
- </p>
+        <p className="max-w-xl text-base text-foreground/85 md:text-lg">
+          {"\n"}
+        </p>
 
  {!revealed && (
  <button
