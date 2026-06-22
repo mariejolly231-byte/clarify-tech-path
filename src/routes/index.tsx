@@ -17,6 +17,7 @@ import { ToolsMap } from "@/components/presentation/ToolsMap";
 import { RightBackpack } from "@/components/presentation/RightBackpack";
 import { Workshop } from "@/components/presentation/Workshop";
 import { FirstAutomation } from "@/components/presentation/FirstAutomation";
+import { FreelanceStack } from "@/components/presentation/FreelanceStack";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,6 +64,7 @@ function Presentation() {
           <Guardrails />
           <Workshop />
           <FirstAutomation />
+          <FreelanceStack />
           <Takeaway />
         </div>
       </main>

@@ -40,13 +40,6 @@ const QUESTIONS = [
   },
 ];
 
-const DECISIONS = [
-  { k: "Manuel", desc: "On garde la main. Trop rare, trop artisanal, trop sensible.", tone: "sand" },
-  { k: "Assisté par l'IA", desc: "L'IA accélère un brouillon. L'humain valide.", tone: "sage" },
-  { k: "Automatisé", desc: "Règles stables, gain net, données encadrées. On industrialise.", tone: "primary" },
-  { k: "Pas maintenant", desc: "Le processus est flou ou les données pas cadrées. On clarifie d'abord.", tone: "warn" },
-];
-
 const ANALOGIES = [
   {
     icon: "🎒",
@@ -64,13 +57,6 @@ const ANALOGIES = [
     body: "Automatiser le chaos, c'est juste aller plus vite — dans la même direction floue.",
   },
 ];
-
-const toneClass: Record<string, string> = {
-  sand: "border-sand bg-sand/40",
-  sage: "border-accent bg-accent/40",
-  primary: "border-primary/30 bg-primary/[0.04] text-foreground",
-  warn: "border-warn/30 bg-warn/5",
-};
 
 export function Framing() {
   return (

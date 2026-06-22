@@ -18,6 +18,7 @@ export const SECTIONS = [
   { id: "gardefous", label: "Garde-fous", num: "09" },
   { id: "atelier", label: "Atelier — Votre sentier", num: "09·A" },
   { id: "raccourci", label: "Première automatisation", num: "09·B" },
+  { id: "refuge", label: "Bon plan à emporter", num: "09·C" },
   { id: "emporter", label: "Ce que vous emportez", num: "10" },
 ];
 
