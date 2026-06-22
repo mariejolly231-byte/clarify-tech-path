@@ -161,6 +161,14 @@ export function SideNav() {
                       </span>
                     )}
                   </a>
+                  {group.firstId === "cadrage" && (
+                    <a
+                      href="#rgpd-faq"
+                      className="ml-6 mt-1 block rounded-md px-3 py-1.5 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      Questions RGPD fréquentes
+                    </a>
+                  )}
                 </div>
               );
             })}
