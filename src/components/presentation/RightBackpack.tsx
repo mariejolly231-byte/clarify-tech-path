@@ -67,6 +67,19 @@ export function RightBackpack() {
  Choisissez votre <span className="text-primary">trio de base</span>. Maîtrisez-le.
  Puis ajoutez.
  </blockquote>
+
+ {/* Carte des outils — vue d'ensemble */}
+ <figure className="mt-12 overflow-hidden rounded-2xl border border-border bg-card">
+ <img
+ src={carteOutilsAsset.url}
+ alt="Infographie : La carte des outils No-Code & IA — quatre zones (Camp de base, Mousquetons du flux, Bivouac des créateurs, Boussole intelligente) avec les outils clés de chaque catégorie"
+ className="block h-auto w-full"
+ loading="lazy"
+ />
+ <figcaption className="px-5 py-3 text-center text-xs text-muted-foreground">
+ Vue d'ensemble : quatre zones pour naviguer dans l'écosystème no-code & IA.
+ </figcaption>
+ </figure>
  </div>
  </div>
  </Section>
