@@ -6,7 +6,7 @@ export function DataClass() {
  <Section
  id="classer-donnee"
  num="15b"
- eyebrow="Acte 4 · Passer à l'action"
+ eyebrow="Partie 3 · Passer à l'action avec méthode"
  title="Classer sa donnée avant de choisir"
  >
  <RgpdCompass />

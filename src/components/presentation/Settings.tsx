@@ -75,7 +75,7 @@ export function Settings() {
  <Section
  id="reglages"
  num="08"
- eyebrow="Acte 2 · Comprendre le terrain"
+ eyebrow="Partie 2 · Comprendre les outils"
  tint="sage"
  title="Sous le capot de la boussole"
  >

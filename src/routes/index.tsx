@@ -76,32 +76,29 @@ function Presentation() {
           <LivePoll />
           <Opening />
           <About />
-          {/* Acte 1 — Vous êtes déjà équipés */}
+          {/* Partie 1 — D'où ça vient, où on en est */}
           <AlreadyNoCode />
           <History />
           <StateOfArt />
+          {/* Partie 2 — Comprendre les outils */}
           <Vocabulary />
-          {/* Jeu 1 (hors sommaire) */}
           <HumanVsAI />
-          {/* Acte 2 — Comprendre le terrain */}
           <Settings />
           <Limits />
           <HypeReality />
-          {/* Pause (hors sommaire) */}
-          <Pause />
-          {/* Acte 3 — Choisir son chemin */}
           <ToolsMap />
           <RightBackpack />
+          {/* Pause (hors sommaire) */}
+          <Pause />
+          {/* Partie 3 — Passer à l'action avec méthode */}
           <Framing />
           <Decide />
-          {/* Jeu 2 (hors sommaire) */}
           <Quiz />
-          {/* Acte 4 — Sécuriser la cordée */}
           <Guardrails />
           <DataClass />
           <Checklist />
           <SelfCheck />
-          {/* Acte 5 — On marche */}
+          {/* Partie 4 — On fait */}
           <FirstAutomation />
           <Mcp />
           <FirstPath />

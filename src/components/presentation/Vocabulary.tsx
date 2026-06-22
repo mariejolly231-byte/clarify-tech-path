@@ -79,7 +79,7 @@ export function Vocabulary() {
  <Section
  id="tri"
  num="06"
- eyebrow="Acte 1 · Vous êtes déjà équipés"
+ eyebrow="Partie 2 · Comprendre les outils"
  title="Le lexique du randonneur"
  >
  {/* BLOC 1 — Pause cerveau / IA */}

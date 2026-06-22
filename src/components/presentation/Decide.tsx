@@ -14,7 +14,7 @@ export function Decide() {
     <Section
       id="avant"
       num="14"
-      eyebrow="Acte 3 · Choisir son chemin"
+      eyebrow="Partie 3 · Passer à l'action avec méthode"
       title="Choisir sa voie"
     >
       <p className="mb-10 max-w-3xl text-base text-muted-foreground md:text-lg">

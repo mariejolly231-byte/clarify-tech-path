@@ -70,7 +70,7 @@ export function Workshop() {
  <Section
  id="atelier"
  num="18"
- eyebrow="Acte 4 · Passer à l'action"
+ eyebrow="Partie 4 · On fait"
  title="À vous de tracer le sentier"
  tint="sand"
  >

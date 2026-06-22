@@ -49,7 +49,7 @@ export function Mcp() {
     <Section
       id="mcp"
       num="17a"
-      eyebrow="Acte 4 · Passer à l'action"
+      eyebrow="Partie 4 · On fait"
       title="Connecter sa boussole au terrain"
     >
       <DurationBadge>⏱ 15 min · Démo animatrice</DurationBadge>

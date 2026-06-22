@@ -40,7 +40,7 @@ export function HypeReality() {
  <Section
  id="hype"
  num="10"
- eyebrow="Acte 2 · Comprendre le terrain"
+ eyebrow="Partie 2 · Comprendre les outils"
  tint="sand"
  title="La météo vs la réalité"
  >

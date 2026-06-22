@@ -63,7 +63,7 @@ export function ToolsMap() {
     <Section
       id="outils"
       num="11"
-      eyebrow="Acte 3 · Choisir son chemin"
+      eyebrow="Partie 2 · Comprendre les outils"
       title="La carte des outils"
       tint="sage"
     >

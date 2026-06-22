@@ -9,7 +9,7 @@ export function AlreadyNoCode() {
  <Section
  id="deja-no-code"
  num="03"
- eyebrow="Acte 1 · Vous êtes déjà équipés"
+ eyebrow="Partie 1 · D'où ça vient — où on en est"
  title="Vous avez déjà chaussé les crampons"
  tint="sand"
  >

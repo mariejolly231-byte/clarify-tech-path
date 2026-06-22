@@ -46,7 +46,7 @@ export function Quiz() {
  <Section
  id="jeu"
  num="Jeu"
- eyebrow="Acte 3 · Jeu"
+ eyebrow="Partie 3 · Passer à l'action avec méthode"
  tint="sage"
  title="Quel terrain pour quelle technique ?"
  >
