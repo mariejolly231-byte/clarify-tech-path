@@ -114,26 +114,38 @@ export function Workshop() {
  4 groupes · 30 minutes · un vrai problème business · une vraie piste de solution.
  </p>
 
- {/* Temps 1 */}
- <div className="mb-10 rounded-2xl border border-border bg-card p-7 shadow-sm">
- <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
- Temps 1 — Constitution des groupes
- </div>
- <p className="mt-3 text-lg leading-relaxed text-foreground/90">
- Formez 4 groupes. Chaque groupe choisit un profil parmi la liste.
- <br />
- <span className="font-medium text-foreground">Vous résolvez pour quelqu'un d'autre, pas pour vous.</span>
- </p>
+  {/* Temps 1 */}
+  <div className="mb-10 rounded-2xl border border-border bg-card p-7 shadow-sm">
+   <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
+    Temps 1 — Constitution des groupes
+   </div>
+   <p className="mt-3 text-lg leading-relaxed text-foreground/90">
+    4 groupes recommandés, constitués par problématique commune.
+    <br />
+    <span className="font-medium text-foreground">Vous résolvez ensemble un cas concret, pas le vôtre.</span>
+   </p>
 
- <ul className="mt-6 grid gap-2 sm:grid-cols-2">
- {PROFILES.map((p) => (
- <li key={p} className="flex items-start gap-2 rounded-md bg-stone-soft/60 px-3 py-2 text-sm text-foreground/85">
- <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
- {p}
- </li>
- ))}
- </ul>
- </div>
+   <div className="mt-6 grid gap-4 md:grid-cols-2">
+    {GROUPS.map((g) => (
+     <div key={g.title} className="rounded-xl border border-border bg-stone-soft/40 p-5">
+      <h4 className="font-serif text-base text-foreground md:text-lg">{g.title}</h4>
+      <p className="mt-1 text-xs italic text-muted-foreground">{g.theme}</p>
+      <ul className="mt-4 space-y-1.5">
+       {g.members.map((m) => (
+        <li key={m} className="flex items-start gap-2 text-sm text-foreground/85">
+         <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+         {m}
+        </li>
+       ))}
+      </ul>
+      <div className="mt-4 rounded-md border border-primary/20 bg-primary/[0.06] px-3 py-2 text-[13px] leading-relaxed text-foreground/90">
+       <span className="font-medium text-primary">Cas à résoudre · </span>
+       {g.cas}
+      </div>
+     </div>
+    ))}
+   </div>
+  </div>
 
  {/* Temps 2 */}
  <div className="mb-10 rounded-2xl border border-accent bg-accent/40 p-7">
