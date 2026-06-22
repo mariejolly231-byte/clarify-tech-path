@@ -19,12 +19,6 @@ const STEPS_ANDROID = [
  "Ajoute le widget Routine sur l'écran d'accueil",
 ];
 
-const PLATFORMS = [
- { name: "iPhone / iPad", tool: "App Raccourcis (native)" },
- { name: "Android", tool: "Automate ou Google Assistant Routines" },
- { name: "Mac", tool: "App Raccourcis (native depuis macOS Monterey)" },
- { name: "Windows", tool: "Power Automate Desktop (gratuit Microsoft)" },
-];
 
 export function FirstAutomation() {
  return (
