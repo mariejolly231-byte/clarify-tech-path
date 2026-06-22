@@ -144,7 +144,8 @@ export function Settings() {
           <AccordionTrigger className="hover:no-underline rounded-2xl border border-primary/20 bg-card px-6 py-5 text-left text-base font-medium">
             <span className="flex items-center gap-2 font-serif text-xl text-foreground">
               <span aria-hidden>🔬</span>
-              Et techniquement — comment le modèle apprend ?
+              Aller plus loin — la mécanique sous le capot
+
             </span>
           </AccordionTrigger>
           <AccordionContent>
