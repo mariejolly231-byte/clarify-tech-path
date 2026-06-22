@@ -54,9 +54,7 @@ export function RightBackpack() {
  <div
  key={t.title}
  className="flex items-start gap-4 rounded-xl border border-border bg-card p-4"
- >
- <span className="text-2xl" aria-hidden>{t.icon}</span>
- <div>
+ > <div>
  <div className="font-serif text-base text-foreground">{t.title}</div>
  <p className="text-sm text-foreground/80">{t.text}</p>
  </div>

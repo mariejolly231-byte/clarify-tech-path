@@ -207,9 +207,7 @@ export function Vocabulary() {
  key={c.k}
  className={`flex flex-col rounded-2xl border p-6 transition hover:-translate-y-0.5 hover:shadow-sm ${toneClass[c.tone]}`}
  >
- <div className="flex items-baseline justify-between">
- <span className="text-3xl" aria-hidden>{c.icon}</span>
- <span className="text-[10px] uppercase tracking-[0.2em] text-primary">Rôle</span>
+ <div className="flex items-baseline justify-between"> <span className="text-[10px] uppercase tracking-[0.2em] text-primary">Rôle</span>
  </div>
  <h4 className="mt-3 font-serif text-2xl text-foreground">{c.k}</h4>
  {"duration" in c && c.duration && (

@@ -87,9 +87,7 @@ export function Settings() {
  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
  {SETTINGS.map((s) => (
  <div key={s.k} className={`flex flex-col rounded-2xl border p-6 ${toneClass[s.tone]}`}>
- <div className="flex items-baseline justify-between">
- <span className="text-2xl" aria-hidden>{s.icon}</span>
- <span className="text-[10px] uppercase tracking-[0.2em] text-primary">Réglage</span>
+ <div className="flex items-baseline justify-between"> <span className="text-[10px] uppercase tracking-[0.2em] text-primary">Réglage</span>
  </div>
  <h3 className="mt-3 font-serif text-xl text-foreground">{s.k}</h3>
  <p className="mt-2 text-sm leading-relaxed text-foreground/80">{s.short}</p>

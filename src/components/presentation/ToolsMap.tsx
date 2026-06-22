@@ -93,9 +93,7 @@ export function ToolsMap() {
  <div className="space-y-10">
  {CATEGORIES.map((c) => (
  <div key={c.title}>
- <div className="mb-4 flex flex-wrap items-baseline gap-3 border-b border-border pb-3">
- <span className="text-2xl" aria-hidden>{c.icon}</span>
- <h3 className="font-serif text-xl text-foreground md:text-2xl">{c.title}</h3>
+ <div className="mb-4 flex flex-wrap items-baseline gap-3 border-b border-border pb-3"> <h3 className="font-serif text-xl text-foreground md:text-2xl">{c.title}</h3>
  <span className="text-sm italic text-muted-foreground">— {c.metaphor}</span>
  </div>
  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

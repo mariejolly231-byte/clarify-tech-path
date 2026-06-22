@@ -460,9 +460,7 @@ export function Backpack() {
  key={m.title}
  className={`rounded-xl border ${m.bg} p-5`}
  >
- <div className="mb-2 flex items-center gap-2 text-2xl" aria-hidden>
- {m.icon}
- </div>
+ <div className="mb-2 flex items-center gap-2 text-2xl" aria-hidden> </div>
  <h4 className="mb-2 font-serif text-lg text-foreground">{m.title}</h4>
  <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-foreground/85">
  {m.body}
@@ -726,9 +724,7 @@ Choisis : manuel / assisté IA / automatisé.
  body: "Ateliers adaptés à votre équipe, votre secteur, vos outils déjà en place. En présentiel ou à distance.",
  },
  ].map((s) => (
- <div key={s.title} className="rounded-xl border border-border bg-card p-5 text-center">
- <div className="text-3xl" aria-hidden>{s.icon}</div>
- <h4 className="mt-3 font-serif text-lg text-foreground">{s.title}</h4>
+ <div key={s.title} className="rounded-xl border border-border bg-card p-5 text-center"> <h4 className="mt-3 font-serif text-lg text-foreground">{s.title}</h4>
  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
  </div>
  ))}

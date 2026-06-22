@@ -46,9 +46,7 @@ export function Limits() {
  key={c.title}
  className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
  >
- <div className="text-3xl" aria-hidden>
- {c.icon}
- </div>
+ <div className="text-3xl" aria-hidden> </div>
  <h3 className="mt-3 font-serif text-xl text-foreground">{c.title}</h3>
  <p className="mt-3 text-sm leading-relaxed text-foreground/85">
  {c.body}
