@@ -716,7 +716,7 @@ Choisis : manuel / assisté IA / automatisé.
  body: "Je construis avec vous ou pour vous : CRM, espace Notion, automatisation Make, connexion d'outils, agents IA.",
  },
  {
-  title: "Formation sur mesure",
+  title: "Accompagnement sur mesure",
  body: "Ateliers adaptés à votre équipe, votre secteur, vos outils déjà en place. En présentiel ou à distance.",
  },
  ].map((s) => (
