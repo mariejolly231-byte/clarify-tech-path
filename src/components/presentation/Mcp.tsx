@@ -145,8 +145,9 @@ export function Mcp() {
             ta première IA à tes mails.
           </p>
         </div>
-        <div className="flex h-32 w-32 items-center justify-center rounded-xl border border-dashed border-primary/40 bg-background text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-          QR_CODE_MCP
+        <div className="flex h-32 w-32 flex-col items-center justify-center gap-1 rounded-xl border border-dashed border-primary/40 bg-background text-center text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          <span aria-hidden className="text-base">🔗</span>
+          <span>QR à ajouter</span>
         </div>
       </div>
 
