@@ -36,7 +36,7 @@ export function Opening() {
  </div>
 
  <div className="flex items-center gap-3 text-right md:flex-col md:items-end">
- <img src={logoAsset.url} alt="Summit Flow" className="h-16 w-16 rounded-full ring-1 ring-border" />
+ <img src={logoAsset.url} alt="Summit Flow" className="h-24 w-24 rounded-full ring-1 ring-border" />
  <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
  Atelier animé par
  <br />

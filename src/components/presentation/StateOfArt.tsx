@@ -99,10 +99,6 @@ export function StateOfArt() {
  </p>
  </div>
 
- <p className="mt-8 text-sm italic text-muted-foreground">
- Note animatrice — Transition naturelle vers la section outils :
- « Voilà le contexte. Maintenant, qu'est-ce qu'on a à disposition ? »
- </p>
  </Section>
  );
 }

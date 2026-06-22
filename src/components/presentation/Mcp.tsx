@@ -52,7 +52,7 @@ export function Mcp() {
       eyebrow="Partie 4 · On fait"
       title="Connecter sa boussole au terrain"
     >
-      <DurationBadge>⏱ 15 min · Démo animatrice</DurationBadge>
+      <DurationBadge>⏱ 15 min · Démo live</DurationBadge>
       <p className="mb-10 text-base italic text-muted-foreground">
         Jusqu'ici ton IA répondait à tes questions. Maintenant elle peut lire
         tes mails, tes fichiers, ton agenda.
@@ -151,10 +151,6 @@ export function Mcp() {
         </div>
       </div>
 
-      <p className="mt-8 text-sm italic text-muted-foreground">
-        Note animatrice — Démo live : Gmail ouvert, Claude branché, une
-        requête en direct. Montrer le résultat brut puis la validation humaine.
-      </p>
     </Section>
   );
 }
