@@ -280,17 +280,34 @@ export function Vocabulary() {
  <p className="mt-1 text-sm text-foreground/80">{c.ex}</p>
  </div>
               {c.demo && (
-                <div className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-dashed border-primary/40 bg-background/60 px-3 py-2 text-xs text-muted-foreground">
+                <a
+                  href={c.demo.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/20"
+                >
                   <span aria-hidden>🔗</span>
-                  <span>Lien à ajouter — {c.demo.label.trim()}</span>
-                </div>
+                  <span>{c.demo.label}</span>
+                </a>
               )}
  </div>
  ))}
  </div>
 
- {/* Infographie : 3 façons d'être aidé */}
+ {/* Infographie : No-code / Low-code / Code (3 façons de construire) */}
  <figure className="mt-12 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+ <img
+ src={troisFaconsConstruire.url}
+ alt="Trois façons de construire : No-code, Low-code, Code — du prêt-à-monter au sur-mesure"
+ className="w-full"
+ />
+ <figcaption className="border-t border-border bg-stone-soft px-6 py-3 text-center text-xs italic text-muted-foreground">
+ Trois façons de construire — No-code, Low-code, Code.
+ </figcaption>
+ </figure>
+
+ {/* Infographie : 3 façons d'être aidé (après N/L/C) */}
+ <figure className="mt-10 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
  <img
  src={troisFacons.url}
  alt="Trois façons d'être aidé dans son activité : Assistant IA, Automatisation, Agent IA"
@@ -301,13 +318,6 @@ export function Vocabulary() {
  </figcaption>
  </figure>
 
-  <div
-    role="img"
-    aria-label="Emplacement infographie : No-code, Low-code, Code"
-    className="mt-12 flex h-[300px] items-center justify-center rounded-2xl border-2 border-dashed border-border bg-stone-soft/60 px-6 text-center text-sm text-muted-foreground"
-  >
-    📍 Emplacement infographie — No-code / Low-code / Code — à intégrer
-  </div>
 
  {/* Chute */}
  <blockquote className="mx-auto mt-14 max-w-3xl border-l-4 border-primary bg-card px-7 py-6 text-center font-serif text-2xl leading-snug text-foreground md:text-3xl">
