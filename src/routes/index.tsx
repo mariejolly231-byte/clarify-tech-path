@@ -23,7 +23,6 @@ import { Checklist } from "@/components/presentation/Checklist";
 import { SelfCheck } from "@/components/presentation/SelfCheck";
 import { FirstAutomation } from "@/components/presentation/FirstAutomation";
 import { Mcp } from "@/components/presentation/Mcp";
-import { FirstPath } from "@/components/presentation/FirstPath";
 import { Workshop } from "@/components/presentation/Workshop";
 import { Backpack } from "@/components/presentation/Backpack";
 import { Pause } from "@/components/presentation/Pause";
@@ -91,7 +90,6 @@ function Presentation() {
           <SelfCheck />
           {/* Partie 4 — On fait */}
           <FirstAutomation />
-          <FirstPath />
           <Workshop />
           {/* Le refuge */}
           <Backpack />
