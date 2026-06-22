@@ -159,7 +159,7 @@ export function SideNav() {
         </div>
 
         <div className="mt-10 text-[11px] leading-relaxed text-muted-foreground">
-          IA No-code Automatisation
+          IA · No-code · Automatisation
           <br />
           <span className="text-foreground/70">Comprendre, trier, prioriser.</span>
         </div>
