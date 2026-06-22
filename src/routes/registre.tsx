@@ -25,7 +25,7 @@ function RegistrePage() {
           <img
             src={logo}
             alt="Summit Flow"
-            className="h-16 w-16 rounded-md"
+            className="h-12 w-12 rounded-md"
           />
           <div>
             <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">

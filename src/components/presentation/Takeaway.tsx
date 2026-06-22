@@ -101,7 +101,7 @@ export function Takeaway() {
  <img
  src={logoAsset.url}
  alt="Summit Flow"
- className="mx-auto h-16 w-16 rounded-full ring-1 ring-border"
+ className="mx-auto h-14 w-14 rounded-full ring-1 ring-border"
  />
  <div className="mt-3 font-serif text-lg text-foreground">
  Marie Jolly
@@ -138,7 +138,7 @@ export function Takeaway() {
  </div>
 
  <footer className="mt-16 flex flex-col items-center gap-3 border-t border-border pt-10 text-center">
- <img src={logoAsset.url} alt="Summit Flow" className="h-16 w-16 rounded-full ring-1 ring-border" />
+ <img src={logoAsset.url} alt="Summit Flow" className="h-12 w-12 rounded-full ring-1 ring-border" />
  <div className="font-serif text-base text-primary">Summit Flow</div>
  <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
  Atelier d'acculturation · Marie Jolly
