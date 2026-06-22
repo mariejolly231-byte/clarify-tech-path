@@ -206,6 +206,11 @@ function RoundCard({ round }: { round: Round }) {
 export function HumanVsAI() {
   return (
     <div className="mt-16 rounded-3xl border border-border bg-background p-6 md:p-10">
+      <div className="mb-4 flex justify-end">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
+          ⏱️ 10 min · Jeu collectif
+        </span>
+      </div>
       <div className="mb-8 text-center">
         <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
           Jeu d'atelier

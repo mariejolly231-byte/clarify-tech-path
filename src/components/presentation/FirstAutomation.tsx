@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import { DurationBadge } from "./Badge";
 
 const STEPS_IPHONE = [
   'Ouvre l\'app "Raccourcis" (native iOS, déjà installée)',
@@ -29,6 +30,7 @@ export function FirstAutomation() {
         </>
       }
     >
+      <DurationBadge>⏱️ 10 min · Manipulation live</DurationBadge>
       <p className="mb-12 text-base italic text-muted-foreground">
         Avant Make, Zapier ou n8n, il y a un outil que vous avez déjà.
         On le construit ensemble, maintenant.
