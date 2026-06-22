@@ -57,6 +57,20 @@ const CARDS = [
     ex: "Analyser une demande, chercher des infos, proposer une action, puis attendre validation.",
     tone: "primary",
   },
+  {
+    k: "API",
+    icon: "🔌",
+    def: "Je permets à deux outils de se parler directement, sans interface visuelle.",
+    ex: "Ton formulaire envoie automatiquement les données vers ta base sans que tu copies-colles quoi que ce soit.",
+    tone: "sand",
+  },
+  {
+    k: "MCP (Model Context Protocol)",
+    icon: "🧩",
+    def: "Je connecte une IA à tes outils réels — elle peut lire tes mails, ton agenda, tes fichiers et agir dessus à ta demande.",
+    ex: "Tu demandes à Claude \"résume mes mails non lus\" — il le fait directement, sans copier-coller.",
+    tone: "primary",
+  },
 ];
 
 const toneClass: Record<string, string> = {
