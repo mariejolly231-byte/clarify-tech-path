@@ -1,5 +1,5 @@
 import { Section } from "./Section";
-import carteOutilsAsset from "@/assets/carte-outils-no-code-ia.png.asset.json";
+
 
 type Tool = { name: string; usage: string; price: string; multi?: boolean; deal?: string; slug?: string };
 type Cat = { title: string; metaphor: string; tools: Tool[] };
@@ -71,17 +71,8 @@ export function ToolsMap() {
         Pas besoin de tout connaître. Juste savoir où chaque outil vit dans le paysage — et ce qu'il fait pour vous.
       </p>
 
-      <figure className="mb-10 overflow-hidden rounded-2xl border border-border bg-card">
-        <img
-          src={carteOutilsAsset.url}
-          alt="Infographie : La carte des outils No-Code & IA — quatre zones (Camp de base, Mousquetons du flux, Bivouac des créateurs, Boussole intelligente) avec les outils clés de chaque catégorie"
-          className="block h-auto w-full"
-          loading="lazy"
-        />
-        <figcaption className="px-5 py-3 text-center text-xs text-muted-foreground">
-          Vue d'ensemble : quatre zones pour naviguer dans l'écosystème no-code & IA.
-        </figcaption>
-      </figure>
+
+
 
       {/* Encart Freelance Stack */}
       <div className="mb-12 rounded-2xl border-2 border-primary/40 bg-primary/[0.06] p-7 shadow-sm">
