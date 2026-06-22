@@ -36,11 +36,6 @@ const SCEN: { q: string; a: Cat; why: string }[] = [
     a: "agent",
     why: "Analyse + recommandation d'action à valider. C'est typiquement un usage agent.",
   },
-  {
-    q: "Je tiens un cahier papier pour des commandes très peu nombreuses et très artisanales.",
-    a: "aucun",
-    why: "Volume faible, geste maîtrisé, zéro friction. L'automatisation coûterait plus qu'elle ne rapporterait.",
-  },
 ];
 
 export function Quiz() {
@@ -55,7 +50,7 @@ export function Quiz() {
       title={<>Assistant, workflow, agent — <span className="text-primary">ou aucun des trois ?</span></>}
     >
       <p className="mb-10 max-w-3xl text-base text-muted-foreground md:text-lg">
-        Six scénarios. Pour chacun, tentez votre réponse — puis révélez la bonne catégorie.
+        Cinq scénarios. Pour chacun, tentez votre réponse — puis révélez la bonne catégorie.
         L'objectif n'est pas d'avoir tout juste, mais d'aiguiser le réflexe de tri.
       </p>
 

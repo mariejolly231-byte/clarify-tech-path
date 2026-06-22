@@ -1,5 +1,4 @@
 import { Section } from "./Section";
-import { DecisionMatrix } from "./Infographics";
 
 const QUADRANTS = [
   {
@@ -73,7 +72,8 @@ export function Decide() {
         ))}
       </div>
 
-      <DecisionMatrix />
+
+
 
 
 
