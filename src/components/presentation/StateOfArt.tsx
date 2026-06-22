@@ -52,7 +52,33 @@ export function StateOfArt() {
  </div>
  </div>
  ))}
- </div>
+  </div>
+
+  <div className="mt-12 rounded-2xl border border-primary/20 bg-stone-soft/60 p-7 shadow-sm">
+    <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+      Panorama 2026 — ce qui a changé
+    </div>
+    <p className="mt-4 text-[15px] leading-relaxed text-foreground/90 md:text-base">
+      « ChatGPT a atteint 100 millions d'utilisateurs en 2 mois. Depuis, les IA
+      génératives sont entrées dans les outils du quotidien — Notion, Sheets,
+      Gmail, Word. En 2026, la question n'est plus "est-ce que ça marche ?" mais
+      "comment je l'utilise sans me tromper ?" »
+    </p>
+    <div className="mt-6 grid gap-3 md:grid-cols-2">
+      {[
+        "Les LLM lisent désormais images, audio et vidéo — pas seulement du texte",
+        "Les agents IA commencent à agir (réserver, envoyer, modifier) — pas seulement répondre",
+        "Le no-code et l'IA convergent : Lovable, Bolt, Cursor = décrire pour construire",
+        "La réglementation arrive : AI Act européen entré en vigueur progressivement depuis 2025",
+      ].map((fact) => (
+        <div
+          key={fact}
+          className="rounded-xl border border-border/60 bg-background/80 p-4 text-[14px] leading-relaxed text-foreground/85"
+        >
+          {fact}
+        </div>
+      ))}
+    </div>
 
  <div className="mt-12 rounded-2xl border-2 border-warn/40 bg-warn/[0.08] p-7 shadow-sm">
  <div className="flex items-baseline gap-3">
