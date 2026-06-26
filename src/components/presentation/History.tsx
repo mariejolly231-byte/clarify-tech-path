@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import { IkeaAnalogy } from "./Infographics";
 import histoireAsset from "@/assets/histoire-no-code-40ans.png.asset.json";
 import commentIA from "@/assets/comment-fonctionne-ia.png.asset.json";
 
@@ -36,7 +37,9 @@ export function History() {
  <figcaption className="border-t border-border bg-stone-soft px-6 py-3 text-center text-xs italic text-muted-foreground">
  Données → Modèle → Prompt &amp; Réponse &nbsp;·&nbsp; L'IA calcule, l'humain pense.
  </figcaption>
- </figure>
+  </figure>
+
+  <IkeaAnalogy />
 
  {/* Cas exemple : évolution de la gestion d'une facture */}
  <div className="mt-14">
