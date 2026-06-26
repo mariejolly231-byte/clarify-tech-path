@@ -165,41 +165,6 @@ export function Workshop() {
  </p>
  </div>
 
- {/* Temps 3 */}
- <div id="atelier-idees">
- <div className="text-[11px] uppercase tracking-[0.2em] text-primary">
- Temps 3 — Exemples d'idées par profil
- </div>
- <p className="mt-2 mb-6 text-sm italic text-muted-foreground">
- On déplie au fur et à mesure de la restitution.
- </p>
-
- <Accordion type="multiple" className="rounded-2xl border border-border bg-card">
- {IDEAS.map((idea) => (
- <AccordionItem key={idea.name} value={idea.name} className="px-5">
- <AccordionTrigger>
- <div className="flex flex-1 flex-wrap items-baseline gap-x-3 gap-y-1">
- <span className="font-serif text-base text-foreground">{idea.name}</span>
- <span className="text-xs text-muted-foreground">— {idea.meta}</span>
- {idea.warn && (
- <span className="ml-auto rounded-full bg-warn/10 px-2 py-0.5 text-[10px] font-medium text-warn">
- RGPD sensible
- </span>
- )}
- </div>
- </AccordionTrigger>
- <AccordionContent>
- <div className="grid gap-3 pb-2 sm:grid-cols-2">
- <Field label="Problème" value={idea.probleme} />
- <Field label="Solution" value={idea.solution} />
- <Field label="Outils" value={idea.outils} />
- <Field label="RGPD" value={idea.rgpd} warn={idea.warn} />
- </div>
- </AccordionContent>
- </AccordionItem>
- ))}
- </Accordion>
- </div>
 
 
  {/* Temps 4 — Pistes de solutions par groupe */}

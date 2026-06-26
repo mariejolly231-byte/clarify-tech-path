@@ -52,11 +52,10 @@ const SETTINGS = [
  tone: "sage",
  },
  {
- k: "RAG",
+  k: "RAG",
   short: "Retrieval-Augmented Generation. L'IA va chercher dans vos documents les bons extraits avant de répondre.",
- analogy: "Un assistant qui va consulter les bons classeurs dans l'armoire avant de vous donner sa réponse.",
- tone: "primary",
- link: { label: "Démo RAG — NotebookLM Summit Flow", href: "https://notebooklm.google.com/notebook/70814c9c-9f66-45ff-b80c-bb220df20bc6" },
+  analogy: "Un assistant qui va consulter les bons classeurs dans l'armoire avant de vous donner sa réponse.",
+  tone: "primary",
  },
  {
  k: "Fine-tuning",
