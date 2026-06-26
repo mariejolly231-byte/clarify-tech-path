@@ -611,87 +611,26 @@ Choisis : manuel / assisté IA / automatisé.
  </div>
  </div>
 
- {/* BLOC 5 — Plans personnalisés */}
- <div className="mb-10 rounded-2xl border border-border bg-stone-soft/60 p-8 shadow-sm md:p-10">
- <div className="mb-6">
- <div className="text-[11px] uppercase tracking-[0.2em] text-primary">Personnalisé</div>
- <h3 className="mt-1 font-serif text-2xl text-foreground md:text-3xl">
- Votre plan selon votre activité
- </h3>
- <p className="mt-1 text-sm text-muted-foreground">
- Retrouvez votre Samoyède — voici ce qu'on vous recommande en priorité.
- </p>
- </div>
- <div className="grid gap-3 md:grid-cols-2">
- {PARTICIPANTS.map((p) => {
- const plan = PLANS_BY_ID.get(p.id);
- if (!plan) return null;
- return (
- <details
- key={p.id}
- className="group rounded-xl border border-border bg-background p-4 shadow-sm"
- >
- <summary className="flex cursor-pointer list-none items-center gap-3 marker:hidden">
- <img
- src={p.image}
- alt={`${p.prenom} ${p.nom}`}
- className="h-14 w-14 shrink-0 rounded-full bg-stone-soft object-cover ring-1 ring-border"
- />
- <div className="flex-1">
- <div className="font-serif text-base text-foreground">
- {p.prenom} {p.nom}
- </div>
- <div className="text-xs text-muted-foreground">{p.activite}</div>
- </div>
- <span className="text-primary group-open:hidden">＋</span>
- <span className="text-primary hidden group-open:inline">−</span>
- </summary>
-
- <div className="mt-5 space-y-5 border-t border-border pt-5">
- <div>
- <div className="mb-2 text-[11px] uppercase tracking-[0.2em] text-primary">
- Cette semaine
- </div>
- <ul className="space-y-1.5">
- {plan.semaine.map((s, i) => (
- <li key={i} className="flex gap-2 text-sm text-foreground/85">
- <span className="text-primary">→</span>
- <span>{s}</span>
- </li>
- ))}
- </ul>
- </div>
-
- <div>
- <div className="mb-2 text-[11px] uppercase tracking-[0.2em] text-primary">
- Stack recommandé
- </div>
- <div className="flex flex-wrap gap-2">
- {plan.stack.split("·").map((s, i) => (
- <span
- key={i}
- className="rounded-md border border-border bg-stone-soft px-2.5 py-1 text-xs text-foreground/80"
- >
- {s.trim()}
- </span>
- ))}
- </div>
- </div>
-
- <div>
- <div className="mb-2 text-[11px] uppercase tracking-[0.2em] text-primary">
- Idée d'automatisation
- </div>
- <p className="rounded-lg bg-accent/40 p-3 text-sm leading-relaxed text-foreground/90">
- {plan.idee}
- </p>
- </div>
- </div>
- </details>
- );
- })}
- </div>
- </div>
+  {/* BLOC 5 — Plans personnalisés */}
+  <div className="mb-10 rounded-2xl border border-border bg-stone-soft/60 p-8 shadow-sm md:p-10 text-center">
+   <div className="mb-6">
+    <div className="text-[11px] uppercase tracking-[0.2em] text-primary">Personnalisé</div>
+    <h3 className="mt-1 font-serif text-2xl text-foreground md:text-3xl">
+     Votre plan d'action sur mesure
+    </h3>
+   </div>
+   <p className="mx-auto max-w-2xl text-base leading-relaxed text-foreground/85">
+    Chaque activité est différente. Ce qu'on a exploré ensemble aujourd'hui n'est qu'un point de départ — la vraie valeur est dans l'adaptation à votre terrain.
+    <br /><br />
+    Vous voulez aller plus loin ? On en parle.
+   </p>
+   <a
+    href="mailto:contact@summitflow.fr"
+    className="mt-6 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90"
+   >
+    Me contacter <span aria-hidden>→</span> contact@summitflow.fr
+   </a>
+  </div>
 
  {/* BLOC 6 — Contact */}
  <div className="rounded-2xl border border-primary/20 bg-accent/40 p-8 md:p-10">

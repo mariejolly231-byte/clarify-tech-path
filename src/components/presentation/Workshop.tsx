@@ -1,11 +1,5 @@
 import { Section } from "./Section";
 import { DurationBadge } from "./Badge";
-import {
- Accordion,
- AccordionContent,
- AccordionItem,
- AccordionTrigger,
-} from "@/components/ui/accordion";
 
 type Group = {
  title: string;
@@ -175,93 +169,17 @@ export function Workshop() {
   <h3 className="mt-2 font-serif text-2xl text-foreground md:text-3xl">
    Une stack possible par groupe
   </h3>
-  <p className="mt-2 max-w-2xl text-sm italic text-muted-foreground">
-   Pas une vérité — un point de départ concret. À adapter selon le terrain.
-  </p>
-
-  <div className="mt-6 space-y-6">
-   {SOLUTIONS.map((s) => (
-    <div key={s.title} className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-     <div className="flex flex-wrap items-baseline justify-between gap-3">
-      <h4 className="font-serif text-lg text-foreground md:text-xl">{s.title}</h4>
-      <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-       {s.members}
-      </span>
-     </div>
-
-     <div className="mt-3 rounded-md border-l-2 border-warn/60 bg-warn/[0.06] px-4 py-3 text-sm text-foreground/85">
-      <span className="font-medium text-warn">Problème racine · </span>
-      {s.problem}
-     </div>
-
-     <div className="mt-4 rounded-md bg-stone-soft/50 px-4 py-3 text-sm text-foreground/90">
-      <span className="font-medium text-primary">Solution · </span>
-      {s.solution}
-     </div>
-
-     {/* Stack d'outils — chips logos */}
-     <div className="mt-4 flex flex-wrap gap-2">
-      {s.stack.map((t) => (
-       <span
-        key={t.name}
-        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/85"
-       >
-        {t.slug ? (
-         <img
-          src={`https://cdn.simpleicons.org/${t.slug}`}
-          alt=""
-          className="h-3.5 w-3.5"
-          loading="lazy"
-         />
-        ) : (
-         <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden />
-        )}
-        {t.name}
-       </span>
-      ))}
-     </div>
-
-     {/* Étapes */}
-     <div className="mt-5 overflow-hidden rounded-lg border border-border">
-      <table className="w-full text-sm">
-       <thead className="bg-stone-soft/60 text-left text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-        <tr>
-         <th className="px-4 py-2 font-medium">Étape</th>
-         <th className="px-4 py-2 font-medium">Outil</th>
-         <th className="px-4 py-2 font-medium">Ce que ça fait</th>
-        </tr>
-       </thead>
-       <tbody>
-        {s.steps.map((step, i) => (
-         <tr key={step.step} className={i % 2 === 0 ? "bg-background" : "bg-stone-soft/30"}>
-          <td className="px-4 py-3 align-top text-foreground/90">{step.step}</td>
-          <td className="px-4 py-3 align-top">
-           <div className="flex items-center gap-2">
-            {step.slug && (
-             <img
-              src={`https://cdn.simpleicons.org/${step.slug}`}
-              alt=""
-              className="h-4 w-4 shrink-0"
-              loading="lazy"
-             />
-            )}
-            <span className="font-medium text-primary">{step.tool}</span>
-           </div>
-          </td>
-          <td className="px-4 py-3 align-top text-foreground/80">{step.what}</td>
-         </tr>
-        ))}
-       </tbody>
-      </table>
-     </div>
-
-     <div className="mt-4 rounded-md border border-primary/20 bg-primary/[0.06] px-4 py-3 text-sm text-foreground/90">
-      <span className="font-medium text-primary">Résultat concret · </span>
-      {s.result}
-     </div>
-    </div>
-   ))}
-  </div>
+   <div className="mt-8 text-center">
+    <p className="mx-auto max-w-2xl text-base leading-relaxed text-foreground/85">
+     Les pistes de solutions sont partagées en accompagnement individuel. Contactez-moi pour en discuter.
+    </p>
+    <a
+     href="mailto:contact@summitflow.fr"
+     className="mt-5 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90"
+    >
+     Prendre contact <span aria-hidden>→</span> contact@summitflow.fr
+    </a>
+   </div>
  </div>
 
   {/* Clôture atelier */}
