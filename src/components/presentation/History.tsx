@@ -1,4 +1,5 @@
 import { Section } from "./Section";
+import { IkeaAnalogy } from "./Infographics";
 import histoireAsset from "@/assets/histoire-no-code-40ans.png.asset.json";
 import commentIA from "@/assets/comment-fonctionne-ia.png.asset.json";
 
