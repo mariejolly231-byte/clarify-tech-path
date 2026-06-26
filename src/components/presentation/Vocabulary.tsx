@@ -52,7 +52,7 @@ const CARDS = [
   def: "Un endroit structuré où je range mes informations en lignes et colonnes, avec des liens entre elles.",
  ex: "Mes clients dans une table, mes commandes dans une autre, reliées entre elles.",
  tone: "sand",
- demo: { label: "Exemple Notion — Association la Trésorerie Numérique", href: "https://silver-papyrus-4c0.notion.site/Association-la-tr-so-Num-rique-30a44f68064780b4b947ee1f5f037c14" },
+ demoLabel: "Exemple Notion — Association la Trésorerie Numérique",
  },
 
  {
@@ -121,7 +121,7 @@ const CARDS = [
   def: "L'IA va chercher dans tes propres documents les bons extraits avant de répondre — plutôt que d'improviser depuis sa mémoire.",
  ex: "Tu lui donnes ta base de connaissances ; elle répond en citant tes vrais contenus, pas des généralités.",
  tone: "primary",
- demo: { label: "Démo RAG — NotebookLM Summit Flow", href: "https://notebooklm.google.com/notebook/70814c9c-9f66-45ff-b80c-bb220df20bc6" },
+ demoLabel: "Démo RAG — NotebookLM Summit Flow",
  },
  {
  k: "Hallucination",
@@ -276,16 +276,11 @@ export function Vocabulary() {
  </div>
  <p className="mt-1 text-sm text-foreground/80">{c.ex}</p>
  </div>
-              {c.demo && (
-                <a
-                  href={c.demo.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/20"
-                >
+              {("demoLabel" in c) && c.demoLabel && (
+                <span className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-medium text-primary">
                   <span aria-hidden>🔗</span>
-                  <span>{c.demo.label}</span>
-                </a>
+                  <span>{c.demoLabel}</span>
+                </span>
               )}
  </div>
  ))}

@@ -54,18 +54,6 @@ export function AssoExample() {
         </div>
       </div>
 
-      {/* Capture Make */}
-      <figure className="mb-8 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-        <img
-          src={makeScreenshot.url}
-          alt="Capture d'écran d'un scénario Make : Webhook Tally → Notion (recherche) → Notion (mise à jour) → Email de bienvenue → Router vers trois branches d'onboarding selon le niveau d'adhésion"
-          className="block h-auto w-full"
-          loading="lazy"
-        />
-        <figcaption className="border-t border-border bg-stone-soft px-6 py-3 text-center text-xs italic text-muted-foreground">
-          Le scénario Make « Confirmation paiement + onboarding » — un webhook, Notion, un routeur, trois emails personnalisés.
-        </figcaption>
-      </figure>
 
       {/* Les 3 automatisations */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -83,17 +71,6 @@ export function AssoExample() {
         ))}
       </div>
 
-      {/* Lien espace asso */}
-      <div className="mt-8 flex justify-center">
-        <a
-          href="https://silver-papyrus-4c0.notion.site/Association-la-tr-so-Num-rique-30a44f68064780b4b947ee1f5f037c14"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/[0.06] px-5 py-2.5 text-sm font-medium text-primary transition hover:bg-primary/10"
-        >
-          🔗 Voir l'espace Notion de l'association
-        </a>
-      </div>
     </Section>
   );
 }
