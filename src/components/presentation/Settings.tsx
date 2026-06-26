@@ -103,16 +103,6 @@ export function Settings() {
  <div className="text-[10px] uppercase tracking-[0.18em] text-primary">Analogie</div>
  <p className="mt-1 text-sm italic leading-relaxed text-foreground/75">{s.analogy}</p>
  </div>
- {"link" in s && s.link && (
- <a
- href={s.link.href}
- target="_blank"
- rel="noreferrer"
- className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/20"
- >
- <span aria-hidden>🔗</span> {s.link.label}
- </a>
- )}
  </div>
  ))}
  </div>
