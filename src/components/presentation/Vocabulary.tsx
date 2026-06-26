@@ -276,16 +276,11 @@ export function Vocabulary() {
  </div>
  <p className="mt-1 text-sm text-foreground/80">{c.ex}</p>
  </div>
-              {c.demo && (
-                <a
-                  href={c.demo.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-medium text-primary transition hover:bg-primary/20"
-                >
+              {("demoLabel" in c) && c.demoLabel && (
+                <span className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-medium text-primary">
                   <span aria-hidden>🔗</span>
-                  <span>{c.demo.label}</span>
-                </a>
+                  <span>{c.demoLabel}</span>
+                </span>
               )}
  </div>
  ))}
