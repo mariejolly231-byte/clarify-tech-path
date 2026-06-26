@@ -1,11 +1,5 @@
 import { Section } from "./Section";
 import { DurationBadge } from "./Badge";
-import {
- Accordion,
- AccordionContent,
- AccordionItem,
- AccordionTrigger,
-} from "@/components/ui/accordion";
 
 type Group = {
  title: string;
