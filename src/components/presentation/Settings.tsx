@@ -56,6 +56,7 @@ const SETTINGS = [
   short: "Retrieval-Augmented Generation. L'IA va chercher dans vos documents les bons extraits avant de répondre.",
   analogy: "Un assistant qui va consulter les bons classeurs dans l'armoire avant de vous donner sa réponse.",
   tone: "primary",
+  demoLabel: "Démo RAG — NotebookLM Summit Flow",
  },
  {
  k: "Fine-tuning",
@@ -100,12 +101,17 @@ export function Settings() {
  <h3 className="mt-3 font-serif text-xl text-foreground">{s.k}</h3>
  <p className="mt-2 text-sm leading-relaxed text-foreground/80">{s.short}</p>
  <div className="mt-4 border-t border-foreground/10 pt-3">
- <div className="text-[10px] uppercase tracking-[0.18em] text-primary">Analogie</div>
- <p className="mt-1 text-sm italic leading-relaxed text-foreground/75">{s.analogy}</p>
- </div>
- </div>
- ))}
- </div>
+  <div className="text-[10px] uppercase tracking-[0.18em] text-primary">Analogie</div>
+  <p className="mt-1 text-sm italic leading-relaxed text-foreground/75">{s.analogy}</p>
+  </div>
+  {"demoLabel" in s && s.demoLabel && (
+    <span className="mt-4 inline-flex items-center gap-2 self-start rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-medium text-primary">
+      <span aria-hidden>🔗</span> {s.demoLabel}
+    </span>
+  )}
+  </div>
+  ))}
+  </div>
 
 
  <div className="mt-12 rounded-2xl border border-border bg-card p-7">
