@@ -188,13 +188,6 @@ slide(f'''    <p class="eyebrow">Retour sur mars</p>
  notes="C'est le fil rouge de la journée : chaque exemple viendra de cette liste. Demander ce qui a bougé depuis mars.")
 
 pi = "".join(f'<div class="postit fill-{c}" contenteditable="true" data-k="mars-{i}" data-ph="{ph}"></div>' for i, (c, ph) in enumerate([("sky", "j'ai retenu…"), ("lemon", "j'utilise…"), ("mint", "j'ai retenu…"), ("blush", "ça a coincé…"), ("lemon", "j'utilise…"), ("sky", "ça a coincé…"), ("mint", "j'ai retenu…"), ("blush", "j'aimerais…")]))
-slide(f'''    <p class="eyebrow">Retour sur mars</p>
-    <h2>Ce que vous en avez <span class="mark mark--lemon">retenu</span></h2>
-    <div class="board">{pi}</div>
-    <p class="small" style="margin-top:22px">On écrit en direct ce que dit la salle. On y revient en fin de journée.</p>''',
- seq=1, section="9h00 · Point de départ",
- notes="Clique sur un post-it pour écrire. Les post-it gardent leur texte dans ce navigateur.")
-
 tf = [("L'IA générative va chercher la bonne réponse dans une base de données.", "Faux", "Elle prédit la suite de texte la plus probable."),
       ("Elle peut inventer une source qui n'existe pas.", "Vrai", "C'est ce qu'on appelle une hallucination."),
       ("Plus la consigne est précise, plus la réponse est utile.", "Vrai", "Le contexte fait souvent la différence."),
@@ -228,10 +221,11 @@ slide(f'''    <p class="eyebrow">Rappel commun</p>
 
 # ---------- 9h45 Trois logiques ----------
 S945 = "9h45 · Assistant, automatisation, agent"
-slide('''    <p class="eyebrow">Trois logiques différentes</p>
+slide(f'''    <p class="eyebrow">Trois logiques différentes</p>
     <div class="grow stack-lg center-y">
       <p class="idea">L'assistant <span class="mark mark--sky frag">répond</span>. L'automatisation <span class="mark mark--lemon frag">exécute</span>. L'agent <span class="mark frag">poursuit un objectif</span>.</p>
       <p class="lead frag">Le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
+      {tip("Sur Malt, la demande de compétences liées aux agents IA a été multipliée par 60 par rapport à 2024.", "Malt Tech Trends 2026", "frag")}
     </div>''', seq=2, section=S945, notes="Faire apparaître les trois verbes un par un. Demander au groupe de deviner le suivant.")
 
 slide(f'''    <p class="eyebrow">1. L'automatisation</p>
@@ -240,15 +234,8 @@ slide(f'''    <p class="eyebrow">1. L'automatisation</p>
     <div class="cols mt" style="align-items:start">
       <div class="card sk fill-sky frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{CLOCK}<div><h3>Le temps</h3><p>Chaque matin, le tableau de trésorerie se met à jour. Chaque fin de mois, les variables de salaire sont préparées.</p></div></div>
       <div class="card sk fill-lemon frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{BOLT}<div><h3>Un événement</h3><p>Une facture arrive par e-mail, un pointage est saisi, une demande de démonstration tombe.</p></div></div>
-    </div>
-    {tip("Anthropic appelle « workflow » un système où le modèle et les outils suivent des chemins définis à l'avance. C'est l'esprit de l'automatisation.", "Anthropic, Building effective agents, 19 décembre 2024", "frag mt")}''',
+    </div>''',
  seq=2, section=S945, notes="Faire trouver un exemple de chaque famille dans leur quotidien.")
-
-slide('''    <p class="eyebrow">Pour les curieux · 1. L'automatisation</p>
-    <h2>Le webhook, <span class="mark mark--lemon">c'est la sonnette</span></h2>
-    <figure class="schema" role="img" aria-label="Schéma : un événement se produit dans un logiciel, par exemple un courriel arrive. Le logiciel sonne à une adresse web, le webhook, en envoyant un appel HTTP. Le scénario démarre et enchaîne ses actions."><!-- schema:webhook --></figure>''',
- seq=2, cls="slide--schema", section=S945,
- notes="Le webhook : une adresse web qui attend qu'on sonne. Quand l'événement arrive, le logiciel envoie un message à cette adresse, et le scénario se réveille. Pas besoin de vérifier toutes les cinq minutes.")
 
 logic("1. L'automatisation", 'Elle <span class="mark mark--lemon">exécute</span>, toujours pareil', "", "Aucune réflexion, et c'est sa force : même entrée, même résultat.",
  [("Un scénario Make", "Un événement déclenche une série d'actions, montée visuellement.", shot("Capture d'un scénario Make")),
@@ -256,38 +243,41 @@ logic("1. L'automatisation", 'Elle <span class="mark mark--lemon">exécute</span
   ("Chez vous", "L'équivalent dans Microsoft 365 se monte avec les outils de l'environnement, selon les licences.", "")],
  "fill-lemon", "Make et Apps Script servent d'illustration : la formation reste sur l'environnement Microsoft de l'entreprise.")
 
-comp = [("Instructions", "le super prompt : rôle, règles, ton", "lemon"), ("Base de connaissances", "la bibliothèque : documents, procédures", "sky"), ("Outils et connecteurs", "les bras et les jambes : lire, écrire, envoyer", "mint"),
-        ("Compétences", "les skills : des savoir-faire prêts à l'emploi", "lemon"), ("Mémoire", "ce qu'il retient d'une fois sur l'autre", "sky"), ("Boucle", "il essaie, vérifie, recommence : gérée par l'outil", "mint")]
-cells = [f'<div class="comp sk fill-{c} frag"><p class="hand comp-t">{t}</p><p>{d}</p></div>' for t, d, c in comp]
+HUMAN = """<svg class="illu human" viewBox="0 0 440 640" aria-hidden="true">
+      <g class="frag" data-step="7"><path class="inkt" d="M70 470 A 190 290 0 1 1 120 560" stroke-dasharray="6 12" style="stroke-width:4"/><path class="inkt" d="M104 548 L120 562 L128 540" style="stroke-width:4"/></g>
+      <g class="frag" data-step="4"><path d="M178 228 C 135 262, 112 300, 96 342" fill="none" stroke="#D6F1E6" stroke-width="22" stroke-linecap="round"/><path d="M262 228 C 305 262, 328 300, 344 342" fill="none" stroke="#D6F1E6" stroke-width="22" stroke-linecap="round"/><path d="M198 400 C 193 465, 188 520, 176 590" fill="none" stroke="#D6F1E6" stroke-width="22" stroke-linecap="round"/><path d="M242 400 C 247 465, 252 520, 264 590" fill="none" stroke="#D6F1E6" stroke-width="22" stroke-linecap="round"/></g>
+      <path class="ink" d="M178 228 C 135 262, 112 300, 96 342" filter="url(#rough)"/>
+      <path class="ink" d="M262 228 C 305 262, 328 300, 344 342" filter="url(#rough)"/>
+      <path class="ink" d="M198 400 C 193 465, 188 520, 176 590 L 150 596" filter="url(#rough)"/>
+      <path class="ink" d="M242 400 C 247 465, 252 520, 264 590 L 290 596" filter="url(#rough)"/>
+      <rect x="176" y="198" width="88" height="210" rx="36" fill="#FFFFFF" stroke="#1F2A2E" stroke-width="4" filter="url(#rough)"/>
+      <circle cx="220" cy="118" r="78" fill="#FFFFFF" stroke="#1F2A2E" stroke-width="4" filter="url(#rough)"/>
+      <g class="frag" data-step="1"><path d="M162 112 C 150 72, 190 52, 214 66 C 236 50, 280 70, 274 110 C 286 140, 252 164, 220 152 C 188 164, 152 142, 162 112 Z" fill="#FCE4E8" stroke="#1F2A2E" stroke-width="3" filter="url(#rough)"/><path class="ink" style="stroke-width:2.5" d="M218 66 C 210 92, 228 112, 218 150 M178 104 C 192 94, 202 112, 214 102 M228 92 C 242 82, 254 98, 266 90"/></g>
+      <g class="frag" data-step="6"><ellipse cx="250" cy="150" rx="26" ry="15" fill="#DCEEFA" stroke="#1F2A2E" stroke-width="3" filter="url(#rough)"/></g>
+      <g class="frag" data-step="5"><circle cx="220" cy="262" r="24" fill="#FFF3C4" stroke="#1F2A2E" stroke-width="3" filter="url(#rough)"/><path class="inkt" style="stroke-width:3.5" d="M208 262 L217 271 L233 253"/></g>
+      <g class="frag" data-step="3"><path d="M48 334 L104 326 L110 380 L54 390 Z" fill="#DCEEFA" stroke="#1F2A2E" stroke-width="3.5" stroke-linejoin="round" filter="url(#rough)"/><path class="ink" style="stroke-width:2.5" d="M78 330 L82 386"/></g>
+      <g class="frag" data-step="2"><rect x="322" y="316" width="70" height="92" rx="8" fill="#FFF3C4" stroke="#1F2A2E" stroke-width="3.5" transform="rotate(6 357 362)" filter="url(#rough)"/><path class="ink" style="stroke-width:2.5" d="M338 342 h40 M337 358 h40 M336 374 h30" transform="rotate(6 357 362)"/></g>
+    </svg>"""
+
+parts = [(1, "Le cerveau", "le modèle", "Il comprend et rédige. Seul, il ne fait rien.", "blush"),
+         (2, "La fiche de poste", "le prompt, les instructions", "Son rôle, ses objectifs, ses contraintes, ce qu'il doit livrer.", "lemon"),
+         (3, "La bibliothèque", "les connaissances", "Vos documents, procédures, tarifs : là où il va chercher.", "sky"),
+         (4, "Les bras et les jambes", "outils, connecteurs, plugins", "Ce qui lui permet d'agir : lire Outlook, écrire dans Excel, envoyer.", "mint"),
+         (5, "Le savoir-faire", "les compétences", "Ce qu'il a déjà appris et sait refaire, dans plein de situations.", "lemon"),
+         (6, "La mémoire", "", "Ce qu'il retient d'une fois sur l'autre.", "sky"),
+         (7, "La boucle", "", "Essayer, vérifier, recommencer. C'est l'outil qui la gère.", "tealp")]
+def part(n, t, sub, d, c):
+    s = f'<span class="comp-sub">{sub}</span>' if sub else ""
+    return f'<div class="comp sk fill-{c} frag" data-step="{n}"><p class="hand comp-t">{t}</p>{s}<p>{d}</p></div>'
+cards = [part(*x) for x in parts]
 slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
-    <h2>Mêmes pièces, <span class="mark mark--blush">même anatomie</span></h2>
+    <h2>Un assistant, c'est <span class="mark mark--blush">comme un collègue</span></h2>
     <div class="anat">
-      <div class="anat-col">{"".join(cells[:3])}</div>
-      <div class="anat-mid">{BRAIN}<p class="hand" style="font-size:36px;color:var(--teal)">Le modèle</p><p class="small">le cerveau</p><span class="live" style="margin-top:14px">démo en direct</span></div>
-      <div class="anat-col">{"".join(cells[3:])}</div>
+      <div class="anat-col">{"".join(cards[:3])}</div>
+      <div class="anat-mid">{HUMAN}<span class="live">démo en direct</span></div>
+      <div class="anat-col">{"".join(cards[3:])}</div>
     </div>''', seq=2, section=S945,
- notes="Démontrer en direct dans un assistant puis dans un agent : faire apparaître chaque pièce au moment où tu la montres à l'écran.")
-
-slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
-    <h2>Les bras et les jambes : <span class="mark">outils, connecteurs, plugins</span></h2>
-    <div class="cols--3 grow" style="display:grid;margin-top:36px;align-items:start">
-      <div class="card sk fill-mint frag"><h3>Le connecteur</h3><p>L'accès à une application : Outlook, SharePoint, Teams. Sans lui, l'IA ne voit rien de vos outils.</p></div>
-      <div class="card sk fill-sky frag"><h3>L'outil</h3><p>Une action précise qu'elle peut faire : lire un courriel, créer un fichier, chercher une information.</p></div>
-      <div class="card sk fill-lemon frag"><h3>Le plugin</h3><p>Un paquet prêt à installer, qui regroupe un ou plusieurs outils pour un usage donné.</p></div>
-    </div>
-    <p class="small frag">Les mots changent d'un éditeur à l'autre. Ce qui compte : à quoi l'IA a accès, et ce qu'elle a le droit de faire.</p>''',
- seq=2, section=S945, notes="Montrer où se trouvent les connecteurs dans Copilot. Insister sur les droits : un connecteur ouvre une porte.")
-
-slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
-    <h2>Les compétences, <span class="mark mark--lemon">des fiches recettes</span></h2>
-    <div class="cols mt" style="align-items:start">
-      <div class="stack">
-        <p class="lead rise">Une compétence (« skill ») regroupe une façon de faire, des consignes et parfois des fichiers modèles.</p>
-        <p class="rise">L'IA ne la charge que quand la tâche le demande : elle reste légère le reste du temps.</p>
-      </div>
-      <div class="card sk fill-lemon frag"><h3>Exemple</h3><ul><li>Rédiger un compte rendu au format de l'entreprise</li><li>Avec le modèle de document</li><li>Et les règles de nommage du fichier</li></ul></div>
-    </div>''', seq=2, section=S945,
- notes="Le parallèle : un nouvel arrivant à qui on donne la fiche de poste (instructions), la documentation (connaissances), les accès (connecteurs) et des fiches recettes (compétences).")
+ notes="Faire apparaître chaque pièce au moment où tu la montres dans l'outil : la carte et la partie du dessin arrivent ensemble. L'agent a exactement les mêmes pièces.")
 
 same = "".join(f'<span class="pill sk sk--thin">{t}</span>' for t in ["Modèle", "Instructions", "Connaissances", "Outils", "Compétences", "Mémoire", "Boucle"])
 slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
@@ -327,23 +317,7 @@ slide(f'''    <figure class="infographic grow">
       <img src="images/harnais-bocal.png" alt="Schéma Modèle, inférence, harnais. 1. Le modèle : un cerveau dans un bocal, il sait plein de choses mais ne peut rien faire seul, sans outils ni consignes. 2. L'inférence : ton prompt va au modèle qui produit une réponse, c'est le moment où il travaille, facturé au token. 3. Le harnais : autour du modèle, des outils, une mémoire, des règles et instructions, une boucle et une base de connaissances. Agent IA égale modèle plus harnais ; le harnais fait souvent la différence en production.">
     </figure>''',
  seq=2, cls="slide--figure", section=S945,
- notes="Synthèse après la démo : le bocal, c'est le modèle seul. Tout ce qu'on vient de montrer, c'est le harnais.")
-
-slide(f'''    <p class="eyebrow">Ce qu'en disent les éditeurs</p>
-    <h2>Trois définitions, <span class="mark mark--sky">trois sources</span></h2>
-    <div class="cols--3 grow" style="display:grid;margin-top:36px;align-items:start">
-      <blockquote class="quote sk fill-lemon frag"><p>« Des systèmes où le modèle et les outils sont orchestrés selon des chemins définis à l'avance. »</p><cite>Anthropic, à propos des workflows, déc. 2024</cite></blockquote>
-      <blockquote class="quote sk fill-mint frag"><p>« Des systèmes où le modèle dirige lui-même ses étapes et l'usage de ses outils. »</p><cite>Anthropic, à propos des agents, déc. 2024</cite></blockquote>
-      <blockquote class="quote sk fill-sky frag"><p>« Un assistant IA qui suit vos instructions, s'appuie sur les sources de connaissances connectées et utilise des outils pour agir. »</p><cite>Microsoft, à propos des agents Copilot Studio</cite></blockquote>
-    </div>
-    {tip("Microsoft parle lui aussi de « harness », comme dans le schéma du bocal : chaque agent Copilot Studio tourne sur l'un de trois harnais.", "Microsoft Learn, Copilot Studio, Agents overview", "frag")}
-    <p class="small">Traductions libres. Sources : Anthropic, Building effective agents, 19 décembre 2024 ; Microsoft Learn, Overview, Microsoft Copilot Studio.</p>''',
- seq=2, section=S945, notes="La définition de Microsoft reprend mot pour mot les pièces de l'anatomie : instructions, connaissances, outils.")
-
-slide('''    <p class="eyebrow">Trois logiques différentes</p>
-    <h2>Qui garde la main ?</h2>
-    <figure class="schema" role="img" aria-label="Schéma en trois colonnes. Assistant : tu poses une question, l'IA propose une réponse, tu décides. Automatisation : un courriel arrive, toujours les mêmes actions, un résultat sans réflexion. Agent : un objectif, l'IA choisit ses étapes en boucle, elle agit dans ton cadre."><!-- schema:trois-logiques --></figure>''',
- seq=2, cls="slide--schema", section=S945, notes="Récapitulatif des trois logiques avant les exemples.")
+ notes="Synthèse après la démo : le bocal, c'est le modèle seul. Tout ce qu'on vient de montrer, c'est le harnais. Deux mots nouveaux à poser à l'oral : l'inférence, c'est le moment où le modèle travaille ; le token, c'est un petit morceau de mot, l'unité sur laquelle on paie. Microsoft emploie aussi le mot « harness » pour les agents Copilot Studio (Microsoft Learn, Agents overview).")
 
 logic("L'assistant en vrai", 'Il <span class="mark mark--sky">répond</span>, tu gardes la main', "", "Tu lui poses une question ou tu lui confies un texte. Il propose, tu décides.",
  [("Chatbot du site Summit Flow", "Assistant de type chatbot : il répond aux visiteurs à partir du contenu du site.", '<span class="live">démo en direct</span>'),
@@ -356,12 +330,6 @@ logic("L'agent en vrai", 'Il <span class="mark">poursuit un objectif</span>, dan
   ("Un agent Claude", "Le modèle avec ses outils, sa mémoire et ses règles.", shot("Capture d'un agent Claude")),
   ("Un agent Copilot", "Un agent construit dans l'environnement Microsoft.", shot("Capture d'un agent Copilot"))],
  "fill-mint", "Relier à l'anatomie : mêmes pièces que l'assistant, mais c'est l'objectif qui le lance.")
-
-slide(f'''    <p class="eyebrow">Le marché bouge vite</p>
-    <div class="grow stack-lg center-y">
-      <p class="idea">Les agents, <span class="mark">la compétence la plus demandée</span> de l'année.</p>
-      {tip("Sur Malt, la demande de compétences liées aux agents IA a été multipliée par 60 par rapport à 2024. Les projets n8n, outil d'automatisation, ont été multipliés par 14 en un an.", "Malt Tech Trends 2026", "frag")}
-    </div>''', seq=2, section=S945, notes="Ancrer dans le réel : les entreprises passent de l'essai à la mise en production.")
 
 quiz = [("Préparer une présentation PowerPoint à partir de mes notes", "assistant", "sky"),
         ("Chaque facture reçue par e-mail s'ajoute au tableau de trésorerie", "automatisation", "lemon"),
@@ -444,22 +412,20 @@ slide(f'''    <div class="grow center-y">
 
 # ---------- 13h30 Démonstrations ----------
 S1330 = "13h30 · Démonstrations commentées"
-slide(f'''    <p class="eyebrow">Pour les curieux · avant les démos</p>
-    <h2>Comment les outils <span class="mark mark--sky">se parlent</span></h2>
-    <div class="cols--3" style="display:grid;margin-top:26px;align-items:start">
-      <div class="card sk fill-sky frag conn">{PLUG}<h3>API</h3><p>La prise. On demande au logiciel une chose précise : lire un courriel, créer une ligne.</p></div>
-      <div class="card sk fill-blush frag conn">{BADGE}<h3>OAuth</h3><p>Le badge. Tu autorises l'accès sans donner ton mot de passe, et tu peux le retirer.</p></div>
-      <div class="card sk fill-mint frag conn">{MULTI}<h3>MCP</h3><p>La multiprise de l'ère agentique : une connexion qui regroupe plusieurs capacités, prêtes pour l'agent.</p></div>
-    </div>
-    {tip("MCP a été publié par Anthropic en novembre 2024 comme un standard pour connecter les assistants IA aux systèmes où vivent les données, en remplaçant les intégrations au cas par cas par un seul protocole.", "Anthropic, Introducing the Model Context Protocol, 25 novembre 2024", "frag mt")}''',
- seq=4, section=S1330, notes="Ne pas entrer dans le détail technique. L'image à retenir : avant, une prise par fonction ; avec MCP, une multiprise par logiciel.")
-
-slide('''    <p class="eyebrow">Pour les curieux · sous le capot</p>
-    <h2>Au fond, <span class="mark mark--lemon">des requêtes HTTP</span></h2>
-    <figure class="schema" role="img" aria-label="Schéma : Copilot envoie une requête HTTP à l'API d'Outlook pour demander les derniers courriels, Outlook renvoie la réponse. Dans l'autre sens, quand un événement se produit, un webhook prévient l'outil par un appel HTTP."><!-- schema:sous-le-capot --></figure>''',
+slide('''    <p class="eyebrow">Pour les curieux · avant les démos</p>
+    <h2>Comment deux logiciels <span class="mark mark--sky">se parlent</span></h2>
+    <figure class="schema" role="img" aria-label="Schéma. Ton outil envoie une demande, un appel HTTP, au guichet d'Outlook, son API. Outlook renvoie une réponse. Quatre types d'appel : GET pour lire, POST pour créer, PATCH pour modifier, DELETE pour supprimer. Dans l'autre sens, le webhook : c'est Outlook qui sonne quand un courriel arrive, et ton scénario démarre."><!-- schema:logiciels-parlent --></figure>''',
  seq=4, cls="slide--schema", section=S1330,
- notes="Même dans Copilot, un assistant ou un agent qui utilise un outil envoie des requêtes HTTP. Le webhook, c'est le même mécanisme dans l'autre sens.")
+ notes="Dans l'ordre du dessin : 1. HTTP, c'est la langue commune des logiciels sur internet. Un appel, c'est une demande. 2. L'API, c'est le guichet du logiciel : ce qu'il accepte qu'on lui demande. 3. Quatre verbes suffisent : lire, créer, modifier, supprimer. 4. Le webhook, c'est l'inverse : on ne demande plus, on est prévenu. Même dans Copilot, un assistant ou un agent qui utilise un outil fait exactement ça.")
 
+slide(f'''    <p class="eyebrow">Pour les curieux · deux mots que vous croiserez</p>
+    <h2><span class="mark">OAuth et MCP</span></h2>
+    <div class="cols" style="margin-top:30px;align-items:start">
+      <div class="card sk fill-blush frag conn">{BADGE}<h3>OAuth, le badge</h3><p>Tu autorises un outil à entrer dans ton compte sans lui donner ton mot de passe. Et tu peux reprendre le badge.</p></div>
+      <div class="card sk fill-mint frag conn">{MULTI}<h3>MCP, la multiprise</h3><p>Au lieu de brancher chaque appel un par un, une seule prise donne à l'agent plusieurs capacités d'un logiciel, prêtes à l'emploi.</p></div>
+    </div>
+    {tip("MCP est un standard publié par Anthropic en novembre 2024 : une seule façon de brancher un assistant IA sur les systèmes où vivent vos données.", "Anthropic, Introducing the Model Context Protocol, 25 novembre 2024", "frag mt")}''',
+ seq=4, section=S1330, notes="Ce sont les deux mots qu'ils verront dans les réglages de Copilot ou d'un autre outil. Pas besoin d'aller plus loin.")
 def edit(k): return f'<td class="edit sk" contenteditable="true" data-k="{k}" data-ph="à compléter"></td>'
 rows = [("fait", "Ce que ça fait"), ("demande", "Ce que ça demande"), ("pas", "Ce que ça ne fait pas")]
 trs = "".join(f'<tr><td class="row">{l}</td>{edit("as-"+k)}{edit("au-"+k)}{edit("ag-"+k)}</tr>' for k, l in rows)
@@ -482,12 +448,15 @@ def demo(n, title, mk, what, shots, notes):
       <div class="stack" style="display:grid;gap:20px">{s}</div>
     </div>''', seq=4, section="13h30 · Démonstrations commentées", notes=notes)
 
-demo(1, 'Un assistant <span class="mark mark--sky">qui connaît vos règles</span>', "", ["Des consignes écrites une fois", "Des documents de référence", "Exemple : analyser le tableau de bord du mois"],
-     ["Capture d'un assistant Copilot configuré (consignes et documents)"], "Cas de mars : analyse des tableaux de bord. Montrer aussi le projet Claude si utile. Remplir la colonne Assistant de la grille de lecture.")
-demo(2, 'Une automatisation <span class="mark mark--lemon">déclenchée par un courriel</span>', "", ["Une facture arrive par e-mail", "Les mêmes actions, à chaque fois", "Une ligne s'ajoute au tableau de trésorerie"],
-     ["Capture de l'automatisation simple sur Outlook et Excel"], "Cas de mars : trésorerie quotidienne et factures reçues par e-mail. Dire ce que ça demande à mettre en place : accès, règles claires, test.")
-demo(3, 'Un agent <span class="mark">qui enchaîne plusieurs étapes</span>', "", ["Objectif : trouver un produit chez les fournisseurs", "Il cherche, compare, propose", "Il s'arrête avant de commander"],
-     ["Capture d'un agent Copilot en action"], "Cas de mars : trouver un produit chez un fournisseur. Insister sur ce qu'il ne fait pas : il propose, il ne commande pas.")
+slide(f'''    <p class="eyebrow">Les trois démos</p>
+    <h2>Sur vos cas, <span class="mark mark--sky">en direct</span></h2>
+    <div class="cols--3 grow" style="display:grid;margin-top:30px;align-items:stretch">
+      <div class="ex sk fill-sky rise"><p class="who">1. Un assistant</p><p>Des consignes et des documents de référence. Exemple : analyser le tableau de bord du mois.</p>{shot("Capture de secours : l'assistant Copilot configuré")}</div>
+      <div class="ex sk fill-lemon rise"><p class="who">2. Une automatisation</p><p>Une facture arrive par e-mail, une ligne s'ajoute au tableau de trésorerie.</p>{shot("Capture de secours : l'automatisation sur Outlook et Excel")}</div>
+      <div class="ex sk fill-mint rise"><p class="who">3. Un agent</p><p>Trouver un produit chez les fournisseurs : il cherche, compare, propose, et s'arrête avant de commander.</p>{shot("Capture de secours : l'agent Copilot en action")}</div>
+    </div>''', seq=4, section="13h30 · Démonstrations commentées",
+ notes="Démos en direct, les captures servent de plan B. Après chaque démo, revenir à la grille de lecture et remplir la colonne.")
+
 
 slide(f'''    <div class="stack">
       <div class="meta"><span class="tag sk">{icon("users")}Chacun sur son poste</span><span class="tag tag--soft sk">{icon("search")}Selon les licences disponibles</span></div>
@@ -558,14 +527,8 @@ slide(f'''    <p class="eyebrow">Doutes et réserves</p>
 
 # ---------- 16h00 Garde-fous ----------
 slide('''    <p class="eyebrow">Garde-fous</p>
-    <div class="grow stack-lg center-y">
-      <p class="idea">L'IA peut se tromper <span class="mark mark--blush">avec aplomb</span>.</p>
-      <p class="lead frag">On parle d'« hallucination » : une réponse fausse, présentée comme sûre. Elle n'a pas l'air d'une erreur, c'est là le piège.</p>
-    </div>''', seq=6, section="16h00 · Garde-fous essentiels",
- notes="Si possible, montrer un exemple vécu en démo dans la journée.")
-
-slide('''    <p class="eyebrow">Garde-fous</p>
     <h2>L'humain <span class="mark">valide</span>, toujours</h2>
+    <p class="lead" style="margin-top:12px">L'IA peut se tromper avec aplomb : une réponse fausse, présentée comme sûre. C'est l'« hallucination » vue ce matin.</p>
     <figure class="schema" role="img" aria-label="Schéma : l'IA propose, tu relis et corriges, puis ça part. Si ce n'est pas bon, on revient à l'IA."><!-- schema:humain-valide --></figure>''',
  seq=6, cls="slide--schema", section="16h00 · Garde-fous essentiels",
  notes="La boucle de retour est la clé : relire n'est pas une perte de temps, c'est la condition pour déléguer.")

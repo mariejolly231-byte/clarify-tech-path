@@ -94,6 +94,26 @@ def sous_le_capot():
     els.append(text("t1", 20, 420, "Dans un sens, on demande. Dans l'autre, on est prévenu.", size=22, color=TEAL))
     return els
 
-SCHEMAS = {"webhook": (webhook, "Le webhook"), "sous-le-capot": (sous_le_capot, "Sous le capot"), "humain-valide": (humain_valide, "L'humain valide"),
+def logiciels_parlent():
+    els = []
+    els.append(text("t0", 20, 10, "1. Une demande, une réponse", size=22, color=TEAL))
+    els.append(box("me", 20, 50, 240, 110, "Ton outil\n(Copilot, un scénario)", fill=BLUE, size=21))
+    els.append(box("api", 600, 50, 240, 110, "L'API d'Outlook :\nle guichet", fill=GREEN, size=21))
+    els.append(arrow("rq", 262, 85, 598, 85))
+    els.append(arrow("rp", 598, 128, 262, 128, dashed=True))
+    els.append(text("rqt", 345, 52, "un appel HTTP", size=19))
+    els.append(text("rpt", 360, 138, "la réponse", size=19, color=MUTED))
+    els.append(text("t1", 20, 200, "2. Quatre types d'appel", size=22, color=TEAL))
+    verbs = [("get", "GET\nlire\nun courriel", BLUE), ("post", "POST\ncréer un\nrendez-vous", GREEN), ("patch", "PATCH\nmodifier\nune ligne", YELLOW), ("del", "DELETE\nsupprimer\nun brouillon", PINK)]
+    for i, (id, label, fill) in enumerate(verbs):
+        els.append(box(id, 20 + i * 210, 240, 190, 130, label, fill=fill, size=20))
+    els.append(text("t2", 20, 410, "3. Dans l'autre sens : le webhook, la sonnette", size=22, color=TEAL))
+    els.append(box("ev", 20, 450, 240, 100, "Outlook :\nun courriel arrive", fill=YELLOW, size=21))
+    els.append(box("sc", 600, 450, 240, 100, "Ton scénario\ndémarre", fill=BLUE, size=21))
+    els.append(arrow("wh", 262, 500, 598, 500))
+    els.append(text("wht", 350, 464, "le webhook sonne", size=19))
+    return els
+
+SCHEMAS = {"logiciels-parlent": (logiciels_parlent, "Comment deux logiciels se parlent"), "webhook": (webhook, "Le webhook"), "sous-le-capot": (sous_le_capot, "Sous le capot"), "humain-valide": (humain_valide, "L'humain valide"),
 "trois-logiques": (trois_logiques, "Trois logiques : qui garde la main"),
            "grille-decision": (grille, "Grille de décision en quatre questions")}

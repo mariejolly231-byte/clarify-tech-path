@@ -95,7 +95,13 @@
     slide.querySelectorAll(".schema svg *, svg.illu *").forEach((p) => { p.style.transition = ""; p.style.strokeDasharray = ""; p.style.strokeDashoffset = ""; p.style.opacity = ""; });
   }
 
-  function frags(slide) { return Array.from(slide.querySelectorAll(".frag")); }
+  // Éléments à révéler, dans l'ordre : data-step regroupe ceux qui apparaissent ensemble (une carte et son dessin)
+  function frags(slide) {
+    return Array.from(slide.querySelectorAll(".frag"))
+      .map((el, i) => ({ el, k: el.dataset.step !== undefined ? parseFloat(el.dataset.step) : 1000 + i }))
+      .sort((a, b) => a.k - b.k).map((x) => x.el);
+  }
+  function stepOf(el) { return el.dataset.step !== undefined ? "s" + el.dataset.step : el; }
 
   function fit() { stage.style.setProperty("--scale", Math.min(window.innerWidth / 1920, window.innerHeight / 1080)); }
 
@@ -129,12 +135,12 @@
   function go(i, direction) { current = Math.max(0, Math.min(total - 1, i)); render(direction || 1); }
   function next() {
     const hidden = frags(slides[current]).filter((x) => !x.classList.contains("is-shown"));
-    if (hidden.length) { hidden[0].classList.add("is-shown"); return; }
+    if (hidden.length) { const s = stepOf(hidden[0]); hidden.filter((x) => stepOf(x) === s).forEach((x) => x.classList.add("is-shown")); return; }
     if (current < total - 1) go(current + 1, 1);
   }
   function prev() {
     const shown = frags(slides[current]).filter((x) => x.classList.contains("is-shown"));
-    if (shown.length) { shown[shown.length - 1].classList.remove("is-shown"); return; }
+    if (shown.length) { const s = stepOf(shown[shown.length - 1]); shown.filter((x) => stepOf(x) === s).forEach((x) => x.classList.remove("is-shown")); return; }
     if (current > 0) go(current - 1, -1);
   }
   function fromHash() { const n = parseInt(location.hash.slice(1), 10); if (!isNaN(n) && n - 1 !== current) go(n - 1, -1); }
