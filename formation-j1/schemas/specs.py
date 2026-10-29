@@ -70,9 +70,9 @@ def humain_valide():
 
 def webhook():
     els = []
-    els.append(box("ev", 20, 120, 220, 120, "Un courriel\narrive", fill=BLUE, size=24))
+    els.append(box("ev", 20, 120, 220, 120, "Une facture\narrive par e-mail", fill=BLUE, size=22))
     els.append(box("wh", 330, 120, 220, 120, "L'adresse\nwebhook", fill=YELLOW, size=24))
-    els.append(box("sc", 640, 120, 220, 120, "Le scénario\ndémarre", fill=GREEN, size=24))
+    els.append(box("sc", 640, 120, 220, 120, "La trésorerie\nse met à jour", fill=GREEN, size=22))
     els.append(arrow("a1", 240, 180, 328, 180))
     els.append(arrow("a2", 550, 180, 638, 180))
     els.append(text("t1", 20, 40, "Le logiciel prévient lui-même, par un appel HTTP.", size=24, color=TEAL))

@@ -140,14 +140,25 @@ slide(f'''    <p class="eyebrow">Retour sur mars</p>
     <div class="cols mt" style="align-items:start">
       <div class="card sk fill-sky rise"><h3>Ce qui a été posé</h3><ul>
         <li>Ce qu'est un assistant conversationnel</li>
-        <li>Les premiers usages, chacun de son côté</li>
-        <li class="frag">À compléter avec le contenu exact de mars</li></ul></div>
-      <div class="card sk rise"><h3>Ce qui change aujourd'hui</h3><ul>
-        <li>On passe d'usages individuels à des gains partagés</li>
-        <li>On distingue trois logiques</li>
-        <li>On choisit avec une méthode, pôle par pôle</li></ul></div>
+        <li>Une quinzaine de situations repérées ensemble, pôle par pôle</li>
+        <li>Des premiers temps estimés : jusqu'à 4 jours par mois pour certaines tâches</li></ul></div>
+      <div class="card sk fill-lemon rise"><h3>Ce que vous avez demandé</h3><ul>
+        <li>Moins de vocabulaire technique</li>
+        <li>Plus de pratique sur vos outils : Outlook, Excel</li>
+        <li class="frag">Alors aujourd'hui, chaque notion part d'une de vos situations</li></ul></div>
     </div>''', seq=1, section="9h00 · Point de départ",
- notes="Faire raconter par ceux qui étaient là, pour ceux qui n'y étaient pas. La troisième ligne de gauche est à remplacer par le programme réel de mars.")
+ notes="Faire raconter par ceux qui étaient là, pour ceux qui n'y étaient pas. La colonne de droite reprend les retours d'évaluation de mars : le dire, c'est montrer qu'on les a écoutés.")
+
+slide(f'''    <p class="eyebrow">Retour sur mars</p>
+    <h2>Vos situations, <span class="mark">celles de mars</span></h2>
+    <div class="cols--4" style="display:grid;margin-top:30px;align-items:start">
+      <div class="card sk fill-sky rise"><h3>{icon("cart")}Commerce</h3><ul><li>Commissions des vendeurs itinérants <span class="hand t-est">4 h</span></li><li>Contrôle des études de prix, vente et reprise</li><li>Estimation des reprises</li><li>Ciblage de clients pour les démonstrations</li><li>Trouver un produit chez un fournisseur</li></ul></div>
+      <div class="card sk fill-lemon rise"><h3>{icon("ledger")}RH et compta</h3><ul><li>Variables de salaire <span class="hand t-est">1,5 à 2 j</span></li><li>Vérification des paiements clients pour les commissions</li><li>Trésorerie quotidienne, factures reçues par e-mail</li><li>Saisie des pointages, du papier au logiciel</li></ul></div>
+      <div class="card sk fill-mint rise"><h3>{icon("mega")}Communication</h3><ul><li>Planning de communication <span class="hand t-est">4 j par mois</span></li><li>Optimisation des bases de données pour la communication</li></ul></div>
+      <div class="card sk fill-teal rise"><h3>{icon("file")}Direction</h3><ul><li>Création de tableaux de bord</li><li>Analyse des tableaux de bord</li><li>Présentations PowerPoint</li></ul></div>
+    </div>
+    <p class="small" style="margin-top:20px">Temps estimés par l'équipe en mars, à préciser dans la grille d'audit.</p>''', seq=1, section="9h00 · Point de départ",
+ notes="C'est le fil rouge de la journée : chaque exemple viendra de cette liste. Demander ce qui a bougé depuis mars.")
 
 pi = "".join(f'<div class="postit fill-{c}" contenteditable="true" data-k="mars-{i}" data-ph="{ph}"></div>' for i, (c, ph) in enumerate([("sky", "j'ai retenu…"), ("lemon", "j'utilise…"), ("mint", "j'ai retenu…"), ("blush", "ça a coincé…"), ("lemon", "j'utilise…"), ("sky", "ça a coincé…"), ("mint", "j'ai retenu…"), ("blush", "j'aimerais…")]))
 slide(f'''    <p class="eyebrow">Retour sur mars</p>
@@ -200,13 +211,13 @@ slide(f'''    <p class="eyebrow">1. L'automatisation</p>
     <h2>Tout part d'un <span class="mark mark--lemon">déclencheur</span></h2>
     <p class="lead rise" style="margin-top:18px">Un déclencheur (le « trigger »), puis toujours la même suite d'actions. Deux familles :</p>
     <div class="cols mt" style="align-items:start">
-      <div class="card sk fill-sky frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{CLOCK}<div><h3>Le temps</h3><p>Tous les lundis à 8h, chaque fin de mois, toutes les heures.</p></div></div>
-      <div class="card sk fill-lemon frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{BOLT}<div><h3>Un événement</h3><p>Un courriel arrive, un fichier est déposé, une ligne est ajoutée.</p></div></div>
+      <div class="card sk fill-sky frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{CLOCK}<div><h3>Le temps</h3><p>Chaque matin, le tableau de trésorerie se met à jour. Chaque fin de mois, les variables de salaire sont préparées.</p></div></div>
+      <div class="card sk fill-lemon frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{BOLT}<div><h3>Un événement</h3><p>Une facture arrive par e-mail, un pointage est saisi, une demande de démonstration tombe.</p></div></div>
     </div>
     {tip("Anthropic appelle « workflow » un système où le modèle et les outils suivent des chemins définis à l'avance. C'est l'esprit de l'automatisation.", "Anthropic, Building effective agents, 19 décembre 2024", "frag mt")}''',
  seq=2, section=S945, notes="Faire trouver un exemple de chaque famille dans leur quotidien.")
 
-slide('''    <p class="eyebrow">1. L'automatisation</p>
+slide('''    <p class="eyebrow">Pour les curieux · 1. L'automatisation</p>
     <h2>Le webhook, <span class="mark mark--lemon">c'est la sonnette</span></h2>
     <figure class="schema" role="img" aria-label="Schéma : un événement se produit dans un logiciel, par exemple un courriel arrive. Le logiciel sonne à une adresse web, le webhook, en envoyant un appel HTTP. Le scénario démarre et enchaîne ses actions."><!-- schema:webhook --></figure>''',
  seq=2, cls="slide--schema", section=S945,
@@ -314,15 +325,15 @@ slide(f'''    <p class="eyebrow">Le marché bouge vite</p>
       {tip("Sur Malt, la demande de compétences liées aux agents IA a été multipliée par 60 par rapport à 2024. Les projets n8n, outil d'automatisation, ont été multipliés par 14 en un an.", "Malt Tech Trends 2026", "frag")}
     </div>''', seq=2, section=S945, notes="Ancrer dans le réel : les entreprises passent de l'essai à la mise en production.")
 
-quiz = [("Résumer un long courriel avant de répondre", "assistant", "sky"),
-        ("Chaque facture reçue est rangée dans le bon dossier", "automatisation", "lemon"),
-        ("Préparer la liste des clients à relancer, rédiger les relances et les proposer à la validation", "agent", "mint"),
-        ("Envoyer le même tableau à l'équipe tous les lundis", "automatisation", "lemon")]
+quiz = [("Préparer une présentation PowerPoint à partir de mes notes", "assistant", "sky"),
+        ("Chaque facture reçue par e-mail s'ajoute au tableau de trésorerie", "automatisation", "lemon"),
+        ("Chercher un produit chez plusieurs fournisseurs, comparer et me proposer le meilleur", "agent", "mint"),
+        ("Analyser le tableau de bord du mois et en tirer trois points clés", "assistant", "sky")]
 items = "".join(f'''<div class="ex sk" style="flex-direction:row;align-items:center;justify-content:space-between;gap:24px"><p style="font-size:30px">{q}</p><span class="mark mark--{c if c!='mint' else 'teal'} frag hand" style="font-size:34px;white-space:nowrap">{a}</span></div>''' for q, a, c in quiz)
 slide(f'''    <p class="eyebrow">À vous de jouer</p>
     <h2>Assistant, automatisation ou agent ?</h2>
     <div class="stack mt">{items}</div>''', seq=2, section="9h45 · Assistant, automatisation, agent",
- notes="Lire chaque situation, laisser le groupe voter à main levée, puis flèche droite pour révéler la réponse.")
+ notes="Les quatre situations viennent de la liste de mars. Vote à main levée, puis flèche droite. Les réponses sont des propositions : un débat est bienvenu, il prépare la grille de 11h.")
 
 slide(f'''    <div class="grow center-y">
       <p class="eyebrow">10h45</p>
@@ -374,13 +385,13 @@ slide(f'''    <div class="stack">
 def chips(pole, items):
     return "".join(f'<button class="chip sk sk--thin" data-k="{pole}-{i}"><span>{t}</span><span class="verdict">à classer</span></button>' for i, t in enumerate(items))
 slide(f'''    <div class="stack">
-      <span class="tag tag--soft sk">{icon("search")}Pistes issues de nos échanges, à confirmer par la grille d'audit</span>
+      <span class="tag tag--soft sk">{icon("search")}Repérées en mars, à confirmer par la grille d'audit</span>
       <h2>Vos situations, classées <span class="mark mark--sky">en direct</span></h2>
     </div>
     <div class="situations">
-      <div class="pole"><h3>{icon("cart")}Commerce</h3>{chips("com", ["Calcul de commissions", "Ciblage de clients pour des démonstrations", "Contrôle d'études de prix"])}</div>
-      <div class="pole"><h3>{icon("ledger")}RH et compta</h3>{chips("rh", ["Saisie et suivi des pointages", "Calcul de variables de salaire", "Suivi de trésorerie", "Vérification de paiements"])}</div>
-      <div class="pole"><h3>{icon("mega")}Communication</h3>{chips("cm", ["Planning de communication", "Préparation et mise en forme de bases de données"])}</div>
+      <div class="pole"><h3>{icon("cart")}Commerce</h3>{chips("com", ["Commissions des vendeurs itinérants", "Contrôle des études de prix", "Estimation des reprises", "Ciblage pour les démonstrations", "Produit chez un fournisseur"])}</div>
+      <div class="pole"><h3>{icon("ledger")}RH et compta</h3>{chips("rh", ["Variables de salaire", "Vérification des paiements clients", "Trésorerie quotidienne", "Saisie des pointages"])}</div>
+      <div class="pole"><h3>{icon("mega")}Communication et direction</h3>{chips("cm", ["Planning de communication", "Bases de données pour la communication", "Création de tableaux de bord", "Analyse des tableaux de bord", "Présentations PowerPoint"])}</div>
     </div>
     <div class="legend"><span><i style="background:var(--sky)"></i>assistant</span><span><i style="background:var(--lemon)"></i>automatisation</span><span><i style="background:var(--mint)"></i>agent</span><span><i style="background:var(--blush)"></i>pas d'outil</span><span>· un clic pour changer</span></div>''',
  seq=3, section="11h00 · Quand utiliser quoi",
@@ -395,7 +406,7 @@ slide(f'''    <div class="grow center-y">
 
 # ---------- 13h30 Démonstrations ----------
 S1330 = "13h30 · Démonstrations commentées"
-slide(f'''    <p class="eyebrow">Avant les démos</p>
+slide(f'''    <p class="eyebrow">Pour les curieux · avant les démos</p>
     <h2>Comment les outils <span class="mark mark--sky">se parlent</span></h2>
     <div class="cols--3" style="display:grid;margin-top:26px;align-items:start">
       <div class="card sk fill-sky frag conn">{PLUG}<h3>API</h3><p>La prise. On demande au logiciel une chose précise : lire un courriel, créer une ligne.</p></div>
@@ -405,7 +416,7 @@ slide(f'''    <p class="eyebrow">Avant les démos</p>
     {tip("MCP a été publié par Anthropic en novembre 2024 comme un standard pour connecter les assistants IA aux systèmes où vivent les données, en remplaçant les intégrations au cas par cas par un seul protocole.", "Anthropic, Introducing the Model Context Protocol, 25 novembre 2024", "frag mt")}''',
  seq=4, section=S1330, notes="Ne pas entrer dans le détail technique. L'image à retenir : avant, une prise par fonction ; avec MCP, une multiprise par logiciel.")
 
-slide('''    <p class="eyebrow">Sous le capot</p>
+slide('''    <p class="eyebrow">Pour les curieux · sous le capot</p>
     <h2>Au fond, <span class="mark mark--lemon">des requêtes HTTP</span></h2>
     <figure class="schema" role="img" aria-label="Schéma : Copilot envoie une requête HTTP à l'API d'Outlook pour demander les derniers courriels, Outlook renvoie la réponse. Dans l'autre sens, quand un événement se produit, un webhook prévient l'outil par un appel HTTP."><!-- schema:sous-le-capot --></figure>''',
  seq=4, cls="slide--schema", section=S1330,
@@ -433,12 +444,12 @@ def demo(n, title, mk, what, shots, notes):
       <div class="stack" style="display:grid;gap:20px">{s}</div>
     </div>''', seq=4, section="13h30 · Démonstrations commentées", notes=notes)
 
-demo(1, 'Un assistant <span class="mark mark--sky">qui connaît vos règles</span>', "", ["Des consignes écrites une fois", "Des documents de référence", "Des réponses dans votre cadre"],
-     ["Capture d'un assistant Copilot configuré (consignes et documents)"], "Montrer aussi le projet Claude en parallèle si utile. Remplir la colonne Assistant de la grille de lecture.")
-demo(2, 'Une automatisation <span class="mark mark--lemon">déclenchée par un courriel</span>', "", ["Un courriel arrive", "Les mêmes actions, à chaque fois", "Un résultat rangé dans Excel"],
-     ["Capture de l'automatisation simple sur Outlook et Excel"], "Dire ce que ça demande à mettre en place : accès, règles claires, test. Remplir la colonne Automatisation.")
-demo(3, 'Un agent <span class="mark">qui enchaîne plusieurs étapes</span>', "", ["Un objectif", "Il choisit ses étapes", "Il s'arrête avant d'envoyer"],
-     ["Capture d'un agent Copilot en action"], "Insister sur ce qu'il ne fait pas. Remplir la colonne Agent.")
+demo(1, 'Un assistant <span class="mark mark--sky">qui connaît vos règles</span>', "", ["Des consignes écrites une fois", "Des documents de référence", "Exemple : analyser le tableau de bord du mois"],
+     ["Capture d'un assistant Copilot configuré (consignes et documents)"], "Cas de mars : analyse des tableaux de bord. Montrer aussi le projet Claude si utile. Remplir la colonne Assistant de la grille de lecture.")
+demo(2, 'Une automatisation <span class="mark mark--lemon">déclenchée par un courriel</span>', "", ["Une facture arrive par e-mail", "Les mêmes actions, à chaque fois", "Une ligne s'ajoute au tableau de trésorerie"],
+     ["Capture de l'automatisation simple sur Outlook et Excel"], "Cas de mars : trésorerie quotidienne et factures reçues par e-mail. Dire ce que ça demande à mettre en place : accès, règles claires, test.")
+demo(3, 'Un agent <span class="mark">qui enchaîne plusieurs étapes</span>', "", ["Objectif : trouver un produit chez les fournisseurs", "Il cherche, compare, propose", "Il s'arrête avant de commander"],
+     ["Capture d'un agent Copilot en action"], "Cas de mars : trouver un produit chez un fournisseur. Insister sur ce qu'il ne fait pas : il propose, il ne commande pas.")
 
 slide(f'''    <div class="stack">
       <div class="meta"><span class="tag sk">{icon("users")}Chacun sur son poste</span><span class="tag tag--soft sk">{icon("search")}Selon les licences disponibles</span></div>
@@ -550,7 +561,7 @@ slide(f'''    <p class="eyebrow">Ensemble</p>
     <table class="readgrid mt"><thead><tr>{"".join(f"<th>{c}</th>" for c in cells)}</tr></thead><tbody><tr style="height:260px">{tr}</tr></tbody></table>
     <p class="small">On prend une des situations classées ce matin et on remplit la ligne avec le groupe.</p>''',
  seq=7, section="16h30 · Lancement de l'intersession",
- notes="Choisir une situation consensuelle du matin. Clique dans une case pour écrire.")
+ notes="Proposition : partir des commissions des vendeurs itinérants, estimées à 4 h en mars. Clique dans une case pour écrire.")
 
 ref = "".join(f'<div class="fill-line rise"><span>{p}</span><span class="f" contenteditable="true" data-k="ref-{i}" data-ph="nom à écrire en séance"></span></div>' for i, p in enumerate(["Commerce", "RH et comptabilité", "Communication"]))
 slide(f'''    <p class="eyebrow">Qui porte quoi</p>

@@ -341,6 +341,13 @@ p, li { font-size: var(--fs-body); line-height: 1.38; }
 .tf-a .hand { font-size: 34px; white-space: nowrap; }
 .tf-a .small { font-size: 22px; }
 
+.t-est { display: inline-block; margin-left: 6px; padding: 0 10px; font-size: 24px; color: var(--teal); background: var(--paper); border-radius: 10px; }
+.cols--4 .card { padding: 24px 26px; }
+.cols--4 .card h3 { font-size: 34px; }
+.cols--4 .card ul li { font-size: 25px; padding: 6px 0 6px 28px; }
+.cols--4 .card ul li::before { top: 20px; width: 14px; }
+.situations .pole .chip { font-size: 25px; padding: 11px 16px; margin-bottom: 10px; }
+
 /* Couverture et pages de pause */
 .cover-ridge { position: absolute; right: 0; bottom: 0; width: 900px; height: 360px; pointer-events: none; }
 .cover-meta { margin-top: 40px; }
