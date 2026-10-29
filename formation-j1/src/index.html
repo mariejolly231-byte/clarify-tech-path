@@ -8,120 +8,180 @@
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
   <symbol id="i-logo" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="3"/><path d="M9 34 L19 19 L24 26 L29 17 L39 34 Z" fill="currentColor"/><path d="M14 39 h6 v-3 h8 v3 h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.5M12 17.2v.3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
-  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 20c.8-3.5 3.3-5.5 6.5-5.5s5.7 2 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.8c1.8.7 3 2.5 3.5 5.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
   <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8l-5-5z M14 3v5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
-  <symbol id="i-backpack" viewBox="0 0 24 24"><path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6M5 11a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v8.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19.5V11zM9 14h6v4H9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
-  <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 19H16a3.5 3.5 0 0 0 0-7H8a3.5 3.5 0 0 1 0-7h7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2.5l2.2 10.5a1.5 1.5 0 0 0 1.5 1.2h8.3a1.5 1.5 0 0 0 1.5-1.1L21 8H6.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="19.5" r="1.5" fill="currentColor"/><circle cx="17" cy="19.5" r="1.5" fill="currentColor"/></symbol>
+  <symbol id="i-ledger" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 10v4h3l7 4V6L6 10H3zM16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
 <div class="viewport">
 <main class="stage" aria-roledescription="présentation" aria-label="Automatisation et IA agentique, jour 1">
 
-  <!-- TYPE 1 : couverture / ouverture de séquence -->
-  <section class="slide slide--dark slide--cover" aria-roledescription="slide">
+  <section class="slide slide--dark slide--cover slide--full" aria-roledescription="slide">
     <span class="wordmark wordmark--lg"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span>
-    <div class="grow stack center-y" style="display:flex;flex-direction:column;">
-      <p class="eyebrow">Automatisation et IA agentique · Jour 1</p>
+    <div class="grow stack center-y">
+      <p class="eyebrow">Automatisation et IA agentique · Maison Lagarrigue · Jour 1</p>
       <h1>Assistant, automatisation, agent : savoir quoi utiliser, <span class="hl script">et quand</span></h1>
       <p class="lead">Comprendre, mesurer et choisir.</p>
       <p class="cover-meta small">17 novembre 2026 · 9h00 à 17h00 · Marie Jolly, Summit Flow</p>
     </div>
     <svg class="cover-ridge" viewBox="0 0 1920 300" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0 300 L0 250 L300 200 L520 240 L820 170 L1000 210 L1240 130 L1400 170 L1600 40 L1760 140 L1920 110 L1920 300 Z" fill="#0E6170"/>
+      <path d="M0 300 L0 250 L300 200 L520 240 L820 170 L1000 210 L1240 130 L1400 170 L1600 40 L1760 140 L1920 110 L1920 300 Z" fill="#0E6170" filter="url(#rough)"/>
       <path d="M980 290 C 1200 270, 1330 220, 1430 170 S 1560 70, 1600 44" fill="none" stroke="#7DD8BE" stroke-width="5" stroke-dasharray="4 18" stroke-linecap="round"/>
       <circle cx="1600" cy="42" r="10" fill="#7DD8BE"/>
     </svg>
-    <div class="chrome"><span class="section">9h00 · Point de départ</span><span class="count"></span></div>
+    <div class="chrome"><span class="section">9h00 · Point de départ</span></div>
     <aside class="notes">Tour de table : qui a suivi l'acculturation de mars, ce qui est utilisé aujourd'hui, ce qui a coincé, ce que chacun attend du parcours.</aside>
   </section>
 
-  <!-- TYPE 2 : idée clé, une phrase -->
-  <section class="slide" aria-roledescription="slide">
+  <section class="slide" data-seq="1" aria-roledescription="slide">
+    <p class="eyebrow">Le parcours complet</p>
+    <h2>Cinq jours, une montée par étapes</h2>
+    <div class="journey">
+      <svg class="journey-path" viewBox="0 0 1370 150" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M44 120 C 200 118, 260 100, 392 95 S 600 72, 740 70 S 960 44, 1088 40 L 1340 20" fill="none" stroke="#1D6F5C" stroke-width="4" stroke-dasharray="6 14" stroke-linecap="round" filter="url(#rough)"/>
+      </svg>
+      <div class="stop is-here" style="--pin-y:100px">
+        <span class="here">vous êtes ici</span><span class="pin"></span>
+        <p class="when">Jour 1 · 17 nov. 2026</p>
+        <h3>Comprendre et choisir</h3>
+        <p>Toute l'équipe. Les trois logiques, quand utiliser quoi, et le lancement de la grille d'audit.</p>
+      </div>
+      <div class="stop" style="--pin-y:75px">
+        <span class="pin"></span>
+        <p class="when">Intersession · 9 semaines</p>
+        <h3>Observer son travail</h3>
+        <p>Jusqu'au 22 janvier. Chaque pôle décrit trois à cinq tâches dans la grille. Point d'étape mi-décembre.</p>
+      </div>
+      <div class="stop" style="--pin-y:50px">
+        <span class="pin"></span>
+        <p class="when">Jours 2 à 4 · janv. à mars</p>
+        <h3>Ateliers par pôle</h3>
+        <p>22 janvier, 26 février, 15 mars. Commerce, RH et compta, communication : on construit et on teste.</p>
+      </div>
+      <div class="stop" style="--pin-y:20px">
+        <span class="pin"></span>
+        <p class="when">Jour 5 · 26 mars 2027</p>
+        <h3>Conformité et charte</h3>
+        <p>Responsables de pôle. RGPD, éthique, charte d'usage de l'entreprise, feuille de route.</p>
+      </div>
+    </div>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">Le parcours</span></div>
+    <aside class="notes">L'ordre des ateliers et la composition des groupes restent à valider avec l'entreprise. Avant le jour 2, Summit Flow consolide les grilles et propose une priorisation, validée avec vous.</aside>
+  </section>
+
+  <section class="slide slide--full" aria-roledescription="slide">
+    <p class="eyebrow">Aujourd'hui</p>
+    <h2>Le programme du jour 1</h2>
+    <ol class="agenda" style="margin-top:44px">
+      <li><span class="h">9h00</span>Point de départ et repères pour tous</li>
+      <li><span class="h">9h45</span>Assistant, automatisation, agent</li>
+      <li class="pause"><span class="h">10h45</span>Pause</li>
+      <li><span class="h">11h00</span>Quand utiliser quoi</li>
+      <li class="pause"><span class="h">12h30</span>Déjeuner</li>
+      <li><span class="h">13h30</span>Démonstrations commentées</li>
+      <li class="pause"><span class="h">15h00</span>Pause</li>
+      <li><span class="h">15h15</span>Limites, investissement, choix d'un outil</li>
+      <li><span class="h">16h00</span>Garde-fous essentiels</li>
+      <li><span class="h">16h30</span>Lancement de l'intersession</li>
+    </ol>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">Le programme</span></div>
+    <aside class="notes">Le sommaire reste affiché à gauche de chaque slide : on sait toujours où on en est.</aside>
+  </section>
+
+  <section class="slide" data-seq="2" aria-roledescription="slide">
     <p class="eyebrow">Trois logiques différentes</p>
-    <div class="grow stack-lg center-y" style="display:flex;flex-direction:column;">
+    <div class="grow stack-lg center-y">
       <p class="idea">L'assistant répond. L'automatisation exécute. L'agent <span class="hl script">poursuit un objectif.</span></p>
       <p class="lead">Le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
     </div>
-    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">9h45 · Assistant, automatisation, agent</span><span class="count"></span></div>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">9h45 · Assistant, automatisation, agent</span></div>
     <aside class="notes">Assistant : l'humain garde la main. Automatisation : même suite d'actions à partir d'un déclencheur, sans réfléchir. Agent : reçoit un objectif, choisit ses étapes, agit dans un cadre défini.</aside>
   </section>
 
-  <!-- TYPE 5 : schéma didactique Excalidraw (source : schemas/trois-logiques.excalidraw) -->
-  <section class="slide slide--schema" aria-roledescription="slide">
+  <section class="slide slide--schema" data-seq="2" aria-roledescription="slide">
     <p class="eyebrow">Trois logiques différentes</p>
     <h2>Qui garde la main ?</h2>
     <figure class="schema" role="img" aria-label="Schéma en trois colonnes. Assistant : tu poses une question, l'IA propose une réponse, tu décides. Automatisation : un déclencheur, toujours les mêmes actions, un résultat sans réflexion. Agent : un objectif, l'IA choisit ses étapes en boucle, elle agit dans un cadre défini."><!-- schema:trois-logiques --></figure>
-    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">9h45 · Assistant, automatisation, agent</span><span class="count"></span></div>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">9h45 · Assistant, automatisation, agent</span></div>
     <aside class="notes">Faire deviner la ligne du bas avant de la montrer : qui garde la main dans chaque cas ?</aside>
   </section>
 
-  <!-- TYPE 5 : schéma didactique Excalidraw (source : schemas/grille-decision.excalidraw) -->
-  <section class="slide slide--schema" aria-roledescription="slide">
+  <section class="slide slide--schema" data-seq="3" aria-roledescription="slide">
     <p class="eyebrow">Quand utiliser quoi</p>
     <h2>La grille en quatre questions</h2>
     <figure class="schema" role="img" aria-label="Arbre de décision. 1. La tâche revient-elle souvent ? Non : geste manuel ou assistant au cas par cas. 2. Les règles sont-elles stables ? Non : clarifier la règle avant d'outiller. 3. Faut-il interpréter un texte ou décider ? Non : automatisation. Oui : agent, ou assistant et automatisation. 4. Une erreur coûte cher ? Un humain valide avant que ça parte."><!-- schema:grille-decision --></figure>
-    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">11h00 · Quand utiliser quoi</span><span class="count"></span></div>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">11h00 · Quand utiliser quoi</span></div>
     <aside class="notes">La question 4 s'applique à toutes les branches : elle ne choisit pas l'outil, elle fixe le niveau de contrôle humain.</aside>
   </section>
 
-  <!-- TYPE 4 : consigne d'atelier + alerte -->
-  <section class="slide" aria-roledescription="slide">
+  <section class="slide" data-seq="3" aria-roledescription="slide">
     <div class="stack">
       <div class="meta">
-        <span class="tag"><svg><use href="#i-users"/></svg>En sous-groupes</span>
-        <span class="tag"><svg><use href="#i-clock"/></svg>11h00 à 12h30</span>
-        <span class="tag"><svg><use href="#i-file"/></svg>Grille en quatre questions</span>
+        <span class="tag sk"><svg><use href="#i-users"/></svg>En sous-groupes</span>
+        <span class="tag sk"><svg><use href="#i-clock"/></svg>11h00 à 12h30</span>
+        <span class="tag sk"><svg><use href="#i-file"/></svg>Grille en quatre questions</span>
       </div>
-      <h2>Atelier : classer des situations avec la grille</h2>
+      <h2>Atelier : classer vos situations avec la grille</h2>
     </div>
-    <div class="cols cols--1-2 grow" style="margin-top:56px;align-items:start;">
+    <div class="cols cols--1-2 grow" style="margin-top:48px;align-items:start;">
       <ol class="steps">
-        <li><strong>Lis</strong> la situation de ta carte.</li>
+        <li><strong>Prends</strong> une situation de ton pôle.</li>
         <li><strong>Passe-la</strong> dans les quatre questions.</li>
         <li><strong>Classe-la</strong> : assistant, automatisation ou agent.</li>
       </ol>
-      <div class="alert" role="note">
+      <div class="alert sk" role="note">
         <svg aria-hidden="true"><use href="#i-alert"/></svg>
         <div>
           <p class="alert-title">Vigilance données</p>
-          <p>Aucune donnée client réelle dans un outil d'IA grand public. Pour l'exercice, on décrit la tâche, pas son contenu.</p>
+          <p>Aucune donnée réelle de l'entreprise dans un outil d'IA grand public. On décrit la tâche, pas son contenu.</p>
         </div>
       </div>
     </div>
-    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">11h00 · Quand utiliser quoi</span><span class="count"></span></div>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">11h00 · Quand utiliser quoi</span></div>
     <aside class="notes">Les quatre questions : la tâche est-elle répétitive, les règles sont-elles stables, faut-il interpréter un texte ou décider, que se passe-t-il en cas d'erreur.</aside>
   </section>
 
-  <!-- TYPE 3 : cas concret, avant / après -->
-  <section class="slide" aria-roledescription="slide">
+  <section class="slide" data-seq="3" aria-roledescription="slide">
     <div class="stack">
-      <span class="tag tag--fiction"><svg><use href="#i-flask"/></svg>Données fictives</span>
-      <h2>Une demande de devis, deux itinéraires</h2>
+      <span class="tag tag--soft sk"><svg><use href="#i-search"/></svg>Pistes issues de nos échanges, à confirmer par la grille d'audit</span>
+      <h2>Vos situations à classer</h2>
     </div>
-    <div class="cols grow" style="margin-top:56px;align-items:start;">
-      <div class="card card--muted">
-        <h3><svg><use href="#i-backpack"/></svg>Aujourd'hui</h3>
-        <ol class="flow">
-          <li>Mail reçu dans la boîte partagée</li>
-          <li>Recopie à la main dans Excel</li>
-          <li>Relance selon la mémoire de chacun</li>
-        </ol>
-      </div>
-      <div class="card card--mint">
-        <h3><svg><use href="#i-route"/></svg>Demain</h3>
-        <ol class="flow">
-          <li>Le courriel déclenche l'automatisation</li>
-          <li>Une ligne s'ajoute au suivi Excel</li>
-          <li>Relance à date, un humain valide</li>
-        </ol>
-      </div>
+    <div class="situations">
+      <div class="card sk"><h3><svg><use href="#i-cart"/></svg>Commerce</h3><ul><li>Calcul de commissions</li><li>Ciblage de clients pour des démonstrations</li><li>Contrôle d'études de prix</li></ul></div>
+      <div class="card sk"><h3><svg><use href="#i-ledger"/></svg>RH et compta</h3><ul><li>Saisie et suivi des pointages</li><li>Calcul de variables de salaire</li><li>Suivi de trésorerie</li><li>Vérification de paiements</li></ul></div>
+      <div class="card sk"><h3><svg><use href="#i-mega"/></svg>Communication</h3><ul><li>Planning de communication</li><li>Préparation et mise en forme de bases de données</li></ul></div>
     </div>
-    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">13h30 · Démonstrations commentées</span><span class="count"></span></div>
-    <aside class="notes">Ce que ça fait, ce que ça demande à mettre en place, ce que ça ne fait pas. L'humain reste dans la boucle à l'étape 3 : on automatise le recopiage, pas la décision.</aside>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">11h00 · Quand utiliser quoi</span></div>
+    <aside class="notes">Situations listées dans la proposition à partir des échanges avec l'entreprise. Compléter en séance avec celles que les participants apportent.</aside>
+  </section>
+
+  <section class="slide" data-seq="4" aria-roledescription="slide">
+    <div class="stack">
+      <span class="tag sk"><svg><use href="#i-file"/></svg>Outlook, Excel, Copilot selon les licences</span>
+      <h2>Trois démos, une même grille de lecture</h2>
+    </div>
+    <table class="readgrid">
+      <thead><tr><th></th><th>Assistant<small>avec consignes et documents de référence</small></th><th>Automatisation<small>déclenchée par un courriel</small></th><th>Agent<small>qui enchaîne plusieurs étapes</small></th></tr></thead>
+      <tbody>
+        <tr><td class="row">Ce que ça fait</td><td class="blank sk"></td><td class="blank sk"></td><td class="blank sk"></td></tr>
+        <tr><td class="row">Ce que ça demande</td><td class="blank sk"></td><td class="blank sk"></td><td class="blank sk"></td></tr>
+        <tr><td class="row">Ce que ça ne fait pas</td><td class="blank sk"></td><td class="blank sk"></td><td class="blank sk"></td></tr>
+      </tbody>
+    </table>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">13h30 · Démonstrations commentées</span></div>
+    <aside class="notes">Les cases restent vides à l'écran : le groupe les remplit au tableau pendant chaque démo.</aside>
   </section>
 
   <div class="trail trail-global" aria-hidden="true"><div class="trail-fill"></div><div class="trail-marker"></div><div class="trail-summit"></div></div>

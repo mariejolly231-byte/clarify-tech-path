@@ -8,6 +8,8 @@ css = (src / "deck.css").read_text(encoding="utf-8")
 css = re.sub(r"url\(fonts/([\w.-]+)\)",
              lambda m: "url(data:font/woff2;base64," + base64.b64encode((src / "fonts" / m.group(1)).read_bytes()).decode() + ")", css)
 html = (src / "index.html").read_text(encoding="utf-8")
+# Typographie française : espace insécable avant : ? ! pour ne jamais les rejeter en début de ligne
+html = re.sub(r" ([:?!])(?=[\s<])", "\u00a0\\1", html)
 html = html.replace('<link rel="stylesheet" href="deck.css">', "<style>\n" + css + "\n</style>")
 html = html.replace('<script src="deck.js"></script>', "<script>\n" + (src / "deck.js").read_text(encoding="utf-8") + "\n</script>")
 # Schémas Excalidraw : SVG inséré tel quel dans la page

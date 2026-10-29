@@ -75,19 +75,23 @@ Utiliser cette métaphore pour ouvrir des posts, des intros de page, des anecdot
 
 ## Identité visuelle
 
-**Palette de couleurs :**
-- Vert sarcelle profond (teal foncé) `#0B4F5C` : couleur principale, fond héros, titres
-- Vert teal clair / menthe `#7DD8BE` : accents, icônes, circuits
-- Blanc cassé `#F7F5F0` : texte sur fond sombre, espaces respirants
-- Gris anthracite léger `#2A2F33` : texte courant
+**Palette de couleurs :** un carnet de terrain, pas une interface d'IA. Pas de dégradé, pas de lueur, pas de bleu-violet.
+- Papier `#F3EDE1` : fond des supports, à la place du blanc
+- Vert sarcelle profond (teal foncé) `#0B4F5C` : couleur principale, encre des titres et des traits, fond héros
+- Teal annotation `#1D6F5C` : notes manuscrites, repères, progression
+- Menthe `#7DD8BE` : accent sur fond teal uniquement
+- Sauge `#CFE6DA` : fonds doux
+- Gris anthracite `#2A2F33` : texte courant
 - Rouge `#B3261E` : réservé aux alertes et points de vigilance, jamais décoratif
-- Aplats uniquement, pas de dégradé
 
 **Typographie :**
-- **Proxima Nova** : police principale, pour les titres (600 à 700) et le texte courant (400). Sous licence commerciale (Adobe Fonts). Quand elle n'est pas disponible ou ne peut pas être embarquée (deck de formation hors ligne, page web sans licence web), utiliser **Figtree** en remplacement. Ne pas utiliser Montserrat.
-- **Dancing Script** : accent manuscrit, la touche humaine de la marque. Un ou deux mots dans un grand titre, une signature, une citation courte. Jamais pour du texte courant, une consigne, un chiffre ou un tableau.
+- **Fraunces** (700, axe SOFT au maximum) : titres. Serif chaleureux et arrondi.
+- **Bricolage Grotesque** (500) : texte courant.
+- **Excalifont** (police d'Excalidraw) : annotations, horaires, numéros, schémas.
+- **Dancing Script** : accent manuscrit, un ou deux mots dans un grand titre. Jamais pour du texte courant, une consigne, un chiffre ou un tableau.
+- Toutes sont libres de droits et embarquables, donc utilisables hors ligne.
 
-**Schémas didactiques :** style Excalidraw (trait à main levée) aux couleurs de la marque, texte en Figtree ou Proxima Nova, une idée par schéma. Le rouge n'y sert qu'à la case de vigilance.
+**Style graphique :** dessiné à la main. Schémas didactiques en style Excalidraw (trait à main levée, remplissage hachuré, police Excalifont), une idée par schéma. Contours légèrement tremblés sur les cartes et encadrés.
 
 **Logo :** Cercle avec montagne stylisée teal + Samoyed blanc (le chien de Marie) + circuits imprimés numériques en bas + "SUMMIT FLOW" en capitales blanches.
 

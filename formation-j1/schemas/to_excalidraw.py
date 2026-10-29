@@ -13,7 +13,7 @@ def textel(id, cx, cy, t, size, color, container=None, left=None):
     lines = t.split("\n"); w = max(len(l) for l in lines) * size * 0.56; h = len(lines) * size * 1.25
     x = left if left is not None else cx - w / 2
     return base(id, "text", x, cy - h / 2 if left is None else cy, w, h, strokeColor=color, text=t, originalText=t, fontSize=size,
-                fontFamily=2, textAlign="left" if left is not None else "center", verticalAlign="middle" if container else "top",
+                fontFamily=1, textAlign="left" if left is not None else "center", verticalAlign="middle" if container else "top",
                 baseline=int((len(lines) - 1) * size * 1.25 + size * 0.9), containerId=container, lineHeight=1.25)
 
 def convert(spec):
@@ -22,6 +22,7 @@ def convert(spec):
         if e["kind"] == "box":
             tid = e["id"] + "_t"
             out.append(base(e["id"], "rectangle", e["x"], e["y"], e["w"], e["h"], strokeColor=e["stroke"], backgroundColor=e["fill"],
+                            fillStyle="solid" if e["fill"] == "transparent" else "hachure",
                             roundness={"type": 3}, strokeSharpness="round", boundElements=[{"type": "text", "id": tid}]))
             out.append(textel(tid, e["x"] + e["w"] / 2, e["y"] + e["h"] / 2, e["text"], e["size"], e["color"], container=e["id"]))
         elif e["kind"] == "arrow":

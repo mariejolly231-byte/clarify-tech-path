@@ -13,7 +13,7 @@ const lib = process.argv[2] || require.resolve('@excalidraw/utils/dist/excalidra
       el.querySelectorAll('style').forEach(s => s.remove());
       return el.outerHTML;
     }, doc);
-    const out = svg.replace(/font-family="[^"]*"/g, 'font-family="SF Sans, sans-serif" font-weight="600"');
+    const out = svg.replace(/font-family="[^"]*"/g, 'font-family="SF Hand, cursive"');
     fs.writeFileSync(f.replace('.excalidraw', '.svg'), out); console.log('svg', f, out.length);
   }
   await b.close();

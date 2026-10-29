@@ -1,59 +1,52 @@
-# Summit Flow Altitude
+# Summit Flow Altitude, version carnet de terrain
 
-Thème de projection Summit Flow pour les supports de formation en salle. Grand air, terrain technique, clarté. Le teal profond porte les moments forts (ouverture, idée clé de séquence), le blanc cassé laisse respirer le contenu, la menthe guide l'œil, le rouge ne sert qu'aux alertes.
+Thème de projection Summit Flow pour les formations en salle. L'idée : un carnet de terrain plutôt qu'une interface. Papier chaud, encre teal, trait dessiné à la main, schémas Excalidraw. Rien qui rappelle une interface d'IA générique : pas de dégradé, pas de lueur, pas de bleu-violet, pas de cartes en verre.
 
 ## Palette
 
 | Token | Hex | Rôle |
 |---|---|---|
-| `--sf-teal` | `#0B4F5C` | Couleur principale : fonds de couverture et de séquence, titres sur fond clair |
-| `--sf-teal-2` | `#0E6170` | Variante pour surfaces sur fond teal (cartes, filets) |
-| `--sf-mint` | `#7DD8BE` | Accent sur fond sombre : surlignage, repères, icônes |
-| `--sf-mint-bg` | `#E3F4EE` | Fond doux d'encart sur fond clair |
-| `--sf-mint-ink` | `#1D7A66` | Menthe lisible sur fond clair, réservée aux grands textes et pictos |
-| `--sf-off` | `#F7F5F0` | Blanc cassé : fond des slides de contenu, texte sur fond sombre |
-| `--sf-anth` | `#2A2F33` | Gris anthracite : texte courant |
-| `--sf-muted` | `#5A6268` | Texte secondaire (sources, légendes) |
-| `--sf-line` | `#D9DDD8` | Filets et bordures |
-| `--sf-alert` | `#B3261E` | Rouge alerte, uniquement pour les encarts de vigilance |
-| `--sf-alert-bg` | `#FBEDEC` | Fond d'encart d'alerte |
-
-Aucun dégradé. Aplats uniquement.
+| `--sf-paper` | `#F3EDE1` | Fond papier des slides |
+| `--sf-card` | `#FBF8F2` | Cartes et cases posées sur le papier |
+| `--sf-teal` | `#0B4F5C` | Encre principale : titres, contours, fond de couverture |
+| `--sf-mint-ink` | `#1D6F5C` | Annotations manuscrites, horaires, progression |
+| `--sf-mint` | `#7DD8BE` | Accent sur fond teal uniquement |
+| `--sf-sage` | `#CFE6DA` | Fond doux, halo du repère « vous êtes ici » |
+| `--sf-anth` | `#2A2F33` | Texte courant |
+| `--sf-muted` | `#5E5A52` | Texte secondaire, étapes passées du sommaire |
+| `--sf-line` | `#CFC6B4` | Traits, pointillés, étapes à venir |
+| `--sf-alert` | `#B3261E` | Rouge réservé aux encarts de vigilance |
+| `--sf-alert-bg` | `#F8E6E2` | Fond d'encart de vigilance |
 
 ## Contrastes vérifiés (WCAG 2.x)
 
-| Texte / fond | Ratio | Usage autorisé |
-|---|---|---|
-| Blanc cassé sur teal | 8,4:1 | Tout texte |
-| Anthracite sur blanc cassé | 12,4:1 | Tout texte |
-| Teal sur blanc cassé | 8,4:1 | Tout texte |
-| Gris secondaire sur blanc cassé | 5,7:1 | Légendes, sources |
-| Menthe sur teal | 5,4:1 | Titres et accents, pas de texte courant |
-| Rouge alerte sur fond d'alerte | 5,7:1 | Titre d'alerte |
-| Anthracite sur fond d'alerte | 11,9:1 | Corps d'alerte |
-| Menthe foncée sur blanc cassé | 4,8:1 | Grands textes et pictos seulement |
-
-Un vidéoprojecteur en salle éclairée perd beaucoup de contraste : le texte courant reste donc au-dessus de 7:1.
+| Texte / fond | Ratio |
+|---|---|
+| Anthracite sur papier | 11,6:1 |
+| Teal sur papier | 7,9:1 |
+| Gris secondaire sur papier | 5,9:1 |
+| Teal annotation sur papier | 5,2:1 (grands textes) |
+| Rouge sur papier | 5,6:1 |
+| Papier sur teal | 7,9:1 |
+| Menthe sur teal | 5,4:1 (titres et accents) |
 
 ## Typographie
 
-- **Titres et texte** : Figtree (500 pour le texte, 700 pour les titres), embarquée dans le fichier. Elle remplace Proxima Nova, la police de marque, qui est sous licence commerciale et ne peut pas être embarquée : le rendu est ainsi identique sur tous les postes, sans réseau.
-- **Accent manuscrit** : Dancing Script 700, embarquée. Réservée à un ou deux mots dans un grand titre (couverture, idée clé). Jamais pour du texte courant, une consigne ou une donnée : une écriture manuscrite projetée se lit mal au fond de la salle.
+- **Titres** : Fraunces 700, axe « SOFT » au maximum. Un serif chaleureux aux formes arrondies, loin des sans-serif d'interface.
+- **Texte** : Bricolage Grotesque 500. Un grotesque avec du caractère, très lisible en projection.
+- **Annotations, horaires, numéros, schémas** : Excalifont, la police manuscrite d'Excalidraw.
+- **Accent** : Dancing Script 700, un ou deux mots dans un grand titre seulement.
 
-Échelle sur scène 1920 x 1080 : titre de couverture 92 px, titre de slide 72 px, idée clé 96 px, texte 40 px, minimum absolu 28 px (légendes, sources, pied de page).
+Toutes les polices sont embarquées dans le fichier. Échelle sur scène 1920 x 1080 : couverture 96 px, titre 68 px, idée clé 88 px, texte 38 px, minimum 28 px pour le contenu, 24 px pour le sommaire latéral et le pied de page.
 
-## Schémas didactiques
+## Le trait dessiné
 
-Dessinés dans le style Excalidraw (trait à main levée), aux couleurs du thème : cadres teal, fonds blanc ou menthe, rouge pour la seule case de vigilance. Texte en Figtree, jamais en dessous de 28 px une fois projeté. Les sources éditables sont dans `schemas/*.excalidraw`.
+Les contours des cartes, étiquettes, encarts et du numéro de slide passent par un filtre SVG qui les fait légèrement trembler, comme tracés à la main. Le texte, lui, reste net. Les schémas sont de vrais rendus Excalidraw : trait à main levée, remplissage hachuré, police manuscrite. Leurs sources éditables sont dans `schemas/*.excalidraw`.
 
-## Règles de mise en page
+## Structure de chaque slide
 
-Une idée par slide. Marges de 120 px. Six lignes de texte maximum. Pas d'emoji, pictogrammes en SVG trait. Toute donnée chiffrée porte sa source en pied de slide, sinon elle ne figure pas. Les exemples portent l'étiquette « Données fictives ».
+Sommaire du jour à gauche (étape en cours en teal, étapes passées grisées), numéro de slide entouré en haut à droite, itinéraire de progression en bas. La couverture et le programme du jour sont en pleine largeur.
 
-## Métaphore montagne
+## Règles de contenu
 
-L'itinéraire = le métier. Le sac = les outils, fichiers et process. Le guide allège. La barre de progression du deck est un itinéraire : le repère avance vers le sommet.
-
-## Idéal pour
-
-Formations en présentiel, ateliers, restitutions d'audit projetées.
+Une idée par slide. Les situations citées sont celles de la proposition, signalées comme pistes à confirmer par la grille d'audit. Pas de chiffre sans source, pas de nom de personne, pas d'emoji.

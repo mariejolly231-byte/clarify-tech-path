@@ -1,11 +1,13 @@
 """Sources des schémas didactiques du jour 1 (format simplifié, converti en .excalidraw et en SVG)."""
 
-TEAL, INK, MUTED, MINT_BG, OFF, ALERT, ALERT_BG = "#0B4F5C", "#2A2F33", "#5A6268", "#E3F4EE", "#F7F5F0", "#B3261E", "#FBEDEC"
+# Style Excalidraw : fonds hachurés (la couleur de fond devient la couleur des hachures), cases neutres transparentes
+TEAL, INK, MUTED, MINT_BG, OFF, ALERT, ALERT_BG = "#0B4F5C", "#2A2F33", "#5E5A52", "#8FCDB6", "transparent", "#B3261E", "#EBA79C"
+NONE = "transparent"
 
 # Mise à l'échelle pour la projection : géométrie x1,2 et texte x1,3 (le texte rendu reste au-dessus de 28 px)
 G, F = 1.2, 1.3
 
-def box(id, x, y, w, h, text, fill="#FFFFFF", stroke=TEAL, size=20, color=INK):
+def box(id, x, y, w, h, text, fill=NONE, stroke=TEAL, size=20, color=INK):
     return dict(kind="box", id=id, x=x * G, y=y * G, w=w * G, h=h * G, text=text, fill=fill, stroke=stroke, size=round(size * F), color=color)
 
 def arrow(id, x1, y1, x2, y2, label=None, color=TEAL, dashed=False, via=None):
@@ -23,10 +25,10 @@ def trois_logiques():
         ("ag", 560, "Agent", ["Un objectif\nà atteindre", "L'IA choisit\nses étapes", "Elle agit dans\nun cadre défini"], "Le cadre\nque tu as posé"),
     ]
     for p, x, title, steps, hand in cols:
-        els.append(box(p + "h", x, 60, 220, 56, title, fill=TEAL, stroke=TEAL, size=24, color=OFF))
+        els.append(box(p + "h", x, 60, 220, 56, title, fill=MINT_BG, stroke=TEAL, size=24, color=TEAL))
         for i, s in enumerate(steps):
             y = 150 + i * 110
-            els.append(box(f"{p}{i}", x + 10, y, 200, 76, s, fill="#FFFFFF" if i < 2 else MINT_BG))
+            els.append(box(f"{p}{i}", x + 10, y, 200, 76, s, fill=NONE if i < 2 else MINT_BG))
             if i:
                 els.append(arrow(f"{p}a{i}", x + 110, y - 34, x + 110, y - 2))
         if p == "ag":

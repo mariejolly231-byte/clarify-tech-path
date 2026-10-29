@@ -1,4 +1,4 @@
-// Navigation du deck : clavier, télécommande de présentation, lien direct #n, notes, aide.
+// Navigation du deck : clavier, télécommande, lien direct #n, notes, aide, sommaire latéral du jour.
 (function () {
   const stage = document.querySelector(".stage");
   const slides = Array.from(document.querySelectorAll(".slide"));
@@ -9,6 +9,37 @@
   let current = 0;
   let typed = "";
   let typedTimer = null;
+
+  // Séquences du jour 1, d'après le déroulé de la proposition
+  const SEQ = [
+    ["9h00", "Point de départ"],
+    ["9h45", "Trois logiques"],
+    ["11h00", "Quand utiliser quoi"],
+    ["13h30", "Démonstrations"],
+    ["15h15", "Limites et choix"],
+    ["16h00", "Garde-fous"],
+    ["16h30", "Intersession"],
+  ];
+
+  // Sommaire et numéro construits dans chaque slide : ils restent visibles dans l'export PDF
+  slides.forEach((el, i) => {
+    const num = document.createElement("span");
+    num.className = "num";
+    num.setAttribute("aria-hidden", "true");
+    num.textContent = i + 1;
+    el.appendChild(num);
+
+    const seq = parseInt(el.dataset.seq, 10);
+    if (!seq || el.classList.contains("slide--full")) return;
+    const nav = document.createElement("nav");
+    nav.className = "toc";
+    nav.setAttribute("aria-label", "Sommaire du jour 1");
+    nav.innerHTML = '<p class="toc-title">Jour 1</p><ol>' + SEQ.map(([h, t], k) => {
+      const state = k + 1 < seq ? "is-done" : k + 1 === seq ? "is-current" : "";
+      return '<li class="' + state + '"' + (state === "is-current" ? ' aria-current="step"' : "") + '><span class="t">' + h + "</span>" + t + "</li>";
+    }).join("") + "</ol>";
+    el.prepend(nav);
+  });
 
   function fit() {
     const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
@@ -25,8 +56,8 @@
       if (count) count.textContent = (i + 1) + " / " + total;
     });
     const slide = slides[current];
-    stage.classList.toggle("on-dark", slide.classList.contains("slide--dark"));
     stage.classList.toggle("on-cover", slide.classList.contains("slide--cover"));
+    stage.classList.toggle("on-full", slide.classList.contains("slide--full"));
     stage.classList.toggle("at-summit", current === total - 1);
     const pct = total > 1 ? (current / (total - 1)) * 100 : 100;
     stage.style.setProperty("--progress", pct + "%");
@@ -83,7 +114,6 @@
     e.preventDefault();
   });
 
-  // Balayage tactile, utile sur tablette
   let x0 = null;
   document.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
   document.addEventListener("touchend", (e) => {
