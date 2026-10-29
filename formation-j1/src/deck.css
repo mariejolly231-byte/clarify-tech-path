@@ -1,9 +1,12 @@
 /* Summit Flow Altitude : thème et composants du deck de formation */
 
-@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 400; font-style: normal; font-display: block; src: url(fonts/atk-400.woff2) format("woff2"); }
-@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 400; font-style: italic; font-display: block; src: url(fonts/atk-400i.woff2) format("woff2"); }
-@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 700; font-style: normal; font-display: block; src: url(fonts/atk-700.woff2) format("woff2"); }
-@font-face { font-family: "Outfit"; font-weight: 100 900; font-style: normal; font-display: block; src: url(fonts/outfit.woff2) format("woff2"); }
+/* Proxima Nova est sous licence commerciale : elle est utilisée si elle est installée sur le poste
+   (Adobe Fonts activé en local). Sinon, Montserrat embarquée prend le relais, sans réseau. */
+@font-face { font-family: "SF Sans"; font-weight: 400; font-style: normal; font-display: block; src: local("Proxima Nova Regular"), local("ProximaNova-Regular"), local("Proxima Nova"), url(fonts/montserrat.woff2) format("woff2"); }
+@font-face { font-family: "SF Sans"; font-weight: 400; font-style: italic; font-display: block; src: local("Proxima Nova Italic"), local("ProximaNova-RegularIt"), url(fonts/montserrat-i.woff2) format("woff2"); }
+@font-face { font-family: "SF Sans"; font-weight: 600; font-style: normal; font-display: block; src: local("Proxima Nova Semibold"), local("ProximaNova-Semibold"), url(fonts/montserrat.woff2) format("woff2"); }
+@font-face { font-family: "SF Sans"; font-weight: 700; font-style: normal; font-display: block; src: local("Proxima Nova Bold"), local("ProximaNova-Bold"), url(fonts/montserrat.woff2) format("woff2"); }
+@font-face { font-family: "Dancing Script"; font-weight: 400 700; font-style: normal; font-display: block; src: url(fonts/dancing.woff2) format("woff2"); }
 
 :root {
   --sf-teal: #0B4F5C;
@@ -18,8 +21,9 @@
   --sf-alert: #B3261E;
   --sf-alert-bg: #FBEDEC;
 
-  --font-title: "Outfit", "Segoe UI", system-ui, sans-serif;
-  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-title: "SF Sans", "Segoe UI", system-ui, sans-serif;
+  --font-body: "SF Sans", "Segoe UI", system-ui, sans-serif;
+  --font-script: "Dancing Script", cursive;
 
   --stage-w: 1920px;
   --stage-h: 1080px;
@@ -89,7 +93,7 @@ h1, h2, .idea {
   font-family: var(--font-title);
   font-weight: 700;
   line-height: 1.08;
-  letter-spacing: -.01em;
+  letter-spacing: -.015em;
   color: var(--sf-teal);
   text-wrap: balance;
 }
@@ -98,6 +102,8 @@ h1 { font-size: var(--fs-cover); max-width: 1400px; }
 h2 { font-size: var(--fs-title); max-width: 1500px; }
 .idea { font-size: var(--fs-idea); max-width: 1500px; }
 .hl { color: var(--sf-mint-ink); }
+/* Accent manuscrit : un ou deux mots dans un grand titre, jamais du texte courant */
+.script { font-family: var(--font-script); font-weight: 700; letter-spacing: 0; font-size: 1.12em; line-height: 1; }
 .slide--dark .hl { color: var(--sf-mint); }
 
 p, li { font-size: var(--fs-body); line-height: 1.4; }
@@ -210,9 +216,10 @@ p, li { font-size: var(--fs-body); line-height: 1.4; }
 /* Couverture */
 .cover-ridge { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 300px; pointer-events: none; }
 .slide--cover .lead { max-width: 1250px; }
+.slide--cover h1 { font-size: 92px; max-width: 1500px; }
 .slide--cover .chrome { z-index: 1; }
 .on-cover .trail { display: none; }
-.cover-meta { display: flex; gap: 48px; font-size: var(--fs-small); }
+.cover-meta { margin-top: 48px; }
 
 /* Aide clavier et notes */
 .overlay {

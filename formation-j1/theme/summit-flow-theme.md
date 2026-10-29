@@ -37,10 +37,10 @@ Un vidéoprojecteur en salle éclairée perd beaucoup de contraste : le texte co
 
 ## Typographie
 
-- **Titres** : Outfit, 600 à 700, embarquée en woff2
-- **Texte** : Atkinson Hyperlegible, 400 / 700 / italique, embarquée en woff2. Conçue pour la lisibilité basse vision, caractères ambigus bien distingués (l, I, 1, 0, O).
+- **Titres et texte** : Proxima Nova (400, 600, 700). Police sous licence commerciale : le deck l'utilise si elle est installée sur le poste de projection (Adobe Fonts activé en local). Sinon, Montserrat, embarquée dans le fichier, prend le relais sans réseau.
+- **Accent manuscrit** : Dancing Script 700, embarquée. Réservée à un ou deux mots dans un grand titre (couverture, idée clé). Jamais pour du texte courant, une consigne ou une donnée : une écriture manuscrite projetée se lit mal au fond de la salle.
 
-Échelle sur scène 1920 x 1080 : titre de couverture 112 px, titre de slide 72 px, idée clé 96 px, texte 40 px, minimum absolu 28 px (légendes, sources, pied de page).
+Échelle sur scène 1920 x 1080 : titre de couverture 92 px, titre de slide 72 px, idée clé 96 px, texte 40 px, minimum absolu 28 px (légendes, sources, pied de page).
 
 ## Règles de mise en page
 
