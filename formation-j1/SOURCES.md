@@ -30,3 +30,7 @@
 ## À vérifier
 
 Les chiffres Insee viennent des extraits du site insee.fr renvoyés par la recherche : le site n'a pas pu être ouvert depuis cette session.
+
+## Slide 15, exemple de modèle
+
+GPT-6.1 Sol : modèle OpenAI annoncé le 29 septembre 2026, disponible dans ChatGPT Work et Codex pour les offres payantes. TechCrunch, « OpenAI launches GPT-6.1 Sol », 29 septembre 2026, https://techcrunch.com/2026/09/29/openai-launches-gpt-6-1-sol-says-it-nearly-matches-gpt-6-astra-and-costs-less/. À revérifier la veille de la séance : les noms de modèles changent vite.

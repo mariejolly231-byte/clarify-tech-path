@@ -40,7 +40,7 @@ BRAIN = '''<svg class="illu brain" viewBox="0 0 300 240" aria-hidden="true">
     </svg>'''
 
 CLOCK = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><circle data-d="0.6" cx="60" cy="60" r="46" fill="#DCEEFA"/><circle data-d="0.1" cx="60" cy="60" r="46" class="ink" filter="url(#rough)"/><path data-d="0.5" class="inkt" d="M60 30 V60 L82 74"/></svg>'''
-BOLT = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><path data-d="0.6" d="M68 10 L30 66 H58 L48 110 L92 48 H64 Z" fill="#FFF3C4"/><path data-d="0.1" class="ink" d="M68 10 L30 66 H58 L48 110 L92 48 H64 Z" filter="url(#rough)"/></svg>'''
+BOLT = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><path data-d="0.6" d="M68 10 L30 66 H58 L48 110 L92 48 H64 Z" fill="#FFFFFF"/><path data-d="0.1" class="ink" d="M68 10 L30 66 H58 L48 110 L92 48 H64 Z" filter="url(#rough)"/></svg>'''
 PLUG = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><rect data-d="0.6" x="28" y="40" width="64" height="50" rx="14" fill="#DCEEFA"/><rect data-d="0.1" x="28" y="40" width="64" height="50" rx="14" class="ink" filter="url(#rough)"/><path data-d="0.4" class="ink" d="M46 40 V18 M74 40 V18 M60 90 V112"/></svg>'''
 BADGE = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><rect data-d="0.6" x="22" y="28" width="76" height="66" rx="10" fill="#FCE4E8"/><rect data-d="0.1" x="22" y="28" width="76" height="66" rx="10" class="ink" filter="url(#rough)"/><circle data-d="0.4" cx="48" cy="56" r="10" class="ink"/><path data-d="0.5" class="ink" d="M36 80 C 40 70, 56 70, 60 80 M70 52 H88 M70 64 H84"/><path data-d="0.3" class="ink" d="M52 28 V16 H68 V28"/></svg>'''
 MULTI = '''<svg class="illu ico-xl" viewBox="0 0 140 120" aria-hidden="true"><rect data-d="0.6" x="12" y="50" width="116" height="40" rx="14" fill="#D6F1E6"/><rect data-d="0.1" x="12" y="50" width="116" height="40" rx="14" class="ink" filter="url(#rough)"/><circle data-d="0.4" cx="38" cy="70" r="7" class="ink"/><circle data-d="0.45" cx="70" cy="70" r="7" class="ink"/><circle data-d="0.5" cx="102" cy="70" r="7" class="ink"/><path data-d="0.3" class="ink" d="M128 70 C 140 70, 138 30, 120 26"/></svg>'''
@@ -62,6 +62,7 @@ ICONS = {
  "carte": '<path data-d="0.1" d="M8 20 L30 12 L52 20 L74 12 V70 L52 78 L30 70 L8 78 Z" fill="#FCE4E8" stroke="#2A2F33" stroke-width="3" stroke-linejoin="round"/><path data-d="0.4" class="ink" d="M30 12 V70 M52 20 V78" style="stroke-width:2.5"/><path data-d="0.6" class="inkt" d="M14 60 L68 26" stroke-dasharray="4 6"/>',
  "attelage": '<rect data-d="0.1" x="6" y="30" width="30" height="26" rx="6" fill="#D5EAEC" stroke="#2A2F33" stroke-width="3"/><path data-d="0.3" class="ink" d="M36 44 H52"/><path data-d="0.5" d="M52 30 H78 L70 56 H52 Z" fill="#E6E0F4" stroke="#2A2F33" stroke-width="3" stroke-linejoin="round"/><circle data-d="0.6" cx="14" cy="62" r="8" class="ink" style="stroke-width:3"/>',
  "controle": '<rect data-d="0.1" x="14" y="8" width="52" height="68" rx="8" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/><path data-d="0.4" class="inkt" d="M24 30 l6 6 l12 -12 M24 52 l6 6 l12 -12" style="stroke-width:3.5"/><path data-d="0.5" class="ink" d="M48 32 h10 M48 54 h10" style="stroke-width:2.5"/>',
+ "virement": '<rect data-d="0.1" x="10" y="16" width="64" height="60" rx="8" fill="#D5EAEC" stroke="#2A2F33" stroke-width="3"/><path data-d="0.3" class="ink" d="M10 32 H74 M26 8 V22 M58 8 V22" style="stroke-width:3"/><path data-d="0.5" class="inkt" d="M28 54 l8 8 l16 -18" style="stroke-width:3.5"/>',
  "carnet": '<rect data-d="0.1" x="12" y="8" width="56" height="70" rx="6" fill="#D6F1E6" stroke="#2A2F33" stroke-width="3"/><path data-d="0.4" class="ink" d="M24 8 V78" style="stroke-width:2.5"/><path data-d="0.6" class="ink" d="M32 26 h26 M32 40 h26 M32 54 h18" style="stroke-width:2.5"/>',
 }
 def analogy(icon, text, cls="frag"):
@@ -249,7 +250,7 @@ slide(f'''    <p class="eyebrow">1. L'automatisation</p>
       <div class="card sk fill-sky frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{CLOCK}<div><h3>Le temps</h3><p>Chaque matin, le tableau de trésorerie se met à jour. Chaque fin de mois, les variables de salaire sont préparées.</p></div></div>
       <div class="card sk fill-lav frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{BOLT}<div><h3>Un événement</h3><p>Une facture arrive par e-mail, un pointage est saisi, une demande de démonstration tombe.</p></div></div>
     </div>
-    {analogy("arrosage", "le programmateur d'arrosage : il se lance à heure fixe, ou quand la sonde détecte que le sol est sec. Et il fait toujours le même cycle.", "frag mt")}''',
+    {analogy("virement", "le virement de paie programmé : il part à date fixe, ou dès que les pointages sont validés. Et il fait toujours la même chose.", "frag mt")}''',
  seq=2, section=S945, notes="Faire trouver un exemple de chaque famille dans leur quotidien.")
 
 logic("1. L'automatisation", 'Elle <span class="mark mark--lav">exécute</span>, toujours pareil', "", "Aucune réflexion, et c'est sa force : même entrée, même résultat.",
@@ -277,7 +278,7 @@ HUMAN = """<svg class="illu human" viewBox="0 0 440 640" aria-hidden="true">
       <g class="frag" data-step="2"><rect x="322" y="316" width="70" height="92" rx="8" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3.5" transform="rotate(6 357 362)" filter="url(#rough)"/><path class="inkt" style="stroke-width:2.5" d="M338 342 h40 M337 358 h40 M336 374 h30" transform="rotate(6 357 362)"/></g>
     </svg>"""
 
-parts = [(1, "Le cerveau", "le modèle", "Ex. : GPT-6.1 ou Claude Sonnet 5.5, utilisé seul", "blush"),
+parts = [(1, "Le cerveau", "le modèle", "Ex. : GPT-6.1 Sol ou Claude Sonnet 5.5, utilisé seul", "blush"),
          (2, "La fiche de poste", "le prompt, les instructions", "Ex. : « Tu prépares les études de prix, en HT, sans inventer de tarif. »", "card"),
          (3, "La bibliothèque", "les connaissances", "Ex. : la grille tarifaire, les fiches produits, les procédures SAV", "teal"),
          (4, "Les bras et les jambes", "outils, connecteurs, plugins", "Ex. : lire les demandes dans Outlook, écrire la ligne dans Excel", "mint"),
@@ -439,14 +440,52 @@ slide('''    <p class="eyebrow">Pour les curieux · avant les démos</p>
  seq=4, cls="slide--schema", section=S1330,
  notes="Fil rouge : l'électricité. HTTP, c'est le courant qui circule dans les fils, la langue commune des logiciels. L'API, c'est la prise du logiciel. Un appel API, c'est brancher l'appareil et appuyer sur le bouton. Dans l'ordre du dessin : 1. HTTP, c'est la langue commune des logiciels sur internet. Un appel, c'est une demande. 2. L'API, c'est le guichet du logiciel : ce qu'il accepte qu'on lui demande. 3. Quatre verbes suffisent : lire, créer, modifier, supprimer. 4. Le webhook, c'est l'inverse : on ne demande plus, on est prévenu. Même dans Copilot, un assistant ou un agent qui utilise un outil fait exactement ça.")
 
-slide(f'''    <p class="eyebrow">Pour les curieux · deux mots que vous croiserez</p>
-    <h2><span class="mark">OAuth et MCP</span></h2>
-    <div class="cols" style="margin-top:30px;align-items:start">
-      <div class="card sk fill-blush frag conn">{BADGE}<h3>OAuth, le badge</h3><p>Tu autorises un outil à entrer dans ton compte sans lui donner ton mot de passe. Et tu peux reprendre le badge.</p></div>
-      <div class="card sk fill-mint frag conn">{MULTI}<h3>MCP, la multiprise</h3><p>Au lieu de brancher chaque appel un par un, une seule prise donne à l'agent plusieurs capacités d'un logiciel, prêtes à l'emploi.</p></div>
+# Fil rouge de l'électricité, en trois dessins qui se tracent à chaque clic
+T = 'font-family="SF Hand" fill="#2A2F33"'
+WALL = lambda x, y, d: f'<g data-d="{d}"><rect x="{x}" y="{y}" width="92" height="112" rx="16" fill="#D5EAEC" stroke="#2A2F33" stroke-width="4"/><circle cx="{x+46}" cy="{y+56}" r="30" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3.5"/><circle cx="{x+34}" cy="{y+56}" r="5" fill="#2A2F33"/><circle cx="{x+58}" cy="{y+56}" r="5" fill="#2A2F33"/></g>'
+PRISE = f"""<svg class="illu scene-svg" viewBox="0 0 420 250" aria-hidden="true">
+  {WALL(164, 66, 0.15)}
+  <text data-d="0.5" x="210" y="44" text-anchor="middle" font-size="30" {T}>Outlook</text>
+  <path data-d="0.6" class="inkt" d="M264 112 C 320 104, 350 80, 352 52"/>
+  <text data-d="0.7" x="356" y="40" text-anchor="middle" font-size="24" fill="#0B4F5C" font-family="SF Hand">son API</text>
+  <text data-d="0.8" x="210" y="222" text-anchor="middle" font-size="22" {T}>ce qu'il accepte qu'on y branche</text>
+</svg>"""
+APPEL = f"""<svg class="illu scene-svg" viewBox="0 0 420 250" aria-hidden="true">
+  <g data-d="0.1"><rect x="14" y="78" width="104" height="72" rx="10" fill="#FFFFFF" stroke="#2A2F33" stroke-width="4"/><path d="M4 162 H128" fill="none" stroke="#2A2F33" stroke-width="4" stroke-linecap="round"/></g>
+  <text data-d="0.3" x="66" y="190" text-anchor="middle" font-size="22" {T}>ton outil</text>
+  <path data-d="0.35" class="ink" d="M118 114 C 170 114, 170 150, 214 150 H232"/>
+  <g data-d="0.5"><rect x="232" y="128" width="46" height="44" rx="10" fill="#E6E0F4" stroke="#2A2F33" stroke-width="4"/><path d="M278 140 H300 M278 160 H300" fill="none" stroke="#2A2F33" stroke-width="4" stroke-linecap="round"/></g>
+  {WALL(310, 94, 0.2)}
+  <path data-d="0.8" class="inkt" d="M150 70 H262 M250 60 L262 70 L250 80"/>
+  <text data-d="0.85" x="206" y="52" text-anchor="middle" font-size="22" fill="#0B4F5C" font-family="SF Hand">une demande</text>
+  <path data-d="1.1" class="inkt" d="M262 222 H150 M162 212 L150 222 L162 232"/>
+  <text data-d="1.15" x="206" y="206" text-anchor="middle" font-size="22" fill="#0B4F5C" font-family="SF Hand">une réponse</text>
+</svg>"""
+MCPS = f"""<svg class="illu scene-svg" viewBox="0 0 420 250" aria-hidden="true">
+  {WALL(8, 98, 0.1)}
+  <g data-d="0.25"><rect x="104" y="134" width="40" height="40" rx="9" fill="#E6E0F4" stroke="#2A2F33" stroke-width="4"/><path d="M104 146 H92 M104 162 H92" fill="none" stroke="#2A2F33" stroke-width="4" stroke-linecap="round"/></g>
+  <path data-d="0.35" class="ink" d="M144 154 C 172 154, 146 188, 168 188"/>
+  <g data-d="0.45"><rect x="168" y="160" width="232" height="56" rx="18" fill="#D6F1E6" stroke="#2A2F33" stroke-width="4"/><circle cx="214" cy="188" r="9" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/><circle cx="284" cy="188" r="9" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/><circle cx="354" cy="188" r="9" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/></g>
+  <path data-d="0.7" class="inkt" d="M214 160 V112 M284 160 V90 M354 160 V112"/>
+  <text data-d="0.8" x="214" y="100" text-anchor="middle" font-size="22" fill="#0B4F5C" font-family="SF Hand">lire</text>
+  <text data-d="0.9" x="284" y="78" text-anchor="middle" font-size="22" fill="#0B4F5C" font-family="SF Hand">écrire</text>
+  <text data-d="1.0" x="354" y="100" text-anchor="middle" font-size="22" fill="#0B4F5C" font-family="SF Hand">chercher</text>
+  <text data-d="1.1" x="284" y="38" text-anchor="middle" font-size="22" {T}>pour l'agent, d'un coup</text>
+</svg>"""
+OAUTH_ICO = '<rect data-d="0.1" x="14" y="20" width="56" height="56" rx="8" fill="#FCE4E8" stroke="#2A2F33" stroke-width="3"/><circle data-d="0.3" cx="34" cy="42" r="7" class="ink" style="stroke-width:3"/><path data-d="0.4" class="ink" d="M24 62 C 28 54, 40 54, 44 62 M50 40 H62 M50 50 H60" style="stroke-width:3"/><path data-d="0.2" class="ink" d="M34 20 V10 H50 V20" style="stroke-width:3"/>'
+ICONS["badge"] = OAUTH_ICO
+slide(f'''    <p class="eyebrow">Pour les curieux · le fil de l'électricité</p>
+    <h2>La prise, le branchement, <span class="mark">la multiprise</span></h2>
+    <div class="scene-row">
+      <figure class="scene frag" data-step="1">{PRISE}<figcaption><b class="hand">L'API, la prise</b>Chaque logiciel a la sienne.</figcaption></figure>
+      <figure class="scene frag" data-step="2">{APPEL}<figcaption><b class="hand">L'appel, on branche</b>Une demande part, une réponse revient. C'est le courant HTTP.</figcaption></figure>
+      <figure class="scene frag" data-step="3">{MCPS}<figcaption><b class="hand">MCP, la multiprise</b>Un seul branchement, plusieurs capacités prêtes à l'emploi.</figcaption></figure>
     </div>
-    {tip("MCP est un standard publié par Anthropic en novembre 2024 : une seule façon de brancher un assistant IA sur les systèmes où vivent vos données.", "Anthropic, Introducing the Model Context Protocol, 25 novembre 2024", "frag mt")}''',
- seq=4, section=S1330, notes="Ce sont les deux mots qu'ils verront dans les réglages de Copilot ou d'un autre outil. Pas besoin d'aller plus loin.")
+    <div class="cols" style="margin-top:22px;align-items:stretch;gap:28px">
+      {analogy("badge", "un badge visiteur. C'est <b>OAuth</b> : tu laisses un outil entrer dans ton compte sans lui donner ton mot de passe, et tu peux reprendre le badge.", "frag")}
+      {tip("MCP est un standard publié par Anthropic en novembre 2024 : une seule façon de brancher un assistant IA sur les systèmes où vivent vos données.", "Anthropic, Introducing the Model Context Protocol, 25 novembre 2024", "frag")}
+    </div>''',
+ seq=4, section=S1330, notes="On reprend le fil de la slide précédente, un dessin par clic. La prise : l'API, ce que le logiciel accepte qu'on lui branche. Le branchement : un appel, une demande, une réponse. La multiprise : MCP, l'agent branche une seule fois et récupère lire, écrire, chercher. Puis le badge : OAuth, c'est ce qu'ils verront quand Copilot ou un autre outil demande « autoriser l'accès à votre compte ».")
 def edit(k): return f'<td class="edit sk" contenteditable="true" data-k="{k}" data-ph="à compléter"></td>'
 rows = [("fait", "Ce que ça fait"), ("demande", "Ce que ça demande"), ("pas", "Ce que ça ne fait pas")]
 trs = "".join(f'<tr><td class="row">{l}</td>{edit("as-"+k)}{edit("au-"+k)}{edit("ag-"+k)}</tr>' for k, l in rows)
@@ -550,7 +589,7 @@ slide(f'''    <p class="eyebrow">Doutes et réserves</p>
 slide(f'''    <p class="eyebrow">Garde-fous</p>
     <h2>L'humain <span class="mark">valide</span>, toujours</h2>
     <p class="lead" style="margin-top:12px">L'IA peut se tromper avec aplomb : une réponse fausse, présentée comme sûre. C'est l'« hallucination » vue ce matin.</p>
-    {analogy("controle", "la préparation d'une machine avant livraison : même quand tout semble bon, on vérifie avant que ça parte chez le client.", "frag")}
+    {analogy("controle", "le bon à tirer avant d'imprimer un flyer : même quand la maquette semble parfaite, quelqu'un relit et signe avant l'envoi à l'imprimeur.", "frag")}
     <figure class="schema" role="img" aria-label="Schéma : l'IA propose, tu relis et corriges, puis ça part. Si ce n'est pas bon, on revient à l'IA."><!-- schema:humain-valide --></figure>''',
  seq=6, cls="slide--schema", section="16h00 · Garde-fous essentiels",
  notes="La boucle de retour est la clé : relire n'est pas une perte de temps, c'est la condition pour déléguer.")

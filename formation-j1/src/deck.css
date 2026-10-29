@@ -429,3 +429,12 @@ kbd { font-family: var(--font-body); font-weight: 700; background: #fff; border:
   .frag { opacity: 1; transform: none; }
   .trail-global, body > *:not(.viewport) { display: none !important; }
 }
+
+/* Scène dessinée : la prise, le branchement, la multiprise */
+.scene-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 26px; }
+.scene { margin: 0; background: var(--card); border-radius: 22px; padding: 18px 18px 20px; }
+.scene .scene-svg { width: 100%; height: 250px; display: block; }
+.scene figcaption { margin-top: 6px; font-size: 24px; line-height: 1.3; color: var(--muted); text-align: center; }
+.scene figcaption b { display: block; font-weight: 400; font-size: 34px; color: var(--teal); margin-bottom: 4px; }
+.scene-row + .cols .analogy b:not(.hand) { font-family: var(--font-body); font-size: inherit; color: var(--ink); margin: 0; font-weight: 700; }
+.scene-row + .cols .analogy { max-width: none; }

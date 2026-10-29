@@ -60,6 +60,7 @@
   function draw(slide) {
     if (reduced) return;
     slide.querySelectorAll(".schema svg, svg.illu").forEach((svg) => {
+      if (svg.closest(".scene.frag:not(.is-shown)")) return;
       const groups = svg.matches(".illu") ? Array.from(svg.querySelectorAll("[data-d]")) : Array.from(svg.children).filter((c) => c.tagName === "g");
       groups.forEach((g, k) => {
         const delay = (g.dataset.d !== undefined ? parseFloat(g.dataset.d) : k * 0.07) + 0.15;
@@ -135,7 +136,7 @@
   function go(i, direction) { current = Math.max(0, Math.min(total - 1, i)); render(direction || 1); }
   function next() {
     const hidden = frags(slides[current]).filter((x) => !x.classList.contains("is-shown"));
-    if (hidden.length) { const s = stepOf(hidden[0]); hidden.filter((x) => stepOf(x) === s).forEach((x) => x.classList.add("is-shown")); return; }
+    if (hidden.length) { const s = stepOf(hidden[0]); hidden.filter((x) => stepOf(x) === s).forEach((x) => { x.classList.add("is-shown"); if (x.matches(".scene")) draw(x); }); return; }
     if (current < total - 1) go(current + 1, 1);
   }
   function prev() {
