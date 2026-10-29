@@ -68,6 +68,32 @@ def humain_valide():
     els.append(text("t1", 20, 40, "Déléguer, oui. Sans relire, non.", size=24, color=TEAL))
     return els
 
-SCHEMAS = {"humain-valide": (humain_valide, "L'humain valide"),
+def webhook():
+    els = []
+    els.append(box("ev", 20, 120, 220, 120, "Un courriel\narrive", fill=BLUE, size=24))
+    els.append(box("wh", 330, 120, 220, 120, "L'adresse\nwebhook", fill=YELLOW, size=24))
+    els.append(box("sc", 640, 120, 220, 120, "Le scénario\ndémarre", fill=GREEN, size=24))
+    els.append(arrow("a1", 240, 180, 328, 180))
+    els.append(arrow("a2", 550, 180, 638, 180))
+    els.append(text("t1", 20, 40, "Le logiciel prévient lui-même, par un appel HTTP.", size=24, color=TEAL))
+    els.append(text("t2", 20, 290, "Pas besoin de vérifier toutes les cinq minutes :\nc'est l'événement qui sonne à la porte.", size=22, color=MUTED))
+    return els
+
+def sous_le_capot():
+    els = []
+    els.append(box("co", 20, 60, 240, 110, "Copilot,\nton agent", fill=GREEN, size=24))
+    els.append(box("api", 620, 60, 240, 110, "API\nd'Outlook", fill=BLUE, size=24))
+    els.append(arrow("rq", 262, 95, 618, 95))
+    els.append(arrow("rp", 618, 140, 262, 140, dashed=True))
+    els.append(text("rqt", 290, 50, "requête HTTP : « les courriels ? »", size=19))
+    els.append(text("rpt", 330, 152, "réponse : les courriels", size=19, color=MUTED))
+    els.append(box("ev", 20, 270, 240, 110, "Outlook : un\ncourriel arrive", fill=YELLOW, size=24))
+    els.append(box("au", 620, 270, 240, 110, "Ton automatisation\nou ton agent", fill=PINK, size=19))
+    els.append(arrow("wh", 262, 325, 618, 325))
+    els.append(text("wht", 340, 280, "webhook : appel HTTP", size=19))
+    els.append(text("t1", 20, 420, "Dans un sens, on demande. Dans l'autre, on est prévenu.", size=22, color=TEAL))
+    return els
+
+SCHEMAS = {"webhook": (webhook, "Le webhook"), "sous-le-capot": (sous_le_capot, "Sous le capot"), "humain-valide": (humain_valide, "L'humain valide"),
 "trois-logiques": (trois_logiques, "Trois logiques : qui garde la main"),
            "grille-decision": (grille, "Grille de décision en quatre questions")}
