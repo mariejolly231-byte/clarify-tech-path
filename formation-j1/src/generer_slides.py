@@ -270,6 +270,17 @@ slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
       <div class="card sk fill-mint rise"><h3>L'agent</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Un objectif, un événement ou un horaire. Il enchaîne seul.</p></div>
     </div>''', seq=2, section=S945, notes="Les pièces sont les mêmes. Ce qui change, c'est qui appuie sur le bouton, et combien d'étapes il enchaîne sans toi.")
 
+slide(f'''    <p class="eyebrow">Ce que je constate sur le terrain : l'usage n°1</p>
+    <h2>Un <span class="mark mark--sky">super moteur de recherche</span></h2>
+    <p class="lead rise" style="margin-top:18px">On pose une question, on attend une réponse. On s'en sert en mode assistant, mais on oublie de l'équiper.</p>
+    <div class="cols--3" style="display:grid;margin-top:34px;align-items:start">
+      <div class="card sk fill-lemon frag"><h3>On oublie le contexte</h3><p>Qui je suis, pour qui, avec quelles règles. Sans ça, la réponse reste générique.</p></div>
+      <div class="card sk fill-sky frag"><h3>On oublie la connexion</h3><p>Elle ne voit ni Outlook, ni Excel, ni vos documents. On recopie tout à la main.</p></div>
+      <div class="card sk fill-mint frag"><h3>On oublie la mémoire</h3><p>Chaque fois, on repart de zéro et on réexplique.</p></div>
+    </div>
+    <p class="idea frag" style="font-size:50px;margin-top:36px">Résultat : on passe parfois <span class="mark mark--blush">plus de temps</span> qu'à faire la tâche soi-même.</p>''', seq=2, section=S945,
+ notes="Faire réagir : qui s'est déjà dit que ça aurait été plus rapide de le faire soi-même ? La slide suivante montre pourquoi : il manque des pièces. Pour appuyer : 24 % des TPE et PME utilisent l'IA pour des chatbots, assistants ou outils de recherche d'informations (Baromètre France Num 2026).")
+
 def yes(t): return f'<td class="ok">{t}</td>'
 def no(t): return f'<td class="ko">{t}</td>'
 slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
