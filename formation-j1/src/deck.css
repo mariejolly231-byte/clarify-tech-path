@@ -438,3 +438,36 @@ kbd { font-family: var(--font-body); font-weight: 700; background: #fff; border:
 .scene figcaption b { display: block; font-weight: 400; font-size: 34px; color: var(--teal); margin-bottom: 4px; }
 .scene-row + .cols .analogy b:not(.hand) { font-family: var(--font-body); font-size: inherit; color: var(--ink); margin: 0; font-weight: 700; }
 .scene-row + .cols .analogy { max-width: none; }
+
+/* Bocal : analogie et « même demande, deux réponses » */
+.bocal-row { margin-top: 20px; gap: 28px; align-items: stretch; }
+.bocal-row .analogy { max-width: none; }
+.bocal-row .analogy p { font-size: 24px; }
+.duo { background: var(--card); border-radius: 18px; padding: 16px 24px; display: grid; gap: 8px; }
+.duo-q { font-size: 22px; }
+.duo-q b, .duo-a b { font-weight: 400; color: var(--teal); font-size: 28px; margin-right: 8px; }
+.duo-a { font-size: 22px; line-height: 1.3; padding: 5px 14px; border-radius: 12px; }
+.duo-a--ko { background: var(--blush); }
+.duo-a--ok { background: var(--mint); }
+.scene-row .scene-svg[viewBox$="200"] { height: 200px; }
+
+/* Deux garde-fous de l'agent */
+.guards { display: grid; grid-template-columns: auto 1fr 1fr; gap: 28px; align-items: center; margin-top: 22px; padding: 16px 26px; background: var(--blush); border-radius: 18px; }
+.guards-t { display: flex; align-items: center; gap: 10px; font-size: 30px; color: var(--teal); }
+.guards p { font-size: 24px; line-height: 1.3; }
+.guards b { font-weight: 700; }
+.guards .ico, .guards svg { width: 36px; height: 36px; flex: none; }
+.guards p { font-size: 22px; }
+
+/* Question zéro : ai-je le droit ? */
+.q0 { margin-top: 10px; padding: 10px 20px; background: var(--blush); border-radius: 14px; font-size: 23px; line-height: 1.3; max-width: 1390px; }
+.q0 b { font-weight: 400; font-size: 28px; color: var(--teal); margin-right: 10px; }
+
+/* Exemple d'audit rempli ensemble : une ligne, neuf colonnes en lignes */
+.audit-ex { width: 100%; max-width: 1390px; border-spacing: 10px 6px; margin-top: 14px; }
+.audit-ex td { padding: 6px 16px; font-size: 22px; height: 52px; vertical-align: middle; }
+.audit-ex td.row { width: 420px; font-size: 26px; padding-left: 14px; border-radius: 12px; }
+.audit-ex td.row b { color: var(--teal); font-weight: 400; margin-right: 6px; }
+.audit-ex tr.is-key td.row { background: var(--mint); }
+.steps--tight li { margin-bottom: 0; }
+.steps--tight li + li { margin-top: 20px; }

@@ -45,12 +45,12 @@ PLUG = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><rec
 BADGE = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><rect data-d="0.6" x="22" y="28" width="76" height="66" rx="10" fill="#FCE4E8"/><rect data-d="0.1" x="22" y="28" width="76" height="66" rx="10" class="ink" filter="url(#rough)"/><circle data-d="0.4" cx="48" cy="56" r="10" class="ink"/><path data-d="0.5" class="ink" d="M36 80 C 40 70, 56 70, 60 80 M70 52 H88 M70 64 H84"/><path data-d="0.3" class="ink" d="M52 28 V16 H68 V28"/></svg>'''
 MULTI = '''<svg class="illu ico-xl" viewBox="0 0 140 120" aria-hidden="true"><rect data-d="0.6" x="12" y="50" width="116" height="40" rx="14" fill="#D6F1E6"/><rect data-d="0.1" x="12" y="50" width="116" height="40" rx="14" class="ink" filter="url(#rough)"/><circle data-d="0.4" cx="38" cy="70" r="7" class="ink"/><circle data-d="0.45" cx="70" cy="70" r="7" class="ink"/><circle data-d="0.5" cx="102" cy="70" r="7" class="ink"/><path data-d="0.3" class="ink" d="M128 70 C 140 70, 138 30, 120 26"/></svg>'''
 
-def logic(eyebrow, title, mk, definition, ex, color, notes):
+def logic(eyebrow, title, mk, definition, ex, color, notes, extra=""):
     cards = "".join(f'''<div class="ex sk {color} frag"><p class="who">{w}</p><p>{d}</p>{s}</div>''' for w, d, s in ex)
     slide(f'''    <p class="eyebrow">{eyebrow}</p>
     <h2>{title}</h2>
     <p class="lead rise" style="margin-top:18px">{definition}</p>
-    <div class="cols--3 grow" style="display:grid;margin-top:30px">{cards}</div>''', seq=2, section="9h45 · Assistant, automatisation, agent", notes=notes)
+    <div class="cols--3{'' if extra else ' grow'}" style="display:grid;margin-top:{'22' if extra else '30'}px">{cards}</div>{extra}''', seq=2, section="9h45 · Assistant, automatisation, agent", notes=notes)
 
 
 
@@ -278,6 +278,56 @@ HUMAN = """<svg class="illu human" viewBox="0 0 440 640" aria-hidden="true">
       <g class="frag" data-step="2"><rect x="322" y="316" width="70" height="92" rx="8" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3.5" transform="rotate(6 357 362)" filter="url(#rough)"/><path class="inkt" style="stroke-width:2.5" d="M338 342 h40 M337 358 h40 M336 374 h30" transform="rotate(6 357 362)"/></g>
     </svg>"""
 
+
+# Modèle, inférence, harnais : le schéma du bocal, redessiné et animé
+T = 'font-family="SF Hand" fill="#2A2F33"'
+TT = 'font-family="SF Hand" fill="#0B4F5C"'
+BRAIN = lambda cx, cy, k=1, d=0.4: f'<g data-d="{d}" transform="translate({cx} {cy}) scale({k})"><path d="M-46 4 C -54 -26, -20 -44, 0 -34 C 18 -46, 52 -30, 46 0 C 56 24, 30 44, 8 36 C -14 46, -52 30, -46 4 Z" fill="#FCE4E8" stroke="#2A2F33" stroke-width="3.5"/><path d="M2 -32 C -6 -10, 10 8, 2 34 M-30 -2 C -18 -10, -10 6, 0 -2 M14 -14 C 26 -22, 36 -8, 44 -14" fill="none" stroke="#2A2F33" stroke-width="2.5" stroke-linecap="round"/></g>'
+JAR = lambda x, y, w, h, d=0.1: f'<g data-d="{d}"><rect x="{x+w*0.15}" y="{y}" width="{w*0.7}" height="22" rx="6" fill="#FFFFFF" stroke="#2A2F33" stroke-width="4"/><rect x="{x}" y="{y+22}" width="{w}" height="{h}" rx="30" fill="#D5EAEC" stroke="#2A2F33" stroke-width="4"/></g>'
+M_SEUL = f"""<svg class="illu scene-svg" viewBox="0 0 420 200" aria-hidden="true">
+  {JAR(140, 4, 140, 148)}
+  {BRAIN(210, 96, 0.95)}
+  <text data-d="0.7" x="210" y="196" text-anchor="middle" font-size="21" {T}>ex. : GPT-6.1 Sol, Claude Sonnet 5.5</text>
+</svg>"""
+TOK = "".join(f'<rect x="{262 + i*20}" y="{84 + (i%2)*10}" width="13" height="13" rx="3" fill="#E6E0F4" stroke="#2A2F33" stroke-width="2"/>' for i in range(4))
+M_INF = f"""<svg class="illu scene-svg" viewBox="0 0 420 200" aria-hidden="true">
+  <g data-d="0.1"><rect x="0" y="64" width="128" height="64" rx="12" fill="#FFFFFF" stroke="#2A2F33" stroke-width="4"/></g>
+  <text data-d="0.2" x="64" y="103" text-anchor="middle" font-size="21" {T}>ta demande</text>
+  <path data-d="0.35" class="inkt" d="M132 96 H154 M144 86 L154 96 L144 106"/>
+  {BRAIN(210, 96, 0.72, 0.45)}
+  <path data-d="0.6" class="ink" d="M168 50 l-10 -14 M210 42 V24 M252 50 l10 -14" style="stroke-width:3"/>
+  <g data-d="0.8">{TOK}</g>
+  <text data-d="0.9" x="292" y="140" text-anchor="middle" font-size="20" {TT}>des tokens</text>
+  <g data-d="1.0"><rect x="346" y="64" width="70" height="64" rx="12" fill="#FFFFFF" stroke="#2A2F33" stroke-width="4"/><path d="M358 84 h46 M358 96 h46 M358 108 h30" fill="none" stroke="#2A2F33" stroke-width="2.5" stroke-linecap="round"/></g>
+  <text data-d="1.1" x="381" y="52" text-anchor="middle" font-size="20" {T}>la réponse</text>
+  <text data-d="0.7" x="210" y="192" text-anchor="middle" font-size="21" {T}>il ne travaille que quand on l'appelle</text>
+</svg>"""
+PIECES = [("outils", 22, 6, "#D6F1E6"), ("mémoire", 284, 6, "#D6F1E6"), ("consignes", 6, 146, "#D6F1E6"), ("connaissances", 240, 146, "#D6F1E6")]
+PC = "".join(f'<g data-d="{0.5 + i*0.15}"><rect x="{x}" y="{y}" width="{len(t)*12 + 34}" height="44" rx="14" fill="{c}" stroke="#2A2F33" stroke-width="3.5"/><text x="{x + (len(t)*12 + 34)/2}" y="{y+29}" text-anchor="middle" font-size="22" {T}>{t}</text></g>' for i, (t, x, y, c) in enumerate(PIECES))
+M_HAR = f"""<svg class="illu scene-svg" viewBox="0 0 420 200" aria-hidden="true">
+  <path data-d="0.35" class="inkt" d="M86 50 L172 82 M330 50 L248 82 M90 146 L172 114 M300 146 L248 114" style="stroke-width:3"/>
+  {BRAIN(210, 98, 0.7, 0.1)}
+  {PC}
+  <path data-d="1.2" class="inkt" d="M150 98 C 112 84, 112 124, 150 110 M146 104 l6 6" style="stroke-width:3"/>
+  <text data-d="1.25" x="104" y="106" text-anchor="end" font-size="20" {TT}>la boucle</text>
+</svg>"""
+ICONS["moteur"] = '<rect data-d="0.1" x="8" y="34" width="50" height="38" rx="6" fill="#E6E0F4" stroke="#2A2F33" stroke-width="3"/><path data-d="0.3" class="ink" d="M16 34 V22 H28 V34 M36 34 V22 H48 V34" style="stroke-width:3"/><circle data-d="0.4" cx="68" cy="56" r="10" class="ink" style="stroke-width:3"/><path data-d="0.6" class="inkt" d="M64 22 c6 -6 -4 -10 2 -16 M74 26 c6 -6 -4 -10 2 -16" style="stroke-width:2.5"/><path data-d="0.5" class="ink" d="M4 80 H80" style="stroke-width:3"/>'
+slide(f'''    <p class="eyebrow">2. L'assistant et l'agent : ce qu'il y a sous le capot</p>
+    <h2>Le modèle, l'inférence, <span class="mark">le harnais</span></h2>
+    <div class="scene-row">
+      <figure class="scene frag" data-step="1">{M_SEUL}<figcaption><b class="hand">1. Le modèle</b>Un cerveau dans un bocal : il sait beaucoup, mais seul il ne fait rien.</figcaption></figure>
+      <figure class="scene frag" data-step="2">{M_INF}<figcaption><b class="hand">2. L'inférence</b>Le moment où il travaille. Chaque morceau de mot, le token, se paie.</figcaption></figure>
+      <figure class="scene frag" data-step="3">{M_HAR}<figcaption><b class="hand">3. Le harnais</b>Tout ce qu'on branche autour pour qu'il agisse dans ton cadre.</figcaption></figure>
+    </div>
+    <div class="cols bocal-row">
+      {analogy("moteur", "un moteur de tracteur sur un établi : il tourne et consomme, c'est l'inférence. Il ne laboure rien tant qu'on ne l'a pas monté et équipé : c'est le harnais.", "frag")}
+      <div class="duo frag"><p class="duo-q"><b class="hand">Même demande :</b> « Prépare l'étude de prix de ce client. »</p>
+        <p class="duo-a duo-a--ko"><b class="hand">Sans harnais</b>« Je n'ai pas accès à vos tarifs. Voici un modèle à compléter. »</p>
+        <p class="duo-a duo-a--ok"><b class="hand">Avec harnais</b>Il lit la demande dans Outlook, applique la grille tarifaire en HT, vérifie le total, te le soumet.</p></div>
+    </div>''',
+ seq=2, section=S945,
+ notes="Pont avec le rappel du matin : on a vu comment une IA générative fonctionne. Un clic par dessin. Le modèle seul : il a lu énormément, mais il n'a ni bras, ni consignes, ni mémoire. L'inférence : c'est le moment où il travaille, quand on l'appelle ; il lit la demande et écrit la réponse morceau par morceau, et ces morceaux, les tokens, sont l'unité sur laquelle on paie. Le harnais : tout ce qu'on branche autour. Puis l'analogie du moteur, et la même demande avec et sans harnais : c'est là qu'on comprend pourquoi un assistant ou un agent bien équipé fait mieux qu'une IA toute nue. La slide suivante détaille les pièces une par une. Microsoft emploie aussi le mot « harness » pour les agents Copilot Studio (Microsoft Learn, Agents overview).")
+
 parts = [(1, "Le cerveau", "le modèle", "Ex. : GPT-6.1 Sol ou Claude Sonnet 5.5, utilisé seul", "blush"),
          (2, "La fiche de poste", "le prompt, les instructions", "Ex. : « Tu prépares les études de prix, en HT, sans inventer de tarif. »", "card"),
          (3, "La bibliothèque", "les connaissances", "Ex. : la grille tarifaire, les fiches produits, les procédures SAV", "teal"),
@@ -289,14 +339,14 @@ def part(n, t, sub, ex, c):
     s = f' <span class="comp-sub">{sub}</span>' if sub else ""
     return f'<div class="comp sk fill-{c} frag" data-step="{n}"><p class="hand comp-t">{t}{s}</p><p class="comp-ex">{ex}</p></div>'
 cards = [part(*x) for x in parts]
-slide(f'''    <p class="eyebrow">2. L'assistant et l'agent, un collègue numérique</p>
+slide(f'''    <p class="eyebrow">2. Le harnais pièce par pièce : un collègue numérique</p>
     <h2><span class="mark mark--blush">Le modèle</span> et <span class="mark">son harnais</span></h2>
     <div class="anat">
       <div class="anat-col">{"".join(cards[:3])}</div>
       <div class="anat-mid">{HUMAN}<p class="harness frag" data-step="8"><b class="hand">Tout le reste, c'est le harnais :</b>le réglage qui le rend bon, ou pas.</p></div>
       <div class="anat-col">{"".join(cards[3:])}</div>
     </div>''', seq=2, section=S945,
- notes="Démo en direct : faire apparaître chaque pièce au moment où tu la montres dans l'outil. Insister à la fin : c'est un outil. Le même modèle, mal harnaché, donne de mauvais résultats. Le modèle GPT-6.1 est ton exemple : vérifier le nom exact du modèle au moment de la séance.")
+ notes="Démo en direct : faire apparaître chaque pièce au moment où tu la montres dans l'outil. Insister à la fin : c'est un outil. Le même modèle, mal harnaché, donne de mauvais résultats. Le bocal de la slide précédente, vu de près. Vérifier le nom exact des modèles la veille de la séance.")
 
 same = "".join(f'<span class="pill sk sk--thin">{t}</span>' for t in ["Modèle", "Instructions", "Connaissances", "Outils", "Compétences", "Mémoire", "Boucle"])
 slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
@@ -334,23 +384,22 @@ slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
     {analogy("carte", "un GPS sans carte à jour ni adresse enregistrée : il marche, mais il te fait perdre du temps.", "frag mt")}''', seq=2, section=S945,
  notes="C'est toujours un assistant, mais avec moins de pièces. D'où des réponses plus génériques : ce n'est pas l'IA qui est moins bonne, c'est l'équipement.")
 
-slide(f'''    <figure class="infographic grow">
-      <img src="images/harnais-bocal.png" alt="Schéma Modèle, inférence, harnais. 1. Le modèle : un cerveau dans un bocal, il sait plein de choses mais ne peut rien faire seul, sans outils ni consignes. 2. L'inférence : ton prompt va au modèle qui produit une réponse, c'est le moment où il travaille, facturé au token. 3. Le harnais : autour du modèle, des outils, une mémoire, des règles et instructions, une boucle et une base de connaissances. Agent IA égale modèle plus harnais ; le harnais fait souvent la différence en production.">
-    </figure>''',
- seq=2, cls="slide--figure", section=S945,
- notes="Synthèse après la démo : le bocal, c'est le modèle seul. Tout ce qu'on vient de montrer, c'est le harnais. Deux mots nouveaux à poser à l'oral : l'inférence, c'est le moment où le modèle travaille ; le token, c'est un petit morceau de mot, l'unité sur laquelle on paie. Microsoft emploie aussi le mot « harness » pour les agents Copilot Studio (Microsoft Learn, Agents overview).")
-
 logic("L'assistant en vrai", 'Il <span class="mark mark--sky">répond</span>, tu gardes la main', "", "C'est comme le GPS du téléphone : il propose l'itinéraire, c'est toi qui conduis.",
  [("Chatbot du site Summit Flow", "Assistant de type chatbot : il répond aux visiteurs à partir du contenu du site.", '<span class="live">démo en direct</span>'),
   ("Un projet Claude", "Des consignes et des documents de référence, pour des réponses dans ton cadre.", shot("Capture d'un projet Claude (consignes et documents)")),
   ("Copilot dans Microsoft 365", "Le même principe dans Outlook, Word ou Teams.", shot("Capture de Copilot ou d'un agent Copilot avec consignes"))],
  "fill-sky", "Le chatbot du site se montre en direct, pas de capture.")
 
+
+GARDE = f'''
+    <div class="guards frag"><p class="hand guards-t">{icon("alert")}Deux garde-fous, toujours</p>
+      <p><b>Un humain valide</b> avant que quoi que ce soit parte chez un client, un fournisseur ou un collègue.</p>
+      <p><b>Aucune action irréversible</b> sans toi : payer, commander, supprimer, envoyer.</p></div>'''
 logic("L'agent en vrai", 'Il <span class="mark">poursuit un objectif</span>, dans ton cadre', "", "C'est comme l'autoguidage du tracteur : tu fixes la parcelle et le cadre, il trace les lignes, tu restes en cabine.",
  [("Super agent Lindy", "Un agent qui enchaîne plusieurs tâches depuis le téléphone.", shot("Captures d'écran du téléphone (Lindy)")),
   ("Un agent Claude", "Le modèle avec ses outils, sa mémoire et ses règles.", shot("Capture d'un agent Claude")),
   ("Un agent Copilot", "Un agent construit dans l'environnement Microsoft.", shot("Capture d'un agent Copilot"))],
- "fill-mint", "Relier à l'anatomie : mêmes pièces que l'assistant, mais c'est l'objectif qui le lance.")
+ "fill-mint", "Relier à l'anatomie : mêmes pièces que l'assistant, mais c'est l'objectif qui le lance. Puis les deux garde-fous : ils font partie du cadre qu'on lui donne, c'est le harnais qui les impose. Exemple Lindy : il prépare la commande, il ne la passe pas.", GARDE)
 
 quiz = [("Préparer une présentation PowerPoint à partir de mes notes", "assistant", "sky"),
         ("Chaque facture reçue par e-mail s'ajoute au tableau de trésorerie", "automatisation", "lav"),
@@ -374,19 +423,21 @@ slide(f'''    <div class="grow center-y">
 # ---------- 11h00 Quand utiliser quoi ----------
 slide(f'''    <p class="eyebrow">Quand utiliser quoi</p>
     <h2>La grille en quatre questions</h2>
+    <p class="q0 frag" data-step="0"><b class="hand">Question zéro : ai-je le droit ?</b>Données personnelles, clients ou confidentielles, outil validé par l'entreprise. Dans le doute, on demande à la référente IA.</p>
     <figure class="schema" role="img" aria-label="Arbre de décision. 1. La tâche revient-elle souvent ? Non : geste manuel ou assistant au cas par cas. 2. Les règles sont-elles stables ? Non : clarifier la règle avant d'outiller. 3. Faut-il interpréter un texte ou décider ? Non : automatisation. Oui : agent, ou assistant et automatisation. 4. Une erreur coûte cher ? Un humain valide avant que ça parte."><!-- schema:grille-decision --></figure>
     {analogy("attelage", "choisir l'outil à atteler : on regarde d'abord le travail à faire, pas l'outil le plus récent.", "frag")}''',
  seq=3, cls="slide--schema", section="11h00 · Quand utiliser quoi",
- notes="La question 4 s'applique à toutes les branches : elle ne choisit pas l'outil, elle fixe le niveau de contrôle humain.")
+ notes="La question zéro passe avant tout : si on n'a pas le droit d'utiliser ces données dans cet outil, on s'arrête là, quelle que soit la réponse aux quatre autres. La question 4 s'applique à toutes les branches : elle ne choisit pas l'outil, elle fixe le niveau de contrôle humain.")
 
-qs = [("1", "La tâche revient-elle souvent ?"), ("2", "Les règles sont-elles stables ?"), ("3", "Faut-il interpréter un texte ou décider ?"), ("4", "Une erreur coûte-t-elle cher ?")]
+qs = [("0", "Ai-je le droit d'utiliser ces données ?"), ("1", "La tâche revient-elle souvent ?"), ("2", "Les règles sont-elles stables ?"), ("3", "Faut-il interpréter un texte ou décider ?"), ("4", "Une erreur coûte-t-elle cher ?")]
 qhtml = "".join(f'''<div class="q" data-q="{n}"><span>{n}. {t}</span><div class="yn"><button class="sk sk--thin" value="oui" aria-pressed="false">oui</button><button class="sk sk--thin no" value="non" aria-pressed="false">non</button></div></div>''' for n, t in qs)
 slide(f'''    <p class="eyebrow">On la teste ensemble</p>
     <h2>Une situation, <span class="mark mark--lav">quatre réponses</span></h2>
     <div class="decider">
       <div>{qhtml}<button class="reset sk sk--thin" style="--radius:12px;margin-top:20px;padding:6px 16px;font-family:var(--font-hand);font-size:24px">Recommencer</button>
-      {tip("71 % des entreprises qui n'utilisent pas l'IA disent ne pas y voir d'usage. La grille aide à le vérifier.", "Insee Première n° 2120, juillet 2026", "frag mt")}</div>
-      <div class="verdict-box sk" aria-live="polite"><p class="lbl">La grille propose</p><p class="out"></p><p class="why"></p><p class="guard">Et quelle que soit la réponse : un humain valide avant que ça parte.</p></div>
+</div>
+      <div class="stack"><div class="verdict-box sk" aria-live="polite"><p class="lbl">La grille propose</p><p class="out"></p><p class="why"></p><p class="guard">Et quelle que soit la réponse : un humain valide avant que ça parte.</p></div>
+      {tip("71 % des entreprises qui n'utilisent pas l'IA disent ne pas y voir d'usage. La grille aide à le vérifier.", "Insee Première n° 2120, juillet 2026", "frag")}</div>
     </div>''', seq=3, section="11h00 · Quand utiliser quoi",
  notes="Prendre une situation proposée par la salle, cliquer oui ou non avec le groupe. La réponse s'affiche à droite. Recommencer pour une deuxième situation.")
 
@@ -440,52 +491,58 @@ slide('''    <p class="eyebrow">Pour les curieux · avant les démos</p>
  seq=4, cls="slide--schema", section=S1330,
  notes="Fil rouge : l'électricité. HTTP, c'est le courant qui circule dans les fils, la langue commune des logiciels. L'API, c'est la prise du logiciel. Un appel API, c'est brancher l'appareil et appuyer sur le bouton. Dans l'ordre du dessin : 1. HTTP, c'est la langue commune des logiciels sur internet. Un appel, c'est une demande. 2. L'API, c'est le guichet du logiciel : ce qu'il accepte qu'on lui demande. 3. Quatre verbes suffisent : lire, créer, modifier, supprimer. 4. Le webhook, c'est l'inverse : on ne demande plus, on est prévenu. Même dans Copilot, un assistant ou un agent qui utilise un outil fait exactement ça.")
 
-# Fil rouge de l'électricité, en trois dessins qui se tracent à chaque clic
-T = 'font-family="SF Hand" fill="#2A2F33"'
+# Prises de formes différentes : chaque logiciel a la sienne (API). MCP : la même prise partout.
+def SOCK(x, y, kind, d, fill="#D5EAEC"):
+    holes = {
+        "rond": f'<circle cx="{x+28}" cy="{y+28}" r="4.5" fill="#2A2F33"/><circle cx="{x+44}" cy="{y+28}" r="4.5" fill="#2A2F33"/>',
+        "fente": f'<rect x="{x+22}" y="{y+18}" width="6" height="20" rx="2" fill="#2A2F33"/><rect x="{x+44}" y="{y+18}" width="6" height="20" rx="2" fill="#2A2F33"/><rect x="{x+33}" y="{y+40}" width="6" height="10" rx="2" fill="#2A2F33"/>',
+        "tri": f'<circle cx="{x+36}" cy="{y+18}" r="4.5" fill="#2A2F33"/><circle cx="{x+24}" cy="{y+38}" r="4.5" fill="#2A2F33"/><circle cx="{x+48}" cy="{y+38}" r="4.5" fill="#2A2F33"/>',
+        "mcp": f'<rect x="{x+20}" y="{y+29}" width="32" height="14" rx="7" fill="#2A2F33"/>',
+    }[kind]
+    return f'<g data-d="{d}"><rect x="{x}" y="{y}" width="72" height="72" rx="14" fill="{fill}" stroke="#2A2F33" stroke-width="3.5"/>{holes}</g>'
+def HEAD(x, y, kind, d, fill):
+    shape = {"rond": f'<circle cx="{x+12}" cy="{y}" r="12"', "fente": f'<rect x="{x}" y="{y-12}" width="24" height="24" rx="3"', "tri": f'<path d="M{x} {y-13} L{x+24} {y} L{x} {y+13} Z"', "mcp": f'<rect x="{x}" y="{y-9}" width="26" height="18" rx="9"'}[kind]
+    return f'<g data-d="{d}">{shape} fill="{fill}" stroke="#2A2F33" stroke-width="3"/></g>'
+LOGS = [("Outlook", 4), ("Excel", 92), ("logiciel métier", 180)]
+AGENT = f'<g data-d="0.1"><rect x="6" y="96" width="92" height="66" rx="12" fill="#FFFFFF" stroke="#2A2F33" stroke-width="4"/><path d="M28 120 h48 M28 136 h32" fill="none" stroke="#2A2F33" stroke-width="3" stroke-linecap="round"/></g><text data-d="0.2" x="52" y="188" text-anchor="middle" font-size="22" font-family="SF Hand" fill="#2A2F33">l\'agent</text>'
+def cords(kinds, fills, base):
+    out = []
+    for i, ((name, y), k, f) in enumerate(zip(LOGS, kinds, fills)):
+        cy = y + 36
+        out.append(SOCK(340, y, k, base + i * 0.12))
+        out.append(f'<path data-d="{base + 0.3 + i*0.12}" class="ink" d="M98 129 C 180 129, 210 {cy}, 300 {cy}" style="stroke-width:3"/>')
+        out.append(HEAD(304, cy, k, base + 0.5 + i * 0.12, f))
+        out.append(f'<text data-d="{base + 0.6 + i*0.12}" x="296" y="{cy - 16 if i < 2 else cy + 28}" text-anchor="end" font-size="20" font-family="SF Hand" fill="#0B4F5C">{name}</text>')
+    return "".join(out)
+SANS = f"""<svg class="illu scene-svg" viewBox="0 0 420 260" aria-hidden="true">{AGENT}{cords(["rond", "fente", "tri"], ["#FCE4E8", "#E6E0F4", "#FFFFFF"], 0.2)}</svg>"""
+AVEC = f"""<svg class="illu scene-svg" viewBox="0 0 420 260" aria-hidden="true">{AGENT}{cords(["mcp", "mcp", "mcp"], ["#D6F1E6"] * 3, 0.2)}</svg>"""
 WALL = lambda x, y, d: f'<g data-d="{d}"><rect x="{x}" y="{y}" width="92" height="112" rx="16" fill="#D5EAEC" stroke="#2A2F33" stroke-width="4"/><circle cx="{x+46}" cy="{y+56}" r="30" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3.5"/><circle cx="{x+34}" cy="{y+56}" r="5" fill="#2A2F33"/><circle cx="{x+58}" cy="{y+56}" r="5" fill="#2A2F33"/></g>'
-PRISE = f"""<svg class="illu scene-svg" viewBox="0 0 420 250" aria-hidden="true">
-  {WALL(164, 66, 0.15)}
-  <text data-d="0.5" x="210" y="44" text-anchor="middle" font-size="30" {T}>Outlook</text>
-  <path data-d="0.6" class="inkt" d="M264 112 C 320 104, 350 80, 352 52"/>
-  <text data-d="0.7" x="356" y="40" text-anchor="middle" font-size="24" fill="#0B4F5C" font-family="SF Hand">son API</text>
-  <text data-d="0.8" x="210" y="222" text-anchor="middle" font-size="22" {T}>ce qu'il accepte qu'on y branche</text>
+APPEL = f"""<svg class="illu scene-svg" viewBox="0 0 420 260" aria-hidden="true">
+  <g data-d="0.1"><rect x="14" y="88" width="104" height="72" rx="10" fill="#FFFFFF" stroke="#2A2F33" stroke-width="4"/><path d="M4 172 H128" fill="none" stroke="#2A2F33" stroke-width="4" stroke-linecap="round"/></g>
+  <text data-d="0.3" x="66" y="200" text-anchor="middle" font-size="22" font-family="SF Hand" fill="#2A2F33">ton outil</text>
+  <path data-d="0.35" class="ink" d="M118 124 C 170 124, 170 160, 214 160 H232"/>
+  <g data-d="0.5"><rect x="232" y="138" width="46" height="44" rx="10" fill="#E6E0F4" stroke="#2A2F33" stroke-width="4"/><path d="M278 150 H300 M278 170 H300" fill="none" stroke="#2A2F33" stroke-width="4" stroke-linecap="round"/></g>
+  {WALL(310, 104, 0.2)}
+  <text data-d="0.25" x="356" y="90" text-anchor="middle" font-size="22" font-family="SF Hand" fill="#2A2F33">Outlook</text>
+  <path data-d="0.8" class="inkt" d="M150 62 H262 M250 52 L262 62 L250 72"/>
+  <text data-d="0.85" x="206" y="44" text-anchor="middle" font-size="22" fill="#0B4F5C" font-family="SF Hand">une demande</text>
+  <path data-d="1.1" class="inkt" d="M262 232 H150 M162 222 L150 232 L162 242"/>
+  <text data-d="1.15" x="206" y="216" text-anchor="middle" font-size="22" fill="#0B4F5C" font-family="SF Hand">une réponse</text>
 </svg>"""
-APPEL = f"""<svg class="illu scene-svg" viewBox="0 0 420 250" aria-hidden="true">
-  <g data-d="0.1"><rect x="14" y="78" width="104" height="72" rx="10" fill="#FFFFFF" stroke="#2A2F33" stroke-width="4"/><path d="M4 162 H128" fill="none" stroke="#2A2F33" stroke-width="4" stroke-linecap="round"/></g>
-  <text data-d="0.3" x="66" y="190" text-anchor="middle" font-size="22" {T}>ton outil</text>
-  <path data-d="0.35" class="ink" d="M118 114 C 170 114, 170 150, 214 150 H232"/>
-  <g data-d="0.5"><rect x="232" y="128" width="46" height="44" rx="10" fill="#E6E0F4" stroke="#2A2F33" stroke-width="4"/><path d="M278 140 H300 M278 160 H300" fill="none" stroke="#2A2F33" stroke-width="4" stroke-linecap="round"/></g>
-  {WALL(310, 94, 0.2)}
-  <path data-d="0.8" class="inkt" d="M150 70 H262 M250 60 L262 70 L250 80"/>
-  <text data-d="0.85" x="206" y="52" text-anchor="middle" font-size="22" fill="#0B4F5C" font-family="SF Hand">une demande</text>
-  <path data-d="1.1" class="inkt" d="M262 222 H150 M162 212 L150 222 L162 232"/>
-  <text data-d="1.15" x="206" y="206" text-anchor="middle" font-size="22" fill="#0B4F5C" font-family="SF Hand">une réponse</text>
-</svg>"""
-MCPS = f"""<svg class="illu scene-svg" viewBox="0 0 420 250" aria-hidden="true">
-  {WALL(8, 98, 0.1)}
-  <g data-d="0.25"><rect x="104" y="134" width="40" height="40" rx="9" fill="#E6E0F4" stroke="#2A2F33" stroke-width="4"/><path d="M104 146 H92 M104 162 H92" fill="none" stroke="#2A2F33" stroke-width="4" stroke-linecap="round"/></g>
-  <path data-d="0.35" class="ink" d="M144 154 C 172 154, 146 188, 168 188"/>
-  <g data-d="0.45"><rect x="168" y="160" width="232" height="56" rx="18" fill="#D6F1E6" stroke="#2A2F33" stroke-width="4"/><circle cx="214" cy="188" r="9" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/><circle cx="284" cy="188" r="9" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/><circle cx="354" cy="188" r="9" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/></g>
-  <path data-d="0.7" class="inkt" d="M214 160 V112 M284 160 V90 M354 160 V112"/>
-  <text data-d="0.8" x="214" y="100" text-anchor="middle" font-size="22" fill="#0B4F5C" font-family="SF Hand">lire</text>
-  <text data-d="0.9" x="284" y="78" text-anchor="middle" font-size="22" fill="#0B4F5C" font-family="SF Hand">écrire</text>
-  <text data-d="1.0" x="354" y="100" text-anchor="middle" font-size="22" fill="#0B4F5C" font-family="SF Hand">chercher</text>
-  <text data-d="1.1" x="284" y="38" text-anchor="middle" font-size="22" {T}>pour l'agent, d'un coup</text>
-</svg>"""
-OAUTH_ICO = '<rect data-d="0.1" x="14" y="20" width="56" height="56" rx="8" fill="#FCE4E8" stroke="#2A2F33" stroke-width="3"/><circle data-d="0.3" cx="34" cy="42" r="7" class="ink" style="stroke-width:3"/><path data-d="0.4" class="ink" d="M24 62 C 28 54, 40 54, 44 62 M50 40 H62 M50 50 H60" style="stroke-width:3"/><path data-d="0.2" class="ink" d="M34 20 V10 H50 V20" style="stroke-width:3"/>'
-ICONS["badge"] = OAUTH_ICO
+ICONS["badge"] = '<rect data-d="0.1" x="14" y="20" width="56" height="56" rx="8" fill="#FCE4E8" stroke="#2A2F33" stroke-width="3"/><circle data-d="0.3" cx="34" cy="42" r="7" class="ink" style="stroke-width:3"/><path data-d="0.4" class="ink" d="M24 62 C 28 54, 40 54, 44 62 M50 40 H62 M50 50 H60" style="stroke-width:3"/><path data-d="0.2" class="ink" d="M34 20 V10 H50 V20" style="stroke-width:3"/>'
+ICONS["usbc"] = '<rect data-d="0.1" x="22" y="6" width="40" height="34" rx="8" fill="#D6F1E6" stroke="#2A2F33" stroke-width="3"/><rect data-d="0.3" x="32" y="40" width="20" height="16" rx="6" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/><path data-d="0.5" class="ink" d="M42 6 C 42 -4, 70 -4, 70 14 V 70 C 70 82, 50 82, 46 76" style="stroke-width:3"/><rect data-d="0.6" x="8" y="62" width="30" height="20" rx="5" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/>'
 slide(f'''    <p class="eyebrow">Pour les curieux · le fil de l'électricité</p>
-    <h2>La prise, le branchement, <span class="mark">la multiprise</span></h2>
+    <h2>Chacun sa prise, <span class="mark">ou la même partout</span></h2>
     <div class="scene-row">
-      <figure class="scene frag" data-step="1">{PRISE}<figcaption><b class="hand">L'API, la prise</b>Chaque logiciel a la sienne.</figcaption></figure>
-      <figure class="scene frag" data-step="2">{APPEL}<figcaption><b class="hand">L'appel, on branche</b>Une demande part, une réponse revient. C'est le courant HTTP.</figcaption></figure>
-      <figure class="scene frag" data-step="3">{MCPS}<figcaption><b class="hand">MCP, la multiprise</b>Un seul branchement, plusieurs capacités prêtes à l'emploi.</figcaption></figure>
+      <figure class="scene frag" data-step="1">{APPEL}<figcaption><b class="hand">L'API et l'appel</b>L'API, c'est la prise du logiciel. Un appel : on branche, une demande part, une réponse revient.</figcaption></figure>
+      <figure class="scene frag" data-step="2">{SANS}<figcaption><b class="hand">Sans MCP</b>Chaque prise a sa forme : un câble sur mesure par logiciel, à fabriquer et à entretenir.</figcaption></figure>
+      <figure class="scene frag" data-step="3">{AVEC}<figcaption><b class="hand">Avec MCP</b>Tous les logiciels offrent la même prise : l'agent se branche partout de la même façon.</figcaption></figure>
     </div>
-    <div class="cols" style="margin-top:22px;align-items:stretch;gap:28px">
-      {analogy("badge", "un badge visiteur. C'est <b>OAuth</b> : tu laisses un outil entrer dans ton compte sans lui donner ton mot de passe, et tu peux reprendre le badge.", "frag")}
-      {tip("MCP est un standard publié par Anthropic en novembre 2024 : une seule façon de brancher un assistant IA sur les systèmes où vivent vos données.", "Anthropic, Introducing the Model Context Protocol, 25 novembre 2024", "frag")}
+    <div class="cols bocal-row">
+      {analogy("usbc", "le chargeur USB-C : un seul câble pour le téléphone, l'ordinateur et la tablette. MCP fait pareil entre un agent et vos logiciels.", "frag")}
+      {analogy("badge", "un badge visiteur. C'est <b>OAuth</b> : tu laisses un outil entrer dans ton compte sans donner ton mot de passe, et tu peux reprendre le badge.", "frag")}
     </div>''',
- seq=4, section=S1330, notes="On reprend le fil de la slide précédente, un dessin par clic. La prise : l'API, ce que le logiciel accepte qu'on lui branche. Le branchement : un appel, une demande, une réponse. La multiprise : MCP, l'agent branche une seule fois et récupère lire, écrire, chercher. Puis le badge : OAuth, c'est ce qu'ils verront quand Copilot ou un autre outil demande « autoriser l'accès à votre compte ».")
+ seq=4, section=S1330, notes="On reprend le fil de la slide précédente, un dessin par clic. 1. La prise et le branchement : l'API est la prise d'Outlook, l'appel c'est brancher, demande puis réponse, et le courant c'est HTTP. 2. Sans MCP : trois logiciels, trois prises de formes différentes, donc trois câbles sur mesure à fabriquer et à entretenir. 3. Avec MCP : chaque logiciel propose la même prise, l'agent n'a besoin que d'un type de câble. C'est le chargeur USB-C. MCP, le Model Context Protocol, est un standard ouvert publié par Anthropic le 25 novembre 2024. La documentation officielle de MCP fait elle-même la comparaison avec un port USB-C. Puis le badge : OAuth, c'est ce qu'ils verront quand Copilot ou un autre outil demande « autoriser l'accès à votre compte ».")
 def edit(k): return f'<td class="edit sk" contenteditable="true" data-k="{k}" data-ph="à compléter"></td>'
 rows = [("fait", "Ce que ça fait"), ("demande", "Ce que ça demande"), ("pas", "Ce que ça ne fait pas")]
 trs = "".join(f'<tr><td class="row">{l}</td>{edit("as-"+k)}{edit("au-"+k)}{edit("ag-"+k)}</tr>' for k, l in rows)
@@ -519,11 +576,12 @@ slide(f'''    <p class="eyebrow">Les trois démos</p>
 
 
 slide(f'''    <div class="stack">
-      <div class="meta"><span class="tag sk">{icon("users")}Chacun sur son poste</span><span class="tag tag--soft sk">{icon("search")}Selon les licences disponibles</span></div>
+      <div class="meta"><span class="tag sk">{icon("users")}Ensemble, puis chacun sur son poste</span><span class="tag tag--soft sk">{icon("search")}Selon les licences disponibles</span></div>
       <h2>À vous : <span class="mark">votre premier assistant</span></h2>
     </div>
-    <div class="cols cols--1-2 grow" style="margin-top:40px;align-items:start">
-      <ol class="steps">
+    <div class="cols grow" style="margin-top:30px;align-items:start;grid-template-columns:1.35fr 1fr">
+      <ol class="steps steps--tight">
+        <li class="frag"><strong>Ensemble d'abord</strong> : une consigne écrite en direct, sur un cas de la salle.</li>
         <li class="frag"><strong>Choisis</strong> une tâche simple de ton quotidien.</li>
         <li class="frag"><strong>Écris</strong> la consigne : rôle, contexte, ce que tu attends.</li>
         <li class="frag"><strong>Teste</strong> sur un exemple sans donnée réelle.</li>
@@ -531,7 +589,7 @@ slide(f'''    <div class="stack">
       </ol>
       <div class="stack">{timer(20, (15, 20, 25))}{shot("Capture de l'écran de départ sur Copilot (où cliquer pour créer l'assistant)")}</div>
     </div>''', seq=4, section="13h30 · Démonstrations, puis à vous",
- notes="Manipulation guidée après les trois démos. Prévoir un plan B si les licences ne permettent pas de créer un assistant : faire rédiger la consigne et la tester dans le chat Copilot.")
+ notes="Manipulation guidée après les trois démos. On commence par un exemple fait tous ensemble : un cas proposé par la salle, la consigne écrite en direct (rôle, contexte, attendu), testée devant tout le monde. Ensuite seulement, chacun sur son poste. Prévoir un plan B si les licences ne permettent pas de créer un assistant : faire rédiger la consigne et la tester dans le chat Copilot.")
 
 slide(f'''    <div class="grow center-y">
       <p class="eyebrow">15h00</p>
@@ -607,24 +665,24 @@ slide(f'''    <p class="eyebrow">Garde-fous</p>
  notes="La troisième règle est une proposition : la valider avec la référente IA avant la séance.")
 
 # ---------- 16h30 Intersession ----------
+# On fait d'abord une ligne ensemble, colonne par colonne, puis chacun remplit la sienne
 cols = [("Le déroulé actuel", True), ("Fréquence et temps passé", False), ("Les personnes impliquées", False), ("Outils et documents", False), ("Déclencheur et résultat", False), ("Part de jugement humain", True), ("Sensibilité des données", True), ("Bénéfice attendu", False), ("Type de solution pressenti", True)]
+ex_rows = "".join(f'<tr class="{"is-key" if k else ""}"><td class="row"><b class="hand">{i+1}.</b> {t}</td><td class="edit sk" contenteditable="true" data-k="exemple-c{i}" data-ph="à remplir avec le groupe"></td></tr>' for i, (t, k) in enumerate(cols))
+slide(f'''    <p class="eyebrow">L'intersession · ensemble d'abord</p>
+    <h2>Une ligne <span class="mark mark--lav">remplie en direct</span></h2>
+    <p class="lead" style="margin-top:8px;font-size:28px">Notre exemple : une situation classée ce matin, colonne par colonne.</p>
+    <table class="readgrid audit-ex mt"><tbody>{ex_rows}</tbody></table>''',
+ seq=7, section="16h30 · Lancement de l'intersession",
+ notes="On remplit ensemble avant que chacun s'y mette. Proposition : partir des commissions des vendeurs itinérants, estimées à 4 h en mars. Expliquer chaque colonne au moment où on la remplit. Les colonnes surlignées sont celles qui posent le plus de questions. Clique dans une case pour écrire.")
+
 au = "".join(f'<div class="col sk sk--thin rise{" is-key" if k else ""}"><b>colonne {i+1}</b>{t}</div>' for i, (t, k) in enumerate(cols))
-slide(f'''    <p class="eyebrow">L'intersession</p>
+slide(f'''    <p class="eyebrow">L'intersession · à vous</p>
     <h2>La grille d'audit, <span class="mark">colonne par colonne</span></h2>
     <div class="audit">{au}</div>
-    <p class="small" style="margin-top:22px">Remplissable sans connaissance technique. Trois à cinq tâches par pôle.</p>
+    <p class="small" style="margin-top:22px">Sur le modèle de l'exemple. Remplissable sans connaissance technique. Trois à cinq tâches par pôle.</p>
     {analogy("carnet", "le carnet d'entretien d'une machine : avant de réparer, on note ce qui se passe, combien de fois, et ce que ça coûte.", "frag mt")}''',
  seq=7, section="16h30 · Lancement de l'intersession",
- notes="Les colonnes en vert sont celles qui posent le plus de questions : les détailler.")
-
-cells = ["Déroulé actuel", "Fréquence", "Personnes", "Outils", "Jugement humain", "Solution pressentie"]
-tr = "".join(f'<td class="edit sk" contenteditable="true" data-k="exemple-{i}" data-ph="…"></td>' for i in range(len(cells)))
-slide(f'''    <p class="eyebrow">Ensemble</p>
-    <h2>Un exemple <span class="mark mark--lav">rempli en direct</span></h2>
-    <table class="readgrid mt"><thead><tr>{"".join(f"<th>{c}</th>" for c in cells)}</tr></thead><tbody><tr style="height:260px">{tr}</tr></tbody></table>
-    <p class="small">On prend une des situations classées ce matin et on remplit la ligne avec le groupe.</p>''',
- seq=7, section="16h30 · Lancement de l'intersession",
- notes="Proposition : partir des commissions des vendeurs itinérants, estimées à 4 h en mars. Clique dans une case pour écrire.")
+ notes="Chacun repart avec la même grille que l'exemple. Rappeler la question zéro : la colonne sensibilité des données sert à vérifier qu'on a le droit.")
 
 ref = "".join(f'<div class="fill-line rise"><span>{p}</span><span class="f" contenteditable="true" data-k="ref-{i}" data-ph="nom à écrire en séance"></span></div>' for i, p in enumerate(["Commerce", "RH et comptabilité", "Communication"]))
 slide(f'''    <p class="eyebrow">Qui porte quoi</p>

@@ -9,7 +9,7 @@ Chaque emplacement est un cadre en pointillés. Dépose le fichier dans `src/ima
 | 10 | Une IA générative, comment ça marche | Infographies Clarity `comment-fonctionne-ia.png` et `comment-ia-apprend.png` |
 | 11 | L'IA est déjà dans vos outils | Logos officiels Microsoft 365 Copilot, Outlook, Excel, Word, Teams |
 | 14 | L'automatisation en vrai | Capture d'un scénario Make ; capture du script Apps Script et de son résultat |
-| 15 | Un assistant, c'est comme un collègue | Rien : démonstration en direct |
+| 16 | Le modèle et son harnais | Rien : démonstration en direct |
 | 20 | L'assistant en vrai | Capture d'un projet Claude ; capture de Copilot avec consignes. Chatbot du site Summit Flow en direct |
 | 21 | L'agent en vrai | Captures du téléphone (Lindy) ; capture d'un agent Claude ; capture d'un agent Copilot |
 | 32 | Les trois démos | Trois captures de secours (assistant, automatisation, agent dans Copilot) |

@@ -194,13 +194,14 @@
     const ans = {};
     function compute() {
       let res = ["Réponds aux questions", "Une question après l'autre, avec le groupe."], stop = 99;
-      if (ans[1] === "non") { res = ["Geste manuel, ou assistant au cas par cas", "Une tâche rare ne justifie pas d'outiller."]; stop = 1; }
+      if (ans[0] === "non") { res = ["Stop : on vérifie d'abord", "Données personnelles, clients ou confidentielles : on demande à la référente IA avant d'aller plus loin."]; stop = 0; }
+      else if (ans[1] === "non") { res = ["Geste manuel, ou assistant au cas par cas", "Une tâche rare ne justifie pas d'outiller."]; stop = 1; }
       else if (ans[1] === "oui" && ans[2] === "non") { res = ["Clarifier la règle d'abord", "On n'automatise pas une règle qui change à chaque fois."]; stop = 2; }
       else if (ans[1] === "oui" && ans[2] === "oui" && ans[3] === "non") { res = ["Automatisation", "Répétitif, stable, sans interprétation : une suite d'actions fixe suffit."]; stop = 3; }
       else if (ans[1] === "oui" && ans[2] === "oui" && ans[3] === "oui") { res = ["Agent, ou assistant + automatisation", "Il faut lire, interpréter ou décider à une étape."]; stop = 3; }
-      qs.forEach((q, i) => q.classList.toggle("is-off", i < 3 && i + 1 > stop));
+      qs.forEach((q) => { const n = +q.dataset.q; q.classList.toggle("is-off", stop === 0 ? n > 0 : n >= 1 && n <= 3 && n > stop); });
       out.textContent = res[0]; why.textContent = res[1];
-      box.className = "verdict-box sk" + (res[0].startsWith("Automatisation") ? " fill-lav" : res[0].startsWith("Agent") ? " fill-mint" : res[0].startsWith("Geste") ? " fill-sky" : res[0].startsWith("Clarifier") ? " fill-blush" : "") + (ans[4] === "oui" ? " has-guard" : "");
+      box.className = "verdict-box sk" + (res[0].startsWith("Automatisation") ? " fill-lav" : res[0].startsWith("Agent") ? " fill-mint" : res[0].startsWith("Geste") ? " fill-sky" : res[0].startsWith("Clarifier") || res[0].startsWith("Stop") ? " fill-blush" : "") + (ans[4] === "oui" ? " has-guard" : "");
     }
     qs.forEach((q) => {
       const n = q.dataset.q;
