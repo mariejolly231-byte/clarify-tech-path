@@ -199,7 +199,7 @@
       else if (ans[1] === "oui" && ans[2] === "oui" && ans[3] === "oui") { res = ["Agent, ou assistant + automatisation", "Il faut lire, interpréter ou décider à une étape."]; stop = 3; }
       qs.forEach((q, i) => q.classList.toggle("is-off", i < 3 && i + 1 > stop));
       out.textContent = res[0]; why.textContent = res[1];
-      box.className = "verdict-box sk" + (res[0].startsWith("Automatisation") ? " fill-lemon" : res[0].startsWith("Agent") ? " fill-mint" : res[0].startsWith("Geste") ? " fill-sky" : res[0].startsWith("Clarifier") ? " fill-blush" : "") + (ans[4] === "oui" ? " has-guard" : "");
+      box.className = "verdict-box sk" + (res[0].startsWith("Automatisation") ? " fill-lav" : res[0].startsWith("Agent") ? " fill-mint" : res[0].startsWith("Geste") ? " fill-sky" : res[0].startsWith("Clarifier") ? " fill-blush" : "") + (ans[4] === "oui" ? " has-guard" : "");
     }
     qs.forEach((q) => {
       const n = q.dataset.q;

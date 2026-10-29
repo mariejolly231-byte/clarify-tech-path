@@ -4,7 +4,8 @@ cases au trait épais, aplats pastel pleins (pas de hachures), annotations grise
 
 INK, MUTED, NONE, TEAL = "#1F2A2E", "#5C6366", "transparent", "#0B4F5C"
 # Pastels doux de la charte, jamais de rouge
-BLUE, GREEN, YELLOW, PINK = "#DCEEFA", "#D6F1E6", "#FFF3C4", "#FCE4E8"
+BLUE, GREEN, YELLOW, PINK = "#D5EAEC", "#D6F1E6", "#E6E0F4", "#FCE4E8"
+LEMON = "#FFF3C4"
 
 # Mise à l'échelle pour la projection : géométrie x1,2 et texte x1,3 (texte rendu au-dessus de 28 px)
 G, F = 1.2, 1.3
@@ -53,7 +54,7 @@ def grille():
         els.append(box(id + "o", 470, y + 5, 290, 80, out, fill=fill, stroke=INK if fill != NONE else MUTED, size=20, sw=2 if fill != NONE else 1))
         els.append(arrow(id + "y", 210, y + 90, 210, y + 140, label="Oui"))
     els.append(box("ag", 40, 460, 340, 80, "Agent, ou assistant\n+ automatisation", fill=GREEN, size=20))
-    els.append(box("q4", 470, 445, 290, 110, "4. Une erreur coûte cher ?\nUn humain valide\navant que ça parte", fill=PINK, size=20))
+    els.append(box("q4", 470, 445, 290, 110, "4. Une erreur coûte cher ?\nUn humain valide\navant que ça parte", fill=LEMON, size=20))
     return els
 
 def humain_valide():
@@ -96,12 +97,12 @@ def sous_le_capot():
 
 def logiciels_parlent():
     els = []
-    els.append(text("t0", 20, 10, "1. Une demande, une réponse", size=22, color=TEAL))
+    els.append(text("t0", 20, 10, "1. HTTP, le courant dans les fils : une demande, une réponse", size=22, color=TEAL))
     els.append(box("me", 20, 50, 240, 110, "Ton outil\n(Copilot, un scénario)", fill=BLUE, size=21))
-    els.append(box("api", 600, 50, 240, 110, "L'API d'Outlook :\nle guichet", fill=GREEN, size=21))
+    els.append(box("api", 600, 50, 240, 110, "L'API d'Outlook :\nsa prise", fill=GREEN, size=21))
     els.append(arrow("rq", 262, 85, 598, 85))
     els.append(arrow("rp", 598, 128, 262, 128, dashed=True))
-    els.append(text("rqt", 345, 52, "un appel HTTP", size=19))
+    els.append(text("rqt", 330, 52, "un appel : on branche", size=19))
     els.append(text("rpt", 360, 138, "la réponse", size=19, color=MUTED))
     els.append(text("t1", 20, 200, "2. Quatre types d'appel", size=22, color=TEAL))
     verbs = [("get", "GET\nlire\nun courriel", BLUE), ("post", "POST\ncréer un\nrendez-vous", GREEN), ("patch", "PATCH\nmodifier\nune ligne", YELLOW), ("del", "DELETE\nsupprimer\nun brouillon", PINK)]

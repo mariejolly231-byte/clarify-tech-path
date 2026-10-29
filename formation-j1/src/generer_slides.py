@@ -53,6 +53,20 @@ def logic(eyebrow, title, mk, definition, ex, color, notes):
     <div class="cols--3 grow" style="display:grid;margin-top:30px">{cards}</div>''', seq=2, section="9h45 · Assistant, automatisation, agent", notes=notes)
 
 
+
+# Analogies : un pictogramme dessiné et une phrase « C'est comme… »
+ICONS = {
+ "arrosage": '<path data-d="0.1" class="ink" d="M30 80 V44 M18 80 H42"/><path data-d="0.3" class="inkt" d="M30 44 C 40 30, 58 28, 70 30 M30 44 C 22 30, 8 28, 0 32"/><path data-d="0.5" class="inkt" d="M66 40 l6 8 M58 44 l4 10 M6 42 l-4 8"/>',
+ "gps": '<path data-d="0.1" d="M40 82 C 20 56, 14 46, 14 34 a26 26 0 0 1 52 0 c0 12 -6 22 -26 48 z" fill="#D5EAEC" stroke="#2A2F33" stroke-width="3"/><circle data-d="0.4" cx="40" cy="34" r="9" class="ink" style="stroke-width:3"/>',
+ "volant": '<circle data-d="0.1" cx="40" cy="44" r="30" class="ink" style="stroke-width:4"/><circle data-d="0.3" cx="40" cy="44" r="8" fill="#D6F1E6" stroke="#2A2F33" stroke-width="3"/><path data-d="0.4" class="ink" d="M40 52 V74 M33 40 L13 32 M47 40 L67 32"/><path data-d="0.6" class="inkt" d="M60 8 a14 14 0 0 1 14 14 M62 0 a24 24 0 0 1 20 20"/>',
+ "carte": '<path data-d="0.1" d="M8 20 L30 12 L52 20 L74 12 V70 L52 78 L30 70 L8 78 Z" fill="#FCE4E8" stroke="#2A2F33" stroke-width="3" stroke-linejoin="round"/><path data-d="0.4" class="ink" d="M30 12 V70 M52 20 V78" style="stroke-width:2.5"/><path data-d="0.6" class="inkt" d="M14 60 L68 26" stroke-dasharray="4 6"/>',
+ "attelage": '<rect data-d="0.1" x="6" y="30" width="30" height="26" rx="6" fill="#D5EAEC" stroke="#2A2F33" stroke-width="3"/><path data-d="0.3" class="ink" d="M36 44 H52"/><path data-d="0.5" d="M52 30 H78 L70 56 H52 Z" fill="#E6E0F4" stroke="#2A2F33" stroke-width="3" stroke-linejoin="round"/><circle data-d="0.6" cx="14" cy="62" r="8" class="ink" style="stroke-width:3"/>',
+ "controle": '<rect data-d="0.1" x="14" y="8" width="52" height="68" rx="8" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/><path data-d="0.4" class="inkt" d="M24 30 l6 6 l12 -12 M24 52 l6 6 l12 -12" style="stroke-width:3.5"/><path data-d="0.5" class="ink" d="M48 32 h10 M48 54 h10" style="stroke-width:2.5"/>',
+ "carnet": '<rect data-d="0.1" x="12" y="8" width="56" height="70" rx="6" fill="#D6F1E6" stroke="#2A2F33" stroke-width="3"/><path data-d="0.4" class="ink" d="M24 8 V78" style="stroke-width:2.5"/><path data-d="0.6" class="ink" d="M32 26 h26 M32 40 h26 M32 54 h18" style="stroke-width:2.5"/>',
+}
+def analogy(icon, text, cls="frag"):
+    return f'<aside class="analogy {cls}"><svg class="illu ana-ico" viewBox="0 0 84 86" aria-hidden="true">{ICONS[icon]}</svg><p><b class="hand">C\'est comme</b> {text}</p></aside>'
+
 COVER_RIDGE = '''<svg class="cover-ridge illu" viewBox="0 0 900 360" aria-hidden="true">
       <path data-d="0.9" d="M20 340 L250 150 L360 240 L560 40 L700 190 L780 130 L890 260 L890 340 Z" fill="#DCEEFA" filter="url(#rough)"/>
       <path data-d="0.1" class="ink" d="M20 340 L250 150 L360 240 L560 40 L700 190 L780 130 L890 260" filter="url(#rough)"/>
@@ -131,7 +145,7 @@ slide(f'''    <p class="eyebrow">Le parcours complet</p>
  notes="L'ordre des ateliers et la composition des groupes restent à valider avec l'entreprise. Avant le jour 2, Summit Flow consolide les grilles et propose une priorisation, validée avec vous.")
 
 slide('''    <p class="eyebrow">Aujourd'hui</p>
-    <h2>Le programme du <span class="mark mark--lemon">jour 1</span></h2>
+    <h2>Le programme du <span class="mark mark--teal">jour 1</span></h2>
     <ol class="agenda mt">
       <li class="rise"><span class="h">9h00</span>Point de départ et repères pour tous</li>
       <li class="rise"><span class="h">9h45</span>Assistant, automatisation, agent</li>
@@ -169,7 +183,7 @@ slide(f'''    <p class="eyebrow">Retour sur mars</p>
         <li>Ce qu'est un assistant conversationnel</li>
         <li>Une quinzaine de situations repérées ensemble, pôle par pôle</li>
         <li>Des premiers temps estimés : jusqu'à 4 jours par mois pour certaines tâches</li></ul></div>
-      <div class="card sk fill-lemon rise"><h3>Ce que vous avez demandé</h3><ul>
+      <div class="card sk fill-blush rise"><h3>Ce que vous avez demandé</h3><ul>
         <li>Moins de vocabulaire technique</li>
         <li>Plus de pratique sur vos outils : Outlook, Excel</li>
         <li class="frag">Alors aujourd'hui, chaque notion part d'une de vos situations</li></ul></div>
@@ -180,7 +194,7 @@ slide(f'''    <p class="eyebrow">Retour sur mars</p>
     <h2>Vos situations, <span class="mark">celles de mars</span></h2>
     <div class="cols--4" style="display:grid;margin-top:30px;align-items:start">
       <div class="card sk fill-sky rise"><h3>{icon("cart")}Commerce</h3><ul><li>Commissions des vendeurs itinérants <span class="hand t-est">4 h</span></li><li>Contrôle des études de prix, vente et reprise</li><li>Estimation des reprises</li><li>Ciblage de clients pour les démonstrations</li><li>Trouver un produit chez un fournisseur</li></ul></div>
-      <div class="card sk fill-lemon rise"><h3>{icon("ledger")}RH et compta</h3><ul><li>Variables de salaire <span class="hand t-est">1,5 à 2 j</span></li><li>Vérification des paiements clients pour les commissions</li><li>Trésorerie quotidienne, factures reçues par e-mail</li><li>Saisie des pointages, du papier au logiciel</li></ul></div>
+      <div class="card sk fill-lav rise"><h3>{icon("ledger")}RH et compta</h3><ul><li>Variables de salaire <span class="hand t-est">1,5 à 2 j</span></li><li>Vérification des paiements clients pour les commissions</li><li>Trésorerie quotidienne, factures reçues par e-mail</li><li>Saisie des pointages, du papier au logiciel</li></ul></div>
       <div class="card sk fill-mint rise"><h3>{icon("mega")}Communication</h3><ul><li>Planning de communication <span class="hand t-est">4 j par mois</span></li><li>Optimisation des bases de données pour la communication</li></ul></div>
       <div class="card sk fill-teal rise"><h3>{icon("file")}Direction</h3><ul><li>Création de tableaux de bord</li><li>Analyse des tableaux de bord</li><li>Présentations PowerPoint</li></ul></div>
     </div>
@@ -192,7 +206,7 @@ tf = [("L'IA générative va chercher la bonne réponse dans une base de donnée
       ("Elle peut inventer une source qui n'existe pas.", "Vrai", "C'est ce qu'on appelle une hallucination."),
       ("Plus la consigne est précise, plus la réponse est utile.", "Vrai", "Le contexte fait souvent la différence."),
       ("Ce que je tape peut servir à améliorer le modèle.", "Selon l'outil", "Ça dépend de l'outil, de la licence et des réglages.")]
-rows = "".join(f'''<div class="tf sk sk--thin"><p>{q}</p><div class="frag tf-a"><span class="mark mark--{'teal' if a=='Vrai' else 'blush' if a=='Faux' else 'lemon'} hand">{a}</span><span class="small">{w}</span></div></div>''' for q, a, w in tf)
+rows = "".join(f'''<div class="tf sk sk--thin"><p>{q}</p><div class="frag tf-a"><span class="mark mark--{'teal' if a=='Vrai' else 'blush' if a=='Faux' else 'lav'} hand">{a}</span><span class="small">{w}</span></div></div>''' for q, a, w in tf)
 slide(f'''    <p class="eyebrow">Rappel express</p>
     <h2>Vrai ou faux ?</h2>
     <div class="stack mt">{rows}</div>''', seq=1, section="9h00 · Point de départ",
@@ -223,25 +237,26 @@ slide(f'''    <p class="eyebrow">Rappel commun</p>
 S945 = "9h45 · Assistant, automatisation, agent"
 slide(f'''    <p class="eyebrow">Trois logiques différentes</p>
     <div class="grow stack-lg center-y">
-      <p class="idea">L'assistant <span class="mark mark--sky frag">répond</span>. L'automatisation <span class="mark mark--lemon frag">exécute</span>. L'agent <span class="mark frag">poursuit un objectif</span>.</p>
+      <p class="idea">L'assistant <span class="mark mark--sky frag">répond</span>. L'automatisation <span class="mark mark--lav frag">exécute</span>. L'agent <span class="mark frag">poursuit un objectif</span>.</p>
       <p class="lead frag">Le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
       {tip("Sur Malt, la demande de compétences liées aux agents IA a été multipliée par 60 par rapport à 2024.", "Malt Tech Trends 2026", "frag")}
     </div>''', seq=2, section=S945, notes="Faire apparaître les trois verbes un par un. Demander au groupe de deviner le suivant.")
 
 slide(f'''    <p class="eyebrow">1. L'automatisation</p>
-    <h2>Tout part d'un <span class="mark mark--lemon">déclencheur</span></h2>
+    <h2>Tout part d'un <span class="mark mark--lav">déclencheur</span></h2>
     <p class="lead rise" style="margin-top:18px">Un déclencheur (le « trigger »), puis toujours la même suite d'actions. Deux familles :</p>
     <div class="cols mt" style="align-items:start">
       <div class="card sk fill-sky frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{CLOCK}<div><h3>Le temps</h3><p>Chaque matin, le tableau de trésorerie se met à jour. Chaque fin de mois, les variables de salaire sont préparées.</p></div></div>
-      <div class="card sk fill-lemon frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{BOLT}<div><h3>Un événement</h3><p>Une facture arrive par e-mail, un pointage est saisi, une demande de démonstration tombe.</p></div></div>
-    </div>''',
+      <div class="card sk fill-lav frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{BOLT}<div><h3>Un événement</h3><p>Une facture arrive par e-mail, un pointage est saisi, une demande de démonstration tombe.</p></div></div>
+    </div>
+    {analogy("arrosage", "le programmateur d'arrosage : il se lance à heure fixe, ou quand la sonde détecte que le sol est sec. Et il fait toujours le même cycle.", "frag mt")}''',
  seq=2, section=S945, notes="Faire trouver un exemple de chaque famille dans leur quotidien.")
 
-logic("1. L'automatisation", 'Elle <span class="mark mark--lemon">exécute</span>, toujours pareil', "", "Aucune réflexion, et c'est sa force : même entrée, même résultat.",
+logic("1. L'automatisation", 'Elle <span class="mark mark--lav">exécute</span>, toujours pareil', "", "Aucune réflexion, et c'est sa force : même entrée, même résultat.",
  [("Un scénario Make", "Un événement déclenche une série d'actions, montée visuellement.", shot("Capture d'un scénario Make")),
   ("Un script Apps Script", "Une petite routine qui tourne seule dans un tableur.", shot("Capture du script Apps Script et de son résultat")),
   ("Chez vous", "L'équivalent dans Microsoft 365 se monte avec les outils de l'environnement, selon les licences.", "")],
- "fill-lemon", "Make et Apps Script servent d'illustration : la formation reste sur l'environnement Microsoft de l'entreprise.")
+ "fill-lav", "Make et Apps Script servent d'illustration : la formation reste sur l'environnement Microsoft de l'entreprise.")
 
 HUMAN = """<svg class="illu human" viewBox="0 0 440 640" aria-hidden="true">
       <g class="frag" data-step="7"><path class="inkt" d="M70 470 A 190 290 0 1 1 120 560" stroke-dasharray="6 12" style="stroke-width:4"/><path class="inkt" d="M104 548 L120 562 L128 540" style="stroke-width:4"/></g>
@@ -250,34 +265,37 @@ HUMAN = """<svg class="illu human" viewBox="0 0 440 640" aria-hidden="true">
       <path class="ink" d="M262 228 C 305 262, 328 300, 344 342" filter="url(#rough)"/>
       <path class="ink" d="M198 400 C 193 465, 188 520, 176 590 L 150 596" filter="url(#rough)"/>
       <path class="ink" d="M242 400 C 247 465, 252 520, 264 590 L 290 596" filter="url(#rough)"/>
-      <rect x="176" y="198" width="88" height="210" rx="36" fill="#FFFFFF" stroke="#1F2A2E" stroke-width="4" filter="url(#rough)"/>
-      <circle cx="220" cy="118" r="78" fill="#FFFFFF" stroke="#1F2A2E" stroke-width="4" filter="url(#rough)"/>
-      <g class="frag" data-step="1"><path d="M162 112 C 150 72, 190 52, 214 66 C 236 50, 280 70, 274 110 C 286 140, 252 164, 220 152 C 188 164, 152 142, 162 112 Z" fill="#FCE4E8" stroke="#1F2A2E" stroke-width="3" filter="url(#rough)"/><path class="ink" style="stroke-width:2.5" d="M218 66 C 210 92, 228 112, 218 150 M178 104 C 192 94, 202 112, 214 102 M228 92 C 242 82, 254 98, 266 90"/></g>
-      <g class="frag" data-step="6"><ellipse cx="250" cy="150" rx="26" ry="15" fill="#DCEEFA" stroke="#1F2A2E" stroke-width="3" filter="url(#rough)"/></g>
-      <g class="frag" data-step="5"><circle cx="220" cy="262" r="24" fill="#FFF3C4" stroke="#1F2A2E" stroke-width="3" filter="url(#rough)"/><path class="inkt" style="stroke-width:3.5" d="M208 262 L217 271 L233 253"/></g>
-      <g class="frag" data-step="3"><path d="M48 334 L104 326 L110 380 L54 390 Z" fill="#DCEEFA" stroke="#1F2A2E" stroke-width="3.5" stroke-linejoin="round" filter="url(#rough)"/><path class="ink" style="stroke-width:2.5" d="M78 330 L82 386"/></g>
-      <g class="frag" data-step="2"><rect x="322" y="316" width="70" height="92" rx="8" fill="#FFF3C4" stroke="#1F2A2E" stroke-width="3.5" transform="rotate(6 357 362)" filter="url(#rough)"/><path class="ink" style="stroke-width:2.5" d="M338 342 h40 M337 358 h40 M336 374 h30" transform="rotate(6 357 362)"/></g>
+      <rect x="176" y="198" width="88" height="210" rx="22" fill="#FFFFFF" stroke="#2A2F33" stroke-width="4" filter="url(#rough)"/>
+      <path class="ink" d="M220 40 V 22" style="stroke-width:3.5"/><circle cx="220" cy="18" r="7" fill="#D6F1E6" stroke="#2A2F33" stroke-width="3"/>
+      <rect x="138" y="40" width="164" height="140" rx="26" fill="#FFFFFF" stroke="#2A2F33" stroke-width="4" filter="url(#rough)"/>
+      <rect x="152" y="54" width="136" height="112" rx="16" fill="#FAF8F3" stroke="#2A2F33" stroke-width="2.5"/>
+      <path class="ink" d="M206 180 V 198 M234 180 V 198" style="stroke-width:3.5"/>
+      <g class="frag" data-step="1"><path d="M168 108 C 160 80, 190 64, 210 74 C 228 62, 262 78, 258 106 C 268 130, 242 150, 220 142 C 196 152, 160 134, 168 108 Z" fill="#FCE4E8" stroke="#2A2F33" stroke-width="3" filter="url(#rough)"/><path class="ink" style="stroke-width:2.5" d="M214 76 C 206 98, 222 116, 214 142 M182 104 C 194 96, 202 112, 212 104 M226 94 C 238 86, 248 100, 256 94"/></g>
+      <g class="frag" data-step="6"><ellipse cx="244" cy="142" rx="20" ry="11" fill="#D5EAEC" stroke="#2A2F33" stroke-width="3" filter="url(#rough)"/></g>
+      <g class="frag" data-step="5"><circle cx="220" cy="262" r="24" fill="#E6E0F4" stroke="#2A2F33" stroke-width="3" filter="url(#rough)"/><path class="inkt" style="stroke-width:3.5" d="M208 262 L217 271 L233 253"/></g>
+      <g class="frag" data-step="3"><path d="M48 334 L104 326 L110 380 L54 390 Z" fill="#D5EAEC" stroke="#2A2F33" stroke-width="3.5" stroke-linejoin="round" filter="url(#rough)"/><path class="ink" style="stroke-width:2.5" d="M78 330 L82 386"/></g>
+      <g class="frag" data-step="2"><rect x="322" y="316" width="70" height="92" rx="8" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3.5" transform="rotate(6 357 362)" filter="url(#rough)"/><path class="inkt" style="stroke-width:2.5" d="M338 342 h40 M337 358 h40 M336 374 h30" transform="rotate(6 357 362)"/></g>
     </svg>"""
 
-parts = [(1, "Le cerveau", "le modèle", "Il comprend et rédige. Seul, il ne fait rien.", "blush"),
-         (2, "La fiche de poste", "le prompt, les instructions", "Son rôle, ses objectifs, ses contraintes, ce qu'il doit livrer.", "lemon"),
-         (3, "La bibliothèque", "les connaissances", "Vos documents, procédures, tarifs : là où il va chercher.", "sky"),
-         (4, "Les bras et les jambes", "outils, connecteurs, plugins", "Ce qui lui permet d'agir : lire Outlook, écrire dans Excel, envoyer.", "mint"),
-         (5, "Le savoir-faire", "les compétences", "Ce qu'il a déjà appris et sait refaire, dans plein de situations.", "lemon"),
-         (6, "La mémoire", "", "Ce qu'il retient d'une fois sur l'autre.", "sky"),
-         (7, "La boucle", "", "Essayer, vérifier, recommencer. C'est l'outil qui la gère.", "tealp")]
-def part(n, t, sub, d, c):
-    s = f'<span class="comp-sub">{sub}</span>' if sub else ""
-    return f'<div class="comp sk fill-{c} frag" data-step="{n}"><p class="hand comp-t">{t}</p>{s}<p>{d}</p></div>'
+parts = [(1, "Le cerveau", "le modèle", "Ex. : GPT-6.1 ou Claude Sonnet 5.5, utilisé seul", "blush"),
+         (2, "La fiche de poste", "le prompt, les instructions", "Ex. : « Tu prépares les études de prix, en HT, sans inventer de tarif. »", "card"),
+         (3, "La bibliothèque", "les connaissances", "Ex. : la grille tarifaire, les fiches produits, les procédures SAV", "teal"),
+         (4, "Les bras et les jambes", "outils, connecteurs, plugins", "Ex. : lire les demandes dans Outlook, écrire la ligne dans Excel", "mint"),
+         (5, "Le savoir-faire", "les compétences", "Ex. : rédiger un compte rendu au format maison, pour tous les pôles", "lav"),
+         (6, "La mémoire", "", "Ex. : il se souvient que tu veux les montants HT", "teal"),
+         (7, "La boucle", "gérée par l'outil", "Ex. : il vérifie que le total tombe juste, sinon il recommence", "mint")]
+def part(n, t, sub, ex, c):
+    s = f' <span class="comp-sub">{sub}</span>' if sub else ""
+    return f'<div class="comp sk fill-{c} frag" data-step="{n}"><p class="hand comp-t">{t}{s}</p><p class="comp-ex">{ex}</p></div>'
 cards = [part(*x) for x in parts]
-slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
-    <h2>Un assistant, c'est <span class="mark mark--blush">comme un collègue</span></h2>
+slide(f'''    <p class="eyebrow">2. L'assistant et l'agent, un collègue numérique</p>
+    <h2><span class="mark mark--blush">Le modèle</span> et <span class="mark">son harnais</span></h2>
     <div class="anat">
       <div class="anat-col">{"".join(cards[:3])}</div>
-      <div class="anat-mid">{HUMAN}<span class="live">démo en direct</span></div>
+      <div class="anat-mid">{HUMAN}<p class="harness frag" data-step="8"><b class="hand">Tout le reste, c'est le harnais :</b>le réglage qui le rend bon, ou pas.</p></div>
       <div class="anat-col">{"".join(cards[3:])}</div>
     </div>''', seq=2, section=S945,
- notes="Faire apparaître chaque pièce au moment où tu la montres dans l'outil : la carte et la partie du dessin arrivent ensemble. L'agent a exactement les mêmes pièces.")
+ notes="Démo en direct : faire apparaître chaque pièce au moment où tu la montres dans l'outil. Insister à la fin : c'est un outil. Le même modèle, mal harnaché, donne de mauvais résultats. Le modèle GPT-6.1 est ton exemple : vérifier le nom exact du modèle au moment de la séance.")
 
 same = "".join(f'<span class="pill sk sk--thin">{t}</span>' for t in ["Modèle", "Instructions", "Connaissances", "Outils", "Compétences", "Mémoire", "Boucle"])
 slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
@@ -285,13 +303,14 @@ slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
     <div class="cols mt" style="align-items:stretch">
       <div class="card sk fill-sky rise"><h3>L'assistant</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Toi, à chaque question.</p></div>
       <div class="card sk fill-mint rise"><h3>L'agent</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Un objectif, un événement ou un horaire. Il enchaîne seul.</p></div>
-    </div>''', seq=2, section=S945, notes="Les pièces sont les mêmes. Ce qui change, c'est qui appuie sur le bouton, et combien d'étapes il enchaîne sans toi.")
+    </div>
+    {analogy("volant", "le même tracteur : soit tu conduis et il t'assiste, soit tu lances l'autoguidage sur la parcelle et tu surveilles depuis la cabine.", "frag mt")}''', seq=2, section=S945, notes="Les pièces sont les mêmes. Ce qui change, c'est qui appuie sur le bouton, et combien d'étapes il enchaîne sans toi.")
 
 slide(f'''    <p class="eyebrow">Ce que je constate sur le terrain : l'usage n°1</p>
     <h2>Un <span class="mark mark--sky">super moteur de recherche</span></h2>
     <p class="lead rise" style="margin-top:18px">On pose une question, on attend une réponse. On s'en sert en mode assistant, mais on oublie de l'équiper.</p>
     <div class="cols--3" style="display:grid;margin-top:34px;align-items:start">
-      <div class="card sk fill-lemon frag"><h3>On oublie le contexte</h3><p>Qui je suis, pour qui, avec quelles règles. Sans ça, la réponse reste générique.</p></div>
+      <div class="card sk fill-lav frag"><h3>On oublie le contexte</h3><p>Qui je suis, pour qui, avec quelles règles. Sans ça, la réponse reste générique.</p></div>
       <div class="card sk fill-sky frag"><h3>On oublie la connexion</h3><p>Elle ne voit ni Outlook, ni Excel, ni vos documents. On recopie tout à la main.</p></div>
       <div class="card sk fill-mint frag"><h3>On oublie la mémoire</h3><p>Chaque fois, on repart de zéro et on réexplique.</p></div>
     </div>
@@ -301,7 +320,7 @@ slide(f'''    <p class="eyebrow">Ce que je constate sur le terrain : l'usage n°
 def yes(t): return f'<td class="ok">{t}</td>'
 def no(t): return f'<td class="ko">{t}</td>'
 slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
-    <h2>Un assistant <span class="mark mark--lemon">complet ou dégradé</span></h2>
+    <h2>Un assistant <span class="mark mark--lav">complet ou dégradé</span></h2>
     <table class="cmp mt">
       <thead><tr><th></th><th>IA « toute nue », mémoire désactivée</th><th>Chatbot de site, sans mémoire</th><th>Projet Claude, assistant Copilot</th></tr></thead>
       <tbody>
@@ -310,7 +329,8 @@ slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
         <tr class="frag"><td class="row">Mémoire</td>{no("repart de zéro")}{no("repart de zéro")}{yes("selon les réglages")}</tr>
         <tr class="frag"><td class="row">Outils</td><td class="mid">selon l'outil</td><td class="mid">selon la configuration</td><td class="mid">selon la licence</td></tr>
       </tbody>
-    </table>''', seq=2, section=S945,
+    </table>
+    {analogy("carte", "un GPS sans carte à jour ni adresse enregistrée : il marche, mais il te fait perdre du temps.", "frag mt")}''', seq=2, section=S945,
  notes="C'est toujours un assistant, mais avec moins de pièces. D'où des réponses plus génériques : ce n'est pas l'IA qui est moins bonne, c'est l'équipement.")
 
 slide(f'''    <figure class="infographic grow">
@@ -319,20 +339,20 @@ slide(f'''    <figure class="infographic grow">
  seq=2, cls="slide--figure", section=S945,
  notes="Synthèse après la démo : le bocal, c'est le modèle seul. Tout ce qu'on vient de montrer, c'est le harnais. Deux mots nouveaux à poser à l'oral : l'inférence, c'est le moment où le modèle travaille ; le token, c'est un petit morceau de mot, l'unité sur laquelle on paie. Microsoft emploie aussi le mot « harness » pour les agents Copilot Studio (Microsoft Learn, Agents overview).")
 
-logic("L'assistant en vrai", 'Il <span class="mark mark--sky">répond</span>, tu gardes la main', "", "Tu lui poses une question ou tu lui confies un texte. Il propose, tu décides.",
+logic("L'assistant en vrai", 'Il <span class="mark mark--sky">répond</span>, tu gardes la main', "", "C'est comme le GPS du téléphone : il propose l'itinéraire, c'est toi qui conduis.",
  [("Chatbot du site Summit Flow", "Assistant de type chatbot : il répond aux visiteurs à partir du contenu du site.", '<span class="live">démo en direct</span>'),
   ("Un projet Claude", "Des consignes et des documents de référence, pour des réponses dans ton cadre.", shot("Capture d'un projet Claude (consignes et documents)")),
   ("Copilot dans Microsoft 365", "Le même principe dans Outlook, Word ou Teams.", shot("Capture de Copilot ou d'un agent Copilot avec consignes"))],
  "fill-sky", "Le chatbot du site se montre en direct, pas de capture.")
 
-logic("L'agent en vrai", 'Il <span class="mark">poursuit un objectif</span>, dans ton cadre', "", "Tu lui donnes un objectif. Il choisit ses étapes, utilise des outils, et s'arrête là où tu l'as décidé.",
+logic("L'agent en vrai", 'Il <span class="mark">poursuit un objectif</span>, dans ton cadre', "", "C'est comme l'autoguidage du tracteur : tu fixes la parcelle et le cadre, il trace les lignes, tu restes en cabine.",
  [("Super agent Lindy", "Un agent qui enchaîne plusieurs tâches depuis le téléphone.", shot("Captures d'écran du téléphone (Lindy)")),
   ("Un agent Claude", "Le modèle avec ses outils, sa mémoire et ses règles.", shot("Capture d'un agent Claude")),
   ("Un agent Copilot", "Un agent construit dans l'environnement Microsoft.", shot("Capture d'un agent Copilot"))],
  "fill-mint", "Relier à l'anatomie : mêmes pièces que l'assistant, mais c'est l'objectif qui le lance.")
 
 quiz = [("Préparer une présentation PowerPoint à partir de mes notes", "assistant", "sky"),
-        ("Chaque facture reçue par e-mail s'ajoute au tableau de trésorerie", "automatisation", "lemon"),
+        ("Chaque facture reçue par e-mail s'ajoute au tableau de trésorerie", "automatisation", "lav"),
         ("Chercher un produit chez plusieurs fournisseurs, comparer et me proposer le meilleur", "agent", "mint"),
         ("Analyser le tableau de bord du mois et en tirer trois points clés", "assistant", "sky")]
 items = "".join(f'''<div class="ex sk" style="flex-direction:row;align-items:center;justify-content:space-between;gap:24px"><p style="font-size:30px">{q}</p><span class="mark mark--{c if c!='mint' else 'teal'} frag hand" style="font-size:34px;white-space:nowrap">{a}</span></div>''' for q, a, c in quiz)
@@ -353,14 +373,15 @@ slide(f'''    <div class="grow center-y">
 # ---------- 11h00 Quand utiliser quoi ----------
 slide(f'''    <p class="eyebrow">Quand utiliser quoi</p>
     <h2>La grille en quatre questions</h2>
-    <figure class="schema" role="img" aria-label="Arbre de décision. 1. La tâche revient-elle souvent ? Non : geste manuel ou assistant au cas par cas. 2. Les règles sont-elles stables ? Non : clarifier la règle avant d'outiller. 3. Faut-il interpréter un texte ou décider ? Non : automatisation. Oui : agent, ou assistant et automatisation. 4. Une erreur coûte cher ? Un humain valide avant que ça parte."><!-- schema:grille-decision --></figure>''',
+    <figure class="schema" role="img" aria-label="Arbre de décision. 1. La tâche revient-elle souvent ? Non : geste manuel ou assistant au cas par cas. 2. Les règles sont-elles stables ? Non : clarifier la règle avant d'outiller. 3. Faut-il interpréter un texte ou décider ? Non : automatisation. Oui : agent, ou assistant et automatisation. 4. Une erreur coûte cher ? Un humain valide avant que ça parte."><!-- schema:grille-decision --></figure>
+    {analogy("attelage", "choisir l'outil à atteler : on regarde d'abord le travail à faire, pas l'outil le plus récent.", "frag")}''',
  seq=3, cls="slide--schema", section="11h00 · Quand utiliser quoi",
  notes="La question 4 s'applique à toutes les branches : elle ne choisit pas l'outil, elle fixe le niveau de contrôle humain.")
 
 qs = [("1", "La tâche revient-elle souvent ?"), ("2", "Les règles sont-elles stables ?"), ("3", "Faut-il interpréter un texte ou décider ?"), ("4", "Une erreur coûte-t-elle cher ?")]
 qhtml = "".join(f'''<div class="q" data-q="{n}"><span>{n}. {t}</span><div class="yn"><button class="sk sk--thin" value="oui" aria-pressed="false">oui</button><button class="sk sk--thin no" value="non" aria-pressed="false">non</button></div></div>''' for n, t in qs)
 slide(f'''    <p class="eyebrow">On la teste ensemble</p>
-    <h2>Une situation, <span class="mark mark--lemon">quatre réponses</span></h2>
+    <h2>Une situation, <span class="mark mark--lav">quatre réponses</span></h2>
     <div class="decider">
       <div>{qhtml}<button class="reset sk sk--thin" style="--radius:12px;margin-top:20px;padding:6px 16px;font-family:var(--font-hand);font-size:24px">Recommencer</button>
       {tip("71 % des entreprises qui n'utilisent pas l'IA disent ne pas y voir d'usage. La grille aide à le vérifier.", "Insee Première n° 2120, juillet 2026", "frag mt")}</div>
@@ -399,7 +420,7 @@ slide(f'''    <div class="stack">
       <div class="pole"><h3>{icon("ledger")}RH et compta</h3>{chips("rh", ["Variables de salaire", "Vérification des paiements clients", "Trésorerie quotidienne", "Saisie des pointages"])}</div>
       <div class="pole"><h3>{icon("mega")}Communication et direction</h3>{chips("cm", ["Planning de communication", "Bases de données pour la communication", "Création de tableaux de bord", "Analyse des tableaux de bord", "Présentations PowerPoint"])}</div>
     </div>
-    <div class="legend"><span><i style="background:var(--sky)"></i>assistant</span><span><i style="background:var(--lemon)"></i>automatisation</span><span><i style="background:var(--mint)"></i>agent</span><span><i style="background:var(--blush)"></i>pas d'outil</span><span>· un clic pour changer</span></div>''',
+    <div class="legend"><span><i style="background:var(--sky)"></i>assistant</span><span><i style="background:var(--lav)"></i>automatisation</span><span><i style="background:var(--mint)"></i>agent</span><span><i style="background:var(--blush)"></i>pas d'outil</span><span>· un clic pour changer</span></div>''',
  seq=3, section="11h00 · Quand utiliser quoi",
  notes="Mise en commun : chaque sous-groupe annonce son verdict, clique sur la carte pour la colorer. Les désaccords sont les meilleurs moments : les noter pour la grille d'audit.")
 
@@ -416,7 +437,7 @@ slide('''    <p class="eyebrow">Pour les curieux · avant les démos</p>
     <h2>Comment deux logiciels <span class="mark mark--sky">se parlent</span></h2>
     <figure class="schema" role="img" aria-label="Schéma. Ton outil envoie une demande, un appel HTTP, au guichet d'Outlook, son API. Outlook renvoie une réponse. Quatre types d'appel : GET pour lire, POST pour créer, PATCH pour modifier, DELETE pour supprimer. Dans l'autre sens, le webhook : c'est Outlook qui sonne quand un courriel arrive, et ton scénario démarre."><!-- schema:logiciels-parlent --></figure>''',
  seq=4, cls="slide--schema", section=S1330,
- notes="Dans l'ordre du dessin : 1. HTTP, c'est la langue commune des logiciels sur internet. Un appel, c'est une demande. 2. L'API, c'est le guichet du logiciel : ce qu'il accepte qu'on lui demande. 3. Quatre verbes suffisent : lire, créer, modifier, supprimer. 4. Le webhook, c'est l'inverse : on ne demande plus, on est prévenu. Même dans Copilot, un assistant ou un agent qui utilise un outil fait exactement ça.")
+ notes="Fil rouge : l'électricité. HTTP, c'est le courant qui circule dans les fils, la langue commune des logiciels. L'API, c'est la prise du logiciel. Un appel API, c'est brancher l'appareil et appuyer sur le bouton. Dans l'ordre du dessin : 1. HTTP, c'est la langue commune des logiciels sur internet. Un appel, c'est une demande. 2. L'API, c'est le guichet du logiciel : ce qu'il accepte qu'on lui demande. 3. Quatre verbes suffisent : lire, créer, modifier, supprimer. 4. Le webhook, c'est l'inverse : on ne demande plus, on est prévenu. Même dans Copilot, un assistant ou un agent qui utilise un outil fait exactement ça.")
 
 slide(f'''    <p class="eyebrow">Pour les curieux · deux mots que vous croiserez</p>
     <h2><span class="mark">OAuth et MCP</span></h2>
@@ -431,7 +452,7 @@ rows = [("fait", "Ce que ça fait"), ("demande", "Ce que ça demande"), ("pas", 
 trs = "".join(f'<tr><td class="row">{l}</td>{edit("as-"+k)}{edit("au-"+k)}{edit("ag-"+k)}</tr>' for k, l in rows)
 slide(f'''    <div class="stack">
       <span class="tag sk">{icon("file")}Outlook, Excel, Copilot selon les licences</span>
-      <h2>Trois démos, une même <span class="mark mark--lemon">grille de lecture</span></h2>
+      <h2>Trois démos, une même <span class="mark mark--teal">grille de lecture</span></h2>
     </div>
     <table class="readgrid">
       <thead><tr><th></th><th>Assistant<small>avec consignes et documents de référence</small></th><th>Automatisation<small>déclenchée par un courriel</small></th><th>Agent<small>qui enchaîne plusieurs étapes</small></th></tr></thead>
@@ -452,7 +473,7 @@ slide(f'''    <p class="eyebrow">Les trois démos</p>
     <h2>Sur vos cas, <span class="mark mark--sky">en direct</span></h2>
     <div class="cols--3 grow" style="display:grid;margin-top:30px;align-items:stretch">
       <div class="ex sk fill-sky rise"><p class="who">1. Un assistant</p><p>Des consignes et des documents de référence. Exemple : analyser le tableau de bord du mois.</p>{shot("Capture de secours : l'assistant Copilot configuré")}</div>
-      <div class="ex sk fill-lemon rise"><p class="who">2. Une automatisation</p><p>Une facture arrive par e-mail, une ligne s'ajoute au tableau de trésorerie.</p>{shot("Capture de secours : l'automatisation sur Outlook et Excel")}</div>
+      <div class="ex sk fill-lav rise"><p class="who">2. Une automatisation</p><p>Une facture arrive par e-mail, une ligne s'ajoute au tableau de trésorerie.</p>{shot("Capture de secours : l'automatisation sur Outlook et Excel")}</div>
       <div class="ex sk fill-mint rise"><p class="who">3. Un agent</p><p>Trouver un produit chez les fournisseurs : il cherche, compare, propose, et s'arrête avant de commander.</p>{shot("Capture de secours : l'agent Copilot en action")}</div>
     </div>''', seq=4, section="13h30 · Démonstrations commentées",
  notes="Démos en direct, les captures servent de plan B. Après chaque démo, revenir à la grille de lecture et remplir la colonne.")
@@ -517,7 +538,7 @@ slide(f'''    <p class="eyebrow">Choisir un outil</p>
     <ul class="checks cols mt" style="display:grid;column-gap:60px">{ck}</ul>''', seq=5, section="15h15 · Limites, investissement, choix",
  notes="Pour les décideurs : ces questions valent pour n'importe quel outil. Cocher en direct celles auxquelles l'entreprise sait déjà répondre.")
 
-pi = "".join(f'<div class="postit fill-{c}" contenteditable="true" data-k="doute-{i}" data-ph="un doute ?"></div>' for i, c in enumerate(["lemon", "blush", "sky", "mint", "lemon", "mint", "blush", "sky"]))
+pi = "".join(f'<div class="postit fill-{c}" contenteditable="true" data-k="doute-{i}" data-ph="un doute ?"></div>' for i, c in enumerate(["lav", "blush", "sky", "mint", "card", "mint", "blush", "lav"]))
 slide(f'''    <p class="eyebrow">Doutes et réserves</p>
     <h2>Qu'est-ce qui <span class="mark mark--blush">vous retient</span> ?</h2>
     <div class="board">{pi}</div>
@@ -526,18 +547,19 @@ slide(f'''    <p class="eyebrow">Doutes et réserves</p>
  notes="Clique sur un post-it pour écrire la réserve en direct. Trier ensuite : ce qui est fondé, ce qui se vérifie, ce qui se règle au jour 5.")
 
 # ---------- 16h00 Garde-fous ----------
-slide('''    <p class="eyebrow">Garde-fous</p>
+slide(f'''    <p class="eyebrow">Garde-fous</p>
     <h2>L'humain <span class="mark">valide</span>, toujours</h2>
     <p class="lead" style="margin-top:12px">L'IA peut se tromper avec aplomb : une réponse fausse, présentée comme sûre. C'est l'« hallucination » vue ce matin.</p>
+    {analogy("controle", "la préparation d'une machine avant livraison : même quand tout semble bon, on vérifie avant que ça parte chez le client.", "frag")}
     <figure class="schema" role="img" aria-label="Schéma : l'IA propose, tu relis et corriges, puis ça part. Si ce n'est pas bon, on revient à l'IA."><!-- schema:humain-valide --></figure>''',
  seq=6, cls="slide--schema", section="16h00 · Garde-fous essentiels",
  notes="La boucle de retour est la clé : relire n'est pas une perte de temps, c'est la condition pour déléguer.")
 
 slide(f'''    <p class="eyebrow">Garde-fous</p>
-    <h2>Trois règles <span class="mark mark--lemon">dès demain</span></h2>
+    <h2>Trois règles <span class="mark mark--blush">dès demain</span></h2>
     <div class="cols--3 grow" style="display:grid;margin-top:40px;align-items:start">
-      <div class="card sk fill-lemon frag"><h3>{icon("alert")}Ce qu'on ne saisit pas</h3><p>Données personnelles, données clients, informations confidentielles : jamais dans un outil non validé.</p></div>
-      <div class="card sk fill-sky frag"><h3>{icon("search")}On relit tout</h3><p>Chaque réponse se relit avant d'être utilisée ou envoyée.</p></div>
+      <div class="card sk fill-blush frag"><h3>{icon("alert")}Ce qu'on ne saisit pas</h3><p>Données personnelles, données clients, informations confidentielles : jamais dans un outil non validé.</p></div>
+      <div class="card sk fill-teal frag"><h3>{icon("search")}On relit tout</h3><p>Chaque réponse se relit avant d'être utilisée ou envoyée.</p></div>
       <div class="card sk fill-mint frag"><h3>{icon("users")}On dit qu'on l'a utilisée</h3><p>Quand un document a été préparé avec l'IA, on le signale.</p></div>
     </div>
     {tip("78 % des utilisateurs de l'IA au travail apportent leurs propres outils, sans passer par l'entreprise. D'où l'intérêt de règles simples, partagées.", "Microsoft et LinkedIn, Work Trend Index, mai 2024")}
@@ -551,14 +573,15 @@ au = "".join(f'<div class="col sk sk--thin rise{" is-key" if k else ""}"><b>colo
 slide(f'''    <p class="eyebrow">L'intersession</p>
     <h2>La grille d'audit, <span class="mark">colonne par colonne</span></h2>
     <div class="audit">{au}</div>
-    <p class="small" style="margin-top:22px">Remplissable sans connaissance technique. Trois à cinq tâches par pôle.</p>''',
+    <p class="small" style="margin-top:22px">Remplissable sans connaissance technique. Trois à cinq tâches par pôle.</p>
+    {analogy("carnet", "le carnet d'entretien d'une machine : avant de réparer, on note ce qui se passe, combien de fois, et ce que ça coûte.", "frag mt")}''',
  seq=7, section="16h30 · Lancement de l'intersession",
  notes="Les colonnes en vert sont celles qui posent le plus de questions : les détailler.")
 
 cells = ["Déroulé actuel", "Fréquence", "Personnes", "Outils", "Jugement humain", "Solution pressentie"]
 tr = "".join(f'<td class="edit sk" contenteditable="true" data-k="exemple-{i}" data-ph="…"></td>' for i in range(len(cells)))
 slide(f'''    <p class="eyebrow">Ensemble</p>
-    <h2>Un exemple <span class="mark mark--lemon">rempli en direct</span></h2>
+    <h2>Un exemple <span class="mark mark--lav">rempli en direct</span></h2>
     <table class="readgrid mt"><thead><tr>{"".join(f"<th>{c}</th>" for c in cells)}</tr></thead><tbody><tr style="height:260px">{tr}</tr></tbody></table>
     <p class="small">On prend une des situations classées ce matin et on remplit la ligne avec le groupe.</p>''',
  seq=7, section="16h30 · Lancement de l'intersession",
@@ -587,7 +610,7 @@ slide('''    <p class="eyebrow">Calendrier</p>
 goals = ["Je situe l'IA générative et ses limites actuelles", "Je distingue assistant, automatisation et agent", "Je mesure l'investissement que chacun demande", "J'ai une méthode pour observer mon propre travail"]
 gl = "".join(f'<li class="frag"><button class="sk sk--thin" data-k="but-{i}" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>{g}</span></li>' for i, g in enumerate(goals))
 slide(f'''    <p class="eyebrow">Ce soir</p>
-    <h2>Ce que vous savez <span class="mark mark--lemon">faire maintenant</span></h2>
+    <h2>Ce que vous savez <span class="mark mark--teal">faire maintenant</span></h2>
     <ul class="checks mt">{gl}</ul>''', seq=7, section="16h30 · Lancement de l'intersession",
  notes="Faire cocher par le groupe. Revenir sur les attentes notées au tour de table du matin.")
 
