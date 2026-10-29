@@ -28,29 +28,31 @@
 <div class="viewport">
 <main class="stage" aria-roledescription="présentation" aria-label="Automatisation et IA agentique, jour 1">
 
-  <section class="slide slide--dark slide--cover slide--full" aria-roledescription="slide">
+  <section class="slide slide--cover slide--full" data-preview="1" aria-roledescription="slide">
     <span class="wordmark wordmark--lg"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span>
     <div class="grow stack center-y">
       <p class="eyebrow">Automatisation et IA agentique · Maison Lagarrigue · Jour 1</p>
-      <h1>Assistant, automatisation, agent : savoir quoi utiliser, <span class="hl script">et quand</span></h1>
+      <h1>Assistant, automatisation, agent : savoir quoi utiliser, <span class="mark">et quand</span></h1>
       <p class="lead">Comprendre, mesurer et choisir.</p>
       <p class="cover-meta small">17 novembre 2026 · 9h00 à 17h00 · Marie Jolly, Summit Flow</p>
     </div>
-    <svg class="cover-ridge" viewBox="0 0 1920 300" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0 300 L0 250 L300 200 L520 240 L820 170 L1000 210 L1240 130 L1400 170 L1600 40 L1760 140 L1920 110 L1920 300 Z" fill="#0E6170" filter="url(#rough)"/>
-      <path d="M980 290 C 1200 270, 1330 220, 1430 170 S 1560 70, 1600 44" fill="none" stroke="#7DD8BE" stroke-width="5" stroke-dasharray="4 18" stroke-linecap="round"/>
-      <circle cx="1600" cy="42" r="10" fill="#7DD8BE"/>
+    <svg class="cover-ridge" viewBox="0 0 900 360" aria-hidden="true">
+      <path d="M20 340 L250 150 L360 240 L560 40 L700 190 L780 130 L890 260 L890 340 Z" fill="#a5d8ff" filter="url(#rough)"/>
+      <path d="M20 340 L250 150 L360 240 L560 40 L700 190 L780 130 L890 260" fill="none" stroke="#1e1e1e" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" filter="url(#rough)"/>
+      <path d="M520 80 L560 40 L600 84 L578 76 L560 92 L540 74 Z" fill="#ffffff" stroke="#1e1e1e" stroke-width="3" stroke-linejoin="round" filter="url(#rough)"/>
+      <path d="M90 330 C 250 300, 330 250, 420 190 S 520 90, 556 52" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-dasharray="3 14" stroke-linecap="round"/>
+      <circle cx="560" cy="44" r="9" fill="#b2f2bb" stroke="#1e1e1e" stroke-width="3"/>
     </svg>
     <div class="chrome"><span class="section">9h00 · Point de départ</span></div>
     <aside class="notes">Tour de table : qui a suivi l'acculturation de mars, ce qui est utilisé aujourd'hui, ce qui a coincé, ce que chacun attend du parcours.</aside>
   </section>
 
-  <section class="slide" data-seq="1" aria-roledescription="slide">
+  <section class="slide" data-seq="1" data-preview="2" aria-roledescription="slide">
     <p class="eyebrow">Le parcours complet</p>
-    <h2>Cinq jours, une montée par étapes</h2>
+    <h2>Cinq jours, une <span class="mark mark--blue">montée par étapes</span></h2>
     <div class="journey">
       <svg class="journey-path" viewBox="0 0 1370 150" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M44 120 C 200 118, 260 100, 392 95 S 600 72, 740 70 S 960 44, 1088 40 L 1340 20" fill="none" stroke="#1D6F5C" stroke-width="4" stroke-dasharray="6 14" stroke-linecap="round" filter="url(#rough)"/>
+        <path d="M44 120 C 200 118, 260 100, 392 95 S 600 72, 740 70 S 960 44, 1088 40 L 1340 20" fill="none" stroke="#1e1e1e" stroke-width="3" stroke-dasharray="4 14" stroke-linecap="round" filter="url(#rough)"/>
       </svg>
       <div class="stop is-here" style="--pin-y:100px">
         <span class="here">vous êtes ici</span><span class="pin"></span>
@@ -83,7 +85,7 @@
 
   <section class="slide slide--full" aria-roledescription="slide">
     <p class="eyebrow">Aujourd'hui</p>
-    <h2>Le programme du jour 1</h2>
+    <h2>Le programme du <span class="mark mark--yellow">jour 1</span></h2>
     <ol class="agenda" style="margin-top:44px">
       <li><span class="h">9h00</span>Point de départ et repères pour tous</li>
       <li><span class="h">9h45</span>Assistant, automatisation, agent</li>
@@ -103,14 +105,22 @@
   <section class="slide" data-seq="2" aria-roledescription="slide">
     <p class="eyebrow">Trois logiques différentes</p>
     <div class="grow stack-lg center-y">
-      <p class="idea">L'assistant répond. L'automatisation exécute. L'agent <span class="hl script">poursuit un objectif.</span></p>
+      <p class="idea">L'assistant <span class="mark mark--blue">répond</span>. L'automatisation <span class="mark mark--yellow">exécute</span>. L'agent <span class="mark">poursuit un objectif</span>.</p>
       <p class="lead">Le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
     </div>
     <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">9h45 · Assistant, automatisation, agent</span></div>
     <aside class="notes">Assistant : l'humain garde la main. Automatisation : même suite d'actions à partir d'un déclencheur, sans réfléchir. Agent : reçoit un objectif, choisit ses étapes, agit dans un cadre défini.</aside>
   </section>
 
-  <section class="slide slide--schema" data-seq="2" aria-roledescription="slide">
+  <section class="slide slide--figure" data-seq="2" data-preview="3" aria-roledescription="slide">
+    <figure class="infographic grow">
+      <img src="images/harnais-bocal.png" alt="Schéma Modèle, inférence, harnais. 1. Le modèle : un cerveau dans un bocal, il sait plein de choses mais ne peut rien faire seul, sans outils ni consignes. 2. L'inférence : ton prompt va au modèle qui produit une réponse, c'est le moment où il travaille, facturé au token. 3. Le harnais : autour du modèle, des outils, une mémoire, des règles et instructions, une boucle et une base de connaissances. Agent IA égale modèle plus harnais ; le harnais fait souvent la différence en production.">
+    </figure>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">9h45 · Assistant, automatisation, agent</span></div>
+    <aside class="notes">Partir du bocal : le modèle seul sait mais ne fait rien. L'agent, c'est le même cerveau avec des mains, un bureau et des règles.</aside>
+  </section>
+
+  <section class="slide slide--schema" data-seq="2" data-preview="4" aria-roledescription="slide">
     <p class="eyebrow">Trois logiques différentes</p>
     <h2>Qui garde la main ?</h2>
     <figure class="schema" role="img" aria-label="Schéma en trois colonnes. Assistant : tu poses une question, l'IA propose une réponse, tu décides. Automatisation : un déclencheur, toujours les mêmes actions, un résultat sans réflexion. Agent : un objectif, l'IA choisit ses étapes en boucle, elle agit dans un cadre défini."><!-- schema:trois-logiques --></figure>
@@ -159,9 +169,9 @@
       <h2>Vos situations à classer</h2>
     </div>
     <div class="situations">
-      <div class="card sk"><h3><svg><use href="#i-cart"/></svg>Commerce</h3><ul><li>Calcul de commissions</li><li>Ciblage de clients pour des démonstrations</li><li>Contrôle d'études de prix</li></ul></div>
-      <div class="card sk"><h3><svg><use href="#i-ledger"/></svg>RH et compta</h3><ul><li>Saisie et suivi des pointages</li><li>Calcul de variables de salaire</li><li>Suivi de trésorerie</li><li>Vérification de paiements</li></ul></div>
-      <div class="card sk"><h3><svg><use href="#i-mega"/></svg>Communication</h3><ul><li>Planning de communication</li><li>Préparation et mise en forme de bases de données</li></ul></div>
+      <div class="card sk fill-blue"><h3><svg><use href="#i-cart"/></svg>Commerce</h3><ul><li>Calcul de commissions</li><li>Ciblage de clients pour des démonstrations</li><li>Contrôle d'études de prix</li></ul></div>
+      <div class="card sk fill-yellow"><h3><svg><use href="#i-ledger"/></svg>RH et compta</h3><ul><li>Saisie et suivi des pointages</li><li>Calcul de variables de salaire</li><li>Suivi de trésorerie</li><li>Vérification de paiements</li></ul></div>
+      <div class="card sk fill-green"><h3><svg><use href="#i-mega"/></svg>Communication</h3><ul><li>Planning de communication</li><li>Préparation et mise en forme de bases de données</li></ul></div>
     </div>
     <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">11h00 · Quand utiliser quoi</span></div>
     <aside class="notes">Situations listées dans la proposition à partir des échanges avec l'entreprise. Compléter en séance avec celles que les participants apportent.</aside>

@@ -22,19 +22,20 @@ def convert(spec):
         if e["kind"] == "box":
             tid = e["id"] + "_t"
             out.append(base(e["id"], "rectangle", e["x"], e["y"], e["w"], e["h"], strokeColor=e["stroke"], backgroundColor=e["fill"],
-                            fillStyle="solid" if e["fill"] == "transparent" else "hachure",
-                            roundness={"type": 3}, strokeSharpness="round", boundElements=[{"type": "text", "id": tid}]))
-            out.append(textel(tid, e["x"] + e["w"] / 2, e["y"] + e["h"] / 2, e["text"], e["size"], e["color"], container=e["id"]))
+                            fillStyle="solid", strokeWidth=e["sw"] * 1.5,
+                            roundness={"type": 3}, strokeSharpness="round", boundElements=[{"type": "text", "id": tid}] if e["text"] else None))
+            if e["text"]:
+                out.append(textel(tid, e["x"] + e["w"] / 2, e["y"] + e["h"] / 2, e["text"], e["size"], e["color"], container=e["id"]))
         elif e["kind"] == "arrow":
             pts = [[0, 0]] + ([[e["via"][0] - e["x1"], e["via"][1] - e["y1"]]] if e["via"] else []) + [[e["x2"] - e["x1"], e["y2"] - e["y1"]]]
             out.append(base(e["id"], "arrow", e["x1"], e["y1"], abs(e["x2"] - e["x1"]), abs(e["y2"] - e["y1"]), strokeColor=e["color"],
-                            strokeStyle="dashed" if e["dashed"] else "solid", points=pts, startArrowhead=None, endArrowhead="arrow",
+                            strokeStyle="dashed" if e["dashed"] else "solid", strokeWidth=3, points=pts, startArrowhead=None, endArrowhead="arrow",
                             startBinding=None, endBinding=None, lastCommittedPoint=None, roundness={"type": 2}, strokeSharpness="round"))
             if e["label"]:
                 horiz = e["y1"] == e["y2"]
                 lx = (e["x1"] + e["x2"]) / 2 if horiz else e["x1"] + 12
                 ly = e["y1"] - 26 if horiz else (e["y1"] + e["y2"]) / 2 - 10
-                out.append(textel(e["id"] + "_l", lx, ly + 10, e["label"], 30, "#0B4F5C") if horiz else textel(e["id"] + "_l", 0, ly, e["label"], 24, "#0B4F5C", left=lx))
+                out.append(textel(e["id"] + "_l", lx, ly + 10, e["label"], 30, "#1e1e1e") if horiz else textel(e["id"] + "_l", 0, ly, e["label"], 24, "#0B4F5C", left=lx))
         else:
             out.append(textel(e["id"], 0, e["y"], e["text"], e["size"], e["color"], left=e["x"]))
     return out
