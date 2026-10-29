@@ -50,32 +50,22 @@
     <aside class="notes">Assistant : l'humain garde la main. Automatisation : même suite d'actions à partir d'un déclencheur, sans réfléchir. Agent : reçoit un objectif, choisit ses étapes, agit dans un cadre défini.</aside>
   </section>
 
-  <!-- TYPE 3 : cas concret, avant / après -->
-  <section class="slide" aria-roledescription="slide">
-    <div class="stack">
-      <span class="tag tag--fiction"><svg><use href="#i-flask"/></svg>Données fictives</span>
-      <h2>Une demande de devis, deux itinéraires</h2>
-    </div>
-    <div class="cols grow" style="margin-top:56px;align-items:start;">
-      <div class="card card--muted">
-        <h3><svg><use href="#i-backpack"/></svg>Aujourd'hui</h3>
-        <ol class="flow">
-          <li>Mail reçu dans la boîte partagée</li>
-          <li>Recopie à la main dans Excel</li>
-          <li>Relance selon la mémoire de chacun</li>
-        </ol>
-      </div>
-      <div class="card card--mint">
-        <h3><svg><use href="#i-route"/></svg>Demain</h3>
-        <ol class="flow">
-          <li>Le courriel déclenche l'automatisation</li>
-          <li>Une ligne s'ajoute au suivi Excel</li>
-          <li>Relance à date, un humain valide</li>
-        </ol>
-      </div>
-    </div>
-    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">13h30 · Démonstrations commentées</span><span class="count"></span></div>
-    <aside class="notes">Ce que ça fait, ce que ça demande à mettre en place, ce que ça ne fait pas. L'humain reste dans la boucle à l'étape 3 : on automatise le recopiage, pas la décision.</aside>
+  <!-- TYPE 5 : schéma didactique Excalidraw (source : schemas/trois-logiques.excalidraw) -->
+  <section class="slide slide--schema" aria-roledescription="slide">
+    <p class="eyebrow">Trois logiques différentes</p>
+    <h2>Qui garde la main ?</h2>
+    <figure class="schema" role="img" aria-label="Schéma en trois colonnes. Assistant : tu poses une question, l'IA propose une réponse, tu décides. Automatisation : un déclencheur, toujours les mêmes actions, un résultat sans réflexion. Agent : un objectif, l'IA choisit ses étapes en boucle, elle agit dans un cadre défini."><!-- schema:trois-logiques --></figure>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">9h45 · Assistant, automatisation, agent</span><span class="count"></span></div>
+    <aside class="notes">Faire deviner la ligne du bas avant de la montrer : qui garde la main dans chaque cas ?</aside>
+  </section>
+
+  <!-- TYPE 5 : schéma didactique Excalidraw (source : schemas/grille-decision.excalidraw) -->
+  <section class="slide slide--schema" aria-roledescription="slide">
+    <p class="eyebrow">Quand utiliser quoi</p>
+    <h2>La grille en quatre questions</h2>
+    <figure class="schema" role="img" aria-label="Arbre de décision. 1. La tâche revient-elle souvent ? Non : geste manuel ou assistant au cas par cas. 2. Les règles sont-elles stables ? Non : clarifier la règle avant d'outiller. 3. Faut-il interpréter un texte ou décider ? Non : automatisation. Oui : agent, ou assistant et automatisation. 4. Une erreur coûte cher ? Un humain valide avant que ça parte."><!-- schema:grille-decision --></figure>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">11h00 · Quand utiliser quoi</span><span class="count"></span></div>
+    <aside class="notes">La question 4 s'applique à toutes les branches : elle ne choisit pas l'outil, elle fixe le niveau de contrôle humain.</aside>
   </section>
 
   <!-- TYPE 4 : consigne d'atelier + alerte -->
@@ -104,6 +94,34 @@
     </div>
     <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">11h00 · Quand utiliser quoi</span><span class="count"></span></div>
     <aside class="notes">Les quatre questions : la tâche est-elle répétitive, les règles sont-elles stables, faut-il interpréter un texte ou décider, que se passe-t-il en cas d'erreur.</aside>
+  </section>
+
+  <!-- TYPE 3 : cas concret, avant / après -->
+  <section class="slide" aria-roledescription="slide">
+    <div class="stack">
+      <span class="tag tag--fiction"><svg><use href="#i-flask"/></svg>Données fictives</span>
+      <h2>Une demande de devis, deux itinéraires</h2>
+    </div>
+    <div class="cols grow" style="margin-top:56px;align-items:start;">
+      <div class="card card--muted">
+        <h3><svg><use href="#i-backpack"/></svg>Aujourd'hui</h3>
+        <ol class="flow">
+          <li>Mail reçu dans la boîte partagée</li>
+          <li>Recopie à la main dans Excel</li>
+          <li>Relance selon la mémoire de chacun</li>
+        </ol>
+      </div>
+      <div class="card card--mint">
+        <h3><svg><use href="#i-route"/></svg>Demain</h3>
+        <ol class="flow">
+          <li>Le courriel déclenche l'automatisation</li>
+          <li>Une ligne s'ajoute au suivi Excel</li>
+          <li>Relance à date, un humain valide</li>
+        </ol>
+      </div>
+    </div>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">13h30 · Démonstrations commentées</span><span class="count"></span></div>
+    <aside class="notes">Ce que ça fait, ce que ça demande à mettre en place, ce que ça ne fait pas. L'humain reste dans la boucle à l'étape 3 : on automatise le recopiage, pas la décision.</aside>
   </section>
 
   <div class="trail trail-global" aria-hidden="true"><div class="trail-fill"></div><div class="trail-marker"></div><div class="trail-summit"></div></div>

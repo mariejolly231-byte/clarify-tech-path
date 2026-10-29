@@ -37,10 +37,14 @@ Un vidéoprojecteur en salle éclairée perd beaucoup de contraste : le texte co
 
 ## Typographie
 
-- **Titres et texte** : Proxima Nova (400, 600, 700). Police sous licence commerciale : le deck l'utilise si elle est installée sur le poste de projection (Adobe Fonts activé en local). Sinon, Montserrat, embarquée dans le fichier, prend le relais sans réseau.
+- **Titres et texte** : Figtree (500 pour le texte, 700 pour les titres), embarquée dans le fichier. Elle remplace Proxima Nova, la police de marque, qui est sous licence commerciale et ne peut pas être embarquée : le rendu est ainsi identique sur tous les postes, sans réseau.
 - **Accent manuscrit** : Dancing Script 700, embarquée. Réservée à un ou deux mots dans un grand titre (couverture, idée clé). Jamais pour du texte courant, une consigne ou une donnée : une écriture manuscrite projetée se lit mal au fond de la salle.
 
 Échelle sur scène 1920 x 1080 : titre de couverture 92 px, titre de slide 72 px, idée clé 96 px, texte 40 px, minimum absolu 28 px (légendes, sources, pied de page).
+
+## Schémas didactiques
+
+Dessinés dans le style Excalidraw (trait à main levée), aux couleurs du thème : cadres teal, fonds blanc ou menthe, rouge pour la seule case de vigilance. Texte en Figtree, jamais en dessous de 28 px une fois projeté. Les sources éditables sont dans `schemas/*.excalidraw`.
 
 ## Règles de mise en page
 

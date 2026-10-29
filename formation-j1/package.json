@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "type": "commonjs",
+  "description": "Outils de construction du deck : export des schémas Excalidraw en SVG",
+  "dependencies": { "@excalidraw/utils": "0.1.2" }
+}

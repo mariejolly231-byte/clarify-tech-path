@@ -1,11 +1,8 @@
 /* Summit Flow Altitude : thème et composants du deck de formation */
 
-/* Proxima Nova est sous licence commerciale : elle est utilisée si elle est installée sur le poste
-   (Adobe Fonts activé en local). Sinon, Montserrat embarquée prend le relais, sans réseau. */
-@font-face { font-family: "SF Sans"; font-weight: 400; font-style: normal; font-display: block; src: local("Proxima Nova Regular"), local("ProximaNova-Regular"), local("Proxima Nova"), url(fonts/montserrat.woff2) format("woff2"); }
-@font-face { font-family: "SF Sans"; font-weight: 400; font-style: italic; font-display: block; src: local("Proxima Nova Italic"), local("ProximaNova-RegularIt"), url(fonts/montserrat-i.woff2) format("woff2"); }
-@font-face { font-family: "SF Sans"; font-weight: 600; font-style: normal; font-display: block; src: local("Proxima Nova Semibold"), local("ProximaNova-Semibold"), url(fonts/montserrat.woff2) format("woff2"); }
-@font-face { font-family: "SF Sans"; font-weight: 700; font-style: normal; font-display: block; src: local("Proxima Nova Bold"), local("ProximaNova-Bold"), url(fonts/montserrat.woff2) format("woff2"); }
+/* Figtree remplace Proxima Nova (sous licence, non embarquable) : rendu identique sur tous les postes, sans réseau. */
+@font-face { font-family: "SF Sans"; font-weight: 400 800; font-style: normal; font-display: block; src: url(fonts/figtree.woff2) format("woff2"); }
+@font-face { font-family: "SF Sans"; font-weight: 400; font-style: italic; font-display: block; src: url(fonts/figtree-i.woff2) format("woff2"); }
 @font-face { font-family: "Dancing Script"; font-weight: 400 700; font-style: normal; font-display: block; src: url(fonts/dancing.woff2) format("woff2"); }
 
 :root {
@@ -47,6 +44,7 @@ html, body {
   background: #061F25;
   color: var(--sf-anth);
   font-family: var(--font-body);
+  font-weight: 500;
   overflow: hidden;
 }
 
@@ -212,6 +210,14 @@ p, li { font-size: var(--fs-body); line-height: 1.4; }
 .alert svg { width: 64px; height: 64px; color: var(--sf-alert); }
 .alert .alert-title { font-family: var(--font-title); font-weight: 700; font-size: 44px; color: var(--sf-alert); margin-bottom: 12px; }
 .alert p { font-size: 36px; color: var(--sf-anth); }
+
+/* Schéma didactique et infographie */
+.schema, .infographic { flex: 1; min-height: 0; margin-top: 24px; display: flex; align-items: center; justify-content: center; }
+.schema svg { width: auto; height: 100%; max-width: 100%; max-height: 680px; }
+.infographic img { max-width: 100%; max-height: 640px; object-fit: contain; border-radius: var(--radius); }
+.infographic figcaption { font-size: var(--fs-small); color: var(--sf-muted); margin-top: 16px; }
+.slide--schema h2 { font-size: 64px; }
+.slide--schema { padding-bottom: 160px; }
 
 /* Couverture */
 .cover-ridge { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 300px; pointer-events: none; }

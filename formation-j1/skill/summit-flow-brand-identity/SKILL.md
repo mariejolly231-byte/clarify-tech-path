@@ -84,8 +84,10 @@ Utiliser cette métaphore pour ouvrir des posts, des intros de page, des anecdot
 - Aplats uniquement, pas de dégradé
 
 **Typographie :**
-- **Proxima Nova** : police principale, pour les titres (600 à 700) et le texte courant (400). Sous licence commerciale (Adobe Fonts). Quand elle n'est pas disponible ou ne peut pas être embarquée (deck hors ligne, page web sans licence web), utiliser **Montserrat** en remplacement.
+- **Proxima Nova** : police principale, pour les titres (600 à 700) et le texte courant (400). Sous licence commerciale (Adobe Fonts). Quand elle n'est pas disponible ou ne peut pas être embarquée (deck de formation hors ligne, page web sans licence web), utiliser **Figtree** en remplacement. Ne pas utiliser Montserrat.
 - **Dancing Script** : accent manuscrit, la touche humaine de la marque. Un ou deux mots dans un grand titre, une signature, une citation courte. Jamais pour du texte courant, une consigne, un chiffre ou un tableau.
+
+**Schémas didactiques :** style Excalidraw (trait à main levée) aux couleurs de la marque, texte en Figtree ou Proxima Nova, une idée par schéma. Le rouge n'y sert qu'à la case de vigilance.
 
 **Logo :** Cercle avec montagne stylisée teal + Samoyed blanc (le chien de Marie) + circuits imprimés numériques en bas + "SUMMIT FLOW" en capitales blanches.
 
