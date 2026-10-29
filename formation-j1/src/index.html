@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automatisation et IA, jour 1</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-logo" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="3"/><path d="M9 34 L19 19 L24 26 L29 17 L39 34 Z" fill="currentColor"/><path d="M14 39 h6 v-3 h8 v3 h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.5M12 17.2v.3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2.5 20c.8-3.5 3.3-5.5 6.5-5.5s5.7 2 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.8c1.8.7 3 2.5 3.5 5.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8l-5-5z M14 3v5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-backpack" viewBox="0 0 24 24"><path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6M5 11a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v8.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19.5V11zM9 14h6v4H9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 19H16a3.5 3.5 0 0 0 0-7H8a3.5 3.5 0 0 1 0-7h7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="viewport">
+<main class="stage" aria-roledescription="présentation" aria-label="Automatisation et IA, jour 1">
+
+  <!-- TYPE 1 : couverture / ouverture de séquence -->
+  <section class="slide slide--dark slide--cover" aria-roledescription="slide">
+    <span class="wordmark wordmark--lg"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span>
+    <div class="grow stack center-y" style="display:flex;flex-direction:column;">
+      <p class="eyebrow">Formation Automatisation et IA · Jour 1</p>
+      <h1>On allège le sac avant d'ajouter <span class="hl">des outils</span></h1>
+      <p class="lead">Repérer ce qui se répète, ce qui se perd, ce qui se recopie. Et décider ensemble de ce qui mérite d'être automatisé.</p>
+    </div>
+    <svg class="cover-ridge" viewBox="0 0 1920 300" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 300 L0 250 L300 200 L520 240 L820 170 L1000 210 L1240 130 L1400 170 L1600 40 L1760 140 L1920 110 L1920 300 Z" fill="#0E6170"/>
+      <path d="M980 290 C 1200 270, 1330 220, 1430 170 S 1560 70, 1600 44" fill="none" stroke="#7DD8BE" stroke-width="5" stroke-dasharray="4 18" stroke-linecap="round"/>
+      <circle cx="1600" cy="42" r="10" fill="#7DD8BE"/>
+    </svg>
+    <div class="chrome"><span class="section">Accueil</span><span class="count"></span></div>
+    <aside class="notes">Accueil, tour de table. Poser la règle du jour : on part des irritants réels, pas des outils.</aside>
+  </section>
+
+  <!-- TYPE 2 : idée clé, une phrase -->
+  <section class="slide" aria-roledescription="slide">
+    <p class="eyebrow">Étape 1 · Repérer le bordel organisé</p>
+    <div class="grow stack-lg center-y" style="display:flex;flex-direction:column;">
+      <p class="idea">Une info, un endroit, <span class="hl">une version.</span></p>
+      <p class="lead">Avant d'automatiser quoi que ce soit, on sait où vit chaque information et qui la tient à jour.</p>
+    </div>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">Repérer</span><span class="count"></span></div>
+    <aside class="notes">Demander : « Combien de fichiers différents contiennent la liste de vos clients ? » Laisser répondre, ne pas commenter.</aside>
+  </section>
+
+  <!-- TYPE 3 : cas concret, avant / après -->
+  <section class="slide" aria-roledescription="slide">
+    <div class="stack">
+      <span class="tag tag--fiction"><svg><use href="#i-flask"/></svg>Données fictives</span>
+      <h2>Une demande de devis, deux itinéraires</h2>
+    </div>
+    <div class="cols grow" style="margin-top:56px;align-items:start;">
+      <div class="card card--muted">
+        <h3><svg><use href="#i-backpack"/></svg>Aujourd'hui</h3>
+        <ol class="flow">
+          <li>Mail reçu dans la boîte partagée</li>
+          <li>Recopie à la main dans un tableur</li>
+          <li>Relance selon la mémoire de chacun</li>
+        </ol>
+      </div>
+      <div class="card card--mint">
+        <h3><svg><use href="#i-route"/></svg>Demain</h3>
+        <ol class="flow">
+          <li>Formulaire unique de demande</li>
+          <li>Fiche créée seule dans la base</li>
+          <li>Relance à date, un humain valide</li>
+        </ol>
+      </div>
+    </div>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">Cas : société fictive Atelier Exemple</span><span class="count"></span></div>
+    <aside class="notes">Insister : l'humain reste dans la boucle à l'étape 3. On n'automatise pas la décision, on automatise le recopiage.</aside>
+  </section>
+
+  <!-- TYPE 4 : consigne d'atelier + alerte -->
+  <section class="slide" aria-roledescription="slide">
+    <div class="stack">
+      <div class="meta">
+        <span class="tag"><svg><use href="#i-users"/></svg>En binôme</span>
+        <span class="tag"><svg><use href="#i-clock"/></svg>Durée à caler</span>
+        <span class="tag"><svg><use href="#i-file"/></svg>Fiche irritants</span>
+      </div>
+      <h2>Atelier : cartographier une tâche qui revient chaque semaine</h2>
+    </div>
+    <div class="cols cols--1-2 grow" style="margin-top:56px;align-items:start;">
+      <ol class="steps">
+        <li><strong>Choisis</strong> une tâche que tu fais au moins une fois par semaine.</li>
+        <li><strong>Écris</strong> chaque étape, du déclencheur au résultat.</li>
+        <li><strong>Entoure</strong> les étapes où tu recopies une information.</li>
+      </ol>
+      <div class="alert" role="note">
+        <svg aria-hidden="true"><use href="#i-alert"/></svg>
+        <div>
+          <p class="alert-title">Vigilance données</p>
+          <p>Aucune donnée client réelle dans un outil d'IA grand public. Pour l'exercice, on décrit la tâche, pas son contenu.</p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="wordmark wordmark--sm"><svg><use href="#i-logo"/></svg>SUMMIT FLOW</span><span class="section">Atelier 1</span><span class="count"></span></div>
+    <aside class="notes">Passer dans les binômes. Repérer deux ou trois tâches à reprendre en plénière.</aside>
+  </section>
+
+  <div class="trail trail-global" aria-hidden="true"><div class="trail-fill"></div><div class="trail-marker"></div><div class="trail-summit"></div></div>
+</main>
+</div>
+
+<div class="notes-panel" id="notes-panel" aria-live="off"></div>
+<div class="sr-only" id="live" aria-live="polite"></div>
+
+<div class="overlay" id="help" role="dialog" aria-modal="true" aria-labelledby="help-title">
+  <div class="panel">
+    <h2 id="help-title">Raccourcis</h2>
+    <table>
+      <tr><td><kbd>→</kbd> <kbd>Espace</kbd> <kbd>Page suiv.</kbd></td><td>Slide suivante (fonctionne avec une télécommande)</td></tr>
+      <tr><td><kbd>←</kbd> <kbd>Page préc.</kbd></td><td>Slide précédente</td></tr>
+      <tr><td><kbd>Début</kbd> <kbd>Fin</kbd></td><td>Première ou dernière slide</td></tr>
+      <tr><td>Chiffres puis <kbd>Entrée</kbd></td><td>Aller à la slide n</td></tr>
+      <tr><td><kbd>F</kbd></td><td>Plein écran</td></tr>
+      <tr><td><kbd>N</kbd></td><td>Notes de l'animatrice</td></tr>
+      <tr><td><kbd>P</kbd></td><td>Imprimer ou exporter en PDF</td></tr>
+      <tr><td><kbd>?</kbd> <kbd>Échap</kbd></td><td>Afficher ou fermer cette aide</td></tr>
+    </table>
+  </div>
+</div>
+
+<script src="deck.js"></script>
+</body>
+</html>
