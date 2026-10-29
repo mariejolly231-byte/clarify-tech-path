@@ -2,8 +2,9 @@
 Style calé sur le schéma « Modèle, inférence, harnais » : encre noire, grands cadres fins,
 cases au trait épais, aplats pastel pleins (pas de hachures), annotations grises."""
 
-INK, MUTED, NONE = "#1e1e1e", "#5f5f5f", "transparent"
-BLUE, GREEN, YELLOW, PINK = "#a5d8ff", "#b2f2bb", "#ffec99", "#ffc9c9"
+INK, MUTED, NONE, TEAL = "#1F2A2E", "#5C6366", "transparent", "#0B4F5C"
+# Pastels doux de la charte, jamais de rouge
+BLUE, GREEN, YELLOW, PINK = "#DCEEFA", "#D6F1E6", "#FFF3C4", "#FCE4E8"
 
 # Mise à l'échelle pour la projection : géométrie x1,2 et texte x1,3 (texte rendu au-dessus de 28 px)
 G, F = 1.2, 1.3
@@ -27,7 +28,7 @@ def trois_logiques():
     ]
     for p, x, title, steps, color, hand in cols:
         els.append(box(p + "f", x, 20, 270, 500, sw=1))
-        els.append(text(p + "t", x + 24, 38, title, size=24))
+        els.append(text(p + "t", x + 24, 38, title, size=24, color=TEAL))
         for i, s in enumerate(steps):
             y = 100 + i * 115
             els.append(box(f"{p}{i}", x + 30, y, 210, 80, s, fill=color if i == 2 else NONE, size=20, sw=2))
@@ -55,5 +56,18 @@ def grille():
     els.append(box("q4", 470, 445, 290, 110, "4. Une erreur coûte cher ?\nUn humain valide\navant que ça parte", fill=PINK, size=20))
     return els
 
-SCHEMAS = {"trois-logiques": (trois_logiques, "Trois logiques : qui garde la main"),
+def humain_valide():
+    els = []
+    steps = [("ia", 20, "L'IA propose", BLUE), ("toi", 300, "Tu relis\net corriges", YELLOW), ("go", 580, "Ça part", GREEN)]
+    for id, x, label, fill in steps:
+        els.append(box(id, x, 120, 230, 110, label, fill=fill, size=24))
+    els.append(arrow("a1", 250, 175, 298, 175))
+    els.append(arrow("a2", 530, 175, 578, 175))
+    els.append(arrow("back", 415, 232, 135, 232, label=None, dashed=True, via=(275, 330)))
+    els.append(text("bk", 170, 330, "pas bon ? on reprend", size=20, color=MUTED))
+    els.append(text("t1", 20, 40, "Déléguer, oui. Sans relire, non.", size=24, color=TEAL))
+    return els
+
+SCHEMAS = {"humain-valide": (humain_valide, "L'humain valide"),
+"trois-logiques": (trois_logiques, "Trois logiques : qui garde la main"),
            "grille-decision": (grille, "Grille de décision en quatre questions")}
