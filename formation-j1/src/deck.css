@@ -348,6 +348,31 @@ p, li { font-size: var(--fs-body); line-height: 1.38; }
 .cols--4 .card ul li::before { top: 20px; width: 14px; }
 .situations .pole .chip { font-size: 25px; padding: 11px 16px; margin-bottom: 10px; }
 
+/* Ouverture : la photo dans un cadre dessiné, lent zoom à l'intérieur */
+.slide--hero { display: grid; grid-template-columns: 1fr 960px; gap: 60px; align-items: center; padding: 100px 110px 150px; }
+.hero-photo { position: relative; --radius: 24px; width: 960px; height: 722px; padding: 14px; background: var(--paper); transform: rotate(1.2deg); }
+.hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; border-radius: 14px; transform-origin: 50% 0; }
+.slide--hero.is-active .hero-photo img { animation: kenburns 16s ease-out both; }
+@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.06); } }
+.slide--hero.is-active .hero-photo { animation: rise 700ms var(--ease) both 100ms; }
+.hero-card { order: -1; }
+.hero-card h2 { font-size: 84px; margin: 6px 0 18px; }
+.hero-card .dash li { font-size: 32px; padding: 8px 0 8px 40px; }
+.hero-card .dash li::before { top: 28px; }
+.on-hero .trail { left: var(--pad); }
+
+/* Qui je suis */
+.me { display: grid; grid-template-columns: 420px 1fr; gap: 60px; margin-top: 36px; align-items: start; }
+.me-photo { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.me-photo .shot { width: 380px; height: 380px; min-height: 0; border-radius: 50%; }
+.me-photo .shot::before { border-radius: 50%; }
+.me-photo .shot img { border-radius: 50%; width: 100%; height: 100%; object-fit: cover; }
+.me-mount { width: 300px; height: 140px; }
+.me-list li { font-size: 34px; padding: 12px 0 12px 40px; }
+.me-list li::before { top: 32px; }
+
+@media (prefers-reduced-motion: reduce) { .slide--hero.is-active .hero-photo img { animation: none; } }
+
 /* Couverture et pages de pause */
 .cover-ridge { position: absolute; right: 0; bottom: 0; width: 900px; height: 360px; pointer-events: none; }
 .cover-meta { margin-top: 40px; }

@@ -82,6 +82,33 @@ slide(f'''    <span class="wordmark wordmark--lg rise">{icon("logo")}SUMMIT FLOW
     {COVER_RIDGE}''', cls="slide--cover slide--full", section="9h00 · Point de départ",
  notes="Accueil. Le sentier en bas à droite : on monte par étapes, on ne grimpe pas tout d'un coup.")
 
+slide(f'''    <figure class="hero-photo sk"><img src="images/lagarrigue-ouverture.jpg" alt="Vue aérienne d'une ensileuse et d'un tracteur Claas au travail dans un champ, sous le logo Lagarrigue Agricole et espaces verts."></figure>
+    <div class="hero-card">
+      <p class="eyebrow rise">Aujourd'hui, on part de chez vous</p>
+      <h2 class="rise">Maison Lagarrigue</h2>
+      <ul class="dash">
+        <li class="frag">Agricole et espaces verts</li>
+        <li class="frag">Vente et réparation de matériel, concession Claas, irrigation</li>
+        <li class="frag">Cinq points de vente entre l'Aveyron, le Lot et le Tarn-et-Garonne</li>
+        <li class="frag">Une entreprise familiale</li>
+      </ul>
+    </div>''', cls="slide--full slide--hero", section="9h00 · Point de départ",
+ notes="Ouvrir sur eux, pas sur l'IA. Faire compléter par la salle : les métiers, les saisons fortes, ce qui occupe le bureau. Activité reprise d'une offre d'emploi de l'entreprise (France Travail) : à valider avec Julie.")
+
+slide(f'''    <p class="eyebrow">Qui je suis</p>
+    <h2>Marie Jolly, <span class="mark">Summit Flow</span></h2>
+    <div class="me">
+      <div class="me-photo">{shot("Ta photo", "Photo à insérer")}<svg class="illu me-mount" viewBox="0 0 300 140" aria-hidden="true"><path data-d="0.6" d="M10 130 L90 50 L130 90 L190 20 L290 130 Z" fill="#DCEEFA" filter="url(#rough)"/><path data-d="0.2" class="ink" d="M10 130 L90 50 L130 90 L190 20 L290 130" filter="url(#rough)"/><path data-d="1.0" class="inkt" d="M30 128 C 90 120, 130 100, 160 70 S 185 35, 190 24" stroke-dasharray="3 10" style="stroke-width:3"/></svg></div>
+      <ul class="dash me-list">
+        <li class="frag">Ingénieure, formée à IMT Mines Albi, pas très loin d'ici</li>
+        <li class="frag">Dix ans dans l'aéronautique : production, gestion de projet, industrialisation</li>
+        <li class="frag">L'IA, l'automatisation et les agents : d'abord pour mes propres besoins, bien avant ChatGPT</li>
+        <li class="frag">Aujourd'hui, j'accompagne des PME et des organismes de formation, au plus près du terrain</li>
+        <li class="frag">Passionnée de montagne, en parcours de certification pour devenir accompagnatrice en montagne</li>
+      </ul>
+    </div>''', seq=1, section="9h00 · Point de départ",
+ notes="Court : deux minutes. La montagne fait le lien avec le fil de la journée : on monte par étapes, et on allège le sac.")
+
 slide(f'''    <p class="eyebrow">Le parcours complet</p>
     <h2>Cinq jours, une <span class="mark mark--sky">montée par étapes</span></h2>
     <div class="journey">

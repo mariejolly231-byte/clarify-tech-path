@@ -116,6 +116,7 @@
     const slide = slides[current];
     stage.classList.toggle("on-cover", slide.classList.contains("slide--cover"));
     stage.classList.toggle("on-full", slide.classList.contains("slide--full"));
+    stage.classList.toggle("on-hero", slide.classList.contains("slide--hero"));
     stage.classList.toggle("at-summit", current === total - 1);
     stage.style.setProperty("--progress", (total > 1 ? (current / (total - 1)) * 100 : 100) + "%");
     const notes = slide.querySelector(".notes");
