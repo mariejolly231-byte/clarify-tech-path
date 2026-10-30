@@ -471,3 +471,17 @@ kbd { font-family: var(--font-body); font-weight: 700; background: #fff; border:
 .audit-ex tr.is-key td.row { background: var(--mint); }
 .steps--tight li { margin-bottom: 0; }
 .steps--tight li + li { margin-top: 20px; }
+
+/* Logo Summit Flow : entrée en rotation douce, puis légère respiration */
+.brand-logo { width: 150px; height: auto; display: block; }
+.is-active .brand-logo { animation: logo-in 1100ms var(--ease) both, logo-breathe 6s ease-in-out 1400ms infinite; }
+@keyframes logo-in { from { opacity: 0; transform: scale(.6) rotate(-14deg); } 60% { opacity: 1; transform: scale(1.05) rotate(3deg); } to { transform: none; } }
+@keyframes logo-breathe { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-6px) rotate(1.5deg); } }
+
+/* Photo de Marie : cercle, zoom lent façon Ken Burns */
+.me-pic { width: 380px; height: 380px; border-radius: 50%; overflow: hidden; margin: 0; }
+.me-pic::before { border-radius: 50%; }
+.me-pic img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; border-radius: 50%; }
+.is-active .me-pic img { animation: me-zoom 14s ease-in-out both alternate infinite; }
+@keyframes me-zoom { from { transform: scale(1.02); } to { transform: scale(1.12) translate(-2%, 1%); } }
+@media (prefers-reduced-motion: reduce) { .is-active .brand-logo, .is-active .me-pic img { animation: none; } }

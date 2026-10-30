@@ -24,7 +24,7 @@ def embed(m):
     from PIL import Image
     import io
     im = Image.open(src / m.group(1)); im.thumbnail((1800, 1800))
-    buf = io.BytesIO(); im.convert("RGB").save(buf, "WEBP", quality=86)
+    buf = io.BytesIO(); im.convert("RGBA" if "A" in im.mode else "RGB").save(buf, "WEBP", quality=86)
     return 'src="data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode() + '"'
 html = re.sub(r'src="(images/[^"]+)"', embed, html)
 assert "http" not in re.sub(r'xmlns="[^"]+"', "", html), "dépendance réseau détectée"

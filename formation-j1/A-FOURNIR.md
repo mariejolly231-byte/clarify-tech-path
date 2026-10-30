@@ -5,7 +5,7 @@ Chaque emplacement est un cadre en pointillés. Dépose le fichier dans `src/ima
 | Slide | Titre | Ce qu'il faut |
 |---|---|---|
 | 2 | Maison Lagarrigue | Une version plus grande de la photo d'ouverture (celle fournie fait 828 pixels de large) |
-| 3 | Qui je suis | Ta photo, cadrée carrée |
+| 3 | Qui je suis | Fait : photo avec le samoyède intégrée |
 | 10 | Une IA générative, comment ça marche | Infographies Clarity `comment-fonctionne-ia.png` et `comment-ia-apprend.png` |
 | 11 | L'IA est déjà dans vos outils | Logos officiels Microsoft 365 Copilot, Outlook, Excel, Word, Teams |
 | 14 | L'automatisation en vrai | Capture d'un scénario Make ; capture du script Apps Script et de son résultat |

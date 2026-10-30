@@ -87,7 +87,7 @@ CUP = '''<svg class="pause-illu illu" viewBox="0 0 520 420" aria-hidden="true">
     </svg>'''
 
 # ---------- 9h00 Point de départ ----------
-slide(f'''    <span class="wordmark wordmark--lg rise">{icon("logo")}SUMMIT FLOW</span>
+slide(f'''    <img class="brand-logo rise" src="images/logo-summit-flow.png" alt="Logo Summit Flow : une montagne, un circuit et un samoyède.">
     <div class="grow stack center-y">
       <p class="eyebrow rise">Automatisation et IA agentique · Maison Lagarrigue · Jour 1</p>
       <h1 class="rise">Assistant, automatisation, agent : savoir quoi utiliser, <span class="mark">et quand</span></h1>
@@ -113,7 +113,7 @@ slide(f'''    <figure class="hero-photo sk"><img src="images/lagarrigue-ouvertur
 slide(f'''    <p class="eyebrow">Qui je suis</p>
     <h2>Marie Jolly, <span class="mark">Summit Flow</span></h2>
     <div class="me">
-      <div class="me-photo">{shot("Ta photo", "Photo à insérer")}<svg class="illu me-mount" viewBox="0 0 300 140" aria-hidden="true"><path data-d="0.6" d="M10 130 L90 50 L130 90 L190 20 L290 130 Z" fill="#DCEEFA" filter="url(#rough)"/><path data-d="0.2" class="ink" d="M10 130 L90 50 L130 90 L190 20 L290 130" filter="url(#rough)"/><path data-d="1.0" class="inkt" d="M30 128 C 90 120, 130 100, 160 70 S 185 35, 190 24" stroke-dasharray="3 10" style="stroke-width:3"/></svg></div>
+      <div class="me-photo"><figure class="me-pic sk"><img src="images/marie-samoyede.jpg" alt="Marie Jolly en montagne, accroupie à côté de son samoyède blanc en harnais."></figure><svg class="illu me-mount" viewBox="0 0 300 140" aria-hidden="true"><path data-d="0.6" d="M10 130 L90 50 L130 90 L190 20 L290 130 Z" fill="#DCEEFA" filter="url(#rough)"/><path data-d="0.2" class="ink" d="M10 130 L90 50 L130 90 L190 20 L290 130" filter="url(#rough)"/><path data-d="1.0" class="inkt" d="M30 128 C 90 120, 130 100, 160 70 S 185 35, 190 24" stroke-dasharray="3 10" style="stroke-width:3"/></svg></div>
       <ul class="dash me-list">
         <li class="frag">Ingénieure, formée à IMT Mines Albi, pas très loin d'ici</li>
         <li class="frag">Dix ans dans l'aéronautique : production, gestion de projet, industrialisation</li>
@@ -711,7 +711,7 @@ slide(f'''    <p class="eyebrow">Ce soir</p>
     <ul class="checks mt">{gl}</ul>''', seq=7, section="16h30 · Lancement de l'intersession",
  notes="Faire cocher par le groupe. Revenir sur les attentes notées au tour de table du matin.")
 
-slide(f'''    <span class="wordmark wordmark--lg rise">{icon("logo")}SUMMIT FLOW</span>
+slide(f'''    <img class="brand-logo rise" src="images/logo-summit-flow.png" alt="Logo Summit Flow : une montagne, un circuit et un samoyède.">
     <div class="grow stack center-y">
       <p class="eyebrow rise">Rendez-vous le 22 janvier</p>
       <h1 class="rise">Merci, et <span class="mark">bonne observation</span></h1>
