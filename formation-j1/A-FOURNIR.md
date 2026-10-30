@@ -24,3 +24,8 @@ Chaque emplacement est un cadre en pointillés. Dépose le fichier dans `src/ima
 | 8, 27 | Situations du paperboard de mars : sens des encadrés roses, nom du logiciel de pointage (« I80 » ?), estimation des reprises barrée ou non |
 | 40 | La troisième règle (« on dit qu'on l'a utilisée ») est une proposition, à valider avec la référente IA |
 | 43 | Les noms des référents s'écrivent en séance |
+
+## Illustrations du samoyède
+
+Toutes les illustrations à générer, avec leur prompt ChatGPT, leur slide et leur nom de fichier, sont dans `PROMPTS-IMAGES.md`. Slides concernées : 1, 5, 6, 7, 10, 12, 23, 26, 28, 34, 37, 43, 45 et 46.
+

@@ -23,10 +23,15 @@ html = re.sub(r"<!-- schema:([\w-]+) -->", lambda m: re.sub(r"<\?xml[^>]*>", "",
 def embed(m):
     from PIL import Image
     import io
-    im = Image.open(src / m.group(1)); im.thumbnail((1800, 1800))
+    attr, path = m.group(1), m.group(2)
+    if path.endswith((".mp4", ".webm")):
+        # Vidéos en boucle : embarquées telles quelles (les compresser avant, voir README)
+        mime = "video/mp4" if path.endswith(".mp4") else "video/webm"
+        return attr + '="data:' + mime + ';base64,' + base64.b64encode((src / path).read_bytes()).decode() + '"'
+    im = Image.open(src / path); im.thumbnail((1800, 1800))
     buf = io.BytesIO(); im.convert("RGBA" if "A" in im.mode else "RGB").save(buf, "WEBP", quality=86)
-    return 'src="data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode() + '"'
-html = re.sub(r'src="(images/[^"]+)"', embed, html)
-assert "http" not in re.sub(r'xmlns="[^"]+"', "", html), "dépendance réseau détectée"
+    return attr + '="data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode() + '"'
+html = re.sub(r'(src|poster)="(images/[^"]+)"', embed, html)
+assert "http" not in re.sub(r"xmlns=[\"'][^\"']+[\"']", "", html), "dépendance réseau détectée"
 (dist / ("apercu-4-slides.html" if preview else "jour1-deck.html")).write_text(html, encoding="utf-8")
 print("ok", len(html) // 1024, "Ko")

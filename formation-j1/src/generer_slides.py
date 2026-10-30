@@ -3,6 +3,11 @@
 import pathlib
 S = []
 def slide(body, seq=None, section="", cls="", notes="", preview=False):
+    # Les illustrations se placent par rapport à la slide : on les sort des blocs où elles ont été écrites
+    import re
+    arts = re.findall(r'\n?\s*<figure class="art[^"]*"[^>]*>.*?</figure>', body, re.S)
+    for x in arts: body = body.replace(x, "")
+    body += "".join("\n    " + x.strip() for x in arts)
     a = f' data-seq="{seq}"' if seq else ""
     a += f' data-section="{section}"'
     S.append(f'''  <section class="slide {cls}"{a} aria-roledescription="slide">
@@ -14,6 +19,25 @@ def icon(n): return f'<svg aria-hidden="true"><use href="#i-{n}"/></svg>'
 def shot(need, kind="Capture à fournir", src=None, style=""):
     inner = f'<img src="{src}" alt="{need}">' if src else f'<p class="need"><b>{kind}</b>{need}</p>'
     return f'<figure class="shot sk" style="{style}">{inner}</figure>'
+# Illustrations du samoyède : vidéo en boucle si elle existe, sinon image fixe, sinon le dessin
+# de secours, sinon un cadre « à générer » qui indique le nom de fichier attendu (voir PROMPTS-IMAGES.md)
+IMG = pathlib.Path("src/images")
+def art(name, alt, box, fallback=""):
+    r, b, w, h = box
+    pos = f"right:{r}px;bottom:{b}px;width:{w}px;height:{h}px"
+    band = " art--band" if w / h >= 2.4 else ""
+    still = next((f"images/{name}.{e}" for e in ("png", "jpg", "webp") if (IMG / f"{name}.{e}").exists()), None)
+    clip = next((f"images/{name}.{e}" for e in ("webm", "mp4") if (IMG / f"{name}.{e}").exists()), None)
+    if clip:
+        poster = f' poster="{still}"' if still else ""
+        return f'<figure class="art{band}" style="{pos}"><video class="art-media" autoplay muted loop playsinline{poster} aria-label="{alt}"><source src="{clip}"></video></figure>'
+    if still:
+        return f'<figure class="art{band}" style="{pos}"><img class="art-media" src="{still}" alt="{alt}"></figure>'
+    if fallback:
+        return fallback
+    return f'<figure class="art art--todo" style="{pos}" aria-hidden="true"><p><b>Illustration à générer</b>{name}.png</p></figure>'
+def infog(file, need):
+    return shot(need, "Infographie à insérer", f"images/{file}" if (IMG / file).exists() else None)
 def logo(name, file=None):
     inner = f'<img src="images/{file}" alt="{name}">' if file else f'{name}<span class="ph">logo</span>'
     return f'<span class="logo sk">{inner}</span>'
@@ -93,8 +117,9 @@ slide(f'''    <img class="brand-logo rise" src="images/logo-summit-flow.png" alt
       <h1 class="rise">Assistant, automatisation, agent : savoir quoi utiliser, <span class="mark">et quand</span></h1>
       <p class="lead rise">Comprendre, mesurer et choisir.</p>
       <p class="cover-meta small rise">17 novembre 2026 · 9h00 à 17h00 · Marie Jolly, Summit Flow</p>
+      <div class="cover-actions rise"><button class="btn-act" data-act="full">Plein écran</button><button class="btn-act btn-act--ghost" data-act="pdf">Exporter en PDF</button></div>
     </div>
-    {COVER_RIDGE}''', cls="slide--cover slide--full", section="9h00 · Point de départ",
+    {art("couverture-samoyede", "Le samoyède de Summit Flow monte un sentier vers un sommet.", (40, 0, 980, 640), COVER_RIDGE)}''', cls="slide--cover slide--full", section="9h00 · Point de départ",
  notes="Accueil. Le sentier en bas à droite : on monte par étapes, on ne grimpe pas tout d'un coup.")
 
 slide(f'''    <figure class="hero-photo sk"><img src="images/lagarrigue-ouverture.jpg" alt="Vue aérienne d'une ensileuse et d'un tracteur Claas au travail dans un champ, sous le logo Lagarrigue Agricole et espaces verts."></figure>
@@ -145,8 +170,9 @@ slide(f'''    <p class="eyebrow">Le parcours complet</p>
     </div>''', seq=1, section="Le parcours",
  notes="L'ordre des ateliers et la composition des groupes restent à valider avec l'entreprise. Avant le jour 2, Summit Flow consolide les grilles et propose une priorisation, validée avec vous.")
 
-slide('''    <p class="eyebrow">Aujourd'hui</p>
+slide(f'''    <p class="eyebrow">Aujourd'hui</p>
     <h2>Le programme du <span class="mark mark--teal">jour 1</span></h2>
+    {art("programme-samoyede", "Le samoyède sur un sentier balisé de six étapes.", (100, 130, 720, 200))}
     <ol class="agenda mt">
       <li class="rise"><span class="h">9h00</span>Point de départ et repères pour tous</li>
       <li class="rise"><span class="h">9h45</span>Assistant, automatisation, agent</li>
@@ -163,6 +189,7 @@ slide('''    <p class="eyebrow">Aujourd'hui</p>
 
 slide(f'''    <p class="eyebrow">Tour de table</p>
     <h2>D'où part <span class="mark">chacun</span> ?</h2>
+    {art("depart-samoyede", "Le samoyède au point de départ d'un sentier, devant un panneau.", (100, 150, 560, 330))}
     <div class="cols mt" style="align-items:start">
       <ol class="steps">
         <li class="frag">Avez-vous suivi la journée de mars ?</li>
@@ -179,6 +206,7 @@ slide(f'''    <p class="eyebrow">Tour de table</p>
 
 slide(f'''    <p class="eyebrow">Retour sur mars</p>
     <h2>La journée de mars, <span class="mark mark--sky">ce qui reste</span></h2>
+    {art("retour-samoyede", "Le samoyède regarde le chemin déjà parcouru.", (100, 150, 440, 270))}
     <div class="cols mt" style="align-items:start">
       <div class="card sk fill-sky rise"><h3>Ce qui a été posé</h3><ul>
         <li>Ce qu'est un assistant conversationnel</li>
@@ -216,8 +244,8 @@ slide(f'''    <p class="eyebrow">Rappel express</p>
 slide(f'''    <p class="eyebrow">Rappel commun</p>
     <h2>Une IA générative, <span class="mark mark--sky">comment ça marche</span></h2>
     <div class="cols grow mt">
-      {shot("Infographie Clarity « Comment fonctionne l'IA » (comment-fonctionne-ia.png)", "Infographie à insérer")}
-      {shot("Infographie Clarity « Comment l'IA apprend » (comment-ia-apprend.png)", "Infographie à insérer")}
+      {infog("comment-fonctionne-ia.png", "Infographie « Comment fonctionne l'IA » (comment-fonctionne-ia.png)")}
+      {infog("comment-ia-apprend.png", "Infographie « Comment l'IA apprend » (comment-ia-apprend.png)")}
     </div>''', seq=1, section="9h00 · Point de départ",
  notes="Rester sur l'essentiel : elle prédit la suite la plus probable, elle ne cherche pas la vérité.")
 
@@ -241,7 +269,8 @@ slide(f'''    <p class="eyebrow">Trois logiques différentes</p>
       <p class="idea">L'assistant <span class="mark mark--sky frag">répond</span>. L'automatisation <span class="mark mark--lav frag">exécute</span>. L'agent <span class="mark frag">poursuit un objectif</span>.</p>
       <p class="lead frag">Le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
       {tip("Sur Malt, la demande de compétences liées aux agents IA a été multipliée par 60 par rapport à 2024.", "Malt Tech Trends 2026", "frag")}
-    </div>''', seq=2, section=S945, notes="Faire apparaître les trois verbes un par un. Demander au groupe de deviner le suivant.")
+    </div>
+    {art("trois-logiques-samoyede", "Trois samoyèdes : l'un rapporte la balle, une gamelle se remplit à heure fixe, le troisième tire un traîneau vers le refuge.", (90, 150, 400, 300))}''', seq=2, section=S945, notes="Faire apparaître les trois verbes un par un. Demander au groupe de deviner le suivant.")
 
 slide(f'''    <p class="eyebrow">1. L'automatisation</p>
     <h2>Tout part d'un <span class="mark mark--lav">déclencheur</span></h2>
@@ -417,7 +446,7 @@ slide(f'''    <div class="grow center-y">
       <p class="lead">On reprend à 11h00 avec la grille de décision.</p>
       <div class="mt">{timer(15, (10, 15))}</div>
     </div>
-    {CUP}''', cls="slide--full", section="Pause",
+    {art("pause-samoyede", "Le samoyède se repose à côté d'une tasse fumante.", (120, 150, 640, 460), CUP)}''', cls="slide--full", section="Pause",
  notes="")
 
 # ---------- 11h00 Quand utiliser quoi ----------
@@ -447,6 +476,7 @@ slide(f'''    <div class="stack">
         <span class="tag sk">{icon("file")}Grille en quatre questions</span>
       </div>
       <h2>Atelier : classer <span class="mark">vos situations</span></h2>
+    {art("atelier-samoyede", "Le samoyède range des balles dans quatre paniers de couleur.", (100, 135, 560, 200))}
     </div>
     <div class="cols cols--1-2 grow" style="margin-top:40px;align-items:start;">
       <ol class="steps">
@@ -481,7 +511,7 @@ slide(f'''    <div class="grow center-y">
       <h2 style="font-size:120px">Déjeuner</h2>
       <p class="lead">Reprise à 13h30 : on passe aux démonstrations.</p>
     </div>
-    {CUP}''', cls="slide--full", section="Déjeuner")
+    {art("dejeuner-samoyede", "Le samoyède attend devant son sac de randonnée ouvert.", (120, 150, 640, 460), CUP)}''', cls="slide--full", section="Déjeuner")
 
 # ---------- 13h30 Démonstrations ----------
 S1330 = "13h30 · Démonstrations commentées"
@@ -597,7 +627,7 @@ slide(f'''    <div class="grow center-y">
       <p class="lead">Reprise à 15h15 : limites, investissement et choix d'un outil.</p>
       <div class="mt">{timer(15, (10, 15))}</div>
     </div>
-    {CUP}''', cls="slide--full", section="Pause")
+    {art("pause-samoyede", "Le samoyède se repose à côté d'une tasse fumante.", (120, 150, 640, 460), CUP)}''', cls="slide--full", section="Pause")
 
 # ---------- 15h15 Limites et choix ----------
 slide('''    <p class="eyebrow">Limites</p>
@@ -632,6 +662,7 @@ checks = ["Le besoin est-il clair et décrit ?", "L'outil est-il déjà dans not
 ck = "".join(f'<li class="rise"><button class="sk sk--thin" data-k="choix-{i}" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>{c}</span></li>' for i, c in enumerate(checks))
 slide(f'''    <p class="eyebrow">Choisir un outil</p>
     <h2>Six questions <span class="mark">avant de signer</span></h2>
+    {art("choisir-samoyede", "Le samoyède compare deux sacs avant de choisir.", (100, 150, 640, 260))}
     <ul class="checks cols mt" style="display:grid;column-gap:60px">{ck}</ul>''', seq=5, section="15h15 · Limites, investissement, choix",
  notes="Pour les décideurs : ces questions valent pour n'importe quel outil. Cocher en direct celles auxquelles l'entreprise sait déjà répondre.")
 
@@ -687,6 +718,7 @@ slide(f'''    <p class="eyebrow">L'intersession · à vous</p>
 ref = "".join(f'<div class="fill-line rise"><span>{p}</span><span class="f" contenteditable="true" data-k="ref-{i}" data-ph="nom à écrire en séance"></span></div>' for i, p in enumerate(["Commerce", "RH et comptabilité", "Communication"]))
 slide(f'''    <p class="eyebrow">Qui porte quoi</p>
     <h2>Un référent <span class="mark mark--sky">par pôle</span></h2>
+    {art("referents-samoyede", "Trois samoyèdes encordés, le premier ouvre la trace.", (100, 150, 560, 300))}
     <div class="cols mt" style="align-items:start">
       <div>{ref}</div>
       <div class="card sk fill-teal frag"><h3>{icon("users")}La référente IA</h3><p>Elle garde la vue d'ensemble. Les référents de pôle font avancer la grille dans leur équipe.</p></div>
@@ -708,6 +740,7 @@ goals = ["Je situe l'IA générative et ses limites actuelles", "Je distingue as
 gl = "".join(f'<li class="frag"><button class="sk sk--thin" data-k="but-{i}" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>{g}</span></li>' for i, g in enumerate(goals))
 slide(f'''    <p class="eyebrow">Ce soir</p>
     <h2>Ce que vous savez <span class="mark mark--teal">faire maintenant</span></h2>
+    {art("sommet-samoyede", "Le samoyède assis au sommet, il regarde la vue.", (90, 150, 470, 520))}
     <ul class="checks mt">{gl}</ul>''', seq=7, section="16h30 · Lancement de l'intersession",
  notes="Faire cocher par le groupe. Revenir sur les attentes notées au tour de table du matin.")
 
@@ -718,7 +751,7 @@ slide(f'''    <img class="brand-logo rise" src="images/logo-summit-flow.png" alt
       <p class="lead rise">D'ici là, on observe, on note, on remplit la grille.</p>
       <p class="cover-meta small rise">Marie Jolly · contact@summitflow.fr · summitflow.fr</p>
     </div>
-    {COVER_RIDGE}''', cls="slide--cover slide--full", section="Fin du jour 1")
+    {art("observation-samoyede", "Le samoyède renifle des traces dans la neige, un carnet ouvert à côté.", (40, 0, 980, 640), COVER_RIDGE)}''', cls="slide--cover slide--full", section="Fin du jour 1")
 
 # assemble
 src = pathlib.Path("src/index.html").read_text()

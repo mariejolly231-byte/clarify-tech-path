@@ -24,3 +24,12 @@ Le fichier à projeter est `dist/jour1-deck.html`. Il fonctionne sans connexion 
 ## Modifier un schéma
 
 Les sources sont dans `schemas/specs.py`. Après modification : `cd schemas && python3 to_excalidraw.py && node export.cjs`, puis `python3 build.py`. Les fichiers `schemas/*.excalidraw` s'ouvrent aussi sur excalidraw.com pour une retouche à la main ; dans ce cas, réexporte en SVG au même nom.
+
+## Pendant la présentation
+
+La barre d'outils apparaît à droite dès que la souris bouge : plein écran, stylo, surligneur, pointeur, projecteur, gomme, effacer, export PDF et aide. Raccourcis : `F` plein écran, `D` stylo, `M` surligneur, `L` pointeur, `O` projecteur, `G` gomme, `C` effacer la slide, `Ctrl+Z` annuler le dernier trait, `Échap` quitter l'outil, `P` export PDF. Les dessins sont gardés par slide, dans ce navigateur uniquement. Le plein écran peut être bloqué quand le deck est affiché dans une autre page (par exemple l'aperçu claude.ai) : ouvre alors `dist/jour1-deck.html` directement dans le navigateur.
+
+## Illustrations et vidéos
+
+Les prompts sont dans `PROMPTS-IMAGES.md`. Dépose les fichiers dans `src/images/`, lance `bash outils/compresser-videos.sh` pour alléger les vidéos, puis reconstruis.
+
