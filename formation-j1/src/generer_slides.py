@@ -8,6 +8,13 @@ def slide(body, seq=None, section="", cls="", notes="", preview=False):
     arts = re.findall(r'\n?\s*<figure class="art[^"]*"[^>]*>.*?</figure>', body, re.S)
     for x in arts: body = body.replace(x, "")
     body += "".join("\n    " + x.strip() for x in arts)
+    if seq and "slide--full" not in cls:
+        if '<p class="eyebrow">' in body:
+            body = body.replace('<p class="eyebrow">', f'<p class="eyebrow"><span class="chap" title="Chapitre {seq}">{seq}</span>', 1)
+        elif '<div class="meta">' in body:
+            body = body.replace('<div class="meta">', f'<div class="meta"><span class="chap chap--tag" title="Chapitre {seq}">{seq}</span>', 1)
+        elif '<span class="tag' in body:
+            body = body.replace('<span class="tag', f'<span class="chap chap--tag" title="Chapitre {seq}">{seq}</span><span class="tag', 1)
     a = f' data-seq="{seq}"' if seq else ""
     a += f' data-section="{section}"'
     S.append(f'''  <section class="slide {cls}"{a} aria-roledescription="slide">
@@ -22,7 +29,7 @@ def shot(need, kind="Capture à fournir", src=None, style=""):
 # Illustrations du samoyède : vidéo en boucle si elle existe, sinon image fixe, sinon le dessin
 # de secours, sinon un cadre « à générer » qui indique le nom de fichier attendu (voir PROMPTS-IMAGES.md)
 IMG = pathlib.Path("src/images")
-def art(name, alt, box, fallback=""):
+def art(name, alt, box, fallback="", over=""):
     r, b, w, h = box
     pos = f"right:{r}px;bottom:{b}px;width:{w}px;height:{h}px"
     band = " art--band" if w / h >= 2.4 else ""
@@ -32,10 +39,20 @@ def art(name, alt, box, fallback=""):
         poster = f' poster="{still}"' if still else ""
         return f'<figure class="art{band}" style="{pos}"><video class="art-media" autoplay muted loop playsinline{poster} aria-label="{alt}"><source src="{clip}"></video></figure>'
     if still:
-        return f'<figure class="art{band}" style="{pos}"><img class="art-media" src="{still}" alt="{alt}"></figure>'
+        return f'<figure class="art{band}" style="{pos}"><img class="art-media" src="{still}" alt="{alt}">{over}</figure>'
     if fallback:
         return fallback
     return f'<figure class="art art--todo" style="{pos}" aria-hidden="true"><p><b>Illustration à générer</b>{name}.png</p></figure>'
+# Calques animés posés sur les illustrations : nuages qui passent, queue qui frétille, soleil qui rayonne.
+# Chaque calque est dessiné dans le repère de pixels de son image, et suit son cadrage.
+def overlay(vw, vh, inner, fit="meet"):
+    return f'<svg class="art-over" viewBox="0 0 {vw} {vh}" preserveAspectRatio="xMidYMid {fit}" aria-hidden="true">{inner}</svg>'
+CLOUD = lambda x, y, k, d, cls="drift": f'<g class="ov-cloud {cls}" style="--d:{d}s"><path transform="translate({x} {y}) scale({k})" d="M0 30 C -2 14, 16 6, 28 14 C 34 0, 62 0, 66 16 C 82 12, 94 24, 88 34 Z" fill="#FFFFFF" stroke="#0B4F5C" stroke-width="3" stroke-linejoin="round"/></g>'
+WAG = lambda x, y, k=1: f'<g transform="translate({x} {y}) scale({k})"><g class="ov-wag"><path d="M0 0 C -8 10, -8 22, 0 32" /><path d="M-14 -6 C -24 10, -24 30, -14 44" /></g></g>'
+OV_COVER = overlay(1672, 941, CLOUD(1180, 40, 1.1, 46) + CLOUD(1330, 250, 0.8, 62, "drift drift--slow") + WAG(1330, 500, 1.2)
+                   + '<g transform="translate(1440 150)"><g class="ov-spark"><path d="M0 -26 V-40 M22 -14 L33 -22 M-22 -14 L-33 -22"/></g></g>', "slice")
+OV_RETOUR = overlay(1672, 636, '<g transform="translate(1528 186)"><g class="ov-sun"><path d="M0 -70 V-92 M50 -50 L64 -64 M-50 -50 L-64 -64 M70 0 H92 M-70 0 H-92"/></g></g>' + CLOUD(1300, 60, 0.9, 50))
+OV_DEPART = overlay(1120, 758, WAG(242, 430, 1.1) + '<g class="ov-arrow"><path d="M840 120 l18 0 M846 112 l12 8 l-12 8"/></g>')
 def infog(file, need):
     return shot(need, "Infographie à insérer", f"images/{file}" if (IMG / file).exists() else None)
 def logo(name, file=None):
@@ -110,6 +127,44 @@ CUP = '''<svg class="pause-illu illu" viewBox="0 0 520 420" aria-hidden="true">
       <path data-d="1.1" class="inkt" d="M290 140 c-20 -30 20 -40 0 -70"/>
     </svg>'''
 
+
+# Ouvertures de chapitre : numéro dessiné, titre lettre à lettre, et le samoyède qui avance d'une balise sur le sentier
+CHAPTERS = [("9h00", "Point de départ", "On fait connaissance, on repart de mars, on se met d'accord sur les mots."),
+            ("9h45", "Trois logiques", "Assistant, automatisation, agent : ce que chacun fait vraiment, et ce qui les distingue."),
+            ("11h00", "Quand utiliser quoi", "Une grille en quatre questions, testée ensemble puis sur vos situations."),
+            ("13h30", "Démonstrations", "Comment les logiciels se parlent, trois démos sur vos cas, puis votre premier assistant."),
+            ("15h15", "Limites et choix", "Ce que l'IA ne fait pas, ce que ça coûte vraiment, comment choisir un outil."),
+            ("16h00", "Garde-fous", "Les règles simples qui protègent l'entreprise, dès demain."),
+            ("16h30", "Intersession", "La grille d'audit, les référents et le calendrier jusqu'au 22 janvier.")]
+TX = [80 + k * 253 for k in range(7)]
+TY = [176, 150, 166, 136, 158, 128, 146]
+def chapter(n):
+    h, title, promise = CHAPTERS[n - 1]
+    ridge = "M0 196 " + " ".join(f"C {TX[k] - 110} {TY[k] + 24}, {TX[k] - 60} {TY[k]}, {TX[k]} {TY[k]}" for k in range(7)) + " C 1720 150, 1760 190, 1800 180"
+    flags = []
+    for k in range(7):
+        state = "is-done" if k + 1 < n else "is-here" if k + 1 == n else "is-next"
+        fill = "#0B4F5C" if k + 1 < n else "#D6F1E6" if k + 1 == n else "#FFFFFF"
+        x, y = TX[k], TY[k]
+        flags.append(f'<g class="balise {state}" style="--k:{k}"><path class="pole" d="M{x} {y} V{y - 62}"/><path class="flag" d="M{x} {y - 62} L{x + 40} {y - 52} L{x} {y - 40} Z" fill="{fill}"/><circle cx="{x}" cy="{y}" r="7" fill="{fill}"/>'
+                     f'<text x="{x}" y="{y + 44}" text-anchor="middle">{CHAPTERS[k][0]}</text></g>')
+    x0 = TX[n - 2] if n > 1 else -160
+    return f'''    <div class="chap-hero">
+      <div class="chap-num" aria-hidden="true"><svg viewBox="0 0 260 260"><circle class="ring" cx="130" cy="130" r="112"/><circle class="ring2" cx="130" cy="130" r="112"/></svg><span>{n}</span></div>
+      <div class="chap-text">
+        <p class="eyebrow">Chapitre {n} · {h}</p>
+        <h1 class="chap-title">{title}</h1>
+        <p class="lead chap-lead">{promise}</p>
+      </div>
+    </div>
+    <div class="chap-trail" style="--from:{x0};--to:{TX[n - 1]};--ty:{TY[n - 1]}" aria-hidden="true">
+      <svg viewBox="0 0 1800 260" preserveAspectRatio="none"><path class="ridge" d="{ridge}"/>{"".join(flags)}</svg>
+      <img class="chap-dog" src="images/samoyede-profil.png" alt="">
+    </div>'''
+def chapter_slide(n):
+    slide(chapter(n), cls="slide--full slide--chapter", section=f"Chapitre {n} · {CHAPTERS[n - 1][1]}",
+          notes=f"Ouverture du chapitre {n}. Une phrase pour dire ce qu'on va faire, puis on avance.")
+
 # ---------- 9h00 Point de départ ----------
 slide(f'''    <img class="brand-logo rise" src="images/logo-summit-flow.png" alt="Logo Summit Flow : une montagne, un circuit et un samoyède.">
     <div class="grow stack center-y">
@@ -119,7 +174,7 @@ slide(f'''    <img class="brand-logo rise" src="images/logo-summit-flow.png" alt
       <p class="cover-meta small rise">17 novembre 2026 · 9h00 à 17h00 · Marie Jolly, Summit Flow</p>
       <div class="cover-actions rise"><button class="btn-act" data-act="full">Plein écran</button><button class="btn-act btn-act--ghost" data-act="pdf">Exporter en PDF</button></div>
     </div>
-    {art("couverture-samoyede", "Le samoyède de Summit Flow monte un sentier vers un sommet.", (40, 0, 980, 640), COVER_RIDGE)}''', cls="slide--cover slide--full", section="9h00 · Point de départ",
+    {art("couverture-samoyede", "Le samoyède de Summit Flow monte un sentier vers un sommet.", (0, 0, 1560, 878), COVER_RIDGE, OV_COVER)}''', cls="slide--cover slide--full", section="9h00 · Point de départ",
  notes="Accueil. Le sentier en bas à droite : on monte par étapes, on ne grimpe pas tout d'un coup.")
 
 slide(f'''    <figure class="hero-photo sk"><img src="images/lagarrigue-ouverture.jpg" alt="Vue aérienne d'une ensileuse et d'un tracteur Claas au travail dans un champ, sous le logo Lagarrigue Agricole et espaces verts."></figure>
@@ -134,6 +189,8 @@ slide(f'''    <figure class="hero-photo sk"><img src="images/lagarrigue-ouvertur
       </ul>
     </div>''', cls="slide--full slide--hero", section="9h00 · Point de départ",
  notes="Ouvrir sur eux, pas sur l'IA. Faire compléter par la salle : les métiers, les saisons fortes, ce qui occupe le bureau. Activité reprise d'une offre d'emploi de l'entreprise (France Travail) : à valider avec Julie.")
+
+chapter_slide(1)
 
 slide(f'''    <p class="eyebrow">Qui je suis</p>
     <h2>Marie Jolly, <span class="mark">Summit Flow</span></h2>
@@ -172,24 +229,24 @@ slide(f'''    <p class="eyebrow">Le parcours complet</p>
 
 slide(f'''    <p class="eyebrow">Aujourd'hui</p>
     <h2>Le programme du <span class="mark mark--teal">jour 1</span></h2>
-    {art("programme-samoyede", "Le samoyède sur un sentier balisé de six étapes.", (100, 130, 720, 200))}
+    {art("programme-samoyede", "Le samoyède sur un sentier balisé de six étapes.", (110, 128, 1560, 208))}
     <ol class="agenda mt">
-      <li class="rise"><span class="h">9h00</span>Point de départ et repères pour tous</li>
-      <li class="rise"><span class="h">9h45</span>Assistant, automatisation, agent</li>
-      <li class="pause rise"><span class="h">10h45</span>Pause</li>
-      <li class="rise"><span class="h">11h00</span>Quand utiliser quoi</li>
-      <li class="pause rise"><span class="h">12h30</span>Déjeuner</li>
-      <li class="rise"><span class="h">13h30</span>Démonstrations, puis à vous</li>
-      <li class="pause rise"><span class="h">15h00</span>Pause</li>
-      <li class="rise"><span class="h">15h15</span>Limites, investissement, choix d'un outil</li>
-      <li class="rise"><span class="h">16h00</span>Garde-fous essentiels</li>
-      <li class="rise"><span class="h">16h30</span>Lancement de l'intersession</li>
+      <li class="rise"><span class="h">9h00</span><span class="cn">1</span>Point de départ et repères pour tous</li>
+      <li class="rise"><span class="h">9h45</span><span class="cn">2</span>Assistant, automatisation, agent</li>
+      <li class="pause rise"><span class="h">10h45</span><span class="cn cn--none"></span>Pause</li>
+      <li class="rise"><span class="h">11h00</span><span class="cn">3</span>Quand utiliser quoi</li>
+      <li class="pause rise"><span class="h">12h30</span><span class="cn cn--none"></span>Déjeuner</li>
+      <li class="rise"><span class="h">13h30</span><span class="cn">4</span>Démonstrations, puis à vous</li>
+      <li class="pause rise"><span class="h">15h00</span><span class="cn cn--none"></span>Pause</li>
+      <li class="rise"><span class="h">15h15</span><span class="cn">5</span>Limites, investissement, choix d'un outil</li>
+      <li class="rise"><span class="h">16h00</span><span class="cn">6</span>Garde-fous essentiels</li>
+      <li class="rise"><span class="h">16h30</span><span class="cn">7</span>Lancement de l'intersession</li>
     </ol>''', cls="slide--full", section="Le programme",
  notes="Le sommaire reste affiché à gauche de chaque slide : on sait toujours où on en est.")
 
 slide(f'''    <p class="eyebrow">Tour de table</p>
     <h2>D'où part <span class="mark">chacun</span> ?</h2>
-    {art("depart-samoyede", "Le samoyède au point de départ d'un sentier, devant un panneau.", (100, 150, 560, 330))}
+    {art("depart-samoyede", "Le samoyède au point de départ d'un sentier, devant un panneau.", (100, 150, 560, 330), over=OV_DEPART)}
     <div class="cols mt" style="align-items:start">
       <ol class="steps">
         <li class="frag">Avez-vous suivi la journée de mars ?</li>
@@ -199,14 +256,14 @@ slide(f'''    <p class="eyebrow">Tour de table</p>
       </ol>
       <div class="stack">
         <div class="frag frag--pop">{timer(15, (10, 15, 20))}</div>
-        {tip("Seuls 39 % des utilisateurs de l'IA au travail disent avoir été formés par leur entreprise.", "Microsoft et LinkedIn, Work Trend Index, mai 2024", "frag")}
+        {tip("65 % des utilisateurs de l'IA au travail craignent de prendre du retard s'ils ne s'adaptent pas vite.", "Microsoft, Work Trend Index 2026, mai 2026", "frag")}
       </div>
     </div>''', seq=1, section="9h00 · Point de départ",
  notes="Flèche droite pour faire apparaître les questions une par une. Noter au tableau ce qui a coincé : on s'en sert au moment des limites et des doutes.")
 
 slide(f'''    <p class="eyebrow">Retour sur mars</p>
     <h2>La journée de mars, <span class="mark mark--sky">ce qui reste</span></h2>
-    {art("retour-samoyede", "Le samoyède regarde le chemin déjà parcouru.", (100, 150, 440, 270))}
+    {art("retour-samoyede", "Le samoyède regarde le chemin déjà parcouru.", (100, 136, 760, 270), over=OV_RETOUR)}
     <div class="cols mt" style="align-items:start">
       <div class="card sk fill-sky rise"><h3>Ce qui a été posé</h3><ul>
         <li>Ce qu'est un assistant conversationnel</li>
@@ -241,13 +298,23 @@ slide(f'''    <p class="eyebrow">Rappel express</p>
     <div class="stack mt">{rows}</div>''', seq=1, section="9h00 · Point de départ",
  notes="Vote à main levée, puis flèche droite pour révéler. Sert de remise à niveau sans en avoir l'air.")
 
+# Infographie fournie d'un seul tenant (infographie-ia.png) : la build la coupe en deux,
+# le haut pour « comment ça marche », le bas pour « les principales IA »
+_full = IMG / "infographie-ia.png"
+if _full.exists() and not (IMG / "principales-ia.png").exists():
+    from PIL import Image as _Im
+    _im = _Im.open(_full); _w, _h = _im.size; _cut = int(_h * 0.425)
+    _im.crop((0, 0, _w, _cut)).save(IMG / "comment-fonctionne-ia.png")
+    _im.crop((0, _cut, _w, _h)).save(IMG / "principales-ia.png")
 slide(f'''    <p class="eyebrow">Rappel commun</p>
     <h2>Une IA générative, <span class="mark mark--sky">comment ça marche</span></h2>
-    <div class="cols grow mt">
-      {infog("comment-fonctionne-ia.png", "Infographie « Comment fonctionne l'IA » (comment-fonctionne-ia.png)")}
-      {infog("comment-ia-apprend.png", "Infographie « Comment l'IA apprend » (comment-ia-apprend.png)")}
-    </div>''', seq=1, section="9h00 · Point de départ",
- notes="Rester sur l'essentiel : elle prédit la suite la plus probable, elle ne cherche pas la vérité.")
+    <div class="grow infog-one mt">{infog("comment-fonctionne-ia.png", "Infographie « Comment fonctionne l'IA » : tokens, modèle, prédiction du token suivant (comment-fonctionne-ia.png)")}</div>''', seq=1, section="9h00 · Point de départ",
+ notes="Rester sur l'essentiel : elle découpe le texte en tokens, elle a appris des régularités, elle prédit le token suivant. Elle ne cherche pas la vérité. Les pourcentages de la bulle sont un exemple pour illustrer, pas une mesure.")
+
+slide(f'''    <p class="eyebrow">Rappel commun</p>
+    <h2>Les principales IA <span class="mark">aujourd'hui</span></h2>
+    <div class="grow infog-one mt">{infog("principales-ia.png", "Infographie « Les principales IA aujourd'hui » : ChatGPT, Claude, Gemini, Mistral (principales-ia.png)")}</div>''', seq=1, section="9h00 · Point de départ",
+ notes="Présenter comme des tendances d'usage, pas comme un classement : les modèles changent tous les trois mois. Vérifier la veille de la séance que les points forts et faibles tiennent toujours. Chez Maison Lagarrigue, l'outil disponible est Copilot : rappeler qu'il s'appuie sur des modèles d'OpenAI.")
 
 slide(f'''    <p class="eyebrow">Rappel commun</p>
     <h2>L'IA est déjà dans <span class="mark">vos outils</span></h2>
@@ -262,6 +329,8 @@ slide(f'''    <p class="eyebrow">Rappel commun</p>
  notes="Ce qui est accessible chez vous dépend du niveau de licence : on le vérifie cet après-midi.")
 
 
+chapter_slide(2)
+
 # ---------- 9h45 Trois logiques ----------
 S945 = "9h45 · Assistant, automatisation, agent"
 slide(f'''    <p class="eyebrow">Trois logiques différentes</p>
@@ -272,7 +341,7 @@ slide(f'''    <p class="eyebrow">Trois logiques différentes</p>
     </div>
     {art("trois-logiques-samoyede", "Trois samoyèdes : l'un rapporte la balle, une gamelle se remplit à heure fixe, le troisième tire un traîneau vers le refuge.", (90, 150, 400, 300))}''', seq=2, section=S945, notes="Faire apparaître les trois verbes un par un. Demander au groupe de deviner le suivant.")
 
-slide(f'''    <p class="eyebrow">1. L'automatisation</p>
+slide(f'''    <p class="eyebrow">L'automatisation</p>
     <h2>Tout part d'un <span class="mark mark--lav">déclencheur</span></h2>
     <p class="lead rise" style="margin-top:18px">Un déclencheur (le « trigger »), puis toujours la même suite d'actions. Deux familles :</p>
     <div class="cols mt" style="align-items:start">
@@ -282,7 +351,7 @@ slide(f'''    <p class="eyebrow">1. L'automatisation</p>
     {analogy("virement", "le virement de paie programmé : il part à date fixe, ou dès que les pointages sont validés. Et il fait toujours la même chose.", "frag mt")}''',
  seq=2, section=S945, notes="Faire trouver un exemple de chaque famille dans leur quotidien.")
 
-logic("1. L'automatisation", 'Elle <span class="mark mark--lav">exécute</span>, toujours pareil', "", "Aucune réflexion, et c'est sa force : même entrée, même résultat.",
+logic("L'automatisation", 'Elle <span class="mark mark--lav">exécute</span>, toujours pareil', "", "Aucune réflexion, et c'est sa force : même entrée, même résultat.",
  [("Un scénario Make", "Un événement déclenche une série d'actions, montée visuellement.", shot("Capture d'un scénario Make")),
   ("Un script Apps Script", "Une petite routine qui tourne seule dans un tableur.", shot("Capture du script Apps Script et de son résultat")),
   ("Chez vous", "L'équivalent dans Microsoft 365 se monte avec les outils de l'environnement, selon les licences.", "")],
@@ -341,7 +410,7 @@ M_HAR = f"""<svg class="illu scene-svg" viewBox="0 0 420 200" aria-hidden="true"
   <text data-d="1.25" x="104" y="106" text-anchor="end" font-size="20" {TT}>la boucle</text>
 </svg>"""
 ICONS["moteur"] = '<rect data-d="0.1" x="8" y="34" width="50" height="38" rx="6" fill="#E6E0F4" stroke="#2A2F33" stroke-width="3"/><path data-d="0.3" class="ink" d="M16 34 V22 H28 V34 M36 34 V22 H48 V34" style="stroke-width:3"/><circle data-d="0.4" cx="68" cy="56" r="10" class="ink" style="stroke-width:3"/><path data-d="0.6" class="inkt" d="M64 22 c6 -6 -4 -10 2 -16 M74 26 c6 -6 -4 -10 2 -16" style="stroke-width:2.5"/><path data-d="0.5" class="ink" d="M4 80 H80" style="stroke-width:3"/>'
-slide(f'''    <p class="eyebrow">2. L'assistant et l'agent : ce qu'il y a sous le capot</p>
+slide(f'''    <p class="eyebrow">L'assistant et l'agent : sous le capot</p>
     <h2>Le modèle, l'inférence, <span class="mark">le harnais</span></h2>
     <div class="scene-row">
       <figure class="scene frag" data-step="1">{M_SEUL}<figcaption><b class="hand">1. Le modèle</b>Un cerveau dans un bocal : il sait beaucoup, mais seul il ne fait rien.</figcaption></figure>
@@ -368,7 +437,7 @@ def part(n, t, sub, ex, c):
     s = f' <span class="comp-sub">{sub}</span>' if sub else ""
     return f'<div class="comp sk fill-{c} frag" data-step="{n}"><p class="hand comp-t">{t}{s}</p><p class="comp-ex">{ex}</p></div>'
 cards = [part(*x) for x in parts]
-slide(f'''    <p class="eyebrow">2. Le harnais pièce par pièce : un collègue numérique</p>
+slide(f'''    <p class="eyebrow">Le harnais pièce par pièce : un collègue numérique</p>
     <h2><span class="mark mark--blush">Le modèle</span> et <span class="mark">son harnais</span></h2>
     <div class="anat">
       <div class="anat-col">{"".join(cards[:3])}</div>
@@ -377,29 +446,20 @@ slide(f'''    <p class="eyebrow">2. Le harnais pièce par pièce : un collègue 
     </div>''', seq=2, section=S945,
  notes="Démo en direct : faire apparaître chaque pièce au moment où tu la montres dans l'outil. Insister à la fin : c'est un outil. Le même modèle, mal harnaché, donne de mauvais résultats. Le bocal de la slide précédente, vu de près. Vérifier le nom exact des modèles la veille de la séance.")
 
-same = "".join(f'<span class="pill sk sk--thin">{t}</span>' for t in ["Modèle", "Instructions", "Connaissances", "Outils", "Compétences", "Mémoire", "Boucle"])
-slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
-    <h2>Une seule vraie différence : <span class="mark mark--blush">le déclencheur</span></h2>
-    <div class="cols mt" style="align-items:stretch">
-      <div class="card sk fill-sky rise"><h3>L'assistant</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Toi, à chaque question.</p></div>
-      <div class="card sk fill-mint rise"><h3>L'agent</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Un objectif, un événement ou un horaire. Il enchaîne seul.</p></div>
-    </div>
-    {analogy("volant", "le même tracteur : soit tu conduis et il t'assiste, soit tu lances l'autoguidage sur la parcelle et tu surveilles depuis la cabine.", "frag mt")}''', seq=2, section=S945, notes="Les pièces sont les mêmes. Ce qui change, c'est qui appuie sur le bouton, et combien d'étapes il enchaîne sans toi.")
-
-slide(f'''    <p class="eyebrow">Ce que je constate sur le terrain : l'usage n°1</p>
+slide(f'''    <p class="eyebrow">Sur le terrain : l'usage n°1</p>
     <h2>Un <span class="mark mark--sky">super moteur de recherche</span></h2>
-    <p class="lead rise" style="margin-top:18px">On pose une question, on attend une réponse. On s'en sert en mode assistant, mais on oublie de l'équiper.</p>
+    <p class="lead rise" style="margin-top:18px">Le harnais, c'est la théorie. En pratique, on pose une question et on attend une réponse : on s'en sert en assistant, sans l'équiper.</p>
     <div class="cols--3" style="display:grid;margin-top:34px;align-items:start">
       <div class="card sk fill-lav frag"><h3>On oublie le contexte</h3><p>Qui je suis, pour qui, avec quelles règles. Sans ça, la réponse reste générique.</p></div>
       <div class="card sk fill-sky frag"><h3>On oublie la connexion</h3><p>Elle ne voit ni Outlook, ni Excel, ni vos documents. On recopie tout à la main.</p></div>
       <div class="card sk fill-mint frag"><h3>On oublie la mémoire</h3><p>Chaque fois, on repart de zéro et on réexplique.</p></div>
     </div>
     <p class="idea frag" style="font-size:50px;margin-top:36px">Résultat : on passe parfois <span class="mark mark--blush">plus de temps</span> qu'à faire la tâche soi-même.</p>''', seq=2, section=S945,
- notes="Faire réagir : qui s'est déjà dit que ça aurait été plus rapide de le faire soi-même ? La slide suivante montre pourquoi : il manque des pièces. Pour appuyer : 24 % des TPE et PME utilisent l'IA pour des chatbots, assistants ou outils de recherche d'informations (Baromètre France Num 2026).")
+ notes="Transition : on vient de voir les pièces du harnais ; voilà ce qui se passe quand on les oublie. Faire réagir : qui s'est déjà dit que ça aurait été plus rapide de le faire soi-même ? La slide suivante montre pourquoi : il manque des pièces. Pour appuyer : 24 % des TPE et PME utilisent l'IA pour des chatbots, assistants ou outils de recherche d'informations (Baromètre France Num 2026).")
 
 def yes(t): return f'<td class="ok">{t}</td>'
 def no(t): return f'<td class="ko">{t}</td>'
-slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
+slide(f'''    <p class="eyebrow">L'assistant et l'agent</p>
     <h2>Un assistant <span class="mark mark--lav">complet ou dégradé</span></h2>
     <table class="cmp mt">
       <thead><tr><th></th><th>IA « toute nue », mémoire désactivée</th><th>Chatbot de site, sans mémoire</th><th>Projet Claude, assistant Copilot</th></tr></thead>
@@ -412,6 +472,15 @@ slide(f'''    <p class="eyebrow">2. L'assistant et l'agent</p>
     </table>
     {analogy("carte", "un GPS sans carte à jour ni adresse enregistrée : il marche, mais il te fait perdre du temps.", "frag mt")}''', seq=2, section=S945,
  notes="C'est toujours un assistant, mais avec moins de pièces. D'où des réponses plus génériques : ce n'est pas l'IA qui est moins bonne, c'est l'équipement.")
+
+same = "".join(f'<span class="pill sk sk--thin">{t}</span>' for t in ["Modèle", "Instructions", "Connaissances", "Outils", "Compétences", "Mémoire", "Boucle"])
+slide(f'''    <p class="eyebrow">L'assistant et l'agent</p>
+    <h2>Une seule vraie différence : <span class="mark mark--blush">le déclencheur</span></h2>
+    <div class="cols mt" style="align-items:stretch">
+      <div class="card sk fill-sky rise"><h3>L'assistant</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Toi, à chaque question.</p></div>
+      <div class="card sk fill-mint rise"><h3>L'agent</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Un objectif, un événement ou un horaire. Il enchaîne seul.</p></div>
+    </div>
+    {analogy("volant", "le même tracteur : soit tu conduis et il t'assiste, soit tu lances l'autoguidage sur la parcelle et tu surveilles depuis la cabine.", "frag mt")}''', seq=2, section=S945, notes="Les pièces sont les mêmes. Ce qui change, c'est qui appuie sur le bouton, et combien d'étapes il enchaîne sans toi.")
 
 logic("L'assistant en vrai", 'Il <span class="mark mark--sky">répond</span>, tu gardes la main', "", "C'est comme le GPS du téléphone : il propose l'itinéraire, c'est toi qui conduis.",
  [("Chatbot du site Summit Flow", "Assistant de type chatbot : il répond aux visiteurs à partir du contenu du site.", '<span class="live">démo en direct</span>'),
@@ -448,6 +517,8 @@ slide(f'''    <div class="grow center-y">
     </div>
     {art("pause-samoyede", "Le samoyède se repose à côté d'une tasse fumante.", (120, 150, 640, 460), CUP)}''', cls="slide--full", section="Pause",
  notes="")
+
+chapter_slide(3)
 
 # ---------- 11h00 Quand utiliser quoi ----------
 slide(f'''    <p class="eyebrow">Quand utiliser quoi</p>
@@ -512,6 +583,8 @@ slide(f'''    <div class="grow center-y">
       <p class="lead">Reprise à 13h30 : on passe aux démonstrations.</p>
     </div>
     {art("dejeuner-samoyede", "Le samoyède attend devant son sac de randonnée ouvert.", (120, 150, 640, 460), CUP)}''', cls="slide--full", section="Déjeuner")
+
+chapter_slide(4)
 
 # ---------- 13h30 Démonstrations ----------
 S1330 = "13h30 · Démonstrations commentées"
@@ -629,6 +702,8 @@ slide(f'''    <div class="grow center-y">
     </div>
     {art("pause-samoyede", "Le samoyède se repose à côté d'une tasse fumante.", (120, 150, 640, 460), CUP)}''', cls="slide--full", section="Pause")
 
+chapter_slide(5)
+
 # ---------- 15h15 Limites et choix ----------
 slide('''    <p class="eyebrow">Limites</p>
     <h2>Ce que l'IA permet, <span class="mark mark--blush">ce qu'elle ne permet pas</span></h2>
@@ -674,6 +749,8 @@ slide(f'''    <p class="eyebrow">Doutes et réserves</p>
  seq=5, section="15h15 · Limites, investissement, choix",
  notes="Clique sur un post-it pour écrire la réserve en direct. Trier ensuite : ce qui est fondé, ce qui se vérifie, ce qui se règle au jour 5.")
 
+chapter_slide(6)
+
 # ---------- 16h00 Garde-fous ----------
 slide(f'''    <p class="eyebrow">Garde-fous</p>
     <h2>L'humain <span class="mark">valide</span>, toujours</h2>
@@ -690,10 +767,12 @@ slide(f'''    <p class="eyebrow">Garde-fous</p>
       <div class="card sk fill-teal frag"><h3>{icon("search")}On relit tout</h3><p>Chaque réponse se relit avant d'être utilisée ou envoyée.</p></div>
       <div class="card sk fill-mint frag"><h3>{icon("users")}On dit qu'on l'a utilisée</h3><p>Quand un document a été préparé avec l'IA, on le signale.</p></div>
     </div>
-    {tip("78 % des utilisateurs de l'IA au travail apportent leurs propres outils, sans passer par l'entreprise. D'où l'intérêt de règles simples, partagées.", "Microsoft et LinkedIn, Work Trend Index, mai 2024")}
+    {tip("Seuls 26 % des utilisateurs de l'IA au travail disent que leur direction est clairement alignée sur l'IA. D'où l'intérêt de règles simples, partagées.", "Microsoft, Work Trend Index 2026, mai 2026")}
     <p class="small">Le cadre RGPD, légal, environnemental et éthique est traité en détail au jour 5.</p>''',
  seq=6, section="16h00 · Garde-fous essentiels",
  notes="La troisième règle est une proposition : la valider avec la référente IA avant la séance.")
+
+chapter_slide(7)
 
 # ---------- 16h30 Intersession ----------
 # On fait d'abord une ligne ensemble, colonne par colonne, puis chacun remplit la sienne

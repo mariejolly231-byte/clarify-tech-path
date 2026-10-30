@@ -181,7 +181,7 @@ p, li { font-size: var(--fs-body); line-height: 1.38; }
 
 /* Programme du jour */
 .agenda { list-style: none; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(5, auto); grid-auto-flow: column; column-gap: 64px; row-gap: 6px; }
-.agenda li { display: grid; grid-template-columns: 170px 1fr; gap: 20px; padding: 16px 0; border-bottom: 2px dashed var(--line); font-size: 32px; }
+.agenda li { display: grid; grid-template-columns: 130px 52px 1fr; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 2px dashed var(--line); font-size: 32px; }
 .agenda .h { font-family: var(--font-hand); font-size: 34px; color: var(--teal); }
 .agenda .pause { color: var(--muted); }
 
@@ -579,3 +579,97 @@ body.tool-spot .spot { opacity: 1; }
 .slide:has(> .art) .center-y > .tip { max-width: 960px; }
 /* Emplacements en bandeau : l'image 16:9 est recadrée sur sa bande centrale */
 .art--band .art-media { object-fit: cover; object-position: 50% 50%; }
+
+/* ---------- Chapitres ---------- */
+/* Numéro de chapitre devant chaque surtitre, et dans le programme et le sommaire */
+.chap { display: inline-grid; place-items: center; width: 40px; height: 40px; margin-right: 14px; border-radius: 50%; background: var(--teal); color: #fff; font-family: var(--font-hand); font-size: 24px; line-height: 1; vertical-align: 2px; }
+.chap--tag { width: 44px; height: 44px; margin-right: 4px; font-size: 26px; }
+.slide.is-active .chap { animation: num-pop 700ms var(--ease) both 60ms; }
+.agenda .cn { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--mint); color: var(--teal); font-family: var(--font-hand); font-size: 26px; box-shadow: inset 0 0 0 2.5px var(--teal); }
+.agenda .cn--none { background: none; box-shadow: none; }
+.toc li .tn { display: inline-grid; place-items: center; width: 24px; height: 24px; margin-right: 8px; border-radius: 50%; border: 2px solid currentColor; font-family: var(--font-hand); font-size: 15px; font-weight: 400; vertical-align: 1px; }
+.toc li.is-current .tn { background: var(--teal); border-color: var(--teal); color: #fff; }
+
+/* Ouverture de chapitre */
+.slide--chapter { padding-top: 120px; }
+.chap-hero { display: grid; grid-template-columns: 300px 1fr; gap: 70px; align-items: center; margin-top: 40px; }
+.chap-num { position: relative; width: 280px; height: 280px; }
+.chap-num svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.chap-num .ring { fill: var(--mint); stroke: none; transform-origin: center; }
+.chap-num .ring2 { fill: none; stroke: var(--teal); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 704; stroke-dashoffset: 0; filter: url(#rough); transform: rotate(-90deg); transform-origin: center; }
+.chap-num span { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-hand); font-size: 200px; line-height: 1; color: var(--teal); padding-bottom: 16px; }
+.chap-text .eyebrow { font-size: 36px; }
+.chap-title { font-size: 128px; line-height: 1.05; margin: 8px 0 22px; }
+.chap-title .ch { display: inline-block; }
+.chap-lead { max-width: 1100px; font-size: 36px; color: var(--ink); }
+.chap-trail { position: absolute; left: 60px; right: 60px; bottom: 120px; height: 260px; }
+.chap-trail svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.chap-trail .ridge { fill: none; stroke: var(--ink); stroke-width: 3.5; stroke-dasharray: 2 12; stroke-linecap: round; }
+.balise .pole { stroke: var(--ink); stroke-width: 3.5; stroke-linecap: round; }
+.balise .flag, .balise circle { stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+.balise text { font-family: var(--font-hand); font-size: 24px; fill: var(--muted); }
+.balise.is-here text { fill: var(--teal); font-size: 28px; }
+.balise.is-next .pole, .balise.is-next .flag, .balise.is-next circle { stroke: var(--line); }
+.balise .flag { transform-box: fill-box; transform-origin: left center; }
+.chap-dog { position: absolute; width: 200px; height: auto; left: calc(var(--to) / 1800 * 100% - 100px); top: calc(var(--ty) / 260 * 100% - 200px); }
+.slide--chapter.is-active .chap-num .ring { animation: ring-in 800ms var(--ease) both 100ms; }
+.slide--chapter.is-active .chap-num .ring2 { animation: ring-draw 1100ms var(--ease) both 250ms; }
+.slide--chapter.is-active .chap-num span { animation: num-pop 900ms var(--ease) both 500ms; }
+.slide--chapter.is-active .chap-title .ch { animation: ch-in 620ms var(--ease) both; animation-delay: calc(var(--c) * 32ms + 420ms); }
+.slide--chapter.is-active .chap-lead { animation: rise 700ms var(--ease) both 1000ms; }
+.slide--chapter.is-active .chap-trail .ridge { animation: ridge-in 1400ms var(--ease) both 300ms; }
+.slide--chapter.is-active .balise { animation: rise 520ms var(--ease) both; animation-delay: calc(var(--k) * 90ms + 600ms); }
+.slide--chapter.is-active .balise.is-here .flag { animation: flag-wave 1.6s ease-in-out 1.6s infinite; }
+.slide--chapter.is-active .chap-dog { animation: dog-walk 1800ms cubic-bezier(.35, .1, .25, 1) both 700ms, dog-bob 360ms ease-in-out 700ms 5 alternate; }
+@keyframes ring-in { from { transform: scale(.3); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes ring-draw { from { stroke-dashoffset: 704; } to { stroke-dashoffset: 0; } }
+@keyframes ch-in { from { opacity: 0; transform: translateY(40px) rotate(8deg); } to { opacity: 1; transform: none; } }
+@keyframes ridge-in { from { opacity: 0; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
+@keyframes flag-wave { 0%, 100% { transform: skewY(0) scaleX(1); } 50% { transform: skewY(-8deg) scaleX(.9); } }
+@keyframes dog-walk { from { left: calc(var(--from) / 1800 * 100% - 100px); } to { left: calc(var(--to) / 1800 * 100% - 100px); } }
+@keyframes dog-bob { from { translate: 0 0; } to { translate: 0 -8px; } }
+
+/* ---------- Couverture ---------- */
+.slide--cover > .brand-logo { position: absolute; top: 64px; left: var(--pad); width: 128px; z-index: 2; }
+.slide--cover > .grow { position: relative; z-index: 2; max-width: 1320px; padding-top: 110px; }
+.slide--cover h1 { font-size: 88px; text-wrap: pretty; }
+.slide--cover:has(.cover-actions) h1 { max-width: 1160px; }
+.slide--cover .art { z-index: 0; }
+.slide--cover .art .art-media { object-fit: cover; object-position: right bottom; }
+
+/* ---------- Illustrations : motion design ---------- */
+/* L'image se fond dans le papier, se peint de gauche à droite, frémit comme un dessin animé et suit un peu la souris */
+.art img.art-media { filter: url(#boil); }
+.art { translate: var(--px, 0) var(--py, 0); transition: translate 900ms cubic-bezier(.2, .7, .2, 1); }
+.slide.is-active .art img.art-media { animation: paint-in 1600ms cubic-bezier(.5, .1, .2, 1) both 250ms; }
+@keyframes paint-in { from { -webkit-mask-position: 100% 0; mask-position: 100% 0; } to { -webkit-mask-position: 0 0; mask-position: 0 0; } }
+.art img.art-media { -webkit-mask-image: linear-gradient(90deg, #000 45%, transparent 55%); mask-image: linear-gradient(90deg, #000 45%, transparent 55%); -webkit-mask-size: 260% 100%; mask-size: 260% 100%; -webkit-mask-position: 0 0; mask-position: 0 0; }
+.art--band.is-pan img.art-media, .slide.is-active .art--band img.art-media { animation: paint-in 1600ms cubic-bezier(.5, .1, .2, 1) both 250ms, pan 22s ease-in-out 2s infinite alternate; }
+@keyframes pan { from { object-position: 46% 50%; } to { object-position: 54% 50%; } }
+.art-over { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.ov-wag path, .ov-spark path, .ov-sun path, .ov-arrow path { fill: none; stroke: #0B4F5C; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.slide.is-active .ov-wag { animation: wag 900ms ease-in-out infinite; transform-box: fill-box; transform-origin: left center; }
+.slide.is-active .ov-spark, .slide.is-active .ov-sun { animation: glint 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.slide.is-active .ov-sun { animation: glint 3s ease-in-out infinite; }
+.slide.is-active .ov-arrow { animation: nudge-x 1.8s ease-in-out infinite; }
+.slide.is-active .ov-cloud.drift { animation: drift-x var(--d, 50s) linear infinite; }
+@keyframes wag { 0%, 100% { opacity: .2; transform: translateX(0); } 50% { opacity: 1; transform: translateX(-6px); } }
+@keyframes glint { 0%, 100% { opacity: .25; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.1); } }
+@keyframes sun-turn { to { rotate: 360deg; } }
+@keyframes nudge-x { 0%, 100% { transform: translateX(0); opacity: .3; } 50% { transform: translateX(10px); opacity: 1; } }
+@keyframes drift-x { from { transform: translateX(-120px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } to { transform: translateX(420px); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .art img.art-media { filter: none; -webkit-mask-image: none; mask-image: none; }
+  .slide.is-active .art img.art-media, .slide--chapter.is-active *, .slide.is-active .chap, .slide.is-active [class^="ov-"], .slide.is-active .ov-cloud { animation: none !important; }
+}
+@media print {
+  .art img.art-media { filter: none; -webkit-mask-image: none; mask-image: none; }
+  .chap-title .ch { opacity: 1; transform: none; }
+  .art-over { display: none; }
+}
+
+.infog-one { display: flex; min-height: 0; }
+.infog-one .shot { flex: 1; min-height: 0; height: 100%; background: transparent; }
+.infog-one .shot:has(img) { border: 0; }
+.infog-one .shot:has(img)::before { display: none; }

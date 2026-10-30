@@ -13,6 +13,10 @@
       <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
       <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
+    <filter id="boil" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence id="boil-noise" type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="1" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
   </defs>
   <symbol id="i-logo" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="3"/><path d="M9 34 L19 19 L24 26 L29 17 L39 34 Z" fill="currentColor"/><path d="M14 39 h6 v-3 h8 v3 h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.5M12 17.2v.3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
@@ -37,13 +41,7 @@
       <p class="cover-meta small rise">17 novembre 2026 · 9h00 à 17h00 · Marie Jolly, Summit Flow</p>
       <div class="cover-actions rise"><button class="btn-act" data-act="full">Plein écran</button><button class="btn-act btn-act--ghost" data-act="pdf">Exporter en PDF</button></div>
     </div>
-    <svg class="cover-ridge illu" viewBox="0 0 900 360" aria-hidden="true">
-      <path data-d="0.9" d="M20 340 L250 150 L360 240 L560 40 L700 190 L780 130 L890 260 L890 340 Z" fill="#DCEEFA" filter="url(#rough)"/>
-      <path data-d="0.1" class="ink" d="M20 340 L250 150 L360 240 L560 40 L700 190 L780 130 L890 260" filter="url(#rough)"/>
-      <path data-d="0.6" class="ink" d="M520 80 L560 40 L600 84 L578 76 L560 92 L540 74 Z" style="fill:#fff;stroke-width:3"/>
-      <path data-d="1.1" class="inkt" d="M90 330 C 250 300, 330 250, 420 190 S 520 90, 556 52" stroke-dasharray="3 14" style="stroke-width:3"/>
-      <circle data-d="1.6" cx="560" cy="44" r="10" fill="#D6F1E6" stroke="#1F2A2E" stroke-width="3"/>
-    </svg>
+    <figure class="art" style="right:0px;bottom:0px;width:1560px;height:878px"><img class="art-media" src="images/couverture-samoyede.png" alt="Le samoyède de Summit Flow monte un sentier vers un sommet."><svg class="art-over" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="ov-cloud drift" style="--d:46s"><path transform="translate(1180 40) scale(1.1)" d="M0 30 C -2 14, 16 6, 28 14 C 34 0, 62 0, 66 16 C 82 12, 94 24, 88 34 Z" fill="#FFFFFF" stroke="#0B4F5C" stroke-width="3" stroke-linejoin="round"/></g><g class="ov-cloud drift drift--slow" style="--d:62s"><path transform="translate(1330 250) scale(0.8)" d="M0 30 C -2 14, 16 6, 28 14 C 34 0, 62 0, 66 16 C 82 12, 94 24, 88 34 Z" fill="#FFFFFF" stroke="#0B4F5C" stroke-width="3" stroke-linejoin="round"/></g><g transform="translate(1330 500) scale(1.2)"><g class="ov-wag"><path d="M0 0 C -8 10, -8 22, 0 32" /><path d="M-14 -6 C -24 10, -24 30, -14 44" /></g></g><g transform="translate(1440 150)"><g class="ov-spark"><path d="M0 -26 V-40 M22 -14 L33 -22 M-22 -14 L-33 -22"/></g></g></svg></figure>
     <aside class="notes">Accueil. Le sentier en bas à droite : on monte par étapes, on ne grimpe pas tout d'un coup.</aside>
   </section>
 
@@ -62,8 +60,24 @@
     <aside class="notes">Ouvrir sur eux, pas sur l'IA. Faire compléter par la salle : les métiers, les saisons fortes, ce qui occupe le bureau. Activité reprise d'une offre d'emploi de l'entreprise (France Travail) : à valider avec Julie.</aside>
   </section>
 
+  <section class="slide slide--full slide--chapter" data-section="Chapitre 1 · Point de départ" aria-roledescription="slide">
+    <div class="chap-hero">
+      <div class="chap-num" aria-hidden="true"><svg viewBox="0 0 260 260"><circle class="ring" cx="130" cy="130" r="112"/><circle class="ring2" cx="130" cy="130" r="112"/></svg><span>1</span></div>
+      <div class="chap-text">
+        <p class="eyebrow">Chapitre 1 · 9h00</p>
+        <h1 class="chap-title">Point de départ</h1>
+        <p class="lead chap-lead">On fait connaissance, on repart de mars, on se met d'accord sur les mots.</p>
+      </div>
+    </div>
+    <div class="chap-trail" style="--from:-160;--to:80;--ty:176" aria-hidden="true">
+      <svg viewBox="0 0 1800 260" preserveAspectRatio="none"><path class="ridge" d="M0 196 C -30 200, 20 176, 80 176 C 223 174, 273 150, 333 150 C 476 190, 526 166, 586 166 C 729 160, 779 136, 839 136 C 982 182, 1032 158, 1092 158 C 1235 152, 1285 128, 1345 128 C 1488 170, 1538 146, 1598 146 C 1720 150, 1760 190, 1800 180"/><g class="balise is-here" style="--k:0"><path class="pole" d="M80 176 V114"/><path class="flag" d="M80 114 L120 124 L80 136 Z" fill="#D6F1E6"/><circle cx="80" cy="176" r="7" fill="#D6F1E6"/><text x="80" y="220" text-anchor="middle">9h00</text></g><g class="balise is-next" style="--k:1"><path class="pole" d="M333 150 V88"/><path class="flag" d="M333 88 L373 98 L333 110 Z" fill="#FFFFFF"/><circle cx="333" cy="150" r="7" fill="#FFFFFF"/><text x="333" y="194" text-anchor="middle">9h45</text></g><g class="balise is-next" style="--k:2"><path class="pole" d="M586 166 V104"/><path class="flag" d="M586 104 L626 114 L586 126 Z" fill="#FFFFFF"/><circle cx="586" cy="166" r="7" fill="#FFFFFF"/><text x="586" y="210" text-anchor="middle">11h00</text></g><g class="balise is-next" style="--k:3"><path class="pole" d="M839 136 V74"/><path class="flag" d="M839 74 L879 84 L839 96 Z" fill="#FFFFFF"/><circle cx="839" cy="136" r="7" fill="#FFFFFF"/><text x="839" y="180" text-anchor="middle">13h30</text></g><g class="balise is-next" style="--k:4"><path class="pole" d="M1092 158 V96"/><path class="flag" d="M1092 96 L1132 106 L1092 118 Z" fill="#FFFFFF"/><circle cx="1092" cy="158" r="7" fill="#FFFFFF"/><text x="1092" y="202" text-anchor="middle">15h15</text></g><g class="balise is-next" style="--k:5"><path class="pole" d="M1345 128 V66"/><path class="flag" d="M1345 66 L1385 76 L1345 88 Z" fill="#FFFFFF"/><circle cx="1345" cy="128" r="7" fill="#FFFFFF"/><text x="1345" y="172" text-anchor="middle">16h00</text></g><g class="balise is-next" style="--k:6"><path class="pole" d="M1598 146 V84"/><path class="flag" d="M1598 84 L1638 94 L1598 106 Z" fill="#FFFFFF"/><circle cx="1598" cy="146" r="7" fill="#FFFFFF"/><text x="1598" y="190" text-anchor="middle">16h30</text></g></svg>
+      <img class="chap-dog" src="images/samoyede-profil.png" alt="">
+    </div>
+    <aside class="notes">Ouverture du chapitre 1. Une phrase pour dire ce qu'on va faire, puis on avance.</aside>
+  </section>
+
   <section class="slide " data-seq="1" data-section="9h00 · Point de départ" aria-roledescription="slide">
-    <p class="eyebrow">Qui je suis</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 1">1</span>Qui je suis</p>
     <h2>Marie Jolly, <span class="mark">Summit Flow</span></h2>
     <div class="me">
       <div class="me-photo"><figure class="me-pic sk"><img src="images/marie-samoyede.jpg" alt="Marie Jolly en montagne, accroupie à côté de son samoyède blanc en harnais."></figure><svg class="illu me-mount" viewBox="0 0 300 140" aria-hidden="true"><path data-d="0.6" d="M10 130 L90 50 L130 90 L190 20 L290 130 Z" fill="#DCEEFA" filter="url(#rough)"/><path data-d="0.2" class="ink" d="M10 130 L90 50 L130 90 L190 20 L290 130" filter="url(#rough)"/><path data-d="1.0" class="inkt" d="M30 128 C 90 120, 130 100, 160 70 S 185 35, 190 24" stroke-dasharray="3 10" style="stroke-width:3"/></svg></div>
@@ -79,7 +93,7 @@
   </section>
 
   <section class="slide " data-seq="1" data-section="Le parcours" aria-roledescription="slide">
-    <p class="eyebrow">Le parcours complet</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 1">1</span>Le parcours complet</p>
     <h2>Cinq jours, une <span class="mark mark--sky">montée par étapes</span></h2>
     <div class="journey">
       <svg class="journey-path illu" viewBox="0 0 1370 150" preserveAspectRatio="none" aria-hidden="true">
@@ -105,23 +119,23 @@
     <p class="eyebrow">Aujourd'hui</p>
     <h2>Le programme du <span class="mark mark--teal">jour 1</span></h2>
     <ol class="agenda mt">
-      <li class="rise"><span class="h">9h00</span>Point de départ et repères pour tous</li>
-      <li class="rise"><span class="h">9h45</span>Assistant, automatisation, agent</li>
-      <li class="pause rise"><span class="h">10h45</span>Pause</li>
-      <li class="rise"><span class="h">11h00</span>Quand utiliser quoi</li>
-      <li class="pause rise"><span class="h">12h30</span>Déjeuner</li>
-      <li class="rise"><span class="h">13h30</span>Démonstrations, puis à vous</li>
-      <li class="pause rise"><span class="h">15h00</span>Pause</li>
-      <li class="rise"><span class="h">15h15</span>Limites, investissement, choix d'un outil</li>
-      <li class="rise"><span class="h">16h00</span>Garde-fous essentiels</li>
-      <li class="rise"><span class="h">16h30</span>Lancement de l'intersession</li>
+      <li class="rise"><span class="h">9h00</span><span class="cn">1</span>Point de départ et repères pour tous</li>
+      <li class="rise"><span class="h">9h45</span><span class="cn">2</span>Assistant, automatisation, agent</li>
+      <li class="pause rise"><span class="h">10h45</span><span class="cn cn--none"></span>Pause</li>
+      <li class="rise"><span class="h">11h00</span><span class="cn">3</span>Quand utiliser quoi</li>
+      <li class="pause rise"><span class="h">12h30</span><span class="cn cn--none"></span>Déjeuner</li>
+      <li class="rise"><span class="h">13h30</span><span class="cn">4</span>Démonstrations, puis à vous</li>
+      <li class="pause rise"><span class="h">15h00</span><span class="cn cn--none"></span>Pause</li>
+      <li class="rise"><span class="h">15h15</span><span class="cn">5</span>Limites, investissement, choix d'un outil</li>
+      <li class="rise"><span class="h">16h00</span><span class="cn">6</span>Garde-fous essentiels</li>
+      <li class="rise"><span class="h">16h30</span><span class="cn">7</span>Lancement de l'intersession</li>
     </ol>
-    <figure class="art art--todo" style="right:100px;bottom:130px;width:720px;height:200px" aria-hidden="true"><p><b>Illustration à générer</b>programme-samoyede.png</p></figure>
+    <figure class="art art--band" style="right:110px;bottom:128px;width:1560px;height:208px"><img class="art-media" src="images/programme-samoyede.png" alt="Le samoyède sur un sentier balisé de six étapes."></figure>
     <aside class="notes">Le sommaire reste affiché à gauche de chaque slide : on sait toujours où on en est.</aside>
   </section>
 
   <section class="slide " data-seq="1" data-section="9h00 · Point de départ" aria-roledescription="slide">
-    <p class="eyebrow">Tour de table</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 1">1</span>Tour de table</p>
     <h2>D'où part <span class="mark">chacun</span> ?</h2>
     <div class="cols mt" style="align-items:start">
       <ol class="steps">
@@ -137,15 +151,15 @@
         <div class="presets"><button class="sk sk--thin" value="10" aria-pressed="false">10 min</button><button class="sk sk--thin" value="15" aria-pressed="false" data-default>15 min</button><button class="sk sk--thin" value="20" aria-pressed="false">20 min</button></div>
         <button class="go sk sk--thin">Lancer</button>
       </div></div>
-        <aside class="tip sk sk--thin frag"><svg class="bulb" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 4c-9 0-15 7-15 15 0 6 3 9 6 13 1.5 2 2 4 2 6h14c0-2 .5-4 2-6 3-4 6-7 6-13 0-8-6-15-15-15z" fill="#FFF3C4" stroke="#1F2A2E" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 42h12M15 47h10" stroke="#1F2A2E" stroke-width="2.5" stroke-linecap="round"/><path d="M20 20v12M16 24l4 4 4-4" stroke="#0B4F5C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="tip-txt">Seuls 39 % des utilisateurs de l'IA au travail disent avoir été formés par leur entreprise.</p><p class="tip-src">Source : Microsoft et LinkedIn, Work Trend Index, mai 2024</p></div></aside>
+        <aside class="tip sk sk--thin frag"><svg class="bulb" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 4c-9 0-15 7-15 15 0 6 3 9 6 13 1.5 2 2 4 2 6h14c0-2 .5-4 2-6 3-4 6-7 6-13 0-8-6-15-15-15z" fill="#FFF3C4" stroke="#1F2A2E" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 42h12M15 47h10" stroke="#1F2A2E" stroke-width="2.5" stroke-linecap="round"/><path d="M20 20v12M16 24l4 4 4-4" stroke="#0B4F5C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="tip-txt">65 % des utilisateurs de l'IA au travail craignent de prendre du retard s'ils ne s'adaptent pas vite.</p><p class="tip-src">Source : Microsoft, Work Trend Index 2026, mai 2026</p></div></aside>
       </div>
     </div>
-    <figure class="art art--todo" style="right:100px;bottom:150px;width:560px;height:330px" aria-hidden="true"><p><b>Illustration à générer</b>depart-samoyede.png</p></figure>
+    <figure class="art" style="right:100px;bottom:150px;width:560px;height:330px"><img class="art-media" src="images/depart-samoyede.png" alt="Le samoyède au point de départ d'un sentier, devant un panneau."><svg class="art-over" viewBox="0 0 1120 758" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><g transform="translate(242 430) scale(1.1)"><g class="ov-wag"><path d="M0 0 C -8 10, -8 22, 0 32" /><path d="M-14 -6 C -24 10, -24 30, -14 44" /></g></g><g class="ov-arrow"><path d="M840 120 l18 0 M846 112 l12 8 l-12 8"/></g></svg></figure>
     <aside class="notes">Flèche droite pour faire apparaître les questions une par une. Noter au tableau ce qui a coincé : on s'en sert au moment des limites et des doutes.</aside>
   </section>
 
   <section class="slide " data-seq="1" data-section="9h00 · Point de départ" aria-roledescription="slide">
-    <p class="eyebrow">Retour sur mars</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 1">1</span>Retour sur mars</p>
     <h2>La journée de mars, <span class="mark mark--sky">ce qui reste</span></h2>
     <div class="cols mt" style="align-items:start">
       <div class="card sk fill-sky rise"><h3>Ce qui a été posé</h3><ul>
@@ -157,12 +171,12 @@
         <li>Plus de pratique sur vos outils : Outlook, Excel</li>
         <li class="frag">Alors aujourd'hui, chaque notion part d'une de vos situations</li></ul></div>
     </div>
-    <figure class="art art--todo" style="right:100px;bottom:150px;width:440px;height:270px" aria-hidden="true"><p><b>Illustration à générer</b>retour-samoyede.png</p></figure>
+    <figure class="art art--band" style="right:100px;bottom:136px;width:760px;height:270px"><img class="art-media" src="images/retour-samoyede.png" alt="Le samoyède regarde le chemin déjà parcouru."><svg class="art-over" viewBox="0 0 1672 636" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><g transform="translate(1528 186)"><g class="ov-sun"><path d="M0 -70 V-92 M50 -50 L64 -64 M-50 -50 L-64 -64 M70 0 H92 M-70 0 H-92"/></g></g><g class="ov-cloud drift" style="--d:50s"><path transform="translate(1300 60) scale(0.9)" d="M0 30 C -2 14, 16 6, 28 14 C 34 0, 62 0, 66 16 C 82 12, 94 24, 88 34 Z" fill="#FFFFFF" stroke="#0B4F5C" stroke-width="3" stroke-linejoin="round"/></g></svg></figure>
     <aside class="notes">Faire raconter par ceux qui étaient là, pour ceux qui n'y étaient pas. La colonne de droite reprend les retours d'évaluation de mars : le dire, c'est montrer qu'on les a écoutés.</aside>
   </section>
 
   <section class="slide " data-seq="1" data-section="9h00 · Point de départ" aria-roledescription="slide">
-    <p class="eyebrow">Retour sur mars</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 1">1</span>Retour sur mars</p>
     <h2>Vos situations, <span class="mark">celles de mars</span></h2>
     <div class="cols--4" style="display:grid;margin-top:30px;align-items:start">
       <div class="card sk fill-sky rise"><h3><svg aria-hidden="true"><use href="#i-cart"/></svg>Commerce</h3><ul><li>Commissions des vendeurs itinérants <span class="hand t-est">4 h</span></li><li>Contrôle des études de prix, vente et reprise</li><li>Estimation des reprises</li><li>Ciblage de clients pour les démonstrations</li><li>Trouver un produit chez un fournisseur</li></ul></div>
@@ -175,24 +189,28 @@
   </section>
 
   <section class="slide " data-seq="1" data-section="9h00 · Point de départ" aria-roledescription="slide">
-    <p class="eyebrow">Rappel express</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 1">1</span>Rappel express</p>
     <h2>Vrai ou faux ?</h2>
     <div class="stack mt"><div class="tf sk sk--thin"><p>L'IA générative va chercher la bonne réponse dans une base de données.</p><div class="frag tf-a"><span class="mark mark--blush hand">Faux</span><span class="small">Elle prédit la suite de texte la plus probable.</span></div></div><div class="tf sk sk--thin"><p>Elle peut inventer une source qui n'existe pas.</p><div class="frag tf-a"><span class="mark mark--teal hand">Vrai</span><span class="small">C'est ce qu'on appelle une hallucination.</span></div></div><div class="tf sk sk--thin"><p>Plus la consigne est précise, plus la réponse est utile.</p><div class="frag tf-a"><span class="mark mark--teal hand">Vrai</span><span class="small">Le contexte fait souvent la différence.</span></div></div><div class="tf sk sk--thin"><p>Ce que je tape peut servir à améliorer le modèle.</p><div class="frag tf-a"><span class="mark mark--lav hand">Selon l'outil</span><span class="small">Ça dépend de l'outil, de la licence et des réglages.</span></div></div></div>
     <aside class="notes">Vote à main levée, puis flèche droite pour révéler. Sert de remise à niveau sans en avoir l'air.</aside>
   </section>
 
   <section class="slide " data-seq="1" data-section="9h00 · Point de départ" aria-roledescription="slide">
-    <p class="eyebrow">Rappel commun</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 1">1</span>Rappel commun</p>
     <h2>Une IA générative, <span class="mark mark--sky">comment ça marche</span></h2>
-    <div class="cols grow mt">
-      <figure class="shot sk" style=""><p class="need"><b>Infographie à insérer</b>Infographie « Comment fonctionne l'IA » (comment-fonctionne-ia.png)</p></figure>
-      <figure class="shot sk" style=""><p class="need"><b>Infographie à insérer</b>Infographie « Comment l'IA apprend » (comment-ia-apprend.png)</p></figure>
-    </div>
-    <aside class="notes">Rester sur l'essentiel : elle prédit la suite la plus probable, elle ne cherche pas la vérité.</aside>
+    <div class="grow infog-one mt"><figure class="shot sk" style=""><p class="need"><b>Infographie à insérer</b>Infographie « Comment fonctionne l'IA » : tokens, modèle, prédiction du token suivant (comment-fonctionne-ia.png)</p></figure></div>
+    <aside class="notes">Rester sur l'essentiel : elle découpe le texte en tokens, elle a appris des régularités, elle prédit le token suivant. Elle ne cherche pas la vérité. Les pourcentages de la bulle sont un exemple pour illustrer, pas une mesure.</aside>
   </section>
 
   <section class="slide " data-seq="1" data-section="9h00 · Point de départ" aria-roledescription="slide">
-    <p class="eyebrow">Rappel commun</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 1">1</span>Rappel commun</p>
+    <h2>Les principales IA <span class="mark">aujourd'hui</span></h2>
+    <div class="grow infog-one mt"><figure class="shot sk" style=""><p class="need"><b>Infographie à insérer</b>Infographie « Les principales IA aujourd'hui » : ChatGPT, Claude, Gemini, Mistral (principales-ia.png)</p></figure></div>
+    <aside class="notes">Présenter comme des tendances d'usage, pas comme un classement : les modèles changent tous les trois mois. Vérifier la veille de la séance que les points forts et faibles tiennent toujours. Chez Maison Lagarrigue, l'outil disponible est Copilot : rappeler qu'il s'appuie sur des modèles d'OpenAI.</aside>
+  </section>
+
+  <section class="slide " data-seq="1" data-section="9h00 · Point de départ" aria-roledescription="slide">
+    <p class="eyebrow"><span class="chap" title="Chapitre 1">1</span>Rappel commun</p>
     <h2>L'IA est déjà dans <span class="mark">vos outils</span></h2>
     <p class="lead rise" style="margin-top:24px">Ce n'est plus un site à part : elle arrive dans ce que vous ouvrez chaque matin.</p>
     <div class="logo-row mt rise">
@@ -205,8 +223,24 @@
     <aside class="notes">Ce qui est accessible chez vous dépend du niveau de licence : on le vérifie cet après-midi.</aside>
   </section>
 
+  <section class="slide slide--full slide--chapter" data-section="Chapitre 2 · Trois logiques" aria-roledescription="slide">
+    <div class="chap-hero">
+      <div class="chap-num" aria-hidden="true"><svg viewBox="0 0 260 260"><circle class="ring" cx="130" cy="130" r="112"/><circle class="ring2" cx="130" cy="130" r="112"/></svg><span>2</span></div>
+      <div class="chap-text">
+        <p class="eyebrow">Chapitre 2 · 9h45</p>
+        <h1 class="chap-title">Trois logiques</h1>
+        <p class="lead chap-lead">Assistant, automatisation, agent : ce que chacun fait vraiment, et ce qui les distingue.</p>
+      </div>
+    </div>
+    <div class="chap-trail" style="--from:80;--to:333;--ty:150" aria-hidden="true">
+      <svg viewBox="0 0 1800 260" preserveAspectRatio="none"><path class="ridge" d="M0 196 C -30 200, 20 176, 80 176 C 223 174, 273 150, 333 150 C 476 190, 526 166, 586 166 C 729 160, 779 136, 839 136 C 982 182, 1032 158, 1092 158 C 1235 152, 1285 128, 1345 128 C 1488 170, 1538 146, 1598 146 C 1720 150, 1760 190, 1800 180"/><g class="balise is-done" style="--k:0"><path class="pole" d="M80 176 V114"/><path class="flag" d="M80 114 L120 124 L80 136 Z" fill="#0B4F5C"/><circle cx="80" cy="176" r="7" fill="#0B4F5C"/><text x="80" y="220" text-anchor="middle">9h00</text></g><g class="balise is-here" style="--k:1"><path class="pole" d="M333 150 V88"/><path class="flag" d="M333 88 L373 98 L333 110 Z" fill="#D6F1E6"/><circle cx="333" cy="150" r="7" fill="#D6F1E6"/><text x="333" y="194" text-anchor="middle">9h45</text></g><g class="balise is-next" style="--k:2"><path class="pole" d="M586 166 V104"/><path class="flag" d="M586 104 L626 114 L586 126 Z" fill="#FFFFFF"/><circle cx="586" cy="166" r="7" fill="#FFFFFF"/><text x="586" y="210" text-anchor="middle">11h00</text></g><g class="balise is-next" style="--k:3"><path class="pole" d="M839 136 V74"/><path class="flag" d="M839 74 L879 84 L839 96 Z" fill="#FFFFFF"/><circle cx="839" cy="136" r="7" fill="#FFFFFF"/><text x="839" y="180" text-anchor="middle">13h30</text></g><g class="balise is-next" style="--k:4"><path class="pole" d="M1092 158 V96"/><path class="flag" d="M1092 96 L1132 106 L1092 118 Z" fill="#FFFFFF"/><circle cx="1092" cy="158" r="7" fill="#FFFFFF"/><text x="1092" y="202" text-anchor="middle">15h15</text></g><g class="balise is-next" style="--k:5"><path class="pole" d="M1345 128 V66"/><path class="flag" d="M1345 66 L1385 76 L1345 88 Z" fill="#FFFFFF"/><circle cx="1345" cy="128" r="7" fill="#FFFFFF"/><text x="1345" y="172" text-anchor="middle">16h00</text></g><g class="balise is-next" style="--k:6"><path class="pole" d="M1598 146 V84"/><path class="flag" d="M1598 84 L1638 94 L1598 106 Z" fill="#FFFFFF"/><circle cx="1598" cy="146" r="7" fill="#FFFFFF"/><text x="1598" y="190" text-anchor="middle">16h30</text></g></svg>
+      <img class="chap-dog" src="images/samoyede-profil.png" alt="">
+    </div>
+    <aside class="notes">Ouverture du chapitre 2. Une phrase pour dire ce qu'on va faire, puis on avance.</aside>
+  </section>
+
   <section class="slide " data-seq="2" data-section="9h45 · Assistant, automatisation, agent" aria-roledescription="slide">
-    <p class="eyebrow">Trois logiques différentes</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 2">2</span>Trois logiques différentes</p>
     <div class="grow stack-lg center-y">
       <p class="idea">L'assistant <span class="mark mark--sky frag">répond</span>. L'automatisation <span class="mark mark--lav frag">exécute</span>. L'agent <span class="mark frag">poursuit un objectif</span>.</p>
       <p class="lead frag">Le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
@@ -217,7 +251,7 @@
   </section>
 
   <section class="slide " data-seq="2" data-section="9h45 · Assistant, automatisation, agent" aria-roledescription="slide">
-    <p class="eyebrow">1. L'automatisation</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 2">2</span>L'automatisation</p>
     <h2>Tout part d'un <span class="mark mark--lav">déclencheur</span></h2>
     <p class="lead rise" style="margin-top:18px">Un déclencheur (le « trigger »), puis toujours la même suite d'actions. Deux familles :</p>
     <div class="cols mt" style="align-items:start">
@@ -229,7 +263,7 @@
   </section>
 
   <section class="slide " data-seq="2" data-section="9h45 · Assistant, automatisation, agent" aria-roledescription="slide">
-    <p class="eyebrow">1. L'automatisation</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 2">2</span>L'automatisation</p>
     <h2>Elle <span class="mark mark--lav">exécute</span>, toujours pareil</h2>
     <p class="lead rise" style="margin-top:18px">Aucune réflexion, et c'est sa force : même entrée, même résultat.</p>
     <div class="cols--3 grow" style="display:grid;margin-top:30px"><div class="ex sk fill-lav frag"><p class="who">Un scénario Make</p><p>Un événement déclenche une série d'actions, montée visuellement.</p><figure class="shot sk" style=""><p class="need"><b>Capture à fournir</b>Capture d'un scénario Make</p></figure></div><div class="ex sk fill-lav frag"><p class="who">Un script Apps Script</p><p>Une petite routine qui tourne seule dans un tableur.</p><figure class="shot sk" style=""><p class="need"><b>Capture à fournir</b>Capture du script Apps Script et de son résultat</p></figure></div><div class="ex sk fill-lav frag"><p class="who">Chez vous</p><p>L'équivalent dans Microsoft 365 se monte avec les outils de l'environnement, selon les licences.</p></div></div>
@@ -237,7 +271,7 @@
   </section>
 
   <section class="slide " data-seq="2" data-section="9h45 · Assistant, automatisation, agent" aria-roledescription="slide">
-    <p class="eyebrow">2. L'assistant et l'agent : ce qu'il y a sous le capot</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 2">2</span>L'assistant et l'agent : sous le capot</p>
     <h2>Le modèle, l'inférence, <span class="mark">le harnais</span></h2>
     <div class="scene-row">
       <figure class="scene frag" data-step="1"><svg class="illu scene-svg" viewBox="0 0 420 200" aria-hidden="true">
@@ -275,7 +309,7 @@
   </section>
 
   <section class="slide " data-seq="2" data-section="9h45 · Assistant, automatisation, agent" aria-roledescription="slide">
-    <p class="eyebrow">2. Le harnais pièce par pièce : un collègue numérique</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 2">2</span>Le harnais pièce par pièce : un collègue numérique</p>
     <h2><span class="mark mark--blush">Le modèle</span> et <span class="mark">son harnais</span></h2>
     <div class="anat">
       <div class="anat-col"><div class="comp sk fill-blush frag" data-step="1"><p class="hand comp-t">Le cerveau <span class="comp-sub">le modèle</span></p><p class="comp-ex">Ex. : GPT-6.1 Sol ou Claude Sonnet 5.5, utilisé seul</p></div><div class="comp sk fill-card frag" data-step="2"><p class="hand comp-t">La fiche de poste <span class="comp-sub">le prompt, les instructions</span></p><p class="comp-ex">Ex. : « Tu prépares les études de prix, en HT, sans inventer de tarif. »</p></div><div class="comp sk fill-teal frag" data-step="3"><p class="hand comp-t">La bibliothèque <span class="comp-sub">les connaissances</span></p><p class="comp-ex">Ex. : la grille tarifaire, les fiches produits, les procédures SAV</p></div></div>
@@ -303,31 +337,20 @@
   </section>
 
   <section class="slide " data-seq="2" data-section="9h45 · Assistant, automatisation, agent" aria-roledescription="slide">
-    <p class="eyebrow">2. L'assistant et l'agent</p>
-    <h2>Une seule vraie différence : <span class="mark mark--blush">le déclencheur</span></h2>
-    <div class="cols mt" style="align-items:stretch">
-      <div class="card sk fill-sky rise"><h3>L'assistant</h3><div class="pills"><span class="pill sk sk--thin">Modèle</span><span class="pill sk sk--thin">Instructions</span><span class="pill sk sk--thin">Connaissances</span><span class="pill sk sk--thin">Outils</span><span class="pill sk sk--thin">Compétences</span><span class="pill sk sk--thin">Mémoire</span><span class="pill sk sk--thin">Boucle</span></div><p class="trig frag"><b class="hand">Déclencheur</b>Toi, à chaque question.</p></div>
-      <div class="card sk fill-mint rise"><h3>L'agent</h3><div class="pills"><span class="pill sk sk--thin">Modèle</span><span class="pill sk sk--thin">Instructions</span><span class="pill sk sk--thin">Connaissances</span><span class="pill sk sk--thin">Outils</span><span class="pill sk sk--thin">Compétences</span><span class="pill sk sk--thin">Mémoire</span><span class="pill sk sk--thin">Boucle</span></div><p class="trig frag"><b class="hand">Déclencheur</b>Un objectif, un événement ou un horaire. Il enchaîne seul.</p></div>
-    </div>
-    <aside class="analogy frag mt"><svg class="illu ana-ico" viewBox="0 0 84 86" aria-hidden="true"><circle data-d="0.1" cx="40" cy="44" r="30" class="ink" style="stroke-width:4"/><circle data-d="0.3" cx="40" cy="44" r="8" fill="#D6F1E6" stroke="#2A2F33" stroke-width="3"/><path data-d="0.4" class="ink" d="M40 52 V74 M33 40 L13 32 M47 40 L67 32"/><path data-d="0.6" class="inkt" d="M60 8 a14 14 0 0 1 14 14 M62 0 a24 24 0 0 1 20 20"/></svg><p><b class="hand">C'est comme</b> le même tracteur : soit tu conduis et il t'assiste, soit tu lances l'autoguidage sur la parcelle et tu surveilles depuis la cabine.</p></aside>
-    <aside class="notes">Les pièces sont les mêmes. Ce qui change, c'est qui appuie sur le bouton, et combien d'étapes il enchaîne sans toi.</aside>
-  </section>
-
-  <section class="slide " data-seq="2" data-section="9h45 · Assistant, automatisation, agent" aria-roledescription="slide">
-    <p class="eyebrow">Ce que je constate sur le terrain : l'usage n°1</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 2">2</span>Sur le terrain : l'usage n°1</p>
     <h2>Un <span class="mark mark--sky">super moteur de recherche</span></h2>
-    <p class="lead rise" style="margin-top:18px">On pose une question, on attend une réponse. On s'en sert en mode assistant, mais on oublie de l'équiper.</p>
+    <p class="lead rise" style="margin-top:18px">Le harnais, c'est la théorie. En pratique, on pose une question et on attend une réponse : on s'en sert en assistant, sans l'équiper.</p>
     <div class="cols--3" style="display:grid;margin-top:34px;align-items:start">
       <div class="card sk fill-lav frag"><h3>On oublie le contexte</h3><p>Qui je suis, pour qui, avec quelles règles. Sans ça, la réponse reste générique.</p></div>
       <div class="card sk fill-sky frag"><h3>On oublie la connexion</h3><p>Elle ne voit ni Outlook, ni Excel, ni vos documents. On recopie tout à la main.</p></div>
       <div class="card sk fill-mint frag"><h3>On oublie la mémoire</h3><p>Chaque fois, on repart de zéro et on réexplique.</p></div>
     </div>
     <p class="idea frag" style="font-size:50px;margin-top:36px">Résultat : on passe parfois <span class="mark mark--blush">plus de temps</span> qu'à faire la tâche soi-même.</p>
-    <aside class="notes">Faire réagir : qui s'est déjà dit que ça aurait été plus rapide de le faire soi-même ? La slide suivante montre pourquoi : il manque des pièces. Pour appuyer : 24 % des TPE et PME utilisent l'IA pour des chatbots, assistants ou outils de recherche d'informations (Baromètre France Num 2026).</aside>
+    <aside class="notes">Transition : on vient de voir les pièces du harnais ; voilà ce qui se passe quand on les oublie. Faire réagir : qui s'est déjà dit que ça aurait été plus rapide de le faire soi-même ? La slide suivante montre pourquoi : il manque des pièces. Pour appuyer : 24 % des TPE et PME utilisent l'IA pour des chatbots, assistants ou outils de recherche d'informations (Baromètre France Num 2026).</aside>
   </section>
 
   <section class="slide " data-seq="2" data-section="9h45 · Assistant, automatisation, agent" aria-roledescription="slide">
-    <p class="eyebrow">2. L'assistant et l'agent</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 2">2</span>L'assistant et l'agent</p>
     <h2>Un assistant <span class="mark mark--lav">complet ou dégradé</span></h2>
     <table class="cmp mt">
       <thead><tr><th></th><th>IA « toute nue », mémoire désactivée</th><th>Chatbot de site, sans mémoire</th><th>Projet Claude, assistant Copilot</th></tr></thead>
@@ -343,7 +366,18 @@
   </section>
 
   <section class="slide " data-seq="2" data-section="9h45 · Assistant, automatisation, agent" aria-roledescription="slide">
-    <p class="eyebrow">L'assistant en vrai</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 2">2</span>L'assistant et l'agent</p>
+    <h2>Une seule vraie différence : <span class="mark mark--blush">le déclencheur</span></h2>
+    <div class="cols mt" style="align-items:stretch">
+      <div class="card sk fill-sky rise"><h3>L'assistant</h3><div class="pills"><span class="pill sk sk--thin">Modèle</span><span class="pill sk sk--thin">Instructions</span><span class="pill sk sk--thin">Connaissances</span><span class="pill sk sk--thin">Outils</span><span class="pill sk sk--thin">Compétences</span><span class="pill sk sk--thin">Mémoire</span><span class="pill sk sk--thin">Boucle</span></div><p class="trig frag"><b class="hand">Déclencheur</b>Toi, à chaque question.</p></div>
+      <div class="card sk fill-mint rise"><h3>L'agent</h3><div class="pills"><span class="pill sk sk--thin">Modèle</span><span class="pill sk sk--thin">Instructions</span><span class="pill sk sk--thin">Connaissances</span><span class="pill sk sk--thin">Outils</span><span class="pill sk sk--thin">Compétences</span><span class="pill sk sk--thin">Mémoire</span><span class="pill sk sk--thin">Boucle</span></div><p class="trig frag"><b class="hand">Déclencheur</b>Un objectif, un événement ou un horaire. Il enchaîne seul.</p></div>
+    </div>
+    <aside class="analogy frag mt"><svg class="illu ana-ico" viewBox="0 0 84 86" aria-hidden="true"><circle data-d="0.1" cx="40" cy="44" r="30" class="ink" style="stroke-width:4"/><circle data-d="0.3" cx="40" cy="44" r="8" fill="#D6F1E6" stroke="#2A2F33" stroke-width="3"/><path data-d="0.4" class="ink" d="M40 52 V74 M33 40 L13 32 M47 40 L67 32"/><path data-d="0.6" class="inkt" d="M60 8 a14 14 0 0 1 14 14 M62 0 a24 24 0 0 1 20 20"/></svg><p><b class="hand">C'est comme</b> le même tracteur : soit tu conduis et il t'assiste, soit tu lances l'autoguidage sur la parcelle et tu surveilles depuis la cabine.</p></aside>
+    <aside class="notes">Les pièces sont les mêmes. Ce qui change, c'est qui appuie sur le bouton, et combien d'étapes il enchaîne sans toi.</aside>
+  </section>
+
+  <section class="slide " data-seq="2" data-section="9h45 · Assistant, automatisation, agent" aria-roledescription="slide">
+    <p class="eyebrow"><span class="chap" title="Chapitre 2">2</span>L'assistant en vrai</p>
     <h2>Il <span class="mark mark--sky">répond</span>, tu gardes la main</h2>
     <p class="lead rise" style="margin-top:18px">C'est comme le GPS du téléphone : il propose l'itinéraire, c'est toi qui conduis.</p>
     <div class="cols--3 grow" style="display:grid;margin-top:30px"><div class="ex sk fill-sky frag"><p class="who">Chatbot du site Summit Flow</p><p>Assistant de type chatbot : il répond aux visiteurs à partir du contenu du site.</p><span class="live">démo en direct</span></div><div class="ex sk fill-sky frag"><p class="who">Un projet Claude</p><p>Des consignes et des documents de référence, pour des réponses dans ton cadre.</p><figure class="shot sk" style=""><p class="need"><b>Capture à fournir</b>Capture d'un projet Claude (consignes et documents)</p></figure></div><div class="ex sk fill-sky frag"><p class="who">Copilot dans Microsoft 365</p><p>Le même principe dans Outlook, Word ou Teams.</p><figure class="shot sk" style=""><p class="need"><b>Capture à fournir</b>Capture de Copilot ou d'un agent Copilot avec consignes</p></figure></div></div>
@@ -351,7 +385,7 @@
   </section>
 
   <section class="slide " data-seq="2" data-section="9h45 · Assistant, automatisation, agent" aria-roledescription="slide">
-    <p class="eyebrow">L'agent en vrai</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 2">2</span>L'agent en vrai</p>
     <h2>Il <span class="mark">poursuit un objectif</span>, dans ton cadre</h2>
     <p class="lead rise" style="margin-top:18px">C'est comme l'autoguidage du tracteur : tu fixes la parcelle et le cadre, il trace les lignes, tu restes en cabine.</p>
     <div class="cols--3" style="display:grid;margin-top:22px"><div class="ex sk fill-mint frag"><p class="who">Super agent Lindy</p><p>Un agent qui enchaîne plusieurs tâches depuis le téléphone.</p><figure class="shot sk" style=""><p class="need"><b>Capture à fournir</b>Captures d'écran du téléphone (Lindy)</p></figure></div><div class="ex sk fill-mint frag"><p class="who">Un agent Claude</p><p>Le modèle avec ses outils, sa mémoire et ses règles.</p><figure class="shot sk" style=""><p class="need"><b>Capture à fournir</b>Capture d'un agent Claude</p></figure></div><div class="ex sk fill-mint frag"><p class="who">Un agent Copilot</p><p>Un agent construit dans l'environnement Microsoft.</p><figure class="shot sk" style=""><p class="need"><b>Capture à fournir</b>Capture d'un agent Copilot</p></figure></div></div>
@@ -362,7 +396,7 @@
   </section>
 
   <section class="slide " data-seq="2" data-section="9h45 · Assistant, automatisation, agent" aria-roledescription="slide">
-    <p class="eyebrow">À vous de jouer</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 2">2</span>À vous de jouer</p>
     <h2>Assistant, automatisation ou agent ?</h2>
     <div class="stack mt"><div class="ex sk" style="flex-direction:row;align-items:center;justify-content:space-between;gap:24px"><p style="font-size:30px">Préparer une présentation PowerPoint à partir de mes notes</p><span class="mark mark--sky frag hand" style="font-size:34px;white-space:nowrap">assistant</span></div><div class="ex sk" style="flex-direction:row;align-items:center;justify-content:space-between;gap:24px"><p style="font-size:30px">Chaque facture reçue par e-mail s'ajoute au tableau de trésorerie</p><span class="mark mark--lav frag hand" style="font-size:34px;white-space:nowrap">automatisation</span></div><div class="ex sk" style="flex-direction:row;align-items:center;justify-content:space-between;gap:24px"><p style="font-size:30px">Chercher un produit chez plusieurs fournisseurs, comparer et me proposer le meilleur</p><span class="mark mark--teal frag hand" style="font-size:34px;white-space:nowrap">agent</span></div><div class="ex sk" style="flex-direction:row;align-items:center;justify-content:space-between;gap:24px"><p style="font-size:30px">Analyser le tableau de bord du mois et en tirer trois points clés</p><span class="mark mark--sky frag hand" style="font-size:34px;white-space:nowrap">assistant</span></div></div>
     <aside class="notes">Les quatre situations viennent de la liste de mars. Vote à main levée, puis flèche droite. Les réponses sont des propositions : un débat est bienvenu, il prépare la grille de 11h.</aside>
@@ -392,8 +426,24 @@
     <aside class="notes"></aside>
   </section>
 
+  <section class="slide slide--full slide--chapter" data-section="Chapitre 3 · Quand utiliser quoi" aria-roledescription="slide">
+    <div class="chap-hero">
+      <div class="chap-num" aria-hidden="true"><svg viewBox="0 0 260 260"><circle class="ring" cx="130" cy="130" r="112"/><circle class="ring2" cx="130" cy="130" r="112"/></svg><span>3</span></div>
+      <div class="chap-text">
+        <p class="eyebrow">Chapitre 3 · 11h00</p>
+        <h1 class="chap-title">Quand utiliser quoi</h1>
+        <p class="lead chap-lead">Une grille en quatre questions, testée ensemble puis sur vos situations.</p>
+      </div>
+    </div>
+    <div class="chap-trail" style="--from:333;--to:586;--ty:166" aria-hidden="true">
+      <svg viewBox="0 0 1800 260" preserveAspectRatio="none"><path class="ridge" d="M0 196 C -30 200, 20 176, 80 176 C 223 174, 273 150, 333 150 C 476 190, 526 166, 586 166 C 729 160, 779 136, 839 136 C 982 182, 1032 158, 1092 158 C 1235 152, 1285 128, 1345 128 C 1488 170, 1538 146, 1598 146 C 1720 150, 1760 190, 1800 180"/><g class="balise is-done" style="--k:0"><path class="pole" d="M80 176 V114"/><path class="flag" d="M80 114 L120 124 L80 136 Z" fill="#0B4F5C"/><circle cx="80" cy="176" r="7" fill="#0B4F5C"/><text x="80" y="220" text-anchor="middle">9h00</text></g><g class="balise is-done" style="--k:1"><path class="pole" d="M333 150 V88"/><path class="flag" d="M333 88 L373 98 L333 110 Z" fill="#0B4F5C"/><circle cx="333" cy="150" r="7" fill="#0B4F5C"/><text x="333" y="194" text-anchor="middle">9h45</text></g><g class="balise is-here" style="--k:2"><path class="pole" d="M586 166 V104"/><path class="flag" d="M586 104 L626 114 L586 126 Z" fill="#D6F1E6"/><circle cx="586" cy="166" r="7" fill="#D6F1E6"/><text x="586" y="210" text-anchor="middle">11h00</text></g><g class="balise is-next" style="--k:3"><path class="pole" d="M839 136 V74"/><path class="flag" d="M839 74 L879 84 L839 96 Z" fill="#FFFFFF"/><circle cx="839" cy="136" r="7" fill="#FFFFFF"/><text x="839" y="180" text-anchor="middle">13h30</text></g><g class="balise is-next" style="--k:4"><path class="pole" d="M1092 158 V96"/><path class="flag" d="M1092 96 L1132 106 L1092 118 Z" fill="#FFFFFF"/><circle cx="1092" cy="158" r="7" fill="#FFFFFF"/><text x="1092" y="202" text-anchor="middle">15h15</text></g><g class="balise is-next" style="--k:5"><path class="pole" d="M1345 128 V66"/><path class="flag" d="M1345 66 L1385 76 L1345 88 Z" fill="#FFFFFF"/><circle cx="1345" cy="128" r="7" fill="#FFFFFF"/><text x="1345" y="172" text-anchor="middle">16h00</text></g><g class="balise is-next" style="--k:6"><path class="pole" d="M1598 146 V84"/><path class="flag" d="M1598 84 L1638 94 L1598 106 Z" fill="#FFFFFF"/><circle cx="1598" cy="146" r="7" fill="#FFFFFF"/><text x="1598" y="190" text-anchor="middle">16h30</text></g></svg>
+      <img class="chap-dog" src="images/samoyede-profil.png" alt="">
+    </div>
+    <aside class="notes">Ouverture du chapitre 3. Une phrase pour dire ce qu'on va faire, puis on avance.</aside>
+  </section>
+
   <section class="slide slide--schema" data-seq="3" data-section="11h00 · Quand utiliser quoi" aria-roledescription="slide">
-    <p class="eyebrow">Quand utiliser quoi</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 3">3</span>Quand utiliser quoi</p>
     <h2>La grille en quatre questions</h2>
     <p class="q0 frag" data-step="0"><b class="hand">Question zéro : ai-je le droit ?</b>Données personnelles, clients ou confidentielles, outil validé par l'entreprise. Dans le doute, on demande à la référente IA.</p>
     <figure class="schema" role="img" aria-label="Arbre de décision. 1. La tâche revient-elle souvent ? Non : geste manuel ou assistant au cas par cas. 2. Les règles sont-elles stables ? Non : clarifier la règle avant d'outiller. 3. Faut-il interpréter un texte ou décider ? Non : automatisation. Oui : agent, ou assistant et automatisation. 4. Une erreur coûte cher ? Un humain valide avant que ça parte."><!-- schema:grille-decision --></figure>
@@ -402,7 +452,7 @@
   </section>
 
   <section class="slide " data-seq="3" data-section="11h00 · Quand utiliser quoi" aria-roledescription="slide">
-    <p class="eyebrow">On la teste ensemble</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 3">3</span>On la teste ensemble</p>
     <h2>Une situation, <span class="mark mark--lav">quatre réponses</span></h2>
     <div class="decider">
       <div><div class="q" data-q="0"><span>0. Ai-je le droit d'utiliser ces données ?</span><div class="yn"><button class="sk sk--thin" value="oui" aria-pressed="false">oui</button><button class="sk sk--thin no" value="non" aria-pressed="false">non</button></div></div><div class="q" data-q="1"><span>1. La tâche revient-elle souvent ?</span><div class="yn"><button class="sk sk--thin" value="oui" aria-pressed="false">oui</button><button class="sk sk--thin no" value="non" aria-pressed="false">non</button></div></div><div class="q" data-q="2"><span>2. Les règles sont-elles stables ?</span><div class="yn"><button class="sk sk--thin" value="oui" aria-pressed="false">oui</button><button class="sk sk--thin no" value="non" aria-pressed="false">non</button></div></div><div class="q" data-q="3"><span>3. Faut-il interpréter un texte ou décider ?</span><div class="yn"><button class="sk sk--thin" value="oui" aria-pressed="false">oui</button><button class="sk sk--thin no" value="non" aria-pressed="false">non</button></div></div><div class="q" data-q="4"><span>4. Une erreur coûte-t-elle cher ?</span><div class="yn"><button class="sk sk--thin" value="oui" aria-pressed="false">oui</button><button class="sk sk--thin no" value="non" aria-pressed="false">non</button></div></div><button class="reset sk sk--thin" style="--radius:12px;margin-top:20px;padding:6px 16px;font-family:var(--font-hand);font-size:24px">Recommencer</button>
@@ -415,7 +465,7 @@
 
   <section class="slide " data-seq="3" data-section="11h00 · Quand utiliser quoi" aria-roledescription="slide">
     <div class="stack">
-      <div class="meta">
+      <div class="meta"><span class="chap chap--tag" title="Chapitre 3">3</span>
         <span class="tag sk"><svg aria-hidden="true"><use href="#i-users"/></svg>En sous-groupes</span>
         <span class="tag sk"><svg aria-hidden="true"><use href="#i-file"/></svg>Grille en quatre questions</span>
       </div>
@@ -443,7 +493,7 @@
 
   <section class="slide " data-seq="3" data-section="11h00 · Quand utiliser quoi" aria-roledescription="slide">
     <div class="stack">
-      <span class="tag tag--soft sk"><svg aria-hidden="true"><use href="#i-search"/></svg>Repérées en mars, à confirmer par la grille d'audit</span>
+      <span class="chap chap--tag" title="Chapitre 3">3</span><span class="tag tag--soft sk"><svg aria-hidden="true"><use href="#i-search"/></svg>Repérées en mars, à confirmer par la grille d'audit</span>
       <h2>Vos situations, classées <span class="mark mark--sky">en direct</span></h2>
     </div>
     <div class="situations">
@@ -473,15 +523,31 @@
     <aside class="notes"></aside>
   </section>
 
+  <section class="slide slide--full slide--chapter" data-section="Chapitre 4 · Démonstrations" aria-roledescription="slide">
+    <div class="chap-hero">
+      <div class="chap-num" aria-hidden="true"><svg viewBox="0 0 260 260"><circle class="ring" cx="130" cy="130" r="112"/><circle class="ring2" cx="130" cy="130" r="112"/></svg><span>4</span></div>
+      <div class="chap-text">
+        <p class="eyebrow">Chapitre 4 · 13h30</p>
+        <h1 class="chap-title">Démonstrations</h1>
+        <p class="lead chap-lead">Comment les logiciels se parlent, trois démos sur vos cas, puis votre premier assistant.</p>
+      </div>
+    </div>
+    <div class="chap-trail" style="--from:586;--to:839;--ty:136" aria-hidden="true">
+      <svg viewBox="0 0 1800 260" preserveAspectRatio="none"><path class="ridge" d="M0 196 C -30 200, 20 176, 80 176 C 223 174, 273 150, 333 150 C 476 190, 526 166, 586 166 C 729 160, 779 136, 839 136 C 982 182, 1032 158, 1092 158 C 1235 152, 1285 128, 1345 128 C 1488 170, 1538 146, 1598 146 C 1720 150, 1760 190, 1800 180"/><g class="balise is-done" style="--k:0"><path class="pole" d="M80 176 V114"/><path class="flag" d="M80 114 L120 124 L80 136 Z" fill="#0B4F5C"/><circle cx="80" cy="176" r="7" fill="#0B4F5C"/><text x="80" y="220" text-anchor="middle">9h00</text></g><g class="balise is-done" style="--k:1"><path class="pole" d="M333 150 V88"/><path class="flag" d="M333 88 L373 98 L333 110 Z" fill="#0B4F5C"/><circle cx="333" cy="150" r="7" fill="#0B4F5C"/><text x="333" y="194" text-anchor="middle">9h45</text></g><g class="balise is-done" style="--k:2"><path class="pole" d="M586 166 V104"/><path class="flag" d="M586 104 L626 114 L586 126 Z" fill="#0B4F5C"/><circle cx="586" cy="166" r="7" fill="#0B4F5C"/><text x="586" y="210" text-anchor="middle">11h00</text></g><g class="balise is-here" style="--k:3"><path class="pole" d="M839 136 V74"/><path class="flag" d="M839 74 L879 84 L839 96 Z" fill="#D6F1E6"/><circle cx="839" cy="136" r="7" fill="#D6F1E6"/><text x="839" y="180" text-anchor="middle">13h30</text></g><g class="balise is-next" style="--k:4"><path class="pole" d="M1092 158 V96"/><path class="flag" d="M1092 96 L1132 106 L1092 118 Z" fill="#FFFFFF"/><circle cx="1092" cy="158" r="7" fill="#FFFFFF"/><text x="1092" y="202" text-anchor="middle">15h15</text></g><g class="balise is-next" style="--k:5"><path class="pole" d="M1345 128 V66"/><path class="flag" d="M1345 66 L1385 76 L1345 88 Z" fill="#FFFFFF"/><circle cx="1345" cy="128" r="7" fill="#FFFFFF"/><text x="1345" y="172" text-anchor="middle">16h00</text></g><g class="balise is-next" style="--k:6"><path class="pole" d="M1598 146 V84"/><path class="flag" d="M1598 84 L1638 94 L1598 106 Z" fill="#FFFFFF"/><circle cx="1598" cy="146" r="7" fill="#FFFFFF"/><text x="1598" y="190" text-anchor="middle">16h30</text></g></svg>
+      <img class="chap-dog" src="images/samoyede-profil.png" alt="">
+    </div>
+    <aside class="notes">Ouverture du chapitre 4. Une phrase pour dire ce qu'on va faire, puis on avance.</aside>
+  </section>
+
   <section class="slide slide--schema" data-seq="4" data-section="13h30 · Démonstrations commentées" aria-roledescription="slide">
-    <p class="eyebrow">Pour les curieux · avant les démos</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 4">4</span>Pour les curieux · avant les démos</p>
     <h2>Comment deux logiciels <span class="mark mark--sky">se parlent</span></h2>
     <figure class="schema" role="img" aria-label="Schéma. Ton outil envoie une demande, un appel HTTP, au guichet d'Outlook, son API. Outlook renvoie une réponse. Quatre types d'appel : GET pour lire, POST pour créer, PATCH pour modifier, DELETE pour supprimer. Dans l'autre sens, le webhook : c'est Outlook qui sonne quand un courriel arrive, et ton scénario démarre."><!-- schema:logiciels-parlent --></figure>
     <aside class="notes">Fil rouge : l'électricité. HTTP, c'est le courant qui circule dans les fils, la langue commune des logiciels. L'API, c'est la prise du logiciel. Un appel API, c'est brancher l'appareil et appuyer sur le bouton. Dans l'ordre du dessin : 1. HTTP, c'est la langue commune des logiciels sur internet. Un appel, c'est une demande. 2. L'API, c'est le guichet du logiciel : ce qu'il accepte qu'on lui demande. 3. Quatre verbes suffisent : lire, créer, modifier, supprimer. 4. Le webhook, c'est l'inverse : on ne demande plus, on est prévenu. Même dans Copilot, un assistant ou un agent qui utilise un outil fait exactement ça.</aside>
   </section>
 
   <section class="slide " data-seq="4" data-section="13h30 · Démonstrations commentées" aria-roledescription="slide">
-    <p class="eyebrow">Pour les curieux · le fil de l'électricité</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 4">4</span>Pour les curieux · le fil de l'électricité</p>
     <h2>Chacun sa prise, <span class="mark">ou la même partout</span></h2>
     <div class="scene-row">
       <figure class="scene frag" data-step="1"><svg class="illu scene-svg" viewBox="0 0 420 260" aria-hidden="true">
@@ -508,7 +574,7 @@
 
   <section class="slide " data-seq="4" data-section="13h30 · Démonstrations commentées" aria-roledescription="slide">
     <div class="stack">
-      <span class="tag sk"><svg aria-hidden="true"><use href="#i-file"/></svg>Outlook, Excel, Copilot selon les licences</span>
+      <span class="chap chap--tag" title="Chapitre 4">4</span><span class="tag sk"><svg aria-hidden="true"><use href="#i-file"/></svg>Outlook, Excel, Copilot selon les licences</span>
       <h2>Trois démos, une même <span class="mark mark--teal">grille de lecture</span></h2>
     </div>
     <table class="readgrid">
@@ -519,7 +585,7 @@
   </section>
 
   <section class="slide " data-seq="4" data-section="13h30 · Démonstrations commentées" aria-roledescription="slide">
-    <p class="eyebrow">Les trois démos</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 4">4</span>Les trois démos</p>
     <h2>Sur vos cas, <span class="mark mark--sky">en direct</span></h2>
     <div class="cols--3 grow" style="display:grid;margin-top:30px;align-items:stretch">
       <div class="ex sk fill-sky rise"><p class="who">1. Un assistant</p><p>Des consignes et des documents de référence. Exemple : analyser le tableau de bord du mois.</p><figure class="shot sk" style=""><p class="need"><b>Capture à fournir</b>Capture de secours : l'assistant Copilot configuré</p></figure></div>
@@ -531,7 +597,7 @@
 
   <section class="slide " data-seq="4" data-section="13h30 · Démonstrations, puis à vous" aria-roledescription="slide">
     <div class="stack">
-      <div class="meta"><span class="tag sk"><svg aria-hidden="true"><use href="#i-users"/></svg>Ensemble, puis chacun sur son poste</span><span class="tag tag--soft sk"><svg aria-hidden="true"><use href="#i-search"/></svg>Selon les licences disponibles</span></div>
+      <div class="meta"><span class="chap chap--tag" title="Chapitre 4">4</span><span class="tag sk"><svg aria-hidden="true"><use href="#i-users"/></svg>Ensemble, puis chacun sur son poste</span><span class="tag tag--soft sk"><svg aria-hidden="true"><use href="#i-search"/></svg>Selon les licences disponibles</span></div>
       <h2>À vous : <span class="mark">votre premier assistant</span></h2>
     </div>
     <div class="cols grow" style="margin-top:30px;align-items:start;grid-template-columns:1.35fr 1fr">
@@ -576,8 +642,24 @@
     <aside class="notes"></aside>
   </section>
 
+  <section class="slide slide--full slide--chapter" data-section="Chapitre 5 · Limites et choix" aria-roledescription="slide">
+    <div class="chap-hero">
+      <div class="chap-num" aria-hidden="true"><svg viewBox="0 0 260 260"><circle class="ring" cx="130" cy="130" r="112"/><circle class="ring2" cx="130" cy="130" r="112"/></svg><span>5</span></div>
+      <div class="chap-text">
+        <p class="eyebrow">Chapitre 5 · 15h15</p>
+        <h1 class="chap-title">Limites et choix</h1>
+        <p class="lead chap-lead">Ce que l'IA ne fait pas, ce que ça coûte vraiment, comment choisir un outil.</p>
+      </div>
+    </div>
+    <div class="chap-trail" style="--from:839;--to:1092;--ty:158" aria-hidden="true">
+      <svg viewBox="0 0 1800 260" preserveAspectRatio="none"><path class="ridge" d="M0 196 C -30 200, 20 176, 80 176 C 223 174, 273 150, 333 150 C 476 190, 526 166, 586 166 C 729 160, 779 136, 839 136 C 982 182, 1032 158, 1092 158 C 1235 152, 1285 128, 1345 128 C 1488 170, 1538 146, 1598 146 C 1720 150, 1760 190, 1800 180"/><g class="balise is-done" style="--k:0"><path class="pole" d="M80 176 V114"/><path class="flag" d="M80 114 L120 124 L80 136 Z" fill="#0B4F5C"/><circle cx="80" cy="176" r="7" fill="#0B4F5C"/><text x="80" y="220" text-anchor="middle">9h00</text></g><g class="balise is-done" style="--k:1"><path class="pole" d="M333 150 V88"/><path class="flag" d="M333 88 L373 98 L333 110 Z" fill="#0B4F5C"/><circle cx="333" cy="150" r="7" fill="#0B4F5C"/><text x="333" y="194" text-anchor="middle">9h45</text></g><g class="balise is-done" style="--k:2"><path class="pole" d="M586 166 V104"/><path class="flag" d="M586 104 L626 114 L586 126 Z" fill="#0B4F5C"/><circle cx="586" cy="166" r="7" fill="#0B4F5C"/><text x="586" y="210" text-anchor="middle">11h00</text></g><g class="balise is-done" style="--k:3"><path class="pole" d="M839 136 V74"/><path class="flag" d="M839 74 L879 84 L839 96 Z" fill="#0B4F5C"/><circle cx="839" cy="136" r="7" fill="#0B4F5C"/><text x="839" y="180" text-anchor="middle">13h30</text></g><g class="balise is-here" style="--k:4"><path class="pole" d="M1092 158 V96"/><path class="flag" d="M1092 96 L1132 106 L1092 118 Z" fill="#D6F1E6"/><circle cx="1092" cy="158" r="7" fill="#D6F1E6"/><text x="1092" y="202" text-anchor="middle">15h15</text></g><g class="balise is-next" style="--k:5"><path class="pole" d="M1345 128 V66"/><path class="flag" d="M1345 66 L1385 76 L1345 88 Z" fill="#FFFFFF"/><circle cx="1345" cy="128" r="7" fill="#FFFFFF"/><text x="1345" y="172" text-anchor="middle">16h00</text></g><g class="balise is-next" style="--k:6"><path class="pole" d="M1598 146 V84"/><path class="flag" d="M1598 84 L1638 94 L1598 106 Z" fill="#FFFFFF"/><circle cx="1598" cy="146" r="7" fill="#FFFFFF"/><text x="1598" y="190" text-anchor="middle">16h30</text></g></svg>
+      <img class="chap-dog" src="images/samoyede-profil.png" alt="">
+    </div>
+    <aside class="notes">Ouverture du chapitre 5. Une phrase pour dire ce qu'on va faire, puis on avance.</aside>
+  </section>
+
   <section class="slide " data-seq="5" data-section="15h15 · Limites, investissement, choix" aria-roledescription="slide">
-    <p class="eyebrow">Limites</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 5">5</span>Limites</p>
     <h2>Ce que l'IA permet, <span class="mark mark--blush">ce qu'elle ne permet pas</span></h2>
     <div class="cols grow mt" style="align-items:start">
       <div class="card sk fill-mint"><h3>Elle permet</h3><ul>
@@ -589,7 +671,7 @@
   </section>
 
   <section class="slide " data-seq="5" data-section="15h15 · Limites, investissement, choix" aria-roledescription="slide">
-    <p class="eyebrow">Investissement</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 5">5</span>Investissement</p>
     <h2>Ce qu'on voit, <span class="mark mark--sky">ce qu'on ne voit pas</span></h2>
     <div style="display:grid;grid-template-columns:520px 1fr;gap:40px;align-items:center" class="grow">
       <svg class="illu" viewBox="0 0 760 640" style="width:520px;height:auto" aria-hidden="true">
@@ -608,7 +690,7 @@
   </section>
 
   <section class="slide " data-seq="5" data-section="15h15 · Limites, investissement, choix" aria-roledescription="slide">
-    <p class="eyebrow">Choisir un outil</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 5">5</span>Choisir un outil</p>
     <h2>Six questions <span class="mark">avant de signer</span></h2>
     <ul class="checks cols mt" style="display:grid;column-gap:60px"><li class="rise"><button class="sk sk--thin" data-k="choix-0" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>Le besoin est-il clair et décrit ?</span></li><li class="rise"><button class="sk sk--thin" data-k="choix-1" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>L'outil est-il déjà dans notre environnement ?</span></li><li class="rise"><button class="sk sk--thin" data-k="choix-2" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>Où vont nos données ?</span></li><li class="rise"><button class="sk sk--thin" data-k="choix-3" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>Qui le fera vivre après la formation ?</span></li><li class="rise"><button class="sk sk--thin" data-k="choix-4" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>Comment saura-t-on que ça marche ?</span></li><li class="rise"><button class="sk sk--thin" data-k="choix-5" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>Que se passe-t-il s'il se trompe ?</span></li></ul>
     <figure class="art art--todo" style="right:100px;bottom:150px;width:640px;height:260px" aria-hidden="true"><p><b>Illustration à générer</b>choisir-samoyede.png</p></figure>
@@ -616,15 +698,31 @@
   </section>
 
   <section class="slide " data-seq="5" data-section="15h15 · Limites, investissement, choix" aria-roledescription="slide">
-    <p class="eyebrow">Doutes et réserves</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 5">5</span>Doutes et réserves</p>
     <h2>Qu'est-ce qui <span class="mark mark--blush">vous retient</span> ?</h2>
     <div class="board"><div class="postit fill-lav" contenteditable="true" data-k="doute-0" data-ph="un doute ?"></div><div class="postit fill-blush" contenteditable="true" data-k="doute-1" data-ph="un doute ?"></div><div class="postit fill-sky" contenteditable="true" data-k="doute-2" data-ph="un doute ?"></div><div class="postit fill-mint" contenteditable="true" data-k="doute-3" data-ph="un doute ?"></div><div class="postit fill-card" contenteditable="true" data-k="doute-4" data-ph="un doute ?"></div><div class="postit fill-mint" contenteditable="true" data-k="doute-5" data-ph="un doute ?"></div><div class="postit fill-blush" contenteditable="true" data-k="doute-6" data-ph="un doute ?"></div><div class="postit fill-lav" contenteditable="true" data-k="doute-7" data-ph="un doute ?"></div></div>
     <p class="small" style="margin-top:24px">Une réserve fondée aide à décider : elle dit ce qu'il faut vérifier avant d'y aller.</p>
     <aside class="notes">Clique sur un post-it pour écrire la réserve en direct. Trier ensuite : ce qui est fondé, ce qui se vérifie, ce qui se règle au jour 5.</aside>
   </section>
 
+  <section class="slide slide--full slide--chapter" data-section="Chapitre 6 · Garde-fous" aria-roledescription="slide">
+    <div class="chap-hero">
+      <div class="chap-num" aria-hidden="true"><svg viewBox="0 0 260 260"><circle class="ring" cx="130" cy="130" r="112"/><circle class="ring2" cx="130" cy="130" r="112"/></svg><span>6</span></div>
+      <div class="chap-text">
+        <p class="eyebrow">Chapitre 6 · 16h00</p>
+        <h1 class="chap-title">Garde-fous</h1>
+        <p class="lead chap-lead">Les règles simples qui protègent l'entreprise, dès demain.</p>
+      </div>
+    </div>
+    <div class="chap-trail" style="--from:1092;--to:1345;--ty:128" aria-hidden="true">
+      <svg viewBox="0 0 1800 260" preserveAspectRatio="none"><path class="ridge" d="M0 196 C -30 200, 20 176, 80 176 C 223 174, 273 150, 333 150 C 476 190, 526 166, 586 166 C 729 160, 779 136, 839 136 C 982 182, 1032 158, 1092 158 C 1235 152, 1285 128, 1345 128 C 1488 170, 1538 146, 1598 146 C 1720 150, 1760 190, 1800 180"/><g class="balise is-done" style="--k:0"><path class="pole" d="M80 176 V114"/><path class="flag" d="M80 114 L120 124 L80 136 Z" fill="#0B4F5C"/><circle cx="80" cy="176" r="7" fill="#0B4F5C"/><text x="80" y="220" text-anchor="middle">9h00</text></g><g class="balise is-done" style="--k:1"><path class="pole" d="M333 150 V88"/><path class="flag" d="M333 88 L373 98 L333 110 Z" fill="#0B4F5C"/><circle cx="333" cy="150" r="7" fill="#0B4F5C"/><text x="333" y="194" text-anchor="middle">9h45</text></g><g class="balise is-done" style="--k:2"><path class="pole" d="M586 166 V104"/><path class="flag" d="M586 104 L626 114 L586 126 Z" fill="#0B4F5C"/><circle cx="586" cy="166" r="7" fill="#0B4F5C"/><text x="586" y="210" text-anchor="middle">11h00</text></g><g class="balise is-done" style="--k:3"><path class="pole" d="M839 136 V74"/><path class="flag" d="M839 74 L879 84 L839 96 Z" fill="#0B4F5C"/><circle cx="839" cy="136" r="7" fill="#0B4F5C"/><text x="839" y="180" text-anchor="middle">13h30</text></g><g class="balise is-done" style="--k:4"><path class="pole" d="M1092 158 V96"/><path class="flag" d="M1092 96 L1132 106 L1092 118 Z" fill="#0B4F5C"/><circle cx="1092" cy="158" r="7" fill="#0B4F5C"/><text x="1092" y="202" text-anchor="middle">15h15</text></g><g class="balise is-here" style="--k:5"><path class="pole" d="M1345 128 V66"/><path class="flag" d="M1345 66 L1385 76 L1345 88 Z" fill="#D6F1E6"/><circle cx="1345" cy="128" r="7" fill="#D6F1E6"/><text x="1345" y="172" text-anchor="middle">16h00</text></g><g class="balise is-next" style="--k:6"><path class="pole" d="M1598 146 V84"/><path class="flag" d="M1598 84 L1638 94 L1598 106 Z" fill="#FFFFFF"/><circle cx="1598" cy="146" r="7" fill="#FFFFFF"/><text x="1598" y="190" text-anchor="middle">16h30</text></g></svg>
+      <img class="chap-dog" src="images/samoyede-profil.png" alt="">
+    </div>
+    <aside class="notes">Ouverture du chapitre 6. Une phrase pour dire ce qu'on va faire, puis on avance.</aside>
+  </section>
+
   <section class="slide slide--schema" data-seq="6" data-section="16h00 · Garde-fous essentiels" aria-roledescription="slide">
-    <p class="eyebrow">Garde-fous</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 6">6</span>Garde-fous</p>
     <h2>L'humain <span class="mark">valide</span>, toujours</h2>
     <p class="lead" style="margin-top:12px">L'IA peut se tromper avec aplomb : une réponse fausse, présentée comme sûre. C'est l'« hallucination » vue ce matin.</p>
     <aside class="analogy frag"><svg class="illu ana-ico" viewBox="0 0 84 86" aria-hidden="true"><rect data-d="0.1" x="14" y="8" width="52" height="68" rx="8" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/><path data-d="0.4" class="inkt" d="M24 30 l6 6 l12 -12 M24 52 l6 6 l12 -12" style="stroke-width:3.5"/><path data-d="0.5" class="ink" d="M48 32 h10 M48 54 h10" style="stroke-width:2.5"/></svg><p><b class="hand">C'est comme</b> le bon à tirer avant d'imprimer un flyer : même quand la maquette semble parfaite, quelqu'un relit et signe avant l'envoi à l'imprimeur.</p></aside>
@@ -633,20 +731,36 @@
   </section>
 
   <section class="slide " data-seq="6" data-section="16h00 · Garde-fous essentiels" aria-roledescription="slide">
-    <p class="eyebrow">Garde-fous</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 6">6</span>Garde-fous</p>
     <h2>Trois règles <span class="mark mark--blush">dès demain</span></h2>
     <div class="cols--3 grow" style="display:grid;margin-top:40px;align-items:start">
       <div class="card sk fill-blush frag"><h3><svg aria-hidden="true"><use href="#i-alert"/></svg>Ce qu'on ne saisit pas</h3><p>Données personnelles, données clients, informations confidentielles : jamais dans un outil non validé.</p></div>
       <div class="card sk fill-teal frag"><h3><svg aria-hidden="true"><use href="#i-search"/></svg>On relit tout</h3><p>Chaque réponse se relit avant d'être utilisée ou envoyée.</p></div>
       <div class="card sk fill-mint frag"><h3><svg aria-hidden="true"><use href="#i-users"/></svg>On dit qu'on l'a utilisée</h3><p>Quand un document a été préparé avec l'IA, on le signale.</p></div>
     </div>
-    <aside class="tip sk sk--thin "><svg class="bulb" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 4c-9 0-15 7-15 15 0 6 3 9 6 13 1.5 2 2 4 2 6h14c0-2 .5-4 2-6 3-4 6-7 6-13 0-8-6-15-15-15z" fill="#FFF3C4" stroke="#1F2A2E" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 42h12M15 47h10" stroke="#1F2A2E" stroke-width="2.5" stroke-linecap="round"/><path d="M20 20v12M16 24l4 4 4-4" stroke="#0B4F5C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="tip-txt">78 % des utilisateurs de l'IA au travail apportent leurs propres outils, sans passer par l'entreprise. D'où l'intérêt de règles simples, partagées.</p><p class="tip-src">Source : Microsoft et LinkedIn, Work Trend Index, mai 2024</p></div></aside>
+    <aside class="tip sk sk--thin "><svg class="bulb" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 4c-9 0-15 7-15 15 0 6 3 9 6 13 1.5 2 2 4 2 6h14c0-2 .5-4 2-6 3-4 6-7 6-13 0-8-6-15-15-15z" fill="#FFF3C4" stroke="#1F2A2E" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 42h12M15 47h10" stroke="#1F2A2E" stroke-width="2.5" stroke-linecap="round"/><path d="M20 20v12M16 24l4 4 4-4" stroke="#0B4F5C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="tip-txt">Seuls 26 % des utilisateurs de l'IA au travail disent que leur direction est clairement alignée sur l'IA. D'où l'intérêt de règles simples, partagées.</p><p class="tip-src">Source : Microsoft, Work Trend Index 2026, mai 2026</p></div></aside>
     <p class="small">Le cadre RGPD, légal, environnemental et éthique est traité en détail au jour 5.</p>
     <aside class="notes">La troisième règle est une proposition : la valider avec la référente IA avant la séance.</aside>
   </section>
 
+  <section class="slide slide--full slide--chapter" data-section="Chapitre 7 · Intersession" aria-roledescription="slide">
+    <div class="chap-hero">
+      <div class="chap-num" aria-hidden="true"><svg viewBox="0 0 260 260"><circle class="ring" cx="130" cy="130" r="112"/><circle class="ring2" cx="130" cy="130" r="112"/></svg><span>7</span></div>
+      <div class="chap-text">
+        <p class="eyebrow">Chapitre 7 · 16h30</p>
+        <h1 class="chap-title">Intersession</h1>
+        <p class="lead chap-lead">La grille d'audit, les référents et le calendrier jusqu'au 22 janvier.</p>
+      </div>
+    </div>
+    <div class="chap-trail" style="--from:1345;--to:1598;--ty:146" aria-hidden="true">
+      <svg viewBox="0 0 1800 260" preserveAspectRatio="none"><path class="ridge" d="M0 196 C -30 200, 20 176, 80 176 C 223 174, 273 150, 333 150 C 476 190, 526 166, 586 166 C 729 160, 779 136, 839 136 C 982 182, 1032 158, 1092 158 C 1235 152, 1285 128, 1345 128 C 1488 170, 1538 146, 1598 146 C 1720 150, 1760 190, 1800 180"/><g class="balise is-done" style="--k:0"><path class="pole" d="M80 176 V114"/><path class="flag" d="M80 114 L120 124 L80 136 Z" fill="#0B4F5C"/><circle cx="80" cy="176" r="7" fill="#0B4F5C"/><text x="80" y="220" text-anchor="middle">9h00</text></g><g class="balise is-done" style="--k:1"><path class="pole" d="M333 150 V88"/><path class="flag" d="M333 88 L373 98 L333 110 Z" fill="#0B4F5C"/><circle cx="333" cy="150" r="7" fill="#0B4F5C"/><text x="333" y="194" text-anchor="middle">9h45</text></g><g class="balise is-done" style="--k:2"><path class="pole" d="M586 166 V104"/><path class="flag" d="M586 104 L626 114 L586 126 Z" fill="#0B4F5C"/><circle cx="586" cy="166" r="7" fill="#0B4F5C"/><text x="586" y="210" text-anchor="middle">11h00</text></g><g class="balise is-done" style="--k:3"><path class="pole" d="M839 136 V74"/><path class="flag" d="M839 74 L879 84 L839 96 Z" fill="#0B4F5C"/><circle cx="839" cy="136" r="7" fill="#0B4F5C"/><text x="839" y="180" text-anchor="middle">13h30</text></g><g class="balise is-done" style="--k:4"><path class="pole" d="M1092 158 V96"/><path class="flag" d="M1092 96 L1132 106 L1092 118 Z" fill="#0B4F5C"/><circle cx="1092" cy="158" r="7" fill="#0B4F5C"/><text x="1092" y="202" text-anchor="middle">15h15</text></g><g class="balise is-done" style="--k:5"><path class="pole" d="M1345 128 V66"/><path class="flag" d="M1345 66 L1385 76 L1345 88 Z" fill="#0B4F5C"/><circle cx="1345" cy="128" r="7" fill="#0B4F5C"/><text x="1345" y="172" text-anchor="middle">16h00</text></g><g class="balise is-here" style="--k:6"><path class="pole" d="M1598 146 V84"/><path class="flag" d="M1598 84 L1638 94 L1598 106 Z" fill="#D6F1E6"/><circle cx="1598" cy="146" r="7" fill="#D6F1E6"/><text x="1598" y="190" text-anchor="middle">16h30</text></g></svg>
+      <img class="chap-dog" src="images/samoyede-profil.png" alt="">
+    </div>
+    <aside class="notes">Ouverture du chapitre 7. Une phrase pour dire ce qu'on va faire, puis on avance.</aside>
+  </section>
+
   <section class="slide " data-seq="7" data-section="16h30 · Lancement de l'intersession" aria-roledescription="slide">
-    <p class="eyebrow">L'intersession · ensemble d'abord</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 7">7</span>L'intersession · ensemble d'abord</p>
     <h2>Une ligne <span class="mark mark--lav">remplie en direct</span></h2>
     <p class="lead" style="margin-top:8px;font-size:28px">Notre exemple : une situation classée ce matin, colonne par colonne.</p>
     <table class="readgrid audit-ex mt"><tbody><tr class="is-key"><td class="row"><b class="hand">1.</b> Le déroulé actuel</td><td class="edit sk" contenteditable="true" data-k="exemple-c0" data-ph="à remplir avec le groupe"></td></tr><tr class=""><td class="row"><b class="hand">2.</b> Fréquence et temps passé</td><td class="edit sk" contenteditable="true" data-k="exemple-c1" data-ph="à remplir avec le groupe"></td></tr><tr class=""><td class="row"><b class="hand">3.</b> Les personnes impliquées</td><td class="edit sk" contenteditable="true" data-k="exemple-c2" data-ph="à remplir avec le groupe"></td></tr><tr class=""><td class="row"><b class="hand">4.</b> Outils et documents</td><td class="edit sk" contenteditable="true" data-k="exemple-c3" data-ph="à remplir avec le groupe"></td></tr><tr class=""><td class="row"><b class="hand">5.</b> Déclencheur et résultat</td><td class="edit sk" contenteditable="true" data-k="exemple-c4" data-ph="à remplir avec le groupe"></td></tr><tr class="is-key"><td class="row"><b class="hand">6.</b> Part de jugement humain</td><td class="edit sk" contenteditable="true" data-k="exemple-c5" data-ph="à remplir avec le groupe"></td></tr><tr class="is-key"><td class="row"><b class="hand">7.</b> Sensibilité des données</td><td class="edit sk" contenteditable="true" data-k="exemple-c6" data-ph="à remplir avec le groupe"></td></tr><tr class=""><td class="row"><b class="hand">8.</b> Bénéfice attendu</td><td class="edit sk" contenteditable="true" data-k="exemple-c7" data-ph="à remplir avec le groupe"></td></tr><tr class="is-key"><td class="row"><b class="hand">9.</b> Type de solution pressenti</td><td class="edit sk" contenteditable="true" data-k="exemple-c8" data-ph="à remplir avec le groupe"></td></tr></tbody></table>
@@ -654,7 +768,7 @@
   </section>
 
   <section class="slide " data-seq="7" data-section="16h30 · Lancement de l'intersession" aria-roledescription="slide">
-    <p class="eyebrow">L'intersession · à vous</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 7">7</span>L'intersession · à vous</p>
     <h2>La grille d'audit, <span class="mark">colonne par colonne</span></h2>
     <div class="audit"><div class="col sk sk--thin rise is-key"><b>colonne 1</b>Le déroulé actuel</div><div class="col sk sk--thin rise"><b>colonne 2</b>Fréquence et temps passé</div><div class="col sk sk--thin rise"><b>colonne 3</b>Les personnes impliquées</div><div class="col sk sk--thin rise"><b>colonne 4</b>Outils et documents</div><div class="col sk sk--thin rise"><b>colonne 5</b>Déclencheur et résultat</div><div class="col sk sk--thin rise is-key"><b>colonne 6</b>Part de jugement humain</div><div class="col sk sk--thin rise is-key"><b>colonne 7</b>Sensibilité des données</div><div class="col sk sk--thin rise"><b>colonne 8</b>Bénéfice attendu</div><div class="col sk sk--thin rise is-key"><b>colonne 9</b>Type de solution pressenti</div></div>
     <p class="small" style="margin-top:22px">Sur le modèle de l'exemple. Remplissable sans connaissance technique. Trois à cinq tâches par pôle.</p>
@@ -663,7 +777,7 @@
   </section>
 
   <section class="slide " data-seq="7" data-section="16h30 · Lancement de l'intersession" aria-roledescription="slide">
-    <p class="eyebrow">Qui porte quoi</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 7">7</span>Qui porte quoi</p>
     <h2>Un référent <span class="mark mark--sky">par pôle</span></h2>
     <div class="cols mt" style="align-items:start">
       <div><div class="fill-line rise"><span>Commerce</span><span class="f" contenteditable="true" data-k="ref-0" data-ph="nom à écrire en séance"></span></div><div class="fill-line rise"><span>RH et comptabilité</span><span class="f" contenteditable="true" data-k="ref-1" data-ph="nom à écrire en séance"></span></div><div class="fill-line rise"><span>Communication</span><span class="f" contenteditable="true" data-k="ref-2" data-ph="nom à écrire en séance"></span></div></div>
@@ -674,7 +788,7 @@
   </section>
 
   <section class="slide " data-seq="7" data-section="16h30 · Lancement de l'intersession" aria-roledescription="slide">
-    <p class="eyebrow">Calendrier</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 7">7</span>Calendrier</p>
     <h2>Neuf semaines, <span class="mark">trois rendez-vous</span></h2>
     <div class="cal">
       <svg class="cal-line illu" viewBox="0 0 1300 10" preserveAspectRatio="none" aria-hidden="true" style="width:calc(100% - 60px);height:10px;overflow:visible"><path data-d="0.1" class="ink" d="M0 5 L1300 5" style="stroke-width:3"/></svg>
@@ -687,7 +801,7 @@
   </section>
 
   <section class="slide " data-seq="7" data-section="16h30 · Lancement de l'intersession" aria-roledescription="slide">
-    <p class="eyebrow">Ce soir</p>
+    <p class="eyebrow"><span class="chap" title="Chapitre 7">7</span>Ce soir</p>
     <h2>Ce que vous savez <span class="mark mark--teal">faire maintenant</span></h2>
     <ul class="checks mt"><li class="frag"><button class="sk sk--thin" data-k="but-0" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>Je situe l'IA générative et ses limites actuelles</span></li><li class="frag"><button class="sk sk--thin" data-k="but-1" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>Je distingue assistant, automatisation et agent</span></li><li class="frag"><button class="sk sk--thin" data-k="but-2" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>Je mesure l'investissement que chacun demande</span></li><li class="frag"><button class="sk sk--thin" data-k="but-3" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>J'ai une méthode pour observer mon propre travail</span></li></ul>
     <figure class="art art--todo" style="right:90px;bottom:150px;width:470px;height:520px" aria-hidden="true"><p><b>Illustration à générer</b>sommet-samoyede.png</p></figure>

@@ -49,7 +49,7 @@
       nav.setAttribute("aria-label", "Sommaire du jour 1");
       nav.innerHTML = '<p class="toc-title">Jour 1</p><ol>' + SEQ.map(([h, t], k) => {
         const state = k + 1 < seq ? "is-done" : k + 1 === seq ? "is-current" : "";
-        return '<li class="' + state + '"' + (state === "is-current" ? ' aria-current="step"' : "") + '><span class="t">' + h + "</span>" + t + "</li>";
+        return '<li class="' + state + '"' + (state === "is-current" ? ' aria-current="step"' : "") + '><span class="t"><b class="tn">' + (k + 1) + "</b>" + h + "</span>" + t + "</li>";
       }).join("") + "</ol>";
       el.prepend(nav);
     }
@@ -440,3 +440,31 @@
   cur = Math.max(0, slides.findIndex((s) => s.classList.contains("is-active")));
   redraw();
 })();
+
+// Motion des illustrations et des ouvertures de chapitre
+(function () {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Titres de chapitre : chaque lettre arrive à son tour (le texte reste lisible tel quel pour les lecteurs d'écran)
+  document.querySelectorAll(".chap-title").forEach((h) => {
+    const text = h.textContent;
+    h.setAttribute("aria-label", text);
+    h.innerHTML = Array.from(text).map((c, i) => '<span class="ch" aria-hidden="true" style="--c:' + i + '">' + (c === " " ? "&nbsp;" : c) + "</span>").join("");
+  });
+  if (reduced) return;
+  // Trait qui « frémit » comme un dessin animé image par image, seulement sur la slide affichée
+  const noise = document.getElementById("boil-noise");
+  let seed = 1;
+  setInterval(() => {
+    const active = document.querySelector(".slide.is-active");
+    if (!noise || !active || !active.querySelector(".art img")) return;
+    seed = (seed % 5) + 1; noise.setAttribute("seed", seed);
+  }, 150);
+  // Léger effet de profondeur : l'illustration suit un peu la souris
+  document.addEventListener("pointermove", (e) => {
+    const art = document.querySelector(".slide.is-active .art");
+    if (!art) return;
+    const dx = (e.clientX / window.innerWidth - 0.5) * -14, dy = (e.clientY / window.innerHeight - 0.5) * -10;
+    art.style.setProperty("--px", dx.toFixed(1) + "px"); art.style.setProperty("--py", dy.toFixed(1) + "px");
+  });
+})();
+
