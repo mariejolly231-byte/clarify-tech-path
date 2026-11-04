@@ -22,9 +22,11 @@ Contrastes : encre sur tous les pastels au-dessus de 11:1, teal au-dessus de 7:1
 
 ## Typographie
 
-- **Titres, annotations, schémas** : Excalifont, la police d'Excalidraw.
-- **Texte courant** : Bricolage Grotesque 500.
-- Proxima Nova reste la police de marque pour les supports imprimés et le web sous licence.
+- **Écriture principale, titres et accents** : Calligraffitti (Google Fonts), une écriture manuscrite.
+- **Écriture secondaire, texte courant** : Overpass (Google Fonts), de 400 à 800.
+- **Chiffres et commandes** (numéros de slide et de chapitre, minuteur, horaires, boutons, sommaire, sources) : Overpass, car Calligraffitti devient peu lisible en petit et sur les chiffres.
+- Les schémas Excalidraw et les petits dessins gardent Excalifont, qui fait partie du style dessiné.
+- Les polices sont embarquées dans le fichier : le deck marche sans connexion.
 
 ## Interactivité
 

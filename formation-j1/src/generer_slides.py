@@ -53,6 +53,16 @@ OV_COVER = overlay(1672, 941, CLOUD(1180, 40, 1.1, 46) + CLOUD(1330, 250, 0.8, 6
                    + '<g transform="translate(1440 150)"><g class="ov-spark"><path d="M0 -26 V-40 M22 -14 L33 -22 M-22 -14 L-33 -22"/></g></g>', "slice")
 OV_RETOUR = overlay(1672, 636, '<g transform="translate(1528 186)"><g class="ov-sun"><path d="M0 -70 V-92 M50 -50 L64 -64 M-50 -50 L-64 -64 M70 0 H92 M-70 0 H-92"/></g></g>' + CLOUD(1300, 60, 0.9, 50))
 OV_DEPART = overlay(1120, 758, WAG(242, 430, 1.1) + '<g class="ov-arrow"><path d="M840 120 l18 0 M846 112 l12 8 l-12 8"/></g>')
+# Illustrations en pleine scène (décor et texte inclus) : posées comme une carte, assez grandes pour être lues
+def pic(name, alt, w, h, style="", over=""):
+    src = next((f"images/{name}.{e}" for e in ("png", "jpg", "webp") if (IMG / f"{name}.{e}").exists()), None)
+    box = f"width:{w}px;height:{h}px;{style}"
+    if not src:
+        return f'<figure class="pic pic--todo" style="{box}" aria-hidden="true"><p><b>Illustration à générer</b>{name}.png</p></figure>'
+    return f'<figure class="pic" style="{box}"><img src="{src}" alt="{alt}">{over}</figure>'
+STEAM = '<g class="ov-steam"><path d="M0 0 C -14 -20, 14 -40, 0 -60 C -14 -80, 10 -96, 2 -116"/><path d="M26 6 C 14 -14, 38 -34, 26 -54 C 16 -70, 32 -84, 28 -98"/></g>'
+OV_PAUSE = overlay(1672, 941, f'<g transform="translate(888 590)">{STEAM}</g><g transform="translate(1228 240)"><g class="ov-sun"><path d="M0 -84 V-104 M58 -60 L72 -74 M-58 -60 L-72 -74 M84 0 H104 M-84 0 H-104"/></g></g>', "slice")
+OV_REF = overlay(1671, 941, '<g transform="translate(1500 190)"><g class="ov-sun"><path d="M0 -76 V-96 M54 -54 L68 -68 M-54 -54 L-68 -68 M76 0 H96 M-76 0 H-96"/></g></g>', "slice")
 def infog(file, need):
     return shot(need, "Infographie à insérer", f"images/{file}" if (IMG / file).exists() else None)
 def logo(name, file=None):
@@ -334,12 +344,14 @@ chapter_slide(2)
 # ---------- 9h45 Trois logiques ----------
 S945 = "9h45 · Assistant, automatisation, agent"
 slide(f'''    <p class="eyebrow">Trois logiques différentes</p>
-    <div class="grow stack-lg center-y">
-      <p class="idea">L'assistant <span class="mark mark--sky frag">répond</span>. L'automatisation <span class="mark mark--lav frag">exécute</span>. L'agent <span class="mark frag">poursuit un objectif</span>.</p>
-      <p class="lead frag">Le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
-      {tip("Sur Malt, la demande de compétences liées aux agents IA a été multipliée par 60 par rapport à 2024.", "Malt Tech Trends 2026", "frag")}
-    </div>
-    {art("trois-logiques-samoyede", "Trois samoyèdes : l'un rapporte la balle, une gamelle se remplit à heure fixe, le troisième tire un traîneau vers le refuge.", (90, 150, 400, 300))}''', seq=2, section=S945, notes="Faire apparaître les trois verbes un par un. Demander au groupe de deviner le suivant.")
+    <p class="idea logic-idea">L'assistant <span class="mark mark--sky frag">répond</span>. L'automatisation <span class="mark mark--lav frag">exécute</span>. L'agent <span class="mark frag">poursuit un objectif</span>.</p>
+    <div class="pic-row">
+      <div class="stack-lg">
+        <p class="lead frag">Le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
+        {tip("Sur Malt, la demande de compétences liées aux agents IA a été multipliée par 60 par rapport à 2024.", "Malt Tech Trends 2026", "frag")}
+      </div>
+      {pic("trois-logiques-samoyede", "Trois samoyèdes : IA conversationnelle, automatisation, agent IA.", 840, 472)}
+    </div>''', seq=2, section=S945, notes="Faire apparaître les trois verbes un par un. Demander au groupe de deviner le suivant.")
 
 slide(f'''    <p class="eyebrow">L'automatisation</p>
     <h2>Tout part d'un <span class="mark mark--lav">déclencheur</span></h2>
@@ -515,7 +527,7 @@ slide(f'''    <div class="grow center-y">
       <p class="lead">On reprend à 11h00 avec la grille de décision.</p>
       <div class="mt">{timer(15, (10, 15))}</div>
     </div>
-    {art("pause-samoyede", "Le samoyède se repose à côté d'une tasse fumante.", (120, 150, 640, 460), CUP)}''', cls="slide--full", section="Pause",
+    {pic("pause-samoyede", "Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes.", 880, 495, "position:absolute;right:110px;bottom:190px", OV_PAUSE) if (IMG / "pause-samoyede.png").exists() else CUP}''', cls="slide--full", section="Pause",
  notes="")
 
 chapter_slide(3)
@@ -547,17 +559,19 @@ slide(f'''    <div class="stack">
         <span class="tag sk">{icon("file")}Grille en quatre questions</span>
       </div>
       <h2>Atelier : classer <span class="mark">vos situations</span></h2>
-    {art("atelier-samoyede", "Le samoyède range des balles dans quatre paniers de couleur.", (100, 135, 560, 200))}
     </div>
     <div class="cols cols--1-2 grow" style="margin-top:40px;align-items:start;">
+      <div>
       <ol class="steps">
         <li class="frag"><strong>Prends</strong> une situation de ton pôle.</li>
         <li class="frag"><strong>Passe-la</strong> dans les quatre questions.</li>
         <li class="frag"><strong>Classe-la</strong> : assistant, automatisation, agent, ou pas d'outil.</li>
       </ol>
+      <div class="alert alert--compact sk" role="note">{icon("alert")}<div><p class="alert-title">Vigilance données</p><p>Aucune donnée réelle dans un outil grand public : on décrit la tâche, pas son contenu.</p></div></div>
+      </div>
       <div class="stack">
         {timer(20, (15, 20, 30))}
-        <div class="alert sk" role="note">{icon("alert")}<div><p class="alert-title">Vigilance données</p><p>Aucune donnée réelle de l'entreprise dans un outil d'IA grand public. On décrit la tâche, pas son contenu.</p></div></div>
+        {pic("atelier-samoyede", "Le samoyède range des balles dans quatre paniers.", 600, 338)}
       </div>
     </div>''', seq=3, section="11h00 · Quand utiliser quoi",
  notes="Les quatre questions : la tâche est-elle répétitive, les règles sont-elles stables, faut-il interpréter un texte ou décider, que se passe-t-il en cas d'erreur.")
@@ -700,7 +714,7 @@ slide(f'''    <div class="grow center-y">
       <p class="lead">Reprise à 15h15 : limites, investissement et choix d'un outil.</p>
       <div class="mt">{timer(15, (10, 15))}</div>
     </div>
-    {art("pause-samoyede", "Le samoyède se repose à côté d'une tasse fumante.", (120, 150, 640, 460), CUP)}''', cls="slide--full", section="Pause")
+    {pic("pause-samoyede", "Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes.", 880, 495, "position:absolute;right:110px;bottom:190px", OV_PAUSE) if (IMG / "pause-samoyede.png").exists() else CUP}''', cls="slide--full", section="Pause")
 
 chapter_slide(5)
 
@@ -737,8 +751,10 @@ checks = ["Le besoin est-il clair et décrit ?", "L'outil est-il déjà dans not
 ck = "".join(f'<li class="rise"><button class="sk sk--thin" data-k="choix-{i}" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>{c}</span></li>' for i, c in enumerate(checks))
 slide(f'''    <p class="eyebrow">Choisir un outil</p>
     <h2>Six questions <span class="mark">avant de signer</span></h2>
-    {art("choisir-samoyede", "Le samoyède compare deux sacs avant de choisir.", (100, 150, 640, 260))}
-    <ul class="checks cols mt" style="display:grid;column-gap:60px">{ck}</ul>''', seq=5, section="15h15 · Limites, investissement, choix",
+    <div class="pic-row pic-row--top mt">
+      <ul class="checks checks--tight">{ck}</ul>
+      {pic("choisir-samoyede", "Choisir un outil : un samoyède écrasé sous un sac trop chargé d'outils, l'autre léger, avec le bon sac.", 760, 428)}
+    </div>''', seq=5, section="15h15 · Limites, investissement, choix",
  notes="Pour les décideurs : ces questions valent pour n'importe quel outil. Cocher en direct celles auxquelles l'entreprise sait déjà répondre.")
 
 pi = "".join(f'<div class="postit fill-{c}" contenteditable="true" data-k="doute-{i}" data-ph="un doute ?"></div>' for i, c in enumerate(["lav", "blush", "sky", "mint", "card", "mint", "blush", "lav"]))
@@ -797,10 +813,12 @@ slide(f'''    <p class="eyebrow">L'intersession · à vous</p>
 ref = "".join(f'<div class="fill-line rise"><span>{p}</span><span class="f" contenteditable="true" data-k="ref-{i}" data-ph="nom à écrire en séance"></span></div>' for i, p in enumerate(["Commerce", "RH et comptabilité", "Communication"]))
 slide(f'''    <p class="eyebrow">Qui porte quoi</p>
     <h2>Un référent <span class="mark mark--sky">par pôle</span></h2>
-    {art("referents-samoyede", "Trois samoyèdes encordés, le premier ouvre la trace.", (100, 150, 560, 300))}
-    <div class="cols mt" style="align-items:start">
-      <div>{ref}</div>
-      <div class="card sk fill-teal frag"><h3>{icon("users")}La référente IA</h3><p>Elle garde la vue d'ensemble. Les référents de pôle font avancer la grille dans leur équipe.</p></div>
+    <div class="pic-row pic-row--top mt">
+      <div class="stack-lg">
+        <div>{ref}</div>
+        <div class="card sk fill-teal frag"><h3>{icon("users")}La référente IA</h3><p>Elle garde la vue d'ensemble. Les référents de pôle font avancer la grille dans leur équipe.</p></div>
+      </div>
+      {pic("referents-samoyede", "Trois samoyèdes encordés montent vers un drapeau : métier, processus, technologie, un cap commun.", 680, 383, over=OV_REF)}
     </div>''', seq=7, section="16h30 · Lancement de l'intersession",
  notes="Les noms s'écrivent en séance, ils ne figurent pas dans le support.")
 

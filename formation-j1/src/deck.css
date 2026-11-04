@@ -1,6 +1,7 @@
 /* Summit Flow Altitude, version tableau Excalidraw : fond blanc, encre teal, aplats pastel doux, trait à main levée */
 
-@font-face { font-family: "SF Sans"; font-weight: 400 700; font-style: normal; font-display: block; src: url(fonts/bricolage.woff2) format("woff2"); }
+@font-face { font-family: "SF Sans"; font-weight: 400 800; font-style: normal; font-display: block; src: url(fonts/overpass.woff2) format("woff2"); }
+@font-face { font-family: "SF Script"; font-weight: 400; font-style: normal; font-display: block; src: url(fonts/calligraffitti.woff2) format("woff2"); }
 @font-face { font-family: "SF Hand"; font-weight: 400; font-style: normal; font-display: block; src: url(fonts/excalifont.woff2) format("woff2"); }
 
 :root {
@@ -19,9 +20,9 @@
   --blush: #FCE4E8;
   --lemon: #FFF3C4;
 
-  --font-title: "SF Hand", "Comic Sans MS", cursive;
+  --font-title: "SF Script", "Segoe Script", cursive;
   --font-body: "SF Sans", "Segoe UI", system-ui, sans-serif;
-  --font-hand: "SF Hand", "Comic Sans MS", cursive;
+  --font-hand: "SF Script", "Segoe Script", cursive;
 
   --stage-w: 1920px;
   --stage-h: 1080px;
@@ -673,3 +674,61 @@ body.tool-spot .spot { opacity: 1; }
 .infog-one .shot { flex: 1; min-height: 0; height: 100%; background: transparent; }
 .infog-one .shot:has(img) { border: 0; }
 .infog-one .shot:has(img)::before { display: none; }
+
+/* ---------- Illustrations en carte (scène complète, texte inclus) ---------- */
+.pic { position: relative; margin: 0; flex: none; border-radius: 26px; overflow: hidden; background: var(--card); box-shadow: 0 30px 60px -34px rgba(11, 79, 92, .55), 0 0 0 1.5px rgba(11, 79, 92, .1); }
+.pic img { display: block; width: 100%; height: 100%; object-fit: cover; transform-origin: 60% 40%; }
+.pic .art-over { position: absolute; inset: 0; }
+.pic::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, .45) 50%, transparent 65%) no-repeat; background-size: 250% 100%; background-position: 130% 0; }
+.slide.is-active .pic { animation: pic-in 1000ms var(--ease) both 380ms; }
+.slide.is-active .pic img { animation: pic-zoom 20s ease-in-out 1.4s infinite alternate; }
+.slide.is-active .pic::after { animation: pic-sheen 1400ms ease-out 1.1s both; }
+body:not(.idle):not([class*="tool-"]) .slide.is-active .pic:hover { translate: 0 -6px; box-shadow: 0 40px 70px -34px rgba(11, 79, 92, .6), 0 0 0 1.5px rgba(11, 79, 92, .14); }
+.pic { transition: translate 300ms var(--ease), box-shadow 300ms var(--ease); }
+@keyframes pic-in { from { opacity: 0; transform: translateY(36px) rotate(-1.5deg) scale(.95); } to { opacity: 1; transform: none; } }
+@keyframes pic-zoom { from { transform: scale(1); } to { transform: scale(1.07) translate(-1.2%, -.8%); } }
+@keyframes pic-sheen { from { background-position: 130% 0; } to { background-position: -40% 0; } }
+.pic--todo { display: grid; place-items: center; border: 3px dashed var(--line); box-shadow: none; background: rgba(255, 255, 255, .55); text-align: center; }
+.pic--todo p { font-family: var(--font-hand); font-size: 24px; color: var(--muted); }
+.pic--todo b { display: block; font-family: var(--font-body); font-weight: 700; font-size: 16px; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); }
+.ov-steam path { fill: none; stroke: #0B4F5C; stroke-width: 4; stroke-linecap: round; opacity: .7; }
+.slide.is-active .ov-steam path { animation: steam 2.8s ease-in-out infinite; }
+.slide.is-active .ov-steam path:nth-child(2) { animation-delay: 1.3s; }
+@keyframes steam { 0% { opacity: 0; transform: translateY(14px); } 40% { opacity: .75; } 100% { opacity: 0; transform: translateY(-26px); } }
+/* Mises en page avec illustration */
+.logic-idea { font-size: 66px; margin-top: 24px; }
+.pic-row { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center; margin-top: 30px; }
+.pic-row--top { align-items: start; }
+.checks--tight li { padding: 10px 0; }
+.alert--compact { list-style: none; padding: 18px 24px; grid-template-columns: 40px 1fr; gap: 16px; margin-top: 26px; }
+.alert--compact::before { display: none; }
+.alert--compact p { font-size: 22px; }
+.alert--compact .alert-title { font-size: 26px; }
+@media (prefers-reduced-motion: reduce) { .slide.is-active .pic, .slide.is-active .pic img, .slide.is-active .pic::after, .slide.is-active .ov-steam path { animation: none; } }
+@media print { .pic { box-shadow: none; } .pic::after { display: none; } }
+.slide--full:has(> .pic) > .grow { max-width: 780px; }
+.pic-row .fill-line { grid-template-columns: 260px 1fr; }
+.pic-row .card h3 { font-size: 30px; }
+.pic-row .card p { font-size: 22px; }
+
+/* ---------- Typographie : Calligraffitti pour les titres et les accents, Overpass pour le texte, les chiffres et les commandes ---------- */
+/* Calligraffitti a un petit œil : on grossit un peu les titres pour garder leur présence */
+h1 { font-size: calc(var(--h1-size, 1em) * 1); }
+h2 { letter-spacing: .005em; }
+/* Les chiffres et les petits éléments pratiques restent nets en Overpass */
+.num, .chap, .chap-num span, .agenda .cn, .toc li .tn, .toc li .t, .agenda .h, .timer .clock, .timer button, .yn button, .reset,
+.chrome .section, .balise text, .audit-ex td.row, .audit .col b, .cal .d, .steps li::before, .readgrid th, .fill-line .f, .q span {
+  font-family: var(--font-body) !important; font-weight: 700;
+}
+.num { font-size: 32px; }
+.chap-num span { font-size: 170px; font-weight: 800; padding-bottom: 0; }
+.toc li .t { font-size: 18px; letter-spacing: .02em; }
+.agenda .h { font-size: 30px; }
+.timer .clock { letter-spacing: .02em; }
+.chrome .section { font-size: 20px; font-weight: 600; }
+.audit-ex td.row { font-size: 22px; font-weight: 600; }
+.fill-line .f { font-weight: 500; font-size: 26px; }
+.q span { font-weight: 500; }
+.tip-src, .need, .art--todo p, .pic--todo p, .edit:empty::before, .f:empty::before { font-family: var(--font-body) !important; font-style: italic; font-weight: 500; }
+.tip-src { font-size: 16px; }
+.chrome .section { word-spacing: .12em; }
