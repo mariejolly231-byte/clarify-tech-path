@@ -23,6 +23,8 @@ Mise à jour d'octobre 2026 : les deux chiffres du Work Trend Index 2024 (39 % d
 
 | Slide | Information | Source |
 |---|---|---|
+| 8 | 45 % des salariés craignent que leur métier soit, au moins en partie, repris par une IA ou un robot | Sondage Odoxa, 1 005 Français, 22 et 23 avril 2026, repris par CB News : https://www.cbnews.fr/node/101258 (à vérifier sur la publication Odoxa) |
+| 8 | Écologie, perte de compétences, manque de temps : pas de chiffre 2026 fiable trouvé, présentés comme des freins entendus sur le terrain | — |
 | 39 | Copilot Studio : usage autonome facturé en crédits Copilot, en plus des licences ; l'usage interactif est inclus avec Microsoft 365 Copilot | Microsoft Q&A, licences Copilot Studio : https://learn.microsoft.com/en-ca/answers/questions/5884289/copilot-studio-licensing-m365-copilot-credit-pack ; Licensing School, Copilot Studio Licensing Guide, octobre 2026 |
 | 31, 32 | Arbre « quelle brique pour quelle tâche » : Cowork et certaines briques dépendent de la licence et des réglages de l'entreprise | À vérifier dans l'environnement de Maison Lagarrigue la veille de la séance |
 

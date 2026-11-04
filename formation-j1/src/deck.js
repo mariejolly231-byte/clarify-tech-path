@@ -18,7 +18,7 @@
     ["11h00", "Quand utiliser quoi"],
     ["13h30", "Démonstrations"],
     ["15h15", "Limites et choix"],
-    ["16h00", "Garde-fous"],
+    ["16h00", "À quoi faire attention"],
     ["16h30", "Intersession"],
   ];
   // Le vrai logo signe chaque slide : chargé une seule fois, réutilisé en fond par le pied de page
@@ -244,23 +244,23 @@
 
   // Outil de décision : l'arbre « quelle brique pour quelle tâche », une question après l'autre
   const TREE = {
-    q0: ["Ai-je le droit d'utiliser ces données dans cet outil ?", "q1", "stop"],
-    q1: ["Vais-je refaire ce geste, avec les mêmes règles ?", "qj", "qc"],
-    qc: ["Tout tient-il dans l'échange ou dans un fichier ?", "prompt", "qd"],
+    q0: ["Ai-je le droit d'utiliser ces données dans Copilot ?", "q1", "stop"],
+    q1: ["Vais-je refaire cette tâche souvent, de la même façon ?", "qj", "qc"],
+    qc: ["Tout le nécessaire tient-il dans la conversation ou dans un fichier ?", "prompt", "qd"],
     qd: ["Faut-il croiser plusieurs documents d'un même dossier ?", "notes", "cowork"],
-    qj: ["Demande-t-il du jugement ?", "qa", "flux"],
-    qa: ["Faut-il un assistant à part, avec ses documents ?", "qt", "req"],
-    qt: ["Doit-il agir dans vos outils, ou se lancer seul ?", "studio", "agent"],
+    qj: ["Faut-il lire, interpréter ou décider à une étape ?", "qa", "flux"],
+    qa: ["Doit-elle se lancer seule, à heure fixe, sans que tu la relances ?", "plan", "qt"],
+    qt: ["Faut-il des consignes et des documents à elle, partagés avec l'équipe ?", "agent", "req"],
   };
   const LEAF = {
-    stop: ["On s'arrête et on vérifie", "", "blush", "Données personnelles, clients ou confidentielles : on demande à la référente IA avant d'aller plus loin."],
-    prompt: ["Une demande", "Assistant", "mint", "Un geste ponctuel, tout le contexte tient dans l'échange. Elle peut se planifier si elle revient."],
+    stop: ["On s'arrête et on vérifie", "", "card", "Données personnelles, clients ou confidentielles : on demande à la référente IA avant d'aller plus loin."],
+    prompt: ["Une demande", "Assistant", "mint", "Un besoin ponctuel : tout le contexte tient dans l'échange ou un fichier joint."],
     notes: ["Un bloc-notes", "Assistant", "mint", "Un dossier de documents à croiser pour cette tâche."],
-    cowork: ["Cowork", "Agent", "blush", "Plusieurs étapes et plusieurs applications : à vérifier selon la licence."],
-    flux: ["Un flux Power Automate", "Automatisation", "lav", "Répétitif, stable, sans jugement : une suite d'actions fixe suffit."],
-    req: ["Une requête enregistrée", "Assistant", "mint", "Une méthode qu'on rappelle dans ses conversations."],
-    agent: ["Un agent Copilot", "Assistant bien équipé", "mint", "Agent Builder : des consignes et des documents, réutilisables par l'équipe."],
-    studio: ["Copilot Studio", "Agent", "blush", "Il agit dans vos outils ou se lance seul : à construire avec l'informatique."],
+    cowork: ["Cowork", "Agent, à vérifier selon la licence", "blush", "Plusieurs étapes et plusieurs applications : Copilot enchaîne pour toi."],
+    flux: ["Un flux Power Automate", "Automatisation", "lav", "Répétitif, des règles fixes, sans interprétation : une suite d'actions suffit."],
+    plan: ["Une demande planifiée", "Vers l'agent : c'est l'horaire qui la lance", "blush", "Copilot la relance seule chaque jour ou chaque semaine et t'envoie le résultat."],
+    req: ["Une requête enregistrée", "Assistant", "mint", "Ta méthode, gardée dans ta galerie et rappelée quand tu en as besoin."],
+    agent: ["Un agent Copilot", "Assistant dédié", "mint", "Agent Builder : des consignes et des documents, réutilisables par toute l'équipe."],
   };
   document.querySelectorAll(".decider--tree").forEach((d) => {
     const list = d.querySelector(".tq-list"), box = d.querySelector(".verdict-box");
@@ -513,3 +513,17 @@
   }, true);
   document.addEventListener("deck:slide", () => { if (md) { md.hidden = true; md = null; } });
 })();
+
+// Intersession : le cas de mars choisi pour l'exemple, et le numéro de la slide de l'arbre
+(function () {
+  const slidesAll = Array.from(document.querySelectorAll(".slide"));
+  const treeIdx = slidesAll.findIndex((el) => el.querySelector(".tree"));
+  document.querySelectorAll(".ref-tree").forEach((r) => { if (treeIdx >= 0) r.textContent = "voir l'arbre, slide " + (treeIdx + 1); });
+  document.querySelectorAll(".case-pick").forEach((sel) => {
+    const key = "sf-j1-" + sel.dataset.k;
+    try { const v = localStorage.getItem(key); if (v) sel.value = v; } catch (e) { /* stockage indisponible */ }
+    sel.addEventListener("change", () => { try { localStorage.setItem(key, sel.value); } catch (e) { /* stockage indisponible */ } });
+    sel.addEventListener("keydown", (e) => e.stopPropagation());
+  });
+})();
+
