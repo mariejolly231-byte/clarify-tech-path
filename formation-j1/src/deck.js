@@ -52,7 +52,7 @@
       nav.setAttribute("aria-label", "Sommaire du jour 1");
       nav.innerHTML = '<p class="toc-title">Jour 1</p><ol>' + SEQ.map(([h, t], k) => {
         const state = k + 1 < seq ? "is-done" : k + 1 === seq ? "is-current" : "";
-        return '<li class="' + state + '"' + (state === "is-current" ? ' aria-current="step"' : "") + '><span class="t"><b class="tn">' + (k + 1) + "</b>" + h + "</span>" + t + "</li>";
+        return '<li class="' + state + '"' + (state === "is-current" ? ' aria-current="step"' : "") + '><button class="toc-go" data-chap="' + (k + 1) + '" aria-label="Aller au chapitre ' + (k + 1) + " : " + t + '"><span class="t"><b class="tn">' + (k + 1) + "</b>" + h + "</span>" + t + "</button></li>";
       }).join("") + "</ol>";
       el.prepend(nav);
     }
@@ -178,6 +178,17 @@
     document.dispatchEvent(new CustomEvent("deck:slide", { detail: current }));
   }
 
+  // Sommaire latéral : un clic ouvre la slide d'ouverture du chapitre
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest(".toc-go");
+    if (!b) return;
+    const n = b.dataset.chap;
+    const idx = slides.findIndex((el) => el.classList.contains("slide--chapter") && (el.dataset.section || "").startsWith("Chapitre " + n + " "));
+    const fallback = slides.findIndex((el) => el.dataset.seq === n);
+    const target = idx >= 0 ? idx : fallback;
+    if (target >= 0) go(target, target < current ? -1 : 1);
+    b.blur();
+  });
   function go(i, direction) { current = Math.max(0, Math.min(total - 1, i)); render(direction || 1); }
   function next() {
     const hidden = frags(slides[current]).filter((x) => !x.classList.contains("is-shown"));
@@ -231,34 +242,52 @@
     c.addEventListener("click", () => { const idx = CYCLE.findIndex((x) => x[0] === (c.dataset.v || "")); const v = CYCLE[(idx + 1) % CYCLE.length][0]; set(v); store(key, v); });
   });
 
-  // Outil de décision : la grille des quatre questions, réponse en direct
-  document.querySelectorAll(".decider").forEach((d) => {
-    const qs = Array.from(d.querySelectorAll(".q"));
-    const box = d.querySelector(".verdict-box");
-    const out = box.querySelector(".out"), why = box.querySelector(".why");
-    const ans = {};
-    function compute() {
-      let res = ["Réponds aux questions", "Une question après l'autre, avec le groupe."], stop = 99;
-      if (ans[0] === "non") { res = ["Stop : on vérifie d'abord", "Données personnelles, clients ou confidentielles : on demande à la référente IA avant d'aller plus loin."]; stop = 0; }
-      else if (ans[1] === "non") { res = ["Geste manuel, ou assistant au cas par cas", "Une tâche rare ne justifie pas d'outiller."]; stop = 1; }
-      else if (ans[1] === "oui" && ans[2] === "non") { res = ["Clarifier la règle d'abord", "On n'automatise pas une règle qui change à chaque fois."]; stop = 2; }
-      else if (ans[1] === "oui" && ans[2] === "oui" && ans[3] === "non") { res = ["Automatisation", "Répétitif, stable, sans interprétation : une suite d'actions fixe suffit."]; stop = 3; }
-      else if (ans[1] === "oui" && ans[2] === "oui" && ans[3] === "oui") { res = ["Agent, ou assistant + automatisation", "Il faut lire, interpréter ou décider à une étape."]; stop = 3; }
-      qs.forEach((q) => { const n = +q.dataset.q; q.classList.toggle("is-off", stop === 0 ? n > 0 : n >= 1 && n <= 3 && n > stop); });
-      out.textContent = res[0]; why.textContent = res[1];
-      box.className = "verdict-box sk" + (res[0].startsWith("Automatisation") ? " fill-lav" : res[0].startsWith("Agent") ? " fill-mint" : res[0].startsWith("Geste") ? " fill-sky" : res[0].startsWith("Clarifier") || res[0].startsWith("Stop") ? " fill-blush" : "") + (ans[4] === "oui" ? " has-guard" : "");
+  // Outil de décision : l'arbre « quelle brique pour quelle tâche », une question après l'autre
+  const TREE = {
+    q0: ["Ai-je le droit d'utiliser ces données dans cet outil ?", "q1", "stop"],
+    q1: ["Vais-je refaire ce geste, avec les mêmes règles ?", "qj", "qc"],
+    qc: ["Tout tient-il dans l'échange ou dans un fichier ?", "prompt", "qd"],
+    qd: ["Faut-il croiser plusieurs documents d'un même dossier ?", "notes", "cowork"],
+    qj: ["Demande-t-il du jugement ?", "qa", "flux"],
+    qa: ["Faut-il un assistant à part, avec ses documents ?", "qt", "req"],
+    qt: ["Doit-il agir dans vos outils, ou se lancer seul ?", "studio", "agent"],
+  };
+  const LEAF = {
+    stop: ["On s'arrête et on vérifie", "", "blush", "Données personnelles, clients ou confidentielles : on demande à la référente IA avant d'aller plus loin."],
+    prompt: ["Une demande", "Assistant", "mint", "Un geste ponctuel, tout le contexte tient dans l'échange. Elle peut se planifier si elle revient."],
+    notes: ["Un bloc-notes", "Assistant", "mint", "Un dossier de documents à croiser pour cette tâche."],
+    cowork: ["Cowork", "Agent", "blush", "Plusieurs étapes et plusieurs applications : à vérifier selon la licence."],
+    flux: ["Un flux Power Automate", "Automatisation", "lav", "Répétitif, stable, sans jugement : une suite d'actions fixe suffit."],
+    req: ["Une requête enregistrée", "Assistant", "mint", "Une méthode qu'on rappelle dans ses conversations."],
+    agent: ["Un agent Copilot", "Assistant bien équipé", "mint", "Agent Builder : des consignes et des documents, réutilisables par l'équipe."],
+    studio: ["Copilot Studio", "Agent", "blush", "Il agit dans vos outils ou se lance seul : à construire avec l'informatique."],
+  };
+  document.querySelectorAll(".decider--tree").forEach((d) => {
+    const list = d.querySelector(".tq-list"), box = d.querySelector(".verdict-box");
+    const out = box.querySelector(".out"), kind = box.querySelector(".kind"), why = box.querySelector(".why");
+    let path = []; // [[question, réponse]]
+    function render() {
+      list.innerHTML = "";
+      let node = "q0";
+      for (let k = 0; k <= path.length; k++) {
+        if (!TREE[node]) break;
+        const [label, yes, no] = TREE[node], ans = path[k] ? path[k][1] : null;
+        const row = document.createElement("div");
+        row.className = "q";
+        row.innerHTML = "<span>" + label + '</span><div class="yn"><button class="sk sk--thin" value="oui" aria-pressed="' + (ans === "oui") + '">oui</button><button class="sk sk--thin no" value="non" aria-pressed="' + (ans === "non") + '">non</button></div>';
+        const depth = k;
+        row.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { path = path.slice(0, depth); path.push([node, b.value]); render(); }));
+        list.appendChild(row);
+        if (!ans) break;
+        node = ans === "oui" ? yes : no;
+      }
+      const leaf = LEAF[node] && path.length ? LEAF[node] : null;
+      if (leaf) { out.textContent = leaf[0]; kind.textContent = leaf[1]; why.textContent = leaf[3]; box.className = "verdict-box sk fill-" + leaf[2] + (node !== "stop" ? " has-guard" : ""); }
+      else { out.textContent = "Réponds aux questions"; kind.textContent = ""; why.textContent = "Une question après l'autre, avec le groupe."; box.className = "verdict-box sk"; }
     }
-    qs.forEach((q) => {
-      const n = q.dataset.q;
-      q.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => {
-        ans[n] = ans[n] === b.value ? undefined : b.value;
-        q.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(ans[n] === x.value)));
-        compute();
-      }));
-    });
     const reset = d.querySelector(".reset");
-    if (reset) reset.addEventListener("click", () => { Object.keys(ans).forEach((k) => delete ans[k]); d.querySelectorAll(".yn button").forEach((x) => x.setAttribute("aria-pressed", "false")); compute(); });
-    compute();
+    if (reset) reset.addEventListener("click", () => { path = []; render(); });
+    render();
   });
 
   // Minuteur d'atelier
@@ -442,4 +471,45 @@
   document.addEventListener("deck:slide", (e) => { cur = e.detail; stroke = null; redraw(); });
   cur = Math.max(0, slides.findIndex((s) => s.classList.contains("is-active")));
   redraw();
+})();
+
+// Mini-présentations (rappel Copilot, agents Copilot) : chacune s'ouvre au-dessus du deck depuis son bouton,
+// et ses flèches lui appartiennent tant qu'elle est ouverte
+(function () {
+  const decks = Array.from(document.querySelectorAll(".minideck"));
+  if (!decks.length) return;
+  let md = null, pages = [], i = 0, opener = null;
+  function show(k) {
+    i = Math.max(0, Math.min(pages.length - 1, k));
+    pages.forEach((p, j) => p.classList.toggle("is-on", j === i));
+    md.querySelector(".md-n").textContent = i + 1;
+    md.querySelector(".md-tot").textContent = pages.length;
+    md.querySelector('[data-md="prev"]').disabled = i === 0;
+    md.querySelector('[data-md="next"]').disabled = i === pages.length - 1;
+  }
+  function open(btn) {
+    md = document.getElementById(btn.dataset.target || "minideck");
+    if (!md) return;
+    opener = btn; pages = Array.from(md.querySelectorAll(".md-slide"));
+    md.hidden = false; show(0); md.querySelector(".md-close").focus();
+  }
+  function close() { if (!md) return; md.hidden = true; md = null; if (opener) opener.focus(); }
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-act='minideck'], [data-md]");
+    if (!b) return;
+    e.stopPropagation();
+    if (b.dataset.act === "minideck") open(b);
+    else if (b.dataset.md === "close") close();
+    else show(i + (b.dataset.md === "next" ? 1 : -1));
+  }, true);
+  window.addEventListener("keydown", (e) => {
+    if (!md) return;
+    const k = e.key;
+    if (k === "Escape") close();
+    else if (k === "ArrowRight" || k === "PageDown" || k === " ") show(i + 1);
+    else if (k === "ArrowLeft" || k === "PageUp") show(i - 1);
+    else if (k !== "Tab") return;
+    if (k !== "Tab") { e.preventDefault(); e.stopImmediatePropagation(); }
+  }, true);
+  document.addEventListener("deck:slide", () => { if (md) { md.hidden = true; md = null; } });
 })();

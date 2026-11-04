@@ -10,7 +10,7 @@ def topic_mark(body):
     code = next((v for k, v in TOPIC.items() if k in body), None)
     if not code:
         return ""
-    items = [("a", "Automatisation", "lav"), ("s", "Assistant", "sky"), ("g", "Agent", "mint")]
+    items = [("a", "Automatisation", "lav"), ("s", "Assistant", "mint"), ("g", "Agent", "blush")]
     on = set(code.replace("m", "g") if code == "am" else code)
     if code == "am": on = {"a", "s"}
     if code == "asm": on = {"a", "s", "g"}
@@ -117,7 +117,9 @@ def golink(key, label):
         return f'<a class="golink" href="{url}" target="_blank" rel="noopener">{label}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>'
     return f'<span class="golink golink--todo">{label} · lien à ajouter</span>'
 # Pastille « À vous » : ce que les participants peuvent refaire tout de suite dans leur Copilot
-def avous(txt="À vous, dans votre Copilot"):
+def avous(txt="À vous, dans votre Copilot", target=None):
+    if target:
+        return f'<button class="avous avous--go" data-act="minideck" data-target="{target}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v10.5l-2.2-2.2a1.6 1.6 0 0 0-2.3 2.3L9.8 19a6 6 0 0 0 4.2 1.8h.5a5.5 5.5 0 0 0 5.5-5.5V11a1.5 1.5 0 0 0-3 0v-1a1.5 1.5 0 0 0-3 0v-.5a1.5 1.5 0 0 0-3 0V3a1.5 1.5 0 0 0-3 0z"/></svg>{txt}<span aria-hidden="true"> ›</span></button>'
     return f'<span class="avous"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v10.5l-2.2-2.2a1.6 1.6 0 0 0-2.3 2.3L9.8 19a6 6 0 0 0 4.2 1.8h.5a5.5 5.5 0 0 0 5.5-5.5V11a1.5 1.5 0 0 0-3 0v-1a1.5 1.5 0 0 0-3 0v-.5a1.5 1.5 0 0 0-3 0V3a1.5 1.5 0 0 0-3 0z"/></svg>{txt}</span>'
 
 def logic(eyebrow, title, mk, definition, ex, color, notes, extra=""):
@@ -299,6 +301,18 @@ slide(f'''    <p class="eyebrow">Tour de table</p>
     </div>''', seq=1, section="9h00 · Point de départ",
  notes="Flèche droite pour faire apparaître les questions une par une. Noter au tableau ce qui a coincé : on s'en sert au moment des limites et des doutes.")
 
+FREINS = [("Je ne vois pas à quoi ça me servirait", "71 %", "des entreprises qui n'utilisent pas l'IA n'y voient pas d'utilité.", "On y répond au chapitre 3, avec la grille et vos situations.", "sky"),
+          ("Je ne sais pas m'en servir", "54 %", "citent le manque d'expertise.", "C'est l'objet de ces cinq jours, sur vos outils.", "lav"),
+          ("Et nos données ?", "38 %", "s'inquiètent pour la protection des données.", "Chapitre 6 : ce qu'on saisit, ce qu'on ne saisit pas.", "blush"),
+          ("Elle se trompe", "", "Une réponse fausse peut être présentée comme sûre.", "On apprend à vérifier, et un humain valide toujours.", "mint"),
+          ("Je n'ai pas le temps", "", "Se former, essayer, corriger : ça demande du temps au départ.", "On part de tâches qui en font gagner, mesurées dans la grille d'audit.", "teal")]
+fr = "".join(f'''<div class="frein sk fill-{c} frag"><p class="frein-t">{t}</p>{f'<p class="frein-n"><b>{n}</b> {d}</p>' if n else f'<p class="frein-n">{d}</p>'}<p class="frein-r">{r}</p></div>''' for t, n, d, r, c in FREINS)
+slide(f'''    <h2>Ce qui freine, <span class="mark mark--blush">le plus souvent</span></h2>
+    <p class="howto">Vous avez dit ce qui coinçait chez vous. Voici ce que disent les entreprises françaises, et où on y répond aujourd'hui.</p>
+    <div class="freins">{fr}</div>
+    <p class="three-src">Source des pourcentages : Insee Première n° 2120, juillet 2026, entreprises de 10 personnes ou plus n'utilisant pas l'IA.</p>''', seq=1, section="9h00 · Point de départ",
+ notes="Juste après le tour de table : relier ce qu'ils viennent de dire à ces cinq freins. Les trois premiers sont chiffrés par l'Insee (entreprises qui n'utilisent pas l'IA, plusieurs réponses possibles). Les deux derniers n'ont pas de chiffre fiable pour 2026 : les présenter comme ce qu'on entend sur le terrain. Les entendre sans les balayer : chacun a sa réponse dans la journée.")
+
 slide(f'''    <p class="eyebrow">Retour sur mars</p>
     <h2>La journée de mars, <span class="mark mark--sky">ce qui reste</span></h2>
     {art("retour-samoyede", "Le samoyède regarde le chemin déjà parcouru.", (100, 136, 760, 270))}
@@ -311,8 +325,9 @@ slide(f'''    <p class="eyebrow">Retour sur mars</p>
         <li>Moins de vocabulaire technique</li>
         <li>Plus de pratique sur vos outils : Outlook, Excel</li>
         <li class="frag">Alors aujourd'hui, chaque notion part d'une de vos situations</li></ul></div>
-    </div>''', seq=1, section="9h00 · Point de départ",
- notes="Faire raconter par ceux qui étaient là, pour ceux qui n'y étaient pas. La colonne de droite reprend les retours d'évaluation de mars : le dire, c'est montrer qu'on les a écoutés.")
+    </div>
+    <button class="btn-act md-open" data-act="minideck"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H4z M9 20h6 M12 16v4"/></svg>Rappel : Copilot, comment ça marche</button>''', seq=1, section="9h00 · Point de départ",
+ notes="Faire raconter par ceux qui étaient là, pour ceux qui n'y étaient pas. La colonne de droite reprend les retours d'évaluation de mars : le dire, c'est montrer qu'on les a écoutés. Le bouton ouvre un rappel en trois écrans sur Copilot (comment il fonctionne, ce que change la licence, ce que Microsoft garantit sur les données) : à ouvrir si le groupe en a besoin, Échap pour revenir.")
 
 slide(f'''    <p class="eyebrow">Retour sur mars</p>
     <h2>Vos situations, <span class="mark">celles de mars</span></h2>
@@ -349,6 +364,17 @@ slide(f'''    <p class="eyebrow">Rappel commun</p>
     <div class="grow infog-one mt">{infog("comment-fonctionne-ia.png", "Infographie « Comment fonctionne l'IA » : tokens, modèle, prédiction du token suivant (comment-fonctionne-ia.png)")}</div>''', seq=1, section="9h00 · Point de départ",
  notes="Rester sur l'essentiel : elle découpe le texte en tokens, elle a appris des régularités, elle prédit le token suivant. Elle ne cherche pas la vérité. Les pourcentages de la bulle sont un exemple pour illustrer, pas une mesure.")
 
+savoir = [("Elle prédit, elle ne sait pas", "Elle écrit la suite la plus probable, pas forcément la plus juste.", "Vérifier les faits, les chiffres et les sources."),
+          ("Elle est figée à une date", "Elle n'apprend pas toute seule : ses connaissances s'arrêtent au moment de son entraînement.", "Pour l'actualité, activer la recherche web ou lui donner vos documents."),
+          ("Elle n'a pas de mémoire", "Sans la fonction mémoire, elle ne garde rien de vos conversations précédentes.", "Redonner le contexte à chaque nouvelle conversation."),
+          ("Ses réponses varient", "La même question peut donner deux réponses différentes.", "Reformuler, relancer, comparer.")]
+rows_s = "".join(f'''<div class="sv frag"><div class="sv-k"><p class="sv-t">{t}</p><p>{d}</p></div><svg class="sv-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><p class="sv-r">{r}</p></div>''' for t, d, r in savoir)
+slide(f'''    <h2>Quatre choses à savoir, <span class="mark mark--sky">et le bon réflexe</span></h2>
+    <div class="sv-head"><span>Ce qu'il faut savoir</span><span>Ton réflexe</span></div>
+    <div class="svs">{rows_s}</div>
+    <p class="sv-retenir frag"><b class="hand">À retenir :</b> plus tu lui donnes de contexte, meilleure est la réponse.</p>''', seq=1, section="9h00 · Point de départ",
+ notes="Suite directe de « comment ça marche ». Une ligne par clic. Pour chaque ligne, demander un exemple vécu : une réponse fausse, une info périmée, un contexte à réexpliquer. La dernière phrase prépare le harnais du chapitre 2.")
+
 slide(f'''    <p class="eyebrow">Rappel commun</p>
     <h2>Les principales IA <span class="mark">aujourd'hui</span></h2>
     <p class="howto">Quatre familles de modèles, chacune avec son style. Ce sont des tendances d'usage à ce jour, pas un classement.</p>
@@ -375,9 +401,9 @@ S945 = "9h45 · Assistant, automatisation, agent"
 slide(f'''    <p class="eyebrow">Trois logiques différentes</p>
     <div class="three">
       <div class="three-lines">
-        <p class="three-l frag"><span class="dot dot--sky"></span>L'assistant <span class="mark mark--sky">répond</span></p>
+        <p class="three-l frag"><span class="dot dot--mint"></span>L'assistant <span class="mark">répond</span></p>
         <p class="three-l frag"><span class="dot dot--lav"></span>L'automatisation <span class="mark mark--lav">exécute</span></p>
-        <p class="three-l frag"><span class="dot dot--mint"></span>L'agent <span class="mark">poursuit un objectif</span></p>
+        <p class="three-l frag"><span class="dot dot--blush"></span>L'agent <span class="mark mark--blush">poursuit un objectif</span></p>
         <p class="lead three-c frag">Le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
       </div>
       {pic("trois-logiques-samoyede", "Trois samoyèdes : l'assistant qui répond, l'automatisation qui exécute, l'agent qui poursuit un objectif.", 640, 360)}
@@ -388,7 +414,7 @@ slide(f'''    <p class="eyebrow">L'automatisation</p>
     <h2>Tout part d'un <span class="mark mark--lav">déclencheur</span></h2>
     <p class="lead rise" style="margin-top:18px">Un déclencheur (le « trigger »), puis une suite d'actions. Trois déclencheurs possibles :</p>
     <div class="cols--3 mt" style="display:grid;align-items:stretch">
-      <div class="card sk fill-sky frag trig-card">{CLOCK}<div><h3>Le temps</h3><p>Chaque matin, la trésorerie se met à jour.</p><p class="trig-who">Automatisation</p></div></div>
+      <div class="card sk fill-lav frag trig-card">{CLOCK}<div><h3>Le temps</h3><p>Chaque matin, la trésorerie se met à jour.</p><p class="trig-who">Automatisation</p></div></div>
       <div class="card sk fill-lav frag trig-card">{BOLT}<div><h3>Un événement</h3><p>Une facture arrive par e-mail, un pointage est saisi.</p><p class="trig-who">Automatisation, agent</p></div></div>
       <div class="card sk fill-mint frag trig-card">{CHAT}<div><h3>Ton message</h3><p>Tu poses une question, il répond. Sans message, il ne fait rien.</p><p class="trig-who">Assistant</p></div></div>
     </div>
@@ -526,34 +552,50 @@ same = "".join(f'<span class="pill sk sk--thin">{t}</span>' for t in ["Modèle",
 slide(f'''    <p class="eyebrow">L'assistant et l'agent</p>
     <h2>Assistant ou agent : <span class="mark mark--blush">le déclencheur</span> fait la différence</h2>
     <div class="cols mt" style="align-items:stretch">
-      <div class="card sk fill-sky rise"><h3>L'assistant</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Ton message, à chaque question.</p></div>
-      <div class="card sk fill-mint rise"><h3>L'agent</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Un objectif, un événement ou un horaire. Il enchaîne seul.</p></div>
+      <div class="card sk fill-mint rise"><h3>L'assistant</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Ton message, à chaque question.</p></div>
+      <div class="card sk fill-blush rise"><h3>L'agent</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Un objectif, un événement ou un horaire. Il enchaîne seul.</p></div>
     </div>
     {analogy("volant", "le même tracteur : soit tu conduis et il t'assiste, soit tu lances l'autoguidage sur la parcelle et tu surveilles depuis la cabine.", "frag mt")}''', seq=2, section=S945, notes="Les pièces sont les mêmes. Ce qui change, c'est qui appuie sur le bouton, et combien d'étapes il enchaîne sans toi.")
 
-logic("L'assistant en vrai", 'Il <span class="mark mark--sky">répond</span>, tu gardes la main', "", "C'est comme le GPS du téléphone : il propose l'itinéraire, c'est toi qui conduis.",
+logic("L'assistant en vrai", 'Il <span class="mark">répond</span>, tu gardes la main', "", "C'est comme le GPS du téléphone : il propose l'itinéraire, c'est toi qui conduis.",
  [("Chatbot du site Summit Flow", "Assistant de type chatbot : il répond aux visiteurs à partir du contenu du site.", '<span class="live">démo en direct</span>'),
   ("Un projet Claude", "Des consignes et des documents de référence, pour des réponses dans ton cadre.", f'<span class="live">démo en direct</span>{golink("claude_projet", "Ouvrir le projet Claude")}'),
   ("L'équivalent dans Copilot", "Un agent créé avec « Créer un agent » (Agent Builder) : des consignes et des documents de référence, comme un projet Claude.", avous())],
- "fill-sky", "Le chatbot du site et le projet Claude se montrent en direct. Côté Copilot, chacun peut créer un agent avec Agent Builder (« Créer un agent ») : un nom, des consignes, des documents de référence. Les Notebooks Copilot rendent un service proche : réunir des notes et des documents pour travailler dessus.")
+ "fill-mint", "Le chatbot du site et le projet Claude se montrent en direct. Côté Copilot, chacun peut créer un agent avec Agent Builder (« Créer un agent ») : un nom, des consignes, des documents de référence. Les Notebooks Copilot rendent un service proche : réunir des notes et des documents pour travailler dessus.")
 
 
 GARDE = f'''
     <div class="guards frag"><p class="hand guards-t">{icon("alert")}Deux garde-fous, toujours</p>
       <p><b>Un humain valide</b> avant que quoi que ce soit parte chez un client, un fournisseur ou un collègue.</p>
       <p><b>Aucune action irréversible</b> sans toi : payer, commander, supprimer, envoyer.</p></div>'''
-logic("L'agent en vrai", 'Il <span class="mark">poursuit un objectif</span>, dans ton cadre', "", "C'est comme l'autoguidage du tracteur : tu fixes la parcelle et le cadre, il trace les lignes, tu restes en cabine.",
+logic("L'agent en vrai", 'Il <span class="mark mark--blush">poursuit un objectif</span>, dans ton cadre', "", "C'est comme l'autoguidage du tracteur : tu fixes la parcelle et le cadre, il trace les lignes, tu restes en cabine.",
  [("Super agent Lindy", "Un mélange des deux : tu lui parles comme à un assistant, puis il part faire le travail seul, comme un agent.", '<span class="live">démo en direct sur mon téléphone</span>'),
   ("Une tâche planifiée Claude", "Elle se lance seule à l'heure prévue, fait le travail, et me livre le résultat.", '<span class="live">démo en direct</span>'),
-  ("Côté Copilot", "<b>Agent Builder</b> (« Créer un agent ») : un agent avec ses consignes et ses sources. Avec une demande planifiée, il travaille sans qu'on le relance. Pour aller plus loin : <b>Copilot Studio</b>.", avous())],
- "fill-mint", "Relier à l'anatomie : mêmes pièces que l'assistant, mais c'est l'objectif qui le lance. Puis les deux garde-fous : ils font partie du cadre qu'on lui donne, c'est le harnais qui les impose. Exemple Lindy : il prépare la commande, il ne la passe pas. Les super agents (Lindy, Hermes…) mélangent les deux logiques : on leur parle comme à un assistant, par message, et ils enchaînent ensuite plusieurs tâches seuls, avec leurs outils, comme un agent. Côté Copilot, nuance à donner : un agent créé avec Agent Builder répond surtout quand on lui écrit, il se comporte d'abord comme un assistant bien équipé ; il devient vraiment un agent quand il a des actions et une planification, ou quand il est construit dans Copilot Studio. Côté Copilot, les invites planifiées dans Agent Builder arrivent entre mi-novembre et mi-décembre 2026 selon Microsoft (MC1302906) : vérifier la veille qu'elles sont ouvertes chez eux, sinon le montrer avec Claude seulement.", GARDE)
+  ("Côté Copilot", "<b>Agent Builder</b> (« Créer un agent ») : un agent avec ses consignes et ses sources. Avec une demande planifiée, il travaille sans qu'on le relance. Pour aller plus loin : <b>Copilot Studio</b>.", avous("À vous : créer un agent", "md-agents"))],
+ "fill-blush", "Relier à l'anatomie : mêmes pièces que l'assistant, mais c'est l'objectif qui le lance. Puis les deux garde-fous : ils font partie du cadre qu'on lui donne, c'est le harnais qui les impose. Exemple Lindy : il prépare la commande, il ne la passe pas. Les super agents (Lindy, Hermes…) mélangent les deux logiques : on leur parle comme à un assistant, par message, et ils enchaînent ensuite plusieurs tâches seuls, avec leurs outils, comme un agent. Côté Copilot, nuance à donner : un agent créé avec Agent Builder répond surtout quand on lui écrit, il se comporte d'abord comme un assistant bien équipé ; il devient vraiment un agent quand il a des actions et une planification, ou quand il est construit dans Copilot Studio. Côté Copilot, les invites planifiées dans Agent Builder arrivent entre mi-novembre et mi-décembre 2026 selon Microsoft (MC1302906) : vérifier la veille qu'elles sont ouvertes chez eux, sinon le montrer avec Claude seulement.", GARDE)
 
 # Le harnais complet : le collègue numérique, avec ses garde-fous, et la façon de les tester
 import re as _re
 HUMAN_ALL = _re.sub(r'<g class="frag" data-step="\d+">', '<g>', HUMAN)
 SHIELD = '<path d="M0 -60 L46 -44 V-6 C46 26, 22 46, 0 56 C-22 46, -46 26, -46 -6 V-44 Z" fill="#FCE4E8" stroke="#2A2F33" stroke-width="4" stroke-linejoin="round"/><path d="M-18 0 L-4 14 L22 -14" fill="none" stroke="#0B4F5C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>'
-def gcard(title, text, cls="blush"):
-    return f'<div class="comp sk fill-{cls} frag"><p class="hand comp-t">{title}</p><p class="comp-ex">{text}</p></div>'
+# Les garde-fous s'enfilent comme un équipement de chantier : casque et chaussures de sécurité.
+# Les tests, c'est le caillou qui tombe : on vérifie que le casque tient.
+GEAR = """<g class="frag" data-step="1">
+        <path d="M128 74 C 126 14, 314 14, 312 74 Z" fill="#FCE4E8" stroke="#2A2F33" stroke-width="4" stroke-linejoin="round" filter="url(#rough)"/>
+        <path d="M220 20 V 74 M176 30 C 170 46, 168 60, 170 74 M264 30 C 270 46, 272 60, 270 74" fill="none" stroke="#2A2F33" stroke-width="3" stroke-linecap="round"/>
+        <rect x="112" y="68" width="216" height="16" rx="8" fill="#FCE4E8" stroke="#2A2F33" stroke-width="4"/>
+        <path d="M104 584 H158 C 170 584, 178 592, 178 602 V 612 H 100 C 96 612, 96 600, 104 584 Z" fill="#FCE4E8" stroke="#2A2F33" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M282 584 H336 C 344 600, 344 612, 340 612 H 262 V 602 C 262 592, 270 584, 282 584 Z" fill="#FCE4E8" stroke="#2A2F33" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M150 586 V 610 M290 586 V 610" stroke="#2A2F33" stroke-width="3"/>
+      </g>
+      <g class="frag rock" data-step="2">
+        <path d="M356 -70 L 392 -82 L 414 -58 L 404 -28 L 366 -24 L 346 -46 Z" fill="#D5EAEC" stroke="#2A2F33" stroke-width="4" stroke-linejoin="round" filter="url(#rough)"/>
+        <path d="M330 -96 L 322 -118 M 360 -104 L 360 -128 M 392 -104 L 400 -126" fill="none" stroke="#0B4F5C" stroke-width="3" stroke-linecap="round"/>
+        <path d="M300 4 L 318 -10 M 314 26 L 338 18 M 288 -14 L 296 -34" fill="none" stroke="#0B4F5C" stroke-width="3.5" stroke-linecap="round"/>
+      </g>"""
+HUMAN_GEAR = HUMAN_ALL.replace("</svg>", GEAR + "\n    </svg>").replace('viewBox="0 0 440 640"', 'viewBox="0 -140 440 780"')
+def gcard(title, text, cls="blush", step=1):
+    return f'<div class="comp sk fill-{cls} frag" data-step="{step}"><p class="hand comp-t">{title}</p><p class="comp-ex">{text}</p></div>'
 slide(f'''    <h2>Le harnais complet, <span class="mark mark--blush">avec ses garde-fous</span></h2>
     <p class="howto">Les garde-fous font partie du réglage : on les écrit dans les consignes, et on vérifie qu'ils tiennent.</p>
     <div class="anat anat--guard">
@@ -562,20 +604,20 @@ slide(f'''    <h2>Le harnais complet, <span class="mark mark--blush">avec ses ga
         {gcard("Rien d'irréversible", "Il ne paie pas, ne commande pas, ne supprime pas, n'envoie pas sans toi.")}
         {gcard("Ai-je le droit ?", "Données personnelles, clients ou confidentielles : seulement dans un outil validé.")}
       </div>
-      <div class="anat-mid guard-mid">{HUMAN_ALL}<svg class="guard-shield" viewBox="-60 -70 120 140" aria-hidden="true">{SHIELD}</svg><p class="harness"><b class="hand">Les garde-fous entourent tout le reste.</b>Ils sont réglés, puis testés.</p></div>
+      <div class="anat-mid guard-mid">{HUMAN_GEAR}<p class="harness"><b class="hand">Casque et chaussures de sécurité.</b>On les règle, puis on vérifie qu'ils tiennent quand ça tombe.</p></div>
       <div class="anat-col"><p class="col-h">On les teste</p>
-        {gcard("On essaie de le faire déraper", "Une demande ambiguë, une donnée sensible, une action interdite : il doit s'arrêter ou poser la question.", "teal")}
-        {gcard("On regarde ce qu'il fait", "Avant d'élargir, on relit ses réponses et ses actions sur quelques cas réels.", "teal")}
-        {gcard("On reteste à chaque changement", "Nouvelle consigne, nouvel outil, nouveau modèle : les garde-fous se revérifient.", "teal")}
+        {gcard("On essaie de le faire déraper", "Une demande ambiguë, une donnée sensible, une action interdite : il doit s'arrêter ou poser la question.", "teal", 2)}
+        {gcard("On regarde ce qu'il fait", "Avant d'élargir, on relit ses réponses et ses actions sur quelques cas réels.", "teal", 2)}
+        {gcard("On reteste à chaque changement", "Nouvelle consigne, nouvel outil, nouveau modèle : les garde-fous se revérifient.", "teal", 2)}
       </div>
     </div>''', seq=2, section=S945,
- notes="Reprendre le collègue numérique de tout à l'heure : mêmes pièces, et les garde-fous autour. Les trois de gauche se règlent dans les consignes et les droits d'accès. Les trois de droite disent comment on vérifie qu'ils tiennent : c'est ce qui permet de confier un travail à un assistant ou à un agent. Exemple à faire vivre : demander à l'agent de passer la commande lui-même ; il doit refuser et proposer de la préparer.")
+ notes="Reprendre le collègue numérique de tout à l'heure : mêmes pièces, et les garde-fous autour. Les trois de gauche se règlent dans les consignes et les droits d'accès. Les trois de droite disent comment on vérifie qu'ils tiennent : c'est ce qui permet de confier un travail à un assistant ou à un agent. Exemple à faire vivre : demander à l'agent de passer la commande lui-même ; il doit refuser et proposer de la préparer. Image du chantier : les garde-fous sont l'équipement de sécurité (premier clic), les tests sont le caillou qui tombe (deuxième clic) : on vérifie que le casque tient avant d'envoyer quelqu'un sur le chantier.")
 
-quiz = [("Préparer une présentation PowerPoint à partir de mes notes", "assistant", "sky"),
+quiz = [("Préparer une présentation PowerPoint à partir de mes notes", "assistant", "mint"),
         ("Chaque facture reçue par e-mail s'ajoute au tableau de trésorerie", "automatisation", "lav"),
-        ("Chercher un produit chez plusieurs fournisseurs, comparer et me proposer le meilleur", "agent", "mint"),
-        ("Analyser le tableau de bord du mois et en tirer trois points clés", "assistant", "sky")]
-items = "".join(f'''<div class="ex sk" style="flex-direction:row;align-items:center;justify-content:space-between;gap:24px"><p style="font-size:30px">{q}</p><span class="mark mark--{c if c!='mint' else 'teal'} frag hand" style="font-size:34px;white-space:nowrap">{a}</span></div>''' for q, a, c in quiz)
+        ("Chercher un produit chez plusieurs fournisseurs, comparer et me proposer le meilleur", "agent", "blush"),
+        ("Analyser le tableau de bord du mois et en tirer trois points clés", "assistant", "mint")]
+items = "".join(f'''<div class="ex sk" style="flex-direction:row;align-items:center;justify-content:space-between;gap:24px"><p style="font-size:30px">{q}</p><span class="mark mark--{c} frag hand" style="font-size:34px;white-space:nowrap">{a}</span></div>''' for q, a, c in quiz)
 slide(f'''    <p class="eyebrow">À vous de jouer</p>
     <h2>Assistant, automatisation ou agent ?</h2>
     <div class="stack mt">{items}</div>''', seq=2, section="9h45 · Assistant, automatisation, agent",
@@ -593,30 +635,80 @@ slide(f'''    <div class="grow center-y">
 chapter_slide(3)
 
 # ---------- 11h00 Quand utiliser quoi ----------
-slide(f'''    <p class="eyebrow">Quand utiliser quoi</p>
-    <h2>La grille en quatre questions</h2>
-    <p class="q0 frag" data-step="0"><b class="hand">Question zéro : ai-je le droit ?</b>Données personnelles, clients ou confidentielles, outil validé par l'entreprise. Dans le doute, on demande à la référente IA.</p>
-    <figure class="schema" role="img" aria-label="Arbre de décision. 1. La tâche revient-elle souvent ? Non : geste manuel ou assistant au cas par cas. 2. Les règles sont-elles stables ? Non : clarifier la règle avant d'outiller. 3. Faut-il interpréter un texte ou décider ? Non : automatisation. Oui : agent, ou assistant et automatisation. 4. Une erreur coûte cher ? Un humain valide avant que ça parte."><!-- schema:grille-decision --></figure>
-    {analogy("attelage", "choisir l'outil à atteler : on regarde d'abord le travail à faire, pas l'outil le plus récent.", "frag")}''',
- seq=3, cls="slide--schema", section="11h00 · Quand utiliser quoi",
- notes="La question zéro passe avant tout : si on n'a pas le droit d'utiliser ces données dans cet outil, on s'arrête là, quelle que soit la réponse aux quatre autres. La question 4 s'applique à toutes les branches : elle ne choisit pas l'outil, elle fixe le niveau de contrôle humain.")
+# Arbre de décision : une question après l'autre, de la brique la plus simple à la plus avancée.
+# Coordonnées en pixels de scène ; les traits sont dessinés en SVG sous les cases.
+NODES = {
+    "root": (0, 200, 150, 100, "Une tâche à réaliser", "", 1),
+    "q1": (175, 190, 205, 120, "Vais-je refaire ce geste, avec les mêmes règles ?", "", 1),
+    "qc": (410, 61, 190, 80, "De quel contexte a-t-il besoin ?", "", 2),
+    "qj": (410, 227, 190, 80, "Demande-t-il du jugement ?", "", 3),
+    "qa": (630, 296, 190, 84, "Un assistant à part, avec ses documents ?", "", 4),
+    "qt": (848, 366, 156, 84, "Doit-il agir, ou se lancer seul ?", "", 5),
+}
+LEAVES = [
+    ("prompt", 0, "Une demande", "Tout tient dans l'échange ou un fichier", "mint", 2),
+    ("notes", 70, "Un bloc-notes", "Plusieurs documents à croiser", "mint", 2),
+    ("cowork", 140, "Cowork, à vérifier", "Plusieurs étapes, plusieurs applications", "blush", 2),
+    ("flux", 236, "Un flux Power Automate", "Un déclencheur, des étapes fixes", "lav", 3),
+    ("req", 306, "Une requête enregistrée", "Une méthode, rappelée au besoin", "mint", 4),
+    ("agent", 376, "Un agent Copilot", "Agent Builder : consignes et documents", "mint", 5),
+    ("studio", 446, "Copilot Studio", "Il agit et se lance seul, dans Teams", "blush", 5),
+]
+LX, LW, LH = 1050, 340, 62
+def _mid(k):
+    x, y, w, h = NODES[k][:4]
+    return x + w, y + h / 2
+def _leaf_y(name):
+    return next(y for n, y, *_ in LEAVES if n == name) + LH / 2
+EDGES = [("root", None, "q1", "", 1), ("q1", None, "qc", "non", 2), ("q1", None, "qj", "oui", 3),
+         ("qc", "prompt", None, "", 2), ("qc", "notes", None, "", 2), ("qc", "cowork", None, "", 2),
+         ("qj", "flux", None, "non", 3), ("qj", None, "qa", "oui", 4),
+         ("qa", "req", None, "non", 4), ("qa", None, "qt", "oui", 5),
+         ("qt", "agent", None, "non", 5), ("qt", "studio", None, "oui", 5)]
+def _edge(src, leaf, node, label):
+    x1, y1 = _mid(src)
+    if leaf:
+        x2, y2 = LX, _leaf_y(leaf)
+    else:
+        nx, ny, nw, nh = NODES[node][:4]
+        x2, y2 = nx, ny + nh / 2
+    xm = x1 + 14
+    if not label:
+        lab = ""
+    elif leaf:
+        lab = f'<text x="{x2 - 6}" y="{y2 - 8}" text-anchor="end" class="tl">{label}</text>'
+    else:
+        lab = f'<text x="{x2 + 8}" y="{y2 - nh / 2 - 7}" class="tl">{label}</text>'
+    return f'<path d="M{x1} {y1} H{xm} V{y2} H{x2}"/>{lab}'
+def tree_html():
+    steps = sorted({e[4] for e in EDGES})
+    svg = "".join(f'<g class="frag" data-step="{st}">' + "".join(_edge(a, l, n, lab) for a, l, n, lab, s2 in EDGES if s2 == st) + "</g>" for st in steps)
+    nodes = "".join(f'<div class="tnode{" tnode--root" if k == "root" else ""} frag" data-step="{st}" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px"><span>{t}</span></div>'
+                    for k, (x, y, w, h, t, _, st) in NODES.items())
+    leaves = "".join(f'<div class="tleaf fill-{c} frag{" tleaf--check" if n == "cowork" else ""}" data-step="{st}" style="left:{LX}px;top:{y}px;width:{LW}px;height:{LH}px"><b class="hand">{t}</b><span>{d}</span></div>'
+                     for n, y, t, d, c, st in LEAVES)
+    return f'<div class="tree"><svg class="tree-lines" viewBox="0 0 1390 508" aria-hidden="true">{svg}</svg>{nodes}{leaves}</div>'
 
-qs = [("0", "Ai-je le droit d'utiliser ces données ?"), ("1", "La tâche revient-elle souvent ?"), ("2", "Les règles sont-elles stables ?"), ("3", "Faut-il interpréter un texte ou décider ?"), ("4", "Une erreur coûte-t-elle cher ?")]
-qhtml = "".join(f'''<div class="q" data-q="{n}"><span>{n}. {t}</span><div class="yn"><button class="sk sk--thin" value="oui" aria-pressed="false">oui</button><button class="sk sk--thin no" value="non" aria-pressed="false">non</button></div></div>''' for n, t in qs)
-slide(f'''    <p class="eyebrow">On la teste ensemble</p>
-    <h2>Une situation, <span class="mark mark--lav">quatre réponses</span></h2>
-    <div class="decider">
-      <div>{qhtml}<button class="reset sk sk--thin" style="--radius:12px;margin-top:20px;padding:6px 16px;font-family:var(--font-hand);font-size:24px">Recommencer</button>
-</div>
-      <div class="stack"><div class="verdict-box sk" aria-live="polite"><p class="lbl">La grille propose</p><p class="out"></p><p class="why"></p><p class="guard">Et quelle que soit la réponse : un humain valide avant que ça parte.</p></div>
-      {tip("71 % des entreprises qui n'utilisent pas l'IA disent ne pas y voir d'usage. La grille aide à le vérifier.", "Insee Première n° 2120, juillet 2026", "frag")}</div>
+slide(f'''    <h2>Quelle brique <span class="mark">pour quelle tâche ?</span></h2>
+    <p class="tree-gate frag" data-step="0"><b class="hand">Avant tout : ai-je le droit ?</b>Données personnelles, clients ou confidentielles : seulement dans un outil validé. Dans le doute, on demande à la référente IA.</p>
+    {tree_html()}
+    <div class="tree-foot">
+      <p class="tree-legend"><span><i class="lg-mint"></i>assistant</span><span><i class="lg-lav"></i>automatisation</span><span><i class="lg-blush"></i>agent</span></p>
+      <p class="tree-tip frag" data-step="6"><b>En cas de doute,</b> commencer simple : une demande qui revient souvent devient une requête enregistrée, puis un agent. Et quelle que soit la brique, un humain valide avant que ça parte.</p>
     </div>''', seq=3, section="11h00 · Quand utiliser quoi",
- notes="Prendre une situation proposée par la salle, cliquer oui ou non avec le groupe. La réponse s'affiche à droite. Recommencer pour une deuxième situation.")
+ notes="Un clic par branche. D'abord la question zéro. Puis : vais-je refaire ce geste avec les mêmes règles ? Non : c'est une demande ponctuelle, on choisit selon le contexte (une demande, un bloc-notes, ou Cowork pour plusieurs étapes). Oui : demande-t-il du jugement ? Non : une automatisation, Power Automate. Oui : on monte en gamme, de la requête enregistrée à l'agent, puis à Copilot Studio quand il doit agir ou se lancer seul. Les couleurs rappellent les trois logiques du chapitre 2. Cowork et certaines briques dépendent de la licence et des réglages de l'entreprise : à vérifier la veille. C'est comme choisir l'outil à atteler : on regarde d'abord le travail à faire, pas l'outil le plus récent.")
+
+slide(f'''    <h2>Une situation, <span class="mark mark--lav">l'arbre en direct</span></h2>
+    <div class="decider decider--tree">
+      <div><div class="tq-list"></div><button class="reset sk sk--thin" style="--radius:12px;margin-top:20px;padding:6px 16px;font-family:var(--font-hand);font-size:24px">Recommencer</button></div>
+      <div class="verdict-box sk" aria-live="polite"><p class="lbl">L'arbre propose</p><p class="out"></p><p class="kind"></p><p class="why"></p><p class="guard">Et quelle que soit la brique : un humain valide avant que ça parte.</p></div>
+    </div>''', seq=3, section="11h00 · Quand utiliser quoi",
+ notes="Prendre une situation proposée par la salle et répondre avec le groupe, une question à la fois : les questions suivantes apparaissent selon les réponses. Cliquer sur une réponse précédente pour changer de branche. Recommencer pour une deuxième situation.")
 
 slide(f'''    <div class="stack">
       <div class="meta">
         <span class="tag sk">{icon("users")}En sous-groupes</span>
-        <span class="tag sk">{icon("file")}Grille en quatre questions</span>
+        <span class="tag sk">{icon("file")}L'arbre des briques</span>
       </div>
       <h2>Atelier : classer <span class="mark">vos situations</span></h2>
     </div>
@@ -624,7 +716,7 @@ slide(f'''    <div class="stack">
       <div>
       <ol class="steps">
         <li class="frag"><strong>Prends</strong> une situation de ton pôle.</li>
-        <li class="frag"><strong>Passe-la</strong> dans les quatre questions.</li>
+        <li class="frag"><strong>Passe-la</strong> dans l'arbre, une question après l'autre.</li>
         <li class="frag"><strong>Classe-la</strong> : assistant, automatisation, agent, ou pas d'outil.</li>
       </ol>
       <div class="alert alert--compact sk" role="note">{icon("alert")}<div><p class="alert-title">Vigilance données</p><p>Aucune donnée réelle dans un outil grand public : on décrit la tâche, pas son contenu.</p></div></div>
@@ -647,7 +739,7 @@ slide(f'''    <div class="stack">
       <div class="pole"><h3>{icon("ledger")}RH et compta</h3>{chips("rh", ["Variables de salaire", "Vérification des paiements clients", "Trésorerie quotidienne", "Saisie des pointages"])}</div>
       <div class="pole"><h3>{icon("mega")}Communication et direction</h3>{chips("cm", ["Planning de communication", "Bases de données pour la communication", "Création de tableaux de bord", "Analyse des tableaux de bord", "Présentations PowerPoint"])}</div>
     </div>
-    <div class="legend"><span><i style="background:var(--sky)"></i>assistant</span><span><i style="background:var(--lav)"></i>automatisation</span><span><i style="background:var(--mint)"></i>agent</span><span><i style="background:var(--blush)"></i>pas d'outil</span><span>· un clic pour changer</span></div>''',
+    <div class="legend"><span><i style="background:var(--mint)"></i>assistant</span><span><i style="background:var(--lav)"></i>automatisation</span><span><i style="background:var(--blush)"></i>agent</span><span><i style="background:#E7EBEB"></i>pas d'outil</span><span>· un clic pour changer</span></div>''',
  seq=3, section="11h00 · Quand utiliser quoi",
  notes="Mise en commun : chaque sous-groupe annonce son verdict, clique sur la carte pour la colorer. Les désaccords sont les meilleurs moments : les noter pour la grille d'audit.")
 
@@ -664,6 +756,7 @@ chapter_slide(4)
 S1330 = "13h30 · Démonstrations commentées"
 slide('''    <p class="eyebrow">Pour les curieux · avant les démos</p>
     <h2>Comment deux logiciels <span class="mark mark--sky">se parlent</span></h2>
+    <p class="howto">C'est ce qui donne à l'assistant et à l'agent leurs bras et leurs jambes : la connexion à vos outils et à vos sources.</p>
     <figure class="schema" role="img" aria-label="Schéma. Ton outil envoie une demande, un appel HTTP, au guichet d'Outlook, son API. Outlook renvoie une réponse. Quatre types d'appel : GET pour lire, POST pour créer, PATCH pour modifier, DELETE pour supprimer. Dans l'autre sens, le webhook : c'est Outlook qui sonne quand un courriel arrive, et ton scénario démarre."><!-- schema:logiciels-parlent --></figure>''',
  seq=4, cls="slide--schema", section=S1330,
  notes="Fil rouge : l'électricité. HTTP, c'est le courant qui circule dans les fils, la langue commune des logiciels. L'API, c'est la prise du logiciel. Un appel API, c'est brancher l'appareil et appuyer sur le bouton. Dans l'ordre du dessin : 1. HTTP, c'est la langue commune des logiciels sur internet. Un appel, c'est une demande. 2. L'API, c'est le guichet du logiciel : ce qu'il accepte qu'on lui demande. 3. Quatre verbes suffisent : lire, créer, modifier, supprimer. 4. Le webhook, c'est l'inverse : on ne demande plus, on est prévenu. Même dans Copilot, un assistant ou un agent qui utilise un outil fait exactement ça.")
@@ -710,6 +803,7 @@ ICONS["badge"] = '<rect data-d="0.1" x="14" y="20" width="56" height="56" rx="8"
 ICONS["usbc"] = '<rect data-d="0.1" x="22" y="6" width="40" height="34" rx="8" fill="#D6F1E6" stroke="#2A2F33" stroke-width="3"/><rect data-d="0.3" x="32" y="40" width="20" height="16" rx="6" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/><path data-d="0.5" class="ink" d="M42 6 C 42 -4, 70 -4, 70 14 V 70 C 70 82, 50 82, 46 76" style="stroke-width:3"/><rect data-d="0.6" x="8" y="62" width="30" height="20" rx="5" fill="#FFFFFF" stroke="#2A2F33" stroke-width="3"/>'
 slide(f'''    <p class="eyebrow">Pour les curieux · le fil de l'électricité</p>
     <h2>Chacun sa prise, <span class="mark">ou la même partout</span></h2>
+    <p class="howto">Les bras et les jambes, branchés : chaque outil connecté est une prise de plus pour l'assistant ou l'agent.</p>
     <div class="scene-row">
       <figure class="scene frag" data-step="1">{APPEL}<figcaption><b class="hand">L'API et l'appel</b>L'API, c'est la prise du logiciel. Un appel : on branche, une demande part, une réponse revient.</figcaption></figure>
       <figure class="scene frag" data-step="2">{SANS}<figcaption><b class="hand">Sans MCP</b>Chaque prise a sa forme : un câble sur mesure par logiciel, à fabriquer et à entretenir.</figcaption></figure>
@@ -721,17 +815,15 @@ slide(f'''    <p class="eyebrow">Pour les curieux · le fil de l'électricité</
     </div>''',
  seq=4, section=S1330, notes="On reprend le fil de la slide précédente, un dessin par clic. 1. La prise et le branchement : l'API est la prise d'Outlook, l'appel c'est brancher, demande puis réponse, et le courant c'est HTTP. 2. Sans MCP : trois logiciels, trois prises de formes différentes, donc trois câbles sur mesure à fabriquer et à entretenir. 3. Avec MCP : chaque logiciel propose la même prise, l'agent n'a besoin que d'un type de câble. C'est le chargeur USB-C. MCP, le Model Context Protocol, est un standard ouvert publié par Anthropic le 25 novembre 2024. La documentation officielle de MCP fait elle-même la comparaison avec un port USB-C. Puis le badge : OAuth, c'est ce qu'ils verront quand Copilot ou un autre outil demande « autoriser l'accès à votre compte ».")
 def edit(k): return f'<td class="edit sk" contenteditable="true" data-k="{k}" data-ph="à compléter"></td>'
-rows = [("fait", "Ce que ça fait"), ("demande", "Ce que ça demande"), ("pas", "Ce que ça ne fait pas")]
-trs = "".join(f'<tr><td class="row">{l}</td>{edit("as-"+k)}{edit("au-"+k)}{edit("ag-"+k)}</tr>' for k, l in rows)
-slide(f'''    <div class="stack">
-      <span class="tag sk">{icon("file")}Outlook, Excel, Copilot selon les licences</span>
-      <h2>Trois démos, une même <span class="mark mark--teal">grille de lecture</span></h2>
-    </div>
-    <table class="readgrid">
-      <thead><tr><th></th><th>Assistant<small>avec consignes et documents de référence</small></th><th>Automatisation<small>déclenchée par un courriel</small></th><th>Agent<small>qui enchaîne plusieurs étapes</small></th></tr></thead>
-      <tbody>{trs}</tbody>
-    </table>''', seq=4, section="13h30 · Démonstrations commentées",
- notes="Clique dans une case pour écrire ce que dit le groupe pendant chaque démo. Le texte reste enregistré dans ce navigateur.")
+
+# Et dans Copilot : jusqu'où brancher les bras et les jambes
+slide(f'''    <h2>Et dans Copilot : <span class="mark">jusqu'où brancher ?</span></h2>
+    <p class="howto">Les bras et les jambes de l'agent dépendent de l'outil qui le construit.</p>
+    <div class="cols mt" style="align-items:stretch">
+      <div class="card sk fill-mint frag"><h3>Avec Agent Builder, vu ce matin</h3><p>On branche les sources et les outils de Microsoft 365 : SharePoint, OneDrive, Teams, Outlook, et le web.</p><p class="mt-s">Les autres logiciels ne sont accessibles que si l'informatique a ouvert un connecteur.</p><p class="trig-who">Inclus avec la licence Copilot</p></div>
+      <div class="card sk fill-blush frag"><h3>Pour aller plus loin : Copilot Studio</h3><p>D'autres logiciels, des actions, un agent qui se lance seul.</p><p class="mt-s">Autre mode de facturation : à l'usage, en crédits. Et l'administrateur peut l'avoir désactivé.</p><p class="trig-who">À voir avec l'informatique avant de se lancer</p></div>
+    </div>''', seq=4, section=S1330,
+ notes="Message à faire passer : avec ce qu'ils ont, Agent Builder, on branche surtout l'univers Microsoft 365. Les connecteurs vers d'autres logiciels (Copilot connectors) sont ouverts par l'informatique. Copilot Studio va plus loin, mais l'usage autonome se paie en crédits Copilot, en plus des licences, et il peut être désactivé dans l'entreprise : à vérifier avec le service informatique. Sources : guides de licence Copilot Studio 2026 et Microsoft Q&A, voir SOURCES.md.")
 
 def demo(n, title, mk, what, shots, notes):
     s = "".join(shot(x) for x in shots)
@@ -745,9 +837,9 @@ def demo(n, title, mk, what, shots, notes):
 slide(f'''    <p class="eyebrow">Les trois démos</p>
     <h2>Sur vos cas, <span class="mark mark--sky">en direct</span></h2>
     <div class="cols--3 grow" style="display:grid;margin-top:30px;align-items:stretch">
-      <div class="ex sk fill-sky rise"><p class="who">1. Un assistant</p><p>Des consignes et des documents de référence. Exemple : analyser le tableau de bord du mois.</p>{shot("Capture de secours : l'assistant Copilot configuré")}{avous()}</div>
+      <div class="ex sk fill-mint rise"><p class="who">1. Un assistant</p><p>Des consignes et des documents de référence. Exemple : analyser le tableau de bord du mois.</p>{shot("Capture de secours : l'assistant Copilot configuré")}{avous()}</div>
       <div class="ex sk fill-lav rise"><p class="who">2. Une automatisation</p><p>Une facture arrive par e-mail, une ligne s'ajoute au tableau de trésorerie, avec Power Automate.</p>{shot("Capture de secours : l'automatisation sur Outlook et Excel")}{avous()}</div>
-      <div class="ex sk fill-mint rise"><p class="who">3. Un agent</p><p>Trouver un produit chez les fournisseurs : il cherche, compare, propose, et s'arrête avant de commander.</p>{shot("Capture de secours : l'agent Copilot en action")}{avous()}</div>
+      <div class="ex sk fill-blush rise"><p class="who">3. Un agent</p><p>Trouver un produit chez les fournisseurs : il cherche, compare, propose, et s'arrête avant de commander.</p>{shot("Capture de secours : l'agent Copilot en action")}{avous()}</div>
     </div>''', seq=4, section="13h30 · Démonstrations commentées",
  notes="Démos en direct, les captures servent de plan B. Après chaque démo, revenir à la grille de lecture et remplir la colonne.")
 
@@ -788,24 +880,6 @@ slide('''    <p class="eyebrow">Limites</p>
         <li class="frag">Garantir que c'est juste</li><li class="frag">Connaître vos règles si on ne les lui donne pas</li><li class="frag">Décider à votre place</li><li class="frag">Réparer un process mal défini</li></ul></div>
     </div>''', seq=5, section="15h15 · Limites, investissement, choix",
  notes="Faire apparaître ligne par ligne, en alternant les deux colonnes si on veut faire réagir.")
-
-ICE = '''<svg class="illu" viewBox="0 0 760 640" style="width:520px;height:auto" aria-hidden="true">
-        <path data-d="0.1" class="inkt" d="M20 210 C 140 200, 250 222, 380 210 S 620 200, 740 214" style="stroke-width:3"/>
-        <path data-d="0.5" d="M300 210 L350 110 L380 140 L420 70 L470 210 Z" fill="#FFFFFF" stroke="#1F2A2E" stroke-width="4" stroke-linejoin="round" filter="url(#rough)"/>
-        <path data-d="0.9" d="M300 210 L470 210 L560 330 L520 470 L400 600 L270 520 L200 360 Z" fill="#DCEEFA" filter="url(#rough)"/>
-        <path data-d="0.7" class="ink" d="M300 210 L200 360 L270 520 L400 600 L520 470 L560 330 L470 210" filter="url(#rough)"/>
-      </svg>'''
-slide(f'''    <p class="eyebrow">Investissement</p>
-    <h2>Ce qu'on voit, <span class="mark mark--sky">ce qu'on ne voit pas</span></h2>
-    <div style="display:grid;grid-template-columns:520px 1fr;gap:40px;align-items:center" class="grow">
-      {ICE}
-      <div class="stack">
-        <div class="rise"><p class="hand" style="font-size:34px;color:var(--teal)">Au-dessus de l'eau</p><p>L'outil, la licence, la démo qui impressionne.</p></div>
-        <div class="frag"><p class="hand" style="font-size:34px;color:var(--teal)">En dessous</p><ul class="dash"><li>Le temps de prise en main</li><li>Écrire les consignes, préparer les documents</li><li>Tester, corriger, tester encore</li><li>Accompagner l'équipe, entretenir dans la durée</li></ul></div>
-        {tip("54 % des entreprises qui n'utilisent pas l'IA citent le manque d'expertise. Chez celles qui l'utilisent, plus de la moitié disent aussi qu'il limite leur usage.", "Insee Première n° 2120, juillet 2026", "frag")}
-      </div>
-    </div>''', seq=5, section="15h15 · Limites, investissement, choix",
- notes="Le coût des licences se chiffre avec le service informatique, au cas par cas. Pas de chiffre : l'investissement dépend de chaque cas. L'idée à faire passer : le gros du travail n'est pas l'outil.")
 
 checks = ["Le besoin est-il clair et décrit ?", "L'outil est-il déjà dans notre environnement ?", "Où vont nos données ?", "Qui le fera vivre après la formation ?", "Comment saura-t-on que ça marche ?", "Que se passe-t-il s'il se trompe ?"]
 ck = "".join(f'<li class="rise"><button class="sk sk--thin" data-k="choix-{i}" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>{c}</span></li>' for i, c in enumerate(checks))
@@ -892,6 +966,36 @@ slide('''    <p class="eyebrow">Calendrier</p>
       <div class="pt is-key rise"><span class="dot"></span><p class="d">22 janvier</p><p>Jour 2, premier atelier, avec une priorisation validée ensemble.</p></div>
     </div>''', seq=7, section="16h30 · Lancement de l'intersession",
  notes="Les fêtes de fin d'année sont dans l'intersession : le point de mi-décembre évite de perdre le fil.")
+
+# Message clé de fin : l'iceberg. Ce qui se voit (l'outil, ce qu'on a créé) et ce qui fait la différence.
+ICE_ABOVE = [("Les outils", "ChatGPT, Claude, Copilot : faciles à obtenir, accessibles à tous"), ("Ce qu'on a créé", "La demande, l'agent, l'automatisation qui marche en démo")]
+ICE_BELOW = [("Cadrer le besoin", "Partir de la tâche et du temps qu'elle coûte, pas de l'outil"),
+             ("La méthode", "Des consignes claires, les bons documents, le bon contexte"),
+             ("L'esprit critique", "Vérifier les faits, les chiffres et les sources"),
+             ("La sécurité", "Savoir ce qu'on a le droit de saisir, et où vont les données"),
+             ("Les garde-fous testés", "Un humain valide, rien d'irréversible, et on le vérifie"),
+             ("Le temps", "Prendre en main, tester, corriger, faire adopter par l'équipe")]
+ICE_SVG = """<svg class="iceberg" viewBox="0 0 520 620" aria-hidden="true">
+  <rect x="0" y="176" width="520" height="444" fill="#D5EAEC" opacity=".45"/>
+  <path d="M0 176 C 80 168, 160 186, 260 176 S 440 166, 520 180" fill="none" stroke="#0B4F5C" stroke-width="3.5"/>
+  <path d="M170 176 L222 92 L246 118 L282 46 L330 128 L352 110 L372 176 Z" fill="#FFFFFF" stroke="#2A2F33" stroke-width="4" stroke-linejoin="round" filter="url(#rough)"/>
+  <path d="M170 176 L372 176 L452 300 L430 430 L330 580 L196 520 L110 360 Z" fill="#9FCBD1" opacity=".55"/>
+  <path d="M170 176 L110 360 L196 520 L330 580 L430 430 L452 300 L372 176" fill="none" stroke="#2A2F33" stroke-width="4" stroke-linejoin="round" filter="url(#rough)"/>
+</svg>"""
+above = "".join(f'<p class="ice-i rise"><b class="hand">{t}</b>{d}</p>' for t, d in ICE_ABOVE)
+below = "".join(f'<p class="ice-i frag"><b class="hand">{t}</b>{d}</p>' for t, d in ICE_BELOW)
+slide(f'''    <h2>Ce qui fait <span class="mark">vraiment la différence</span></h2>
+    <div class="ice">
+      <div class="ice-art">{ICE_SVG}</div>
+      <div class="ice-txt">
+        <p class="ice-h">Ce que l'on voit</p>
+        <div class="ice-above">{above}</div>
+        <p class="ice-h ice-h--below">Ce qui fait la valeur : moins visible, plus long à construire</p>
+        <div class="ice-below">{below}</div>
+      </div>
+    </div>
+    <p class="ice-msg frag">L'outil ne fait pas le résultat. C'est la méthode, la sécurité et le temps qu'on y met.</p>''', seq=7, section="16h30 · Lancement de l'intersession",
+ notes="Message clé de la journée, juste avant le bilan. Au-dessus de l'eau : ce qu'on voit, les outils et ce qu'on a construit en démo. En dessous : ce qui fait que ça marche vraiment, et qui prend du temps. Faire le lien avec l'intersession : la grille d'audit, c'est justement le travail sous l'eau. Le coût des licences se chiffre avec l'informatique, au cas par cas. 54 % des entreprises qui n'utilisent pas l'IA citent le manque d'expertise (Insee Première n° 2120, juillet 2026).")
 
 goals = ["Je situe l'IA générative et ses limites actuelles", "Je distingue assistant, automatisation et agent", "Je mesure l'investissement que chacun demande", "J'ai une méthode pour observer mon propre travail"]
 gl = "".join(f'<li class="frag"><button class="sk sk--thin" data-k="but-{i}" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>{g}</span></li>' for i, g in enumerate(goals))

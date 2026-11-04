@@ -50,7 +50,7 @@ Image : le samoyède est assis au pied d'un panneau de départ de randonnée en 
 
 Animation : le samoyède tourne la tête d'une flèche à l'autre du panneau, puis revient vers le spectateur, la queue remue.
 
-## 4. Retour sur mars, slide 8 (fait)
+## 4. Retour sur mars, slide 9 (fait)
 
 Fichier : `retour-samoyede.png` puis `retour-samoyede.mp4`.
 
@@ -58,7 +58,7 @@ Image : le samoyède est arrêté sur un replat et regarde en arrière, vers le 
 
 Animation : le samoyède regarde le chemin derrière lui, puis se retourne vers l'avant. Les traces de pattes apparaissent une à une le long du chemin.
 
-## 5 et 6. Infographies, slides 11 et 12 (fait)
+## 5 et 6. Infographies, slides 12 et 14 (fait)
 
 Fichiers : `comment-fonctionne-ia.png` et `comment-ia-apprend.png`, en format portrait 2:3, sans animation.
 
@@ -68,7 +68,7 @@ Comment fonctionne l'IA : crée une infographie verticale dans le style de la s�
 
 Comment l'IA apprend : crée une infographie verticale dans le même style, avec le samoyède en petit dans un coin. Trois étapes reliées par des flèches dessinées. Étape 1, « Elle lit d'énormes quantités de textes ». Étape 2, « Elle repère les régularités du langage ». Étape 3, « Elle est ajustée pour suivre des consignes ». En bas, un encadré rose pâle : « Ce qu'elle n'a pas lu, elle ne le sait pas. » Texte en français, sans faute, lettres dessinées à la main mais lisibles. Aucun autre texte.
 
-## 7. Trois logiques, slide 15
+## 7. Trois logiques, slide 17
 
 Fichier : `trois-logiques-samoyede.png` puis `trois-logiques-samoyede.mp4`.
 
@@ -76,7 +76,7 @@ Image : trois petites vignettes côte à côte, chacune dans un cadre arrondi au
 
 Animation : dans la première vignette, la balle part et le chien la rapporte. Dans la deuxième, les croquettes tombent dans la gamelle et l'aiguille avance. Dans la troisième, le chien avance vers le refuge. Les trois bougent en même temps.
 
-## 8. Pause, slides 27 et 40 (fait)
+## 8. Pause, slides 29 et 42 (fait)
 
 Fichier : `pause-samoyede.png` puis `pause-samoyede.mp4`.
 
@@ -84,7 +84,7 @@ Image : le samoyède est couché sur un rocher plat, la tête posée sur ses pat
 
 Animation : le samoyède respire lentement, son flanc se soulève, il cligne des yeux une fois. La vapeur monte en volutes et se dissipe.
 
-## 9. Atelier de classement, slide 31
+## 9. Atelier de classement, slide 33
 
 Fichier : `atelier-samoyede.png` puis `atelier-samoyede.mp4`.
 
@@ -92,7 +92,7 @@ Image : quatre paniers alignés, teal pâle, lavande, menthe et rose pâle. Le s
 
 Animation : le samoyède dépose la balle dans un panier, se retourne, en prend une autre au sol.
 
-## 10. Déjeuner, slide 33
+## 10. Déjeuner, slide 35
 
 Fichier : `dejeuner-samoyede.png` puis `dejeuner-samoyede.mp4`.
 
@@ -100,7 +100,7 @@ Image : le samoyède est assis, attentif et souriant, devant un sac de randonné
 
 Animation : le samoyède penche la tête d'un côté puis de l'autre, ses oreilles se dressent, sa queue balaie le sol.
 
-## 11. Choisir un outil, slide 44 (fait)
+## 11. Choisir un outil, slide 46 (fait)
 
 Fichier : `choisir-samoyede.png` puis `choisir-samoyede.mp4`.
 
@@ -108,7 +108,7 @@ Image : deux sacs de randonnée posés côte à côte, l'un énorme et chargé d
 
 Animation : le samoyède regarde le gros sac, penche la tête, puis pose la patte sur le petit sac.
 
-## 12. Un référent par pôle, slide 52
+## 12. Un référent par pôle, slide 54
 
 Fichier : `referents-samoyede.png` puis `referents-samoyede.mp4`.
 
@@ -116,7 +116,7 @@ Image : trois samoyèdes encordés montent en file sur une pente douce enneigée
 
 Animation : les trois chiens avancent ensemble d'un même pas, la corde se tend et se détend légèrement, de nouvelles traces apparaissent derrière eux.
 
-## 13. Ce que vous savez faire maintenant, slide 54
+## 13. Ce que vous savez faire maintenant, slide 56
 
 Fichier : `sommet-samoyede.png` puis `sommet-samoyede.mp4`, en format carré 1:1.
 
@@ -124,7 +124,7 @@ Image : le samoyède est assis au sommet d'une montagne aux aplats teal pâle, �
 
 Animation : le fanion flotte au vent, la fourrure du samoyède bouge légèrement, il ferme les yeux un instant, comme au soleil.
 
-## 14. Fin de journée et intersession, slide 55
+## 14. Fin de journée et intersession, slide 57
 
 Fichier : `observation-samoyede.png` puis `observation-samoyede.mp4`.
 
@@ -144,9 +144,9 @@ Le feu vert, fichier `gardefous-samoyede.png` : le samoyède en harnais s'est ar
 
 ## Ce que ChatGPT ne doit pas fabriquer
 
-Les captures des slides 17, 23, 24, 38 et 39 (Make, Apps Script, projet Claude, Copilot, Lindy) doivent être de vraies captures d'écran de tes outils. Une fausse capture générée par une IA se repère vite, et elle te ferait perdre ta crédibilité devant le groupe, surtout pour des démos de secours.
+Les captures des slides 19, 25, 26, 40 et 41 (Make, Apps Script, projet Claude, Copilot, Lindy) doivent être de vraies captures d'écran de tes outils. Une fausse capture générée par une IA se repère vite, et elle te ferait perdre ta crédibilité devant le groupe, surtout pour des démos de secours.
 
-Les logos de la slide 13 (Microsoft 365 Copilot, Outlook, Excel, Word, Teams) se prennent sur les pages officielles de Microsoft. Un logo régénéré est faux, et il peut poser un problème de droit de marque.
+Les logos de la slide 15 (Microsoft 365 Copilot, Outlook, Excel, Word, Teams) se prennent sur les pages officielles de Microsoft. Un logo régénéré est faux, et il peut poser un problème de droit de marque.
 
 ## Si le résultat dérive
 
@@ -156,14 +156,14 @@ Si le chien change d'une image à l'autre : « Reprends exactement le samoyède 
 
 Ces trois images sont déjà dans le deck, mais leurs libellés ne disent pas la même chose que les slides. Colle chaque prompt dans la conversation ChatGPT où tu as créé la série, pour garder le même samoyède et le même style. Garde le même nom de fichier : le deck prendra la nouvelle version tout seul.
 
-### Atelier de classement, slide 31 (`atelier-samoyede.png`)
+### Atelier de classement, slide 33 (`atelier-samoyede.png`)
 
 Même personnage, même style aquarelle et trait dessiné que les images précédentes, format 16:9. Le samoyède en harnais teal est assis derrière quatre paniers alignés et dépose une balle dans l'un d'eux. Un panneau en bois à gauche porte le texte « Atelier de classement ». Sur chaque panier, une seule étiquette, dans cet ordre de gauche à droite : un panier teal pâle avec une petite bulle de dialogue et le mot « Assistant » ; un panier lavande avec un engrenage et le mot « Automatisation » ; un panier menthe avec un panneau de direction et le mot « Agent » ; un panier rose pâle avec une main ouverte et les mots « Pas d'outil ». Aucun autre texte dans l'image. Texte en français, sans faute, lettres lisibles. Montagnes douces en fond, beaucoup d'air.
 
-### Un référent par pôle, slide 52 (`referents-samoyede.png`)
+### Un référent par pôle, slide 54 (`referents-samoyede.png`)
 
 Même personnage, même style que les images précédentes, format 16:9. Trois samoyèdes encordés montent ensemble une pente enneigée vers un drapeau au sommet. Chacun porte un petit sac à dos d'une couleur différente : teal pâle, lavande, menthe. Au-dessus de chaque chien, une bulle avec un seul nom, dans cet ordre de gauche à droite : « Commerce », « RH et compta », « Communication ». Au sommet, à côté du drapeau, un quatrième samoyède assis, en harnais teal, qui les attend et regarde le chemin : il représente la référente IA, sans texte. Un panneau en bois en haut à gauche porte le texte « Un référent par pôle ». Aucun autre texte dans l'image. Texte en français, sans faute.
 
-### Trois logiques, slide 15 (`trois-logiques-samoyede.png`)
+### Trois logiques, slide 17 (`trois-logiques-samoyede.png`)
 
 Reprends exactement l'image des trois samoyèdes (bulle de dialogue, engrenages, panneaux de direction), même composition et mêmes couleurs, en changeant uniquement les textes. Sous le premier : titre « Assistant », phrase « Il répond, tu gardes la main ». Sous le deuxième : titre « Automatisation », phrase « Elle exécute, toujours pareil ». Sous le troisième : titre « Agent », phrase « Il poursuit un objectif, dans ton cadre ». Aucun autre texte. Texte en français, sans faute.
