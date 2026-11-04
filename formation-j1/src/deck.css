@@ -721,3 +721,32 @@ h2 { letter-spacing: .005em; }
 .me-do-t { font-size: 24px; }
 .me-do-row p { padding: 10px 16px; font-size: 20px; }
 .me-do-row b { font-size: 32px; }
+
+/* Slide 12 : les quatre familles séparées, affichées sans agrandissement pour rester nettes */
+.ia-cols { display: flex; justify-content: center; gap: 44px; margin-top: 20px; }
+.ia-col { margin: 0; width: 268px; flex: none; }
+.ia-col img { width: 100%; height: auto; display: block; border-radius: 18px; }
+/* Slide 13 : les logiciels avec leur vrai logo */
+.logo-row { display: flex; gap: 22px; flex-wrap: wrap; }
+.app { display: inline-flex; align-items: center; gap: 14px; background: var(--card); border-radius: 18px; padding: 14px 22px 14px 16px; font: 700 24px/1.2 var(--font-body); color: var(--ink); }
+.app img { width: 56px; height: 56px; object-fit: contain; }
+.ia-col { width: 288px; }
+.ia-cols { gap: 36px; }
+/* Slide 15 : les trois logiques, une par ligne */
+.three { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; margin-top: 30px; }
+.three-lines { display: grid; gap: 22px; }
+.three-l { font-family: var(--font-title); font-size: 64px; line-height: 1.15; color: var(--teal); display: flex; align-items: center; gap: 22px; }
+.three-l .mark { margin-left: .28em; }
+.dot { width: 22px; height: 22px; border-radius: 50%; flex: none; }
+.dot--sky { background: var(--sky); box-shadow: inset 0 0 0 3px var(--teal); }
+.dot--lav { background: var(--lav); box-shadow: inset 0 0 0 3px var(--teal); }
+.dot--mint { background: var(--mint); box-shadow: inset 0 0 0 3px var(--teal); }
+.three-c { margin-top: 18px; font-size: 30px; }
+.three-src { margin-top: 26px; font-size: 18px; color: var(--muted); font-style: italic; }
+.three { margin-top: auto; margin-bottom: auto; }
+.three-src { margin-top: 0; }
+.trig-card { display: grid; grid-template-columns: 96px 1fr; gap: 20px; align-items: start; }
+.trig-card .ico-xl { width: 96px; height: 96px; }
+.trig-card h3 { margin-bottom: 6px; }
+.trig-card p { font-size: 24px; }
+.trig-card .trig-who { margin-top: 10px; font-weight: 700; color: var(--teal); font-size: 20px; }

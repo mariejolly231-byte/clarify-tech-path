@@ -84,6 +84,7 @@ BRAIN = '''<svg class="illu brain" viewBox="0 0 300 240" aria-hidden="true">
 
 CLOCK = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><circle data-d="0.6" cx="60" cy="60" r="46" fill="#DCEEFA"/><circle data-d="0.1" cx="60" cy="60" r="46" class="ink" filter="url(#rough)"/><path data-d="0.5" class="inkt" d="M60 30 V60 L82 74"/></svg>'''
 BOLT = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><path data-d="0.6" d="M68 10 L30 66 H58 L48 110 L92 48 H64 Z" fill="#FFFFFF"/><path data-d="0.1" class="ink" d="M68 10 L30 66 H58 L48 110 L92 48 H64 Z" filter="url(#rough)"/></svg>'''
+CHAT = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><path data-d="0.6" d="M18 26 H102 A10 10 0 0 1 112 36 V78 A10 10 0 0 1 102 88 H52 L30 106 V88 H18 A10 10 0 0 1 8 78 V36 A10 10 0 0 1 18 26 Z" fill="#D6F1E6"/><path data-d="0.1" class="ink" d="M18 26 H102 A10 10 0 0 1 112 36 V78 A10 10 0 0 1 102 88 H52 L30 106 V88 H18 A10 10 0 0 1 8 78 V36 A10 10 0 0 1 18 26 Z" filter="url(#rough)"/><path data-d="0.4" class="inkt" d="M30 50 H90 M30 66 H72"/></svg>'''
 PLUG = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><rect data-d="0.6" x="28" y="40" width="64" height="50" rx="14" fill="#DCEEFA"/><rect data-d="0.1" x="28" y="40" width="64" height="50" rx="14" class="ink" filter="url(#rough)"/><path data-d="0.4" class="ink" d="M46 40 V18 M74 40 V18 M60 90 V112"/></svg>'''
 BADGE = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><rect data-d="0.6" x="22" y="28" width="76" height="66" rx="10" fill="#FCE4E8"/><rect data-d="0.1" x="22" y="28" width="76" height="66" rx="10" class="ink" filter="url(#rough)"/><circle data-d="0.4" cx="48" cy="56" r="10" class="ink"/><path data-d="0.5" class="ink" d="M36 80 C 40 70, 56 70, 60 80 M70 52 H88 M70 64 H84"/><path data-d="0.3" class="ink" d="M52 28 V16 H68 V28"/></svg>'''
 MULTI = '''<svg class="illu ico-xl" viewBox="0 0 140 120" aria-hidden="true"><rect data-d="0.6" x="12" y="50" width="116" height="40" rx="14" fill="#D6F1E6"/><rect data-d="0.1" x="12" y="50" width="116" height="40" rx="14" class="ink" filter="url(#rough)"/><circle data-d="0.4" cx="38" cy="70" r="7" class="ink"/><circle data-d="0.45" cx="70" cy="70" r="7" class="ink"/><circle data-d="0.5" cx="102" cy="70" r="7" class="ink"/><path data-d="0.3" class="ink" d="M128 70 C 140 70, 138 30, 120 26"/></svg>'''
@@ -334,14 +335,15 @@ slide(f'''    <p class="eyebrow">Rappel commun</p>
 
 slide(f'''    <p class="eyebrow">Rappel commun</p>
     <h2>Les principales IA <span class="mark">aujourd'hui</span></h2>
-    <div class="grow infog-one mt">{infog("principales-ia.png", "Infographie « Les principales IA aujourd'hui » : ChatGPT, Claude, Gemini, Mistral (principales-ia.png)")}</div>''', seq=1, section="9h00 · Point de départ",
- notes="Présenter comme des tendances d'usage, pas comme un classement : les modèles changent tous les trois mois. Vérifier la veille de la séance que les points forts et faibles tiennent toujours. Chez Maison Lagarrigue, l'outil disponible est Copilot : rappeler qu'il s'appuie sur des modèles d'OpenAI.")
+    <p class="howto">Quatre familles de modèles, chacune avec son style. Ce sont des tendances d'usage à ce jour, pas un classement.</p>
+    <div class="ia-cols">{"".join(f'<figure class="ia-col frag"><img src="images/ia-{k}.png" alt="{a}"></figure>' for k, a in [("chatgpt", "ChatGPT, d'OpenAI : polyvalent, points forts et points faibles"), ("claude", "Claude, d'Anthropic : analyse et rédaction, points forts et points faibles"), ("gemini", "Gemini, de Google : multimodal et recherche, points forts et points faibles"), ("mistral", "Mistral AI : modèle européen, points forts et points faibles")])}</div>''', seq=1, section="9h00 · Point de départ",
+ notes="Un clic par famille. Les points forts et faibles sont des tendances d'usage, pas des mesures : tous ces modèles peuvent se tromper, et leur avance change tous les trois mois. Le message à faire passer : on ne choisit pas un modèle une fois pour toutes, on choisit un outil adapté à la tâche. Lien avec Copilot : Microsoft 365 Copilot n'est pas un cinquième modèle, il s'appuie sur des modèles d'OpenAI et, selon les réglages de l'entreprise, aussi sur ceux d'Anthropic (Claude). En Europe, les modèles Claude sont désactivés par défaut et c'est l'administrateur qui les active : à vérifier chez Maison Lagarrigue.")
 
 slide(f'''    <p class="eyebrow">Rappel commun</p>
     <h2>L'IA est déjà dans <span class="mark">vos outils</span></h2>
     <p class="lead rise" style="margin-top:24px">Ce n'est plus un site à part : elle arrive dans ce que vous ouvrez chaque matin.</p>
     <div class="logo-row mt rise">
-      {logo("Microsoft 365 Copilot")}{logo("Outlook")}{logo("Excel")}{logo("Word")}{logo("Teams")}
+      {"".join(f'<span class="app"><img src="images/logo-{f}.png" alt=""><span>{n}</span></span>' for f, n in [("microsoft", "Microsoft 365 Copilot"), ("outlook", "Outlook"), ("excel", "Excel"), ("word", "Word"), ("teams", "Teams")])}
     </div>
     <div class="cols mt" style="align-items:start">
       {tip("40 % des TPE et PME déclarent utiliser au moins une solution d'IA en 2026, contre 13 % en 2024. Chez les PME, c'est 53 %.", "Baromètre France Num 2026, DGE et Crédoc", "frag")}
@@ -355,26 +357,29 @@ chapter_slide(2)
 # ---------- 9h45 Trois logiques ----------
 S945 = "9h45 · Assistant, automatisation, agent"
 slide(f'''    <p class="eyebrow">Trois logiques différentes</p>
-    <p class="idea logic-idea">L'assistant <span class="mark mark--sky frag">répond</span>. L'automatisation <span class="mark mark--lav frag">exécute</span>. L'agent <span class="mark frag">poursuit un objectif</span>.</p>
-    <div class="pic-row">
-      <div class="stack-lg">
-        <p class="lead frag">Le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
-        {tip("Sur Malt, la demande de compétences liées aux agents IA a été multipliée par 60 par rapport à 2024.", "Malt Tech Trends 2026", "frag")}
+    <div class="three">
+      <div class="three-lines">
+        <p class="three-l frag"><span class="dot dot--sky"></span>L'assistant <span class="mark mark--sky">répond</span></p>
+        <p class="three-l frag"><span class="dot dot--lav"></span>L'automatisation <span class="mark mark--lav">exécute</span></p>
+        <p class="three-l frag"><span class="dot dot--mint"></span>L'agent <span class="mark">poursuit un objectif</span></p>
+        <p class="lead three-c frag">Le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
       </div>
-      {pic("trois-logiques-samoyede", "Trois samoyèdes : IA conversationnelle, automatisation, agent IA.", 840, 472)}
-    </div>''', seq=2, section=S945, notes="Faire apparaître les trois verbes un par un. Demander au groupe de deviner le suivant.")
+      {pic("trois-logiques-samoyede", "Trois samoyèdes : l'assistant qui répond, l'automatisation qui exécute, l'agent qui poursuit un objectif.", 640, 360)}
+    </div>
+    <p class="three-src frag">Sur Malt, la demande de compétences liées aux agents IA a été multipliée par 60 par rapport à 2024. Source : Malt Tech Trends 2026</p>''', seq=2, section=S945, notes="Faire apparaître les trois verbes un par un. Demander au groupe de deviner le suivant.")
 
 slide(f'''    <p class="eyebrow">L'automatisation</p>
     <h2>Tout part d'un <span class="mark mark--lav">déclencheur</span></h2>
-    <p class="lead rise" style="margin-top:18px">Un déclencheur (le « trigger »), puis toujours la même suite d'actions. Deux familles :</p>
-    <div class="cols mt" style="align-items:start">
-      <div class="card sk fill-sky frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{CLOCK}<div><h3>Le temps</h3><p>Chaque matin, le tableau de trésorerie se met à jour. Chaque fin de mois, les variables de salaire sont préparées.</p></div></div>
-      <div class="card sk fill-lav frag" style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:center">{BOLT}<div><h3>Un événement</h3><p>Une facture arrive par e-mail, un pointage est saisi, une demande de démonstration tombe.</p></div></div>
+    <p class="lead rise" style="margin-top:18px">Un déclencheur (le « trigger »), puis une suite d'actions. Trois déclencheurs possibles :</p>
+    <div class="cols--3 mt" style="display:grid;align-items:stretch">
+      <div class="card sk fill-sky frag trig-card">{CLOCK}<div><h3>Le temps</h3><p>Chaque matin, la trésorerie se met à jour.</p><p class="trig-who">Automatisation</p></div></div>
+      <div class="card sk fill-lav frag trig-card">{BOLT}<div><h3>Un événement</h3><p>Une facture arrive par e-mail, un pointage est saisi.</p><p class="trig-who">Automatisation, agent</p></div></div>
+      <div class="card sk fill-mint frag trig-card">{CHAT}<div><h3>Ton message</h3><p>Tu poses une question, il répond. Sans message, il ne fait rien.</p><p class="trig-who">Assistant</p></div></div>
     </div>
     {analogy("virement", "le virement de paie programmé : il part à date fixe, ou dès que les pointages sont validés. Et il fait toujours la même chose.", "frag mt")}''',
- seq=2, section=S945, notes="Faire trouver un exemple de chaque famille dans leur quotidien.")
+ seq=2, section=S945, notes="Faire trouver un exemple de chaque famille dans leur quotidien. Le troisième déclencheur prépare la suite : l'assistant ne démarre que quand on lui écrit, c'est la différence avec l'automatisation et avec l'agent.")
 
-logic("L'automatisation", 'Elle <span class="mark mark--lav">exécute</span>, toujours pareil', "", "Aucune réflexion, et c'est sa force : même entrée, même résultat.",
+logic("L'automatisation", 'L\'automatisation <span class="mark mark--lav">exécute</span>, toujours pareil', "", "Aucune réflexion, et c'est sa force : même entrée, même résultat.",
  [("Un scénario Make", "Un événement déclenche une série d'actions, montée visuellement, bloc par bloc.", f'<span class="live">démo en direct</span>{golink("make", "Ouvrir le scénario Make")}'),
   ("Apps Script : la réservation des salles", "Une demande de réservation arrive, le script vérifie le planning et répond. Personne ne recopie rien.", f'<span class="live">démo en direct</span>{golink("appscript", "Ouvrir le script")}'),
   ("Chez vous, dans Microsoft 365", '<span class="tools"><b>Power Automate</b> : des flux entre Outlook, Teams, Excel et SharePoint.<br><b>Workflows dans Copilot</b> : décrire l\'automatisation en une phrase.<br><b>Copilot Studio</b> : des agents et leurs flux.<br><b>Excel, onglet Automatiser</b> : enregistrer une suite d\'actions.</span>', avous("À vous de jouer"))],
@@ -435,6 +440,7 @@ M_HAR = f"""<svg class="illu scene-svg" viewBox="0 0 420 200" aria-hidden="true"
 ICONS["moteur"] = '<rect data-d="0.1" x="8" y="34" width="50" height="38" rx="6" fill="#E6E0F4" stroke="#2A2F33" stroke-width="3"/><path data-d="0.3" class="ink" d="M16 34 V22 H28 V34 M36 34 V22 H48 V34" style="stroke-width:3"/><circle data-d="0.4" cx="68" cy="56" r="10" class="ink" style="stroke-width:3"/><path data-d="0.6" class="inkt" d="M64 22 c6 -6 -4 -10 2 -16 M74 26 c6 -6 -4 -10 2 -16" style="stroke-width:2.5"/><path data-d="0.5" class="ink" d="M4 80 H80" style="stroke-width:3"/>'
 slide(f'''    <p class="eyebrow">L'assistant et l'agent : sous le capot</p>
     <h2>Le modèle, l'inférence, <span class="mark">le harnais</span></h2>
+    <p class="howto">Trois notions à poser avant de parler de l'assistant et de l'agent : elles valent pour les deux.</p>
     <div class="scene-row">
       <figure class="scene frag" data-step="1">{M_SEUL}<figcaption><b class="hand">1. Le modèle</b>Un cerveau dans un bocal : il sait beaucoup, mais seul il ne fait rien.</figcaption></figure>
       <figure class="scene frag" data-step="2">{M_INF}<figcaption><b class="hand">2. L'inférence</b>Le moment où il travaille. Chaque morceau de mot, le token, se paie.</figcaption></figure>
@@ -461,7 +467,8 @@ def part(n, t, sub, ex, c):
     return f'<div class="comp sk fill-{c} frag" data-step="{n}"><p class="hand comp-t">{t}{s}</p><p class="comp-ex">{ex}</p></div>'
 cards = [part(*x) for x in parts]
 slide(f'''    <p class="eyebrow">Le harnais pièce par pièce : un collègue numérique</p>
-    <h2><span class="mark mark--blush">Le modèle</span> et <span class="mark">son harnais</span></h2>
+    <h2>Ce qu'on paramètre : <span class="mark">le harnais</span>, pièce par pièce</h2>
+    <p class="howto">Les mêmes pièces pour un assistant et pour un agent. <span class="live">démo en direct : Marie l'assistant, ou Marie l'agent</span></p>
     <div class="anat">
       <div class="anat-col">{"".join(cards[:3])}</div>
       <div class="anat-mid">{HUMAN}<p class="harness frag" data-step="8"><b class="hand">Tout le reste, c'est le harnais :</b>le réglage qui le rend bon, ou pas.</p></div>
@@ -500,7 +507,7 @@ same = "".join(f'<span class="pill sk sk--thin">{t}</span>' for t in ["Modèle",
 slide(f'''    <p class="eyebrow">L'assistant et l'agent</p>
     <h2>Une seule vraie différence : <span class="mark mark--blush">le déclencheur</span></h2>
     <div class="cols mt" style="align-items:stretch">
-      <div class="card sk fill-sky rise"><h3>L'assistant</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Toi, à chaque question.</p></div>
+      <div class="card sk fill-sky rise"><h3>L'assistant</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Ton message, à chaque question.</p></div>
       <div class="card sk fill-mint rise"><h3>L'agent</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Un objectif, un événement ou un horaire. Il enchaîne seul.</p></div>
     </div>
     {analogy("volant", "le même tracteur : soit tu conduis et il t'assiste, soit tu lances l'autoguidage sur la parcelle et tu surveilles depuis la cabine.", "frag mt")}''', seq=2, section=S945, notes="Les pièces sont les mêmes. Ce qui change, c'est qui appuie sur le bouton, et combien d'étapes il enchaîne sans toi.")
