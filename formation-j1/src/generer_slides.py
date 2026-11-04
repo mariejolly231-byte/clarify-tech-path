@@ -185,7 +185,7 @@ def chapter_slide(n):
 # ---------- 9h00 Point de départ ----------
 slide(f'''    <div class="lockup lockup--duo rise">
       <img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow">
-      <span class="logo-tile"><img src="images/logo-cfd-formation.png" alt="Logo CFD Formation"></span>
+      <img class="partner-logo" src="images/logo-cfd-formation.png" alt="Logo CFD Formation">
       <div><p class="lockup-name">Summit Flow, pour CFD Formation</p><p class="lockup-sub">Formation Automatisation et IA agentique</p></div>
     </div>
     <div class="cover-body">
@@ -215,7 +215,7 @@ chapter_slide(1)
 slide(f'''    <p class="eyebrow">Qui je suis</p>
     <h2>Marie Jolly, <span class="mark">Summit Flow</span></h2>
     <div class="me">
-      <div class="me-photo"><figure class="me-pic sk"><img src="images/marie-samoyede.jpg" alt="Marie Jolly en montagne, accroupie à côté de son samoyède blanc en harnais."></figure><div class="me-logos"><img src="images/logo-summit-flow.png" alt="Logo Summit Flow"><span class="logo-tile"><img src="images/logo-cfd-formation.png" alt="Logo CFD Formation"></span></div><p class="me-logos-t">Ici, pour CFD Formation</p></div>
+      <div class="me-photo"><figure class="me-pic sk"><img src="images/marie-samoyede.jpg" alt="Marie Jolly en montagne, accroupie à côté de son samoyède blanc en harnais."></figure><div class="me-logos"><img src="images/logo-summit-flow.png" alt="Logo Summit Flow"></div></div>
       <div class="me-right"><ul class="dash me-list">
         <li class="frag">Ingénieure, formée à IMT Mines Albi, pas très loin d'ici</li>
         <li class="frag">Dix ans dans l'aéronautique : production, gestion de projet, industrialisation</li>

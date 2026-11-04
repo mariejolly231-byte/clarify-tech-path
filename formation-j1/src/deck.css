@@ -675,19 +675,16 @@ h2 { letter-spacing: .005em; }
 .chrome-logo { display: inline-block; width: 52px; height: 52px; border-radius: 50%; background: var(--logo) center / contain no-repeat; }
 
 /* Organisme pour lequel j'interviens, en contrepoint du logo Summit Flow */
-/* Les deux logos côte à côte, à la même hauteur : Summit Flow rond, CFD Formation sur sa tuile blanche d'origine */
+/* Les deux logos côte à côte, à la même hauteur, posés directement sur le papier */
 .lockup--duo { gap: 24px; }
 .lockup--duo .brand-logo { width: 150px; height: 150px; }
-.logo-tile { display: grid; place-items: center; height: 150px; padding: 0 22px; border-radius: 22px; background: #fff; }
-.logo-tile img { height: 118px; width: auto; display: block; }
+.lockup--duo .partner-logo { height: 140px; width: auto; display: block; }
 .lockup--duo > div { margin-left: 14px; }
 .lockup--duo .lockup-name { font-size: 34px; }
 /* Qui je suis : les logos sous la photo, et ce que je fais en trois verbes */
 .me-logos { display: flex; align-items: center; gap: 18px; margin-top: 26px; }
-.me-logos > img { width: 104px; height: 104px; }
-.me-logos .logo-tile { height: 104px; padding: 0 16px; border-radius: 18px; }
-.me-logos .logo-tile img { height: 82px; }
-.me-logos-t { margin-top: 10px; font-family: var(--font-body); font-weight: 600; font-size: 20px; color: var(--muted); }
+.me-logos { justify-content: center; }
+.me-logos > img { width: 150px; height: 150px; }
 .me-list li { font-size: 28px; }
 .me-do { margin-top: 26px; }
 .me-do-t { font-size: 26px; font-weight: 600; color: var(--ink); margin-bottom: 14px; }
@@ -710,3 +707,9 @@ h2 { letter-spacing: .005em; }
 .ex .live + .golink { margin-top: 12px; }
 .ex .tools { display: block; font-size: 21px; line-height: 1.45; }
 .ex .tools b { color: var(--teal); }
+/* Infographies : elles prennent toute la place sous le titre, sans déborder sur le pied de page */
+.infog-one { height: 640px; flex: none; margin-top: 18px; }
+.infog-one .shot { padding: 0; overflow: hidden; min-height: 0; }
+.infog-one .shot { height: 100%; }
+.infog-one .shot img { width: 100%; height: 100%; max-width: none; max-height: none; object-fit: contain; border-radius: 16px; }
+.infog-one .shot img { height: 640px; }

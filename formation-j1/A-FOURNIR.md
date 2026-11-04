@@ -5,7 +5,7 @@ Chaque emplacement est un cadre en pointillés. Dépose le fichier dans `src/ima
 | Slide | Titre | Ce qu'il faut |
 |---|---|---|
 | 2 | Maison Lagarrigue | Une version plus grande de la photo d'ouverture (celle fournie fait 828 pixels de large) |
-| 11 et 12 | Comment ça marche, les principales IA | Ton infographie complète, enregistrée sous `infographie-ia.png` : la construction la coupe en deux toute seule |
+| 11 et 12 | Comment ça marche, les principales IA | Fait : ton infographie, coupée en deux. Coquille à corriger dans l'étape 2 (« énormément ») |
 | 13 | L'IA est déjà dans vos outils | Logos officiels Microsoft 365 Copilot, Outlook, Excel, Word, Teams |
 | 17 | Elle exécute, toujours pareil | Le lien de ton scénario Make et celui de ton Apps Script de réservation des salles : à coller dans `LINKS`, en haut de `src/generer_slides.py` |
 | 19 | Le modèle et son harnais | Rien : démonstration en direct |
