@@ -682,9 +682,6 @@ h2 { letter-spacing: .005em; }
 .lockup--duo > div { margin-left: 14px; }
 .lockup--duo .lockup-name { font-size: 34px; }
 /* Qui je suis : les logos sous la photo, et ce que je fais en trois verbes */
-.me-logos { display: flex; align-items: center; gap: 18px; margin-top: 26px; }
-.me-logos { justify-content: center; }
-.me-logos > img { width: 150px; height: 150px; }
 .me-list li { font-size: 28px; }
 .me-do { margin-top: 26px; }
 .me-do-t { font-size: 26px; font-weight: 600; color: var(--ink); margin-bottom: 14px; }
@@ -713,3 +710,14 @@ h2 { letter-spacing: .005em; }
 .infog-one .shot { height: 100%; }
 .infog-one .shot img { width: 100%; height: 100%; max-width: none; max-height: none; object-fit: contain; border-radius: 16px; }
 .infog-one .shot img { height: 640px; }
+/* Qui je suis : le logo à côté du nom, en grand */
+.me-title { display: flex; align-items: center; gap: 30px; }
+.me-title-logo { width: 150px; height: 150px; flex: none; }
+.me-title-logo { width: 130px; height: 130px; }
+.slide .me { margin-top: 14px; }
+.me-list li { font-size: 25px; }
+.me-list li + li { margin-top: 10px; }
+.me-do { margin-top: 18px; }
+.me-do-t { font-size: 24px; }
+.me-do-row p { padding: 10px 16px; font-size: 20px; }
+.me-do-row b { font-size: 32px; }

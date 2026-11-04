@@ -213,16 +213,16 @@ slide(f'''    <figure class="hero-photo sk"><img src="images/lagarrigue-ouvertur
 chapter_slide(1)
 
 slide(f'''    <p class="eyebrow">Qui je suis</p>
-    <h2>Marie Jolly, <span class="mark">Summit Flow</span></h2>
+    <h2 class="me-title">Marie Jolly, <span class="mark">Summit Flow</span><img class="me-title-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"></h2>
     <div class="me">
-      <div class="me-photo"><figure class="me-pic sk"><img src="images/marie-samoyede.jpg" alt="Marie Jolly en montagne, accroupie à côté de son samoyède blanc en harnais."></figure><div class="me-logos"><img src="images/logo-summit-flow.png" alt="Logo Summit Flow"></div></div>
+      <div class="me-photo"><figure class="me-pic sk"><img src="images/marie-samoyede.jpg" alt="Marie Jolly en montagne, accroupie à côté de son samoyède blanc en harnais."></figure></div>
       <div class="me-right"><ul class="dash me-list">
         <li class="frag">Ingénieure, formée à IMT Mines Albi, pas très loin d'ici</li>
         <li class="frag">Dix ans dans l'aéronautique : production, gestion de projet, industrialisation</li>
         <li class="frag">L'IA, l'automatisation et les agents : d'abord pour mes propres besoins, bien avant ChatGPT</li>
         <li class="frag">Passionnée de montagne, en parcours de certification pour devenir accompagnatrice en montagne</li>
       </ul>
-      <div class="me-do frag"><p class="me-do-t">Avec Summit Flow, j'aide les entreprises à passer à l'IA, du premier pas à la mise en place.</p>
+      <div class="me-do frag"><p class="me-do-t">Avec Summit Flow, j'aide les entreprises industrielles à retrouver de la valeur ajoutée : des usages de l'IA et des applications qui s'adaptent à elles, et pas l'inverse.</p>
         <div class="me-do-row"><p><b>Former</b>les équipes, en entreprise, sur leurs vrais outils</p><p><b>Auditer</b>les processus, pour voir ce qui gagne à être automatisé</p><p><b>Construire</b>les solutions : automatisations, assistants, agents</p></div></div></div>
     </div>''', seq=1, section="9h00 · Point de départ",
  notes="Court : deux minutes. La montagne fait le lien avec le fil de la journée : on monte par étapes, et on allège le sac.")
