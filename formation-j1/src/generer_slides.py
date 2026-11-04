@@ -29,7 +29,7 @@ def shot(need, kind="Capture à fournir", src=None, style=""):
 # Illustrations du samoyède : vidéo en boucle si elle existe, sinon image fixe, sinon le dessin
 # de secours, sinon un cadre « à générer » qui indique le nom de fichier attendu (voir PROMPTS-IMAGES.md)
 IMG = pathlib.Path("src/images")
-def art(name, alt, box, fallback="", over=""):
+def art(name, alt, box, fallback=""):
     r, b, w, h = box
     pos = f"right:{r}px;bottom:{b}px;width:{w}px;height:{h}px"
     band = " art--band" if w / h >= 2.4 else ""
@@ -39,30 +39,17 @@ def art(name, alt, box, fallback="", over=""):
         poster = f' poster="{still}"' if still else ""
         return f'<figure class="art{band}" style="{pos}"><video class="art-media" autoplay muted loop playsinline{poster} aria-label="{alt}"><source src="{clip}"></video></figure>'
     if still:
-        return f'<figure class="art{band}" style="{pos}"><img class="art-media" src="{still}" alt="{alt}">{over}</figure>'
+        return f'<figure class="art{band}" style="{pos}"><img class="art-media" src="{still}" alt="{alt}"></figure>'
     if fallback:
         return fallback
     return f'<figure class="art art--todo" style="{pos}" aria-hidden="true"><p><b>Illustration à générer</b>{name}.png</p></figure>'
-# Calques animés posés sur les illustrations : nuages qui passent, queue qui frétille, soleil qui rayonne.
-# Chaque calque est dessiné dans le repère de pixels de son image, et suit son cadrage.
-def overlay(vw, vh, inner, fit="meet"):
-    return f'<svg class="art-over" viewBox="0 0 {vw} {vh}" preserveAspectRatio="xMidYMid {fit}" aria-hidden="true">{inner}</svg>'
-CLOUD = lambda x, y, k, d, cls="drift": f'<g class="ov-cloud {cls}" style="--d:{d}s"><path transform="translate({x} {y}) scale({k})" d="M0 30 C -2 14, 16 6, 28 14 C 34 0, 62 0, 66 16 C 82 12, 94 24, 88 34 Z" fill="#FFFFFF" stroke="#0B4F5C" stroke-width="3" stroke-linejoin="round"/></g>'
-WAG = lambda x, y, k=1: f'<g transform="translate({x} {y}) scale({k})"><g class="ov-wag"><path d="M0 0 C -8 10, -8 22, 0 32" /><path d="M-14 -6 C -24 10, -24 30, -14 44" /></g></g>'
-OV_COVER = overlay(1672, 941, CLOUD(1180, 40, 1.1, 46) + CLOUD(1330, 250, 0.8, 62, "drift drift--slow") + WAG(1330, 500, 1.2)
-                   + '<g transform="translate(1440 150)"><g class="ov-spark"><path d="M0 -26 V-40 M22 -14 L33 -22 M-22 -14 L-33 -22"/></g></g>', "slice")
-OV_RETOUR = overlay(1672, 636, '<g transform="translate(1528 186)"><g class="ov-sun"><path d="M0 -70 V-92 M50 -50 L64 -64 M-50 -50 L-64 -64 M70 0 H92 M-70 0 H-92"/></g></g>' + CLOUD(1300, 60, 0.9, 50))
-OV_DEPART = overlay(1120, 758, WAG(242, 430, 1.1) + '<g class="ov-arrow"><path d="M840 120 l18 0 M846 112 l12 8 l-12 8"/></g>')
 # Illustrations en pleine scène (décor et texte inclus) : posées comme une carte, assez grandes pour être lues
-def pic(name, alt, w, h, style="", over=""):
+def pic(name, alt, w, h, style=""):
     src = next((f"images/{name}.{e}" for e in ("png", "jpg", "webp") if (IMG / f"{name}.{e}").exists()), None)
     box = f"width:{w}px;height:{h}px;{style}"
     if not src:
         return f'<figure class="pic pic--todo" style="{box}" aria-hidden="true"><p><b>Illustration à générer</b>{name}.png</p></figure>'
-    return f'<figure class="pic" style="{box}"><img src="{src}" alt="{alt}">{over}</figure>'
-STEAM = '<g class="ov-steam"><path d="M0 0 C -14 -20, 14 -40, 0 -60 C -14 -80, 10 -96, 2 -116"/><path d="M26 6 C 14 -14, 38 -34, 26 -54 C 16 -70, 32 -84, 28 -98"/></g>'
-OV_PAUSE = overlay(1672, 941, f'<g transform="translate(888 590)">{STEAM}</g><g transform="translate(1228 240)"><g class="ov-sun"><path d="M0 -84 V-104 M58 -60 L72 -74 M-58 -60 L-72 -74 M84 0 H104 M-84 0 H-104"/></g></g>', "slice")
-OV_REF = overlay(1671, 941, '<g transform="translate(1500 190)"><g class="ov-sun"><path d="M0 -76 V-96 M54 -54 L68 -68 M-54 -54 L-68 -68 M76 0 H96 M-76 0 H-96"/></g></g>', "slice")
+    return f'<figure class="pic" style="{box}"><img src="{src}" alt="{alt}"></figure>'
 def infog(file, need):
     return shot(need, "Infographie à insérer", f"images/{file}" if (IMG / file).exists() else None)
 def logo(name, file=None):
@@ -176,15 +163,14 @@ def chapter_slide(n):
           notes=f"Ouverture du chapitre {n}. Une phrase pour dire ce qu'on va faire, puis on avance.")
 
 # ---------- 9h00 Point de départ ----------
-slide(f'''    <img class="brand-logo rise" src="images/logo-summit-flow.png" alt="Logo Summit Flow : une montagne, un circuit et un samoyède.">
-    <div class="grow stack center-y">
-      <p class="eyebrow rise">Automatisation et IA agentique · Maison Lagarrigue · Jour 1</p>
-      <h1 class="rise">Assistant, automatisation, agent : savoir quoi utiliser, <span class="mark">et quand</span></h1>
+slide(f'''    <div class="lockup rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><div><p class="lockup-name">Summit Flow</p><p class="lockup-sub">Formation Automatisation et IA agentique</p></div></div>
+    <div class="cover-body">
+      <h1 class="rise"><span class="l">Assistant, automatisation, agent :</span> <span class="l">savoir quoi utiliser, <span class="mark">et quand</span></span></h1>
       <p class="lead rise">Comprendre, mesurer et choisir.</p>
-      <p class="cover-meta small rise">17 novembre 2026 · 9h00 à 17h00 · Marie Jolly, Summit Flow</p>
-      <div class="cover-actions rise"><button class="btn-act" data-act="full">Plein écran</button><button class="btn-act btn-act--ghost" data-act="pdf">Exporter en PDF</button></div>
+      <p class="cover-meta rise">Maison Lagarrigue · Jour 1 · 17 novembre 2026 · 9h00 à 17h00</p>
     </div>
-    {art("couverture-samoyede", "Le samoyède de Summit Flow monte un sentier vers un sommet.", (0, 0, 1560, 878), COVER_RIDGE, OV_COVER)}''', cls="slide--cover slide--full", section="9h00 · Point de départ",
+    <div class="cover-actions"><button class="btn-act btn-act--ghost" data-act="full">Plein écran</button><button class="btn-act btn-act--ghost" data-act="pdf">Exporter en PDF</button></div>
+    {art("couverture-samoyede", "Le samoyède de Summit Flow monte un sentier vers un sommet.", (0, 0, 1180, 664), COVER_RIDGE)}''', cls="slide--cover slide--full", section="9h00 · Point de départ",
  notes="Accueil. Le sentier en bas à droite : on monte par étapes, on ne grimpe pas tout d'un coup.")
 
 slide(f'''    <figure class="hero-photo sk"><img src="images/lagarrigue-ouverture.jpg" alt="Vue aérienne d'une ensileuse et d'un tracteur Claas au travail dans un champ, sous le logo Lagarrigue Agricole et espaces verts."></figure>
@@ -256,7 +242,7 @@ slide(f'''    <p class="eyebrow">Aujourd'hui</p>
 
 slide(f'''    <p class="eyebrow">Tour de table</p>
     <h2>D'où part <span class="mark">chacun</span> ?</h2>
-    {art("depart-samoyede", "Le samoyède au point de départ d'un sentier, devant un panneau.", (100, 150, 560, 330), over=OV_DEPART)}
+    {art("depart-samoyede", "Le samoyède au point de départ d'un sentier, devant un panneau.", (100, 150, 560, 330))}
     <div class="cols mt" style="align-items:start">
       <ol class="steps">
         <li class="frag">Avez-vous suivi la journée de mars ?</li>
@@ -273,7 +259,7 @@ slide(f'''    <p class="eyebrow">Tour de table</p>
 
 slide(f'''    <p class="eyebrow">Retour sur mars</p>
     <h2>La journée de mars, <span class="mark mark--sky">ce qui reste</span></h2>
-    {art("retour-samoyede", "Le samoyède regarde le chemin déjà parcouru.", (100, 136, 760, 270), over=OV_RETOUR)}
+    {art("retour-samoyede", "Le samoyède regarde le chemin déjà parcouru.", (100, 136, 760, 270))}
     <div class="cols mt" style="align-items:start">
       <div class="card sk fill-sky rise"><h3>Ce qui a été posé</h3><ul>
         <li>Ce qu'est un assistant conversationnel</li>
@@ -527,7 +513,7 @@ slide(f'''    <div class="grow center-y">
       <p class="lead">On reprend à 11h00 avec la grille de décision.</p>
       <div class="mt">{timer(15, (10, 15))}</div>
     </div>
-    {pic("pause-samoyede", "Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes.", 880, 495, "position:absolute;right:110px;bottom:190px", OV_PAUSE) if (IMG / "pause-samoyede.png").exists() else CUP}''', cls="slide--full", section="Pause",
+    {pic("pause-samoyede", "Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes.", 880, 495, "position:absolute;right:110px;bottom:190px") if (IMG / "pause-samoyede.png").exists() else CUP}''', cls="slide--full", section="Pause",
  notes="")
 
 chapter_slide(3)
@@ -714,7 +700,7 @@ slide(f'''    <div class="grow center-y">
       <p class="lead">Reprise à 15h15 : limites, investissement et choix d'un outil.</p>
       <div class="mt">{timer(15, (10, 15))}</div>
     </div>
-    {pic("pause-samoyede", "Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes.", 880, 495, "position:absolute;right:110px;bottom:190px", OV_PAUSE) if (IMG / "pause-samoyede.png").exists() else CUP}''', cls="slide--full", section="Pause")
+    {pic("pause-samoyede", "Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes.", 880, 495, "position:absolute;right:110px;bottom:190px") if (IMG / "pause-samoyede.png").exists() else CUP}''', cls="slide--full", section="Pause")
 
 chapter_slide(5)
 
@@ -818,7 +804,7 @@ slide(f'''    <p class="eyebrow">Qui porte quoi</p>
         <div>{ref}</div>
         <div class="card sk fill-teal frag"><h3>{icon("users")}La référente IA</h3><p>Elle garde la vue d'ensemble. Les référents de pôle font avancer la grille dans leur équipe.</p></div>
       </div>
-      {pic("referents-samoyede", "Trois samoyèdes encordés montent vers un drapeau : métier, processus, technologie, un cap commun.", 680, 383, over=OV_REF)}
+      {pic("referents-samoyede", "Trois samoyèdes encordés montent vers un drapeau : métier, processus, technologie, un cap commun.", 680, 383)}
     </div>''', seq=7, section="16h30 · Lancement de l'intersession",
  notes="Les noms s'écrivent en séance, ils ne figurent pas dans le support.")
 
@@ -841,12 +827,10 @@ slide(f'''    <p class="eyebrow">Ce soir</p>
     <ul class="checks mt">{gl}</ul>''', seq=7, section="16h30 · Lancement de l'intersession",
  notes="Faire cocher par le groupe. Revenir sur les attentes notées au tour de table du matin.")
 
-slide(f'''    <img class="brand-logo rise" src="images/logo-summit-flow.png" alt="Logo Summit Flow : une montagne, un circuit et un samoyède.">
-    <div class="grow stack center-y">
-      <p class="eyebrow rise">Rendez-vous le 22 janvier</p>
+slide(f'''    <div class="lockup rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><div><p class="lockup-name">Summit Flow</p><p class="lockup-sub">Marie Jolly · contact@summitflow.fr · summitflow.fr</p></div></div>
+    <div class="cover-body">
       <h1 class="rise">Merci, et <span class="mark">bonne observation</span></h1>
-      <p class="lead rise">D'ici là, on observe, on note, on remplit la grille.</p>
-      <p class="cover-meta small rise">Marie Jolly · contact@summitflow.fr · summitflow.fr</p>
+      <p class="lead rise">D'ici le 22 janvier, on observe, on note, on remplit la grille.</p>
     </div>
     {art("observation-samoyede", "Le samoyède renifle des traces dans la neige, un carnet ouvert à côté.", (40, 0, 980, 640), COVER_RIDGE)}''', cls="slide--cover slide--full", section="Fin du jour 1")
 

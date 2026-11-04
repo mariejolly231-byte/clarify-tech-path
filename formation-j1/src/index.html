@@ -13,10 +13,6 @@
       <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
       <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
-    <filter id="boil" x="-2%" y="-2%" width="104%" height="104%">
-      <feTurbulence id="boil-noise" type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="1" result="n"/>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
   </defs>
   <symbol id="i-logo" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="3"/><path d="M9 34 L19 19 L24 26 L29 17 L39 34 Z" fill="currentColor"/><path d="M14 39 h6 v-3 h8 v3 h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.5M12 17.2v.3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
@@ -33,15 +29,14 @@
 <main class="stage" aria-roledescription="présentation" aria-label="Automatisation et IA agentique, jour 1">
 
   <section class="slide slide--cover slide--full" data-section="9h00 · Point de départ" aria-roledescription="slide">
-    <img class="brand-logo rise" src="images/logo-summit-flow.png" alt="Logo Summit Flow : une montagne, un circuit et un samoyède.">
-    <div class="grow stack center-y">
-      <p class="eyebrow rise">Automatisation et IA agentique · Maison Lagarrigue · Jour 1</p>
-      <h1 class="rise">Assistant, automatisation, agent : savoir quoi utiliser, <span class="mark">et quand</span></h1>
+    <div class="lockup rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><div><p class="lockup-name">Summit Flow</p><p class="lockup-sub">Formation Automatisation et IA agentique</p></div></div>
+    <div class="cover-body">
+      <h1 class="rise"><span class="l">Assistant, automatisation, agent :</span> <span class="l">savoir quoi utiliser, <span class="mark">et quand</span></span></h1>
       <p class="lead rise">Comprendre, mesurer et choisir.</p>
-      <p class="cover-meta small rise">17 novembre 2026 · 9h00 à 17h00 · Marie Jolly, Summit Flow</p>
-      <div class="cover-actions rise"><button class="btn-act" data-act="full">Plein écran</button><button class="btn-act btn-act--ghost" data-act="pdf">Exporter en PDF</button></div>
+      <p class="cover-meta rise">Maison Lagarrigue · Jour 1 · 17 novembre 2026 · 9h00 à 17h00</p>
     </div>
-    <figure class="art" style="right:0px;bottom:0px;width:1560px;height:878px"><img class="art-media" src="images/couverture-samoyede.png" alt="Le samoyède de Summit Flow monte un sentier vers un sommet."><svg class="art-over" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="ov-cloud drift" style="--d:46s"><path transform="translate(1180 40) scale(1.1)" d="M0 30 C -2 14, 16 6, 28 14 C 34 0, 62 0, 66 16 C 82 12, 94 24, 88 34 Z" fill="#FFFFFF" stroke="#0B4F5C" stroke-width="3" stroke-linejoin="round"/></g><g class="ov-cloud drift drift--slow" style="--d:62s"><path transform="translate(1330 250) scale(0.8)" d="M0 30 C -2 14, 16 6, 28 14 C 34 0, 62 0, 66 16 C 82 12, 94 24, 88 34 Z" fill="#FFFFFF" stroke="#0B4F5C" stroke-width="3" stroke-linejoin="round"/></g><g transform="translate(1330 500) scale(1.2)"><g class="ov-wag"><path d="M0 0 C -8 10, -8 22, 0 32" /><path d="M-14 -6 C -24 10, -24 30, -14 44" /></g></g><g transform="translate(1440 150)"><g class="ov-spark"><path d="M0 -26 V-40 M22 -14 L33 -22 M-22 -14 L-33 -22"/></g></g></svg></figure>
+    <div class="cover-actions"><button class="btn-act btn-act--ghost" data-act="full">Plein écran</button><button class="btn-act btn-act--ghost" data-act="pdf">Exporter en PDF</button></div>
+    <figure class="art" style="right:0px;bottom:0px;width:1180px;height:664px"><img class="art-media" src="images/couverture-samoyede.png" alt="Le samoyède de Summit Flow monte un sentier vers un sommet."></figure>
     <aside class="notes">Accueil. Le sentier en bas à droite : on monte par étapes, on ne grimpe pas tout d'un coup.</aside>
   </section>
 
@@ -154,7 +149,7 @@
         <aside class="tip sk sk--thin frag"><svg class="bulb" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 4c-9 0-15 7-15 15 0 6 3 9 6 13 1.5 2 2 4 2 6h14c0-2 .5-4 2-6 3-4 6-7 6-13 0-8-6-15-15-15z" fill="#FFF3C4" stroke="#1F2A2E" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 42h12M15 47h10" stroke="#1F2A2E" stroke-width="2.5" stroke-linecap="round"/><path d="M20 20v12M16 24l4 4 4-4" stroke="#0B4F5C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="tip-txt">65 % des utilisateurs de l'IA au travail craignent de prendre du retard s'ils ne s'adaptent pas vite.</p><p class="tip-src">Source : Microsoft, Work Trend Index 2026, mai 2026</p></div></aside>
       </div>
     </div>
-    <figure class="art" style="right:100px;bottom:150px;width:560px;height:330px"><img class="art-media" src="images/depart-samoyede.png" alt="Le samoyède au point de départ d'un sentier, devant un panneau."><svg class="art-over" viewBox="0 0 1120 758" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><g transform="translate(242 430) scale(1.1)"><g class="ov-wag"><path d="M0 0 C -8 10, -8 22, 0 32" /><path d="M-14 -6 C -24 10, -24 30, -14 44" /></g></g><g class="ov-arrow"><path d="M840 120 l18 0 M846 112 l12 8 l-12 8"/></g></svg></figure>
+    <figure class="art" style="right:100px;bottom:150px;width:560px;height:330px"><img class="art-media" src="images/depart-samoyede.png" alt="Le samoyède au point de départ d'un sentier, devant un panneau."></figure>
     <aside class="notes">Flèche droite pour faire apparaître les questions une par une. Noter au tableau ce qui a coincé : on s'en sert au moment des limites et des doutes.</aside>
   </section>
 
@@ -171,7 +166,7 @@
         <li>Plus de pratique sur vos outils : Outlook, Excel</li>
         <li class="frag">Alors aujourd'hui, chaque notion part d'une de vos situations</li></ul></div>
     </div>
-    <figure class="art art--band" style="right:100px;bottom:136px;width:760px;height:270px"><img class="art-media" src="images/retour-samoyede.png" alt="Le samoyède regarde le chemin déjà parcouru."><svg class="art-over" viewBox="0 0 1672 636" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><g transform="translate(1528 186)"><g class="ov-sun"><path d="M0 -70 V-92 M50 -50 L64 -64 M-50 -50 L-64 -64 M70 0 H92 M-70 0 H-92"/></g></g><g class="ov-cloud drift" style="--d:50s"><path transform="translate(1300 60) scale(0.9)" d="M0 30 C -2 14, 16 6, 28 14 C 34 0, 62 0, 66 16 C 82 12, 94 24, 88 34 Z" fill="#FFFFFF" stroke="#0B4F5C" stroke-width="3" stroke-linejoin="round"/></g></svg></figure>
+    <figure class="art art--band" style="right:100px;bottom:136px;width:760px;height:270px"><img class="art-media" src="images/retour-samoyede.png" alt="Le samoyède regarde le chemin déjà parcouru."></figure>
     <aside class="notes">Faire raconter par ceux qui étaient là, pour ceux qui n'y étaient pas. La colonne de droite reprend les retours d'évaluation de mars : le dire, c'est montrer qu'on les a écoutés.</aside>
   </section>
 
@@ -416,7 +411,7 @@
         <button class="go sk sk--thin">Lancer</button>
       </div></div>
     </div>
-    <figure class="pic" style="width:880px;height:495px;position:absolute;right:110px;bottom:190px"><img src="images/pause-samoyede.png" alt="Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes."><svg class="art-over" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g transform="translate(888 590)"><g class="ov-steam"><path d="M0 0 C -14 -20, 14 -40, 0 -60 C -14 -80, 10 -96, 2 -116"/><path d="M26 6 C 14 -14, 38 -34, 26 -54 C 16 -70, 32 -84, 28 -98"/></g></g><g transform="translate(1228 240)"><g class="ov-sun"><path d="M0 -84 V-104 M58 -60 L72 -74 M-58 -60 L-72 -74 M84 0 H104 M-84 0 H-104"/></g></g></svg></figure>
+    <figure class="pic" style="width:880px;height:495px;position:absolute;right:110px;bottom:190px"><img src="images/pause-samoyede.png" alt="Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes."></figure>
     <aside class="notes"></aside>
   </section>
 
@@ -626,7 +621,7 @@
         <button class="go sk sk--thin">Lancer</button>
       </div></div>
     </div>
-    <figure class="pic" style="width:880px;height:495px;position:absolute;right:110px;bottom:190px"><img src="images/pause-samoyede.png" alt="Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes."><svg class="art-over" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g transform="translate(888 590)"><g class="ov-steam"><path d="M0 0 C -14 -20, 14 -40, 0 -60 C -14 -80, 10 -96, 2 -116"/><path d="M26 6 C 14 -14, 38 -34, 26 -54 C 16 -70, 32 -84, 28 -98"/></g></g><g transform="translate(1228 240)"><g class="ov-sun"><path d="M0 -84 V-104 M58 -60 L72 -74 M-58 -60 L-72 -74 M84 0 H104 M-84 0 H-104"/></g></g></svg></figure>
+    <figure class="pic" style="width:880px;height:495px;position:absolute;right:110px;bottom:190px"><img src="images/pause-samoyede.png" alt="Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes."></figure>
     <aside class="notes"></aside>
   </section>
 
@@ -774,7 +769,7 @@
         <div><div class="fill-line rise"><span>Commerce</span><span class="f" contenteditable="true" data-k="ref-0" data-ph="nom à écrire en séance"></span></div><div class="fill-line rise"><span>RH et comptabilité</span><span class="f" contenteditable="true" data-k="ref-1" data-ph="nom à écrire en séance"></span></div><div class="fill-line rise"><span>Communication</span><span class="f" contenteditable="true" data-k="ref-2" data-ph="nom à écrire en séance"></span></div></div>
         <div class="card sk fill-teal frag"><h3><svg aria-hidden="true"><use href="#i-users"/></svg>La référente IA</h3><p>Elle garde la vue d'ensemble. Les référents de pôle font avancer la grille dans leur équipe.</p></div>
       </div>
-      <figure class="pic" style="width:680px;height:383px;"><img src="images/referents-samoyede.png" alt="Trois samoyèdes encordés montent vers un drapeau : métier, processus, technologie, un cap commun."><svg class="art-over" viewBox="0 0 1671 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g transform="translate(1500 190)"><g class="ov-sun"><path d="M0 -76 V-96 M54 -54 L68 -68 M-54 -54 L-68 -68 M76 0 H96 M-76 0 H-96"/></g></g></svg></figure>
+      <figure class="pic" style="width:680px;height:383px;"><img src="images/referents-samoyede.png" alt="Trois samoyèdes encordés montent vers un drapeau : métier, processus, technologie, un cap commun."></figure>
     </div>
     <aside class="notes">Les noms s'écrivent en séance, ils ne figurent pas dans le support.</aside>
   </section>
@@ -801,12 +796,10 @@
   </section>
 
   <section class="slide slide--cover slide--full" data-section="Fin du jour 1" aria-roledescription="slide">
-    <img class="brand-logo rise" src="images/logo-summit-flow.png" alt="Logo Summit Flow : une montagne, un circuit et un samoyède.">
-    <div class="grow stack center-y">
-      <p class="eyebrow rise">Rendez-vous le 22 janvier</p>
+    <div class="lockup rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><div><p class="lockup-name">Summit Flow</p><p class="lockup-sub">Marie Jolly · contact@summitflow.fr · summitflow.fr</p></div></div>
+    <div class="cover-body">
       <h1 class="rise">Merci, et <span class="mark">bonne observation</span></h1>
-      <p class="lead rise">D'ici là, on observe, on note, on remplit la grille.</p>
-      <p class="cover-meta small rise">Marie Jolly · contact@summitflow.fr · summitflow.fr</p>
+      <p class="lead rise">D'ici le 22 janvier, on observe, on note, on remplit la grille.</p>
     </div>
     <svg class="cover-ridge illu" viewBox="0 0 900 360" aria-hidden="true">
       <path data-d="0.9" d="M20 340 L250 150 L360 240 L560 40 L700 190 L780 130 L890 260 L890 340 Z" fill="#DCEEFA" filter="url(#rough)"/>
