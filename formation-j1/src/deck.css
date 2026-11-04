@@ -750,3 +750,19 @@ h2 { letter-spacing: .005em; }
 .trig-card h3 { margin-bottom: 6px; }
 .trig-card p { font-size: 24px; }
 .trig-card .trig-who { margin-top: 10px; font-weight: 700; color: var(--teal); font-size: 20px; }
+
+/* Repère de thème du chapitre 2 : de quoi parle la slide */
+.topic { position: absolute; top: 66px; right: 170px; display: flex; gap: 10px; z-index: 3; }
+.topic span { font: 700 20px/1 var(--font-body); padding: 10px 16px; border-radius: 999px; color: #9aa3a5; background: transparent; box-shadow: inset 0 0 0 2px #dfe4e4; }
+.topic span.is-on { color: var(--teal); box-shadow: none; }
+.topic .t-lav.is-on { background: var(--lav); }
+.topic .t-sky.is-on { background: var(--sky); }
+.topic .t-mint.is-on { background: var(--mint); }
+/* Le harnais complet : garde-fous à gauche, tests à droite, le collègue numérique au centre avec son bouclier */
+.anat--guard { grid-template-columns: 1fr 380px 1fr; }
+.guard-mid { position: relative; }
+.guard-mid .human { width: 290px; height: 420px; }
+.guard-shield { position: absolute; top: 170px; left: 50%; width: 92px; height: 108px; transform: translateX(-50%); }
+.anat--guard .comp .comp-t { font-size: 28px; }
+.anat--guard .comp .comp-ex { font-size: 21px; }
+.col-h { font: 700 22px/1 var(--font-body); color: var(--teal); text-transform: none; margin-bottom: 2px; }

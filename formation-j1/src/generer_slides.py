@@ -2,6 +2,20 @@
 # Lancer depuis formation-j1/ : python3 src/generer_slides.py, puis python3 build.py
 import pathlib
 S = []
+# Chapitre 2 : en haut à droite, un repère dit de quoi parle la slide (mêmes couleurs que la légende de l'atelier)
+TOPIC = {"three-lines": "asm", "Tout part d'un": "asm", "L\'automatisation <span": "a", "Le modèle, l'inférence": "sg", "Ce qu'on paramètre": "sg",
+         "Pourquoi l'assistant": "s", "Un assistant <span": "s", "Assistant ou agent :": "sg", "tu gardes la main": "s", "poursuit un objectif</span>, dans": "g",
+         "Assistant, automatisation ou agent ?": "asm", "Le harnais complet": "sg"}
+def topic_mark(body):
+    code = next((v for k, v in TOPIC.items() if k in body), None)
+    if not code:
+        return ""
+    items = [("a", "Automatisation", "lav"), ("s", "Assistant", "sky"), ("g", "Agent", "mint")]
+    on = set(code.replace("m", "g") if code == "am" else code)
+    if code == "am": on = {"a", "s"}
+    if code == "asm": on = {"a", "s", "g"}
+    return '<div class="topic" aria-label="Sur cette slide">' + "".join(f'<span class="t-{c}{" is-on" if k in on else ""}">{n}</span>' for k, n, c in items) + "</div>"
+
 def slide(body, seq=None, section="", cls="", notes="", preview=False):
     # Les illustrations se placent par rapport à la slide : on les sort des blocs où elles ont été écrites
     import re
@@ -20,6 +34,8 @@ def slide(body, seq=None, section="", cls="", notes="", preview=False):
         body = body.replace("</h2>", f'</h2>\n    <p class="howto">{line}</p>', 1)
     if seq and "slide--full" not in cls:
         section = f"Chapitre {seq} · {CHAPTERS[seq - 1][1]}"
+    if seq == 2:
+        body += "\n    " + topic_mark(body)
     a = f' data-seq="{seq}"' if seq else ""
     a += f' data-section="{section}"'
     S.append(f'''  <section class="slide {cls}"{a} aria-roledescription="slide">
@@ -477,14 +493,17 @@ slide(f'''    <p class="eyebrow">Le harnais pièce par pièce : un collègue num
  notes="Démo en direct : faire apparaître chaque pièce au moment où tu la montres dans l'outil. Insister à la fin : c'est un outil. Le même modèle, mal harnaché, donne de mauvais résultats. Le bocal de la slide précédente, vu de près. Vérifier le nom exact des modèles la veille de la séance.")
 
 slide(f'''    <p class="eyebrow">Sur le terrain : l'usage n°1</p>
-    <h2>Un <span class="mark mark--sky">super moteur de recherche</span></h2>
-    <p class="lead rise" style="margin-top:18px">Le harnais, c'est la théorie. En pratique, on pose une question et on attend une réponse : on s'en sert en assistant, sans l'équiper.</p>
+    <h2>Pourquoi l'assistant <span class="mark mark--sky">déçoit</span>, en pratique</h2>
+    <p class="lead rise" style="margin-top:18px">On s'en sert comme d'un super moteur de recherche : une question, une réponse, sans l'équiper. Alors il faut tout réexpliquer, recopier, corriger.</p>
     <div class="cols--3" style="display:grid;margin-top:34px;align-items:start">
       <div class="card sk fill-lav frag"><h3>On oublie le contexte</h3><p>Qui je suis, pour qui, avec quelles règles. Sans ça, la réponse reste générique.</p></div>
       <div class="card sk fill-sky frag"><h3>On oublie la connexion</h3><p>Elle ne voit ni Outlook, ni Excel, ni vos documents. On recopie tout à la main.</p></div>
       <div class="card sk fill-mint frag"><h3>On oublie la mémoire</h3><p>Chaque fois, on repart de zéro et on réexplique.</p></div>
     </div>
-    <p class="idea frag" style="font-size:50px;margin-top:36px">Résultat : on passe parfois <span class="mark mark--blush">plus de temps</span> qu'à faire la tâche soi-même.</p>''', seq=2, section=S945,
+    <div class="cols mt" style="align-items:center">
+      <p class="idea frag" style="font-size:46px">Résultat : on passe parfois <span class="mark mark--blush">plus de temps</span> qu'à faire la tâche soi-même.</p>
+      {tip("Près de 40 % du temps gagné grâce à l'IA est reperdu à corriger, réécrire ou vérifier ce qu'elle produit, surtout avec des outils génériques.", "Workday, enquête auprès de 3 200 salariés, janvier 2026", "frag")}
+    </div>''', seq=2, section=S945,
  notes="Transition : on vient de voir les pièces du harnais ; voilà ce qui se passe quand on les oublie. Faire réagir : qui s'est déjà dit que ça aurait été plus rapide de le faire soi-même ? La slide suivante montre pourquoi : il manque des pièces. Pour appuyer : 24 % des TPE et PME utilisent l'IA pour des chatbots, assistants ou outils de recherche d'informations (Baromètre France Num 2026).")
 
 def yes(t): return f'<td class="ok">{t}</td>'
@@ -505,7 +524,7 @@ slide(f'''    <p class="eyebrow">L'assistant et l'agent</p>
 
 same = "".join(f'<span class="pill sk sk--thin">{t}</span>' for t in ["Modèle", "Instructions", "Connaissances", "Outils", "Compétences", "Mémoire", "Boucle"])
 slide(f'''    <p class="eyebrow">L'assistant et l'agent</p>
-    <h2>Une seule vraie différence : <span class="mark mark--blush">le déclencheur</span></h2>
+    <h2>Assistant ou agent : <span class="mark mark--blush">le déclencheur</span> fait la différence</h2>
     <div class="cols mt" style="align-items:stretch">
       <div class="card sk fill-sky rise"><h3>L'assistant</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Ton message, à chaque question.</p></div>
       <div class="card sk fill-mint rise"><h3>L'agent</h3><div class="pills">{same}</div><p class="trig frag"><b class="hand">Déclencheur</b>Un objectif, un événement ou un horaire. Il enchaîne seul.</p></div>
@@ -524,10 +543,33 @@ GARDE = f'''
       <p><b>Un humain valide</b> avant que quoi que ce soit parte chez un client, un fournisseur ou un collègue.</p>
       <p><b>Aucune action irréversible</b> sans toi : payer, commander, supprimer, envoyer.</p></div>'''
 logic("L'agent en vrai", 'Il <span class="mark">poursuit un objectif</span>, dans ton cadre', "", "C'est comme l'autoguidage du tracteur : tu fixes la parcelle et le cadre, il trace les lignes, tu restes en cabine.",
- [("Super agent Lindy", "Sur mon téléphone : ce que je lui ai confié, et ce qu'il a fait de lui-même.", '<span class="live">démo en direct</span>'),
+ [("Super agent Lindy", "Un mélange des deux : tu lui parles comme à un assistant, puis il part faire le travail seul, comme un agent.", '<span class="live">démo en direct sur mon téléphone</span>'),
   ("Une tâche planifiée Claude", "Elle se lance seule à l'heure prévue, fait le travail, et me livre le résultat.", '<span class="live">démo en direct</span>'),
-  ("Côté Copilot", "Une demande planifiée, qui revient chaque semaine sans qu'on la relance : déjà un premier pas vers l'agent. Pour aller plus loin : Copilot Studio.", avous())],
- "fill-mint", "Relier à l'anatomie : mêmes pièces que l'assistant, mais c'est l'objectif qui le lance. Puis les deux garde-fous : ils font partie du cadre qu'on lui donne, c'est le harnais qui les impose. Exemple Lindy : il prépare la commande, il ne la passe pas. Côté Copilot, les invites planifiées dans Agent Builder arrivent entre mi-novembre et mi-décembre 2026 selon Microsoft (MC1302906) : vérifier la veille qu'elles sont ouvertes chez eux, sinon le montrer avec Claude seulement.", GARDE)
+  ("Côté Copilot", "<b>Agent Builder</b> (« Créer un agent ») : un agent avec ses consignes et ses sources. Avec une demande planifiée, il travaille sans qu'on le relance. Pour aller plus loin : <b>Copilot Studio</b>.", avous())],
+ "fill-mint", "Relier à l'anatomie : mêmes pièces que l'assistant, mais c'est l'objectif qui le lance. Puis les deux garde-fous : ils font partie du cadre qu'on lui donne, c'est le harnais qui les impose. Exemple Lindy : il prépare la commande, il ne la passe pas. Les super agents (Lindy, Hermes…) mélangent les deux logiques : on leur parle comme à un assistant, par message, et ils enchaînent ensuite plusieurs tâches seuls, avec leurs outils, comme un agent. Côté Copilot, nuance à donner : un agent créé avec Agent Builder répond surtout quand on lui écrit, il se comporte d'abord comme un assistant bien équipé ; il devient vraiment un agent quand il a des actions et une planification, ou quand il est construit dans Copilot Studio. Côté Copilot, les invites planifiées dans Agent Builder arrivent entre mi-novembre et mi-décembre 2026 selon Microsoft (MC1302906) : vérifier la veille qu'elles sont ouvertes chez eux, sinon le montrer avec Claude seulement.", GARDE)
+
+# Le harnais complet : le collègue numérique, avec ses garde-fous, et la façon de les tester
+import re as _re
+HUMAN_ALL = _re.sub(r'<g class="frag" data-step="\d+">', '<g>', HUMAN)
+SHIELD = '<path d="M0 -60 L46 -44 V-6 C46 26, 22 46, 0 56 C-22 46, -46 26, -46 -6 V-44 Z" fill="#FCE4E8" stroke="#2A2F33" stroke-width="4" stroke-linejoin="round"/><path d="M-18 0 L-4 14 L22 -14" fill="none" stroke="#0B4F5C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>'
+def gcard(title, text, cls="blush"):
+    return f'<div class="comp sk fill-{cls} frag"><p class="hand comp-t">{title}</p><p class="comp-ex">{text}</p></div>'
+slide(f'''    <h2>Le harnais complet, <span class="mark mark--blush">avec ses garde-fous</span></h2>
+    <p class="howto">Les garde-fous font partie du réglage : on les écrit dans les consignes, et on vérifie qu'ils tiennent.</p>
+    <div class="anat anat--guard">
+      <div class="anat-col"><p class="col-h">Les garde-fous</p>
+        {gcard("Un humain valide", "Rien ne part chez un client, un fournisseur ou un collègue sans relecture.")}
+        {gcard("Rien d'irréversible", "Il ne paie pas, ne commande pas, ne supprime pas, n'envoie pas sans toi.")}
+        {gcard("Ai-je le droit ?", "Données personnelles, clients ou confidentielles : seulement dans un outil validé.")}
+      </div>
+      <div class="anat-mid guard-mid">{HUMAN_ALL}<svg class="guard-shield" viewBox="-60 -70 120 140" aria-hidden="true">{SHIELD}</svg><p class="harness"><b class="hand">Les garde-fous entourent tout le reste.</b>Ils sont réglés, puis testés.</p></div>
+      <div class="anat-col"><p class="col-h">On les teste</p>
+        {gcard("On essaie de le faire déraper", "Une demande ambiguë, une donnée sensible, une action interdite : il doit s'arrêter ou poser la question.", "teal")}
+        {gcard("On regarde ce qu'il fait", "Avant d'élargir, on relit ses réponses et ses actions sur quelques cas réels.", "teal")}
+        {gcard("On reteste à chaque changement", "Nouvelle consigne, nouvel outil, nouveau modèle : les garde-fous se revérifient.", "teal")}
+      </div>
+    </div>''', seq=2, section=S945,
+ notes="Reprendre le collègue numérique de tout à l'heure : mêmes pièces, et les garde-fous autour. Les trois de gauche se règlent dans les consignes et les droits d'accès. Les trois de droite disent comment on vérifie qu'ils tiennent : c'est ce qui permet de confier un travail à un assistant ou à un agent. Exemple à faire vivre : demander à l'agent de passer la commande lui-même ; il doit refuser et proposer de la préparer.")
 
 quiz = [("Préparer une présentation PowerPoint à partir de mes notes", "assistant", "sky"),
         ("Chaque facture reçue par e-mail s'ajoute au tableau de trésorerie", "automatisation", "lav"),

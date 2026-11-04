@@ -58,7 +58,7 @@ Image : le samoyède est arrêté sur un replat et regarde en arrière, vers le 
 
 Animation : le samoyède regarde le chemin derrière lui, puis se retourne vers l'avant. Les traces de pattes apparaissent une à une le long du chemin.
 
-## 5 et 6. Infographies, slides 11 et 12
+## 5 et 6. Infographies, slides 11 et 12 (fait)
 
 Fichiers : `comment-fonctionne-ia.png` et `comment-ia-apprend.png`, en format portrait 2:3, sans animation.
 
@@ -76,7 +76,7 @@ Image : trois petites vignettes côte à côte, chacune dans un cadre arrondi au
 
 Animation : dans la première vignette, la balle part et le chien la rapporte. Dans la deuxième, les croquettes tombent dans la gamelle et l'aiguille avance. Dans la troisième, le chien avance vers le refuge. Les trois bougent en même temps.
 
-## 8. Pause, slides 26 et 39
+## 8. Pause, slides 27 et 40 (fait)
 
 Fichier : `pause-samoyede.png` puis `pause-samoyede.mp4`.
 
@@ -84,7 +84,7 @@ Image : le samoyède est couché sur un rocher plat, la tête posée sur ses pat
 
 Animation : le samoyède respire lentement, son flanc se soulève, il cligne des yeux une fois. La vapeur monte en volutes et se dissipe.
 
-## 9. Atelier de classement, slide 30
+## 9. Atelier de classement, slide 31
 
 Fichier : `atelier-samoyede.png` puis `atelier-samoyede.mp4`.
 
@@ -92,7 +92,7 @@ Image : quatre paniers alignés, teal pâle, lavande, menthe et rose pâle. Le s
 
 Animation : le samoyède dépose la balle dans un panier, se retourne, en prend une autre au sol.
 
-## 10. Déjeuner, slide 32
+## 10. Déjeuner, slide 33
 
 Fichier : `dejeuner-samoyede.png` puis `dejeuner-samoyede.mp4`.
 
@@ -100,7 +100,7 @@ Image : le samoyède est assis, attentif et souriant, devant un sac de randonné
 
 Animation : le samoyède penche la tête d'un côté puis de l'autre, ses oreilles se dressent, sa queue balaie le sol.
 
-## 11. Choisir un outil, slide 43
+## 11. Choisir un outil, slide 44 (fait)
 
 Fichier : `choisir-samoyede.png` puis `choisir-samoyede.mp4`.
 
@@ -108,7 +108,7 @@ Image : deux sacs de randonnée posés côte à côte, l'un énorme et chargé d
 
 Animation : le samoyède regarde le gros sac, penche la tête, puis pose la patte sur le petit sac.
 
-## 12. Un référent par pôle, slide 51
+## 12. Un référent par pôle, slide 52
 
 Fichier : `referents-samoyede.png` puis `referents-samoyede.mp4`.
 
@@ -116,7 +116,7 @@ Image : trois samoyèdes encordés montent en file sur une pente douce enneigée
 
 Animation : les trois chiens avancent ensemble d'un même pas, la corde se tend et se détend légèrement, de nouvelles traces apparaissent derrière eux.
 
-## 13. Ce que vous savez faire maintenant, slide 53
+## 13. Ce que vous savez faire maintenant, slide 54
 
 Fichier : `sommet-samoyede.png` puis `sommet-samoyede.mp4`, en format carré 1:1.
 
@@ -124,7 +124,7 @@ Image : le samoyède est assis au sommet d'une montagne aux aplats teal pâle, �
 
 Animation : le fanion flotte au vent, la fourrure du samoyède bouge légèrement, il ferme les yeux un instant, comme au soleil.
 
-## 14. Fin de journée et intersession, slide 54
+## 14. Fin de journée et intersession, slide 55
 
 Fichier : `observation-samoyede.png` puis `observation-samoyede.mp4`.
 
@@ -144,7 +144,7 @@ Le feu vert, fichier `gardefous-samoyede.png` : le samoyède en harnais s'est ar
 
 ## Ce que ChatGPT ne doit pas fabriquer
 
-Les captures des slides 17, 23, 24, 37 et 38 (Make, Apps Script, projet Claude, Copilot, Lindy) doivent être de vraies captures d'écran de tes outils. Une fausse capture générée par une IA se repère vite, et elle te ferait perdre ta crédibilité devant le groupe, surtout pour des démos de secours.
+Les captures des slides 17, 23, 24, 38 et 39 (Make, Apps Script, projet Claude, Copilot, Lindy) doivent être de vraies captures d'écran de tes outils. Une fausse capture générée par une IA se repère vite, et elle te ferait perdre ta crédibilité devant le groupe, surtout pour des démos de secours.
 
 Les logos de la slide 13 (Microsoft 365 Copilot, Outlook, Excel, Word, Teams) se prennent sur les pages officielles de Microsoft. Un logo régénéré est faux, et il peut poser un problème de droit de marque.
 
@@ -156,11 +156,11 @@ Si le chien change d'une image à l'autre : « Reprends exactement le samoyède 
 
 Ces trois images sont déjà dans le deck, mais leurs libellés ne disent pas la même chose que les slides. Colle chaque prompt dans la conversation ChatGPT où tu as créé la série, pour garder le même samoyède et le même style. Garde le même nom de fichier : le deck prendra la nouvelle version tout seul.
 
-### Atelier de classement, slide 30 (`atelier-samoyede.png`)
+### Atelier de classement, slide 31 (`atelier-samoyede.png`)
 
 Même personnage, même style aquarelle et trait dessiné que les images précédentes, format 16:9. Le samoyède en harnais teal est assis derrière quatre paniers alignés et dépose une balle dans l'un d'eux. Un panneau en bois à gauche porte le texte « Atelier de classement ». Sur chaque panier, une seule étiquette, dans cet ordre de gauche à droite : un panier teal pâle avec une petite bulle de dialogue et le mot « Assistant » ; un panier lavande avec un engrenage et le mot « Automatisation » ; un panier menthe avec un panneau de direction et le mot « Agent » ; un panier rose pâle avec une main ouverte et les mots « Pas d'outil ». Aucun autre texte dans l'image. Texte en français, sans faute, lettres lisibles. Montagnes douces en fond, beaucoup d'air.
 
-### Un référent par pôle, slide 51 (`referents-samoyede.png`)
+### Un référent par pôle, slide 52 (`referents-samoyede.png`)
 
 Même personnage, même style que les images précédentes, format 16:9. Trois samoyèdes encordés montent ensemble une pente enneigée vers un drapeau au sommet. Chacun porte un petit sac à dos d'une couleur différente : teal pâle, lavande, menthe. Au-dessus de chaque chien, une bulle avec un seul nom, dans cet ordre de gauche à droite : « Commerce », « RH et compta », « Communication ». Au sommet, à côté du drapeau, un quatrième samoyède assis, en harnais teal, qui les attend et regarde le chemin : il représente la référente IA, sans texte. Un panneau en bois en haut à gauche porte le texte « Un référent par pôle ». Aucun autre texte dans l'image. Texte en français, sans faute.
 
