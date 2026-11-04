@@ -675,10 +675,27 @@ h2 { letter-spacing: .005em; }
 .chrome-logo { display: inline-block; width: 52px; height: 52px; border-radius: 50%; background: var(--logo) center / contain no-repeat; }
 
 /* Organisme pour lequel j'interviens, en contrepoint du logo Summit Flow */
-.lockup .partner { margin-left: auto; margin-right: 130px; display: flex; align-items: center; gap: 18px; }
-.lockup .partner p { font-family: var(--font-body); font-size: 22px; font-weight: 600; color: var(--muted); }
-.lockup .partner img { height: 150px; width: auto; }
-.me-cfd img { height: 64px; width: auto; vertical-align: middle; margin-left: 18px; }
+/* Les deux logos côte à côte, à la même hauteur : Summit Flow rond, CFD Formation sur sa tuile blanche d'origine */
+.lockup--duo { gap: 24px; }
+.lockup--duo .brand-logo { width: 150px; height: 150px; }
+.logo-tile { display: grid; place-items: center; height: 150px; padding: 0 22px; border-radius: 22px; background: #fff; }
+.logo-tile img { height: 118px; width: auto; display: block; }
+.lockup--duo > div { margin-left: 14px; }
+.lockup--duo .lockup-name { font-size: 34px; }
+/* Qui je suis : les logos sous la photo, et ce que je fais en trois verbes */
+.me-logos { display: flex; align-items: center; gap: 18px; margin-top: 26px; }
+.me-logos > img { width: 104px; height: 104px; }
+.me-logos .logo-tile { height: 104px; padding: 0 16px; border-radius: 18px; }
+.me-logos .logo-tile img { height: 82px; }
+.me-logos-t { margin-top: 10px; font-family: var(--font-body); font-weight: 600; font-size: 20px; color: var(--muted); }
+.me-list li { font-size: 28px; }
+.me-do { margin-top: 26px; }
+.me-do-t { font-size: 26px; font-weight: 600; color: var(--ink); margin-bottom: 14px; }
+.me-do-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.me-do-row p { background: var(--mint); border-radius: 16px; padding: 14px 18px; font-size: 21px; line-height: 1.35; }
+.me-do-row p:nth-child(2) { background: var(--tealp); }
+.me-do-row p:nth-child(3) { background: var(--lav); }
+.me-do-row b { display: block; font-family: var(--font-title); font-weight: 400; font-size: 36px; color: var(--teal); line-height: 1.1; margin-bottom: 4px; }
 /* Consigne d'animation : une ligne simple sous le titre, à la place des pastilles */
 .howto { margin-top: 10px; font-family: var(--font-body); font-size: 24px; font-weight: 600; color: var(--teal); }
 

@@ -183,7 +183,11 @@ def chapter_slide(n):
           notes=f"Ouverture du chapitre {n}. Une phrase pour dire ce qu'on va faire, puis on avance.")
 
 # ---------- 9h00 Point de départ ----------
-slide(f'''    <div class="lockup rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><div><p class="lockup-name">Summit Flow</p><p class="lockup-sub">Formation Automatisation et IA agentique</p></div><div class="partner"><p>Pour</p><img src="images/logo-cfd-formation.png" alt="Logo CFD Formation"></div></div>
+slide(f'''    <div class="lockup lockup--duo rise">
+      <img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow">
+      <span class="logo-tile"><img src="images/logo-cfd-formation.png" alt="Logo CFD Formation"></span>
+      <div><p class="lockup-name">Summit Flow, pour CFD Formation</p><p class="lockup-sub">Formation Automatisation et IA agentique</p></div>
+    </div>
     <div class="cover-body">
       <h1 class="rise"><span class="l">Assistant, automatisation, agent :</span> <span class="l">savoir quoi utiliser, <span class="mark">et quand</span></span></h1>
       <p class="lead rise">Comprendre, mesurer et choisir.</p>
@@ -211,15 +215,15 @@ chapter_slide(1)
 slide(f'''    <p class="eyebrow">Qui je suis</p>
     <h2>Marie Jolly, <span class="mark">Summit Flow</span></h2>
     <div class="me">
-      <div class="me-photo"><figure class="me-pic sk"><img src="images/marie-samoyede.jpg" alt="Marie Jolly en montagne, accroupie à côté de son samoyède blanc en harnais."></figure><svg class="illu me-mount" viewBox="0 0 300 140" aria-hidden="true"><path data-d="0.6" d="M10 130 L90 50 L130 90 L190 20 L290 130 Z" fill="#DCEEFA" filter="url(#rough)"/><path data-d="0.2" class="ink" d="M10 130 L90 50 L130 90 L190 20 L290 130" filter="url(#rough)"/><path data-d="1.0" class="inkt" d="M30 128 C 90 120, 130 100, 160 70 S 185 35, 190 24" stroke-dasharray="3 10" style="stroke-width:3"/></svg></div>
-      <ul class="dash me-list">
+      <div class="me-photo"><figure class="me-pic sk"><img src="images/marie-samoyede.jpg" alt="Marie Jolly en montagne, accroupie à côté de son samoyède blanc en harnais."></figure><div class="me-logos"><img src="images/logo-summit-flow.png" alt="Logo Summit Flow"><span class="logo-tile"><img src="images/logo-cfd-formation.png" alt="Logo CFD Formation"></span></div><p class="me-logos-t">Ici, pour CFD Formation</p></div>
+      <div class="me-right"><ul class="dash me-list">
         <li class="frag">Ingénieure, formée à IMT Mines Albi, pas très loin d'ici</li>
         <li class="frag">Dix ans dans l'aéronautique : production, gestion de projet, industrialisation</li>
         <li class="frag">L'IA, l'automatisation et les agents : d'abord pour mes propres besoins, bien avant ChatGPT</li>
-        <li class="frag">Aujourd'hui, j'accompagne des PME et des organismes de formation, au plus près du terrain</li>
-        <li class="frag me-cfd">Ici, j'interviens pour CFD Formation<img src="images/logo-cfd-formation.png" alt="Logo CFD Formation"></li>
         <li class="frag">Passionnée de montagne, en parcours de certification pour devenir accompagnatrice en montagne</li>
       </ul>
+      <div class="me-do frag"><p class="me-do-t">Avec Summit Flow, j'aide les entreprises à passer à l'IA, du premier pas à la mise en place.</p>
+        <div class="me-do-row"><p><b>Former</b>les équipes, en entreprise, sur leurs vrais outils</p><p><b>Auditer</b>les processus, pour voir ce qui gagne à être automatisé</p><p><b>Construire</b>les solutions : automatisations, assistants, agents</p></div></div></div>
     </div>''', seq=1, section="9h00 · Point de départ",
  notes="Court : deux minutes. La montagne fait le lien avec le fil de la journée : on monte par étapes, et on allège le sac.")
 
