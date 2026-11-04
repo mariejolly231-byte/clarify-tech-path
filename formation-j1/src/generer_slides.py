@@ -8,13 +8,18 @@ def slide(body, seq=None, section="", cls="", notes="", preview=False):
     arts = re.findall(r'\n?\s*<figure class="art[^"]*"[^>]*>.*?</figure>', body, re.S)
     for x in arts: body = body.replace(x, "")
     body += "".join("\n    " + x.strip() for x in arts)
+    # Règle de la maison : rien au-dessus du titre. Ni surtitre, ni étiquette en pastille.
+    # Les consignes d'animation (en sous-groupes, selon les licences) passent en une ligne sous le titre,
+    # et le repère de chapitre vit dans le pied de page.
+    body = re.sub(r'\s*<p class="eyebrow">.*?</p>', '', body, flags=re.S)
+    tags = re.findall(r'<span class="tag[^"]*">(.*?)</span>', body, re.S)
+    if tags:
+        body = re.sub(r'\s*<div class="meta">.*?</div>', '', body, flags=re.S)
+        body = re.sub(r'\s*<span class="tag[^"]*">.*?</span>', '', body, flags=re.S)
+        line = " · ".join(re.sub(r"<svg.*?</svg>", "", t, flags=re.S).strip() for t in tags)
+        body = body.replace("</h2>", f'</h2>\n    <p class="howto">{line}</p>', 1)
     if seq and "slide--full" not in cls:
-        if '<p class="eyebrow">' in body:
-            body = body.replace('<p class="eyebrow">', f'<p class="eyebrow"><span class="chap" title="Chapitre {seq}">{seq}</span>', 1)
-        elif '<div class="meta">' in body:
-            body = body.replace('<div class="meta">', f'<div class="meta"><span class="chap chap--tag" title="Chapitre {seq}">{seq}</span>', 1)
-        elif '<span class="tag' in body:
-            body = body.replace('<span class="tag', f'<span class="chap chap--tag" title="Chapitre {seq}">{seq}</span><span class="tag', 1)
+        section = f"Chapitre {seq} · {CHAPTERS[seq - 1][1]}"
     a = f' data-seq="{seq}"' if seq else ""
     a += f' data-section="{section}"'
     S.append(f'''  <section class="slide {cls}"{a} aria-roledescription="slide">
@@ -163,7 +168,7 @@ def chapter_slide(n):
           notes=f"Ouverture du chapitre {n}. Une phrase pour dire ce qu'on va faire, puis on avance.")
 
 # ---------- 9h00 Point de départ ----------
-slide(f'''    <div class="lockup rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><div><p class="lockup-name">Summit Flow</p><p class="lockup-sub">Formation Automatisation et IA agentique</p></div></div>
+slide(f'''    <div class="lockup rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><div><p class="lockup-name">Summit Flow</p><p class="lockup-sub">Formation Automatisation et IA agentique</p></div><div class="partner"><p>Pour</p><img src="images/logo-cfd-formation.png" alt="Logo CFD Formation"></div></div>
     <div class="cover-body">
       <h1 class="rise"><span class="l">Assistant, automatisation, agent :</span> <span class="l">savoir quoi utiliser, <span class="mark">et quand</span></span></h1>
       <p class="lead rise">Comprendre, mesurer et choisir.</p>
@@ -197,6 +202,7 @@ slide(f'''    <p class="eyebrow">Qui je suis</p>
         <li class="frag">Dix ans dans l'aéronautique : production, gestion de projet, industrialisation</li>
         <li class="frag">L'IA, l'automatisation et les agents : d'abord pour mes propres besoins, bien avant ChatGPT</li>
         <li class="frag">Aujourd'hui, j'accompagne des PME et des organismes de formation, au plus près du terrain</li>
+        <li class="frag me-cfd">Ici, j'interviens pour CFD Formation<img src="images/logo-cfd-formation.png" alt="Logo CFD Formation"></li>
         <li class="frag">Passionnée de montagne, en parcours de certification pour devenir accompagnatrice en montagne</li>
       </ul>
     </div>''', seq=1, section="9h00 · Point de départ",

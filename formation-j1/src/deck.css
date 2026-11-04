@@ -673,3 +673,11 @@ h2 { letter-spacing: .005em; }
 /* Pied de page : le logo rond, lisible, à côté du nom */
 .chrome .wordmark { gap: 14px; letter-spacing: .02em; font-size: 22px; font-weight: 700; }
 .chrome-logo { display: inline-block; width: 52px; height: 52px; border-radius: 50%; background: var(--logo) center / contain no-repeat; }
+
+/* Organisme pour lequel j'interviens, en contrepoint du logo Summit Flow */
+.lockup .partner { margin-left: auto; margin-right: 130px; display: flex; align-items: center; gap: 18px; }
+.lockup .partner p { font-family: var(--font-body); font-size: 22px; font-weight: 600; color: var(--muted); }
+.lockup .partner img { height: 150px; width: auto; }
+.me-cfd img { height: 64px; width: auto; vertical-align: middle; margin-left: 18px; }
+/* Consigne d'animation : une ligne simple sous le titre, à la place des pastilles */
+.howto { margin-top: 10px; font-family: var(--font-body); font-size: 24px; font-weight: 600; color: var(--teal); }

@@ -151,3 +151,19 @@ Les logos de la slide 13 (Microsoft 365 Copilot, Outlook, Excel, Word, Teams) se
 ## Si le résultat dérive
 
 Si le chien change d'une image à l'autre : « Reprends exactement le samoyède de la fiche personnage, mêmes proportions, même harnais teal, même trait. » Si des couleurs vives ou des dégradés apparaissent : « Uniquement les six couleurs de la palette, aplats plats, aucun dégradé. » Si du texte apparaît : « Supprime tout texte et toute lettre. » Si le chien devient trop humain : « C'est un chien qui se comporte comme un chien : à quatre pattes, sans vêtement, sans objet tenu comme un humain. »
+
+## Corrections : trois images à régénérer
+
+Ces trois images sont déjà dans le deck, mais leurs libellés ne disent pas la même chose que les slides. Colle chaque prompt dans la conversation ChatGPT où tu as créé la série, pour garder le même samoyède et le même style. Garde le même nom de fichier : le deck prendra la nouvelle version tout seul.
+
+### Atelier de classement, slide 30 (`atelier-samoyede.png`)
+
+Même personnage, même style aquarelle et trait dessiné que les images précédentes, format 16:9. Le samoyède en harnais teal est assis derrière quatre paniers alignés et dépose une balle dans l'un d'eux. Un panneau en bois à gauche porte le texte « Atelier de classement ». Sur chaque panier, une seule étiquette, dans cet ordre de gauche à droite : un panier teal pâle avec une petite bulle de dialogue et le mot « Assistant » ; un panier lavande avec un engrenage et le mot « Automatisation » ; un panier menthe avec un panneau de direction et le mot « Agent » ; un panier rose pâle avec une main ouverte et les mots « Pas d'outil ». Aucun autre texte dans l'image. Texte en français, sans faute, lettres lisibles. Montagnes douces en fond, beaucoup d'air.
+
+### Un référent par pôle, slide 51 (`referents-samoyede.png`)
+
+Même personnage, même style que les images précédentes, format 16:9. Trois samoyèdes encordés montent ensemble une pente enneigée vers un drapeau au sommet. Chacun porte un petit sac à dos d'une couleur différente : teal pâle, lavande, menthe. Au-dessus de chaque chien, une bulle avec un seul nom, dans cet ordre de gauche à droite : « Commerce », « RH et compta », « Communication ». Au sommet, à côté du drapeau, un quatrième samoyède assis, en harnais teal, qui les attend et regarde le chemin : il représente la référente IA, sans texte. Un panneau en bois en haut à gauche porte le texte « Un référent par pôle ». Aucun autre texte dans l'image. Texte en français, sans faute.
+
+### Trois logiques, slide 15 (`trois-logiques-samoyede.png`)
+
+Reprends exactement l'image des trois samoyèdes (bulle de dialogue, engrenages, panneaux de direction), même composition et mêmes couleurs, en changeant uniquement les textes. Sous le premier : titre « Assistant », phrase « Il répond, tu gardes la main ». Sous le deuxième : titre « Automatisation », phrase « Elle exécute, toujours pareil ». Sous le troisième : titre « Agent », phrase « Il poursuit un objectif, dans ton cadre ». Aucun autre texte. Texte en français, sans faute.
