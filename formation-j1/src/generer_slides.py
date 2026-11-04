@@ -88,6 +88,21 @@ PLUG = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><rec
 BADGE = '''<svg class="illu ico-xl" viewBox="0 0 120 120" aria-hidden="true"><rect data-d="0.6" x="22" y="28" width="76" height="66" rx="10" fill="#FCE4E8"/><rect data-d="0.1" x="22" y="28" width="76" height="66" rx="10" class="ink" filter="url(#rough)"/><circle data-d="0.4" cx="48" cy="56" r="10" class="ink"/><path data-d="0.5" class="ink" d="M36 80 C 40 70, 56 70, 60 80 M70 52 H88 M70 64 H84"/><path data-d="0.3" class="ink" d="M52 28 V16 H68 V28"/></svg>'''
 MULTI = '''<svg class="illu ico-xl" viewBox="0 0 140 120" aria-hidden="true"><rect data-d="0.6" x="12" y="50" width="116" height="40" rx="14" fill="#D6F1E6"/><rect data-d="0.1" x="12" y="50" width="116" height="40" rx="14" class="ink" filter="url(#rough)"/><circle data-d="0.4" cx="38" cy="70" r="7" class="ink"/><circle data-d="0.45" cx="70" cy="70" r="7" class="ink"/><circle data-d="0.5" cx="102" cy="70" r="7" class="ink"/><path data-d="0.3" class="ink" d="M128 70 C 140 70, 138 30, 120 26"/></svg>'''
 
+# Liens des démos : colle ici tes adresses, le bouton apparaît tout seul (vide = « lien à ajouter »)
+LINKS = {
+    "make": "",          # ton scénario Make
+    "appscript": "",     # ton Apps Script de réservation des salles
+    "claude_projet": "", # ton projet Claude
+}
+def golink(key, label):
+    url = LINKS.get(key, "")
+    if url:
+        return f'<a class="golink" href="{url}" target="_blank" rel="noopener">{label}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>'
+    return f'<span class="golink golink--todo">{label} · lien à ajouter</span>'
+# Pastille « À vous » : ce que les participants peuvent refaire tout de suite dans leur Copilot
+def avous(txt="À vous, dans votre Copilot"):
+    return f'<span class="avous"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v10.5l-2.2-2.2a1.6 1.6 0 0 0-2.3 2.3L9.8 19a6 6 0 0 0 4.2 1.8h.5a5.5 5.5 0 0 0 5.5-5.5V11a1.5 1.5 0 0 0-3 0v-1a1.5 1.5 0 0 0-3 0v-.5a1.5 1.5 0 0 0-3 0V3a1.5 1.5 0 0 0-3 0z"/></svg>{txt}</span>'
+
 def logic(eyebrow, title, mk, definition, ex, color, notes, extra=""):
     cards = "".join(f'''<div class="ex sk {color} frag"><p class="who">{w}</p><p>{d}</p>{s}</div>''' for w, d, s in ex)
     slide(f'''    <p class="eyebrow">{eyebrow}</p>
@@ -356,10 +371,10 @@ slide(f'''    <p class="eyebrow">L'automatisation</p>
  seq=2, section=S945, notes="Faire trouver un exemple de chaque famille dans leur quotidien.")
 
 logic("L'automatisation", 'Elle <span class="mark mark--lav">exécute</span>, toujours pareil', "", "Aucune réflexion, et c'est sa force : même entrée, même résultat.",
- [("Un scénario Make", "Un événement déclenche une série d'actions, montée visuellement.", shot("Capture d'un scénario Make")),
-  ("Un script Apps Script", "Une petite routine qui tourne seule dans un tableur.", shot("Capture du script Apps Script et de son résultat")),
-  ("Chez vous", "L'équivalent dans Microsoft 365 se monte avec les outils de l'environnement, selon les licences.", "")],
- "fill-lav", "Make et Apps Script servent d'illustration : la formation reste sur l'environnement Microsoft de l'entreprise.")
+ [("Un scénario Make", "Un événement déclenche une série d'actions, montée visuellement, bloc par bloc.", f'<span class="live">démo en direct</span>{golink("make", "Ouvrir le scénario Make")}'),
+  ("Apps Script : la réservation des salles", "Une demande de réservation arrive, le script vérifie le planning et répond. Personne ne recopie rien.", f'<span class="live">démo en direct</span>{golink("appscript", "Ouvrir le script")}'),
+  ("Chez vous, dans Microsoft 365", '<span class="tools"><b>Power Automate</b> : des flux entre Outlook, Teams, Excel et SharePoint.<br><b>Workflows dans Copilot</b> : décrire l\'automatisation en une phrase.<br><b>Copilot Studio</b> : des agents et leurs flux.<br><b>Excel, onglet Automatiser</b> : enregistrer une suite d\'actions.</span>', avous("À vous de jouer"))],
+ "fill-lav", "Make et Apps Script servent d'illustration ; on revient ensuite à Microsoft 365. Power Automate est inclus dans Microsoft 365 pour les connecteurs standard (Outlook, Teams, SharePoint, OneDrive, Excel). Les Workflows de Microsoft 365 Copilot transforment une description en automatisation sur Outlook, Teams, SharePoint et Planner : à ce jour en accès anticipé (programme Frontier) et en anglais, à vérifier dans leur environnement la veille. Copilot Studio construit des agents et des flux d'agent ; l'usage interactif est inclus avec une licence Microsoft 365 Copilot, les exécutions autonomes consomment des crédits. Manipulation possible : un flux Power Automate à partir d'un modèle, par exemple enregistrer les pièces jointes d'un e-mail dans un dossier.")
 
 HUMAN = """<svg class="illu human" viewBox="0 0 440 640" aria-hidden="true">
       <g class="frag" data-step="7"><path class="inkt" d="M70 470 A 190 290 0 1 1 120 560" stroke-dasharray="6 12" style="stroke-width:4"/><path class="inkt" d="M104 548 L120 562 L128 540" style="stroke-width:4"/></g>
@@ -488,9 +503,9 @@ slide(f'''    <p class="eyebrow">L'assistant et l'agent</p>
 
 logic("L'assistant en vrai", 'Il <span class="mark mark--sky">répond</span>, tu gardes la main', "", "C'est comme le GPS du téléphone : il propose l'itinéraire, c'est toi qui conduis.",
  [("Chatbot du site Summit Flow", "Assistant de type chatbot : il répond aux visiteurs à partir du contenu du site.", '<span class="live">démo en direct</span>'),
-  ("Un projet Claude", "Des consignes et des documents de référence, pour des réponses dans ton cadre.", shot("Capture d'un projet Claude (consignes et documents)")),
-  ("Copilot dans Microsoft 365", "Le même principe dans Outlook, Word ou Teams.", shot("Capture de Copilot ou d'un agent Copilot avec consignes"))],
- "fill-sky", "Le chatbot du site se montre en direct, pas de capture.")
+  ("Un projet Claude", "Des consignes et des documents de référence, pour des réponses dans ton cadre.", f'<span class="live">démo en direct</span>{golink("claude_projet", "Ouvrir le projet Claude")}'),
+  ("L'équivalent dans Copilot", "Un agent créé avec « Créer un agent » (Agent Builder) : des consignes et des documents de référence, comme un projet Claude.", avous())],
+ "fill-sky", "Le chatbot du site et le projet Claude se montrent en direct. Côté Copilot, chacun peut créer un agent avec Agent Builder (« Créer un agent ») : un nom, des consignes, des documents de référence. Les Notebooks Copilot rendent un service proche : réunir des notes et des documents pour travailler dessus.")
 
 
 GARDE = f'''
@@ -498,10 +513,10 @@ GARDE = f'''
       <p><b>Un humain valide</b> avant que quoi que ce soit parte chez un client, un fournisseur ou un collègue.</p>
       <p><b>Aucune action irréversible</b> sans toi : payer, commander, supprimer, envoyer.</p></div>'''
 logic("L'agent en vrai", 'Il <span class="mark">poursuit un objectif</span>, dans ton cadre', "", "C'est comme l'autoguidage du tracteur : tu fixes la parcelle et le cadre, il trace les lignes, tu restes en cabine.",
- [("Super agent Lindy", "Un agent qui enchaîne plusieurs tâches depuis le téléphone.", shot("Captures d'écran du téléphone (Lindy)")),
-  ("Un agent Claude", "Le modèle avec ses outils, sa mémoire et ses règles.", shot("Capture d'un agent Claude")),
-  ("Un agent Copilot", "Un agent construit dans l'environnement Microsoft.", shot("Capture d'un agent Copilot"))],
- "fill-mint", "Relier à l'anatomie : mêmes pièces que l'assistant, mais c'est l'objectif qui le lance. Puis les deux garde-fous : ils font partie du cadre qu'on lui donne, c'est le harnais qui les impose. Exemple Lindy : il prépare la commande, il ne la passe pas.", GARDE)
+ [("Super agent Lindy", "Sur mon téléphone : ce que je lui ai confié, et ce qu'il a fait de lui-même.", '<span class="live">démo en direct</span>'),
+  ("Une tâche planifiée Claude", "Elle se lance seule à l'heure prévue, fait le travail, et me livre le résultat.", '<span class="live">démo en direct</span>'),
+  ("Côté Copilot", "Une demande planifiée, qui revient chaque semaine sans qu'on la relance : déjà un premier pas vers l'agent. Pour aller plus loin : Copilot Studio.", avous())],
+ "fill-mint", "Relier à l'anatomie : mêmes pièces que l'assistant, mais c'est l'objectif qui le lance. Puis les deux garde-fous : ils font partie du cadre qu'on lui donne, c'est le harnais qui les impose. Exemple Lindy : il prépare la commande, il ne la passe pas. Côté Copilot, les invites planifiées dans Agent Builder arrivent entre mi-novembre et mi-décembre 2026 selon Microsoft (MC1302906) : vérifier la veille qu'elles sont ouvertes chez eux, sinon le montrer avec Claude seulement.", GARDE)
 
 quiz = [("Préparer une présentation PowerPoint à partir de mes notes", "assistant", "sky"),
         ("Chaque facture reçue par e-mail s'ajoute au tableau de trésorerie", "automatisation", "lav"),
@@ -677,9 +692,9 @@ def demo(n, title, mk, what, shots, notes):
 slide(f'''    <p class="eyebrow">Les trois démos</p>
     <h2>Sur vos cas, <span class="mark mark--sky">en direct</span></h2>
     <div class="cols--3 grow" style="display:grid;margin-top:30px;align-items:stretch">
-      <div class="ex sk fill-sky rise"><p class="who">1. Un assistant</p><p>Des consignes et des documents de référence. Exemple : analyser le tableau de bord du mois.</p>{shot("Capture de secours : l'assistant Copilot configuré")}</div>
-      <div class="ex sk fill-lav rise"><p class="who">2. Une automatisation</p><p>Une facture arrive par e-mail, une ligne s'ajoute au tableau de trésorerie.</p>{shot("Capture de secours : l'automatisation sur Outlook et Excel")}</div>
-      <div class="ex sk fill-mint rise"><p class="who">3. Un agent</p><p>Trouver un produit chez les fournisseurs : il cherche, compare, propose, et s'arrête avant de commander.</p>{shot("Capture de secours : l'agent Copilot en action")}</div>
+      <div class="ex sk fill-sky rise"><p class="who">1. Un assistant</p><p>Des consignes et des documents de référence. Exemple : analyser le tableau de bord du mois.</p>{shot("Capture de secours : l'assistant Copilot configuré")}{avous()}</div>
+      <div class="ex sk fill-lav rise"><p class="who">2. Une automatisation</p><p>Une facture arrive par e-mail, une ligne s'ajoute au tableau de trésorerie, avec Power Automate.</p>{shot("Capture de secours : l'automatisation sur Outlook et Excel")}{avous()}</div>
+      <div class="ex sk fill-mint rise"><p class="who">3. Un agent</p><p>Trouver un produit chez les fournisseurs : il cherche, compare, propose, et s'arrête avant de commander.</p>{shot("Capture de secours : l'agent Copilot en action")}{avous()}</div>
     </div>''', seq=4, section="13h30 · Démonstrations commentées",
  notes="Démos en direct, les captures servent de plan B. Après chaque démo, revenir à la grille de lecture et remplir la colonne.")
 

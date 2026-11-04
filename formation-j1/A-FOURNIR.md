@@ -7,10 +7,10 @@ Chaque emplacement est un cadre en pointillés. Dépose le fichier dans `src/ima
 | 2 | Maison Lagarrigue | Une version plus grande de la photo d'ouverture (celle fournie fait 828 pixels de large) |
 | 11 et 12 | Comment ça marche, les principales IA | Ton infographie complète, enregistrée sous `infographie-ia.png` : la construction la coupe en deux toute seule |
 | 13 | L'IA est déjà dans vos outils | Logos officiels Microsoft 365 Copilot, Outlook, Excel, Word, Teams |
-| 17 | L'automatisation en vrai | Capture d'un scénario Make ; capture du script Apps Script et de son résultat |
+| 17 | Elle exécute, toujours pareil | Le lien de ton scénario Make et celui de ton Apps Script de réservation des salles : à coller dans `LINKS`, en haut de `src/generer_slides.py` |
 | 19 | Le modèle et son harnais | Rien : démonstration en direct |
-| 23 | L'assistant en vrai | Capture d'un projet Claude ; capture de Copilot avec consignes. Chatbot du site Summit Flow en direct |
-| 24 | L'agent en vrai | Captures du téléphone (Lindy) ; capture d'un agent Claude ; capture d'un agent Copilot |
+| 23 | Il répond, tu gardes la main | Le lien de ton projet Claude, dans `LINKS`. Chatbot du site en direct |
+| 24 | Il poursuit un objectif | Rien : Lindy sur ton téléphone et une tâche planifiée Claude, en direct |
 | 37 | Les trois démos | Trois captures de secours (assistant, automatisation, agent dans Copilot) |
 | 38 | À vous | Capture de l'écran de départ dans Copilot |
 
