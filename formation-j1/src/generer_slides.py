@@ -739,20 +739,50 @@ slide(f'''    <div class="stack">
     </div>
     <div class="cols cols--1-2 grow" style="margin-top:40px;align-items:start;">
       <div>
-      <ol class="steps">
-        <li class="frag"><strong>Reprends</strong> une situation de mars, celle de ton pôle.</li>
-        <li class="frag"><strong>Passe-la</strong> dans l'arbre, une question après l'autre.</li>
+      <ol class="steps steps--tight">
+        <li class="frag"><strong>Reprends</strong> une situation de mars de ton pôle.</li>
+        <li class="frag"><strong>Passe-la</strong> dans l'arbre, question par question.</li>
         <li class="frag"><strong>Note</strong> où elle tombe : assistant, notebook, automatisation, agent, ou on s'arrête.</li>
-        <li class="frag"><strong>Cet après-midi</strong>, on les reprend une par une, l'arbre à l'écran, avec le module Copilot qui va avec.</li>
+        <li class="frag"><strong>Mise en commun</strong> juste après, l'arbre à l'écran.</li>
       </ol>
-      <div class="alert alert--compact sk" role="note">{icon("alert")}<div><p class="alert-title">Vigilance données</p><p>Aucune donnée réelle dans un outil grand public : on décrit la tâche, pas son contenu.</p></div></div>
       </div>
       <div class="stack">
         {timer(20, (15, 20, 30))}
         {pic("atelier-samoyede", "Le samoyède range des balles dans quatre paniers.", 600, 338)}
+        <div class="alert alert--compact sk" role="note">{icon("alert")}<div><p class="alert-title">Vigilance données</p><p>On décrit la tâche, pas son contenu : aucune donnée réelle.</p></div></div>
       </div>
     </div>''', seq=3, section="11h00 · Quand utiliser quoi",
- notes="Atelier avant le déjeuner, en sous-groupes par pôle. Chaque groupe reprend les situations de mars (slide 10) et les passe dans l'arbre de la slide 30, sur papier ou à l'oral. On ne cherche pas encore l'outil exact : on note juste où la situation tombe. La mise en commun se fait cet après-midi, après la prise en main de Copilot, sur la slide « Vos situations, passées dans l'arbre ».")
+ notes="Atelier avant le déjeuner, en sous-groupes par pôle. Chaque groupe reprend les situations de mars (slide 10) et les passe dans l'arbre de la slide 30, sur papier ou à l'oral. On ne cherche pas encore l'outil exact : on note juste où la situation tombe. La mise en commun suit directement, sur la slide suivante : on passe les situations dans l'arbre, à l'écran, avant le déjeuner.")
+
+def chips(pole, items):
+    return "".join(f'<button class="chip chip--tree sk sk--thin" data-k="{pole}-{i}"><span>{t}</span><span class="verdict">à passer dans l&#39;arbre</span></button>' for i, t in enumerate(items))
+TMODAL = f'''<div class="tmodal" role="dialog" aria-modal="true" aria-label="La situation passée dans l'arbre" hidden>
+      <div class="tmodal-card sk">
+        <button class="tmodal-x sk sk--thin" aria-label="Fermer">Fermer</button>
+        <p class="tmodal-sit"><span>La situation</span><b class="hand"></b></p>
+        <div class="decider decider--tree decider--modal">
+          <div><div class="tq-list"></div><button class="reset sk sk--thin">Recommencer</button></div>
+          <div class="tmodal-right">
+            <div class="tree-mini">{tree_html(anim=False)}</div>
+            <div class="verdict-box sk" aria-live="polite"><p class="lbl">L'arbre propose</p><p class="out"></p><p class="kind"></p><p class="mod"></p><p class="why"></p></div>
+          </div>
+        </div>
+      </div>
+    </div>'''
+slide(f'''    <div class="stack">
+      <span class="tag tag--soft sk">{icon("search")}Repérées en mars, à confirmer par la grille d'audit</span>
+      <h2>Vos situations, <span class="mark">passées dans l'arbre</span></h2>
+      <p class="howto">Un clic sur une situation : l'arbre s'ouvre, on répond ensemble, et on voit avec quel module de Copilot la faire.</p>
+    </div>
+    <div class="situations">
+      <div class="pole"><h3>{icon("cart")}Commerce</h3>{chips("com", ["Commissions des vendeurs itinérants", "Contrôle des études de prix", "Estimation des reprises", "Ciblage pour les démonstrations", "Produit chez un fournisseur"])}</div>
+      <div class="pole"><h3>{icon("ledger")}RH et compta</h3>{chips("rh", ["Variables de salaire", "Vérification des paiements clients", "Trésorerie quotidienne", "Saisie des pointages"])}</div>
+      <div class="pole"><h3>{icon("mega")}Communication et direction</h3>{chips("cm", ["Planning de communication", "Bases de données pour la communication", "Création de tableaux de bord", "Analyse des tableaux de bord", "Présentations PowerPoint"])}</div>
+    </div>
+    <div class="legend"><span><i style="background:var(--mint)"></i>assistant ou notebook</span><span><i style="background:var(--lav)"></i>automatisation</span><span><i style="background:var(--blush)"></i>agent</span><span><i style="background:#E7EBEB"></i>on s'arrête</span><span>· un clic pour rouvrir l'arbre</span></div>
+    {TMODAL}''',
+ seq=3, section="11h00 · Quand utiliser quoi",
+ notes="Atelier pratique, juste avant le déjeuner : mise en commun des sous-groupes. Un sous-groupe choisit une de ses situations : je clique, l'arbre s'ouvre. On lit chaque question à voix haute, le groupe répond, les autres peuvent contester. À la fin, l'arbre donne la brique (assistant, notebook, automatisation ou agent) et le module Copilot à utiliser. On ferme, la carte prend sa couleur. Cliquer sur une réponse précédente pour tester l'autre branche. Les désaccords sont les meilleurs moments : les noter pour la grille d'audit.")
 
 slide(f'''    <div class="grow center-y">
       <p class="eyebrow">12h30</p>
@@ -870,36 +900,6 @@ slide(f'''    <div class="stack">
       <div class="stack">{timer(20, (15, 20, 25))}{avous("Pas à pas : créer un agent dans Copilot", "md-agents")}{shot("Capture de l'écran de départ sur Copilot (où cliquer pour créer l'assistant)")}</div>
     </div>''', seq=4, section="13h30 · Démonstrations, puis à vous",
  notes="Manipulation guidée après les trois démos. On commence par un exemple fait tous ensemble : un cas proposé par la salle, la consigne écrite en direct (rôle, contexte, attendu), testée devant tout le monde. Ensuite seulement, chacun sur son poste. Prévoir un plan B si les licences ne permettent pas de créer un assistant : faire rédiger la consigne et la tester dans le chat Copilot.")
-
-def chips(pole, items):
-    return "".join(f'<button class="chip chip--tree sk sk--thin" data-k="{pole}-{i}"><span>{t}</span><span class="verdict">à passer dans l&#39;arbre</span></button>' for i, t in enumerate(items))
-TMODAL = f'''<div class="tmodal" role="dialog" aria-modal="true" aria-label="La situation passée dans l'arbre" hidden>
-      <div class="tmodal-card sk">
-        <button class="tmodal-x sk sk--thin" aria-label="Fermer">Fermer</button>
-        <p class="tmodal-sit"><span>La situation</span><b class="hand"></b></p>
-        <div class="decider decider--tree decider--modal">
-          <div><div class="tq-list"></div><button class="reset sk sk--thin">Recommencer</button></div>
-          <div class="tmodal-right">
-            <div class="tree-mini">{tree_html(anim=False)}</div>
-            <div class="verdict-box sk" aria-live="polite"><p class="lbl">L'arbre propose</p><p class="out"></p><p class="kind"></p><p class="mod"></p><p class="why"></p></div>
-          </div>
-        </div>
-      </div>
-    </div>'''
-slide(f'''    <div class="stack">
-      <span class="tag tag--soft sk">{icon("search")}Repérées en mars, à confirmer par la grille d'audit</span>
-      <h2>Vos situations, <span class="mark">passées dans l'arbre</span></h2>
-      <p class="howto">Un clic sur une situation : l'arbre s'ouvre, on répond ensemble, et on voit avec quel module de Copilot la faire.</p>
-    </div>
-    <div class="situations">
-      <div class="pole"><h3>{icon("cart")}Commerce</h3>{chips("com", ["Commissions des vendeurs itinérants", "Contrôle des études de prix", "Estimation des reprises", "Ciblage pour les démonstrations", "Produit chez un fournisseur"])}</div>
-      <div class="pole"><h3>{icon("ledger")}RH et compta</h3>{chips("rh", ["Variables de salaire", "Vérification des paiements clients", "Trésorerie quotidienne", "Saisie des pointages"])}</div>
-      <div class="pole"><h3>{icon("mega")}Communication et direction</h3>{chips("cm", ["Planning de communication", "Bases de données pour la communication", "Création de tableaux de bord", "Analyse des tableaux de bord", "Présentations PowerPoint"])}</div>
-    </div>
-    <div class="legend"><span><i style="background:var(--mint)"></i>assistant ou notebook</span><span><i style="background:var(--lav)"></i>automatisation</span><span><i style="background:var(--blush)"></i>agent</span><span><i style="background:#E7EBEB"></i>on s'arrête</span><span>· un clic pour rouvrir l'arbre</span></div>
-    {TMODAL}''',
- seq=4, section="13h30 · Démonstrations, puis à vous",
- notes="Atelier pratique, mise en commun de l'atelier du matin. Un sous-groupe choisit une de ses situations : je clique, l'arbre s'ouvre. On lit chaque question à voix haute, le groupe répond, les autres peuvent contester. À la fin, l'arbre donne la brique (assistant, notebook, automatisation ou agent) et le module Copilot à utiliser. On ferme, la carte prend sa couleur. Cliquer sur une réponse précédente pour tester l'autre branche. Les désaccords sont les meilleurs moments : les noter pour la grille d'audit.")
 
 slide(f'''    <div class="grow center-y">
       <p class="eyebrow">15h00</p>

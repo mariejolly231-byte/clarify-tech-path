@@ -640,7 +640,7 @@ body.tool-spot .spot { opacity: 1; }
 .pic-row { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center; margin-top: 30px; }
 .pic-row--top { align-items: start; }
 .checks--tight li { padding: 10px 0; }
-.alert--compact { list-style: none; padding: 18px 24px; grid-template-columns: 40px 1fr; gap: 16px; margin-top: 26px; }
+.alert--compact { list-style: none; padding: 18px 24px; grid-template-columns: 52px 1fr; gap: 20px; align-items: center; margin-top: 26px; }
 .alert--compact::before { display: none; }
 .alert--compact p { font-size: 22px; }
 .alert--compact .alert-title { font-size: 26px; }
