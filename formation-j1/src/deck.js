@@ -14,12 +14,12 @@
 
   const SEQ = [
     ["9h00", "Point de départ"],
-    ["9h45", "Trois logiques"],
+    ["9h50", "Trois logiques"],
     ["11h00", "Quand utiliser quoi"],
     ["13h30", "Démonstrations"],
-    ["15h15", "Limites et choix"],
-    ["16h00", "À quoi faire attention"],
-    ["16h30", "Intersession"],
+    ["15h10", "Limites et choix"],
+    ["15h45", "À quoi faire attention"],
+    ["16h10", "Intersession"],
   ];
   // Le vrai logo signe chaque slide : chargé une seule fois, réutilisé en fond par le pied de page
   const logoImg = document.querySelector(".brand-logo");

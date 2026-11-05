@@ -147,7 +147,7 @@ def logic(eyebrow, title, mk, definition, ex, color, notes, extra=""):
     slide(f'''    <p class="eyebrow">{eyebrow}</p>
     <h2>{title}</h2>
     <p class="lead rise" style="margin-top:18px">{definition}</p>
-    <div class="cols--3{'' if extra else ' grow'}" style="display:grid;margin-top:{'22' if extra else '30'}px">{cards}</div>{extra}''', seq=2, section="9h45 · Assistant, automatisation, agent", notes=notes)
+    <div class="cols--3{'' if extra else ' grow'}" style="display:grid;margin-top:{'22' if extra else '30'}px">{cards}</div>{extra}''', seq=2, section="9h50 · Assistant, automatisation, agent", notes=notes)
 
 
 
@@ -186,12 +186,12 @@ CUP = '''<svg class="pause-illu illu" viewBox="0 0 520 420" aria-hidden="true">
 
 # Ouvertures de chapitre : numéro dessiné, titre lettre à lettre, et le samoyède qui avance d'une balise sur le sentier
 CHAPTERS = [("9h00", "Point de départ", "On fait connaissance, on repart de mars, on se met d'accord sur les mots."),
-            ("9h45", "Trois logiques", "Assistant, automatisation, agent : ce que chacun fait vraiment, et ce qui les distingue."),
-            ("11h00", "Quand utiliser quoi", "Une grille en quatre questions, testée ensemble puis sur vos situations."),
+            ("9h50", "Trois logiques", "Assistant, automatisation, agent : ce que chacun fait vraiment, et ce qui les distingue."),
+            ("11h00", "Quand utiliser quoi", "L'arbre des briques, testé ensemble, puis vos situations de mars passées dedans."),
             ("13h30", "Démonstrations", "Comment les logiciels se parlent, trois démos sur vos cas, puis votre premier assistant."),
-            ("15h15", "Limites et choix", "Ce que l'IA ne fait pas, ce que ça coûte vraiment, comment choisir un outil."),
-            ("16h00", "À quoi faire attention", "Les règles simples qui protègent l'entreprise, dès demain."),
-            ("16h30", "Intersession", "La grille d'audit, les référents et le calendrier jusqu'au 22 janvier.")]
+            ("15h10", "Limites et choix", "Ce que l'IA ne fait pas, ce que ça coûte vraiment, comment choisir un outil."),
+            ("15h45", "À quoi faire attention", "Les règles simples qui protègent l'entreprise, dès demain."),
+            ("16h10", "Intersession", "La grille d'audit, les référents et le calendrier jusqu'au 22 janvier.")]
 TX = [80 + k * 253 for k in range(7)]
 TY = [176, 150, 166, 136, 158, 128, 146]
 def chapter(n):
@@ -292,15 +292,15 @@ slide(f'''    <p class="eyebrow">Aujourd'hui</p>
     {art("programme-samoyede", "Le samoyède sur un sentier balisé de six étapes.", (110, 128, 1560, 208))}
     <ol class="agenda mt">
       <li class="rise"><span class="h">9h00</span><span class="cn">1</span>Point de départ et repères pour tous</li>
-      <li class="rise"><span class="h">9h45</span><span class="cn">2</span>Assistant, automatisation, agent</li>
+      <li class="rise"><span class="h">9h50</span><span class="cn">2</span>Assistant, automatisation, agent</li>
       <li class="pause rise"><span class="h">10h45</span><span class="cn cn--none"></span>Pause</li>
       <li class="rise"><span class="h">11h00</span><span class="cn">3</span>Quand utiliser quoi</li>
       <li class="pause rise"><span class="h">12h30</span><span class="cn cn--none"></span>Déjeuner</li>
       <li class="rise"><span class="h">13h30</span><span class="cn">4</span>Démonstrations, puis à vous</li>
-      <li class="pause rise"><span class="h">15h00</span><span class="cn cn--none"></span>Pause</li>
-      <li class="rise"><span class="h">15h15</span><span class="cn">5</span>Limites, investissement, choix d'un outil</li>
-      <li class="rise"><span class="h">16h00</span><span class="cn">6</span>À quoi faire attention</li>
-      <li class="rise"><span class="h">16h30</span><span class="cn">7</span>Lancement de l'intersession</li>
+      <li class="pause rise"><span class="h">14h55</span><span class="cn cn--none"></span>Pause</li>
+      <li class="rise"><span class="h">15h10</span><span class="cn">5</span>Limites, investissement, choix d'un outil</li>
+      <li class="rise"><span class="h">15h45</span><span class="cn">6</span>À quoi faire attention</li>
+      <li class="rise"><span class="h">16h10</span><span class="cn">7</span>Lancement de l'intersession</li>
     </ol>''', cls="slide--full", section="Le programme",
  notes="Le sommaire reste affiché à gauche de chaque slide : on sait toujours où on en est.")
 
@@ -419,8 +419,8 @@ slide(f'''    <p class="eyebrow">Rappel commun</p>
 
 chapter_slide(2)
 
-# ---------- 9h45 Trois logiques ----------
-S945 = "9h45 · Assistant, automatisation, agent"
+# ---------- 9h50 Trois logiques ----------
+S945 = "9h50 · Assistant, automatisation, agent"
 slide(f'''    <p class="eyebrow">Trois logiques différentes</p>
     <div class="three">
       <div class="three-lines">
@@ -728,7 +728,7 @@ slide(f'''    <p class="eyebrow">À vous de jouer</p>
     <h2>Assistant, automatisation ou agent ?</h2>
     <p class="howto">On passe chaque situation dans l'arbre, à main levée.</p>
     <div class="stack mt">{items}</div>''', seq=3, section="11h00 · Quand utiliser quoi",
- notes="Les quatre situations viennent de la liste de mars. Vote à main levée, puis flèche droite. Les réponses sont des propositions : un débat est bienvenu, l'arbre sert d'arbitre.")
+ notes="Slide tampon : à faire en cinq minutes, ou à sauter si on a pris du retard, l'atelier qui suit couvre la même chose. Les quatre situations viennent de la liste de mars. Vote à main levée, puis flèche droite. Les réponses sont des propositions : un débat est bienvenu, l'arbre sert d'arbitre.")
 
 slide(f'''    <div class="stack">
       <div class="meta">
@@ -748,7 +748,7 @@ slide(f'''    <div class="stack">
       </div>
       <div class="stack">
         {timer(20, (15, 20, 30))}
-        {pic("atelier-samoyede", "Le samoyède range des balles dans quatre paniers.", 600, 338)}
+        {pic("atelier-samoyede", "Le samoyède range des balles dans cinq paniers : assistant, notebook, automatisation, agent, on s'arrête.", 600, 338)}
         <div class="alert alert--compact sk" role="note">{icon("alert")}<div><p class="alert-title">Vigilance données</p><p>On décrit la tâche, pas son contenu : aucune donnée réelle.</p></div></div>
       </div>
     </div>''', seq=3, section="11h00 · Quand utiliser quoi",
@@ -782,7 +782,7 @@ slide(f'''    <div class="stack">
     <div class="legend"><span><i style="background:var(--mint)"></i>assistant ou notebook</span><span><i style="background:var(--lav)"></i>automatisation</span><span><i style="background:var(--blush)"></i>agent</span><span><i style="background:#E7EBEB"></i>on s'arrête</span><span>· un clic pour rouvrir l'arbre</span></div>
     {TMODAL}''',
  seq=3, section="11h00 · Quand utiliser quoi",
- notes="Atelier pratique, juste avant le déjeuner : mise en commun des sous-groupes. Un sous-groupe choisit une de ses situations : je clique, l'arbre s'ouvre. On lit chaque question à voix haute, le groupe répond, les autres peuvent contester. À la fin, l'arbre donne la brique (assistant, notebook, automatisation ou agent) et le module Copilot à utiliser. On ferme, la carte prend sa couleur. Cliquer sur une réponse précédente pour tester l'autre branche. Les désaccords sont les meilleurs moments : les noter pour la grille d'audit.")
+ notes="Atelier pratique, juste avant le déjeuner : mise en commun des sous-groupes, 25 minutes. Viser cinq situations, une par pôle plus celle qui fait débat ; les autres partent dans la grille d'audit. Un sous-groupe choisit une de ses situations : je clique, l'arbre s'ouvre. On lit chaque question à voix haute, le groupe répond, les autres peuvent contester. À la fin, l'arbre donne la brique (assistant, notebook, automatisation ou agent) et le module Copilot à utiliser. On ferme, la carte prend sa couleur. Cliquer sur une réponse précédente pour tester l'autre branche. Les désaccords sont les meilleurs moments : les noter pour la grille d'audit.")
 
 slide(f'''    <div class="grow center-y">
       <p class="eyebrow">12h30</p>
@@ -902,16 +902,16 @@ slide(f'''    <div class="stack">
  notes="Manipulation guidée après les trois démos. On commence par un exemple fait tous ensemble : un cas proposé par la salle, la consigne écrite en direct (rôle, contexte, attendu), testée devant tout le monde. Ensuite seulement, chacun sur son poste. Prévoir un plan B si les licences ne permettent pas de créer un assistant : faire rédiger la consigne et la tester dans le chat Copilot.")
 
 slide(f'''    <div class="grow center-y">
-      <p class="eyebrow">15h00</p>
+      <p class="eyebrow">14h55</p>
       <h2 style="font-size:120px">Pause</h2>
-      <p class="lead">Reprise à 15h15 : limites, investissement et choix d'un outil.</p>
+      <p class="lead">Reprise à 15h10 : limites, investissement et choix d'un outil.</p>
       <div class="mt">{timer(15, (10, 15))}</div>
     </div>
     {pic("pause-samoyede", "Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes.", 880, 495, "position:absolute;right:110px;bottom:190px") if (IMG / "pause-samoyede.png").exists() else CUP}''', cls="slide--full", section="Pause")
 
 chapter_slide(5)
 
-# ---------- 15h15 Limites et choix ----------
+# ---------- 15h10 Limites et choix ----------
 slide('''    <p class="eyebrow">Limites</p>
     <h2>Ce que l'IA permet, <span class="mark mark--blush">ce qu'elle ne permet pas</span></h2>
     <div class="cols grow mt" style="align-items:start">
@@ -919,7 +919,7 @@ slide('''    <p class="eyebrow">Limites</p>
         <li class="frag">Rédiger un premier jet, reformuler</li><li class="frag">Résumer un long document</li><li class="frag">Classer, extraire, comparer</li><li class="frag">Gagner du temps sur ce qui se répète</li></ul></div>
       <div class="card sk fill-blush"><h3>Elle ne permet pas</h3><ul>
         <li class="frag">Garantir que c'est juste</li><li class="frag">Connaître vos règles si on ne les lui donne pas</li><li class="frag">Décider à votre place</li><li class="frag">Réparer un process mal défini</li></ul></div>
-    </div>''', seq=5, section="15h15 · Limites, investissement, choix",
+    </div>''', seq=5, section="15h10 · Limites, investissement, choix",
  notes="Faire apparaître ligne par ligne, en alternant les deux colonnes si on veut faire réagir.")
 
 checks = ["Le besoin est-il clair et décrit ?", "L'outil est-il déjà dans notre environnement ?", "Où vont nos données ?", "Qui le fera vivre après la formation ?", "Comment saura-t-on que ça marche ?", "Que se passe-t-il s'il se trompe ?"]
@@ -929,7 +929,7 @@ slide(f'''    <p class="eyebrow">Choisir un outil</p>
     <div class="pic-row pic-row--top mt">
       <ul class="checks checks--tight">{ck}</ul>
       {pic("choisir-samoyede", "Choisir un outil : un samoyède écrasé sous un sac trop chargé d'outils, l'autre léger, avec le bon sac.", 760, 428)}
-    </div>''', seq=5, section="15h15 · Limites, investissement, choix",
+    </div>''', seq=5, section="15h10 · Limites, investissement, choix",
  notes="Pour les décideurs : ces questions valent pour n'importe quel outil. Cocher en direct celles auxquelles l'entreprise sait déjà répondre.")
 
 pi = "".join(f'<div class="postit fill-{c}" contenteditable="true" data-k="doute-{i}" data-ph="un doute ?"></div>' for i, c in enumerate(["lav", "blush", "sky", "mint", "card", "mint", "blush", "lav"]))
@@ -937,18 +937,18 @@ slide(f'''    <p class="eyebrow">Doutes et réserves</p>
     <h2>Qu'est-ce qui <span class="mark mark--blush">vous retient</span> ?</h2>
     <div class="board">{pi}</div>
     <p class="small" style="margin-top:24px">Une réserve fondée aide à décider : elle dit ce qu'il faut vérifier avant d'y aller.</p>''',
- seq=5, section="15h15 · Limites, investissement, choix",
+ seq=5, section="15h10 · Limites, investissement, choix",
  notes="Clique sur un post-it pour écrire la réserve en direct. Trier ensuite : ce qui est fondé, ce qui se vérifie, ce qui se règle au jour 5.")
 
 chapter_slide(6)
 
-# ---------- 16h00 Garde-fous ----------
+# ---------- 15h45 Garde-fous ----------
 slide(f'''    <p class="eyebrow">Garde-fous</p>
     <h2>L'humain <span class="mark">valide</span>, toujours</h2>
     <p class="lead" style="margin-top:12px">L'IA peut se tromper avec aplomb : une réponse fausse, présentée comme sûre. C'est l'« hallucination » vue ce matin.</p>
     {analogy("controle", "le bon à tirer avant d'imprimer un flyer : même quand la maquette semble parfaite, quelqu'un relit et signe avant l'envoi à l'imprimeur.", "frag")}
     <figure class="schema" role="img" aria-label="Schéma : l'IA propose, tu relis et corriges, puis ça part. Si ce n'est pas bon, on revient à l'IA."><!-- schema:humain-valide --></figure>''',
- seq=6, cls="slide--schema", section="16h00 · À quoi faire attention",
+ seq=6, cls="slide--schema", section="15h45 · À quoi faire attention",
  notes="La boucle de retour est la clé : relire n'est pas une perte de temps, c'est la condition pour déléguer.")
 
 slide(f'''    <p class="eyebrow">Garde-fous</p>
@@ -960,7 +960,7 @@ slide(f'''    <p class="eyebrow">Garde-fous</p>
     </div>
     {tip("Seuls 26 % des utilisateurs de l'IA au travail disent que leur direction est clairement alignée sur l'IA. D'où l'intérêt de règles simples, partagées.", "Microsoft, Work Trend Index 2026, mai 2026")}
     <p class="small">Le cadre RGPD, légal, environnemental et éthique est traité en détail au jour 5.</p>''',
- seq=6, section="16h00 · À quoi faire attention",
+ seq=6, section="15h45 · À quoi faire attention",
  notes="La troisième règle est une proposition : la valider avec la référente IA avant la séance.")
 
 chapter_slide(7)
@@ -972,7 +972,7 @@ MARS = [("Commerce", ["Commissions des vendeurs itinérants", "Contrôle des ét
         ("Direction", ["Création de tableaux de bord", "Analyse des tableaux de bord", "Présentations PowerPoint"])]
 GRILLE_URL = "https://airtable.com/appnUIHs250UX7TC8/pagUud0FR1Zsgu6gA/form"  # formulaire Airtable, réponses envoyées à contact@summitflow.fr
 
-# ---------- 16h30 Intersession ----------
+# ---------- 16h10 Intersession ----------
 # On fait d'abord une ligne ensemble, colonne par colonne, puis chacun remplit la sienne
 cols = [("Le déroulé actuel", True), ("Fréquence et temps passé", False), ("Les personnes impliquées", False), ("Outils et documents", False), ("Déclencheur et résultat", False), ("Part de jugement humain", True), ("Sensibilité des données", True), ("Bénéfice attendu", False), ("Type de solution pressenti <span class=\"ref-tree\">voir l'arbre</span>", True)]
 ex_rows = "".join(f'<tr class="{"is-key" if k else ""}"><td class="row"><b class="hand">{i+1}.</b> {t}</td><td class="edit sk" contenteditable="true" data-k="exemple-c{i}" data-ph="à remplir avec le groupe"></td></tr>' for i, (t, k) in enumerate(cols))
@@ -983,7 +983,7 @@ slide(f'''    <p class="eyebrow">L'intersession · ensemble d'abord</p>
       <p class="ex-deroule"><b>Le déroulé attendu :</b> chaque étape dans l'ordre, qui la fait, avec quel outil, en combien de temps. Comme on l'expliquerait à un remplaçant.</p>
     </div>
     <table class="readgrid audit-ex mt"><tbody>{ex_rows}</tbody></table>''',
- seq=7, section="16h30 · Lancement de l'intersession",
+ seq=7, section="16h10 · Lancement de l'intersession",
  notes="On remplit ensemble avant que chacun s'y mette. Choisir le cas dans la liste déroulante, parmi ceux de mars, par exemple les commissions des vendeurs itinérants, estimées à 4 h. Expliquer chaque colonne au moment où on la remplit. Les colonnes surlignées sont celles qui posent le plus de questions. Clique dans une case pour écrire.")
 
 au = "".join(f'<div class="col sk sk--thin rise{" is-key" if k else ""}"><b>colonne {i+1}</b>{t}</div>' for i, (t, k) in enumerate(cols))
@@ -992,7 +992,7 @@ slide(f'''    <p class="eyebrow">L'intersession · à vous</p>
     <div class="audit">{au}</div>
     <p class="small" style="margin-top:18px">Sur le modèle de l'exemple. Remplissable sans connaissance technique. Trois à cinq tâches par pôle, en partant des cas de mars :</p>
     <div class="mars-mini">{"".join(f'<p><b>{p}</b>{" · ".join(cs)}</p>' for p, cs in MARS)}</div>''',
- seq=7, section="16h30 · Lancement de l'intersession",
+ seq=7, section="16h10 · Lancement de l'intersession",
  notes="Chacun repart avec la même grille que l'exemple. Rappeler la question zéro : la colonne sensibilité des données sert à vérifier qu'on a le droit.")
 
 
@@ -1005,7 +1005,7 @@ slide(f'''    <h2>Remplir la grille : <span class="mark">en ligne ou en PDF</spa
     <div class="cols mt" style="align-items:stretch">
       <div class="card sk fill-mint grille-way">{qr_block()}<div><h3>En ligne, sur ton téléphone</h3><p>Tu scannes, tu remplis, tu envoies : ta réponse m'arrive par e-mail.</p><p class="small">Une réponse par tâche. Une case à cocher pour le traitement des données, détaillé sur summitflow.fr.</p></div></div>
       <div class="card sk fill-card grille-way"><div><h3>En PDF</h3><p>La même grille, en PDF à remplir sur l'ordinateur, que je vous envoie après la séance. Tu la remplis, tu coches la case données, puis tu me la renvoies par e-mail.</p><p class="mail">contact@summitflow.fr</p><p class="small">Aucune donnée réelle de client ou de salarié : on décrit la tâche, pas son contenu.</p></div></div>
-    </div>''', seq=7, section="16h30 · Lancement de l'intersession",
+    </div>''', seq=7, section="16h10 · Lancement de l'intersession",
  notes="Montrer le QR code en direct et faire scanner une fois pour vérifier que la page s'ouvre. Le formulaire en ligne (Airtable) envoie chaque réponse par e-mail à contact@summitflow.fr. Il demande le consentement au traitement des données, comme le PDF. Le PDF à remplir (dist/grille-audit-lagarrigue.pdf) part par e-mail après la séance. Rappeler la question zéro pour la colonne sensibilité des données.")
 
 ref = "".join(f'<div class="fill-line rise"><span>{p}</span><span class="f" contenteditable="true" data-k="ref-{i}" data-ph="nom à écrire en séance"></span></div>' for i, p in enumerate(["Commerce", "RH et comptabilité", "Communication"]))
@@ -1017,7 +1017,7 @@ slide(f'''    <p class="eyebrow">Qui porte quoi</p>
         <div class="card sk fill-teal frag"><h3>{icon("users")}La référente IA</h3><p>Elle garde la vue d'ensemble. Les référents de pôle font avancer la grille dans leur équipe.</p></div>
       </div>
       {pic("referents-samoyede", "Trois samoyèdes encordés montent vers un drapeau : métier, processus, technologie, un cap commun.", 680, 383)}
-    </div>''', seq=7, section="16h30 · Lancement de l'intersession",
+    </div>''', seq=7, section="16h10 · Lancement de l'intersession",
  notes="Les noms s'écrivent en séance, ils ne figurent pas dans le support.")
 
 slide('''    <p class="eyebrow">Calendrier</p>
@@ -1028,7 +1028,7 @@ slide('''    <p class="eyebrow">Calendrier</p>
       <div class="pt rise"><span class="dot"></span><p class="d">Mi-décembre</p><p>Point d'étape d'une heure en visio avec les référents.</p></div>
       <div class="pt rise"><span class="dot"></span><p class="d">Début janvier</p><p>Retour des grilles, au plus tard deux semaines avant le jour 2.</p></div>
       <div class="pt is-key rise"><span class="dot"></span><p class="d">22 janvier</p><p>Jour 2, premier atelier, avec une priorisation validée ensemble.</p></div>
-    </div>''', seq=7, section="16h30 · Lancement de l'intersession",
+    </div>''', seq=7, section="16h10 · Lancement de l'intersession",
  notes="Les fêtes de fin d'année sont dans l'intersession : le point de mi-décembre évite de perdre le fil.")
 
 # Message clé de fin : l'iceberg. Ce qui se voit (l'outil, ce qu'on a créé) et ce qui fait la différence.
@@ -1058,7 +1058,7 @@ slide(f'''    <h2>Ce qui fait <span class="mark">vraiment la différence</span><
         <div class="ice-below">{below}</div>
       </div>
     </div>
-    <p class="ice-msg frag">L'outil ne fait pas le résultat. C'est la méthode, la sécurité et le temps qu'on y met.</p>''', seq=7, section="16h30 · Lancement de l'intersession",
+    <p class="ice-msg frag">L'outil ne fait pas le résultat. C'est la méthode, la sécurité et le temps qu'on y met.</p>''', seq=7, section="16h10 · Lancement de l'intersession",
  notes="Message clé de la journée, juste avant le bilan. Au-dessus de l'eau : ce qu'on voit, les outils et ce qu'on a construit en démo. En dessous : ce qui fait que ça marche vraiment, et qui prend du temps. Faire le lien avec l'intersession : la grille d'audit, c'est justement le travail sous l'eau. Le coût des licences se chiffre avec l'informatique, au cas par cas. 54 % des entreprises qui n'utilisent pas l'IA citent le manque d'expertise (Insee Première n° 2120, juillet 2026).")
 
 goals = ["Je situe l'IA générative et ses limites actuelles", "Je distingue assistant, automatisation et agent", "Je mesure l'investissement que chacun demande", "J'ai une méthode pour observer mon propre travail"]
@@ -1066,7 +1066,7 @@ gl = "".join(f'<li class="frag"><button class="sk sk--thin" data-k="but-{i}" ari
 slide(f'''    <p class="eyebrow">Ce soir</p>
     <h2>Ce que vous savez <span class="mark mark--teal">faire maintenant</span></h2>
     {art("sommet-samoyede", "Le samoyède assis au sommet, il regarde la vue.", (90, 150, 470, 520))}
-    <ul class="checks mt">{gl}</ul>''', seq=7, section="16h30 · Lancement de l'intersession",
+    <ul class="checks mt">{gl}</ul>''', seq=7, section="16h10 · Lancement de l'intersession",
  notes="Faire cocher par le groupe. Revenir sur les attentes notées au tour de table du matin.")
 
 slide(f'''    <div class="lockup rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><div><p class="lockup-name">Summit Flow</p><p class="lockup-sub">Marie Jolly · contact@summitflow.fr · summitflow.fr</p></div></div>
