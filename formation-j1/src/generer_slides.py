@@ -654,7 +654,7 @@ NODES = {
     "root": (0, 200, 150, 100, "Une tâche à réaliser", "", 1),
     "q1": (175, 185, 205, 130, "Vais-je la refaire souvent, de la même façon ?", "", 1),
     "qc": (410, 61, 190, 80, "De quel contexte a-t-elle besoin ?", "", 2),
-    "qj": (410, 227, 190, 80, "Faut-il lire, interpréter ou décider ?", "", 3),
+    "qj": (410, 219, 190, 96, "Faut-il lire, interpréter ou décider ?", "", 3),
     "qa": (630, 296, 190, 84, "Doit-elle se lancer seule, à heure fixe ?", "", 4),
     "qt": (848, 366, 156, 84, "Consignes et documents partagés ?", "", 5),
 }
@@ -693,12 +693,13 @@ def _edge(src, leaf, node, label):
     else:
         lab = f'<text x="{x2 + 8}" y="{y2 - nh / 2 - 7}" class="tl">{label}</text>'
     return f'<path d="M{x1} {y1} H{xm} V{y2} H{x2}"/>{lab}'
-def tree_html():
+def tree_html(anim=True):
+    fr = " frag" if anim else ""
     steps = sorted({e[4] for e in EDGES})
-    svg = "".join(f'<g class="frag" data-step="{st}">' + "".join(_edge(a, l, n, lab) for a, l, n, lab, s2 in EDGES if s2 == st) + "</g>" for st in steps)
-    nodes = "".join(f'<div class="tnode{" tnode--root" if k == "root" else ""} frag" data-step="{st}" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px"><span>{t}</span></div>'
+    svg = "".join(f'<g class="{fr.strip()}" data-step="{st}">' + "".join(_edge(a, l, n, lab) for a, l, n, lab, s2 in EDGES if s2 == st) + "</g>" for st in steps)
+    nodes = "".join(f'<div class="tnode{" tnode--root" if k == "root" else ""}{fr}" data-node="{k}" data-step="{st}" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px"><span>{t}</span></div>'
                     for k, (x, y, w, h, t, _, st) in NODES.items())
-    leaves = "".join(f'<div class="tleaf fill-{c} frag{" tleaf--check" if n == "cowork" else ""}" data-step="{st}" style="left:{LX}px;top:{y}px;width:{LW}px;height:{LH}px"><b class="hand">{t}</b><span>{d}</span></div>'
+    leaves = "".join(f'<div class="tleaf fill-{c}{fr}{" tleaf--check" if n == "cowork" else ""}" data-leaf="{n}" data-step="{st}" style="left:{LX}px;top:{y}px;width:{LW}px;height:{LH}px"><b class="hand">{t}</b><span>{d}</span></div>'
                      for n, y, t, d, c, st in LEAVES)
     return f'<div class="tree"><svg class="tree-lines" viewBox="0 0 1390 508" aria-hidden="true">{svg}</svg>{nodes}{leaves}</div>'
 
@@ -714,7 +715,7 @@ slide(f'''    <h2>Quelle brique <span class="mark">pour quelle tâche ?</span></
 slide(f'''    <h2>Une situation, <span class="mark mark--lav">l'arbre en direct</span></h2>
     <div class="decider decider--tree">
       <div><div class="tq-list"></div><button class="reset sk sk--thin" style="--radius:12px;margin-top:20px;padding:6px 16px;font-family:var(--font-hand);font-size:24px">Recommencer</button></div>
-      <div class="verdict-box sk" aria-live="polite"><p class="lbl">L'arbre propose</p><p class="out"></p><p class="kind"></p><p class="why"></p><p class="guard">Et quelle que soit la brique : un humain valide avant que ça parte.</p></div>
+      <div class="verdict-box sk" aria-live="polite"><p class="lbl">L'arbre propose</p><p class="out"></p><p class="kind"></p><p class="mod"></p><p class="why"></p><p class="guard">Et quelle que soit la brique : un humain valide avant que ça parte.</p></div>
     </div>''', seq=3, section="11h00 · Quand utiliser quoi",
  notes="Prendre une situation proposée par la salle et répondre avec le groupe, une question à la fois : les questions suivantes apparaissent selon les réponses. Cliquer sur une réponse précédente pour changer de branche. Recommencer pour une deuxième situation.")
 
@@ -739,9 +740,10 @@ slide(f'''    <div class="stack">
     <div class="cols cols--1-2 grow" style="margin-top:40px;align-items:start;">
       <div>
       <ol class="steps">
-        <li class="frag"><strong>Prends</strong> une situation de ton pôle.</li>
+        <li class="frag"><strong>Reprends</strong> une situation de mars, celle de ton pôle.</li>
         <li class="frag"><strong>Passe-la</strong> dans l'arbre, une question après l'autre.</li>
-        <li class="frag"><strong>Classe-la</strong> : assistant, automatisation, agent, ou pas d'outil.</li>
+        <li class="frag"><strong>Note</strong> où elle tombe : assistant, notebook, automatisation, agent, ou on s'arrête.</li>
+        <li class="frag"><strong>Cet après-midi</strong>, on les reprend une par une, l'arbre à l'écran, avec le module Copilot qui va avec.</li>
       </ol>
       <div class="alert alert--compact sk" role="note">{icon("alert")}<div><p class="alert-title">Vigilance données</p><p>Aucune donnée réelle dans un outil grand public : on décrit la tâche, pas son contenu.</p></div></div>
       </div>
@@ -750,7 +752,7 @@ slide(f'''    <div class="stack">
         {pic("atelier-samoyede", "Le samoyède range des balles dans quatre paniers.", 600, 338)}
       </div>
     </div>''', seq=3, section="11h00 · Quand utiliser quoi",
- notes="Les quatre questions : la tâche est-elle répétitive, les règles sont-elles stables, faut-il interpréter un texte ou décider, que se passe-t-il en cas d'erreur.")
+ notes="Atelier avant le déjeuner, en sous-groupes par pôle. Chaque groupe reprend les situations de mars (slide 10) et les passe dans l'arbre de la slide 30, sur papier ou à l'oral. On ne cherche pas encore l'outil exact : on note juste où la situation tombe. La mise en commun se fait cet après-midi, après la prise en main de Copilot, sur la slide « Vos situations, passées dans l'arbre ».")
 
 slide(f'''    <div class="grow center-y">
       <p class="eyebrow">12h30</p>
@@ -870,19 +872,34 @@ slide(f'''    <div class="stack">
  notes="Manipulation guidée après les trois démos. On commence par un exemple fait tous ensemble : un cas proposé par la salle, la consigne écrite en direct (rôle, contexte, attendu), testée devant tout le monde. Ensuite seulement, chacun sur son poste. Prévoir un plan B si les licences ne permettent pas de créer un assistant : faire rédiger la consigne et la tester dans le chat Copilot.")
 
 def chips(pole, items):
-    return "".join(f'<button class="chip sk sk--thin" data-k="{pole}-{i}"><span>{t}</span><span class="verdict">à classer</span></button>' for i, t in enumerate(items))
+    return "".join(f'<button class="chip chip--tree sk sk--thin" data-k="{pole}-{i}"><span>{t}</span><span class="verdict">à passer dans l&#39;arbre</span></button>' for i, t in enumerate(items))
+TMODAL = f'''<div class="tmodal" role="dialog" aria-modal="true" aria-label="La situation passée dans l'arbre" hidden>
+      <div class="tmodal-card sk">
+        <button class="tmodal-x sk sk--thin" aria-label="Fermer">Fermer</button>
+        <p class="tmodal-sit"><span>La situation</span><b class="hand"></b></p>
+        <div class="decider decider--tree decider--modal">
+          <div><div class="tq-list"></div><button class="reset sk sk--thin">Recommencer</button></div>
+          <div class="tmodal-right">
+            <div class="tree-mini">{tree_html(anim=False)}</div>
+            <div class="verdict-box sk" aria-live="polite"><p class="lbl">L'arbre propose</p><p class="out"></p><p class="kind"></p><p class="mod"></p><p class="why"></p></div>
+          </div>
+        </div>
+      </div>
+    </div>'''
 slide(f'''    <div class="stack">
       <span class="tag tag--soft sk">{icon("search")}Repérées en mars, à confirmer par la grille d'audit</span>
-      <h2>Vos situations, classées <span class="mark mark--sky">en direct</span></h2>
+      <h2>Vos situations, <span class="mark">passées dans l'arbre</span></h2>
+      <p class="howto">Un clic sur une situation : l'arbre s'ouvre, on répond ensemble, et on voit avec quel module de Copilot la faire.</p>
     </div>
     <div class="situations">
       <div class="pole"><h3>{icon("cart")}Commerce</h3>{chips("com", ["Commissions des vendeurs itinérants", "Contrôle des études de prix", "Estimation des reprises", "Ciblage pour les démonstrations", "Produit chez un fournisseur"])}</div>
       <div class="pole"><h3>{icon("ledger")}RH et compta</h3>{chips("rh", ["Variables de salaire", "Vérification des paiements clients", "Trésorerie quotidienne", "Saisie des pointages"])}</div>
       <div class="pole"><h3>{icon("mega")}Communication et direction</h3>{chips("cm", ["Planning de communication", "Bases de données pour la communication", "Création de tableaux de bord", "Analyse des tableaux de bord", "Présentations PowerPoint"])}</div>
     </div>
-    <div class="legend"><span><i style="background:var(--mint)"></i>assistant</span><span><i style="background:var(--lav)"></i>automatisation</span><span><i style="background:var(--blush)"></i>agent</span><span><i style="background:#E7EBEB"></i>pas d'outil</span><span>· un clic pour changer</span></div>''',
+    <div class="legend"><span><i style="background:var(--mint)"></i>assistant ou notebook</span><span><i style="background:var(--lav)"></i>automatisation</span><span><i style="background:var(--blush)"></i>agent</span><span><i style="background:#E7EBEB"></i>on s'arrête</span><span>· un clic pour rouvrir l'arbre</span></div>
+    {TMODAL}''',
  seq=4, section="13h30 · Démonstrations, puis à vous",
- notes="Mise en commun de l'atelier du matin, après avoir pris Copilot en main : chaque sous-groupe annonce son verdict, clique sur la carte pour la colorer. Les désaccords sont les meilleurs moments : les noter pour la grille d'audit.")
+ notes="Atelier pratique, mise en commun de l'atelier du matin. Un sous-groupe choisit une de ses situations : je clique, l'arbre s'ouvre. On lit chaque question à voix haute, le groupe répond, les autres peuvent contester. À la fin, l'arbre donne la brique (assistant, notebook, automatisation ou agent) et le module Copilot à utiliser. On ferme, la carte prend sa couleur. Cliquer sur une réponse précédente pour tester l'autre branche. Les désaccords sont les meilleurs moments : les noter pour la grille d'audit.")
 
 slide(f'''    <div class="grow center-y">
       <p class="eyebrow">15h00</p>

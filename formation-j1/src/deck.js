@@ -208,6 +208,7 @@
     const t = e.target;
     const editing = t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName);
     if (editing) { if (e.key === "Escape") t.blur(); return; }
+    if (document.querySelector(".tmodal:not([hidden])")) return;
     if (t.tagName === "BUTTON" && (e.key === " " || e.key === "Enter")) return;
     const k = e.key;
     if (helpEl.classList.contains("is-open") && (k === "Escape" || k === "?" || k === "h")) { toggle(helpEl); e.preventDefault(); return; }
@@ -232,16 +233,6 @@
   document.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
   document.addEventListener("touchend", (e) => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 60) (dx < 0 ? next : prev)(); x0 = null; });
 
-  // Cartes à classer : chaque clic passe à la logique suivante
-  const CYCLE = [["", "à classer"], ["assistant", "assistant"], ["automatisation", "automatisation"], ["agent", "agent"], ["outil", "pas d'outil"]];
-  document.querySelectorAll(".chip").forEach((c) => {
-    const key = "chip-" + c.dataset.k;
-    const label = c.querySelector(".verdict");
-    function set(v) { const idx = CYCLE.findIndex((x) => x[0] === v); const [val, txt] = CYCLE[idx < 0 ? 0 : idx]; if (val) c.dataset.v = val; else delete c.dataset.v; label.textContent = txt; c.setAttribute("aria-label", c.firstElementChild.textContent + " : " + txt); }
-    set(store(key) || "");
-    c.addEventListener("click", () => { const idx = CYCLE.findIndex((x) => x[0] === (c.dataset.v || "")); const v = CYCLE[(idx + 1) % CYCLE.length][0]; set(v); store(key, v); });
-  });
-
   // Outil de décision : l'arbre « quelle brique pour quelle tâche », une question après l'autre
   const TREE = {
     q0: ["Ai-je le droit d'utiliser ces données dans Copilot ?", "q1", "stop"],
@@ -252,42 +243,91 @@
     qa: ["Doit-elle se lancer seule, à heure fixe, sans que tu la relances ?", "plan", "qt"],
     qt: ["Faut-il des consignes et des documents à elle, partagés avec l'équipe ?", "agent", "req"],
   };
+  // [brique, logique, couleur, pourquoi, module Copilot, catégorie de la carte, libellé court]
   const LEAF = {
-    stop: ["On s'arrête et on vérifie", "", "card", "Données personnelles, clients ou confidentielles : on demande à la référente IA avant d'aller plus loin."],
-    prompt: ["Une demande", "Assistant", "mint", "Un besoin ponctuel : tout le contexte tient dans l'échange ou un fichier joint."],
-    notes: ["Un bloc-notes", "Assistant", "mint", "Un dossier de documents à croiser pour cette tâche."],
-    cowork: ["Cowork", "Agent, à vérifier selon la licence", "blush", "Plusieurs étapes et plusieurs applications : Copilot enchaîne pour toi."],
-    flux: ["Un flux Power Automate", "Automatisation", "lav", "Répétitif, des règles fixes, sans interprétation : une suite d'actions suffit."],
-    plan: ["Une demande planifiée", "Vers l'agent : c'est l'horaire qui la lance", "blush", "Copilot la relance seule chaque jour ou chaque semaine et t'envoie le résultat."],
-    req: ["Une requête enregistrée", "Assistant", "mint", "Ta méthode, gardée dans ta galerie et rappelée quand tu en as besoin."],
-    agent: ["Un agent Copilot", "Assistant dédié", "mint", "Agent Builder : des consignes et des documents, réutilisables par toute l'équipe."],
+    stop: ["On s'arrête et on vérifie", "", "card", "Données personnelles, clients ou confidentielles : on demande à la référente IA avant d'aller plus loin.", "Avant tout outil : la référente IA", "stop", "on s'arrête"],
+    prompt: ["Une demande", "Assistant", "mint", "Un besoin ponctuel : tout le contexte tient dans l'échange ou un fichier joint.", "Copilot Chat : une demande, avec un fichier joint si besoin", "assistant", "assistant · Copilot Chat"],
+    notes: ["Un bloc-notes", "Notebook", "mint", "Un dossier de documents à croiser pour cette tâche.", "Copilot Notebooks : un bloc-notes avec les documents du dossier", "notebook", "notebook · Notebooks"],
+    cowork: ["Cowork", "Agent, selon la licence", "blush", "Plusieurs étapes et plusieurs applications : Copilot enchaîne pour toi.", "Copilot Cowork, s'il est activé chez vous", "agent", "agent · Cowork"],
+    flux: ["Un flux Power Automate", "Automatisation", "lav", "Répétitif, des règles fixes, sans interprétation : une suite d'actions suffit.", "Power Automate, dans Microsoft 365", "automatisation", "automatisation · Power Automate"],
+    plan: ["Une demande planifiée", "Agent : c'est l'horaire qui la lance", "blush", "Copilot la relance seule chaque jour ou chaque semaine et t'envoie le résultat.", "Copilot Chat : une demande planifiée", "agent", "agent · demande planifiée"],
+    req: ["Une requête enregistrée", "Assistant", "mint", "Ta méthode, gardée dans ta galerie et rappelée quand tu en as besoin.", "Copilot Chat : une requête enregistrée dans ta galerie", "assistant", "assistant · requête enregistrée"],
+    agent: ["Un agent Copilot", "Assistant dédié", "mint", "Des consignes et des documents, réutilisables par toute l'équipe.", "Agent Builder : créer un agent dans Copilot", "assistant", "assistant · agent Copilot"],
   };
-  document.querySelectorAll(".decider--tree").forEach((d) => {
+  const VIS = { q1: "q1", qc: "qc", qd: "qc", qj: "qj", qa: "qa", qt: "qt" }; // question de l'outil -> case de l'arbre dessiné
+  function mountDecider(d, onChange) {
     const list = d.querySelector(".tq-list"), box = d.querySelector(".verdict-box");
-    const out = box.querySelector(".out"), kind = box.querySelector(".kind"), why = box.querySelector(".why");
+    const out = box.querySelector(".out"), kind = box.querySelector(".kind"), why = box.querySelector(".why"), mod = box.querySelector(".mod");
+    const mini = d.querySelector(".tree-mini");
     let path = []; // [[question, réponse]]
     function render() {
       list.innerHTML = "";
       let node = "q0";
+      const seen = [];
       for (let k = 0; k <= path.length; k++) {
         if (!TREE[node]) break;
+        seen.push(node);
         const [label, yes, no] = TREE[node], ans = path[k] ? path[k][1] : null;
         const row = document.createElement("div");
         row.className = "q";
         row.innerHTML = "<span>" + label + '</span><div class="yn"><button class="sk sk--thin" value="oui" aria-pressed="' + (ans === "oui") + '">oui</button><button class="sk sk--thin no" value="non" aria-pressed="' + (ans === "non") + '">non</button></div>';
-        const depth = k;
-        row.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { path = path.slice(0, depth); path.push([node, b.value]); render(); }));
+        const depth = k, here = node;
+        row.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { path = path.slice(0, depth); path.push([here, b.value]); render(); }));
         list.appendChild(row);
         if (!ans) break;
         node = ans === "oui" ? yes : no;
       }
       const leaf = LEAF[node] && path.length ? LEAF[node] : null;
-      if (leaf) { out.textContent = leaf[0]; kind.textContent = leaf[1]; why.textContent = leaf[3]; box.className = "verdict-box sk fill-" + leaf[2] + (node !== "stop" ? " has-guard" : ""); }
-      else { out.textContent = "Réponds aux questions"; kind.textContent = ""; why.textContent = "Une question après l'autre, avec le groupe."; box.className = "verdict-box sk"; }
+      if (leaf) { out.textContent = leaf[0]; kind.textContent = leaf[1]; why.textContent = leaf[3]; if (mod) mod.textContent = leaf[4]; box.className = "verdict-box sk fill-" + leaf[2] + (node !== "stop" ? " has-guard" : ""); }
+      else { out.textContent = "Réponds aux questions"; kind.textContent = ""; why.textContent = "Une question après l'autre, avec le groupe."; if (mod) mod.textContent = ""; box.className = "verdict-box sk"; }
+      if (mini) {
+        mini.classList.toggle("has-path", path.length > 0);
+        mini.querySelectorAll(".is-on").forEach((x) => x.classList.remove("is-on"));
+        if (path.length) {
+          mini.querySelector('[data-node="root"]').classList.add("is-on");
+          seen.forEach((q) => { const v = VIS[q] && mini.querySelector('[data-node="' + VIS[q] + '"]'); if (v) v.classList.add("is-on"); });
+          const lf = leaf && mini.querySelector('[data-leaf="' + node + '"]'); if (lf) lf.classList.add("is-on");
+        }
+      }
+      if (onChange) onChange(path.slice(), leaf ? node : null);
     }
     const reset = d.querySelector(".reset");
     if (reset) reset.addEventListener("click", () => { path = []; render(); });
     render();
+    return { set(p) { path = (p || []).slice(); render(); } };
+  }
+  document.querySelectorAll(".decider--tree:not(.decider--modal)").forEach((d) => mountDecider(d));
+
+  // Situations de mars : un clic ouvre l'arbre, la réponse colore la carte
+  document.querySelectorAll(".tmodal").forEach((m) => {
+    const slide = m.closest(".slide"), sit = m.querySelector(".tmodal-sit b");
+    let chip = null;
+    function paint(c, leafKey) {
+      const lf = leafKey && LEAF[leafKey];
+      if (lf) c.dataset.v = lf[5]; else delete c.dataset.v;
+      c.querySelector(".verdict").textContent = lf ? lf[6] : "à passer dans l'arbre";
+    }
+    const dec = mountDecider(m.querySelector(".decider--modal"), (path, leafKey) => {
+      if (!chip) return;
+      paint(chip, leafKey);
+      store("tchip-" + chip.dataset.k, JSON.stringify({ path, leaf: leafKey }));
+    });
+    function close() { m.hidden = true; slide.classList.remove("has-modal"); if (chip) chip.focus(); chip = null; }
+    slide.querySelectorAll(".chip--tree").forEach((c) => {
+      let saved = null; try { saved = JSON.parse(store("tchip-" + c.dataset.k) || "null"); } catch (e) { saved = null; }
+      if (saved) paint(c, saved.leaf);
+      c.addEventListener("click", () => {
+        let st = null; try { st = JSON.parse(store("tchip-" + c.dataset.k) || "null"); } catch (e) { st = null; }
+        chip = null; dec.set(st ? st.path : []); chip = c;
+        sit.textContent = c.firstElementChild.textContent;
+        m.hidden = false; slide.classList.add("has-modal");
+        const first = m.querySelector(".yn button"); if (first) first.focus();
+      });
+    });
+    m.querySelector(".tmodal-x").addEventListener("click", close);
+    m.addEventListener("click", (e) => { if (e.target === m) close(); });
+    document.addEventListener("keydown", (e) => { if (!m.hidden && e.key === "Escape") { close(); e.stopImmediatePropagation(); } }, true);
+    document.addEventListener("deck:slide", () => { if (!m.hidden) close(); });
   });
 
   // Minuteur d'atelier

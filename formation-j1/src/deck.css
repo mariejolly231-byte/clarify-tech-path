@@ -973,3 +973,35 @@ h2 { letter-spacing: .005em; }
 .qr img { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
 .qr--todo { display: grid; place-items: center; text-align: center; border: 3px dashed var(--line); font: 600 20px/1.3 var(--font-body); color: var(--muted); }
 .grille-way .mail { font: 700 26px/1.2 var(--font-body); color: var(--teal); margin: 14px 0; }
+
+/* Situations de mars passées dans l'arbre : fenêtre par-dessus la slide */
+.chip--tree .verdict { font-size: 20px; }
+.chip[data-v="notebook"] { background: var(--mint); }
+.chip[data-v="stop"] { background: #EEF2F1; }
+.tmodal { position: absolute; inset: 0; z-index: 30; background: rgba(42, 47, 51, .28); display: grid; place-items: center; }
+.tmodal[hidden] { display: none; }
+.tmodal-card { --radius: 30px; position: relative; width: 1700px; height: 820px; margin-right: 60px; padding: 34px 44px; background: var(--paper); display: flex; flex-direction: column; }
+.tmodal-x { --radius: 12px; position: absolute; top: 26px; right: 30px; padding: 6px 18px; font-family: var(--font-hand); font-size: 24px; background: var(--card); }
+.tmodal-sit { display: flex; align-items: baseline; gap: 18px; padding-right: 160px; }
+.tmodal-sit span { font: 700 20px/1 var(--font-body); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.tmodal-sit b { font-weight: 400; font-size: 52px; color: var(--teal); line-height: 1.1; }
+.decider--modal { grid-template-columns: 540px 1fr; gap: 40px; margin-top: 18px; flex: 1; min-height: 0; }
+.decider--modal .q { padding: 11px 0; }
+.decider--modal .q span { font-size: 23px; line-height: 1.25; }
+.decider--modal .yn button { font-size: 24px; padding: 4px 16px; }
+.decider--modal .reset { --radius: 12px; margin-top: 16px; padding: 6px 16px; font-family: var(--font-hand); font-size: 22px; background: var(--card); }
+.tmodal-right { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.tree-mini { width: 1001px; height: 366px; flex: none; }
+.tree-mini .tree { transform: scale(.72); transform-origin: 0 0; margin-top: 0; }
+.tree-mini .tnode, .tree-mini .tleaf { transition: opacity 250ms var(--ease), box-shadow 250ms var(--ease); }
+.tree-mini.has-path .tnode, .tree-mini.has-path .tleaf { opacity: .28; }
+.tree-mini.has-path .tree-lines path { opacity: .25; }
+.tree-mini .tnode.is-on, .tree-mini .tleaf.is-on { opacity: 1; }
+.tree-mini .tnode.is-on { box-shadow: inset 0 0 0 4px var(--teal); }
+.tree-mini .tnode--root.is-on { box-shadow: none; }
+.tree-mini .tleaf.is-on { box-shadow: inset 0 0 0 4px var(--teal); }
+.decider--modal .verdict-box { min-height: 0; flex: 1; padding: 22px 30px; }
+.decider--modal .verdict-box .out { font-size: 44px; margin: 4px 0 8px; }
+.decider--modal .verdict-box .why { font-size: 22px; }
+.verdict-box .mod { font: 600 24px/1.3 var(--font-body); color: var(--ink); margin-bottom: 8px; }
+.verdict-box .mod:not(:empty)::before { content: "Dans Copilot : "; font-weight: 700; color: var(--teal); }
