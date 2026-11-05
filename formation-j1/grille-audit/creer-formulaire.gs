@@ -9,7 +9,7 @@
  *    pour générer le QR code du deck, ou le coller dans un générateur de QR code.
  * Chaque envoi déclenche ensuite envoyerReponse(), qui t'écrit un e-mail récapitulatif.
  */
-const DESTINATAIRE = 'mariejolly231@gmail.com';
+const DESTINATAIRE = 'contact@summitflow.fr';
 
 const CAS_DE_MARS = [
   'Commerce · Commissions des vendeurs itinérants',

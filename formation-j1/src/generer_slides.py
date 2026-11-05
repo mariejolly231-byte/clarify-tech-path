@@ -953,7 +953,7 @@ MARS = [("Commerce", ["Commissions des vendeurs itinérants", "Contrôle des ét
         ("RH et compta", ["Variables de salaire", "Vérification des paiements clients pour les commissions", "Trésorerie quotidienne, factures reçues par e-mail", "Saisie des pointages, du papier au logiciel"]),
         ("Communication", ["Planning de communication", "Optimisation des bases de données pour la communication"]),
         ("Direction", ["Création de tableaux de bord", "Analyse des tableaux de bord", "Présentations PowerPoint"])]
-GRILLE_URL = ""  # adresse du formulaire en ligne : renseignée après publication
+GRILLE_URL = "https://airtable.com/appnUIHs250UX7TC8/pagUud0FR1Zsgu6gA/form"  # formulaire Airtable, réponses envoyées à contact@summitflow.fr
 
 # ---------- 16h30 Intersession ----------
 # On fait d'abord une ligne ensemble, colonne par colonne, puis chacun remplit la sienne
@@ -986,10 +986,10 @@ def qr_block():
 slide(f'''    <h2>Remplir la grille : <span class="mark">en ligne ou en PDF</span></h2>
     <p class="howto">À me renvoyer au plus tard deux semaines avant le jour 2, soit début janvier.</p>
     <div class="cols mt" style="align-items:stretch">
-      <div class="card sk fill-mint grille-way">{qr_block()}<div><h3>En ligne, sur ton téléphone</h3><p>Tu scannes, tu remplis, tu envoies : tes réponses m'arrivent directement par e-mail.</p><p class="small">Une réponse par tâche : renvoie le formulaire autant de fois que nécessaire.</p></div></div>
-      <div class="card sk fill-card grille-way"><div><h3>En PDF</h3><p>La même grille, en PDF à remplir sur l'ordinateur, que je vous envoie après la séance. Tu la remplis, puis tu me la renvoies par e-mail.</p><p class="mail">mariejolly231@gmail.com</p><p class="small">Aucune donnée réelle de client ou de salarié : on décrit la tâche, pas son contenu.</p></div></div>
+      <div class="card sk fill-mint grille-way">{qr_block()}<div><h3>En ligne, sur ton téléphone</h3><p>Tu scannes, tu remplis, tu envoies : ta réponse m'arrive par e-mail.</p><p class="small">Une réponse par tâche. Une case à cocher pour le traitement des données, détaillé sur summitflow.fr.</p></div></div>
+      <div class="card sk fill-card grille-way"><div><h3>En PDF</h3><p>La même grille, en PDF à remplir sur l'ordinateur, que je vous envoie après la séance. Tu la remplis, tu coches la case données, puis tu me la renvoies par e-mail.</p><p class="mail">contact@summitflow.fr</p><p class="small">Aucune donnée réelle de client ou de salarié : on décrit la tâche, pas son contenu.</p></div></div>
     </div>''', seq=7, section="16h30 · Lancement de l'intersession",
- notes="Montrer le QR code en direct et faire scanner une fois pour vérifier que la page s'ouvre. Le formulaire en ligne (Google Forms) envoie chaque réponse par e-mail. Le PDF à remplir (dist/grille-audit-lagarrigue.pdf) part par e-mail après la séance. Rappeler la question zéro pour la colonne sensibilité des données.")
+ notes="Montrer le QR code en direct et faire scanner une fois pour vérifier que la page s'ouvre. Le formulaire en ligne (Airtable) envoie chaque réponse par e-mail à contact@summitflow.fr. Il demande le consentement au traitement des données, comme le PDF. Le PDF à remplir (dist/grille-audit-lagarrigue.pdf) part par e-mail après la séance. Rappeler la question zéro pour la colonne sensibilité des données.")
 
 ref = "".join(f'<div class="fill-line rise"><span>{p}</span><span class="f" contenteditable="true" data-k="ref-{i}" data-ph="nom à écrire en séance"></span></div>' for i, p in enumerate(["Commerce", "RH et comptabilité", "Communication"]))
 slide(f'''    <p class="eyebrow">Qui porte quoi</p>

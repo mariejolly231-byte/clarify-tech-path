@@ -7,6 +7,9 @@ from reportlab.lib.utils import ImageReader
 
 TEAL, INK, MINT, MUTED, PAPER = HexColor("#0B4F5C"), HexColor("#2A2F33"), HexColor("#D6F1E6"), HexColor("#5C6366"), HexColor("#FAF8F3")
 W, H = landscape(A4)
+# Registre des traitements de Summit Flow : adresse exacte à confirmer
+REGISTRE_URL = "https://summitflow.fr"
+REGISTRE_LABEL = "summitflow.fr"
 CAS = ["Choisir un cas de mars, ou écrire le tien",
        "Commerce · Commissions des vendeurs itinérants", "Commerce · Contrôle des études de prix", "Commerce · Estimation des reprises",
        "Commerce · Ciblage de clients pour les démonstrations", "Commerce · Trouver un produit chez un fournisseur",
@@ -29,7 +32,7 @@ def page(c, n, logo):
     c.drawImage(logo, 28, H - 70, 48, 48, mask="auto")
     c.setFillColor(TEAL); c.setFont("Helvetica-Bold", 18); c.drawString(86, H - 44, f"Grille d'audit · tâche {n}")
     c.setFillColor(MUTED); c.setFont("Helvetica", 9.5)
-    c.drawString(86, H - 60, "Maison Lagarrigue · formation Automatisation et IA agentique · à renvoyer à mariejolly231@gmail.com, au plus tard début janvier")
+    c.drawString(86, H - 60, "Maison Lagarrigue · formation Automatisation et IA agentique · à renvoyer à contact@summitflow.fr, au plus tard début janvier")
     form = c.acroForm
     y = H - 98
     c.setFillColor(INK); c.setFont("Helvetica-Bold", 10); c.drawString(28, y + 6, "Ton pôle")
@@ -41,7 +44,7 @@ def page(c, n, logo):
     c.drawString(642, y + 6, "9. Solution pressentie")
     form.choice(name=f"t{n}_solution", value=SOLUTIONS[0], options=SOLUTIONS, x=642, y=y - 22, width=172, height=22, borderColor=TEAL, fillColor=MINT, textColor=INK, fontSize=9, fieldFlags="combo")
     top, colw, gap = y - 44, (W - 56 - 16) / 2, 16
-    hs = {1: 52, 2: 120}
+    hs = {1: 46, 2: 120}
     cols = [[], []]
     cols[0] = FIELDS[:4]; cols[1] = FIELDS[4:]
     for ci, col in enumerate(cols):
@@ -53,8 +56,15 @@ def page(c, n, logo):
             form.textfield(name=f"t{n}_{title[:2].strip('. ')}", x=x, y=yy - 22 - h, width=colw, height=h, borderColor=TEAL, fillColor=white,
                            textColor=INK, fontSize=9.5, borderWidth=1, fieldFlags="multiline")
             yy -= h + 34
+    form.checkbox(name=f"t{n}_consentement", x=28, y=30, size=13, borderColor=TEAL, fillColor=white, buttonStyle="check", borderWidth=1)
+    c.setFillColor(INK); c.setFont("Helvetica", 9)
+    txt = "J'accepte que Summit Flow traite ces réponses pour préparer la suite de la formation. Détail et droits : registre des traitements sur "
+    c.drawString(48, 33, txt)
+    lx = 48 + c.stringWidth(txt, "Helvetica", 9)
+    c.setFillColor(TEAL); c.setFont("Helvetica-Bold", 9); c.drawString(lx, 33, REGISTRE_LABEL)
+    c.linkURL(REGISTRE_URL, (lx, 30, lx + c.stringWidth(REGISTRE_LABEL, "Helvetica-Bold", 9), 43), relative=0)
     c.setFillColor(MUTED); c.setFont("Helvetica", 8.5)
-    c.drawString(28, 18, "On décrit la tâche, pas son contenu : aucune donnée réelle de client ou de salarié. Summit Flow · contact@summitflow.fr")
+    c.drawString(28, 12, "On décrit la tâche, pas son contenu : aucune donnée réelle de client ou de salarié. Summit Flow · contact@summitflow.fr")
     c.showPage()
 
 c = canvas.Canvas("dist/grille-audit-lagarrigue.pdf", pagesize=landscape(A4))
