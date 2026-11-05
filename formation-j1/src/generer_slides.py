@@ -369,10 +369,6 @@ tf = [("L'IA générative va chercher la bonne réponse dans une base de donnée
       ("Plus la consigne est précise, plus la réponse est utile.", "Vrai", "Le contexte fait souvent la différence."),
       ("Ce que je tape peut servir à améliorer le modèle.", "Selon l'outil", "Ça dépend de l'outil, de la licence et des réglages.")]
 rows = "".join(f'''<div class="tf sk sk--thin"><p>{q}</p><div class="frag tf-a"><span class="mark mark--{'teal' if a=='Vrai' else 'blush' if a=='Faux' else 'lav'} hand">{a}</span><span class="small">{w}</span></div></div>''' for q, a, w in tf)
-slide(f'''    <p class="eyebrow">Rappel express</p>
-    <h2>Vrai ou faux ?</h2>
-    <div class="stack mt">{rows}</div>''', seq=1, section="9h00 · Point de départ",
- notes="Vote à main levée, puis flèche droite pour révéler. Sert de remise à niveau sans en avoir l'air.")
 
 # D'où vient l'IA : sept dates, puis où on en est en 2026 (sources dans SOURCES.md)
 TIMELINE = [("1950", "Alan Turing pose la question : une machine peut-elle penser ?"),
@@ -382,14 +378,14 @@ TIMELINE = [("1950", "Alan Turing pose la question : une machine peut-elle pense
             ("2022", "ChatGPT sort le 30 novembre : 100 millions d'utilisateurs en deux mois."),
             ("2023", "Copilot arrive dans Word, Excel, Outlook et Teams."),
             ("2026", "Les agents : Copilot enchaîne des tâches, Workflows, Cowork.")]
-tl = "".join(f'<li class="frag{" is-now" if y == "2026" else ""}"><b class="hand">{y}</b><p>{t}</p></li>' for y, t in TIMELINE)
+tl = "".join(f'<li class="{"is-now" if y == "2026" else ""}"><b class="hand">{y}</b><p>{t}</p></li>' for y, t in TIMELINE)
 slide(f'''    <h2>D'où vient l'IA, <span class="mark">et où on en est</span></h2>
     <ol class="timeline">{tl}</ol>
     <div class="cols mt" style="align-items:stretch">
-      {tip("Plus de 900 millions de personnes utilisent ChatGPT chaque semaine, deux fois plus qu'un an plus tôt.", "OpenAI, février 2026", "frag")}
-      {tip("Deux entreprises françaises sur trois de 20 salariés et plus utilisent l'IA générative, 64 % entre 20 et 49 salariés.", "Banque de France, bulletin n° 266, septembre 2026", "frag")}
+      {tip("Plus de 900 millions de personnes utilisent ChatGPT chaque semaine, deux fois plus qu'un an plus tôt.", "OpenAI, février 2026")}
+      {tip("Deux entreprises françaises sur trois de 20 salariés et plus utilisent l'IA générative, 64 % entre 20 et 49 salariés.", "Banque de France, bulletin n° 266, septembre 2026")}
     </div>''', seq=1, section="9h00 · Point de départ",
- notes="Le rappel historique du programme, en deux minutes : l'IA n'est pas née avec ChatGPT, mais tout s'est accéléré depuis 2017. Ce qui change pour eux : depuis 2023 elle est dans les outils qu'ils ont déjà, et depuis 2025-2026 elle ne fait plus seulement répondre, elle enchaîne des tâches. Les deux chiffres disent où on en est : ce n'est plus une mode, et les entreprises de leur taille s'y mettent. Nuance utile : la même enquête de la Banque de France montre que seules 31 % des entreprises utilisatrices voient déjà un gain de productivité, on y revient à 15h15.")
+ notes="Le rappel historique du programme, en deux minutes, tout s'affiche d'un coup : l'IA n'est pas née avec ChatGPT, mais tout s'est accéléré depuis 2017. Ce qui change pour eux : depuis 2023 elle est dans les outils qu'ils ont déjà, et depuis 2025-2026 elle ne fait plus seulement répondre, elle enchaîne des tâches. Les deux chiffres disent où on en est : ce n'est plus une mode, et les entreprises de leur taille s'y mettent. Nuance utile : la même enquête de la Banque de France montre que seules 31 % des entreprises utilisatrices voient déjà un gain de productivité, on y revient à 15h15.")
 
 # Infographie fournie d'un seul tenant (infographie-ia.png) : la build la coupe en deux,
 # le haut pour « comment ça marche », le bas pour « les principales IA »
@@ -413,7 +409,7 @@ slide(f'''    <h2>Quatre choses à savoir, <span class="mark mark--sky">et le bo
     <div class="sv-head"><span>Ce qu'il faut savoir</span><span>Ton réflexe</span></div>
     <div class="svs">{rows_s}</div>
     <p class="sv-retenir frag"><b class="hand">À retenir :</b> plus tu lui donnes de contexte, meilleure est la réponse.</p>''', seq=1, section="9h00 · Point de départ",
- notes="Suite directe de « comment ça marche ». Une ligne par clic. Pour chaque ligne, demander un exemple vécu : une réponse fausse, une info périmée, un contexte à réexpliquer. La dernière phrase prépare le harnais du chapitre 2.")
+ notes="Suite directe de « comment ça marche ». Une ligne par clic, et avant chaque ligne un vrai ou faux à main levée, pour faire la remise à niveau sans en avoir l'air : « L'IA va chercher la bonne réponse dans une base de données » (faux, elle prédit), « Elle peut inventer une source qui n'existe pas » (vrai, c'est une hallucination), « Elle se souvient de nos échanges d'hier » (faux sans la mémoire), « La même question donne toujours la même réponse » (faux). La question des données saisies est traitée au chapitre 6. Pour chaque ligne, demander un exemple vécu : une réponse fausse, une info périmée, un contexte à réexpliquer. La dernière phrase prépare le harnais du chapitre 2.")
 
 slide(f'''    <p class="eyebrow">Rappel commun</p>
     <h2>Les principales IA <span class="mark">aujourd'hui</span></h2>
@@ -769,7 +765,7 @@ slide(f'''    <div class="stack">
         <div class="alert alert--compact sk" role="note">{icon("alert")}<div><p class="alert-title">Vigilance données</p><p>On décrit la tâche, pas son contenu : aucune donnée réelle.</p></div></div>
       </div>
     </div>''', seq=3, section="11h00 · Quand utiliser quoi",
- notes="Atelier avant le déjeuner, en sous-groupes par pôle. Chaque groupe reprend les situations de mars (slide 10) et les passe dans l'arbre de la slide 31, sur papier ou à l'oral. On ne cherche pas encore l'outil exact : on note juste où la situation tombe. La mise en commun suit directement, sur la slide suivante : on passe les situations dans l'arbre, à l'écran, avant le déjeuner.")
+ notes="Atelier avant le déjeuner, en sous-groupes par pôle. Chaque groupe reprend les situations de mars (slide 10) et les passe dans l'arbre de la slide 30, sur papier ou à l'oral. On ne cherche pas encore l'outil exact : on note juste où la situation tombe. La mise en commun suit directement, sur la slide suivante : on passe les situations dans l'arbre, à l'écran, avant le déjeuner.")
 
 def chips(pole, items):
     return "".join(f'<button class="chip chip--tree sk sk--thin" data-k="{pole}-{i}"><span>{t}</span><span class="verdict">à passer dans l&#39;arbre</span></button>' for i, t in enumerate(items))

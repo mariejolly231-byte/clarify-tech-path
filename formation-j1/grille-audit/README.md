@@ -1,6 +1,6 @@
 # Grille d'audit de l'intersession
 
-Deux façons de la remplir, avec les mêmes 9 colonnes que les slides 53 et 54.
+Deux façons de la remplir, avec les mêmes 9 colonnes que les slides 52 et 53.
 
 ## En ligne, par QR code (Airtable, en service)
 
