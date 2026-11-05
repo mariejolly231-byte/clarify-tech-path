@@ -910,7 +910,7 @@ slide(f'''    <div class="stack">
         <li class="frag"><strong>Teste</strong> sur un exemple sans donnée réelle.</li>
         <li class="frag"><strong>Note</strong> ce qui marche et ce qui coince.</li>
       </ol>
-      <div class="stack">{timer(20, (15, 20, 25))}{avous("Pas à pas : créer un agent dans Copilot", "md-agents")}{shot("Capture de l'écran de départ sur Copilot (où cliquer pour créer l'assistant)")}</div>
+      <div class="stack">{avous("Pas à pas : créer un agent dans Copilot", "md-agents")}{shot("Capture de l'écran de départ sur Copilot (où cliquer pour créer l'assistant)")}</div>
     </div>''', seq=4, section="13h30 · Démonstrations, puis à vous",
  notes="Manipulation guidée après les trois démos. On commence par un exemple fait tous ensemble : un cas proposé par la salle, la consigne écrite en direct (rôle, contexte, attendu), testée devant tout le monde. Ensuite seulement, chacun sur son poste. Prévoir un plan B si les licences ne permettent pas de créer un assistant : faire rédiger la consigne et la tester dans le chat Copilot.")
 

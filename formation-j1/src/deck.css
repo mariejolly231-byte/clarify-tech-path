@@ -1034,3 +1034,13 @@ h2 { letter-spacing: .005em; }
 .verdict-box .risk:not(:empty) ~ .guard { display: none; }
 .sort-grid .chip { min-height: 160px; }
 .slide.is-active .tmodal.auto-in { animation: none; }
+
+/* Finition du mouvement : courbes de sortie franches, durées courtes, retour tactile au clic */
+:root { --ease: cubic-bezier(.23, 1, .32, 1); }
+.slide { transition: opacity 260ms var(--ease), transform 300ms var(--ease), visibility 0s linear 300ms; }
+.slide.is-active { transition: opacity 260ms var(--ease), transform 300ms var(--ease); }
+.slide.is-active .auto-in { animation-duration: 420ms; animation-delay: calc(var(--i, 0) * 50ms + 120ms); }
+.frag { transition: opacity 240ms var(--ease), transform 240ms var(--ease); }
+button { transition: transform 140ms var(--ease), background-color 200ms var(--ease); }
+button:active:not(:disabled) { transform: scale(.97); }
+@media (prefers-reduced-motion: reduce) { button:active:not(:disabled) { transform: none; } }
