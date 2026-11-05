@@ -14,12 +14,12 @@
 
   const SEQ = [
     ["9h00", "Point de départ"],
-    ["9h50", "Trois logiques"],
+    ["9h45", "Trois logiques"],
     ["11h00", "Quand utiliser quoi"],
     ["13h30", "Démonstrations"],
-    ["15h10", "Limites et choix"],
-    ["15h45", "À quoi faire attention"],
-    ["16h10", "Intersession"],
+    ["15h15", "Limites et choix"],
+    ["16h00", "À quoi faire attention"],
+    ["16h30", "Intersession"],
   ];
   // Le vrai logo signe chaque slide : chargé une seule fois, réutilisé en fond par le pied de page
   const logoImg = document.querySelector(".brand-logo");
@@ -249,23 +249,38 @@
     prompt: ["Une demande", "Assistant", "mint", "Un besoin ponctuel : tout le contexte tient dans l'échange ou un fichier joint.", "Copilot Chat : une demande, avec un fichier joint si besoin", "assistant", "assistant · Copilot Chat"],
     notes: ["Un bloc-notes", "Notebook", "mint", "Un dossier de documents à croiser pour cette tâche.", "Copilot Notebooks : un bloc-notes avec les documents du dossier", "notebook", "notebook · Notebooks"],
     cowork: ["Cowork", "Agent, selon la licence", "blush", "Plusieurs étapes et plusieurs applications : Copilot enchaîne pour toi.", "Copilot Cowork, s'il est activé chez vous", "agent", "agent · Cowork"],
-    flux: ["Un flux Power Automate", "Automatisation", "lav", "Répétitif, des règles fixes, sans interprétation : une suite d'actions suffit.", "Power Automate, dans Microsoft 365", "automatisation", "automatisation · Power Automate"],
+    flux: ["Une automatisation simple", "Automatisation", "lav", "Répétitif, des règles fixes, sans interprétation : une suite d'actions suffit.", "Workflows dans Copilot, ou une règle Outlook", "automatisation", "automatisation · Workflows"],
     plan: ["Une demande planifiée", "Agent : c'est l'horaire qui la lance", "blush", "Copilot la relance seule chaque jour ou chaque semaine et t'envoie le résultat.", "Copilot Chat : une demande planifiée", "agent", "agent · demande planifiée"],
     req: ["Une requête enregistrée", "Assistant", "mint", "Ta méthode, gardée dans ta galerie et rappelée quand tu en as besoin.", "Copilot Chat : une requête enregistrée dans ta galerie", "assistant", "assistant · requête enregistrée"],
     agent: ["Un agent Copilot", "Assistant dédié", "mint", "Des consignes et des documents, réutilisables par toute l'équipe.", "Agent Builder : créer un agent dans Copilot", "assistant", "assistant · agent Copilot"],
   };
+  const RISK_Q = "Et si elle se trompe : l'erreur coûterait-elle cher (client, paie, argent) ?";
+  const AUTONOMOUS = ["plan", "cowork"];
+  const RISK_YES = "Erreur coûteuse : un humain valide chaque résultat avant qu'il parte.";
+  const RISK_YES_AUTO = "Erreur coûteuse : on commence en mode assistant, il prépare et tu valides, avant de le laisser tourner seul.";
+  const RISK_NO = "Erreur rattrapable : on vérifie de près au début, puis par sondage.";
   const VIS = { q1: "q1", qc: "qc", qd: "qc", qj: "qj", qa: "qa", qt: "qt" }; // question de l'outil -> case de l'arbre dessiné
   function mountDecider(d, onChange) {
     const list = d.querySelector(".tq-list"), box = d.querySelector(".verdict-box");
     const out = box.querySelector(".out"), kind = box.querySelector(".kind"), why = box.querySelector(".why"), mod = box.querySelector(".mod");
-    const mini = d.querySelector(".tree-mini");
+    const mini = d.querySelector(".tree-mini"), riskEl = box.querySelector(".risk");
     let path = []; // [[question, réponse]]
     function render() {
       list.innerHTML = "";
-      let node = "q0";
+      let node = "q0", risk = null;
       const seen = [];
       for (let k = 0; k <= path.length; k++) {
-        if (!TREE[node]) break;
+        if (!TREE[node]) {
+          if (!LEAF[node] || node === "stop") break;
+          const ans = path[k] ? path[k][1] : null, depth = k;
+          const row = document.createElement("div");
+          row.className = "q q--risk";
+          row.innerHTML = "<span>" + RISK_Q + '</span><div class="yn"><button class="sk sk--thin" value="oui" aria-pressed="' + (ans === "oui") + '">oui</button><button class="sk sk--thin no" value="non" aria-pressed="' + (ans === "non") + '">non</button></div>';
+          row.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { path = path.slice(0, depth); path.push(["qe", b.value]); render(); }));
+          list.appendChild(row);
+          risk = ans;
+          break;
+        }
         seen.push(node);
         const [label, yes, no] = TREE[node], ans = path[k] ? path[k][1] : null;
         const row = document.createElement("div");
@@ -277,9 +292,11 @@
         if (!ans) break;
         node = ans === "oui" ? yes : no;
       }
-      const leaf = LEAF[node] && path.length ? LEAF[node] : null;
+      const leaf = LEAF[node] && path.length && (node === "stop" || risk) ? LEAF[node] : null;
+      if (riskEl) riskEl.textContent = leaf && risk ? (risk === "oui" ? (AUTONOMOUS.includes(node) ? RISK_YES_AUTO : RISK_YES) : RISK_NO) : "";
+      if (riskEl) riskEl.className = "risk" + (risk === "oui" ? " is-high" : "");
       if (leaf) { out.textContent = leaf[0]; kind.textContent = leaf[1]; why.textContent = leaf[3]; if (mod) mod.textContent = leaf[4]; box.className = "verdict-box sk fill-" + leaf[2] + (node !== "stop" ? " has-guard" : ""); }
-      else { out.textContent = "Réponds aux questions"; kind.textContent = ""; why.textContent = "Une question après l'autre, avec le groupe."; if (mod) mod.textContent = ""; box.className = "verdict-box sk"; }
+      else { out.textContent = LEAF[node] && path.length && node !== "stop" ? "Dernière question" : "Réponds aux questions"; kind.textContent = ""; why.textContent = "Une question après l'autre, avec le groupe."; if (mod) mod.textContent = ""; box.className = "verdict-box sk"; }
       if (mini) {
         mini.classList.toggle("has-path", path.length > 0);
         mini.querySelectorAll(".is-on").forEach((x) => x.classList.remove("is-on"));
@@ -297,6 +314,15 @@
     return { set(p) { path = (p || []).slice(); render(); } };
   }
   document.querySelectorAll(".decider--tree:not(.decider--modal)").forEach((d) => mountDecider(d));
+
+  // Freins du matin, triés en direct : un clic passe à la catégorie suivante
+  const SORT = [["", "à trier"], ["fonde", "fondé"], ["verif", "à vérifier"], ["j5", "réglé au jour 5"]];
+  document.querySelectorAll(".chip--sort").forEach((c) => {
+    const key = "sort-" + c.dataset.k, label = c.querySelector(".verdict");
+    function set(v) { const [val, txt] = SORT.find((x) => x[0] === v) || SORT[0]; if (val) c.dataset.v = val; else delete c.dataset.v; label.textContent = txt; }
+    set(store(key) || "");
+    c.addEventListener("click", () => { const i = SORT.findIndex((x) => x[0] === (c.dataset.v || "")); const v = SORT[(i + 1) % SORT.length][0]; set(v); store(key, v); });
+  });
 
   // Situations de mars : un clic ouvre l'arbre, la réponse colore la carte
   document.querySelectorAll(".tmodal").forEach((m) => {

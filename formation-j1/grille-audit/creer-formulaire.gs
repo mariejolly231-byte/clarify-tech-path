@@ -72,7 +72,7 @@ function creerGrille() {
   form.addParagraphTextItem().setTitle('8. Le bénéfice attendu');
   form.addListItem().setTitle('9. Le type de solution pressenti')
     .setHelpText("Voir l'arbre « Quelle brique pour quelle tâche ? » du jour 1.")
-    .setChoiceValues(['Une demande', 'Un bloc-notes', 'Cowork', 'Un flux Power Automate', 'Une demande planifiée', 'Une requête enregistrée', 'Un agent Copilot', 'Je ne sais pas encore']);
+    .setChoiceValues(['Une demande', 'Un bloc-notes', 'Cowork', 'Une automatisation simple (Workflows, règle Outlook)', 'Une demande planifiée', 'Une requête enregistrée', 'Un agent Copilot', 'Je ne sais pas encore']);
   form.addParagraphTextItem().setTitle('Une remarque, une question ?');
 
   ScriptApp.newTrigger('envoyerReponse').forForm(form).onFormSubmit().create();

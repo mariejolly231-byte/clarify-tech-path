@@ -16,7 +16,7 @@ CAS = ["Choisir un cas de mars, ou écrire le tien",
        "RH et compta · Variables de salaire", "RH et compta · Vérification des paiements clients", "RH et compta · Trésorerie quotidienne",
        "RH et compta · Saisie des pointages", "Communication · Planning de communication", "Communication · Bases de données",
        "Direction · Création de tableaux de bord", "Direction · Analyse des tableaux de bord", "Direction · Présentations PowerPoint", "Une autre tâche"]
-SOLUTIONS = ["Choisir, voir l'arbre du jour 1", "Une demande", "Un bloc-notes", "Cowork", "Un flux Power Automate", "Une demande planifiée",
+SOLUTIONS = ["Choisir, voir l'arbre du jour 1", "Une demande", "Un bloc-notes", "Cowork", "Une automatisation simple (Workflows, règle Outlook)", "Une demande planifiée",
              "Une requête enregistrée", "Un agent Copilot", "Je ne sais pas encore"]
 FIELDS = [("1. Le déroulé actuel", "Chaque étape dans l'ordre : qui la fait, avec quel outil, en combien de temps.", 2),
           ("2. Fréquence et temps passé", "Chaque jour, semaine, mois ? Combien de temps à chaque fois ?", 1),
