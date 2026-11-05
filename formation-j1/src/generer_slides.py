@@ -315,7 +315,6 @@ slide(f'''    <p class="eyebrow">Tour de table</p>
         <li class="frag">Qu'attendez-vous de ce <strong>parcours</strong> ?</li>
       </ol>
       <div class="stack">
-        <div class="frag frag--pop">{timer(15, (10, 15, 20))}</div>
         {tip("65 % des utilisateurs de l'IA au travail craignent de prendre du retard s'ils ne s'adaptent pas vite.", "Microsoft, Work Trend Index 2026, mai 2026", "frag")}
       </div>
     </div>''', seq=1, section="9h00 · Point de départ",
@@ -653,7 +652,6 @@ slide(f'''    <div class="grow center-y">
       <p class="eyebrow">10h45</p>
       <h2 style="font-size:120px">Pause</h2>
       <p class="lead">On reprend à 11h00 avec la grille de décision.</p>
-      <div class="mt">{timer(15, (10, 15))}</div>
     </div>
     {pic("pause-samoyede", "Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes.", 880, 495, "position:absolute;right:110px;bottom:190px") if (IMG / "pause-samoyede.png").exists() else CUP}''', cls="slide--full", section="Pause",
  notes="")
@@ -760,7 +758,6 @@ slide(f'''    <div class="stack">
       </ol>
       </div>
       <div class="stack">
-        {timer(20, (15, 20, 30))}
         {pic("atelier-samoyede", "Le samoyède range des balles dans cinq paniers : assistant, notebook, automatisation, agent, on s'arrête.", 600, 338)}
         <div class="alert alert--compact sk" role="note">{icon("alert")}<div><p class="alert-title">Vigilance données</p><p>On décrit la tâche, pas son contenu : aucune donnée réelle.</p></div></div>
       </div>
@@ -918,7 +915,6 @@ slide(f'''    <div class="grow center-y">
       <p class="eyebrow">15h00</p>
       <h2 style="font-size:120px">Pause</h2>
       <p class="lead">Reprise à 15h15 : limites, investissement et choix d'un outil.</p>
-      <div class="mt">{timer(15, (10, 15))}</div>
     </div>
     {pic("pause-samoyede", "Le samoyède fait une pause au soleil, une tasse fumante à côté de lui, face aux montagnes.", 880, 495, "position:absolute;right:110px;bottom:190px") if (IMG / "pause-samoyede.png").exists() else CUP}''', cls="slide--full", section="Pause")
 
