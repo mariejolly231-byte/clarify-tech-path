@@ -240,7 +240,7 @@
     const key = "sort-" + c.dataset.k, label = c.querySelector(".verdict");
     function set(v) { const [val, txt] = SORT.find((x) => x[0] === v) || SORT[0]; if (val) c.dataset.v = val; else delete c.dataset.v; label.textContent = txt; }
     set(store(key) || "");
-    c.addEventListener("click", () => { const i = SORT.findIndex((x) => x[0] === (c.dataset.v || "")); const v = SORT[(i + 1) % SORT.length][0]; set(v); store(key, v); });
+    (c.classList.contains("chip--free") ? label : c).addEventListener("click", () => { const i = SORT.findIndex((x) => x[0] === (c.dataset.v || "")); const v = SORT[(i + 1) % SORT.length][0]; set(v); store(key, v); });
   });
 
   // Situations de mars : un clic ouvre l'arbre, la réponse colore la carte
@@ -341,6 +341,24 @@
     toastEl.textContent = msg; toastEl.classList.add("is-open");
     clearTimeout(toastTimer); toastTimer = setTimeout(() => toastEl.classList.remove("is-open"), ms || 3200);
   }
+
+  // Télécharger la grille PDF remplissable : via la page claude.ai si elle le permet, sinon directement
+  document.querySelectorAll(".dl-pdf").forEach((btn) => btn.addEventListener("click", async () => {
+    const src = document.getElementById("pdf-grille");
+    if (!src) { toast("La grille PDF n'est pas intégrée à cette version : demande-la à contact@summitflow.fr."); return; }
+    const bin = atob(src.textContent.trim()), bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    const blob = new Blob([bytes], { type: "application/pdf" }), name = "grille-audit-lagarrigue.pdf";
+    let dl = null;
+    try { if (window.claude && window.claude.use) dl = await window.claude.use("downloads"); } catch (e) { dl = null; }
+    if (dl) {
+      try { await dl.save({ filename: name, data: blob }); toast("Grille enregistrée."); }
+      catch (e) { if (!e || e.code !== "declined") toast("Téléchargement indisponible ici : demande la grille à contact@summitflow.fr."); }
+      return;
+    }
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  }));
 
   // Plein écran : bloqué quand le deck est affiché dans une page qui ne l'autorise pas
   function full() {

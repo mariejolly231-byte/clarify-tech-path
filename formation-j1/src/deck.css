@@ -1079,3 +1079,66 @@ body:not(.idle):not([class*="tool-"]) .slide.is-active :is(.card, .ex, .comp, .s
 .frein--v2 .frein-t { font-size: 27px; }
 .frein--v2 { padding: 18px 20px; }
 .freins--v2 + .three-src { margin-top: 16px; }
+
+/* Slide 41 : la capture de Copilot */
+.shot-copilot { margin: 0; }
+.shot-copilot img { display: block; width: 100%; max-width: 560px; border-radius: 16px; box-shadow: 0 0 0 1px rgba(11, 79, 92, .14), 0 18px 40px -26px rgba(31, 42, 46, .5); background: #fff; }
+.shot-copilot figcaption { margin-top: 12px; font-size: 22px; color: var(--ink); }
+.shot-copilot b { color: var(--teal); }
+
+/* Slide 47 : réserves libres, à écrire puis à classer */
+.sort-grid .chip { min-height: 118px; font-size: 25px; }
+.chip--free { cursor: text; border-style: dashed; }
+.chip--free .free-t { display: block; width: 100%; min-height: 1.3em; outline: none; font-family: var(--font-hand); font-size: 28px; color: var(--teal); }
+.chip--free .verdict { border: 0; background: rgba(255, 255, 255, .7); border-radius: 999px; padding: 4px 12px; cursor: pointer; font-family: var(--font-hand); font-size: 20px; color: var(--muted); }
+
+/* Partie 6 : la boucle de validation et les trois règles */
+.vloop { position: relative; display: flex; align-items: center; gap: 14px; margin-top: 26px; padding-bottom: 38px; }
+.vstep { --radius: 16px; padding: 16px 26px; font-family: var(--font-hand); font-size: 32px; color: var(--teal); white-space: nowrap; }
+.varrow { width: 60px; height: 24px; fill: none; stroke: var(--teal); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.vback { position: absolute; left: 60px; bottom: 0; font-size: 24px; color: var(--muted); }
+.vback::before { content: "↺ "; color: var(--teal); }
+.rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 20px; }
+.rule { --radius: 20px; display: flex; gap: 16px; padding: 22px 24px; align-items: flex-start; }
+.rule-n { flex: none; font-size: 64px; line-height: .9; color: var(--teal); }
+.rule h3 { display: flex; align-items: center; gap: 10px; font-size: 30px; margin-bottom: 8px; }
+.rule h3 svg { width: 28px; height: 28px; }
+.rule p { font-size: 22px; line-height: 1.4; }
+
+/* Slide 53 : la grille comme une vraie feuille */
+.sheet { width: 100%; border-collapse: separate; border-spacing: 6px; table-layout: fixed; }
+.sheet th { vertical-align: bottom; padding: 0 0 8px; font-weight: 600; }
+.sheet th.task-h { width: 400px; text-align: left; font: 400 34px/1 var(--font-title); color: var(--teal); padding-left: 6px; }
+.sheet th:not(.task-h) span { display: inline-flex; align-items: center; gap: 8px; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 19px; line-height: 1.15; color: var(--ink); max-height: 250px; white-space: normal; }
+.sheet th i { font-style: normal; font: 700 15px/1 var(--font-body); color: #fff; background: var(--teal); border-radius: 999px; padding: 6px 4px; transform: rotate(180deg); writing-mode: horizontal-tb; min-width: 24px; text-align: center; }
+.sheet th.is-key span { background: var(--mint); border-radius: 10px; padding: 10px 6px; }
+.sheet td { height: 72px; background: #fff; border-radius: 10px; box-shadow: inset 0 0 0 1.5px rgba(11, 79, 92, .18); }
+.sheet td.is-key { background: #F1FAF6; }
+.sheet td.task { padding: 8px 14px; background: var(--mint); box-shadow: none; }
+.sheet td.task b { display: block; font-size: 21px; line-height: 1.2; }
+.sheet .tp { display: block; font: 600 14px/1 var(--font-body); color: var(--teal); text-transform: none; margin-bottom: 4px; }
+.sheet .to { display: inline-block; margin-top: 6px; font-family: var(--font-hand); font-size: 18px; color: var(--muted); }
+.sheet tr.is-new td { background: transparent; box-shadow: inset 0 0 0 1.5px rgba(11, 79, 92, .3); border: 0; }
+.sheet tr.is-new td { background-image: none; }
+.sheet tr.is-new td.task { background: transparent; box-shadow: inset 0 0 0 2px rgba(11, 79, 92, .35); }
+.sheet tr.is-new .ph { font-weight: 400; font-style: italic; color: var(--muted); font-size: 19px; }
+.sheet-leg { display: flex; gap: 26px; margin-top: 14px; font-size: 19px; color: var(--muted); }
+.sheet-leg i { display: inline-block; width: 18px; height: 18px; border-radius: 5px; background: var(--mint); vertical-align: -3px; margin-right: 8px; }
+.sheet-leg .ref-tree { display: inline; font-size: 19px; }
+.sheet-leg .ref-tree::before { content: "colonne 9 : "; }
+
+/* Slide 54 : bouton de téléchargement */
+.dl-pdf { display: inline-flex; align-items: center; gap: 10px; margin: 6px 0 12px; }
+.dl-pdf svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.sheet th:not(.task-h) span { font-size: 21px; }
+.sheet td.task b { font-size: 22px; }
+.rule p { font-size: 24px; }
+.rule { padding: 26px 26px; }
+.sheet td { height: 60px; }
+.sheet th:not(.task-h) span { max-height: 215px; font-size: 20px; }
+.sheet { margin-top: 18px; }
+.sheet th.task-h { width: 470px; }
+.sheet td.task { padding: 8px 16px; }
+.sheet td.task b { font-size: 22px; white-space: nowrap; }
+.sheet td { height: 64px; }
+.sheet td { height: 82px; }

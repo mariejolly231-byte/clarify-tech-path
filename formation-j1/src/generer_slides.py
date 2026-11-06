@@ -908,7 +908,7 @@ slide(f'''    <div class="stack">
         <li class="frag"><strong>Teste</strong> sur un exemple sans donnée réelle.</li>
         <li class="frag"><strong>Note</strong> ce qui marche et ce qui coince.</li>
       </ol>
-      <div class="stack">{avous("Pas à pas : créer un agent dans Copilot", "md-agents")}{shot("Capture de l'écran de départ sur Copilot (où cliquer pour créer l'assistant)")}</div>
+      <div class="stack">{avous("Pas à pas : créer un agent dans Copilot", "md-agents")}<figure class="shot-copilot"><img src="images/copilot-assistants.png" alt="Copilot : menu Assistants, puis Nouvel agent"><figcaption>Dans Copilot : <b>Assistants</b>, puis <b>Nouvel agent</b>.</figcaption></figure></div>
     </div>''', seq=4, section="13h30 · Voir, puis faire",
  notes="Manipulation guidée après les trois démos. On commence par un exemple fait tous ensemble : un cas proposé par la salle, la consigne écrite en direct (rôle, contexte, attendu), testée devant tout le monde. Ensuite seulement, chacun sur son poste. Prévoir un plan B si les licences ne permettent pas de créer un assistant : faire rédiger la consigne et la tester dans le chat Copilot.")
 
@@ -953,8 +953,9 @@ slide(f'''    <p class="eyebrow">Choisir un outil</p>
 
 # Doutes et réserves : on reprend les freins du matin et on les trie, un clic par carte
 srt = "".join(f'<button class="chip chip--sort sk sk--thin" data-k="frein-{i}"><span>{t}</span><span class="verdict">à trier</span></button>' for i, (t, *_) in enumerate(FREINS))
+srt += "".join(f'<div class="chip chip--sort chip--free sk sk--thin" data-k="frein-libre-{i}"><span class="free-t" contenteditable="true" data-k="frein-libre-{i}" data-ph="une autre réserve…"></span><button class="verdict">à trier</button></div>' for i in range(4))
 slide(f'''    <h2>Vos réserves : <span class="mark mark--blush">lesquelles sont fondées ?</span></h2>
-    <p class="howto">Les freins de ce matin, un par un. Un clic pour les classer.</p>
+    <p class="howto">Les freins de ce matin, et ceux qu'on ajoute à la main. Un clic sur l'étiquette pour classer.</p>
     <div class="sort-grid">{srt}</div>
     <div class="legend"><span><i style="background:var(--blush)"></i>fondé : on en tient compte</span><span><i style="background:var(--lav)"></i>à vérifier avant d'y aller</span><span><i style="background:var(--mint)"></i>réglé au jour 5</span></div>
     <p class="small" style="margin-top:18px">Une réserve fondée ne dit pas non : elle dit ce qu'il faut vérifier avant de décider.</p>''',
@@ -964,25 +965,23 @@ slide(f'''    <h2>Vos réserves : <span class="mark mark--blush">lesquelles sont
 chapter_slide(6)
 
 # ---------- 16h00 Garde-fous ----------
-slide(f'''    <p class="eyebrow">Garde-fous</p>
-    <h2>L'humain <span class="mark">valide</span>, toujours</h2>
-    <p class="lead" style="margin-top:12px">L'IA peut se tromper avec aplomb : une réponse fausse, présentée comme sûre. C'est l'« hallucination » vue ce matin.</p>
-    {analogy("controle", "le bon à tirer avant d'imprimer un flyer : même quand la maquette semble parfaite, quelqu'un relit et signe avant l'envoi à l'imprimeur.", "frag")}
-    <figure class="schema" role="img" aria-label="Schéma : l'IA propose, tu relis et corriges, puis ça part. Si ce n'est pas bon, on revient à l'IA."><!-- schema:humain-valide --></figure>''',
- seq=6, cls="slide--schema", section="16h00 · À quoi faire attention",
- notes="La boucle de retour est la clé : relire n'est pas une perte de temps, c'est la condition pour déléguer.")
-
-slide(f'''    <p class="eyebrow">Garde-fous</p>
-    <h2>Trois règles <span class="mark mark--blush">dès demain</span></h2>
-    <div class="cols--3 grow" style="display:grid;margin-top:40px;align-items:start">
-      <div class="card sk fill-blush frag"><h3>{icon("alert")}Ce qu'on ne saisit pas</h3><p>Données personnelles, données clients, informations confidentielles : jamais dans un outil non validé.</p></div>
-      <div class="card sk fill-teal frag"><h3>{icon("search")}On relit tout</h3><p>Chaque réponse se relit avant d'être utilisée ou envoyée.</p></div>
-      <div class="card sk fill-mint frag"><h3>{icon("users")}On dit qu'on l'a utilisée</h3><p>Quand un document a été préparé avec l'IA, on le signale.</p></div>
+# Une seule slide : la boucle de validation en haut, les trois règles en dessous
+RULES = [("alert", "Ce qu'on ne saisit pas", "Données personnelles, données clients, informations confidentielles : jamais dans un outil non validé."),
+         ("search", "On relit tout", "Chaque réponse se relit avant d'être utilisée ou envoyée. C'est la boucle du haut."),
+         ("users", "On dit qu'on l'a utilisée", "Quand un document a été préparé avec l'IA, on le signale.")]
+rules = "".join(f'<div class="rule sk fill-mint frag"><span class="rule-n hand">{i}</span><div><h3>{icon(ic)}{t}</h3><p>{d}</p></div></div>' for i, (ic, t, d) in enumerate(RULES, 1))
+slide(f'''    <h2>L'humain valide, <span class="mark">trois règles dès demain</span></h2>
+    <p class="lead" style="margin-top:10px">L'IA peut se tromper avec aplomb : c'est l'« hallucination » vue ce matin. Alors on garde la main.</p>
+    <div class="vloop" role="img" aria-label="L'IA propose, tu relis et corriges, puis ça part. Si ce n'est pas bon, on reprend.">
+      <span class="vstep sk fill-card">L'IA propose</span><svg class="varrow" viewBox="0 0 60 24" aria-hidden="true"><path d="M2 12h52M44 4l10 8-10 8"/></svg>
+      <span class="vstep sk fill-mint">Tu relis et tu corriges</span><svg class="varrow" viewBox="0 0 60 24" aria-hidden="true"><path d="M2 12h52M44 4l10 8-10 8"/></svg>
+      <span class="vstep sk fill-card">Ça part</span>
+      <span class="vback hand">pas bon ? on reprend</span>
     </div>
-    {tip("Seuls 26 % des utilisateurs de l'IA au travail disent que leur direction est clairement alignée sur l'IA. D'où l'intérêt de règles simples, partagées.", "Microsoft, Work Trend Index 2026, mai 2026")}
-    <p class="small">Le cadre RGPD, légal, environnemental et éthique est traité en détail au jour 5.</p>''',
+    <div class="rules">{rules}</div>
+    <p class="small" style="margin-top:18px">Le cadre RGPD, légal, environnemental et éthique est traité en détail au jour 5.</p>''',
  seq=6, section="16h00 · À quoi faire attention",
- notes="La troisième règle est une proposition : la valider avec la référente IA avant la séance.")
+ notes="Un seul message pour ce chapitre : l'humain valide, et trois règles simples dès demain. Le bon à tirer avant d'imprimer un flyer : même quand la maquette semble parfaite, quelqu'un relit et signe avant l'envoi à l'imprimeur. La boucle est la clé : relire n'est pas une perte de temps, c'est la condition pour déléguer. Chiffre utile à l'oral : seuls 26 % des utilisateurs de l'IA au travail disent que leur direction est clairement alignée sur l'IA (Microsoft, Work Trend Index 2026), d'où l'intérêt de règles simples et partagées. La troisième règle est une proposition : la valider avec la référente IA avant la séance.")
 
 chapter_slide(7)
 
@@ -1007,16 +1006,26 @@ slide(f'''    <p class="eyebrow">L'intersession · ensemble d'abord</p>
  seq=7, section="16h30 · Lancement de l'intersession",
  notes="On remplit ensemble avant que chacun s'y mette. Choisir le cas dans la liste déroulante, parmi ceux de mars, par exemple les commissions des vendeurs itinérants, estimées à 4 h. Expliquer chaque colonne au moment où on la remplit. Les colonnes surlignées sont celles qui posent le plus de questions. Clique dans une case pour écrire.")
 
-au = "".join(f'<div class="col sk sk--thin rise{" is-key" if k else ""}"><b>colonne {i+1}</b>{t}</div>' for i, (t, k) in enumerate(cols))
-slide(f'''    <p class="eyebrow">L'intersession · à vous</p>
-    <h2>La grille d'audit, <span class="mark">colonne par colonne</span></h2>
-    <div class="audit">{au}</div>
-    <p class="small" style="margin-top:18px">Sur le modèle de l'exemple. Remplissable sans connaissance technique. Trois à cinq tâches par pôle, en partant des cas de mars :</p>
-    <div class="mars-mini">{"".join(f'<p><b>{p}</b>{" · ".join(cs)}</p>' for p, cs in MARS)}</div>''',
+# La grille d'audit présentée comme une vraie feuille : en-têtes verticaux, des cas de mars ou d'autres
+heads = "".join(f'<th class="{"is-key" if k else ""}"><span><i>{i+1}</i>{re.sub(r"<[^>]+>.*", "", t).strip()}</span></th>' for i, (t, k) in enumerate(cols))
+AUDIT_ROWS = [("Commissions des vendeurs itinérants", "Commerce", "mars"), ("Variables de salaire", "RH et compta", "mars"),
+              ("Planning de communication", "Communication", "mars"), ("", "Votre pôle", "autre")]
+def _arow(t, p, tag):
+    name = f'<b>{t}</b>' if t else '<b class="ph">Une autre tâche, de votre choix</b>'
+    return f'<tr class="{"is-new" if not t else ""}"><td class="task"><span class="tp">{p} · {"vu en mars" if tag == "mars" else "à ajouter"}</span>{name}</td>' + "".join(f'<td class="{"is-key" if k else ""}"></td>' for _, k in cols) + "</tr>"
+arows = "".join(_arow(*r) for r in AUDIT_ROWS)
+slide(f'''    <h2>La grille d'audit : <span class="mark">trois à cinq tâches par pôle</span></h2>
+    <p class="howto">Des cas de mars ou d'autres : tout ce qui vous prend du temps, crée des erreurs ou de la frustration.</p>
+    <table class="sheet mt"><thead><tr><th class="task-h">La tâche</th>{heads}</tr></thead><tbody>{arows}</tbody></table>
+    <p class="sheet-leg"><span><i class="lg-mint"></i>les colonnes qui demandent le plus de réflexion</span><span class="ref-tree">voir l'arbre</span></p>''',
  seq=7, section="16h30 · Lancement de l'intersession",
- notes="Chacun repart avec la même grille que l'exemple. Rappeler la question zéro : la colonne sensibilité des données sert à vérifier qu'on a le droit.")
+ notes="Chacun repart avec la même grille que l'exemple rempli ensemble. Les cas de mars sont un point de départ, pas une liste fermée : toute tâche qui coûte du temps, des erreurs ou de la frustration a sa place. Trois à cinq tâches par pôle. Rappeler la question zéro : la colonne sensibilité des données sert à vérifier qu'on a le droit. La colonne 9 renvoie à l'arbre de la matinée.")
 
 
+# La grille PDF remplissable, intégrée au deck pour le bouton de téléchargement (aucun réseau nécessaire)
+import base64 as _b64
+_pdf = pathlib.Path(__file__).resolve().parent.parent / "dist" / "grille-audit-lagarrigue.pdf"
+PDF_DATA = f'<script type="text/plain" id="pdf-grille">{_b64.b64encode(_pdf.read_bytes()).decode()}</script>' if _pdf.exists() else ""
 def qr_block():
     if (IMG / "qr-grille.png").exists():
         return '<figure class="qr"><img src="images/qr-grille.png" alt="QR code vers la grille d\'audit en ligne"></figure>'
@@ -1025,7 +1034,7 @@ slide(f'''    <h2>Remplir la grille : <span class="mark">en ligne ou en PDF</spa
     <p class="howto">À me renvoyer au plus tard deux semaines avant le jour 2, soit début janvier.</p>
     <div class="cols mt" style="align-items:stretch">
       <div class="card sk fill-mint grille-way">{qr_block()}<div><h3>En ligne, sur ton téléphone</h3><p>Tu scannes, tu remplis, tu envoies : ta réponse m'arrive par e-mail.</p><p class="small">Une réponse par tâche. Une case à cocher pour le traitement des données, détaillé sur summitflow.fr.</p></div></div>
-      <div class="card sk fill-card grille-way"><div><h3>En PDF</h3><p>La même grille, en PDF à remplir sur l'ordinateur, que je vous envoie après la séance. Tu la remplis, tu coches la case données, puis tu me la renvoies par e-mail.</p><p class="mail">contact@summitflow.fr</p><p class="small">Aucune donnée réelle de client ou de salarié : on décrit la tâche, pas son contenu.</p></div></div>
+      <div class="card sk fill-card grille-way"><div><h3>En PDF</h3><p>La même grille, en PDF à remplir sur l'ordinateur. Tu la remplis, tu coches la case données, puis tu me la renvoies par e-mail.</p>{PDF_DATA}<button class="btn-act dl-pdf" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Télécharger la grille PDF</button><p class="mail">contact@summitflow.fr</p><p class="small">Aucune donnée réelle de client ou de salarié : on décrit la tâche, pas son contenu.</p></div></div>
     </div>''', seq=7, section="16h30 · Lancement de l'intersession",
  notes="Montrer le QR code en direct et faire scanner une fois pour vérifier que la page s'ouvre. Le formulaire en ligne (Airtable) envoie chaque réponse par e-mail à contact@summitflow.fr. Il demande le consentement au traitement des données, comme le PDF. Le PDF à remplir (dist/grille-audit-lagarrigue.pdf) part par e-mail après la séance. Rappeler la question zéro pour la colonne sensibilité des données.")
 
