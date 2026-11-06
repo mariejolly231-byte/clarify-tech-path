@@ -506,7 +506,8 @@
     md = document.getElementById(btn.dataset.target || "minideck");
     if (!md) return;
     opener = btn; pages = Array.from(md.querySelectorAll(".md-slide"));
-    md.hidden = false; show(0); md.querySelector(".md-close").focus();
+    const f = btn.dataset.find ? pages.findIndex((pg) => (pg.querySelector("h2") || pg).textContent.includes(btn.dataset.find)) : 0;
+    md.hidden = false; show(Math.max(0, f)); md.querySelector(".md-close").focus();
   }
   function close() { if (!md) return; md.hidden = true; md = null; if (opener) opener.focus(); }
   document.addEventListener("click", (e) => {

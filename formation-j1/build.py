@@ -32,6 +32,7 @@ def embed(m):
     buf = io.BytesIO(); im.convert("RGBA" if "A" in im.mode else "RGB").save(buf, "WEBP", quality=86)
     return attr + '="data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode() + '"'
 html = re.sub(r'(src|poster)="(images/[^"]+)"', embed, html)
-assert "http" not in re.sub(r"xmlns=[\"'][^\"']+[\"']", "", html), "dépendance réseau détectée"
+# Aucune ressource chargée en ligne (scripts, images, polices, feuilles de style) ; les liens cliquables sont permis
+assert not re.search(r"(src=|url\(|@import|<link[^>]+href=)[\"']?https?:", html), "dépendance réseau détectée"
 (dist / ("apercu-4-slides.html" if preview else "jour1-deck.html")).write_text(html, encoding="utf-8")
 print("ok", len(html) // 1024, "Ko")

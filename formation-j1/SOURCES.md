@@ -63,3 +63,10 @@ GPT-6.1 Sol : modèle OpenAI annoncé le 29 septembre 2026, disponible dans Chat
 | notes 45 | Copilot Business autour de 18,20 € HT par utilisateur et par mois au tarif catalogue 2026 | Le Monde Informatique, « Microsoft baisse le prix de M365 Copilot pour les PME » : https://www.lemondeinformatique.fr/actualites/lire-microsoft-baisse-le-prix-de-m365%C2%A0copilot%C2%A0pour-les-pme-98552.html (à vérifier avec le revendeur, le tarif dépend des licences en place) |
 
 Power Automate, Make et n8n ne sont pas au programme (proposition CFD, version 2) : Power Automate a été retiré du deck et remplacé par les Workflows de Copilot et les règles Outlook.
+
+## Ajouts du 6 novembre 2026, slide 12
+
+| Slide | Information | Source |
+|---|---|---|
+| 12 | Les modèles exploitent mieux l'information placée au début et à la fin d'un long texte que celle placée au milieu | Liu et al., « Lost in the Middle: How Language Models Use Long Contexts », 2023 (TACL 2024) : https://arxiv.org/abs/2307.03172 |
+| 11 | GPT signifie Generative Pre-trained Transformer | OpenAI, « Improving Language Understanding by Generative Pre-Training », 2018 |

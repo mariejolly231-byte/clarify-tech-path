@@ -105,8 +105,19 @@ def timer(default=10, presets=(5, 10, 15, 20)):
         <button class="go sk sk--thin">Lancer</button>
       </div>'''
 
+# Sources : chaque nom de source renvoie vers sa page (lien discret, même apparence)
+SRC_URLS = [("Banque de France", "https://www.banque-france.fr/fr/publications-et-statistiques/publications/lia-sinstalle-dans-les-entreprises-francaises-une-diffusion-rapide-mais-des-gains-de-productivite"),
+            ("Baromètre France Num", "https://www.entreprises.gouv.fr/espace-presse/barometre-france-num-2026-quatre-tpe-pme-sur-dix-utilisent-desormais-lintelligence"),
+            ("Malt Tech Trends", "https://www.malt.com/resources/trends/malt-tech-trends/ai"),
+            ("Work Trend Index", "https://www.microsoft.com/en-us/worklab/work-trend-index/agents-human-agency-and-the-opportunity-for-every-organization"),
+            ("OpenAI, février 2026", "https://www.roic.ai/news/openais-chatgpt-surpasses-900-million-weekly-users-50-million-paying-subscribers-02-27-2026"),
+            ("Workday", "https://investor.workday.com/files/doc_news/New-Workday-Research-Companies-Are-Leaving-AI-Gains-on-the-Table-2026.pdf"),
+            ("Liu et al.", "https://arxiv.org/abs/2307.03172")]
+def srclink(text, url=None):
+    url = url or next((u for k, u in SRC_URLS if k in text), None)
+    return f'<a class="src-link" href="{url}" target="_blank" rel="noopener">{text}</a>' if url else text
 def tip(text, source, cls=""):
-    return f'''<aside class="tip sk sk--thin {cls}"><svg class="bulb" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 4c-9 0-15 7-15 15 0 6 3 9 6 13 1.5 2 2 4 2 6h14c0-2 .5-4 2-6 3-4 6-7 6-13 0-8-6-15-15-15z" fill="#FFF3C4" stroke="#1F2A2E" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 42h12M15 47h10" stroke="#1F2A2E" stroke-width="2.5" stroke-linecap="round"/><path d="M20 20v12M16 24l4 4 4-4" stroke="#0B4F5C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="tip-txt">{text}</p><p class="tip-src">Source : {source}</p></div></aside>'''
+    return f'''<aside class="tip sk sk--thin {cls}"><svg class="bulb" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 4c-9 0-15 7-15 15 0 6 3 9 6 13 1.5 2 2 4 2 6h14c0-2 .5-4 2-6 3-4 6-7 6-13 0-8-6-15-15-15z" fill="#FFF3C4" stroke="#1F2A2E" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 42h12M15 47h10" stroke="#1F2A2E" stroke-width="2.5" stroke-linecap="round"/><path d="M20 20v12M16 24l4 4 4-4" stroke="#0B4F5C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="tip-txt">{text}</p><p class="tip-src">Source : {srclink(source)}</p></div></aside>'''
 
 BRAIN = '''<svg class="illu brain" viewBox="0 0 300 240" aria-hidden="true">
       <path data-d="0.5" d="M70 200 C 20 190, 10 130, 40 105 C 25 70, 60 35, 100 45 C 120 15, 175 15, 190 45 C 235 35, 275 70, 260 110 C 290 140, 270 195, 225 200 C 200 225, 150 225, 130 205 C 110 222, 80 218, 70 200 Z" fill="#FCE4E8" filter="url(#rough)"/>
@@ -127,8 +138,8 @@ MULTI = '''<svg class="illu ico-xl" viewBox="0 0 140 120" aria-hidden="true"><re
 
 # Liens des démos : colle ici tes adresses, le bouton apparaît tout seul (vide = « lien à ajouter »)
 LINKS = {
-    "make": "",          # ton scénario Make
-    "appscript": "",     # ton Apps Script de réservation des salles
+    "make": "https://eu2.make.com/2181941/scenarios/7450024/edit",
+    "appscript": "https://script.google.com/home/projects/1tEwgSuW4dc5zW4eYeiTIzYTHfS4g_x4oo6yhg7ionEsAhL4DRSpes8ET/edit?hl=fr",
     "claude_projet": "", # ton projet Claude
 }
 def golink(key, label):
@@ -331,7 +342,7 @@ fr = "".join(f'''<div class="frein frein--v2 sk fill-mint frag"><p class="frein-
 slide(f'''    <h2>Ce qui freine, <span class="mark mark--blush">le plus souvent</span></h2>
     <p class="howto">Ce qu'on entend, ce que disent les chiffres, et où on y répond aujourd'hui.</p>
     <div class="freins freins--v2">{fr}</div>
-    <p class="three-src">Sources : Insee Première n° 2120, juillet 2026 (71, 54 et 38 %, entreprises de 10 personnes ou plus n'utilisant pas l'IA) ; sondage Odoxa, avril 2026 (45 %).</p>''', seq=1, section="9h00 · Point de départ",
+    <p class="three-src">Sources : {srclink("Insee Première n° 2120, juillet 2026", "https://www.insee.fr/fr/statistiques/9025878")} (71, 54 et 38 %, entreprises de 10 personnes ou plus n'utilisant pas l'IA) ; {srclink("sondage Odoxa, avril 2026", "https://www.cbnews.fr/node/101258")} (45 %).</p>''', seq=1, section="9h00 · Point de départ",
  notes="Juste après le tour de table : relier ce qu'ils viennent de dire à ces cinq freins. Les trois premiers sont chiffrés par l'Insee (entreprises qui n'utilisent pas l'IA, plusieurs réponses possibles). Les deux derniers n'ont pas de chiffre fiable pour 2026 : les présenter comme ce qu'on entend sur le terrain. Les entendre sans les balayer : chacun a sa réponse dans la journée. Sur la perte de compétence, ouvrir le débat : qu'est-ce qui crée vraiment la valeur ajoutée dans l'entreprise ? Le conseil au client, la connaissance du matériel, la relation avec les agriculteurs, le jugement sur une reprise. Ce qu'on confie à l'IA, c'est ce qui n'en crée pas : recopier, mettre en forme, chercher. Elle prépare, tu comprends, tu valides : tu gardes la main.")
 
 slide(f'''    <p class="eyebrow">Retour sur mars</p>
@@ -372,7 +383,7 @@ rows = "".join(f'''<div class="tf sk sk--thin"><p>{q}</p><div class="frag tf-a">
 TIMELINE = [("1950", "Alan Turing pose la question : une machine peut-elle penser ?"),
             ("1956", "Le mot « intelligence artificielle » naît à Dartmouth."),
             ("1997", "Deep Blue, d'IBM, bat Kasparov aux échecs."),
-            ("2017", "Google invente le Transformer, le « T » de GPT."),
+            ("2017", "Google invente le Transformer, le « T » de ChatGPT : Generative Pre-trained Transformer."),
             ("2022", "ChatGPT sort le 30 novembre : 100 millions d'utilisateurs en deux mois."),
             ("2023", "Copilot arrive dans Word, Excel, Outlook et Teams."),
             ("2026", "Les agents : Copilot enchaîne des tâches, Workflows, Cowork.")]
@@ -395,9 +406,20 @@ if _full.exists() and not (IMG / "principales-ia.png").exists():
     _im.crop((0, _cut, _w, _h)).save(IMG / "principales-ia.png")
 slide(f'''    <p class="eyebrow">Rappel commun</p>
     <h2>Une IA générative, <span class="mark mark--sky">comment ça marche</span></h2>
-    <div class="grow infog-one mt">{infog("comment-fonctionne-ia.png", "Infographie « Comment fonctionne l'IA » : tokens, modèle, prédiction du token suivant (comment-fonctionne-ia.png)")}</div>
-    <p class="sv-retenir infog-why frag"><b class="hand">Pourquoi structurer ses demandes ?</b> Le modèle ne sait que ce qu'on lui donne. Objectif, contexte, sources, attentes : avec le bon contexte, la prédiction tombe plus juste.</p>''', seq=1, section="9h00 · Point de départ",
- notes="Sur la partie 2, faire le lien : le modèle a appris des régularités, il ne connaît ni l'entreprise ni la situation. Tout ce qu'il sait de la tâche, c'est ce qu'on lui écrit. D'où l'intérêt de structurer la demande : objectif, contexte, sources, attentes, la structure recommandée par Microsoft pour Copilot. Le détail est dans le rappel Copilot. Rester sur l'essentiel : elle découpe le texte en tokens, elle a appris des régularités, elle prédit le token suivant. Elle ne cherche pas la vérité. Les pourcentages de la bulle sont un exemple pour illustrer, pas une mesure.")
+    <div class="infog-split mt">
+      <div class="infog-one">{infog("comment-fonctionne-ia.png", "Infographie « Comment fonctionne l'IA » : tokens, modèle, prédiction du token suivant (comment-fonctionne-ia.png)")}</div>
+      <aside class="why-struct frag">
+        <p class="why-h hand">Pourquoi structurer ses demandes ?</p>
+        <ol>
+          <li><b>Le début et la fin pèsent le plus.</b> Le modèle retient mieux ce qui ouvre et ce qui ferme la demande : l'objectif en premier, le format attendu à la fin.</li>
+          <li><b>Les mots précis orientent la prédiction.</b> Un rôle, un verbe d'action, un format : chaque mot change la suite la plus probable.</li>
+          <li><b>Une structure claire évite qu'il devine.</b> Objectif, contexte, sources, attentes.</li>
+        </ol>
+        <button class="btn-act why-go" data-act="minideck" data-target="minideck" data-find="quatre ingrédients"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Structurer sa demande</button>
+        <p class="tip-src">Source : {srclink("Liu et al., « Lost in the Middle », 2023")}</p>
+      </aside>
+    </div>''', seq=1, section="9h00 · Point de départ",
+ notes="Sur la partie 2, faire le lien avec l'encadré de droite. Le modèle lit tout, mais il ne donne pas le même poids à chaque passage : les études montrent qu'il exploite mieux ce qui est au début et à la fin d'un long texte que ce qui est au milieu (Liu et al., 2023, « Lost in the Middle »). D'où : l'objectif en premier, le format attendu à la fin. Le bouton ouvre la page « Structurer sa demande » du rappel Copilot. Le modèle a appris des régularités, il ne connaît ni l'entreprise ni la situation. Tout ce qu'il sait de la tâche, c'est ce qu'on lui écrit. D'où l'intérêt de structurer la demande : objectif, contexte, sources, attentes, la structure recommandée par Microsoft pour Copilot. Le détail est dans le rappel Copilot. Rester sur l'essentiel : elle découpe le texte en tokens, elle a appris des régularités, elle prédit le token suivant. Elle ne cherche pas la vérité. Les pourcentages de la bulle sont un exemple pour illustrer, pas une mesure.")
 
 savoir = [("Elle prédit, elle ne sait pas", "Elle écrit la suite la plus probable, pas forcément la plus juste.", "Vérifier les faits, les chiffres et les sources."),
           ("Elle est figée à une date", "Elle n'apprend pas toute seule : ses connaissances s'arrêtent au moment de son entraînement.", "Pour l'actualité, activer la recherche web ou lui donner vos documents."),
@@ -585,7 +607,7 @@ slide(f'''    <p class="eyebrow">L'assistant et l'agent</p>
 
 logic("L'assistant en vrai", 'Il <span class="mark">répond</span>, tu gardes la main', "", "C'est comme le GPS du téléphone : il propose l'itinéraire, c'est toi qui conduis.",
  [("Chatbot du site Summit Flow", "Assistant de type chatbot : il répond aux visiteurs à partir du contenu du site.", '<span class="live">démo en direct</span>'),
-  ("Un projet Claude", "Des consignes et des documents de référence, pour des réponses dans ton cadre.", f'<span class="live">démo en direct</span>{golink("claude_projet", "Ouvrir le projet Claude")}'),
+  ("Un projet Claude", "Des consignes et des documents de référence, pour des réponses dans ton cadre.", f'<span class="live">démo en direct</span>{golink("claude_projet", "Ouvrir le projet Claude : Correction TP Sudformadia")}'),
   ("L'équivalent dans Copilot", "Un agent créé avec « Créer un agent » (Agent Builder) : des consignes et des documents de référence, comme un projet Claude.", avous())],
  "fill-mint", "Le chatbot du site et le projet Claude se montrent en direct. Côté Copilot, chacun peut créer un agent avec Agent Builder (« Créer un agent ») : un nom, des consignes, des documents de référence. Les Notebooks Copilot rendent un service proche : réunir des notes et des documents pour travailler dessus.")
 
@@ -885,16 +907,6 @@ def demo(n, title, mk, what, shots, notes):
       <div class="stack" style="display:grid;gap:20px">{s}</div>
     </div>''', seq=4, section="13h30 · Voir, puis faire", notes=notes)
 
-slide(f'''    <p class="eyebrow">Les trois démos</p>
-    <h2>Sur vos cas, <span class="mark mark--sky">en direct</span></h2>
-    <div class="cols--3 grow" style="display:grid;margin-top:30px;align-items:stretch">
-      <div class="ex sk fill-mint rise"><p class="who">1. Un assistant</p><p>Des consignes et des documents de référence. Exemple : analyser le tableau de bord du mois.</p>{shot("Capture de secours : l'assistant Copilot configuré")}{avous()}</div>
-      <div class="ex sk fill-lav rise"><p class="who">2. Une automatisation</p><p>Une facture arrive par e-mail, une ligne s'ajoute au tableau de trésorerie, avec les Workflows de Copilot.</p>{shot("Capture de secours : l'automatisation sur Outlook et Excel")}{avous()}</div>
-      <div class="ex sk fill-blush rise"><p class="who">3. Un agent</p><p>Trouver un produit chez les fournisseurs : il cherche, compare, propose, et s'arrête avant de commander.</p>{shot("Capture de secours : l'agent Copilot en action")}{avous()}</div>
-    </div>''', seq=4, section="13h30 · Voir, puis faire",
- notes="Démos en direct, les captures servent de plan B. Après chaque démo, revenir à la grille de lecture et remplir la colonne.")
-
-
 slide(f'''    <div class="stack">
       <div class="meta"><span class="tag sk">{icon("users")}Ensemble, puis chacun sur son poste</span><span class="tag tag--soft sk">{icon("search")}Selon les licences disponibles</span></div>
       <h2>À vous : <span class="mark">votre premier assistant</span></h2>
@@ -907,7 +919,7 @@ slide(f'''    <div class="stack">
         <li class="frag"><strong>Teste</strong> sur un exemple sans donnée réelle.</li>
         <li class="frag"><strong>Note</strong> ce qui marche et ce qui coince.</li>
       </ol>
-      <div class="stack">{avous("Pas à pas : créer un agent dans Copilot", "md-agents")}<figure class="shot-copilot"><img src="images/copilot-assistants.png" alt="Copilot : menu Assistants, puis Nouvel agent"><figcaption>Dans Copilot : <b>Assistants</b>, puis <b>Nouvel agent</b>.</figcaption></figure></div>
+      <div class="stack"><div class="go-row">{avous("Pas à pas : créer un agent dans Copilot", "md-agents")}<button class="avous avous--go" data-act="minideck" data-target="md-mars">Les cas de mars</button></div><figure class="shot-copilot"><img src="images/copilot-assistants.png" alt="Copilot : menu Assistants, puis Nouvel agent"><figcaption>Dans Copilot : <b>Assistants</b>, puis <b>Nouvel agent</b>.</figcaption></figure></div>
     </div>''', seq=4, section="13h30 · Voir, puis faire",
  notes="Manipulation guidée après les trois démos. On commence par un exemple fait tous ensemble : un cas proposé par la salle, la consigne écrite en direct (rôle, contexte, attendu), testée devant tout le monde. Ensuite seulement, chacun sur son poste. Prévoir un plan B si les licences ne permettent pas de créer un assistant : faire rédiger la consigne et la tester dans le chat Copilot.")
 

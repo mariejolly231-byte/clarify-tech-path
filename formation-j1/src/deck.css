@@ -1142,3 +1142,28 @@ body:not(.idle):not([class*="tool-"]) .slide.is-active :is(.card, .ex, .comp, .s
 .sheet td.task b { font-size: 22px; white-space: nowrap; }
 .sheet td { height: 64px; }
 .sheet td { height: 82px; }
+
+/* Sources cliquables, sans changer d'apparence */
+a.src-link { color: inherit; text-decoration: none; font: inherit; cursor: pointer; }
+a.src-link:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+/* Slide 12 : infographie et pourquoi structurer */
+.infog-split { display: grid; grid-template-columns: 1fr 330px; gap: 26px; align-items: start; }
+.infog-split .infog-one, .infog-split .infog-one .shot, .infog-split .infog-one .shot img { height: auto; }
+.infog-split .infog-one .shot img { height: auto; width: 100%; }
+.why-struct { padding: 22px 22px 18px; border-radius: 20px; background: var(--mint); }
+.why-h { font-size: 30px; line-height: 1.1; color: var(--teal); margin-bottom: 12px; }
+.why-struct ol { list-style: none; display: grid; gap: 12px; counter-reset: w; }
+.why-struct li { font-size: 18px; line-height: 1.35; counter-increment: w; padding-left: 30px; position: relative; }
+.why-struct li::before { content: counter(w); position: absolute; left: 0; top: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--teal); color: #fff; font: 700 13px/22px var(--font-body); text-align: center; }
+.why-struct li b { display: block; color: var(--teal); }
+.why-go { margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; font-size: 18px; padding: 11px 18px; }
+.why-go svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.why-struct .tip-src { margin-top: 10px; }
+
+/* Slide « À vous » : deux boutons côte à côte ; cas de mars par pôle */
+.go-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.md-g--4 { grid-template-columns: repeat(4, 1fr); }
+.md-cases { list-style: none; display: grid; gap: 8px; margin-top: 8px; }
+.md-cases li { font-size: 21px; line-height: 1.3; padding-left: 16px; position: relative; }
+.md-cases li::before { content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
