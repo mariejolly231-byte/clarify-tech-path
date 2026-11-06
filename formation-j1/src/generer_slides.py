@@ -188,7 +188,7 @@ CUP = '''<svg class="pause-illu illu" viewBox="0 0 520 420" aria-hidden="true">
 CHAPTERS = [("9h00", "Point de départ", "On fait connaissance, on repart de mars, on se met d'accord sur les mots."),
             ("9h45", "Trois logiques", "Assistant, automatisation, agent : ce que chacun fait vraiment, et ce qui les distingue."),
             ("11h00", "Quand utiliser quoi", "L'arbre des briques, testé ensemble, puis vos situations de mars passées dedans."),
-            ("13h30", "Démonstrations", "Comment les logiciels se parlent, trois démos sur vos cas, puis votre premier assistant."),
+            ("13h30", "Voir, puis faire", "Démonstrations commentées sur vos cas, puis atelier : vous construisez votre premier assistant."),
             ("15h15", "Limites et choix", "Ce que l'IA ne fait pas, ce que ça coûte vraiment, comment choisir un outil."),
             ("16h00", "À quoi faire attention", "Les règles simples qui protègent l'entreprise, dès demain."),
             ("16h30", "Intersession", "La grille d'audit, les référents et le calendrier jusqu'au 22 janvier.")]
@@ -296,7 +296,7 @@ slide(f'''    <p class="eyebrow">Aujourd'hui</p>
       <li class="pause rise"><span class="h">10h45</span><span class="cn cn--none"></span>Pause</li>
       <li class="rise"><span class="h">11h00</span><span class="cn">3</span>Quand utiliser quoi</li>
       <li class="pause rise"><span class="h">12h30</span><span class="cn cn--none"></span>Déjeuner</li>
-      <li class="rise"><span class="h">13h30</span><span class="cn">4</span>Démonstrations, puis à vous</li>
+      <li class="rise"><span class="h">13h30</span><span class="cn">4</span>Voir, puis faire : démonstrations commentées et atelier</li>
       <li class="pause rise"><span class="h">15h00</span><span class="cn cn--none"></span>Pause</li>
       <li class="rise"><span class="h">15h15</span><span class="cn">5</span>Limites, investissement, choix d'un outil</li>
       <li class="rise"><span class="h">16h00</span><span class="cn">6</span>À quoi faire attention</li>
@@ -328,10 +328,10 @@ FREINS = [("Je ne vois pas à quoi ça me servirait", "71 %", "des entreprises q
           ("Je vais perdre en compétence", "", "Si elle fait tout, on ne sait plus faire.", "Elle prépare, tu comprends, tu valides : tu gardes la main."),
           ("Et l'écologie ?", "", "Chaque demande consomme de l'énergie dans des centres de données.", "On s'en sert quand ça vaut le coup, pas par réflexe."),
           ("Je n'ai pas le temps", "", "Se former et essayer demande du temps au départ.", "On part de tâches qui en font gagner.")]
-fr = "".join(f'''<div class="frein sk fill-mint frag"><p class="frein-t">{t}</p>{f'<p class="frein-n"><b>{n}</b> {d}</p>' if n else f'<p class="frein-n">{d}</p>'}<p class="frein-r">{r}</p></div>''' for t, n, d, r in FREINS)
+fr = "".join(f'''<div class="frein frein--v2 sk fill-mint frag"><p class="frein-t">«&nbsp;{t}&nbsp;»</p>{f'<p class="frein-n"><b>{n}</b><span>{d}</span></p>' if n else f'<p class="frein-n frein-n--txt">{d}</p>'}<p class="frein-r"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>{r}</span></p></div>''' for t, n, d, r in FREINS)
 slide(f'''    <h2>Ce qui freine, <span class="mark mark--blush">le plus souvent</span></h2>
-    <p class="howto">Vous avez dit ce qui coinçait chez vous. Voici ce que disent les entreprises françaises, et où on y répond aujourd'hui.</p>
-    <div class="freins">{fr}</div>
+    <p class="howto">Ce qu'on entend, ce que disent les chiffres, et où on y répond aujourd'hui.</p>
+    <div class="freins freins--v2">{fr}</div>
     <p class="three-src">Sources : Insee Première n° 2120, juillet 2026 (71, 54 et 38 %, entreprises de 10 personnes ou plus n'utilisant pas l'IA) ; sondage Odoxa, avril 2026 (45 %).</p>''', seq=1, section="9h00 · Point de départ",
  notes="Juste après le tour de table : relier ce qu'ils viennent de dire à ces cinq freins. Les trois premiers sont chiffrés par l'Insee (entreprises qui n'utilisent pas l'IA, plusieurs réponses possibles). Les deux derniers n'ont pas de chiffre fiable pour 2026 : les présenter comme ce qu'on entend sur le terrain. Les entendre sans les balayer : chacun a sa réponse dans la journée.")
 
@@ -396,8 +396,9 @@ if _full.exists() and not (IMG / "principales-ia.png").exists():
     _im.crop((0, _cut, _w, _h)).save(IMG / "principales-ia.png")
 slide(f'''    <p class="eyebrow">Rappel commun</p>
     <h2>Une IA générative, <span class="mark mark--sky">comment ça marche</span></h2>
-    <div class="grow infog-one mt">{infog("comment-fonctionne-ia.png", "Infographie « Comment fonctionne l'IA » : tokens, modèle, prédiction du token suivant (comment-fonctionne-ia.png)")}</div>''', seq=1, section="9h00 · Point de départ",
- notes="Rester sur l'essentiel : elle découpe le texte en tokens, elle a appris des régularités, elle prédit le token suivant. Elle ne cherche pas la vérité. Les pourcentages de la bulle sont un exemple pour illustrer, pas une mesure.")
+    <div class="grow infog-one mt">{infog("comment-fonctionne-ia.png", "Infographie « Comment fonctionne l'IA » : tokens, modèle, prédiction du token suivant (comment-fonctionne-ia.png)")}</div>
+    <p class="sv-retenir infog-why frag"><b class="hand">Pourquoi structurer ses demandes ?</b> Le modèle ne sait que ce qu'on lui donne. Objectif, contexte, sources, attentes : avec le bon contexte, la prédiction tombe plus juste.</p>''', seq=1, section="9h00 · Point de départ",
+ notes="Sur la partie 2, faire le lien : le modèle a appris des régularités, il ne connaît ni l'entreprise ni la situation. Tout ce qu'il sait de la tâche, c'est ce qu'on lui écrit. D'où l'intérêt de structurer la demande : objectif, contexte, sources, attentes, la structure recommandée par Microsoft pour Copilot. Le détail est dans le rappel Copilot. Rester sur l'essentiel : elle découpe le texte en tokens, elle a appris des régularités, elle prédit le token suivant. Elle ne cherche pas la vérité. Les pourcentages de la bulle sont un exemple pour illustrer, pas une mesure.")
 
 savoir = [("Elle prédit, elle ne sait pas", "Elle écrit la suite la plus probable, pas forcément la plus juste.", "Vérifier les faits, les chiffres et les sources."),
           ("Elle est figée à une date", "Elle n'apprend pas toute seule : ses connaissances s'arrêtent au moment de son entraînement.", "Pour l'actualité, activer la recherche web ou lui donner vos documents."),
@@ -433,17 +434,17 @@ chapter_slide(2)
 
 # ---------- 9h45 Trois logiques ----------
 S945 = "9h45 · Assistant, automatisation, agent"
-slide(f'''    <p class="eyebrow">Trois logiques différentes</p>
+slide(f'''    <h2>Trois logiques, <span class="mark">trois verbes</span></h2>
     <div class="three">
       <div class="three-lines">
         <p class="three-l frag"><span class="dot dot--mint"></span>L'assistant <span class="mark">répond</span></p>
         <p class="three-l frag"><span class="dot dot--lav"></span>L'automatisation <span class="mark mark--lav">exécute</span></p>
         <p class="three-l frag"><span class="dot dot--blush"></span>L'agent <span class="mark mark--blush">poursuit un objectif</span></p>
-        <p class="lead three-c frag">Le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
+        <p class="sv-retenir three-c frag"><b class="hand">À retenir :</b> le bon choix dépend de la tâche, pas de l'outil à la mode.</p>
       </div>
       {pic("trois-logiques-samoyede", "Trois samoyèdes : l'assistant qui répond, l'automatisation qui exécute, l'agent qui poursuit un objectif.", 640, 360)}
     </div>
-    <p class="three-src frag">Sur Malt, la demande de compétences liées aux agents IA a été multipliée par 60 par rapport à 2024. Source : Malt Tech Trends 2026</p>''', seq=2, section=S945, notes="Faire apparaître les trois verbes un par un. Demander au groupe de deviner le suivant.")
+    {tip("Sur Malt, la demande de compétences liées aux agents IA a été multipliée par 60 par rapport à 2024.", "Malt Tech Trends 2026", "frag")}''', seq=2, section=S945, notes="Faire apparaître les trois verbes un par un. Demander au groupe de deviner le suivant.")
 
 slide(f'''    <p class="eyebrow">L'automatisation</p>
     <h2>Tout part d'un <span class="mark mark--lav">déclencheur</span></h2>
@@ -804,7 +805,7 @@ slide(f'''    <div class="grow center-y">
 chapter_slide(4)
 
 # ---------- 13h30 Démonstrations ----------
-S1330 = "13h30 · Démonstrations commentées"
+S1330 = "13h30 · Voir, puis faire"
 slide('''    <p class="eyebrow">Pour les curieux · avant les démos</p>
     <h2>Comment deux logiciels <span class="mark mark--sky">se parlent</span></h2>
     <p class="howto">C'est ce qui donne à l'assistant et à l'agent leurs bras et leurs jambes : la connexion à vos outils et à vos sources.</p>
@@ -883,7 +884,7 @@ def demo(n, title, mk, what, shots, notes):
     <div class="cols--1-2 grow" style="display:grid;grid-template-columns:1fr 1.5fr;gap:40px;margin-top:30px">
       <div class="stack"><ul class="dash">{"".join(f'<li class="frag">{w}</li>' for w in what)}</ul><span class="live">en direct</span></div>
       <div class="stack" style="display:grid;gap:20px">{s}</div>
-    </div>''', seq=4, section="13h30 · Démonstrations commentées", notes=notes)
+    </div>''', seq=4, section="13h30 · Voir, puis faire", notes=notes)
 
 slide(f'''    <p class="eyebrow">Les trois démos</p>
     <h2>Sur vos cas, <span class="mark mark--sky">en direct</span></h2>
@@ -891,7 +892,7 @@ slide(f'''    <p class="eyebrow">Les trois démos</p>
       <div class="ex sk fill-mint rise"><p class="who">1. Un assistant</p><p>Des consignes et des documents de référence. Exemple : analyser le tableau de bord du mois.</p>{shot("Capture de secours : l'assistant Copilot configuré")}{avous()}</div>
       <div class="ex sk fill-lav rise"><p class="who">2. Une automatisation</p><p>Une facture arrive par e-mail, une ligne s'ajoute au tableau de trésorerie, avec les Workflows de Copilot.</p>{shot("Capture de secours : l'automatisation sur Outlook et Excel")}{avous()}</div>
       <div class="ex sk fill-blush rise"><p class="who">3. Un agent</p><p>Trouver un produit chez les fournisseurs : il cherche, compare, propose, et s'arrête avant de commander.</p>{shot("Capture de secours : l'agent Copilot en action")}{avous()}</div>
-    </div>''', seq=4, section="13h30 · Démonstrations commentées",
+    </div>''', seq=4, section="13h30 · Voir, puis faire",
  notes="Démos en direct, les captures servent de plan B. Après chaque démo, revenir à la grille de lecture et remplir la colonne.")
 
 
@@ -908,7 +909,7 @@ slide(f'''    <div class="stack">
         <li class="frag"><strong>Note</strong> ce qui marche et ce qui coince.</li>
       </ol>
       <div class="stack">{avous("Pas à pas : créer un agent dans Copilot", "md-agents")}{shot("Capture de l'écran de départ sur Copilot (où cliquer pour créer l'assistant)")}</div>
-    </div>''', seq=4, section="13h30 · Démonstrations, puis à vous",
+    </div>''', seq=4, section="13h30 · Voir, puis faire",
  notes="Manipulation guidée après les trois démos. On commence par un exemple fait tous ensemble : un cas proposé par la salle, la consigne écrite en direct (rôle, contexte, attendu), testée devant tout le monde. Ensuite seulement, chacun sur son poste. Prévoir un plan B si les licences ne permettent pas de créer un assistant : faire rédiger la consigne et la tester dans le chat Copilot.")
 
 slide(f'''    <div class="grow center-y">

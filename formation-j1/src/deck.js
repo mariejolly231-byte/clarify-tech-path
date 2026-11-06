@@ -16,7 +16,7 @@
     ["9h00", "Point de départ"],
     ["9h45", "Trois logiques"],
     ["11h00", "Quand utiliser quoi"],
-    ["13h30", "Démonstrations"],
+    ["13h30", "Voir, puis faire"],
     ["15h15", "Limites et choix"],
     ["16h00", "À quoi faire attention"],
     ["16h30", "Intersession"],

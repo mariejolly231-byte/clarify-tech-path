@@ -1055,3 +1055,27 @@ body:not(.idle):not([class*="tool-"]) .slide.is-active :is(.card, .ex, .comp, .s
 .toolbar { transition: transform 200ms var(--ease), opacity 200ms var(--ease); }
 .btn-act { transition: transform 140ms var(--ease); }
 .btn-act:hover { translate: none; }
+
+/* Slide 8 : huit freins, cartes régulières (citation, chiffre, réponse) */
+.freins--v2 { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 1fr; gap: 20px; margin-top: 26px; align-items: stretch; min-height: 0; }
+.frein--v2 { padding: 20px 22px; gap: 10px; }
+.frein--v2 .frein-t { font-size: 29px; line-height: 1.1; }
+.frein--v2 .frein-n { display: flex; align-items: baseline; gap: 12px; font-size: 19px; line-height: 1.3; }
+.frein--v2 .frein-n b { display: inline; flex: none; margin: 0; font: 800 46px/1 var(--font-body); color: var(--teal); }
+.frein--v2 .frein-n--txt { display: block; color: var(--ink); }
+.frein--v2 .frein-r { display: flex; gap: 10px; align-items: flex-start; margin-top: auto; padding: 10px 12px; border: 0; border-radius: 12px; background: rgba(255, 255, 255, .7); font-size: 19px; }
+.frein--v2 .frein-r svg { flex: none; width: 20px; height: 20px; margin-top: 2px; fill: none; stroke: var(--teal); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Slide 12 : le pourquoi de la structure, sous l'infographie */
+.infog-why { margin-top: 14px; font-size: 22px; }
+.infog-why b { font-size: 28px; }
+
+/* Rappel Copilot : exemple de demande structurée */
+.md-ex { margin-top: 22px; padding: 18px 22px; border-radius: 16px; background: #EEF2F1; font-size: 21px; line-height: 1.45; }
+.md-ex .md-h { margin-bottom: 6px; }
+.md-ex b { color: var(--teal); }
+.frein--v2 .frein-n { display: block; }
+.frein--v2 .frein-n b { display: block; margin-bottom: 4px; font-size: 44px; }
+.frein--v2 .frein-t { font-size: 27px; }
+.frein--v2 { padding: 18px 20px; }
+.freins--v2 + .three-src { margin-top: 16px; }
