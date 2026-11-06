@@ -73,8 +73,6 @@ p, li { font-size: var(--fs-body); line-height: 1.38; }
 .mark { position: relative; z-index: 0; white-space: nowrap; }
 .mark::before { content: ""; position: absolute; z-index: -1; left: -.12em; right: -.12em; top: .4em; bottom: .02em; background: var(--mk, var(--mint)); border-radius: .25em .4em .3em .5em; transform: rotate(-1.2deg); filter: url(#rough); }
 .mark--sky { --mk: var(--sky); } .mark--lemon { --mk: var(--lemon); } .mark--blush { --mk: var(--blush); } .mark--teal { --mk: var(--tealp); } .mark--lav { --mk: var(--lav); }
-.slide.is-active .mark::before { animation: swipe 700ms var(--ease) both 250ms; transform-origin: left center; }
-@keyframes swipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
 
 /* Trait dessiné */
 .sk { position: relative; }
@@ -482,8 +480,6 @@ kbd { font-family: var(--font-body); font-weight: 700; background: #fff; border:
 .slide.is-active { transform: none; transition: opacity 320ms var(--ease), transform 420ms var(--ease); }
 /* Titre et surtitre : entrée douce, légère mise au point */
 /* Blocs de contenu : arrivée en cascade */
-.slide.is-active .auto-in { animation: auto-in 640ms var(--ease) both; animation-delay: calc(var(--i, 0) * 85ms + 300ms); }
-@keyframes auto-in { from { opacity: 0; transform: translateY(26px) scale(.985); } to { opacity: 1; transform: none; } }
 /* Révélations : mise au point en plus du glissé */
 .frag { transition: opacity 360ms var(--ease), transform 360ms var(--ease); }
 .frag.is-shown { filter: none; }
@@ -544,7 +540,7 @@ body.tool-spot .spot { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   .slide { transform: none; }
-  .slide.is-active, .slide.is-active .eyebrow, .slide.is-active h2, .slide.is-active .auto-in, .slide.is-active .num, .slide.is-active .art, .slide.is-active .art img.art-media { animation: none; }
+  .slide.is-active, .slide.is-active .eyebrow, .slide.is-active h2, .slide.is-active .num, .slide.is-active .art, .slide.is-active .art img.art-media { animation: none; }
   .frag { filter: none; }
 }
 @page { size: 1920px 1080px; margin: 0; }
@@ -1033,14 +1029,29 @@ h2 { letter-spacing: .005em; }
 .invest + .tip { margin-top: 34px; }
 .verdict-box .risk:not(:empty) ~ .guard { display: none; }
 .sort-grid .chip { min-height: 160px; }
-.slide.is-active .tmodal.auto-in { animation: none; }
 
 /* Finition du mouvement : courbes de sortie franches, durées courtes, retour tactile au clic */
 :root { --ease: cubic-bezier(.23, 1, .32, 1); }
 .slide { transition: opacity 260ms var(--ease), transform 300ms var(--ease), visibility 0s linear 300ms; }
 .slide.is-active { transition: opacity 260ms var(--ease), transform 300ms var(--ease); }
-.slide.is-active .auto-in { animation-duration: 420ms; animation-delay: calc(var(--i, 0) * 50ms + 120ms); }
 .frag { transition: opacity 240ms var(--ease), transform 240ms var(--ease); }
 button { transition: transform 140ms var(--ease), background-color 200ms var(--ease); }
 button:active:not(:disabled) { transform: scale(.97); }
 @media (prefers-reduced-motion: reduce) { button:active:not(:disabled) { transform: none; } }
+
+/* Sobriété du mouvement (méthode Emil Kowalski, « remove-animations ») :
+   tout ce qui se rejoue à chaque appui sur une flèche disparaît ; restent le retour au clic,
+   les changements d'état de l'arbre et les ouvertures de chapitre. */
+.slide, .slide.is-active { transform: none; transition: none; }
+.frag { transform: none; transition: none; }
+.slide.is-active .rise, .slide.is-active .mark::before, .slide.is-active .art, .slide.is-active .pic, .md-slide.is-on { animation: none; }
+.trail-fill, .trail-marker { transition: none; }
+.live::before { animation: none; }
+.slide.is-active :is(.card, .ex, .comp, .scene, .duo, .analogy, .tip, .col, .pt, .q, .chip, .pole, .guards, .q0, .verdict-box, .art:not(.art--todo)) { transition: none; }
+body:not(.idle):not([class*="tool-"]) .slide.is-active :is(.card, .ex, .comp, .scene, .duo, .analogy, .tip, .col, .pt, .q, .chip, .pole, .guards, .q0):hover { translate: none; box-shadow: none; }
+.chip:hover { transform: none; }
+.slide.is-active :is(.dash li, .steps li, .checks li, .me-list li, .timeline li, .cmp td.row) { transition: background-size 150ms ease; }
+.verdict-box { transition: background-color 200ms var(--ease); }
+.toolbar { transition: transform 200ms var(--ease), opacity 200ms var(--ease); }
+.btn-act { transition: transform 140ms var(--ease); }
+.btn-act:hover { translate: none; }

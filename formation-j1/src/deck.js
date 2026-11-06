@@ -60,45 +60,6 @@
   });
 
   // Tracé animé des schémas et illustrations : les traits se dessinent, les aplats apparaissent ensuite
-  function draw(slide) {
-    if (reduced) return;
-    slide.querySelectorAll(".schema svg, svg.illu").forEach((svg) => {
-      if (svg.closest(".scene.frag:not(.is-shown)")) return;
-      const groups = svg.matches(".illu") ? Array.from(svg.querySelectorAll("[data-d]")) : Array.from(svg.children).filter((c) => c.tagName === "g");
-      groups.forEach((g, k) => {
-        const delay = (g.dataset.d !== undefined ? parseFloat(g.dataset.d) : k * 0.07) + 0.15;
-        const shapes = g.matches("path, line, polyline, circle, ellipse, rect") ? [g] : Array.from(g.querySelectorAll("path, line, polyline, circle, ellipse, rect"));
-        shapes.forEach((p) => {
-          const stroked = (p.getAttribute("stroke") || getComputedStyle(p).stroke) !== "none" && p.getAttribute("stroke-width") !== "0";
-          const filled = (p.getAttribute("fill") || "none") !== "none";
-          const dashed = p.getAttribute("stroke-dasharray") || (p.getAttribute("style") || "").includes("dasharray");
-          if (stroked && !filled && !dashed && p.getTotalLength) {
-            const len = p.getTotalLength();
-            p.style.transition = "none";
-            p.style.strokeDasharray = len;
-            p.style.strokeDashoffset = len;
-            p.getBoundingClientRect();
-            p.style.transition = "stroke-dashoffset 700ms cubic-bezier(.4,.1,.2,1) " + delay + "s";
-            p.style.strokeDashoffset = 0;
-          } else {
-            p.style.transition = "none";
-            p.style.opacity = 0;
-            p.getBoundingClientRect();
-            p.style.transition = "opacity 500ms ease " + (delay + 0.25) + "s";
-            p.style.opacity = 1;
-          }
-        });
-        g.querySelectorAll("text").forEach((t) => {
-          t.style.transition = "none"; t.style.opacity = 0; t.getBoundingClientRect();
-          t.style.transition = "opacity 400ms ease " + (delay + 0.3) + "s"; t.style.opacity = 1;
-        });
-      });
-    });
-  }
-  function settle(slide) {
-    slide.querySelectorAll(".schema svg *, svg.illu *").forEach((p) => { p.style.transition = ""; p.style.strokeDasharray = ""; p.style.strokeDashoffset = ""; p.style.opacity = ""; });
-  }
-
   // Éléments à révéler, dans l'ordre : data-step regroupe ceux qui apparaissent ensemble (une carte et son dessin)
   function frags(slide) {
     return Array.from(slide.querySelectorAll(".frag"))
@@ -109,45 +70,7 @@
 
   function fit() { stage.style.setProperty("--scale", Math.min(window.innerWidth / 1920, window.innerHeight / 1080)); }
 
-  // Entrée en cascade : les blocs de la slide arrivent l'un après l'autre (les éléments .frag et .rise gardent leur propre rythme)
-  const SKIP = ".toc, .chrome, .num, .notes, .eyebrow, h1, h2, .frag, .rise, .art, .brand-logo, script";
-  function stagger(slide) {
-    if (reduced) return;
-    const items = [];
-    Array.from(slide.children).forEach((c) => {
-      if (c.matches(SKIP)) return;
-      const kids = Array.from(c.children).filter((k) => !k.matches(SKIP));
-      if (kids.length > 1 && /grid|flex/.test(getComputedStyle(c).display)) items.push(...kids); else items.push(c);
-    });
-    items.forEach((x, k) => { x.classList.remove("auto-in"); void x.offsetWidth; x.style.setProperty("--i", k); x.classList.add("auto-in"); });
-  }
-  // Chiffres des encadrés sourcés : ils défilent jusqu'à leur valeur quand ils apparaissent
-  document.querySelectorAll(".tip p:first-of-type").forEach((p) => {
-    const w = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
-    let n;
-    while ((n = w.nextNode())) {
-      const m = n.nodeValue.match(/\d+/);
-      if (!m) continue;
-      const span = document.createElement("span");
-      span.className = "count"; span.dataset.to = m[0]; span.textContent = m[0];
-      const rest = n.splitText(m.index); rest.nodeValue = rest.nodeValue.slice(m[0].length);
-      n.parentNode.insertBefore(span, rest);
-      break;
-    }
-  });
-  function counters(root) {
-    if (reduced) return;
-    root.querySelectorAll(".count").forEach((c) => {
-      const f = c.closest(".frag");
-      if ((f && !f.classList.contains("is-shown")) || c.dataset.run === "1") return;
-      c.dataset.run = "1";
-      const to = parseInt(c.dataset.to, 10), t0 = performance.now(), dur = 1100;
-      (function tick(t) { const k = Math.min(1, (t - t0) / dur); c.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); })(t0);
-    });
-  }
-
   function render(direction) {
-    slides.forEach((el, i) => el.style.setProperty("--off", (i < current ? -1 : 1) * 24 + "px"));
     slides.forEach((el, i) => {
       const active = i === current;
       if (active !== el.classList.contains("is-active")) {
@@ -155,11 +78,7 @@
         if (active) {
           const f = frags(el);
           f.forEach((x) => x.classList.toggle("is-shown", direction < 0));
-          draw(el);
-          stagger(el);
-          el.querySelectorAll(".count").forEach((c) => { c.dataset.run = ""; });
-          counters(el);
-        } else settle(el);
+        }
       }
       el.setAttribute("aria-hidden", active ? "false" : "true");
       el.inert = !active;
@@ -192,7 +111,7 @@
   function go(i, direction) { current = Math.max(0, Math.min(total - 1, i)); render(direction || 1); }
   function next() {
     const hidden = frags(slides[current]).filter((x) => !x.classList.contains("is-shown"));
-    if (hidden.length) { const s = stepOf(hidden[0]); hidden.filter((x) => stepOf(x) === s).forEach((x) => { x.classList.add("is-shown"); if (x.matches(".scene")) draw(x); }); counters(slides[current]); return; }
+    if (hidden.length) { const s = stepOf(hidden[0]); hidden.filter((x) => stepOf(x) === s).forEach((x) => { x.classList.add("is-shown"); }); return; }
     if (current < total - 1) go(current + 1, 1);
   }
   function prev() {
