@@ -330,8 +330,8 @@
   const laser = document.getElementById("laser");
   const spot = document.getElementById("spot");
   const toastEl = document.getElementById("toast");
-  const PEN = { teal: "#0B4F5C", ink: "#2A2F33", violet: "#6E5BA8", rose: "#C25A7C" };
-  const MARK = { teal: "#8FD3BC", ink: "#C3CBCD", violet: "#CDBFEB", rose: "#F5B7C6" };
+  const PEN = { teal: "#0B4F5C", mint: "#3E9C7F", lav: "#8A78C9", blush: "#D6728E" };
+  const MARK = { teal: "#9FCBD1", mint: "#A8E2CC", lav: "#D3C8F0", blush: "#F8C9D3" };
   let tool = null, color = "teal", cur = 0, stroke = null, idleTimer = null, toastTimer = null;
   let ink = {};
   try { ink = JSON.parse(localStorage.getItem("sf-j1-ink") || "{}") || {}; } catch (e) { ink = {}; }
@@ -367,8 +367,20 @@
     if (!el.requestFullscreen) { toast("Plein écran indisponible ici : utilise F11 ou ouvre le fichier dans ton navigateur."); return; }
     el.requestFullscreen().catch(() => toast("Plein écran bloqué ici : ouvre le fichier dans ton navigateur, ou utilise F11."));
   }
-  function pdf() {
+  async function pdf() {
     setTool(null);
+    let dl = null;
+    try { if (window.claude && window.claude.use) dl = await window.claude.use("downloads"); } catch (e) { dl = null; }
+    if (dl) {
+      toast("Préparation du PDF…", 6000);
+      try {
+        const r = await fetch("jour1-deck.pdf");
+        if (!r.ok) throw new Error("absent");
+        await dl.save({ filename: "deck-jour1-lagarrigue.pdf", data: await r.blob() });
+        toast("PDF enregistré.");
+      } catch (e) { if (!e || e.code !== "declined") toast("Export indisponible ici : ouvre le deck dans ton navigateur, puis Exporter en PDF.", 5000); }
+      return;
+    }
     toast("Dans la fenêtre qui s'ouvre : « Enregistrer au format PDF », marges aucune, arrière-plans cochés.", 5000);
     setTimeout(() => window.print(), 700);
   }

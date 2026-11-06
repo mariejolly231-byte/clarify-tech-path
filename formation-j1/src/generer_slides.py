@@ -229,7 +229,6 @@ slide(f'''    <div class="lockup lockup--duo rise">
     </div>
     <div class="cover-body">
       <h1 class="rise"><span class="l">Assistant, automatisation, agent :</span> <span class="l">savoir quoi utiliser, <span class="mark">et quand</span></span></h1>
-      <p class="lead rise">Comprendre, mesurer et choisir.</p>
       <p class="cover-meta rise">Maison Lagarrigue · Jour 1 · 17 novembre 2026 · 9h00 à 17h00</p>
     </div>
     <div class="cover-actions"><button class="btn-act btn-act--ghost" data-act="full">Plein écran</button><button class="btn-act btn-act--ghost" data-act="pdf">Exporter en PDF</button></div>
@@ -325,7 +324,7 @@ FREINS = [("Je ne vois pas à quoi ça me servirait", "71 %", "des entreprises q
           ("Et nos données ?", "38 %", "s'inquiètent pour la protection des données.", "Chapitre 6 : ce qu'on saisit, ou pas."),
           ("Ça va me remplacer", "45 %", "des salariés craignent que leur métier soit, au moins en partie, repris par l'IA.", "On voit ce qui reste à l'humain : juger, valider, la relation."),
           ("Elle se trompe", "", "Une réponse fausse peut être présentée comme sûre.", "On apprend à vérifier ; un humain valide."),
-          ("Je vais perdre en compétence", "", "Si elle fait tout, on ne sait plus faire.", "Elle prépare, tu comprends, tu valides : tu gardes la main."),
+          ("Je vais perdre en compétence", "", "Si elle fait tout, on ne sait plus faire.", "À débattre : qu'est-ce qui crée la valeur ajoutée chez nous ? C'est là qu'on garde la main."),
           ("Et l'écologie ?", "", "Chaque demande consomme de l'énergie dans des centres de données.", "On s'en sert quand ça vaut le coup, pas par réflexe."),
           ("Je n'ai pas le temps", "", "Se former et essayer demande du temps au départ.", "On part de tâches qui en font gagner.")]
 fr = "".join(f'''<div class="frein frein--v2 sk fill-mint frag"><p class="frein-t">«&nbsp;{t}&nbsp;»</p>{f'<p class="frein-n"><b>{n}</b><span>{d}</span></p>' if n else f'<p class="frein-n frein-n--txt">{d}</p>'}<p class="frein-r"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>{r}</span></p></div>''' for t, n, d, r in FREINS)
@@ -333,7 +332,7 @@ slide(f'''    <h2>Ce qui freine, <span class="mark mark--blush">le plus souvent<
     <p class="howto">Ce qu'on entend, ce que disent les chiffres, et où on y répond aujourd'hui.</p>
     <div class="freins freins--v2">{fr}</div>
     <p class="three-src">Sources : Insee Première n° 2120, juillet 2026 (71, 54 et 38 %, entreprises de 10 personnes ou plus n'utilisant pas l'IA) ; sondage Odoxa, avril 2026 (45 %).</p>''', seq=1, section="9h00 · Point de départ",
- notes="Juste après le tour de table : relier ce qu'ils viennent de dire à ces cinq freins. Les trois premiers sont chiffrés par l'Insee (entreprises qui n'utilisent pas l'IA, plusieurs réponses possibles). Les deux derniers n'ont pas de chiffre fiable pour 2026 : les présenter comme ce qu'on entend sur le terrain. Les entendre sans les balayer : chacun a sa réponse dans la journée.")
+ notes="Juste après le tour de table : relier ce qu'ils viennent de dire à ces cinq freins. Les trois premiers sont chiffrés par l'Insee (entreprises qui n'utilisent pas l'IA, plusieurs réponses possibles). Les deux derniers n'ont pas de chiffre fiable pour 2026 : les présenter comme ce qu'on entend sur le terrain. Les entendre sans les balayer : chacun a sa réponse dans la journée. Sur la perte de compétence, ouvrir le débat : qu'est-ce qui crée vraiment la valeur ajoutée dans l'entreprise ? Le conseil au client, la connaissance du matériel, la relation avec les agriculteurs, le jugement sur une reprise. Ce qu'on confie à l'IA, c'est ce qui n'en crée pas : recopier, mettre en forme, chercher. Elle prépare, tu comprends, tu valides : tu gardes la main.")
 
 slide(f'''    <p class="eyebrow">Retour sur mars</p>
     <h2>La journée de mars, <span class="mark mark--sky">ce qui reste</span></h2>
