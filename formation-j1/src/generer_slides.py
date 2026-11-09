@@ -410,11 +410,16 @@ slide(f'''    <p class="eyebrow">Rappel commun</p>
       <div class="infog-one">{infog("comment-fonctionne-ia.png", "Infographie « Comment fonctionne l'IA » : tokens, modèle, prédiction du token suivant (comment-fonctionne-ia.png)")}</div>
       <aside class="why-struct frag">
         <p class="why-h hand">Pourquoi structurer ses demandes ?</p>
-        <ol>
-          <li><b>Le début et la fin pèsent le plus.</b> Le modèle retient mieux ce qui ouvre et ce qui ferme la demande : l'objectif en premier, le format attendu à la fin.</li>
-          <li><b>Les mots précis orientent la prédiction.</b> Un rôle, un verbe d'action, un format : chaque mot change la suite la plus probable.</li>
-          <li><b>Une structure claire évite qu'il devine.</b> Objectif, contexte, sources, attentes.</li>
-        </ol>
+        <svg class="why-svg" viewBox="0 0 330 270" aria-hidden="true">
+          <text x="6" y="8" class="wl">début</text><text x="292" y="8" class="wl" text-anchor="end">fin</text><text x="150" y="8" class="wl wl--mute" text-anchor="middle">milieu</text>
+          <rect x="6" y="14" width="30" height="30" rx="7" class="tk tk--hi"/><rect x="42" y="14" width="30" height="30" rx="7" class="tk tk--hi"/><rect x="78" y="14" width="30" height="30" rx="7" class="tk tk--md"/><rect x="114" y="14" width="30" height="30" rx="7" class="tk tk--lo"/><rect x="150" y="14" width="30" height="30" rx="7" class="tk tk--lo"/><rect x="186" y="14" width="30" height="30" rx="7" class="tk tk--lo"/><rect x="222" y="14" width="30" height="30" rx="7" class="tk tk--md"/><rect x="258" y="14" width="30" height="30" rx="7" class="tk tk--hi"/><rect x="294" y="14" width="30" height="30" rx="7" class="tk tk--hi"/>
+          <path class="wa" d="M165 52 V82"/><path class="wa" d="M157 74 L165 84 L173 74"/>
+          <g class="wn"><path d="M70 100 L150 110"/><path d="M70 100 L150 150"/><path d="M70 100 L150 190"/><path d="M70 100 L150 230"/><path d="M70 140 L150 110"/><path d="M70 140 L150 150"/><path d="M70 140 L150 190"/><path d="M70 140 L150 230"/><path d="M70 180 L150 110"/><path d="M70 180 L150 150"/><path d="M70 180 L150 190"/><path d="M70 180 L150 230"/><path d="M70 220 L150 110"/><path d="M70 220 L150 150"/><path d="M70 220 L150 190"/><path d="M70 220 L150 230"/><path d="M150 110 L230 120"/><path d="M150 110 L230 160"/><path d="M150 110 L230 200"/><path d="M150 150 L230 120"/><path d="M150 150 L230 160"/><path d="M150 150 L230 200"/><path d="M150 190 L230 120"/><path d="M150 190 L230 160"/><path d="M150 190 L230 200"/><path d="M150 230 L230 120"/><path d="M150 230 L230 160"/><path d="M150 230 L230 200"/></g><circle cx="70" cy="100" r="11" class="nd nd--0"/><circle cx="70" cy="140" r="11" class="nd nd--0"/><circle cx="70" cy="180" r="11" class="nd nd--0"/><circle cx="70" cy="220" r="11" class="nd nd--0"/><circle cx="150" cy="110" r="11" class="nd nd--1"/><circle cx="150" cy="150" r="11" class="nd nd--1"/><circle cx="150" cy="190" r="11" class="nd nd--1"/><circle cx="150" cy="230" r="11" class="nd nd--1"/><circle cx="230" cy="120" r="11" class="nd nd--2"/><circle cx="230" cy="160" r="11" class="nd nd--2"/><circle cx="230" cy="200" r="11" class="nd nd--2"/>
+          <path class="wa" d="M244 160 H284"/><path class="wa" d="M276 152 L286 160 L276 168"/>
+          <rect x="290" y="146" width="30" height="30" rx="8" class="tk tk--out"/>
+        </svg>
+        <p class="why-l"><b>Le début et la fin pèsent le plus</b>l'objectif en premier, le format à la fin.</p>
+        <p class="why-l"><b>Les mots précis orientent la prédiction</b>un rôle, un verbe, un format.</p>
         <button class="btn-act why-go" data-act="minideck" data-target="minideck" data-find="quatre ingrédients"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Structurer sa demande</button>
         <p class="tip-src">Source : {srclink("Liu et al., « Lost in the Middle », 2023")}</p>
       </aside>
@@ -440,15 +445,22 @@ slide(f'''    <p class="eyebrow">Rappel commun</p>
 
 slide(f'''    <p class="eyebrow">Rappel commun</p>
     <h2>L'IA est déjà dans <span class="mark">vos outils</span></h2>
-    <p class="lead rise" style="margin-top:24px">Ce n'est plus un site à part : elle arrive dans ce que vous ouvrez chaque matin.</p>
-    <div class="logo-row mt rise">
-      {"".join(f'<span class="app"><img src="images/logo-{f}.png" alt=""><span>{n}</span></span>' for f, n in [("microsoft", "Microsoft 365 Copilot"), ("outlook", "Outlook"), ("excel", "Excel"), ("word", "Word"), ("teams", "Teams")])}
+    <div class="logo-row logo-row--tight rise">
+      {"".join(f'<span class="app"><img src="images/logo-{f}.png" alt=""><span>{n}</span></span>' for f, n in [("microsoft", "Microsoft 365 Copilot"), ("outlook", "Outlook"), ("excel", "Excel"), ("word", "Word"), ("powerpoint", "PowerPoint"), ("teams", "Teams")])}
     </div>
-    <div class="cols mt" style="align-items:start">
+    <div class="biz mt">
+      <div class="card sk fill-mint frag biz-card"><h3>Chez vous : la licence Copilot Business</h3>
+        <ul class="biz-list">
+          <li><b>Dans Word, Excel, PowerPoint, Outlook et Teams</b>rédiger, résumer, analyser un tableau, préparer une présentation, retrouver ce qui s'est dit en réunion.</li>
+          <li><b>Copilot Chat sur vos données de travail</b>e-mails, fichiers, réunions et conversations, en respectant les droits d'accès de chacun.</li>
+          <li><b>Des agents</b>en créer avec Agent Builder, ou utiliser ceux proposés par Microsoft.</li>
+          <li><b>La protection des données de l'entreprise</b>vos données ne servent pas à entraîner les modèles.</li>
+        </ul>
+        <p class="tip-src">Source : {srclink("Microsoft, Introducing Microsoft 365 Copilot Business", "https://techcommunity.microsoft.com/t5/microsoft-365-copilot-blog/introducing-microsoft-365-copilot-business-empowering-small-and/ba-p/4469700")}</p>
+      </div>
       {tip("40 % des TPE et PME déclarent utiliser au moins une solution d'IA en 2026, contre 13 % en 2024. Chez les PME, c'est 53 %.", "Baromètre France Num 2026, DGE et Crédoc", "frag")}
-      {tip("L'usage le plus répandu : générer du texte, de la voix ou des images (34 % des TPE et PME), devant les chatbots et assistants (24 %).", "Baromètre France Num 2026, DGE et Crédoc", "frag")}
     </div>''', seq=1, section="9h00 · Point de départ",
- notes="Ce qui est accessible chez vous dépend du niveau de licence : on le vérifie cet après-midi.")
+ notes="Ce n'est plus un site à part : elle arrive dans ce que vous ouvrez chaque matin. Confirmé par Julie : Maison Lagarrigue dispose de licences Microsoft 365 Copilot Business. C'est la version PME (jusqu'à 300 utilisateurs) de Microsoft 365 Copilot, avec les mêmes fonctions. Ce qu'elle permet : Copilot dans Word, Excel, PowerPoint, Outlook et Teams ; Copilot Chat qui s'appuie sur les e-mails, fichiers, réunions et conversations de chacun, sans dépasser ses droits ; créer des agents avec Agent Builder ; la protection des données de l'entreprise. À vérifier la veille : qui a une licence (tout le monde ou une partie des postes), et ce que l'administrateur a activé (Workflows, Cowork, modèles Claude). Autre chiffre France Num 2026 : l'usage le plus répandu est la génération de texte, de voix ou d'images (34 % des TPE et PME), devant les chatbots et assistants (24 %).")
 
 
 chapter_slide(2)
@@ -1026,8 +1038,8 @@ def _arow(t, p, tag):
     return f'<tr class="{"is-new" if not t else ""}"><td class="task"><span class="tp">{p} · {"vu en mars" if tag == "mars" else "à ajouter"}</span>{name}</td>' + "".join(f'<td class="{"is-key" if k else ""}"></td>' for _, k in cols) + "</tr>"
 arows = "".join(_arow(*r) for r in AUDIT_ROWS)
 slide(f'''    <h2>La grille d'audit : <span class="mark">trois à cinq tâches par pôle</span></h2>
-    <p class="howto">Des cas de mars ou d'autres : tout ce qui vous prend du temps, crée des erreurs ou de la frustration.</p>
-    <table class="sheet mt"><thead><tr><th class="task-h">La tâche</th>{heads}</tr></thead><tbody>{arows}</tbody></table>
+    <div class="sheet-top"><p class="howto">Des cas de mars ou d'autres : tout ce qui vous prend du temps, crée des erreurs ou de la frustration.</p><button class="avous avous--go" data-act="minideck" data-target="md-mars">Les cas de mars</button></div>
+    <table class="sheet"><thead><tr class="grp"><th class="task-h"></th><th colspan="5"><span>Comment ça se passe aujourd'hui</span></th><th colspan="2" class="grp--b"><span>Les points d'attention</span></th><th colspan="2" class="grp--c"><span>Ce qu'on en attend</span></th></tr><tr><th class="task-h">La tâche</th>{heads}</tr></thead><tbody>{arows}</tbody></table>
     <p class="sheet-leg"><span><i class="lg-mint"></i>les colonnes qui demandent le plus de réflexion</span><span class="ref-tree">voir l'arbre</span></p>''',
  seq=7, section="16h30 · Lancement de l'intersession",
  notes="Chacun repart avec la même grille que l'exemple rempli ensemble. Les cas de mars sont un point de départ, pas une liste fermée : toute tâche qui coûte du temps, des erreurs ou de la frustration a sa place. Trois à cinq tâches par pôle. Rappeler la question zéro : la colonne sensibilité des données sert à vérifier qu'on a le droit. La colonne 9 renvoie à l'arbre de la matinée.")
@@ -1044,8 +1056,8 @@ def qr_block():
 slide(f'''    <h2>Remplir la grille : <span class="mark">en ligne ou en PDF</span></h2>
     <p class="howto">À me renvoyer au plus tard deux semaines avant le jour 2, soit début janvier.</p>
     <div class="cols mt" style="align-items:stretch">
-      <div class="card sk fill-mint grille-way">{qr_block()}<div><h3>En ligne, sur ton téléphone</h3><p>Tu scannes, tu remplis, tu envoies : ta réponse m'arrive par e-mail.</p><p class="small">Une réponse par tâche. Une case à cocher pour le traitement des données, détaillé sur summitflow.fr.</p></div></div>
-      <div class="card sk fill-card grille-way"><div><h3>En PDF</h3><p>La même grille, en PDF à remplir sur l'ordinateur. Tu la remplis, tu coches la case données, puis tu me la renvoies par e-mail.</p>{PDF_DATA}<button class="btn-act dl-pdf" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Télécharger la grille PDF</button><p class="mail">contact@summitflow.fr</p><p class="small">Aucune donnée réelle de client ou de salarié : on décrit la tâche, pas son contenu.</p></div></div>
+      <div class="card sk fill-mint grille-way">{qr_block()}<div><h3>En ligne, sur ton téléphone</h3><p>Tu scannes, tu remplis, tu envoies : ta réponse m'arrive par e-mail.</p><p class="small">Une réponse par tâche. Une case à cocher pour le traitement des données, détaillé dans la <a class="src-link" href="https://www.summitflow.fr/politique-confidentialite" target="_blank" rel="noopener">politique de confidentialité de Summit Flow</a>.</p></div></div>
+      <div class="card sk fill-card grille-way"><div><h3>En PDF</h3><p>La même grille, en PDF à remplir sur l'ordinateur. Tu la remplis, tu coches la case données, puis tu me la renvoies par e-mail.</p>{PDF_DATA}<button class="btn-act dl-pdf" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Télécharger la grille PDF</button><p class="mail">contact@summitflow.fr</p><p class="small">Aucune donnée réelle de client ou de salarié : on décrit la tâche, pas son contenu. Traitement des réponses : <a class="src-link" href="https://www.summitflow.fr/politique-confidentialite" target="_blank" rel="noopener">politique de confidentialité</a>.</p></div></div>
     </div>''', seq=7, section="16h30 · Lancement de l'intersession",
  notes="Montrer le QR code en direct et faire scanner une fois pour vérifier que la page s'ouvre. Le formulaire en ligne (Airtable) envoie chaque réponse par e-mail à contact@summitflow.fr. Il demande le consentement au traitement des données, comme le PDF. Le PDF à remplir (dist/grille-audit-lagarrigue.pdf) part par e-mail après la séance. Rappeler la question zéro pour la colonne sensibilité des données.")
 

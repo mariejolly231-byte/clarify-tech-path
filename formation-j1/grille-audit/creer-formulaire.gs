@@ -74,6 +74,9 @@ function creerGrille() {
     .setHelpText("Voir l'arbre « Quelle brique pour quelle tâche ? » du jour 1.")
     .setChoiceValues(['Une demande', 'Un bloc-notes', 'Cowork', 'Une automatisation simple (Workflows, règle Outlook)', 'Une demande planifiée', 'Une requête enregistrée', 'Un agent Copilot', 'Je ne sais pas encore']);
   form.addParagraphTextItem().setTitle('Une remarque, une question ?');
+  form.addCheckboxItem().setTitle('Tes données')
+    .setHelpText("Les réponses servent uniquement à préparer la suite de la formation et sont envoyées à contact@summitflow.fr. Détail et droits : https://www.summitflow.fr/politique-confidentialite")
+    .setChoiceValues(["J'accepte que Summit Flow traite ces réponses pour préparer la suite de la formation"]).setRequired(true);
 
   ScriptApp.newTrigger('envoyerReponse').forForm(form).onFormSubmit().create();
   Logger.log('Lien à partager (QR code) : ' + form.getPublishedUrl());

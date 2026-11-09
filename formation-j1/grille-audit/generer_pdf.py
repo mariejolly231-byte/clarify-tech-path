@@ -7,9 +7,9 @@ from reportlab.lib.utils import ImageReader
 
 TEAL, INK, MINT, MUTED, PAPER = HexColor("#0B4F5C"), HexColor("#2A2F33"), HexColor("#D6F1E6"), HexColor("#5C6366"), HexColor("#FAF8F3")
 W, H = landscape(A4)
-# Registre des traitements de Summit Flow : adresse exacte à confirmer
-REGISTRE_URL = "https://summitflow.fr"
-REGISTRE_LABEL = "summitflow.fr"
+# Politique de confidentialité et registre des traitements de Summit Flow
+REGISTRE_URL = "https://www.summitflow.fr/politique-confidentialite"
+REGISTRE_LABEL = "summitflow.fr/politique-confidentialite"
 CAS = ["Choisir un cas de mars, ou écrire le tien",
        "Commerce · Commissions des vendeurs itinérants", "Commerce · Contrôle des études de prix", "Commerce · Estimation des reprises",
        "Commerce · Ciblage de clients pour les démonstrations", "Commerce · Trouver un produit chez un fournisseur",
@@ -58,7 +58,7 @@ def page(c, n, logo):
             yy -= h + 34
     form.checkbox(name=f"t{n}_consentement", x=28, y=30, size=13, borderColor=TEAL, fillColor=white, buttonStyle="check", borderWidth=1)
     c.setFillColor(INK); c.setFont("Helvetica", 9)
-    txt = "J'accepte que Summit Flow traite ces réponses pour préparer la suite de la formation. Détail et droits : registre des traitements sur "
+    txt = "J'accepte que Summit Flow traite ces réponses pour préparer la suite de la formation. Détail et droits : "
     c.drawString(48, 33, txt)
     lx = 48 + c.stringWidth(txt, "Helvetica", 9)
     c.setFillColor(TEAL); c.setFont("Helvetica-Bold", 9); c.drawString(lx, 33, REGISTRE_LABEL)
