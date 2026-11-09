@@ -1017,23 +1017,21 @@ slide(f'''    <h2>L'humain valide, <span class="mark">trois règles dès demain<
  seq=6, section="16h00 · À quoi faire attention",
  notes="Un seul message pour ce chapitre : l'humain valide, et trois règles simples dès demain. Le bon à tirer avant d'imprimer un flyer : même quand la maquette semble parfaite, quelqu'un relit et signe avant l'envoi à l'imprimeur. La boucle est la clé : relire n'est pas une perte de temps, c'est la condition pour déléguer. Chiffre utile à l'oral : seuls 26 % des utilisateurs de l'IA au travail disent que leur direction est clairement alignée sur l'IA (Microsoft, Work Trend Index 2026), d'où l'intérêt de règles simples et partagées. La troisième règle est une proposition : la valider avec la référente IA avant la séance.")
 
-# Exercice : trouver les erreurs dans une étude de prix préparée par l'IA (données fictives)
-ERR_LINES = [("Tracteur 120 ch, version confort", "1", "78 400,00", "", "78 400,00", ""),
-             ("Chargeur frontal avec outil", "1", "9 850,00", "", "9 850,00", ""),
-             ("Remise fidélité prévue par la grille tarifaire", "", "", "8 %", "− 7 060,00", "e1"),
-             ("Reprise : tracteur 2012, 6 000 heures", "1", "", "", "− 21 500,00", ""),
-             ("Total HT", "", "", "", "61 190,00", "e2")]
+# Exercice : trouver les erreurs dans une comparaison de fournisseurs préparée par l'IA (corpus fictif Lagarrigue)
+ERR_LINES = [("Alpha Pièces", "premium", "627,00 €", "2 jours", "", ""),
+             ("Bravo Agri", "standard", "624,00 €", "4 jours", "", "e1"),
+             ("Charlie Mécanique", "économique", "592,40 €", "7 jours", "recommandé", "e2")]
 rows_e = "".join(f'<tr class="err-row{" err-row--" + k if k else ""}"><td>{a}</td><td>{b}</td><td>{c}</td><td>{d}</td><td>{e}</td></tr>' for a, b, c, d, e, k in ERR_LINES)
 slide(f'''    <h2>Exercice : <span class="mark">trouvez les erreurs</span></h2>
-    <p class="howto">Une étude de prix préparée par Copilot, données fictives. Elle a l'air parfaite. Deux erreurs s'y cachent.</p>
+    <p class="howto">La demande : 6 filtres hydrauliques, 10 filtres à air, 20 filtres à huile, au meilleur prix et vite. Copilot a comparé les trois catalogues fournisseurs (fictifs). Deux erreurs s'y cachent.</p>
     <div class="err-wrap mt">
-      <table class="err-table"><thead><tr><th>Désignation</th><th>Qté</th><th>Prix unitaire HT</th><th>Remise</th><th>Total HT</th></tr></thead><tbody>{rows_e}</tbody></table>
+      <table class="err-table"><thead><tr><th>Fournisseur</th><th>Gamme</th><th>Total HT</th><th>Livraison</th><th></th></tr></thead><tbody>{rows_e}</tbody></table>
       <div class="err-side">
-        <p class="err-claim">« Étude conforme à la grille tarifaire 2026. Prête à être envoyée au client. »</p>
-        <div class="err-ans frag"><p><b>1. Une règle inventée.</b>La grille ne prévoit aucune remise fidélité : la source est imaginaire.</p><p><b>2. Un calcul faux.</b>78 400 + 9 850 − 7 060 − 21 500 = 59 690 €, pas 61 190 €.</p><p><b>Et la phrase finale :</b>« prête à être envoyée » n'est pas à l'IA de le décider.</p></div>
+        <p class="err-claim">« Charlie Mécanique est le moins cher et livre sous 7 jours ouvrés. Je recommande de passer la commande chez lui. »</p>
+        <div class="err-ans frag"><p><b>1. Une remise oubliée.</b>Bravo accorde 5 % dès 30 articles : 36 articles, donc 592,80 €, au prix de Charlie.</p><p><b>2. Un stock ignoré.</b>Charlie n'a que 4 filtres hydrauliques : les 2 autres arrivent sous 15 jours ouvrés.</p><p><b>Et la décision :</b>commander revient au magasin, pas à l'IA. Ici, Bravo livre tout en 4 jours.</p></div>
       </div>
     </div>''', seq=6, section="16h00 · À quoi faire attention",
- notes="Exercice de 10 minutes, par deux. Distribuer ou projeter l'étude, laisser chercher, puis révéler. Erreur 1 : une hallucination de source, la remise fidélité n'existe pas dans la grille. Erreur 2 : un calcul faux, le total réel est 59 690 euros HT. Point 3 : l'IA s'arroge une décision qui revient au commercial. Message : la relecture n'est pas une formalité, et elle se fait avec les documents sources sous les yeux. À remplacer par une étude tirée du corpus fictif Lagarrigue si tu préfères, en gardant deux erreurs du même type.")
+ notes="Exercice de 10 minutes, par deux, sur le corpus fictif : les trois catalogues (Alpha, Bravo, Charlie) et leur onglet Conditions. Projeter la comparaison, laisser chercher avec les catalogues sous les yeux, puis révéler. Erreur 1 : la remise quantité de Bravo (5 % à partir de 30 articles) n'est pas appliquée ; 624 € moins 5 % donne 592,80 € HT, à 40 centimes de Charlie. Erreur 2 : le stock de Charlie ne couvre pas la commande (4 filtres hydrauliques en stock pour 6 demandés, réapprovisionnement en 15 jours ouvrés). Point 3 : l'IA s'arroge la décision de commander. Conclusion : Bravo livre la commande complète en 4 jours pour le même prix. Message : on relit avec les documents sources, pas seulement le résultat.")
 
 chapter_slide(7)
 

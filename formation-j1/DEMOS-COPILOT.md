@@ -2,38 +2,71 @@
 
 Objectif : montrer un assistant et un agent qui travaillent sur des documents qui ressemblent à ceux de Lagarrigue, sans construire leurs solutions à leur place. Le corpus est fictif : aucune donnée réelle de client ou de salarié.
 
-## 1. Avant tout : ranger le corpus
+Le corpus (5 fichiers) :
 
-1. Dans OneDrive (le compte Microsoft 365 avec lequel tu feras les démos), crée un dossier « Formation Lagarrigue · corpus fictif ».
-2. Dépose-y les fichiers du corpus (grille tarifaire, études de prix exemples, conditions de reprise, etc.). Garde des noms de fichiers clairs : Copilot les retrouve plus facilement.
-3. Vérifie que ce compte a bien une licence Microsoft 365 Copilot (dans Copilot, l'onglet « Travail » doit apparaître).
+| Fichier | Sert à |
+|---|---|
+| 01_tableau_de_bord_octobre_2026_FICTIF.xlsx | Démo assistant (pôle direction : analyse des tableaux de bord) |
+| 02_guide_lecture_indicateurs_FICTIF.docx | Démo assistant : définitions, seuils d'alerte, format de synthèse attendu |
+| 03_catalogue_alpha / bravo / charlie_FICTIF.xlsx | Démo agent (pôle commerce : trouver un produit chez un fournisseur) et exercice « Trouvez les erreurs » (slide 48) |
 
-## 2. Démo assistant : une demande structurée avec des documents
+## 1. Avant tout : ranger le corpus au bon endroit
 
-1. Ouvre Copilot (application Microsoft 365 Copilot, ou m365copilot.com), onglet Travail, nouvelle conversation.
-2. Écris la demande en quatre ingrédients : objectif, contexte, sources, attentes.
-3. Pour les sources, tape « / » puis le nom du fichier du corpus (par exemple la grille tarifaire). Copilot l'ajoute à la demande.
-4. Montre la réponse, puis relance avec une précision (« ajoute la reprise », « présente-le en tableau »).
-5. Ce qu'on commente : ce que ça fait (une étude en une minute), ce que ça demande (une bonne consigne, les bons fichiers), ce que ça ne fait pas (vérifier qu'un tarif existe vraiment, décider de l'envoi).
+Copilot Business ne lit que le OneDrive du compte Microsoft 365, pas le OneDrive personnel.
 
-Variante bloc-notes : Copilot, Blocs-notes, nouveau bloc-notes, ajoute les fichiers du dossier comme références. Utile pour montrer plusieurs documents croisés.
+1. Ouvre OneDrive avec le compte Microsoft 365 de la démo (celui de summitflow232, ou le compte prêté par Lagarrigue).
+2. Crée un dossier « Formation Lagarrigue · corpus fictif » et dépose-y les cinq fichiers.
+3. Vérifie que l'onglet « Travail » apparaît dans Copilot : c'est le signe que la licence est active.
 
-## 3. Démo agent : l'agent des études de prix (Agent Builder)
+## 2. Démo assistant : la synthèse du tableau de bord d'octobre
 
-1. Copilot, menu Assistants, Nouvel agent.
-2. Choisis de le configurer toi-même (onglet Configurer).
-3. Nom : « Études de prix (démo) ». Description : une phrase.
-4. Instructions : colle le prompt très structuré du pas-à-pas (page 5 « Ses instructions : très structurées »), en remplaçant les crochets par les éléments du corpus.
-5. Connaissances : ajoute les fichiers du dossier OneDrive du corpus (grille, conditions de reprise, études exemples). Si possible, désactive la recherche web pour qu'il ne s'appuie que sur le corpus.
-6. Requêtes suggérées : « Prépare l'étude de prix de cette demande », « Vérifie le total de cette étude ».
-7. Crée l'agent, puis teste dans le volet de droite : une demande normale, puis une demande interdite (« Envoie l'étude au client ») : il doit refuser.
-8. Ce qu'on commente : les mêmes trois questions que pour l'assistant, et la différence avec la démo 2 (les consignes et les documents sont rangés une fois pour toutes, réutilisables par l'équipe).
+Ce qu'on montre : un assistant à qui l'on donne des consignes et des documents de référence.
+
+1. Copilot, onglet Travail, nouvelle conversation.
+2. Demande structurée (objectif, contexte, sources, attentes) :
+
+   « Tu prépares la synthèse mensuelle du tableau de bord pour la réunion de direction de Maison Lagarrigue.
+   Contexte : la synthèse est relue par la direction avant d'être diffusée.
+   Sources : /01_tableau_de_bord_octobre_2026_FICTIF et /02_guide_lecture_indicateurs_FICTIF. Applique les seuils d'alerte du guide.
+   Attentes : une page maximum, au format décrit dans le guide : trois chiffres clés, ce qui progresse, ce qui se dégrade, les écarts par site, puis les questions à poser aux responsables. Chaque chiffre renvoie à une ligne du tableau. Si une donnée paraît incohérente ou en double, signale-la sans la corriger. »
+
+   Tape « / » puis le nom du fichier pour l'ajouter comme source.
+3. Ce que la réponse doit faire ressortir (les pièges du corpus, à vérifier en direct) :
+   - Site Est en rouge : rupture magasin 14,2 % (seuil 10 %) et marge pièces 22,4 % (seuil 24 %) ;
+   - Site Sud : délai SAV 6,1 jours (rouge) et ordres de réparation en chute, de 83 à 58 ;
+   - encours de plus de 60 jours à 96,2 k€ (orange), CA atelier à 158,8 k€ sous l'objectif de 165 ;
+   - dans l'onglet des commandes : la ligne du 1er octobre (Client 15, lame de broyeur) apparaît deux fois, et la ligne du 29 octobre affiche 13,95 € pour 3 roulements à 46,50 €, au lieu de 139,50 €.
+4. Si Copilot rate un piège, c'est encore mieux pour la séance : on montre que la relecture fait partie du travail.
+5. Ce qu'on commente : ce que ça fait (une synthèse en une minute), ce que ça demande (une consigne claire, le bon guide), ce que ça ne fait pas (expliquer les causes : il formule des hypothèses à vérifier).
+
+Variante bloc-notes : Copilot, Blocs-notes, nouveau bloc-notes, ajoute le tableau et le guide comme références, puis la même demande. Utile pour montrer qu'on retrouve ses documents d'un mois sur l'autre.
+
+## 3. Démo agent : l'agent de comparaison fournisseurs (Agent Builder)
+
+Ce qu'on montre : un agent qui enchaîne plusieurs étapes (lire la demande, chercher dans trois catalogues, appliquer les conditions, comparer, recommander) et qui s'arrête avant de commander.
+
+1. Copilot, menu Assistants, Nouvel agent, onglet Configurer.
+2. Nom : « Comparateur fournisseurs (démo) ». Description : « Compare les catalogues fournisseurs pour une demande de pièces. »
+3. Instructions :
+
+   « Rôle : tu es l'assistant achats du magasin pièces de Maison Lagarrigue, concession de matériel agricole.
+   Tâche : pour chaque demande de pièces, 1. retrouve chaque pièce dans les trois catalogues grâce à la référence d'origine équivalente (OEM) ; 2. calcule le total HT par fournisseur ; 3. applique les conditions de l'onglet Conditions : remise quantité, franco de port et frais de port, commande minimum ; 4. vérifie le stock disponible pour chaque ligne et le délai de réapprovisionnement en cas de rupture ; 5. présente la comparaison.
+   Format : un tableau par fournisseur (total HT, frais de port, remise appliquée, délai de livraison réel, lignes en rupture), puis une recommandation argumentée en deux phrases, puis les points à vérifier.
+   Limites : tu n'inventes aucun prix ni aucune condition : ce qui n'est pas dans les catalogues, tu le signales. Tu ne passes jamais de commande et tu ne contactes aucun fournisseur : la décision revient au magasinier. »
+4. Connaissances : ajoute les trois catalogues depuis le dossier OneDrive. Désactive la recherche web si l'option existe, pour qu'il ne s'appuie que sur le corpus.
+5. Requêtes suggérées : « Compare les fournisseurs pour cette commande », « Quel fournisseur peut tout livrer en moins de 5 jours ? ».
+6. Créer, puis tester dans le volet de droite :
+   - demande normale : « 6 filtres hydrauliques, 10 filtres à air primaire, 20 filtres à huile moteur, au meilleur prix et vite ». Réponse attendue : Bravo à 592,80 € HT après remise de 5 % (36 articles), livré en 4 jours ; Charlie à 592,40 € mais seulement 4 filtres hydrauliques en stock, réapprovisionnement en 15 jours ; Alpha à 627 € en 2 jours.
+   - demande interdite : « Passe la commande chez Bravo. » L'agent doit refuser.
+7. Ce qu'on commente : les mêmes trois questions que pour l'assistant, et la différence : l'agent enchaîne les étapes seul, avec ses consignes et ses catalogues rangés une fois pour toutes.
+
+L'exercice « Trouvez les erreurs » (slide 48) reprend exactement cette demande : la version fautive oublie la remise de Bravo et le stock de Charlie.
 
 ## 4. L'automatisation simple déclenchée par un courriel (2 minutes, sans Workflows)
 
-Le programme CFD annonce cette démo. Pour la tenir sans Workflows, une règle Outlook suffit :
+Le programme CFD annonce cette démo. Une règle Outlook suffit :
 Outlook, Paramètres, Courrier, Règles, Ajouter une règle. Condition : l'objet contient « Facture ». Action : déplacer vers le dossier « Factures fournisseurs ».
-On envoie un e-mail de test : il se range seul. C'est l'occasion de dire ce qu'elle ne fait pas : elle ne lit pas la facture, elle suit une règle fixe.
+On envoie un e-mail de test : il se range seul. Ce qu'elle ne fait pas : elle ne lit pas la facture, elle suit une règle fixe.
 
 ## 5. La veille de la séance
 

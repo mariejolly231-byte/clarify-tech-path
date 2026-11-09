@@ -1246,3 +1246,4 @@ a.src-link:hover { text-decoration: underline; text-decoration-thickness: 1px; t
 .sat-qr { width: 150px; height: 150px; flex: none; }
 .sat p { font-size: 22px; line-height: 1.35; max-width: 420px; }
 .sat b { display: block; font-family: var(--font-hand); font-weight: 400; font-size: 30px; color: var(--teal); }
+.err-table td:nth-child(2) { text-align: left; } .err-table th:nth-child(n+3) { text-align: right; }
