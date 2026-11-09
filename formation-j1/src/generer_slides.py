@@ -358,19 +358,8 @@ slide(f'''    <p class="eyebrow">Retour sur mars</p>
         <li>Plus de pratique sur vos outils : Outlook, Excel</li>
         <li class="frag">Alors aujourd'hui, chaque notion part d'une de vos situations</li></ul></div>
     </div>
-    <button class="btn-act md-open" data-act="minideck"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H4z M9 20h6 M12 16v4"/></svg>Rappel : Copilot, comment ça marche</button>''', seq=1, section="9h00 · Point de départ",
- notes="Faire raconter par ceux qui étaient là, pour ceux qui n'y étaient pas. La colonne de droite reprend les retours d'évaluation de mars : le dire, c'est montrer qu'on les a écoutés. Le bouton ouvre un rappel en trois écrans sur Copilot (comment il fonctionne, ce que change la licence, ce que Microsoft garantit sur les données) : à ouvrir si le groupe en a besoin, Échap pour revenir.")
-
-slide(f'''    <p class="eyebrow">Retour sur mars</p>
-    <h2>Vos situations, <span class="mark">celles de mars</span></h2>
-    <div class="cols--4" style="display:grid;margin-top:30px;align-items:start">
-      <div class="card sk fill-sky rise"><h3>{icon("cart")}Commerce</h3><ul><li>Commissions des vendeurs itinérants <span class="hand t-est">4 h</span></li><li>Contrôle des études de prix, vente et reprise</li><li>Estimation des reprises</li><li>Ciblage de clients pour les démonstrations</li><li>Trouver un produit chez un fournisseur</li></ul></div>
-      <div class="card sk fill-lav rise"><h3>{icon("ledger")}RH et compta</h3><ul><li>Variables de salaire <span class="hand t-est">1,5 à 2 j</span></li><li>Vérification des paiements clients pour les commissions</li><li>Trésorerie quotidienne, factures reçues par e-mail</li><li>Saisie des pointages, du papier au logiciel</li></ul></div>
-      <div class="card sk fill-mint rise"><h3>{icon("mega")}Communication</h3><ul><li>Planning de communication <span class="hand t-est">4 j par mois</span></li><li>Optimisation des bases de données pour la communication</li></ul></div>
-      <div class="card sk fill-teal rise"><h3>{icon("file")}Direction</h3><ul><li>Création de tableaux de bord</li><li>Analyse des tableaux de bord</li><li>Présentations PowerPoint</li></ul></div>
-    </div>
-    <p class="small" style="margin-top:20px">Temps estimés par l'équipe en mars, à préciser dans la grille d'audit.</p>''', seq=1, section="9h00 · Point de départ",
- notes="C'est le fil rouge de la journée : chaque exemple viendra de cette liste. Demander ce qui a bougé depuis mars.")
+    <div class="go-row mt"><button class="btn-act md-open" data-act="minideck" data-target="md-mars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Les situations de mars</button><button class="btn-act md-open" data-act="minideck"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H4z M9 20h6 M12 16v4"/></svg>Rappel : Copilot, comment ça marche</button></div>''', seq=1, section="9h00 · Point de départ",
+ notes="Faire raconter par ceux qui étaient là, pour ceux qui n'y étaient pas. Le bouton « Les situations de mars » ouvre la liste par pôle, avec les temps estimés : c'est le fil rouge de la journée, chaque exemple viendra de là. La colonne de droite reprend les retours d'évaluation de mars : le dire, c'est montrer qu'on les a écoutés. Le bouton ouvre un rappel en trois écrans sur Copilot (comment il fonctionne, ce que change la licence, ce que Microsoft garantit sur les données) : à ouvrir si le groupe en a besoin, Échap pour revenir.")
 
 pi = "".join(f'<div class="postit fill-{c}" contenteditable="true" data-k="mars-{i}" data-ph="{ph}"></div>' for i, (c, ph) in enumerate([("sky", "j'ai retenu…"), ("lemon", "j'utilise…"), ("mint", "j'ai retenu…"), ("blush", "ça a coincé…"), ("lemon", "j'utilise…"), ("sky", "ça a coincé…"), ("mint", "j'ai retenu…"), ("blush", "j'aimerais…")]))
 tf = [("L'IA générative va chercher la bonne réponse dans une base de données.", "Faux", "Elle prédit la suite de texte la plus probable."),
@@ -699,7 +688,7 @@ NODES = {
     "root": (0, 200, 150, 100, "Une tâche à réaliser", "", 1),
     "q1": (175, 185, 205, 130, "Vais-je la refaire souvent, de la même façon ?", "", 1),
     "qc": (410, 61, 190, 80, "De quel contexte a-t-elle besoin ?", "", 2),
-    "qj": (410, 219, 190, 96, "Faut-il lire, interpréter ou décider ?", "", 3),
+    "qj": (410, 219, 190, 96, "Règles stables, rien à interpréter ?", "", 3),
     "qa": (630, 296, 190, 84, "Doit-elle se lancer seule, à heure fixe ?", "", 4),
     "qt": (848, 366, 156, 84, "Consignes et documents partagés ?", "", 5),
 }
@@ -707,7 +696,7 @@ LEAVES = [
     ("prompt", 0, "Une demande", "Tout tient dans l'échange ou un fichier", "mint", 2),
     ("notes", 70, "Un bloc-notes", "Plusieurs documents à croiser", "mint", 2),
     ("cowork", 140, "Cowork, à vérifier", "Plusieurs étapes, plusieurs applications", "blush", 2),
-    ("flux", 236, "Une automatisation simple", "Workflows Copilot, règle Outlook", "lav", 3),
+    ("flux", 236, "Une automatisation simple", "Une règle Outlook, des règles fixes", "lav", 3),
     ("plan", 306, "Une demande planifiée", "Elle se relance seule, chaque jour ou semaine", "blush", 4),
     ("req", 376, "Une requête enregistrée", "Ta méthode, rappelée quand tu veux", "mint", 5),
     ("agent", 446, "Un agent Copilot", "Agent Builder : un assistant dédié, partagé", "mint", 5),
@@ -720,7 +709,7 @@ def _leaf_y(name):
     return next(y for n, y, *_ in LEAVES if n == name) + LH / 2
 EDGES = [("root", None, "q1", "", 1), ("q1", None, "qc", "non", 2), ("q1", None, "qj", "oui", 3),
          ("qc", "prompt", None, "", 2), ("qc", "notes", None, "", 2), ("qc", "cowork", None, "", 2),
-         ("qj", "flux", None, "non", 3), ("qj", None, "qa", "oui", 4),
+         ("qj", "flux", None, "oui", 3), ("qj", None, "qa", "non", 4),
          ("qa", "plan", None, "oui", 4), ("qa", None, "qt", "non", 5),
          ("qt", "req", None, "non", 5), ("qt", "agent", None, "oui", 5)]
 def _edge(src, leaf, node, label):
@@ -755,7 +744,7 @@ slide(f'''    <h2>Quelle brique <span class="mark">pour quelle tâche ?</span></
       <p class="tree-legend"><span><i class="lg-mint"></i>assistant</span><span><i class="lg-lav"></i>automatisation</span><span><i class="lg-blush"></i>agent</span></p>
       <p class="tree-gate tree-gate--end frag" data-step="6"><b class="hand">Et si elle se trompe ?</b>Erreur coûteuse (client, paie, argent) : un humain valide chaque résultat, et on commence simple.</p>
     </div>''', seq=3, section="11h00 · Quand utiliser quoi",
- notes="Un clic par branche, tout dans l'environnement Copilot. D'abord la question zéro. Puis : vais-je refaire cette tâche souvent, de la même façon ? Non : c'est un besoin ponctuel, on choisit selon le contexte (une demande, un bloc-notes, ou Cowork pour plusieurs étapes, selon la licence). Oui : faut-il lire, interpréter ou décider ? Non : des règles fixes, une automatisation simple (Workflows dans Copilot, une règle Outlook). Oui : doit-elle se lancer seule à heure fixe ? Oui : une demande planifiée, c'est l'horaire qui la déclenche, on est déjà vers l'agent. Non : faut-il des consignes et des documents partagés avec l'équipe ? Oui : un agent Copilot, au sens de la journée un assistant dédié. Non : une requête enregistrée suffit. Les couleurs rappellent les trois logiques. Dernière question, pour toutes les branches : et si elle se trompe ? Si l'erreur coûte cher, un humain valide chaque résultat, et on commence en mode assistant avant d'automatiser. Ce sont les quatre questions du programme : répétitive, règles stables, interpréter ou décider, en cas d'erreur. C'est comme choisir l'outil à atteler : on regarde d'abord le travail à faire, pas l'outil le plus récent.")
+ notes="Un clic par branche, tout dans l'environnement Copilot. D'abord la question zéro. Puis : vais-je refaire cette tâche souvent, de la même façon ? Non : c'est un besoin ponctuel, on choisit selon le contexte (une demande, un bloc-notes, ou Cowork pour plusieurs étapes, selon la licence). Oui : les règles sont-elles stables, sans rien à interpréter ? Oui : une automatisation simple, par exemple une règle Outlook. Non, il faut lire, interpréter ou décider : doit-elle se lancer seule à heure fixe ? Oui : une demande planifiée, c'est l'horaire qui la déclenche, on est déjà vers l'agent. Non : faut-il des consignes et des documents partagés avec l'équipe ? Oui : un agent Copilot, au sens de la journée un assistant dédié. Non : une requête enregistrée suffit. Les couleurs rappellent les trois logiques. Dernière question, pour toutes les branches : et si elle se trompe ? Si l'erreur coûte cher, un humain valide chaque résultat, et on commence en mode assistant avant d'automatiser. Ce sont les quatre questions du programme : répétitive, règles stables, interpréter ou décider, en cas d'erreur. C'est comme choisir l'outil à atteler : on regarde d'abord le travail à faire, pas l'outil le plus récent.")
 
 slide(f'''    <h2>Une situation, <span class="mark mark--lav">l'arbre en direct</span></h2>
     <div class="decider decider--tree">
@@ -796,7 +785,7 @@ slide(f'''    <div class="stack">
         <div class="alert alert--compact sk" role="note">{icon("alert")}<div><p class="alert-title">Vigilance données</p><p>On décrit la tâche, pas son contenu : aucune donnée réelle.</p></div></div>
       </div>
     </div>''', seq=3, section="11h00 · Quand utiliser quoi",
- notes="Atelier avant le déjeuner, en sous-groupes par pôle. Chaque groupe reprend les situations de mars (slide 10) et les passe dans l'arbre de la slide 30, sur papier ou à l'oral. On ne cherche pas encore l'outil exact : on note juste où la situation tombe. La mise en commun suit directement, sur la slide suivante : on passe les situations dans l'arbre, à l'écran, avant le déjeuner.")
+ notes="Atelier avant le déjeuner, en sous-groupes par pôle. Chaque groupe reprend les situations de mars (slide 9) et les passe dans l'arbre de la slide 29, sur papier ou à l'oral. On ne cherche pas encore l'outil exact : on note juste où la situation tombe. La mise en commun suit directement, sur la slide suivante : on passe les situations dans l'arbre, à l'écran, avant le déjeuner.")
 
 def chips(pole, items):
     return "".join(f'<button class="chip chip--tree sk sk--thin" data-k="{pole}-{i}"><span>{t}</span><span class="verdict">à passer dans l&#39;arbre</span></button>' for i, t in enumerate(items))
@@ -955,14 +944,36 @@ slide('''    <p class="eyebrow">Limites</p>
     </div>''', seq=5, section="15h15 · Limites, investissement, choix",
  notes="Faire apparaître ligne par ligne, en alternant les deux colonnes si on veut faire réagir.")
 
-INVEST = [("Le temps", "fill-mint", ["Quelques semaines d'essais pour la prise en main", "Écrire les consignes, choisir les documents", "Relire et corriger : jusqu'à 40 % du temps gagné"]),
-          ("L'accompagnement", "fill-mint", ["Un référent par pôle qui fait vivre l'outil", "Des règles simples, partagées", "Du temps de formation, comme ces cinq jours"]),
-          ("Le budget", "fill-mint", ["Copilot Chat : inclus avec Microsoft 365", "Copilot dans Word, Excel, Outlook : une licence par personne", "Agents qui travaillent seuls : facturés à l'usage"])]
-inv = "".join(f'<div class="card sk {c} frag"><h3>{t}</h3><ul>' + "".join(f"<li>{x}</li>" for x in xs) + "</ul></div>" for t, c, xs in INVEST)
+# L'investissement réel, en iceberg : ce qu'on voit (la licence, l'outil) et ce qui fait la valeur (le temps, la méthode)
+ICE_ABOVE = [("La licence Copilot", "Votre entreprise la paie, par utilisateur. Copilot Chat seul est inclus avec Microsoft 365."),
+             ("L'outil en démo", "La demande, l'agent : ça marche en cinq minutes devant vous.")]
+ICE_BELOW = [("Le temps de prise en main", "Quelques semaines d'essais, pas une après-midi"),
+             ("La méthode", "Cadrer le besoin, écrire les consignes, choisir les bons documents"),
+             ("La relecture", "Jusqu'à 40 % du temps gagné peut repartir en vérifications"),
+             ("Un référent par pôle", "Quelqu'un qui fait vivre l'outil et répond aux questions"),
+             ("Des règles partagées", "Ce qu'on a le droit de saisir, qui valide, comment on le signale"),
+             ("La formation", "Comme ces cinq jours : apprendre en le faisant sur ses propres cas")]
+ICE_SVG = """<svg class="iceberg" viewBox="0 0 520 620" aria-hidden="true">
+  <rect x="0" y="176" width="520" height="444" fill="#D5EAEC" opacity=".45"/>
+  <path d="M0 176 C 80 168, 160 186, 260 176 S 440 166, 520 180" fill="none" stroke="#0B4F5C" stroke-width="3.5"/>
+  <path d="M170 176 L222 92 L246 118 L282 46 L330 128 L352 110 L372 176 Z" fill="#FFFFFF" stroke="#2A2F33" stroke-width="4" stroke-linejoin="round" filter="url(#rough)"/>
+  <path d="M170 176 L372 176 L452 300 L430 430 L330 580 L196 520 L110 360 Z" fill="#9FCBD1" opacity=".55"/>
+  <path d="M170 176 L110 360 L196 520 L330 580 L430 430 L452 300 L372 176" fill="none" stroke="#2A2F33" stroke-width="4" stroke-linejoin="round" filter="url(#rough)"/>
+</svg>"""
+above = "".join(f'<p class="ice-i rise"><b class="hand">{t}</b>{d}</p>' for t, d in ICE_ABOVE)
+below = "".join(f'<p class="ice-i frag"><b class="hand">{t}</b>{d}</p>' for t, d in ICE_BELOW)
 slide(f'''    <h2>Ce que ça demande <span class="mark">vraiment</span></h2>
-    <div class="cols--3 mt invest" style="display:grid;align-items:stretch">{inv}</div>
-    {tip("Début 2026, seules 31 % des entreprises qui utilisent l'IA générative constatent déjà un gain de productivité.", "Banque de France, bulletin n° 266, septembre 2026", "frag mt")}''', seq=5, section="15h15 · Limites, investissement, choix",
- notes="L'investissement réel, prévu au programme : temps, accompagnement, budget. Le gain n'est pas automatique : il vient quand on a investi dans la méthode. Licences : Copilot Business est annoncé autour de 18 € HT par utilisateur et par mois au tarif catalogue 2026 (Le Monde Informatique, à vérifier avec le revendeur de l'entreprise). Le chiffrage exact se fait avec l'informatique, selon les licences déjà en place. Le 40 % vient de l'étude Workday de janvier 2026, déjà vue au chapitre 2.")
+    <div class="ice">
+      <div class="ice-art">{ICE_SVG}</div>
+      <div class="ice-txt">
+        <p class="ice-h">Ce que l'on voit</p>
+        <div class="ice-above">{above}</div>
+        <p class="ice-h ice-h--below">Ce qui fait la valeur : moins visible, plus long à construire</p>
+        <div class="ice-below">{below}</div>
+      </div>
+    </div>
+''', seq=5, section="15h15 · Limites, investissement, choix",
+ notes="L'investissement réel, prévu au programme : en temps de prise en main et d'accompagnement, et en budget. Au-dessus de l'eau, ce qu'on voit : la licence, que l'entreprise paie par utilisateur, et l'outil qui marche en démo. En dessous, ce qui fait que ça marche vraiment, et qui prend du temps. Le gain n'est pas automatique : la Banque de France montre que début 2026, seules 31 % des entreprises qui utilisent l'IA générative constatent déjà un gain de productivité (bulletin n° 266, septembre 2026). Le 40 % vient de l'étude Workday de janvier 2026, vue au chapitre 2. Le chiffrage exact des licences se fait avec l'informatique.")
 
 checks = ["Le besoin est-il clair et décrit ?", "L'outil est-il déjà dans notre environnement ?", "Où vont nos données ?", "Qui le fera vivre après la formation ?", "Comment saura-t-on que ça marche ?", "Que se passe-t-il s'il se trompe ?"]
 ck = "".join(f'<li class="rise"><button class="sk sk--thin" data-k="choix-{i}" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>{c}</span></li>' for i, c in enumerate(checks))
@@ -1005,6 +1016,24 @@ slide(f'''    <h2>L'humain valide, <span class="mark">trois règles dès demain<
     <p class="small" style="margin-top:18px">Le cadre RGPD, légal, environnemental et éthique est traité en détail au jour 5.</p>''',
  seq=6, section="16h00 · À quoi faire attention",
  notes="Un seul message pour ce chapitre : l'humain valide, et trois règles simples dès demain. Le bon à tirer avant d'imprimer un flyer : même quand la maquette semble parfaite, quelqu'un relit et signe avant l'envoi à l'imprimeur. La boucle est la clé : relire n'est pas une perte de temps, c'est la condition pour déléguer. Chiffre utile à l'oral : seuls 26 % des utilisateurs de l'IA au travail disent que leur direction est clairement alignée sur l'IA (Microsoft, Work Trend Index 2026), d'où l'intérêt de règles simples et partagées. La troisième règle est une proposition : la valider avec la référente IA avant la séance.")
+
+# Exercice : trouver les erreurs dans une étude de prix préparée par l'IA (données fictives)
+ERR_LINES = [("Tracteur 120 ch, version confort", "1", "78 400,00", "", "78 400,00", ""),
+             ("Chargeur frontal avec outil", "1", "9 850,00", "", "9 850,00", ""),
+             ("Remise fidélité prévue par la grille tarifaire", "", "", "8 %", "− 7 060,00", "e1"),
+             ("Reprise : tracteur 2012, 6 000 heures", "1", "", "", "− 21 500,00", ""),
+             ("Total HT", "", "", "", "61 190,00", "e2")]
+rows_e = "".join(f'<tr class="err-row{" err-row--" + k if k else ""}"><td>{a}</td><td>{b}</td><td>{c}</td><td>{d}</td><td>{e}</td></tr>' for a, b, c, d, e, k in ERR_LINES)
+slide(f'''    <h2>Exercice : <span class="mark">trouvez les erreurs</span></h2>
+    <p class="howto">Une étude de prix préparée par Copilot, données fictives. Elle a l'air parfaite. Deux erreurs s'y cachent.</p>
+    <div class="err-wrap mt">
+      <table class="err-table"><thead><tr><th>Désignation</th><th>Qté</th><th>Prix unitaire HT</th><th>Remise</th><th>Total HT</th></tr></thead><tbody>{rows_e}</tbody></table>
+      <div class="err-side">
+        <p class="err-claim">« Étude conforme à la grille tarifaire 2026. Prête à être envoyée au client. »</p>
+        <div class="err-ans frag"><p><b>1. Une règle inventée.</b>La grille ne prévoit aucune remise fidélité : la source est imaginaire.</p><p><b>2. Un calcul faux.</b>78 400 + 9 850 − 7 060 − 21 500 = 59 690 €, pas 61 190 €.</p><p><b>Et la phrase finale :</b>« prête à être envoyée » n'est pas à l'IA de le décider.</p></div>
+      </div>
+    </div>''', seq=6, section="16h00 · À quoi faire attention",
+ notes="Exercice de 10 minutes, par deux. Distribuer ou projeter l'étude, laisser chercher, puis révéler. Erreur 1 : une hallucination de source, la remise fidélité n'existe pas dans la grille. Erreur 2 : un calcul faux, le total réel est 59 690 euros HT. Point 3 : l'IA s'arroge une décision qui revient au commercial. Message : la relecture n'est pas une formalité, et elle se fait avec les documents sources sous les yeux. À remplacer par une étude tirée du corpus fictif Lagarrigue si tu préfères, en gardant deux erreurs du même type.")
 
 chapter_slide(7)
 
@@ -1084,48 +1113,19 @@ slide('''    <p class="eyebrow">Calendrier</p>
     </div>''', seq=7, section="16h30 · Lancement de l'intersession",
  notes="Les fêtes de fin d'année sont dans l'intersession : le point de mi-décembre évite de perdre le fil.")
 
-# Message clé de fin : l'iceberg. Ce qui se voit (l'outil, ce qu'on a créé) et ce qui fait la différence.
-ICE_ABOVE = [("Les outils", "ChatGPT, Claude, Copilot : faciles à obtenir, accessibles à tous"), ("Ce qu'on a créé", "La demande, l'agent, l'automatisation qui marche en démo")]
-ICE_BELOW = [("Cadrer le besoin", "Partir de la tâche et du temps qu'elle coûte, pas de l'outil"),
-             ("La méthode", "Des consignes claires, les bons documents, le bon contexte"),
-             ("L'esprit critique", "Vérifier les faits, les chiffres et les sources"),
-             ("La sécurité", "Savoir ce qu'on a le droit de saisir, et où vont les données"),
-             ("Les garde-fous testés", "Un humain valide, rien d'irréversible, et on le vérifie"),
-             ("Le temps", "Prendre en main, tester, corriger, faire adopter par l'équipe")]
-ICE_SVG = """<svg class="iceberg" viewBox="0 0 520 620" aria-hidden="true">
-  <rect x="0" y="176" width="520" height="444" fill="#D5EAEC" opacity=".45"/>
-  <path d="M0 176 C 80 168, 160 186, 260 176 S 440 166, 520 180" fill="none" stroke="#0B4F5C" stroke-width="3.5"/>
-  <path d="M170 176 L222 92 L246 118 L282 46 L330 128 L352 110 L372 176 Z" fill="#FFFFFF" stroke="#2A2F33" stroke-width="4" stroke-linejoin="round" filter="url(#rough)"/>
-  <path d="M170 176 L372 176 L452 300 L430 430 L330 580 L196 520 L110 360 Z" fill="#9FCBD1" opacity=".55"/>
-  <path d="M170 176 L110 360 L196 520 L330 580 L430 430 L452 300 L372 176" fill="none" stroke="#2A2F33" stroke-width="4" stroke-linejoin="round" filter="url(#rough)"/>
-</svg>"""
-above = "".join(f'<p class="ice-i rise"><b class="hand">{t}</b>{d}</p>' for t, d in ICE_ABOVE)
-below = "".join(f'<p class="ice-i frag"><b class="hand">{t}</b>{d}</p>' for t, d in ICE_BELOW)
-slide(f'''    <h2>Ce qui fait <span class="mark">vraiment la différence</span></h2>
-    <div class="ice">
-      <div class="ice-art">{ICE_SVG}</div>
-      <div class="ice-txt">
-        <p class="ice-h">Ce que l'on voit</p>
-        <div class="ice-above">{above}</div>
-        <p class="ice-h ice-h--below">Ce qui fait la valeur : moins visible, plus long à construire</p>
-        <div class="ice-below">{below}</div>
-      </div>
-    </div>
-    <p class="ice-msg frag">L'outil ne fait pas le résultat. C'est la méthode, la sécurité et le temps qu'on y met.</p>''', seq=7, section="16h30 · Lancement de l'intersession",
- notes="Message clé de la journée, juste avant le bilan. Au-dessus de l'eau : ce qu'on voit, les outils et ce qu'on a construit en démo. En dessous : ce qui fait que ça marche vraiment, et qui prend du temps. Faire le lien avec l'intersession : la grille d'audit, c'est justement le travail sous l'eau. Le coût des licences se chiffre avec l'informatique, au cas par cas. 54 % des entreprises qui n'utilisent pas l'IA citent le manque d'expertise (Insee Première n° 2120, juillet 2026).")
-
 goals = ["Je situe l'IA générative et ses limites actuelles", "Je distingue assistant, automatisation et agent", "Je mesure l'investissement que chacun demande", "J'ai une méthode pour observer mon propre travail"]
 gl = "".join(f'<li class="frag"><button class="sk sk--thin" data-k="but-{i}" aria-pressed="false" aria-label="Cocher"><svg viewBox="0 0 34 34"><path d="M6 18 L14 26 L29 8"/></svg></button><span>{g}</span></li>' for i, g in enumerate(goals))
 slide(f'''    <p class="eyebrow">Ce soir</p>
     <h2>Ce que vous savez <span class="mark mark--teal">faire maintenant</span></h2>
     {art("sommet-samoyede", "Le samoyède assis au sommet, il regarde la vue.", (90, 150, 470, 520))}
     <ul class="checks mt">{gl}</ul>''', seq=7, section="16h30 · Lancement de l'intersession",
- notes="Faire cocher par le groupe. Revenir sur les attentes notées au tour de table du matin.")
+ notes="Tour de table de clôture : chacun dit en une phrase ce qu'il sait faire maintenant et ce qu'il va observer dans son travail d'ici janvier. Cocher au fur et à mesure. Revenir sur les attentes notées au tour de table du matin. Ce tour de table sert aussi d'évaluation des acquis.")
 
 slide(f'''    <div class="lockup rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><div><p class="lockup-name">Summit Flow</p><p class="lockup-sub">Marie Jolly · contact@summitflow.fr · summitflow.fr</p></div></div>
     <div class="cover-body">
       <h1 class="rise">Merci, et <span class="mark">bonne observation</span></h1>
       <p class="lead rise">D'ici le 22 janvier, on observe, on note, on remplit la grille.</p>
+      <div class="sat rise"><figure class="qr qr--todo sat-qr"><p>QR code<br>à ajouter</p></figure><p><b>Votre avis sur la journée</b>Deux minutes avant de partir : le questionnaire de satisfaction.</p></div>
     </div>
     {art("observation-samoyede", "Le samoyède renifle des traces dans la neige, un carnet ouvert à côté.", (40, 0, 980, 640), COVER_RIDGE)}''', cls="slide--cover slide--full", section="Fin du jour 1")
 

@@ -158,7 +158,7 @@
     q1: ["Vais-je refaire cette tâche souvent, de la même façon ?", "qj", "qc"],
     qc: ["Tout le nécessaire tient-il dans la conversation ou dans un fichier ?", "prompt", "qd"],
     qd: ["Faut-il croiser plusieurs documents d'un même dossier ?", "notes", "cowork"],
-    qj: ["Faut-il lire, interpréter ou décider à une étape ?", "qa", "flux"],
+    qj: ["Les règles sont-elles stables, sans rien à lire, interpréter ou décider ?", "flux", "qa"],
     qa: ["Doit-elle se lancer seule, à heure fixe, sans que tu la relances ?", "plan", "qt"],
     qt: ["Faut-il des consignes et des documents à elle, partagés avec l'équipe ?", "agent", "req"],
   };
@@ -168,7 +168,7 @@
     prompt: ["Une demande", "Assistant", "mint", "Un besoin ponctuel : tout le contexte tient dans l'échange ou un fichier joint.", "Copilot Chat : une demande, avec un fichier joint si besoin", "assistant", "assistant · Copilot Chat"],
     notes: ["Un bloc-notes", "Notebook", "mint", "Un dossier de documents à croiser pour cette tâche.", "Copilot Notebooks : un bloc-notes avec les documents du dossier", "notebook", "notebook · Notebooks"],
     cowork: ["Cowork", "Agent, selon la licence", "blush", "Plusieurs étapes et plusieurs applications : Copilot enchaîne pour toi.", "Copilot Cowork, s'il est activé chez vous", "agent", "agent · Cowork"],
-    flux: ["Une automatisation simple", "Automatisation", "lav", "Répétitif, des règles fixes, sans interprétation : une suite d'actions suffit.", "Workflows dans Copilot, ou une règle Outlook", "automatisation", "automatisation · Workflows"],
+    flux: ["Une automatisation simple", "Automatisation", "lav", "Répétitif, des règles fixes, sans interprétation : une suite d'actions suffit.", "Une règle Outlook ; au-delà, à voir avec l'informatique", "automatisation", "automatisation · règle Outlook"],
     plan: ["Une demande planifiée", "Agent : c'est l'horaire qui la lance", "blush", "Copilot la relance seule chaque jour ou chaque semaine et t'envoie le résultat.", "Copilot Chat : une demande planifiée", "agent", "agent · demande planifiée"],
     req: ["Une requête enregistrée", "Assistant", "mint", "Ta méthode, gardée dans ta galerie et rappelée quand tu en as besoin.", "Copilot Chat : une requête enregistrée dans ta galerie", "assistant", "assistant · requête enregistrée"],
     agent: ["Un agent Copilot", "Assistant dédié", "mint", "Des consignes et des documents, réutilisables par toute l'équipe.", "Agent Builder : créer un agent dans Copilot", "assistant", "assistant · agent Copilot"],
