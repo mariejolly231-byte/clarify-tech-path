@@ -41,10 +41,10 @@ Hero montagne pyrénéenne, palette teal, les 3 offres (audit, automatisation, f
 ## Architecture SEO
 Pages (les requêtes cibles sont des hypothèses à valider, aucun volume de recherche n'est établi) :
 - `/` : accueil, positionnement PME industrielles Occitanie.
-- `/audit-ia-process-pme-industrielles` : audit IA et process terrain.
-- `/automatisation-no-code-pme` : Make, n8n, agents IA, suppression des ressaisies.
-- `/formation-no-code-ia` : formation sur mesure, Qualiopi/CPF selon situation.
-- `/sous-traitants-aeronautiques` : APQP, AS9100, PPAP, conformité des livrables. Page différenciante.
+L'offre tient en DEUX AXES (décision de Marie) :
+- Axe 1 `/formation-no-code-ia` : formation no-code et IA (ateliers, sur mesure, sous-traitance pour organismes de formation), OPCO/CPF selon sessions.
+- Axe 2 `/audit-automatisation-pme-industrielles` : audit IA et process terrain, puis mise en place d'outils (automatisations Make/n8n, applications no-code, agents IA) et passation.
+- Spécialité `/sous-traitants-aeronautiques` : APQP, AS9100, PPAP, conformité des livrables. S'appuie sur l'axe 2. Page différenciante.
 - `/occitanie-toulouse` : UNE seule page locale. Pas une page par ville (doorway pages sanctionnées).
 - `/a-propos`, `/ressources` (articles), `/contact`.
 - `/mentions-legales`, `/politique-confidentialite` : conserver ces URL, elles existent déjà.
@@ -63,7 +63,7 @@ Les mentions légales exigent une adresse professionnelle : prévoir une domicil
 - Bandeau cookies conforme : aucune mesure d'audience sans accord (ou solution sans cookie).
 
 ## Points à challenger avec Marie avant de construire
-1. Calculateur de rentabilité : Marie le GARDE (décision prise). Il doit rester sur la page d'accueil ou sur la page automatisation. Réserve de cohérence avec la charte : mettre une mention "estimation indicative, à valider ensemble lors de l'audit" et des valeurs par défaut modestes, pour éviter l'effet "chiffre magique".
+1. Calculateur de rentabilité : Marie le GARDE (décision prise). Il doit rester sur la page d'accueil ou sur la page de l'axe 2. Réserve de cohérence avec la charte : mettre une mention "estimation indicative, à valider ensemble lors de l'audit" et des valeurs par défaut modestes, pour éviter l'effet "chiffre magique".
 2. Qualiopi : la mention actuelle repose sur la certification d'ALTITUDE. Décision reportée par Marie. Garder le bloc tel quel pour l'instant, dans un composant isolé facile à modifier.
 3. Agrément CII : décision reportée par Marie. Même consigne : composant isolé, facile à modifier ou à retirer.
 

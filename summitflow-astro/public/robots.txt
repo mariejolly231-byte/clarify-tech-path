@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.summitflow.fr/sitemap-index.xml
+
+# Blocs spécifiques
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /

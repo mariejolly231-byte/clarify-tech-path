@@ -1,0 +1,133 @@
+---
+import '@fontsource-variable/outfit';
+import '@fontsource-variable/work-sans';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Fil d'Ariane hors accueil : [{ name, path }] */
+  breadcrumbs?: { name: string; path: string }[];
+  jsonLd?: Record<string, unknown>[];
+  ogImage?: string;
+  /** L'accueil commence par un hero sombre plein écran : header transparent au départ */
+  heroSombre?: boolean;
+}
+
+const { title, description, breadcrumbs = [], jsonLd = [], ogImage = '/og-image.png', heroSombre = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', SITE.url).href;
+
+const organisation = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${SITE.url}/#organisation`,
+  name: SITE.name,
+  url: SITE.url,
+  logo: `${SITE.url}/favicon.png`,
+  image: `${SITE.url}/og-image.png`,
+  email: SITE.email,
+  slogan: SITE.promesse,
+  description:
+    'Audit IA, automatisation no-code, agents IA et formation sur mesure pour PME industrielles et techniques en Occitanie et partout en France à distance.',
+  // Vie privée : pas d'adresse postale, pas de téléphone, pas de coordonnées GPS.
+  areaServed: [
+    { '@type': 'AdministrativeArea', name: 'Occitanie' },
+    { '@type': 'City', name: 'Toulouse' },
+    { '@type': 'Country', name: 'France' },
+  ],
+  founder: { '@id': `${SITE.url}/#marie-jolly` },
+  sameAs: [SITE.linkedin],
+};
+
+const personne = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${SITE.url}/#marie-jolly`,
+  name: 'Marie Jolly',
+  jobTitle: 'Fondatrice de Summit Flow, ingénieure industrielle',
+  worksFor: { '@id': `${SITE.url}/#organisation` },
+  alumniOf: 'IMT Mines Albi',
+  knowsAbout: ['Automatisation', 'No-code', 'Agents IA', 'APQP', 'AS9100', 'PPAP', 'Formation professionnelle'],
+  sameAs: [SITE.linkedin],
+};
+
+const ariane =
+  breadcrumbs.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [{ name: 'Accueil', path: '/' }, ...breadcrumbs].map((b, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: b.name,
+          item: new URL(b.path, SITE.url).href,
+        })),
+      }
+    : null;
+
+const schemas = [organisation, personne, ...(ariane ? [ariane] : []), ...jsonLd];
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#0e4f4b" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, SITE.url).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <slot name="head" />
+    {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+  </head>
+  <body class={heroSombre ? 'hero-sombre' : ''}>
+    <a
+      href="#contenu"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-paper focus:px-4 focus:py-2 focus:text-teal-950"
+      >Aller au contenu</a
+    >
+    <Header transparent={heroSombre} />
+    <main id="contenu">
+      {
+        breadcrumbs.length > 0 && (
+          <nav aria-label="Fil d’Ariane" class="container-sf pt-28 text-sm text-ink-muted">
+            <ol class="flex flex-wrap gap-2">
+              <li>
+                <a href="/" class="underline-offset-4 hover:underline">Accueil</a>
+              </li>
+              {breadcrumbs.map((b, i) => (
+                <li class="flex gap-2">
+                  <span aria-hidden="true">/</span>
+                  {i === breadcrumbs.length - 1 ? (
+                    <span aria-current="page">{b.name}</span>
+                  ) : (
+                    <a href={b.path} class="underline-offset-4 hover:underline">{b.name}</a>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,58 @@
+---
+/**
+ * Bloc certifications, ISOLÉ volontairement (décisions reportées par Marie) :
+ * - Qualiopi : la mention repose sur la certification d'ALTITUDE. À confirmer.
+ * - Agrément CII : à confirmer. Passer `cii={false}` pour le retirer partout.
+ * Contenu repris tel quel du site actuel.
+ */
+import { Image } from 'astro:assets';
+import qualiopi from '../assets/qualiopi.png';
+import mcf from '../assets/mon-compte-formation.png';
+import franceNum from '../assets/activateur-france-num.png';
+
+interface Props { cii?: boolean; qualiopi?: boolean }
+const { cii = true, qualiopi: afficherQualiopi = true } = Astro.props;
+---
+
+<ul class="grid gap-4 sm:grid-cols-2">
+  {afficherQualiopi && (
+    <li class="flex items-center gap-5 rounded-2xl border border-line bg-white/60 p-5">
+      <a href="/certificat-qualiopi-altitude.pdf" class="flex h-20 w-28 shrink-0 items-center justify-center rounded-lg border border-line bg-white p-1" aria-label="Télécharger le certificat Qualiopi d’ALTITUDE (PDF)">
+        <Image src={qualiopi} alt="" width={200} class="max-h-full w-auto object-contain" />
+      </a>
+      <div>
+        <p class="font-semibold">Certification Qualiopi d’ALTITUDE</p>
+        <p class="text-sm text-ink-muted">Processus certifié. <a href="/certificat-qualiopi-altitude.pdf" class="text-teal-800 underline underline-offset-4">Voir le certificat</a></p>
+      </div>
+    </li>
+  )}
+  <li class="flex items-center gap-5 rounded-2xl border border-line bg-white/60 p-5">
+    <div class="flex h-20 w-28 shrink-0 items-center justify-center rounded-lg bg-ink px-2">
+      <Image src={mcf} alt="" width={200} class="max-h-12 w-auto object-contain" />
+    </div>
+    <div>
+      <p class="font-semibold">Mon Compte Formation</p>
+      <p class="text-sm text-ink-muted">Mobilisation possible des droits CPF selon les sessions</p>
+    </div>
+  </li>
+  {cii && (
+    <li class="flex items-center gap-5 rounded-2xl border border-line bg-white/60 p-5">
+      <div class="flex h-20 w-28 shrink-0 items-center justify-center rounded-lg border border-line bg-white">
+        <svg class="h-10 w-10 text-teal-800" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <p class="font-semibold">Agrément CII</p>
+        <p class="text-sm text-ink-muted">Crédit Impôt Innovation : réduction fiscale sur la R&amp;D</p>
+      </div>
+    </li>
+  )}
+  <li class="flex items-center gap-5 rounded-2xl border border-line bg-white/60 p-5">
+    <div class="flex h-20 w-28 shrink-0 items-center justify-center rounded-lg border border-line bg-white p-2">
+      <Image src={franceNum} alt="" width={200} class="max-h-full w-auto object-contain" />
+    </div>
+    <div>
+      <p class="font-semibold">Activateur France Num</p>
+      <p class="text-sm text-ink-muted">Accompagnement numérique des TPE et PME</p>
+    </div>
+  </li>
+</ul>
