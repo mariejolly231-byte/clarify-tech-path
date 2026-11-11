@@ -16,8 +16,8 @@
   --color-ink-muted: #4f565c;
   --color-line: #ddd8cc;
 
-  --font-display: "Outfit Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Work Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+  --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
 
   /* Courbes d'Emil Kowalski : ease-out fort pour les entrées, ease-in-out pour ce qui bouge à l'écran */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -37,8 +37,9 @@
   }
   h1, h2, h3, h4 {
     @apply font-display text-balance;
-    line-height: 1.12;
-    letter-spacing: -0.015em;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    font-optical-sizing: auto;
   }
   p { text-wrap: pretty; }
   :focus-visible {
@@ -68,7 +69,7 @@
     .btn-ghost:hover { @apply bg-paper/10; }
   }
 
-  .eyebrow { @apply font-display text-sm font-semibold uppercase tracking-[0.14em]; }
+  .eyebrow { @apply font-sans text-[0.8rem] font-semibold uppercase tracking-[0.16em]; }
 
   /* Révélation des blocs au scroll, en CSS pur (hors thread principal).
      Sans support ou en mouvement réduit : contenu affiché directement. */
