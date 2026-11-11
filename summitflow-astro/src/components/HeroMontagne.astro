@@ -1,0 +1,179 @@
+---
+/**
+ * Hero « La montagne qui sort du brouillard ».
+ * Reprend l'effet de l'ancien site : la montagne monte au scroll pendant que le brouillard se lève.
+ * Le décor est collé à l'écran (sticky) ; le texte défile normalement par-dessus.
+ * Rien n'est animé au chargement : le H1 et l'image sont stables, seul le scroll fait bouger le décor.
+ */
+import { Image } from 'astro:assets';
+import { SITE } from '../data/site';
+import montagne from '../assets/montagne.webp';
+---
+
+<section class="hero relative" aria-labelledby="hero-titre" data-hero>
+  <!-- Décor -->
+  <div class="sticky top-0 h-svh overflow-hidden" aria-hidden="true">
+    <div class="ciel absolute inset-0"></div>
+
+    <div class="montagne-wrap absolute inset-x-0 bottom-0 flex justify-center" data-montagne>
+      <Image
+        src={montagne}
+        alt=""
+        widths={[800, 1200, 1600, 1920]}
+        sizes="(min-width: 1280px) 1500px, (min-width: 768px) 115vw, 175vw"
+        loading="eager"
+        fetchpriority="high"
+        class="montagne w-[175vw] max-w-none md:w-[115vw] xl:w-[1500px]"
+      />
+    </div>
+
+    <!-- Fondu vers la section suivante -->
+    <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-paper to-transparent"></div>
+
+    <!-- Bancs de brouillard : dérivent doucement, puis se dispersent au scroll -->
+    <div class="brume brume-1" data-brume="-1"></div>
+    <div class="brume brume-2" data-brume="1"></div>
+    <div class="brume brume-3" data-brume="-0.6"></div>
+  </div>
+
+  <!-- Contenu -->
+  <div class="relative z-10 -mt-[100svh]">
+    <div class="container-sf flex min-h-svh flex-col items-center pt-32 text-center md:pt-40">
+      <p class="eyebrow text-teal-700">Marie Jolly<span class="hidden sm:inline"> · ingénieure industrielle · Occitanie</span></p>
+      <h1 id="hero-titre" class="titre-hero mt-5 max-w-5xl text-teal-950">
+        J’<em>allège le sac</em> des PME industrielles avec l’IA et le <span class="whitespace-nowrap">no-code</span>
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-ink-muted md:text-xl">
+        Perdus dans l’IA et les nouveaux outils, comme dans un brouillard de montagne&nbsp;? Je forme vos équipes, j’audite
+        vos process et je mets en place les outils qui comptent vraiment.
+      </p>
+      <div class="mt-9 flex flex-wrap justify-center gap-3">
+        <a href={SITE.calendly} class="btn btn-dark" rel="noopener">Réserver 30 min d’échange</a>
+        <a href="#offres" class="btn btn-line">Voir les deux axes</a>
+      </div>
+    </div>
+
+    <!-- Quand la montagne est sortie du brouillard : la promesse -->
+    <div class="container-sf flex min-h-[90svh] items-end justify-center pb-[12svh] text-center">
+      <p class="promesse reveal max-w-4xl text-teal-950">
+        Moins de bordel organisé.<br />
+        <em>Plus de flux simples</em> pour que l’industrie respire.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* clip (et non hidden) : coupe le halo qui déborde sans casser le sticky */
+  .hero { overflow-x: clip; }
+  .ciel {
+    background:
+      linear-gradient(to bottom, var(--color-paper) 0%, #eef3f0 45%, #e6f1ee 75%, var(--color-paper) 100%);
+  }
+  .montagne-wrap {
+    /* Départ : le sommet affleure sous les boutons (le haut utile de l'image est à ~8 %).
+       Le calcul mélange la hauteur de l'image (%) et celle de l'écran (svh) : pas de saut au chargement. */
+    --depart: calc(92% - 6svh);
+    transform: translateY(var(--depart));
+    will-change: transform;
+  }
+  @media (min-width: 768px) {
+    .montagne-wrap { --depart: calc(92% - 28svh); }
+  }
+  .montagne { height: auto; }
+
+  .brume {
+    position: absolute;
+    left: -20%;
+    right: -20%;
+    height: 38svh;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(255 255 255 / 0.95), rgb(255 255 255 / 0));
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+  .brume-1 { bottom: 4svh; }
+  .brume-2 { bottom: -10svh; height: 30svh; }
+  .brume-3 { bottom: 18svh; height: 22svh; background: radial-gradient(closest-side, rgb(255 255 255 / 0.7), rgb(255 255 255 / 0)); }
+
+  .titre-hero {
+    font-size: clamp(2.6rem, 6.4vw, 5.6rem);
+    line-height: 1;
+  }
+  .promesse {
+    position: relative;
+    isolation: isolate;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.6vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  /* Halo de brume derrière la promesse : lisible sur la neige comme sur la roche */
+  .promesse::before {
+    content: '';
+    position: absolute;
+    inset: -2.5rem -3rem;
+    z-index: -1;
+    background: radial-gradient(closest-side, rgb(247 245 240 / 0.92), rgb(247 245 240 / 0.6) 60%, rgb(247 245 240 / 0));
+    filter: blur(6px);
+  }
+
+  /* Dérive lente du brouillard : décor permanent, très doux, coupé en mouvement réduit */
+  @media (prefers-reduced-motion: no-preference) {
+    .brume-1 { animation: derive 26s var(--ease-in-out) infinite alternate; }
+    .brume-2 { animation: derive 34s var(--ease-in-out) infinite alternate-reverse; }
+    .brume-3 { animation: derive 30s var(--ease-in-out) infinite alternate; }
+  }
+  @keyframes derive {
+    from { translate: -4% 0; }
+    to { translate: 4% 0; }
+  }
+</style>
+
+<script>
+  /**
+   * La montagne monte (translateY 42 % → 0) et le brouillard s'écarte et s'efface
+   * pendant que l'on fait défiler la hauteur du hero. Moins de 1 Ko, sans bibliothèque.
+   * On écrit transform et opacity directement sur chaque élément.
+   */
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  const reduit = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (hero) {
+    const montagne = hero.querySelector<HTMLElement>('[data-montagne]')!;
+    const brumes = [...hero.querySelectorAll<HTMLElement>('[data-brume]')];
+    let ticking = false;
+
+    const render = () => {
+      ticking = false;
+      const course = hero.offsetHeight - window.innerHeight;
+      const p = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / course));
+      // Courbe ease-out : la montagne démarre vite puis se pose en douceur
+      const e = 1 - Math.pow(1 - p, 3);
+
+      if (reduit.matches) {
+        montagne.style.transform = 'none';
+        brumes.forEach((b) => (b.style.opacity = '0'));
+        return;
+      }
+      montagne.style.transform = `translateY(calc(var(--depart) * ${(1 - e).toFixed(4)})) scale(${(1 + 0.04 * e).toFixed(4)})`;
+      brumes.forEach((b) => {
+        const sens = Number(b.dataset.brume);
+        b.style.transform = `translateX(${(sens * 30 * e).toFixed(2)}%)`;
+        b.style.opacity = String(Math.max(0, 1 - e * 1.4).toFixed(3));
+      });
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(render);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    reduit.addEventListener('change', render);
+    render();
+  }
+</script>

@@ -16,7 +16,7 @@
   --color-ink-muted: #4f565c;
   --color-line: #ddd8cc;
 
-  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
   --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
 
   /* Courbes d'Emil Kowalski : ease-out fort pour les entrées, ease-in-out pour ce qui bouge à l'écran */
@@ -35,11 +35,18 @@
     font-size: 1rem;
     line-height: 1.5;
   }
-  h1, h2, h3, h4 {
+  /* Titres : Instrument Serif (une seule graisse, jamais de faux gras) */
+  h1, h2, h3, h4, .font-display {
     @apply font-display text-balance;
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    font-optical-sizing: auto;
+    font-weight: 400;
+    font-synthesis: none;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+  }
+  /* L'italique calligraphique porte le mot qui compte */
+  h1 em, h2 em, h3 em, .promesse em {
+    font-style: italic;
+    color: var(--color-teal-700);
   }
   p { text-wrap: pretty; }
   :focus-visible {
@@ -63,10 +70,12 @@
   .btn-primary { @apply bg-mint-300 text-teal-950; }
   .btn-dark { @apply bg-teal-900 text-paper; }
   .btn-ghost { @apply text-paper ring-1 ring-inset ring-paper/50; }
+  .btn-line { @apply text-teal-950 ring-1 ring-inset ring-teal-900/40; }
   @media (hover: hover) and (pointer: fine) {
     .btn-primary:hover { @apply bg-mint-200; }
     .btn-dark:hover { @apply bg-teal-800; }
     .btn-ghost:hover { @apply bg-paper/10; }
+    .btn-line:hover { @apply bg-teal-900/5; }
   }
 
   .eyebrow { @apply font-sans text-[0.8rem] font-semibold uppercase tracking-[0.16em]; }

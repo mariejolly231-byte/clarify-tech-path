@@ -1,10 +1,9 @@
 ---
-import { Image, getImage } from 'astro:assets';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import HeroItineraire from '../components/HeroItineraire.astro';
+import HeroMontagne from '../components/HeroMontagne.astro';
 import Certifications from '../components/Certifications.astro';
 import { SITE, AXES } from '../data/site';
-import chaine from '../assets/photos/chaine-pyrenees-hiver.jpg';
 import marieSommet from '../assets/photos/marie-chiens-sommet.jpg';
 
 const logos = import.meta.glob<{ default: ImageMetadata }>('../assets/partners/*.{png,svg}', { eager: true });
@@ -28,8 +27,12 @@ const listeLogos = Object.entries(logos)
   })
   .sort((a, b) => a.nom.localeCompare(b.nom));
 
-// Préchargement de l'image LCP du hero (mêmes réglages que le <Picture> du hero).
-const lcp = await getImage({ src: chaine, format: 'avif', widths: [640, 960, 1280, 1600, 2000], quality: 62 });
+const etapes = [
+  { n: '01', titre: 'Observer', texte: 'Je viens voir comment l’information circule vraiment dans vos ateliers et vos bureaux. Pas le process officiel : celui que vos équipes vivent.' },
+  { n: '02', titre: 'Clarifier', texte: 'On cartographie vos outils, vos fichiers et vos points de friction. On trouve le passage avant de poser le pied.' },
+  { n: '03', titre: 'Simplifier', texte: 'On allège le sac : outils reconnectés, ressaisies supprimées, IA seulement là où elle sert.' },
+  { n: '04', titre: 'Former', texte: 'Vos équipes repartent autonomes. Une info, un endroit, une version. Vous ne dépendez pas de moi à vie.' },
+];
 
 const bordel = [
   { titre: 'Des fichiers qui se contredisent', texte: 'Plusieurs versions du même tableur, des chiffres qui ne collent plus, et personne ne sait laquelle fait foi.' },
@@ -103,18 +106,15 @@ const faqLd = {
   title="Formation IA, audit et outils no-code PME | Summit Flow"
   description="Formation IA et no-code, audit et mise en place d’outils pour les PME industrielles d’Occitanie, par une ingénieure passée par l’aéronautique."
   jsonLd={[faqLd]}
-  heroSombre
 >
-  <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={lcp.srcSet.attribute} imagesizes="100vw" fetchpriority="high" />
-
-  <HeroItineraire />
+  <HeroMontagne />
 
   <!-- Le bordel organisé -->
   <section class="py-24 md:py-32" aria-labelledby="bordel-titre">
     <div class="container-sf">
       <div class="max-w-2xl">
         <p class="eyebrow text-teal-700">Le point de départ</p>
-        <h2 id="bordel-titre" class="mt-3 text-3xl font-semibold text-teal-950 md:text-5xl">Le bordel organisé, vous connaissez ?</h2>
+        <h2 id="bordel-titre" class="mt-3 text-3xl text-teal-950 md:text-5xl">Le bordel organisé, <em>vous connaissez</em> ?</h2>
         <p class="mt-5 text-lg text-ink-muted">
           Ce n’est la faute de personne. C’est un système qui s’est installé, un fichier après l’autre, un outil après l’autre.
           Et on finit par croire que c’est normal dans l’industrie. Ça ne l’est pas.
@@ -124,7 +124,7 @@ const faqLd = {
         {
           bordel.map((b) => (
             <li class="reveal bg-paper p-7">
-              <h3 class="text-lg font-semibold text-teal-950">{b.titre}</h3>
+              <h3 class="text-lg text-teal-950">{b.titre}</h3>
               <p class="mt-2 text-ink-muted">{b.texte}</p>
             </li>
           ))
@@ -133,12 +133,32 @@ const faqLd = {
     </div>
   </section>
 
+  <!-- La méthode : l'itinéraire en quatre étapes -->
+  <section class="bg-teal-950 py-24 text-paper md:py-32" aria-labelledby="methode-titre">
+    <div class="container-sf">
+      <p class="eyebrow text-mint-300">La méthode</p>
+      <h2 id="methode-titre" class="mt-3 max-w-3xl text-4xl md:text-6xl">Un itinéraire en <em class="!text-mint-300">quatre étapes</em></h2>
+      <ol class="sentier relative mt-16 grid gap-12 md:grid-cols-4 md:gap-8">
+        {
+          etapes.map((e) => (
+            <li class="reveal relative md:pt-12">
+              <span class="repere-etape" aria-hidden="true" />
+              <p class="text-[0.8rem] font-semibold tracking-[0.2em] text-mint-300">ÉTAPE {e.n}</p>
+              <h3 class="mt-2 text-4xl">{e.titre}</h3>
+              <p class="mt-3 text-paper/85">{e.texte}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
   <!-- Offres -->
   <section id="offres" class="bg-paper-2 py-24 md:py-32" aria-labelledby="offres-titre">
     <div class="container-sf">
       <div class="max-w-2xl">
         <p class="eyebrow text-teal-700">Les offres</p>
-        <h2 id="offres-titre" class="mt-3 text-3xl font-semibold text-teal-950 md:text-5xl">Deux façons de travailler ensemble</h2>
+        <h2 id="offres-titre" class="mt-3 text-3xl text-teal-950 md:text-5xl">Deux façons de <em>travailler ensemble</em></h2>
         <p class="mt-5 text-lg text-ink-muted">
           Soit vos équipes apprennent à utiliser l’IA et le no-code elles-mêmes. Soit je regarde votre terrain et je mets en
           place les outils qui allègent le sac. Souvent, on finit par faire les deux.
@@ -150,7 +170,7 @@ const faqLd = {
             <li class="reveal">
               <a href={a.href} class="carte flex h-full flex-col rounded-3xl border border-line bg-paper p-8 md:p-10">
                 <span class="font-sans text-[0.8rem] font-semibold uppercase tracking-[0.2em] text-teal-700">Axe {a.num}</span>
-                <h3 class="mt-3 text-3xl font-semibold text-teal-950 md:text-4xl">{a.titre}</h3>
+                <h3 class="mt-3 text-3xl text-teal-950 md:text-4xl">{a.titre}</h3>
                 <p class="mt-4 text-lg text-ink-muted">{a.court}</p>
                 <p class="mt-6 text-sm"><span class="font-semibold text-teal-950">Pour :</span> <span class="text-ink-muted">{a.pour}</span></p>
                 <ul class="mt-6 flex-1 space-y-3 border-t border-line pt-6">
@@ -175,7 +195,7 @@ const faqLd = {
       <a href="/sous-traitants-aeronautiques" class="carte reveal mt-5 grid gap-6 rounded-2xl bg-teal-900 p-8 text-paper md:grid-cols-[1fr_auto] md:items-center md:p-10">
         <div>
           <p class="eyebrow text-mint-300">Spécialité · Sous-traitants aéronautiques</p>
-          <h3 class="mt-3 text-2xl font-semibold md:text-3xl">APQP, AS9100, PPAP : j’ai passé dix ans de ce côté du dossier</h3>
+          <h3 class="mt-3 text-3xl md:text-4xl">APQP, AS9100, PPAP : j’ai passé <em class="!text-mint-300">dix ans</em> de ce côté du dossier</h3>
           <p class="mt-3 max-w-2xl text-paper/85">
             Plans de surveillance, dossiers de premier article, revues de conformité : je sais ce que vos donneurs d’ordre
             attendent et ce que ces livrables coûtent à vos équipes qualité quand tout passe par Excel et par mail.
@@ -191,7 +211,7 @@ const faqLd = {
     <div class="container-sf">
       <div class="max-w-2xl">
         <p class="eyebrow text-teal-700">Sur le terrain</p>
-        <h2 id="projets-titre" class="mt-3 text-3xl font-semibold text-teal-950 md:text-5xl">Des projets réels, pas des promesses</h2>
+        <h2 id="projets-titre" class="mt-3 text-3xl text-teal-950 md:text-5xl">Des projets réels, <em>pas des promesses</em></h2>
         <p class="mt-5 text-lg text-ink-muted">Quelques itinéraires déjà parcourus avec des entreprises qui avaient, elles aussi, un sac trop lourd.</p>
       </div>
       <ul class="mt-14 grid gap-5 md:grid-cols-3">
@@ -199,14 +219,14 @@ const faqLd = {
           projets.map((p) => (
             <li class="reveal rounded-2xl border border-line p-7">
               <p class="text-sm text-ink-muted">{p.secteur}</p>
-              <h3 class="mt-2 text-xl font-semibold text-teal-950">{p.nom}</h3>
+              <h3 class="mt-2 text-2xl text-teal-950">{p.nom}</h3>
               <p class="mt-3 text-ink-muted">{p.texte}</p>
             </li>
           ))
         }
       </ul>
 
-      <h3 class="mt-24 text-2xl font-semibold text-teal-950">Ce qu’en disent les personnes accompagnées</h3>
+      <h3 class="mt-24 text-3xl text-teal-950">Ce qu’en disent les personnes accompagnées</h3>
       <ul class="mt-8 grid gap-5 md:grid-cols-2">
         {
           temoignages.map((t) => (
@@ -250,7 +270,7 @@ const faqLd = {
       />
       <div>
         <p class="eyebrow text-mint-300">Votre guide</p>
-        <h2 id="guide-titre" class="mt-3 text-3xl font-semibold md:text-5xl">Marie Jolly, ingénieure industrielle avant d’être experte no-code</h2>
+        <h2 id="guide-titre" class="mt-3 text-4xl md:text-6xl">Marie Jolly, <em class="!text-mint-300">ingénieure industrielle</em> avant d’être experte no-code</h2>
         <p class="mt-6 text-lg text-paper/85">
           Dix ans dans l’aéronautique et l’industrie, entre production, qualité et projets critiques. J’ai vu de près comment
           l’information se perd entre l’atelier, le bureau et le client. Aujourd’hui, je mets les outils no-code et l’IA au
@@ -268,7 +288,7 @@ const faqLd = {
   <!-- Financement -->
   <section class="py-24" aria-labelledby="financement-titre">
     <div class="container-sf">
-      <h2 id="financement-titre" class="text-2xl font-semibold text-teal-950 md:text-3xl">Certifications et financements</h2>
+      <h2 id="financement-titre" class="text-2xl text-teal-950 md:text-3xl">Certifications et financements</h2>
       <p class="mt-3 max-w-2xl text-ink-muted">Les formations peuvent être prises en charge selon votre situation. On regarde ensemble les options lors du premier échange.</p>
       <div class="mt-8"><Certifications /></div>
     </div>
@@ -279,13 +299,13 @@ const faqLd = {
     <div class="container-sf grid gap-12 md:grid-cols-[1fr_1.6fr]">
       <div>
         <p class="eyebrow text-teal-700">Questions fréquentes</p>
-        <h2 id="faq-titre" class="mt-3 text-3xl font-semibold text-teal-950 md:text-4xl">Avant de partir, on vérifie le matériel</h2>
+        <h2 id="faq-titre" class="mt-3 text-3xl text-teal-950 md:text-4xl">Avant de partir, on vérifie <em>le matériel</em></h2>
       </div>
       <div class="divide-y divide-line border-y border-line">
         {
           faq.map((f) => (
             <details class="faq group py-2">
-              <summary class="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-6 py-3 font-display text-lg font-medium text-teal-950">
+              <summary class="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-6 py-3 font-display text-2xl text-teal-950">
                 {f.q}
                 <svg class="plus h-5 w-5 shrink-0 text-teal-700" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
               </summary>
@@ -301,7 +321,7 @@ const faqLd = {
   <section class="py-24 md:py-32" aria-labelledby="cta-titre">
     <div class="container-sf">
       <div class="rounded-3xl bg-teal-900 px-7 py-14 text-center text-paper md:px-16 md:py-20">
-        <h2 id="cta-titre" class="mx-auto max-w-3xl text-3xl font-semibold md:text-5xl">On regarde votre itinéraire ensemble ?</h2>
+        <h2 id="cta-titre" class="mx-auto max-w-3xl text-4xl md:text-6xl">On regarde votre <em class="!text-mint-300">itinéraire</em> ensemble ?</h2>
         <p class="mx-auto mt-5 max-w-xl text-lg text-paper/85">30 minutes en visio, gratuites et sans engagement. Vous repartez avec un premier avis honnête sur ce qui vaut la peine d’être simplifié.</p>
         <div class="mt-9 flex flex-wrap justify-center gap-3">
           <a href={SITE.calendly} class="btn btn-primary" rel="noopener">Réserver 30 min d’échange</a>
@@ -327,4 +347,20 @@ const faqLd = {
   .plus { transition: transform 200ms var(--ease-out); }
   .faq[open] .plus { transform: rotate(45deg); }
   summary::-webkit-details-marker { display: none; }
+  .sentier::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: 0.45rem;
+    border-top: 2px dashed rgb(142 227 214 / 0.45);
+  }
+  .repere-etape {
+    position: absolute; left: 0; top: 0;
+    width: 1rem; height: 1rem; border-radius: 9999px;
+    background: var(--color-mint-300);
+    box-shadow: 0 0 0 6px rgb(142 227 214 / 0.15);
+  }
+  @media (max-width: 767px) {
+    .sentier::before { display: none; }
+    .repere-etape { display: none; }
+  }
 </style>
