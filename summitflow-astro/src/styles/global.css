@@ -16,7 +16,7 @@
   --color-ink-muted: #4f565c;
   --color-line: #ddd8cc;
 
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-display: "Young Serif", ui-serif, Georgia, serif;
   --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
 
   /* Courbes d'Emil Kowalski : ease-out fort pour les entrées, ease-in-out pour ce qui bouge à l'écran */
@@ -35,17 +35,17 @@
     font-size: 1rem;
     line-height: 1.5;
   }
-  /* Titres : Instrument Serif (une seule graisse, jamais de faux gras) */
+  /* Titres : Young Serif, une seule police et une seule graisse (jamais de faux gras) */
   h1, h2, h3, h4, .font-display {
     @apply font-display text-balance;
     font-weight: 400;
     font-synthesis: none;
-    line-height: 1.04;
-    letter-spacing: -0.01em;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
   }
-  /* L'italique calligraphique porte le mot qui compte */
+  /* Le mot qui compte : même police, simplement en couleur */
   h1 em, h2 em, h3 em, .promesse em {
-    font-style: italic;
+    font-style: normal;
     color: var(--color-teal-700);
   }
   p { text-wrap: pretty; }

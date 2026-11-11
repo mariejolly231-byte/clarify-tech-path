@@ -137,14 +137,14 @@ const faqLd = {
   <section class="bg-teal-950 py-24 text-paper md:py-32" aria-labelledby="methode-titre">
     <div class="container-sf">
       <p class="eyebrow text-mint-300">La méthode</p>
-      <h2 id="methode-titre" class="mt-3 max-w-3xl text-4xl md:text-6xl">Un itinéraire en <em class="!text-mint-300">quatre étapes</em></h2>
+      <h2 id="methode-titre" class="mt-3 max-w-3xl text-4xl md:text-5xl">Un itinéraire en <em class="!text-mint-300">quatre étapes</em></h2>
       <ol class="sentier relative mt-16 grid gap-12 md:grid-cols-4 md:gap-8">
         {
           etapes.map((e) => (
             <li class="reveal relative md:pt-12">
               <span class="repere-etape" aria-hidden="true" />
               <p class="text-[0.8rem] font-semibold tracking-[0.2em] text-mint-300">ÉTAPE {e.n}</p>
-              <h3 class="mt-2 text-4xl">{e.titre}</h3>
+              <h3 class="mt-2 text-3xl">{e.titre}</h3>
               <p class="mt-3 text-paper/85">{e.texte}</p>
             </li>
           ))
@@ -270,7 +270,7 @@ const faqLd = {
       />
       <div>
         <p class="eyebrow text-mint-300">Votre guide</p>
-        <h2 id="guide-titre" class="mt-3 text-4xl md:text-6xl">Marie Jolly, <em class="!text-mint-300">ingénieure industrielle</em> avant d’être experte no-code</h2>
+        <h2 id="guide-titre" class="mt-3 text-4xl md:text-5xl">Marie Jolly, <em class="!text-mint-300">ingénieure industrielle</em> avant d’être experte no-code</h2>
         <p class="mt-6 text-lg text-paper/85">
           Dix ans dans l’aéronautique et l’industrie, entre production, qualité et projets critiques. J’ai vu de près comment
           l’information se perd entre l’atelier, le bureau et le client. Aujourd’hui, je mets les outils no-code et l’IA au
@@ -321,7 +321,7 @@ const faqLd = {
   <section class="py-24 md:py-32" aria-labelledby="cta-titre">
     <div class="container-sf">
       <div class="rounded-3xl bg-teal-900 px-7 py-14 text-center text-paper md:px-16 md:py-20">
-        <h2 id="cta-titre" class="mx-auto max-w-3xl text-4xl md:text-6xl">On regarde votre <em class="!text-mint-300">itinéraire</em> ensemble ?</h2>
+        <h2 id="cta-titre" class="mx-auto max-w-3xl text-4xl md:text-5xl">On regarde votre <em class="!text-mint-300">itinéraire</em> ensemble ?</h2>
         <p class="mx-auto mt-5 max-w-xl text-lg text-paper/85">30 minutes en visio, gratuites et sans engagement. Vous repartez avec un premier avis honnête sur ce qui vaut la peine d’être simplifié.</p>
         <div class="mt-9 flex flex-wrap justify-center gap-3">
           <a href={SITE.calendly} class="btn btn-primary" rel="noopener">Réserver 30 min d’échange</a>
