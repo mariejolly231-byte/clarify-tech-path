@@ -78,6 +78,24 @@ def timer(default=10, presets=(5, 10, 15, 20)):
       </div>'''
 
 
+# Logos des outils cités (src/images/logos) : Simple Icons (CC0) et sites des éditeurs, voir README
+TOOL_LOGOS = {"openai": "openai.svg", "chatgpt": "openai.svg", "claude": "claude.svg", "anthropic": "anthropic.svg", "gemini": "gemini.svg",
+              "google": "google.svg", "mistral": "mistral.svg", "deepseek": "deepseek.svg", "microsoft": "microsoft.png", "copilot": "microsoft.png",
+              "teams": "teams.png", "meet": "googlemeet.svg", "elevenlabs": "elevenlabs.svg", "suno": "suno.svg", "bfl": "bfl.svg",
+              "midjourney": "midjourney.svg", "fireflies": "fireflies.svg"}
+WIDE = {"bfl", "fireflies"}
+
+
+def tl(key, cls=""):
+    """Petit logo d'outil, aligné sur le texte."""
+    return f'<img class="tlogo{" tlogo--wide" if key in WIDE else ""}{(" " + cls) if cls else ""}" src="images/logos/{TOOL_LOGOS[key]}" alt="">'
+
+
+def with_logo(label):
+    """Remplace le marqueur {tl_outil} d'un libellé par le logo de l'outil."""
+    return re.sub(r"\{tl_(\w+)\}", lambda m: tl(m.group(1)), label)
+
+
 def var(key, fallback):
     """Texte remplacé à l'ouverture par la valeur de window.SESSION (date, horaires, lieu…)."""
     return f'<span data-var="{key}">{fallback}</span>'
@@ -172,7 +190,7 @@ def module_open(n):
 # ---------- Consigne, débrief et quiz : le même gabarit pour les cinq ateliers ----------
 def consigne(n, seq, titre, objectif, duree, livrable, critere, etapes, adapt, humour, notes, timer_default=20, presets=(10, 20, 30, 40)):
     how = "".join(f"<li>{e}</li>" for e in etapes)
-    ad = "".join(f"<li><b>{k} :</b> {v}</li>" for k, v in adapt)
+    ad = "".join(f"<li><b>{with_logo(k)} :</b> {v}</li>" for k, v in adapt)
     slide(f'''    <h2>Atelier {n} : <span class="mark mark--apricot">{titre}</span></h2>
     <div class="brief">
       <div class="brief-c brief-c--obj"><p class="k">Objectif</p><p>{objectif}</p></div>
@@ -238,7 +256,7 @@ slide(f'''    <div class="lockup lockup--cg rise">
 slide(f'''    <h2>Recueil de besoins : <span class="mark mark--apricot">six questions avant la session</span></h2>
     <p class="howto">Envoyé deux semaines avant, à rendre une semaine avant. Les réponses règlent les ateliers sur vos outils.</p>
     <ol class="recueil">
-      <li class="rise"><i>1</i><span>Quels outils d'IA utilises-tu au travail ?<small>ChatGPT, Copilot, Mistral (Vibe, ex Le Chat), Gemini, Claude, autre</small></span></li>
+      <li class="rise"><i>1</i><span>Quels outils d'IA utilises-tu au travail ?<small>ChatGPT, Copilot, Mistral (Vibe, ex Le Chat), Gemini, Claude, autre</small><span class="tool-row">{tl("openai")}{tl("copilot")}{tl("mistral")}{tl("gemini")}{tl("claude")}</span></span></li>
       <li class="rise"><i>2</i><span>En version gratuite ou payante ?<small>Et si payante : personnelle ou fournie par l'entreprise</small></span></li>
       <li class="rise"><i>3</i><span>À quelle fréquence ?<small>Jamais, de temps en temps, chaque semaine, chaque jour</small></span></li>
       <li class="rise"><i>4</i><span>Trois tâches où tu aimerais gagner du temps<small>Elles deviennent la matière des ateliers</small></span></li>
@@ -267,10 +285,11 @@ slide(f'''    <h2 class="me-title">Marie Jolly, <span class="mark">Summit Flow</
     <div class="me">
       <div class="me-photo"><figure class="me-pic sk"><img src="images/marie-samoyede.jpg" alt="Marie Jolly en montagne, accroupie à côté de son samoyède blanc en harnais."></figure></div>
       <div class="me-right"><ul class="dash me-list">
-        <li class="frag">Ingénieure, dix ans dans l'industrie : production, gestion de projet, industrialisation</li>
+        <li class="frag">Ingénieure, dix ans dans l'industrie aéronautique : avionneur, aménagement de cabine et métallurgie. Production, gestion de projet, industrialisation</li>
         <li class="frag">J'accompagne des PME sur l'IA, l'automatisation et les agents IA, du cadrage à la mise en production</li>
         <li class="frag">Je teste les outils avant de les montrer : ce que vous verrez aujourd'hui a été vérifié pour cette session</li>
       </ul>
+      <div class="career frag" aria-label="Entreprises où j'ai travaillé"><img src="images/carriere/airbus.svg" alt="Airbus"><img src="images/carriere/diehl.svg" alt="Diehl"><img src="images/carriere/aubert-duval.svg" alt="Aubert &amp; Duval"><img src="images/carriere/mecachrome.svg" alt="Mecachrome"></div>
       <div class="me-do frag"><div class="me-do-row"><p><b>Former</b>les équipes, sur leurs vrais outils</p><p><b>Auditer</b>les processus, pour voir ce qui gagne à être automatisé</p><p><b>Construire</b>automatisations, assistants, agents</p></div></div></div>
     </div>''', seq=1, section="Accueil · Votre formatrice",
       notes=note("1 minute 30. Court : la journée est à eux.",
@@ -317,9 +336,9 @@ slide(f'''    <h2>Le catalogue parlait d'O1, O3 et R1. <span class="mark mark--l
     <table class="cmp cmp--market mt">
       <thead><tr><th>Dans le catalogue</th><th>Ce que c'était</th><th>Ce qui l'a remplacé, au 12 novembre 2026</th></tr></thead>
       <tbody>
-        <tr class="frag"><td class="row">O1, O3 <span class="obso">dépassé</span></td><td>Les premiers modèles « qui réfléchissent » d'OpenAI, à choisir à part dans ChatGPT</td><td>La réflexion est intégrée aux modèles GPT récents : on règle un niveau de réflexion au lieu de changer de modèle</td></tr>
-        <tr class="frag"><td class="row">R1 <span class="obso">dépassé</span></td><td>Le modèle de raisonnement de DeepSeek, début 2025</td><td><b>DeepSeek V4 Pro</b> et <b>V4.1 Flash</b> : le mode réflexion est activé par défaut, et se désactive</td></tr>
-        <tr class="frag"><td class="row">DeepSeek <span class="obso">à nuancer</span></td><td>L'outsider chinois, gratuit et performant</td><td>Toujours là, modèles ouverts. Même questions de confidentialité qu'avant : on n'y met pas de données de l'entreprise</td></tr>
+        <tr class="frag"><td class="row">{tl("openai")}O1, O3 <span class="obso">dépassé</span></td><td>Les premiers modèles « qui réfléchissent » d'OpenAI, à choisir à part dans ChatGPT</td><td>La réflexion est intégrée aux modèles GPT récents : on règle un niveau de réflexion au lieu de changer de modèle</td></tr>
+        <tr class="frag"><td class="row">{tl("deepseek")}R1 <span class="obso">dépassé</span></td><td>Le modèle de raisonnement de DeepSeek, début 2025</td><td><b>DeepSeek V4 Pro</b> et <b>V4.1 Flash</b> : le mode réflexion est activé par défaut, et se désactive</td></tr>
+        <tr class="frag"><td class="row">{tl("deepseek")}DeepSeek <span class="obso">à nuancer</span></td><td>L'outsider chinois, gratuit et performant</td><td>Toujours là, modèles ouverts. Même questions de confidentialité qu'avant : on n'y met pas de données de l'entreprise</td></tr>
       </tbody>
     </table>
     <p class="takeaway frag"><b>Le vrai changement.</b> Le « modèle de raisonnement » n'est plus un produit à part : c'est un réglage, chez presque tous les éditeurs.</p>''',
@@ -333,11 +352,11 @@ slide(f'''    <h2>Les modèles phares, <span class="mark">éditeur par éditeur<
     <table class="cmp cmp--market">
       <thead><tr><th>Éditeur</th><th>Le plus capable</th><th>Le rapide, pour le quotidien</th><th>La réflexion, chez lui</th></tr></thead>
       <tbody>
-        <tr class="frag"><td class="row">OpenAI · ChatGPT</td><td><b>GPT-6</b>, présenté début septembre 2026</td><td>Les déclinaisons rapides de GPT-6</td><td>Des niveaux de réflexion à choisir dans ChatGPT. L'accès dépend de l'offre</td></tr>
-        <tr class="frag"><td class="row">Anthropic · Claude</td><td><b>Claude Opus 5.5</b> (22 sept.) et <b>Claude Fable 5.2</b> (9 nov.)</td><td><b>Claude Sonnet 5.5</b>, <b>Claude Haiku 5.5</b></td><td>Réflexion adaptative : le modèle décide combien réfléchir</td></tr>
-        <tr class="frag"><td class="row">Google · Gemini</td><td><b>Gemini 4 Argon</b> (13 oct., offres Google AI Pro et Ultra)</td><td><b>Gemini 3.6 Flash</b>, pour tous les utilisateurs</td><td>Le mode Thinking, et Deep Think pour l'offre Ultra</td></tr>
-        <tr class="frag"><td class="row">Mistral · Vibe</td><td><b>Mistral Large 4</b> (6 oct., poids ouverts)</td><td><b>Mistral Small 4</b></td><td>Small 4 réunit réponse directe, raisonnement et code dans un seul modèle</td></tr>
-        <tr class="frag"><td class="row">Microsoft · Copilot</td><td colspan="2">S'appuie sur des modèles d'OpenAI, et d'Anthropic si l'administrateur les active</td><td>Réponse rapide, Réponse approfondie, ou Automatique</td></tr>
+        <tr class="frag"><td class="row">{tl("openai")}OpenAI · ChatGPT</td><td><b>GPT-6</b>, présenté début septembre 2026</td><td>Les déclinaisons rapides de GPT-6</td><td>Des niveaux de réflexion à choisir dans ChatGPT. L'accès dépend de l'offre</td></tr>
+        <tr class="frag"><td class="row">{tl("claude")}Anthropic · Claude</td><td><b>Claude Opus 5.5</b> (22 sept.) et <b>Claude Fable 5.2</b> (9 nov.)</td><td><b>Claude Sonnet 5.5</b>, <b>Claude Haiku 5.5</b></td><td>Réflexion adaptative : le modèle décide combien réfléchir</td></tr>
+        <tr class="frag"><td class="row">{tl("gemini")}Google · Gemini</td><td><b>Gemini 4 Argon</b> (13 oct., offres Google AI Pro et Ultra)</td><td><b>Gemini 3.6 Flash</b>, pour tous les utilisateurs</td><td>Le mode Thinking, et Deep Think pour l'offre Ultra</td></tr>
+        <tr class="frag"><td class="row">{tl("mistral")}Mistral · Vibe</td><td><b>Mistral Large 4</b> (6 oct., poids ouverts)</td><td><b>Mistral Small 4</b></td><td>Small 4 réunit réponse directe, raisonnement et code dans un seul modèle</td></tr>
+        <tr class="frag"><td class="row">{tl("microsoft")}Microsoft · Copilot</td><td colspan="2">S'appuie sur des modèles d'OpenAI, et d'Anthropic si l'administrateur les active</td><td>Réponse rapide, Réponse approfondie, ou Automatique</td></tr>
       </tbody>
     </table>
     <p class="src-line">Sources officielles consultées le 12 novembre 2026, détail dans les notes. Les noms changent vite : on vérifie dans ton outil, pas sur cette slide.</p>''',
@@ -368,11 +387,11 @@ consigne(1, 2, "le même cas, deux réglages",
           "Lance exactement la même demande en <b>mode réflexion</b>. Note le temps d'attente.",
           "Compare sur quatre critères : juste, utile, ce qu'il a fallu corriger, temps d'attente.",
           "Écris ta règle : « pour ce type de tâche, j'utilise… »"],
-         [("ChatGPT", "choisis le niveau de réflexion dans le sélecteur de modèle. En gratuit, l'accès à la réflexion peut être limité"),
-          ("Copilot", "Réponse rapide, puis Réponse approfondie"),
-          ("Mistral Vibe", "même demande, réflexion activée si ton offre la propose"),
-          ("Gemini", "3.6 Flash, puis le mode Thinking"),
-          ("Claude", "réflexion adaptative : compare plutôt Sonnet et Opus"),
+         [("{tl_openai}ChatGPT", "choisis le niveau de réflexion dans le sélecteur de modèle. En gratuit, l'accès à la réflexion peut être limité"),
+          ("{tl_copilot}Copilot", "Réponse rapide, puis Réponse approfondie"),
+          ("{tl_mistral}Mistral Vibe", "même demande, réflexion activée si ton offre la propose"),
+          ("{tl_gemini}Gemini", "3.6 Flash, puis le mode Thinking"),
+          ("{tl_claude}Claude", "réflexion adaptative : compare plutôt Sonnet et Opus"),
           ("Pas d'outil autorisé", "binôme avec un voisin, ou démonstration projetée")],
          "Le mode réflexion, c'est le collègue qui dit « laisse-moi y réfléchir ». Parfois génial. Parfois juste plus long.",
          note("40 minutes. Lancer le minuteur. À mi-parcours (20 min), faire un point : tout le monde a-t-il lancé les deux versions ?",
@@ -402,7 +421,7 @@ pause("Pause, dix minutes", "Pause", note("10 minutes.", "Relancer à l'heure : 
 # =====================================================================================
 module_open(2)
 
-slide(f'''    <h2>ChatGPT ne se résume plus <span class="mark">à une conversation</span></h2>
+slide(f'''    <h2>{tl("openai", "tlogo--h")}ChatGPT ne se résume plus <span class="mark">à une conversation</span></h2>
     <div class="cards-4">
       <div class="card sk fill-apricot frag"><h3>Projets</h3><p>Un espace par dossier : tes conversations, tes fichiers et tes instructions au même endroit. Il garde le contexte d'une conversation à l'autre.</p></div>
       <div class="card sk fill-mint frag"><h3>Assistants spécialisés</h3><p>Une consigne métier écrite une fois, réutilisable par toi ou ton équipe. Les GPT personnalisés, et côté entreprise les agents d'espace de travail.</p></div>
@@ -451,11 +470,11 @@ consigne(2, 3, "ton premier vrai projet",
           "Dépose deux documents <b>non confidentiels</b> : une trame, un exemple réussi.",
           "Teste trois demandes. Corrige les instructions après chaque essai.",
           "<b>B, 40 min.</b> Ajoute une tâche planifiée <b>ou</b> un assistant, et vérifie son premier résultat."],
-         [("ChatGPT gratuit", "limites possibles : en B, l'assistant plutôt que la tâche"),
-          ("ChatGPT payant", "projet, tâche planifiée et assistant"),
-          ("Copilot", "Notebooks en A, requête planifiée ou nouvel agent en B"),
-          ("Mistral Vibe", "dossier de projet et bibliothèque, puis tâche planifiée"),
-          ("Gemini ou Claude", "compétence enregistrée (Gemini), projet (Claude)")],
+         [("{tl_openai}ChatGPT gratuit", "limites possibles : en B, l'assistant plutôt que la tâche"),
+          ("{tl_openai}ChatGPT payant", "projet, tâche planifiée et assistant"),
+          ("{tl_copilot}Copilot", "Notebooks en A, requête planifiée ou nouvel agent en B"),
+          ("{tl_mistral}Mistral Vibe", "dossier de projet et bibliothèque, puis tâche planifiée"),
+          ("{tl_gemini}Gemini ou Claude", "compétence enregistrée (Gemini), projet (Claude)")],
          "Un projet où toi seul retrouves les choses, ce n'est pas un projet, c'est un tiroir.",
          note("85 minutes : 45 pour la partie A, 40 pour la partie B. Point d'étape obligatoire à la fin de la partie A : chacun montre ses instructions en 30 secondes.",
               "Piège 1 : des instructions trop vagues (« sois professionnel »). Exiger le format attendu et un exemple. Piège 2 : déposer des documents réels clients ou salariés : rappeler la règle du jour. Piège 3 : la tâche planifiée qui dépend d'un fichier qu'elle ne voit pas : la demande doit se suffire à elle-même. Les stagiaires en gratuit qui butent sur une limite passent en binôme ou basculent sur l'assistant.",
@@ -483,7 +502,7 @@ pause("Déjeuner", "Déjeuner", note("1 heure.", "Laisser le deck sur cette slid
 # =====================================================================================
 module_open(3)
 
-slide(f'''    <h2>Le Chat s'appelle <span class="mark">désormais Vibe</span></h2>
+slide(f'''    <h2>{tl("mistral", "tlogo--h")}Le Chat s'appelle <span class="mark">désormais Vibe</span></h2>
     <div class="cols mt" style="align-items:start">
       <div class="stack">
         <p class="frag" style="font-size:30px">Le 28 mai 2026, Mistral a renommé son application : <b>Le Chat devient Vibe</b>. Conversations, réglages et abonnements ont été conservés.</p>
@@ -506,7 +525,7 @@ slide(f'''    <h2>Le Chat s'appelle <span class="mark">désormais Vibe</span></h
                  src("vibe", "mistral_pricing"),
                  extra="Citation : « Le Chat is now Vibe (…) with every conversation, setting, and plan carried over. »"))
 
-slide(f'''    <h2>Ce qu'on fait dans Vibe, <span class="mark mark--apricot">pour le travail</span></h2>
+slide(f'''    <h2>{tl("mistral", "tlogo--h")}Ce qu'on fait dans Vibe, <span class="mark mark--apricot">pour le travail</span></h2>
     <div class="cards-4">
       <div class="card sk fill-card frag"><h3>Mode Work</h3><p>Il prépare un plan, te le fait valider, puis travaille avec tes connecteurs : recherche, synthèse, livrable dans le Canvas.</p></div>
       <div class="card sk fill-card frag"><h3>Projets et bibliothèques</h3><p>Des dossiers de projet et des bibliothèques de documents pour garder le contexte.</p></div>
@@ -543,10 +562,10 @@ consigne(3, 4, "ton cas, version française",
           "Génère une image utile à ton travail : visuel de note interne, illustration de post. Trois itérations maximum.",
           "Enregistre un mémo vocal d'une minute (une réunion fictive), puis demande un compte rendu structuré.",
           "Note ton verdict : pour quoi tu utiliserais Vibe chez toi."],
-         [("Déjà sur Mistral", "va plus loin : mode Work sur une recherche, ou une tâche planifiée"),
+         [("{tl_mistral}Déjà sur Mistral", "va plus loin : mode Work sur une recherche, ou une tâche planifiée"),
           ("Entreprise qui interdit les outils non validés", "binôme avec un voisin autorisé, ou démonstration projetée"),
           ("Pas de micro", "dépose un court fichier audio fourni par la formatrice"),
-          ("Outil habituel Copilot", "compare surtout la partie compte rendu avec Teams")],
+          ("{tl_copilot}Outil habituel Copilot", "compare surtout la partie compte rendu avec Teams")],
          "Trois itérations pour l'image : à la quatrième, ce n'est plus de l'IA, c'est de la procrastination.",
          note("40 minutes. Annoncer les trois temps : 15 minutes de comparaison, 10 d'image, 15 de compte rendu.",
               "Piège 1 : créer un compte avec une adresse professionnelle sans savoir si l'entreprise l'autorise : poser la question avant. Piège 2 : la séance d'image qui dérape : limiter à trois itérations. Piège 3 : enregistrer une vraie réunion avec de vrais noms : mémo fictif uniquement. Prévoir un fichier audio de secours d'une minute, sans donnée personnelle.",
@@ -576,12 +595,12 @@ slide(f'''    <h2>Image et vidéo : <span class="mark mark--lav">qui fait quoi</
     <table class="cmp cmp--market">
       <thead><tr><th></th><th>Outil</th><th>À retenir</th></tr></thead>
       <tbody>
-        <tr class="frag"><td class="row">Image</td><td><b>Nano Banana</b> (Google, dans Gemini)</td><td>Créer et retoucher une image en conversation</td></tr>
-        <tr class="frag"><td class="row">Image</td><td><b>Génération d'images dans ChatGPT</b></td><td>Directement dans la conversation, utile pour des visuels simples</td></tr>
-        <tr class="frag"><td class="row">Image</td><td><b>Vibe</b> (Mistral)</td><td>Génération et retouche, limitées en gratuit</td></tr>
-        <tr class="frag"><td class="row">Image, vidéo</td><td><b>FLUX 3</b> (Black Forest Labs, Allemagne)</td><td>Images, et vidéos jusqu'à 20 secondes avec son ; poids ouverts disponibles</td></tr>
-        <tr class="frag"><td class="row">Image</td><td><b>Midjourney</b></td><td>La référence pour le rendu artistique, sur abonnement</td></tr>
-        <tr class="frag"><td class="row">Vidéo</td><td><b>Veo 3.1</b> et <b>Gemini Omni</b> (Google)</td><td>Vidéo avec son. Omni crée et modifie des vidéos dans l'application Gemini, pour les abonnés Google AI</td></tr>
+        <tr class="frag"><td class="row">Image</td><td>{tl("google")}<b>Nano Banana</b> (Google, dans Gemini)</td><td>Créer et retoucher une image en conversation</td></tr>
+        <tr class="frag"><td class="row">Image</td><td>{tl("openai")}<b>Génération d'images dans ChatGPT</b></td><td>Directement dans la conversation, utile pour des visuels simples</td></tr>
+        <tr class="frag"><td class="row">Image</td><td>{tl("mistral")}<b>Vibe</b> (Mistral)</td><td>Génération et retouche, limitées en gratuit</td></tr>
+        <tr class="frag"><td class="row">Image, vidéo</td><td>{tl("bfl")}<b>FLUX 3</b> (Black Forest Labs, Allemagne)</td><td>Images, et vidéos jusqu'à 20 secondes avec son ; poids ouverts disponibles</td></tr>
+        <tr class="frag"><td class="row">Image</td><td>{tl("midjourney")}<b>Midjourney</b></td><td>La référence pour le rendu artistique, sur abonnement</td></tr>
+        <tr class="frag"><td class="row">Vidéo</td><td>{tl("google")}<b>Veo 3.1</b> et <b>Gemini Omni</b> (Google)</td><td>Vidéo avec son. Omni crée et modifie des vidéos dans l'application Gemini, pour les abonnés Google AI</td></tr>
       </tbody>
     </table>
     <p class="src-line">Versions et accès vérifiés sur les pages des éditeurs le 12 novembre 2026, sauf Midjourney et ChatGPT : voir a-verifier.md.</p>''',
@@ -593,10 +612,10 @@ slide(f'''    <h2>Image et vidéo : <span class="mark mark--lav">qui fait quoi</
 
 slide(f'''    <h2>Audio et musique : <span class="mark mark--apricot">voix, podcasts, jingles</span></h2>
     <div class="cards-4">
-      <div class="card sk fill-card frag"><h3>ElevenLabs</h3><p>Voix de synthèse très naturelles (modèle Eleven v4), doublage, musique, transcription, agents vocaux.</p></div>
-      <div class="card sk fill-card frag"><h3>Voxtral TTS 3</h3><p>La synthèse vocale de Mistral : plus de 35 langues, voix qui s'adaptent au ton de la conversation.</p></div>
-      <div class="card sk fill-card frag"><h3>Suno v6</h3><p>Chansons et musiques complètes à partir d'un texte, depuis le 9 septembre 2026.</p></div>
-      <div class="card sk fill-card frag"><h3>Lyria</h3><p>Le modèle musical de Google DeepMind, utilisé dans les outils de Google.</p></div>
+      <div class="card sk fill-card frag"><h3>{tl("elevenlabs")}ElevenLabs</h3><p>Voix de synthèse très naturelles (modèle Eleven v4), doublage, musique, transcription, agents vocaux.</p></div>
+      <div class="card sk fill-card frag"><h3>{tl("mistral")}Voxtral TTS 3</h3><p>La synthèse vocale de Mistral : plus de 35 langues, voix qui s'adaptent au ton de la conversation.</p></div>
+      <div class="card sk fill-card frag"><h3>{tl("suno")}Suno v6</h3><p>Chansons et musiques complètes à partir d'un texte, depuis le 9 septembre 2026.</p></div>
+      <div class="card sk fill-card frag"><h3>{tl("google")}Lyria</h3><p>Le modèle musical de Google DeepMind, utilisé dans les outils de Google.</p></div>
     </div>
     <div class="alert alert--compact frag" style="margin-top:26px">{icon("alert")}<div><p class="alert-title">Voix et musique : prudence</p><p>Pas de clonage de la voix d'un collègue sans son accord écrit. Pour un usage commercial, lire les conditions de licence de chaque outil.</p></div></div>''',
       seq=5, section="Module 4 · Audio et musique",
@@ -609,10 +628,10 @@ slide(f'''    <h2>Comptes rendus de réunion : <span class="mark">le match utile
     <table class="cmp cmp--market">
       <thead><tr><th>Outil</th><th>Ce qu'il fait</th><th>Ce qu'il faut</th></tr></thead>
       <tbody>
-        <tr class="frag"><td class="row">Teams + Copilot</td><td>Pendant et après la réunion : qui a dit quoi, points d'accord, actions</td><td>Une licence Copilot. Si l'organisateur coupe Copilot, l'enregistrement et la transcription s'arrêtent aussi</td></tr>
-        <tr class="frag"><td class="row">Google Meet</td><td>« Prendre des notes pour moi » : notes rangées dans Google Docs, résumé envoyé à l'organisateur</td><td>Une édition Workspace ou une offre Google AI éligible. Français pris en charge, une langue par réunion</td></tr>
-        <tr class="frag"><td class="row">Vibe (Mistral)</td><td>Transcription et résumé d'un enregistrement ou d'un fichier audio</td><td>Le compte Vibe. Côté API, Voxtral Transcribe 3 distingue les intervenants</td></tr>
-        <tr class="frag"><td class="row">Fireflies</td><td>Un assistant qui rejoint tes visios, transcrit et résume</td><td>Offre gratuite, puis payante par utilisateur. Plus de 100 langues, conformité RGPD annoncée</td></tr>
+        <tr class="frag"><td class="row">{tl("teams")}Teams + Copilot</td><td>Pendant et après la réunion : qui a dit quoi, points d'accord, actions</td><td>Une licence Copilot. Si l'organisateur coupe Copilot, l'enregistrement et la transcription s'arrêtent aussi</td></tr>
+        <tr class="frag"><td class="row">{tl("meet")}Google Meet</td><td>« Prendre des notes pour moi » : notes rangées dans Google Docs, résumé envoyé à l'organisateur</td><td>Une édition Workspace ou une offre Google AI éligible. Français pris en charge, une langue par réunion</td></tr>
+        <tr class="frag"><td class="row">{tl("mistral")}Vibe (Mistral)</td><td>Transcription et résumé d'un enregistrement ou d'un fichier audio</td><td>Le compte Vibe. Côté API, Voxtral Transcribe 3 distingue les intervenants</td></tr>
+        <tr class="frag"><td class="row">{tl("fireflies", "tlogo--solo")}<span class="sr-only">Fireflies</span></td><td>Un assistant qui rejoint tes visios, transcrit et résume</td><td>Offre gratuite, puis payante par utilisateur. Plus de 100 langues, conformité RGPD annoncée</td></tr>
       </tbody>
     </table>
     <p class="takeaway frag"><b>Avant d'enregistrer.</b> On prévient tous les participants, et on vérifie que l'outil est autorisé par l'entreprise. Toujours.</p>''',

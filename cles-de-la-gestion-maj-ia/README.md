@@ -56,3 +56,9 @@ Sur 7 heures (9h00 à 12h30, 13h30 à 17h00), environ 4 h 40 de manipulation, so
 ## Les sources
 
 Recherche faite le 12 novembre 2026, sur les pages officielles des éditeurs : Anthropic, Google (notes de version de Gemini, Google DeepMind, aide Google Meet), Mistral (blog, documentation, tarifs), DeepSeek (documentation de l'API), Black Forest Labs, ElevenLabs, Suno, Microsoft Learn, Fireflies. Chaque slide de contenu cite ses sources dans ses notes (touche `N`). Les pages d'OpenAI n'ont pas pu être lues depuis l'environnement de préparation : tout ce qui concerne ChatGPT est à contrôler la veille (voir `a-verifier.md`).
+
+## Les logos
+
+- `src/images/logos/` : les outils cités. OpenAI, Claude, Anthropic, Gemini, Google, Google Meet, Mistral, DeepSeek, ElevenLabs et Suno viennent de Simple Icons (licence CC0, dessins officiels des marques) ; Black Forest Labs et Fireflies de leurs sites ; Midjourney de Wikimedia Commons ; Microsoft et Teams du deck Lagarrigue. Copilot est représenté par le logo Microsoft.
+- `src/images/carriere/` : Airbus et Diehl (Wikimedia Commons), Aubert & Duval et Mecachrome (leurs sites). Utilisés uniquement pour illustrer le parcours de la formatrice.
+- Les marques restent la propriété de leurs titulaires : les logos servent à identifier les outils et les entreprises, pas à suggérer un partenariat.
