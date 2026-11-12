@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* FabfeltScript Bold, Fabien Despinoy (fabiendespinoy.fr), licence 1001Fonts « Free for commercial use ».
+   Fichiers web fournis par l'auteur, non modifiés. */
+@font-face {
+  font-family: "FabfeltScript";
+  src: url("/fonts/fabfeltscript-bold.woff2") format("woff2"), url("/fonts/fabfeltscript-bold.woff") format("woff");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Palette Summit Flow : vert sarcelle profond, menthe, blanc cassé, anthracite.
    Contrastes vérifiés : paper/ink 14:1, paper/ink-muted 6.9:1, teal-900/paper 8.9:1, mint-300/teal-950 10:1. */
 @theme {
@@ -16,7 +26,7 @@
   --color-ink-muted: #4f565c;
   --color-line: #ddd8cc;
 
-  --font-display: "Kalam", "Segoe Print", "Bradley Hand", cursive;
+  --font-display: "FabfeltScript", "Segoe Print", "Bradley Hand", cursive;
   --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
 
   /* Courbes d'Emil Kowalski : ease-out fort pour les entrées, ease-in-out pour ce qui bouge à l'écran */
@@ -35,7 +45,7 @@
     font-size: 1rem;
     line-height: 1.5;
   }
-  /* Titres : Kalam, écriture au marqueur comme sur un tableau blanc d’atelier. Une seule graisse. */
+  /* Titres : FabfeltScript, écriture au feutre. Une seule graisse. */
   h1, h2, h3, h4, .font-display {
     @apply font-display text-balance;
     font-weight: 700;
