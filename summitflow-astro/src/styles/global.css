@@ -88,6 +88,25 @@
     .btn-line:hover { @apply bg-teal-900/5; }
   }
 
+  /* Motif d'identité : courbes de niveau. Le SVG sert de masque, la couleur vient de currentColor. */
+  .topo {
+    background-color: currentColor;
+    -webkit-mask: url("/topo.svg") center / cover no-repeat;
+    mask: url("/topo.svg") center / cover no-repeat;
+    pointer-events: none;
+  }
+
+  /* Trait de feutre sous les mots clés des grands titres */
+  h1 em, h2 em, .promesse em {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9 C 45 3, 90 12, 140 7 S 235 4, 297 8' fill='none' stroke='%2316756e' stroke-width='3.5' stroke-linecap='round' opacity='.55'/%3E%3C/svg%3E") no-repeat 0 100% / 100% 0.28em;
+    padding-bottom: 0.1em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  h2 em[class*="mint"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9 C 45 3, 90 12, 140 7 S 235 4, 297 8' fill='none' stroke='%238ee3d6' stroke-width='3.5' stroke-linecap='round' opacity='.6'/%3E%3C/svg%3E");
+  }
+
   .eyebrow { @apply font-sans text-[0.8rem] font-semibold uppercase tracking-[0.16em]; }
 
   /* Révélation des blocs au scroll, en CSS pur (hors thread principal).

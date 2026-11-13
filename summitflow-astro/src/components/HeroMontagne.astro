@@ -1,30 +1,79 @@
 ---
 /**
- * Hero « La montagne qui sort du brouillard ».
- * Reprend l'effet de l'ancien site : la montagne monte au scroll pendant que le brouillard se lève.
- * Le décor est collé à l'écran (sticky) ; le texte défile normalement par-dessus.
- * Rien n'est animé au chargement : le H1 et l'image sont stables, seul le scroll fait bouger le décor.
+ * Hero « L'itinéraire sur la montagne ».
+ * 1. La montagne sort du brouillard et monte au scroll (effet de l'ancien site).
+ * 2. Un itinéraire tracé au feutre se dessine jusqu'au sommet ; les quatre balises de la méthode
+ *    apparaissent quand le tracé les atteint. L'animation raconte la méthode, elle ne décore pas.
+ * Le décor est collé à l'écran (sticky), le texte défile par-dessus. Rien ne bouge au chargement :
+ * le H1 et l'image sont stables, seul le scroll pilote le décor (transform et opacity uniquement).
  */
 import { Image } from 'astro:assets';
 import { SITE } from '../data/site';
 import montagne from '../assets/montagne.webp';
+
+// Coordonnées dans le repère de l'image (1920 × 1279). Sommet vers (980, 104).
+const balises = [
+  { n: 1, nom: 'Observer', x: 862, y: 792, cote: 'd' },
+  { n: 2, nom: 'Clarifier', x: 742, y: 652, cote: 'g' },
+  { n: 3, nom: 'Simplifier', x: 906, y: 516, cote: 'd' },
+  { n: 4, nom: 'Former', x: 848, y: 392, cote: 'g' },
+];
+const TRACE = 'M 690 930 C 760 880, 820 840, 862 792 S 700 700, 742 652 S 930 580, 906 516 S 800 440, 848 392 S 960 260, 980 128';
 ---
 
 <section class="hero relative" aria-labelledby="hero-titre" data-hero>
   <!-- Décor -->
   <div class="sticky top-0 h-svh overflow-hidden" aria-hidden="true">
     <div class="ciel absolute inset-0"></div>
+    <div class="topo carte absolute -inset-[12%] text-teal-700" data-carte></div>
 
     <div class="montagne-wrap absolute inset-x-0 bottom-0 flex justify-center" data-montagne>
-      <Image
-        src={montagne}
-        alt=""
-        widths={[800, 1200, 1600, 1920]}
-        sizes="(min-width: 1280px) 1500px, (min-width: 768px) 115vw, 175vw"
-        loading="eager"
-        fetchpriority="high"
-        class="montagne w-[175vw] max-w-none md:w-[115vw] xl:w-[1500px]"
-      />
+      <div class="relative w-[175vw] shrink-0 md:w-[115vw] xl:w-[1500px]">
+        <Image
+          src={montagne}
+          alt=""
+          widths={[800, 1200, 1600, 1920]}
+          sizes="(min-width: 1280px) 1500px, (min-width: 768px) 115vw, 175vw"
+          loading="eager"
+          fetchpriority="high"
+          class="block h-auto w-full"
+        />
+        <!-- Itinéraire : même repère que l'image, il monte avec elle -->
+        <svg class="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 1920 1279" fill="none">
+          <defs>
+            <clipPath id="trace-clip">
+              <!-- Le rectangle remonte : le tracé se découvre du bas vers le sommet -->
+              <rect x="0" y="0" width="1920" height="1279" transform="translate(0 1279)" data-clip></rect>
+            </clipPath>
+          </defs>
+          <g clip-path="url(#trace-clip)">
+            <path d={TRACE} stroke="var(--color-paper)" stroke-width="11" stroke-linecap="round" opacity="0.75"></path>
+            <path d={TRACE} stroke="var(--color-teal-950)" stroke-width="5" stroke-linecap="round" stroke-dasharray="3 15"></path>
+          </g>
+          {
+            balises.map((b) => (
+              <g class="balise" data-balise={b.y}>
+                <circle cx={b.x} cy={b.y} r="15" fill="var(--color-paper)" stroke="var(--color-teal-950)" stroke-width="5" />
+                <circle cx={b.x} cy={b.y} r="5" fill="var(--color-teal-700)" />
+                <text
+                  class="nom-balise"
+                  x={b.cote === 'd' ? b.x + 38 : b.x - 38}
+                  y={b.y + 18}
+                  text-anchor={b.cote === 'd' ? 'start' : 'end'}
+                >
+                  {b.n}. {b.nom}
+                </text>
+              </g>
+            ))
+          }
+          <!-- Sommet : le fanion -->
+          <g class="balise" data-balise="130">
+            <path d="M980 128 V52" stroke="var(--color-teal-950)" stroke-width="5" stroke-linecap="round"></path>
+            <path d="M982 54 L1036 70 L982 90 Z" fill="var(--color-teal-700)" stroke="var(--color-teal-950)" stroke-width="4" stroke-linejoin="round"></path>
+            <text class="nom-balise" x="1056" y="62">Des équipes<tspan x="1056" dy="1.05em">autonomes</tspan></text>
+          </g>
+        </svg>
+      </div>
     </div>
 
     <!-- Fondu vers la section suivante -->
@@ -52,35 +101,70 @@ import montagne from '../assets/montagne.webp';
         <a href="#offres" class="btn btn-line">Voir les deux axes</a>
       </div>
     </div>
-
-    <!-- Quand la montagne est sortie du brouillard : la promesse -->
-    <div class="container-sf flex min-h-[90svh] items-end justify-center pb-[12svh] text-center">
-      <p class="promesse reveal max-w-4xl text-teal-950">
-        Moins de bordel organisé.<br />
-        <em>Plus de flux simples</em> pour que l’industrie respire.
-      </p>
-    </div>
+    <!-- Temps de montée : la montagne se dégage, l'itinéraire se trace -->
+    <div class="h-[150svh]" aria-hidden="true"></div>
   </div>
 </section>
 
+<!-- Au sommet : la promesse -->
+<section class="pb-24 pt-10 md:pb-32" aria-label="La promesse Summit Flow">
+  <p class="promesse reveal container-sf max-w-5xl text-center text-teal-950">
+    Moins de bordel organisé.<br />
+    <em>Plus de flux simples</em> pour que l’industrie respire.
+  </p>
+</section>
+
+<noscript>
+  <style>
+    .montagne-wrap { transform: translateY(var(--arrivee)) !important; }
+    [data-clip] { transform: none !important; }
+    .balise { opacity: 1 !important; transform: none !important; }
+    .brume { display: none; }
+  </style>
+</noscript>
+
 <style>
-  /* clip (et non hidden) : coupe le halo qui déborde sans casser le sticky */
+  /* clip (et non hidden) : coupe ce qui déborde sans casser le sticky */
   .hero { overflow-x: clip; }
   .ciel {
-    background:
-      linear-gradient(to bottom, var(--color-paper) 0%, #eef3f0 45%, #e6f1ee 75%, var(--color-paper) 100%);
+    background: linear-gradient(to bottom, var(--color-paper) 0%, #eef3f0 45%, #e6f1ee 75%, var(--color-paper) 100%);
   }
+  .carte { opacity: 0.16; will-change: transform; }
+
   .montagne-wrap {
     /* Départ : le sommet affleure sous les boutons (le haut utile de l'image est à ~8 %).
-       Le calcul mélange la hauteur de l'image (%) et celle de l'écran (svh) : pas de saut au chargement. */
+       Arrivée : le haut de l'image se cale à 10 % de l'écran, le sommet reste sous le menu.
+       Les % se rapportent à la hauteur de l'image : aucun saut au chargement. */
     --depart: calc(92% - 6svh);
+    --arrivee: max(0px, calc(100% - 90svh));
     transform: translateY(var(--depart));
     will-change: transform;
   }
   @media (min-width: 768px) {
     .montagne-wrap { --depart: calc(92% - 28svh); }
   }
-  .montagne { height: auto; }
+
+  .nom-balise {
+    font-family: var(--font-display);
+    font-size: 64px;
+    fill: var(--color-teal-950);
+    stroke: var(--color-paper);
+    stroke-width: 12px;
+    stroke-linejoin: round;
+    paint-order: stroke;
+  }
+  @media (min-width: 768px) {
+    .nom-balise { font-size: 46px; stroke-width: 9px; }
+  }
+  /* Les balises apparaissent quand le tracé les atteint : jamais depuis scale(0) */
+  .balise {
+    opacity: 0;
+    transform: scale(0.92);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: opacity 260ms var(--ease-out), transform 260ms var(--ease-out);
+  }
+  .balise[data-on='true'] { opacity: 1; transform: none; }
 
   .brume {
     position: absolute;
@@ -101,22 +185,9 @@ import montagne from '../assets/montagne.webp';
     line-height: 1.12;
   }
   .promesse {
-    position: relative;
-    isolation: isolate;
     font-family: var(--font-display);
-    font-size: clamp(1.8rem, 3.8vw, 3.3rem);
-    line-height: 1.1;
-    letter-spacing: 0;
-  }
-
-  /* Halo de brume derrière la promesse : lisible sur la neige comme sur la roche */
-  .promesse::before {
-    content: '';
-    position: absolute;
-    inset: -2.5rem -3rem;
-    z-index: -1;
-    background: radial-gradient(closest-side, rgb(247 245 240 / 0.92), rgb(247 245 240 / 0.6) 60%, rgb(247 245 240 / 0));
-    filter: blur(6px);
+    font-size: clamp(2rem, 4.4vw, 3.9rem);
+    line-height: 1.15;
   }
 
   /* Dérive lente du brouillard : décor permanent, très doux, coupé en mouvement réduit */
@@ -129,40 +200,51 @@ import montagne from '../assets/montagne.webp';
     from { translate: -4% 0; }
     to { translate: 4% 0; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    .balise { transition: none; }
+  }
 </style>
 
 <script>
   /**
-   * La montagne monte (translateY 42 % → 0) et le brouillard s'écarte et s'efface
-   * pendant que l'on fait défiler la hauteur du hero. Moins de 1 Ko, sans bibliothèque.
+   * Pilote le décor au scroll, sans bibliothèque (environ 1 Ko).
+   * Phase 1 (0 → 45 %) : la montagne monte, le brouillard s'écarte, la carte glisse.
+   * Phase 2 (30 → 88 %) : l'itinéraire se trace du bas vers le sommet, les balises s'allument.
    * On écrit transform et opacity directement sur chaque élément.
    */
   const hero = document.querySelector<HTMLElement>('[data-hero]');
   const reduit = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const borne = (v: number) => Math.min(1, Math.max(0, v));
 
   if (hero) {
     const montagne = hero.querySelector<HTMLElement>('[data-montagne]')!;
+    const carte = hero.querySelector<HTMLElement>('[data-carte]')!;
+    const clip = hero.querySelector<SVGRectElement>('[data-clip]')!;
     const brumes = [...hero.querySelectorAll<HTMLElement>('[data-brume]')];
+    const balises = [...hero.querySelectorAll<SVGGElement>('[data-balise]')];
+    const BAS = 940; // y du départ du tracé
+    const HAUT = 40; // y au-dessus du fanion
     let ticking = false;
 
     const render = () => {
       ticking = false;
       const course = hero.offsetHeight - window.innerHeight;
-      const p = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / course));
-      // Courbe ease-out : la montagne démarre vite puis se pose en douceur
-      const e = 1 - Math.pow(1 - p, 3);
+      const p = reduit.matches ? 1 : borne(-hero.getBoundingClientRect().top / course);
 
-      if (reduit.matches) {
-        montagne.style.transform = 'none';
-        brumes.forEach((b) => (b.style.opacity = '0'));
-        return;
-      }
-      montagne.style.transform = `translateY(calc(var(--depart) * ${(1 - e).toFixed(4)})) scale(${(1 + 0.04 * e).toFixed(4)})`;
+      // Phase 1 : courbe ease-out, la montagne démarre vite puis se pose
+      const e = 1 - Math.pow(1 - borne(p / 0.45), 3);
+      montagne.style.transform = `translateY(calc(var(--depart) * ${(1 - e).toFixed(4)} + var(--arrivee) * ${e.toFixed(4)}))`;
+      carte.style.transform = `translateY(${(-6 * e).toFixed(2)}%) scale(${(1 + 0.06 * e).toFixed(4)})`;
       brumes.forEach((b) => {
-        const sens = Number(b.dataset.brume);
-        b.style.transform = `translateX(${(sens * 30 * e).toFixed(2)}%)`;
-        b.style.opacity = String(Math.max(0, 1 - e * 1.4).toFixed(3));
+        b.style.transform = `translateX(${(Number(b.dataset.brume) * 30 * e).toFixed(2)}%)`;
+        b.style.opacity = Math.max(0, 1 - e * 1.4).toFixed(3);
       });
+
+      // Phase 2 : le rectangle de découpe remonte de BAS à HAUT
+      const t = borne((p - 0.3) / 0.58);
+      const y = BAS - t * (BAS - HAUT);
+      clip.setAttribute('transform', `translate(0 ${y.toFixed(1)})`);
+      balises.forEach((b) => (b.dataset.on = t > 0 && y <= Number(b.dataset.balise) ? 'true' : 'false'));
     };
 
     const onScroll = () => {
