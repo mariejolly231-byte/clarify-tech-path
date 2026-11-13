@@ -1255,43 +1255,10 @@ a.src-link:hover { text-decoration: underline; text-decoration-thickness: 1px; t
 .qr-ask h3 { font-size: 30px; margin-bottom: 6px; }
 .qr-ask p { font-size: 21px; line-height: 1.35; }
 
-/* Réponses en direct */
-.besoins-live { display: grid; gap: 20px; margin-top: 20px; }
-.bl-top { display: grid; grid-template-columns: repeat(3, 170px) 1fr; gap: 18px; align-items: stretch; }
-.bl-kpi { display: flex; flex-direction: column; justify-content: center; padding: 16px 18px; border-radius: 18px; background: var(--mint); }
-.bl-kpi b { font: 800 52px/1 var(--font-body); color: var(--teal); }
-.bl-kpi span { margin-top: 6px; font-size: 17px; line-height: 1.25; }
-.bl-tools { padding: 14px 20px; border-radius: 18px; background: #fff; box-shadow: inset 0 0 0 1.5px rgba(11, 79, 92, .14); }
-.bl-h { font-family: var(--font-hand); font-size: 26px; color: var(--teal); margin-bottom: 8px; }
-.bl-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 26px; }
-.bl-bar { display: grid; grid-template-columns: 150px 1fr 30px; align-items: center; gap: 10px; font-size: 17px; }
-.bl-track { height: 12px; border-radius: 99px; background: #EEF2F1; overflow: hidden; }
-.bl-track i { display: block; height: 100%; border-radius: 99px; background: var(--teal); transition: width 300ms var(--ease); }
-.bl-bar b { text-align: right; color: var(--teal); }
-.bl-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.bl-col { padding: 16px 22px; border-radius: 18px; background: #fff; box-shadow: inset 0 0 0 1.5px rgba(11, 79, 92, .14); min-height: 250px; }
-.bl-col ul { list-style: none; display: grid; gap: 8px; }
-.bl-col li { font-size: 19px; line-height: 1.35; padding-left: 16px; position: relative; }
-.bl-col li::before { content: "«"; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
-.bl-col li.bl-empty { color: var(--muted); font-style: italic; }
-.bl-col li.bl-empty::before { content: ""; }
-.bl-status { display: flex; align-items: center; gap: 16px; font-size: 16px; color: var(--muted); }
-.bl-refresh { --radius: 12px; padding: 6px 16px; font-family: var(--font-hand); font-size: 22px; background: var(--card); cursor: pointer; }
-.besoins-live[data-state="off"] .bl-msg { color: var(--ink); }
 .qr-ask { flex-direction: column; text-align: center; padding: 26px; }
 .qr-ask .qr { width: 300px; height: 300px; }
 .qr-ask h3 { font-size: 34px; }
 .qr-ask p { font-size: 22px; }
-.besoins-live { gap: 26px; margin-top: 26px; }
-.bl-top { grid-template-columns: repeat(3, 210px) 1fr; }
-.bl-kpi b { font-size: 72px; }
-.bl-kpi span { font-size: 20px; }
-.bl-h { font-size: 32px; }
-.bl-bar { font-size: 20px; grid-template-columns: 170px 1fr 30px; }
-.bl-track { height: 16px; }
-.bl-col { min-height: 360px; }
-.bl-col li { font-size: 24px; }
-.bl-status { font-size: 18px; }
 .sat-qr { width: 230px; height: 230px; }
 .sat p { font-size: 24px; }
 .sat b { font-size: 34px; }
@@ -1303,3 +1270,14 @@ a.src-link:hover { text-decoration: underline; text-decoration-thickness: 1px; t
 .chrome-x { margin: 0 14px; font-weight: 400; color: var(--muted); }
 .chrome-for { display: none; }
 .chrome-cfd { width: 66px; height: 48px; margin-right: 10px; background-position: center; }
+
+/* Slide 8 : les réponses du questionnaire, ouvertes dans Airtable */
+.rep-row { margin-top: 36px; }
+.rep { position: relative; padding: 34px 32px 30px; }
+.rep-n { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: var(--teal); color: #fff; font-family: var(--font-hand); font-size: 32px; margin-bottom: 16px; }
+.rep h3 { font-size: 40px; margin-bottom: 10px; }
+.rep p { font-size: 25px; line-height: 1.35; }
+.rep-go { display: flex; align-items: center; gap: 28px; margin-top: 44px; }
+.rep-go .btn-act { display: inline-flex; align-items: center; gap: 12px; font-size: 26px; padding: 18px 32px; text-decoration: none; }
+.rep-go .btn-act svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.rep-go p { font-size: 22px; color: var(--muted); }

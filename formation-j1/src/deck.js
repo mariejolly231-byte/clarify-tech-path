@@ -362,56 +362,6 @@
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
   }));
 
-  // Réponses du questionnaire de départ, lues en direct dans Airtable par le connecteur de la personne qui projette
-  (function besoinsLive() {
-    const box = document.querySelector(".besoins-live");
-    if (!box) return;
-    const F = { pole: "fldoW8l2Qh7qO8poF", mars: "fldLDwnp2ch4Sjh8x", outils: "fldSf3gee0RGkF7Tw", aise: "fldxxYJdpOWBacX2X", coince: "fld7miCxbFLxeMo9D", attente: "fldPYi3CjB9jAXYuX" };
-    const INPUT = { baseId: "appnUIHs250UX7TC8", tableId: "tble4jIBtv1FNKHHa", pageSize: 200 };
-    const TOOLS = ["Copilot", "ChatGPT", "Claude", "Gemini", "Le Chat (Mistral)", "Aucun"];
-    const $ = (c) => box.querySelector(c), msg = $(".bl-msg");
-    const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-    function render(payload, cache) {
-      if (typeof payload === "string") { try { payload = JSON.parse(payload); } catch (e) { msg.textContent = "Réponse d'Airtable illisible : " + payload.slice(0, 140); return; } }
-      if (!payload || !Array.isArray(payload.records)) { msg.textContent = "Airtable a répondu sans liste de réponses : vérifie la base et la table « Besoins J1 »."; return; }
-      const recs = ((payload && payload.records) || []).map((r) => r.cellValuesByFieldId || {});
-      const n = recs.length;
-      $(".bl-n").textContent = n;
-      const mars = recs.filter((r) => r[F.mars] && r[F.mars].name === "Oui").length;
-      $(".bl-mars").textContent = n ? Math.round(mars / n * 100) + " %" : "–";
-      const notes = recs.map((r) => r[F.aise]).filter((v) => typeof v === "number");
-      $(".bl-aise").textContent = notes.length ? (notes.reduce((a, b) => a + b, 0) / notes.length).toFixed(1).replace(".", ",") : "–";
-      const counts = Object.fromEntries(TOOLS.map((t) => [t, 0]));
-      recs.forEach((r) => (r[F.outils] || []).forEach((o) => { if (o && o.name in counts) counts[o.name]++; }));
-      const max = Math.max(1, ...Object.values(counts));
-      $(".bl-bars").innerHTML = TOOLS.map((t) => `<div class="bl-bar"><span class="bl-l">${esc(t)}</span><span class="bl-track"><i style="width:${counts[t] / max * 100}%"></i></span><b>${counts[t]}</b></div>`).join("");
-      const list = (k, el) => { const items = recs.map((r) => (r[k] || "").trim()).filter(Boolean).slice(-6).reverse(); $(el).innerHTML = items.length ? items.map((t) => `<li>${esc(t.length > 160 ? t.slice(0, 157) + "…" : t)}</li>`).join("") : '<li class="bl-empty">En attente des premières réponses</li>'; };
-      list(F.coince, ".bl-coince"); list(F.attente, ".bl-attentes");
-      box.dataset.state = "live";
-      const when = cache && cache.storedAt ? new Date(cache.storedAt) : new Date();
-      msg.textContent = "Mis à jour à " + when.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }) + " · se met à jour toute seule toutes les 30 secondes.";
-    }
-    function fail(err) {
-      const c = err && err.code;
-      const txt = { server_not_connected: "Ajoute le connecteur Airtable dans claude.ai, Paramètres, Connecteurs.", needs_reauth: "Reconnecte Airtable dans claude.ai, Paramètres, Connecteurs.", not_in_manifest: "La page n'a pas l'autorisation de lire Airtable : autorise-la depuis claude.ai.", approval_required: "Clique sur Actualiser pour autoriser la page à lire les réponses.", server_unavailable: "Airtable ne répond pas pour l'instant : nouvel essai dans 30 secondes.", selection_required: "Tu as plusieurs connecteurs Airtable : choisis-en un dans la fenêtre de claude.ai, puis Actualiser.", tool_error: "Airtable refuse la lecture : vérifie que ton compte a accès à la base « Grille d'audit ».", not_granted: "Cette vue ne permet pas d'utiliser tes connecteurs : ouvre le deck depuis claude.ai, connectée à ton compte.", capability_disabled: "Cette vue ne permet pas d'utiliser tes connecteurs : ouvre le deck depuis claude.ai, connectée à ton compte." }[c] || "Impossible de lire les réponses pour l'instant.";
-      // Le code reste affiché en petit : c'est lui qui dit quoi réparer
-      msg.textContent = txt + (c ? " [" + c + (c === "tool_error" || !txt.indexOf("Impossible") ? " : " + String(err.message || "").slice(0, 120) : "") + "]" : "");
-      if (["server_not_connected", "needs_reauth", "not_in_manifest", "blocked_by_policy"].includes(c)) box.dataset.state = "off";
-    }
-    let mcp = null;
-    (async () => {
-      try { if (window.claude && window.claude.use) mcp = await window.claude.use("mcp"); } catch (e) { mcp = null; }
-      if (!mcp) { box.dataset.state = "off"; msg.textContent = "Connecteurs indisponibles dans cette vue : ouvre le deck sur claude.ai, connectée à ton compte, pas en navigation privée ni depuis le fichier."; return; }
-      msg.textContent = "Lecture des réponses…";
-      mcp.watchTool("Airtable", "list_records_for_table", INPUT, (ev) => { if (ev.type === "data") render(ev.result.payload, ev.result.cache); else fail(ev.error); }, { refetchInterval: 30000 });
-    })();
-    $(".bl-refresh").addEventListener("click", async () => {
-      if (!mcp) { msg.textContent = "Les réponses s'affichent quand le deck est ouvert sur claude.ai."; return; }
-      msg.textContent = "Actualisation…";
-      try { const r = await mcp.callTool("Airtable", "list_records_for_table", INPUT, { cache: { refresh: true } }); render(r.payload, null); } catch (e) { fail(e); }
-    });
-  })();
-
   // Plein écran : bloqué quand le deck est affiché dans une page qui ne l'autorise pas
   function full() {
     const d = document, el = d.documentElement;
