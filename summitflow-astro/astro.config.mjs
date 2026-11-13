@@ -6,6 +6,6 @@ export default defineConfig({
   site: 'https://www.summitflow.fr',
   trailingSlash: 'never',
   build: { format: 'file', inlineStylesheets: 'auto' },
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/apercu-') })],
   vite: { plugins: [tailwindcss()] },
 });

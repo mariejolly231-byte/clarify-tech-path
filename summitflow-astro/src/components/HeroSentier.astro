@@ -1,0 +1,240 @@
+---
+/**
+ * Hero « Le sentier » (APERÇU, à valider par Marie).
+ * Une vraie photo de crête pyrénéenne, plein écran. Au départ, un voile de brouillard :
+ * il se lève au scroll, puis l'itinéraire se trace le long du vrai sentier jusqu'à la
+ * randonneuse au sommet. Les balises de la méthode apparaissent quand le tracé les atteint.
+ * Scroll : transform et opacity uniquement. Rien ne bouge au chargement.
+ */
+import { Image } from 'astro:assets';
+import { SITE } from '../data/site';
+import crete from '../assets/photos/crete-pyrenees.jpg';
+
+// Repère de la photo : 1440 × 1080. La randonneuse est vers (205, 400).
+const TRACE = 'M 470 900 C 455 860, 448 835, 440 810 S 425 750, 415 715 S 400 660, 378 620 S 340 540, 300 505 S 250 462, 226 448';
+const balises = [
+  { n: 1, nom: 'Observer', x: 440, y: 810, cote: 'd' },
+  { n: 2, nom: 'Clarifier', x: 415, y: 715, cote: 'g' },
+  { n: 3, nom: 'Simplifier', x: 378, y: 620, cote: 'd' },
+  { n: 4, nom: 'Former', x: 300, y: 505, cote: 'd' },
+];
+---
+
+<section class="hero relative" aria-labelledby="hero-titre" data-hero>
+  <!-- Décor -->
+  <div class="sticky top-0 h-svh overflow-hidden bg-paper" aria-hidden="true">
+    <div class="scene" data-scene>
+      <Image
+        src={crete}
+        alt=""
+        widths={[800, 1200, 1440]}
+        sizes="(min-aspect-ratio: 4/3) 100vw, 134svh"
+        quality={78}
+        loading="eager"
+        fetchpriority="high"
+        class="block h-full w-full"
+      />
+      <svg class="absolute inset-0 h-full w-full" viewBox="0 0 1440 1080" fill="none">
+        <defs>
+          <clipPath id="sentier-clip">
+            <rect x="0" y="0" width="1440" height="1080" transform="translate(0 1080)" data-clip></rect>
+          </clipPath>
+        </defs>
+        <g clip-path="url(#sentier-clip)">
+          <path d={TRACE} stroke="var(--color-teal-950)" stroke-width="9" stroke-linecap="round" opacity="0.55"></path>
+          <path d={TRACE} stroke="var(--color-paper)" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 11"></path>
+        </g>
+        {
+          balises.map((b) => (
+            <g class="balise" data-balise={b.y}>
+              <circle cx={b.x} cy={b.y} r="10" fill="var(--color-paper)" stroke="var(--color-teal-950)" stroke-width="3.5" />
+              <circle cx={b.x} cy={b.y} r="3.5" fill="var(--color-teal-700)" />
+              <text class="nom-balise" x={b.cote === 'd' ? b.x + 24 : b.x - 24} y={b.y + 11} text-anchor={b.cote === 'd' ? 'start' : 'end'}>
+                {b.n}. {b.nom}
+              </text>
+            </g>
+          ))
+        }
+        <g class="balise" data-balise="452">
+          <text class="nom-balise" x="262" y="388">Des équipes<tspan x="262" dy="1.05em">autonomes</tspan></text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Brouillard de départ : garantit la lisibilité du titre, se lève au scroll -->
+    <div class="voile absolute inset-0" data-voile></div>
+    <div class="brume brume-1" data-brume="-1"></div>
+    <div class="brume brume-2" data-brume="1"></div>
+
+    <!-- Fondu vers la section suivante -->
+    <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-paper to-transparent"></div>
+  </div>
+
+  <!-- Contenu -->
+  <div class="relative z-10 -mt-[100svh]">
+    <div class="container-sf flex min-h-svh flex-col items-center pt-28 text-center md:pt-36">
+      <p class="eyebrow text-teal-800">Marie Jolly · Occitanie</p>
+      <h1 id="hero-titre" class="titre-hero mt-5 max-w-5xl text-teal-950">
+        Des <em>équipes formées</em>,<br class="hidden sm:inline" /> des outils qui <em>bossent pour elles</em>
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-ink md:text-xl">
+        Formation IA et <span class="whitespace-nowrap">no-code</span>, audit et mise en place d’outils pour les PME
+        industrielles d’Occitanie.
+      </p>
+      <div class="mt-9 flex flex-wrap justify-center gap-3">
+        <a href={SITE.calendly} class="btn btn-dark" rel="noopener">Réserver 30 min d’échange</a>
+        <a href="#offres" class="btn btn-line bg-paper/70">Voir les deux axes</a>
+      </div>
+    </div>
+    <div class="h-[150svh]" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section class="pb-24 pt-10 md:pb-32" aria-label="La promesse Summit Flow">
+  <p class="promesse reveal container-sf max-w-5xl text-center text-teal-950">
+    Moins de bordel organisé.<br />
+    <em>Plus de flux simples</em> pour que l’industrie respire.
+  </p>
+</section>
+
+<noscript>
+  <style>
+    [data-clip] { transform: none !important; }
+    .balise { opacity: 1 !important; transform: none !important; }
+    .voile, .brume { display: none; }
+  </style>
+</noscript>
+
+<style>
+  .hero { overflow-x: clip; }
+
+  /* La scène garde le format 4:3 de la photo et couvre l'écran : la photo et le tracé
+     partagent le même repère, quel que soit le recadrage. --px / --py règlent le cadrage. */
+  .scene {
+    --w: max(100vw, 133.334svh);
+    --px: 0.12;
+    --py: 0.5;
+    position: absolute;
+    width: var(--w);
+    height: calc(var(--w) * 0.75);
+    left: calc((100vw - var(--w)) * var(--px));
+    top: calc((100svh - var(--w) * 0.75) * var(--py));
+    transform-origin: 15% 40%;
+    transform: scale(1.1);
+    will-change: transform;
+  }
+  @media (min-width: 768px) {
+    .scene { --py: 0.4; }
+  }
+  @media (min-aspect-ratio: 16/9) {
+    .scene { --py: 0.55; }
+  }
+
+  .voile {
+    background: linear-gradient(to bottom, rgb(247 245 240 / 0.82) 0%, rgb(247 245 240 / 0.7) 55%, rgb(247 245 240 / 0.45) 100%);
+    will-change: opacity;
+  }
+  .brume {
+    position: absolute;
+    left: -20%;
+    right: -20%;
+    height: 42svh;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(255 255 255 / 0.9), rgb(255 255 255 / 0));
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+  .brume-1 { bottom: 6svh; }
+  .brume-2 { bottom: -12svh; height: 34svh; }
+
+  .nom-balise {
+    font-family: var(--font-display);
+    font-size: 34px;
+    fill: var(--color-teal-950);
+    stroke: var(--color-paper);
+    stroke-width: 7px;
+    stroke-linejoin: round;
+    paint-order: stroke;
+  }
+  .balise {
+    opacity: 0;
+    transform: scale(0.92);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: opacity 260ms var(--ease-out), transform 260ms var(--ease-out);
+  }
+  .balise[data-on='true'] { opacity: 1; transform: none; }
+
+  .titre-hero {
+    font-size: clamp(2.3rem, 5.2vw, 4.6rem);
+    line-height: 1.12;
+  }
+  .promesse {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.4vw, 3.9rem);
+    line-height: 1.15;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .brume-1 { animation: derive 26s var(--ease-in-out) infinite alternate; }
+    .brume-2 { animation: derive 34s var(--ease-in-out) infinite alternate-reverse; }
+  }
+  @keyframes derive {
+    from { translate: -4% 0; }
+    to { translate: 4% 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .balise { transition: none; }
+  }
+</style>
+
+<script>
+  /**
+   * Phase 1 (0 → 40 %) : le brouillard se lève, la photo recule légèrement.
+   * Phase 2 (28 → 88 %) : l'itinéraire se trace du bas du sentier jusqu'au sommet.
+   */
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  const reduit = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const borne = (v: number) => Math.min(1, Math.max(0, v));
+
+  if (hero) {
+    const scene = hero.querySelector<HTMLElement>('[data-scene]')!;
+    const voile = hero.querySelector<HTMLElement>('[data-voile]')!;
+    const clip = hero.querySelector<SVGRectElement>('[data-clip]')!;
+    const brumes = [...hero.querySelectorAll<HTMLElement>('[data-brume]')];
+    const balises = [...hero.querySelectorAll<SVGGElement>('[data-balise]')];
+    const BAS = 905;
+    const HAUT = 440;
+    let ticking = false;
+
+    const render = () => {
+      ticking = false;
+      const course = hero.offsetHeight - window.innerHeight;
+      const p = reduit.matches ? 1 : borne(-hero.getBoundingClientRect().top / course);
+
+      const e = 1 - Math.pow(1 - borne(p / 0.4), 3);
+      scene.style.transform = `scale(${(1.1 - 0.1 * e).toFixed(4)})`;
+      voile.style.opacity = (1 - e).toFixed(3);
+      brumes.forEach((b) => {
+        b.style.transform = `translateX(${(Number(b.dataset.brume) * 30 * e).toFixed(2)}%)`;
+        b.style.opacity = Math.max(0, 1 - e * 1.4).toFixed(3);
+      });
+
+      const t = borne((p - 0.28) / 0.6);
+      const y = BAS - t * (BAS - HAUT);
+      clip.setAttribute('transform', `translate(0 ${y.toFixed(1)})`);
+      balises.forEach((b) => (b.dataset.on = t > 0 && y <= Number(b.dataset.balise) ? 'true' : 'false'));
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(render);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    reduit.addEventListener('change', render);
+    render();
+  }
+</script>
