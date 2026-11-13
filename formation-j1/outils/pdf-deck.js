@@ -12,7 +12,7 @@ const fs = require('fs'), path = require('path'), os = require('os');
   const p = await (await b.newContext({ viewport: { width: 1920, height: 1080 }, offline: true })).newPage();
   await p.goto('file://' + path.resolve('dist/jour1-deck.html') + '#1');
   await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(800);
-  await p.addStyleTag({ content: '.toolbar,.toast,.cover-actions,.notes,.help{display:none!important}' });
+  await p.addStyleTag({ content: '.toolbar,.toast,.cover-actions,.notes,.help,.bl-key,.bl-status{display:none!important}' });
   const n = await p.evaluate(() => document.querySelectorAll('.slide').length);
   for (let i = 1; i <= n; i++) {
     await p.evaluate((i) => { location.hash = '#' + i; }, i); await p.waitForTimeout(250);

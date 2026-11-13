@@ -323,9 +323,9 @@ slide(f'''    <p class="eyebrow">Tour de table</p>
         <li class="frag">Qu'est-ce qui a <strong>coincé</strong> ?</li>
         <li class="frag">Qu'attendez-vous de ce <strong>parcours</strong> ?</li>
       </ol>
-      <div class="qr-ask card sk fill-mint"><figure class="qr"><img src="images/qr-besoins.png" alt="QR code vers le questionnaire de départ"></figure><div><h3>Scanne et réponds</h3><p>Deux minutes, anonyme. On regarde vos réponses ensemble juste après.</p></div></div>
+      <div class="qr-ask card sk fill-mint"><figure class="qr"><img src="images/qr-besoins.png" alt="QR code vers le questionnaire de départ"></figure><div><h3>Scanne et réponds</h3><p>Deux minutes, anonyme. Vos réponses s'affichent ensemble sur la slide suivante.</p></div></div>
     </div>''', seq=1, section="9h00 · Point de départ",
- notes="Faire scanner le QR code dès l'arrivée : deux minutes, anonyme. Pendant qu'ils répondent, poser les questions à voix haute. Puis passer à la slide suivante pour ouvrir les réponses. Chiffre utile à l'oral : 65 % des utilisateurs de l'IA au travail craignent de prendre du retard s'ils ne s'adaptent pas vite (Microsoft, Work Trend Index 2026).")
+ notes="Faire scanner le QR code dès l'arrivée : deux minutes, anonyme. Pendant qu'ils répondent, poser les questions à voix haute. Puis passer à la slide suivante : les réponses s'y affichent en direct. Noter ce qui a coincé : on s'en sert au moment des limites et des doutes. Chiffre utile à l'oral : 65 % des utilisateurs de l'IA au travail craignent de prendre du retard s'ils ne s'adaptent pas vite (Microsoft, Work Trend Index 2026).")
 
 FREINS = [("Je ne vois pas à quoi ça me servirait", "71 %", "des entreprises qui n'utilisent pas l'IA n'y voient pas d'utilité.", "Chapitre 3 : l'arbre et vos situations."),
           ("Je ne sais pas m'en servir", "54 %", "citent le manque d'expertise.", "C'est l'objet de ces cinq jours."),
@@ -336,15 +336,22 @@ FREINS = [("Je ne vois pas à quoi ça me servirait", "71 %", "des entreprises q
           ("Et l'écologie ?", "", "Chaque demande consomme de l'énergie dans des centres de données.", "On s'en sert quand ça vaut le coup, pas par réflexe."),
           ("Je n'ai pas le temps", "", "Se former et essayer demande du temps au départ.", "On part de tâches qui en font gagner.")]
 fr = "".join(f'''<div class="frein frein--v2 sk fill-mint frag"><p class="frein-t">«&nbsp;{t}&nbsp;»</p>{f'<p class="frein-n"><b>{n}</b><span>{d}</span></p>' if n else f'<p class="frein-n frein-n--txt">{d}</p>'}<p class="frein-r"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>{r}</span></p></div>''' for t, n, d, r in FREINS)
-REP = [("1", "Ce qui a coincé", "Depuis mars, qu'est-ce qui n'a pas marché ou vous a freinés ?"),
-       ("2", "Ce que vous utilisez déjà", "Copilot, ChatGPT, autre chose, ou rien encore."),
-       ("3", "Ce que vous attendez", "Ce qui ferait de cette journée une journée utile pour vous.")]
-rep = "".join(f'''<div class="rep card sk fill-mint"><span class="rep-n">{n}</span><h3>{t}</h3><p>{d}</p></div>''' for n, t, d in REP)
-slide(f'''    <h2>Vos réponses, <span class="mark">on les regarde ensemble</span></h2>
-    <p class="howto">Ce que le questionnaire nous dit, dans cet ordre.</p>
-    <div class="cols cols--3 rep-row">{rep}</div>
-    <div class="rep-go"><a class="btn-act" href="https://airtable.com/appnUIHs250UX7TC8/tble4jIBtv1FNKHHa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>Ouvrir les réponses</a><p>Anonymes. On lit, on ne commente pas les personnes.</p></div>''', seq=1, section="9h00 · Point de départ",
- notes="Clique sur « Ouvrir les réponses » : la table « Besoins J1 » s'ouvre dans Airtable (base Grille d'audit), dans un nouvel onglet. Il faut être connectée à Airtable sur l'ordinateur de projection : vérifie-le avant 9h. Astuce : prépare une vue grille qui n'affiche que les trois colonnes utiles (ce qui a coincé, outils, attentes). Lis deux ou trois réponses par colonne à voix haute, et dis ce que la journée va y répondre. Note ce qui a coincé : on s'en sert au moment des limites et des doutes.")
+slide(f'''    <h2>Vos réponses, <span class="mark">en direct</span></h2>
+    <div class="besoins-live" data-state="wait">
+      <div class="bl-top">
+        <div class="bl-kpi"><b class="bl-n">0</b><span>réponses</span></div>
+        <div class="bl-kpi"><b class="bl-mars">–</b><span>ont suivi mars</span></div>
+        <div class="bl-kpi"><b class="bl-aise">–</b><span>aisance moyenne sur 5</span></div>
+        <div class="bl-tools"><p class="bl-h">Ce que vous utilisez déjà</p><div class="bl-bars"></div></div>
+      </div>
+      <div class="bl-cols">
+        <div class="bl-col"><p class="bl-h">Ce qui a coincé</p><ul class="bl-coince"></ul></div>
+        <div class="bl-col"><p class="bl-h">Ce que vous attendez</p><ul class="bl-attentes"></ul></div>
+      </div>
+      <p class="bl-status"><button class="bl-refresh sk sk--thin" type="button">Actualiser</button><span class="bl-msg">Lecture des réponses…</span></p>
+      <form class="bl-key" hidden><input type="password" autocomplete="off" spellcheck="false" placeholder="Clé Airtable (pat…)" aria-label="Clé Airtable en lecture seule"><button class="sk sk--thin" type="submit">Valider</button></form>
+    </div>''', seq=1, section="9h00 · Point de départ",
+ notes="Les réponses du questionnaire de départ, lues en direct dans Airtable (base Grille d'audit, table « Besoins J1 »). Elles se mettent à jour toutes les 30 secondes, ou avec le bouton Actualiser. Deux façons : sur claude.ai, avec ton connecteur Airtable (la première fois, clique sur Actualiser pour autoriser la page) ; ou depuis le fichier HTML ouvert dans ton navigateur, avec ta clé Airtable en lecture seule, collée une fois sur l'ordinateur de projection (elle reste dans ce navigateur). Lire deux ou trois attentes à voix haute, et dire ce que la journée va y répondre.")
 
 slide(f'''    <h2>Ce qui freine, <span class="mark mark--blush">le plus souvent</span></h2>
     <p class="howto">Ce qu'on entend, ce que disent les chiffres, et où on y répond aujourd'hui.</p>
