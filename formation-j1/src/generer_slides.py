@@ -316,7 +316,6 @@ slide(f'''    <p class="eyebrow">Aujourd'hui</p>
 
 slide(f'''    <p class="eyebrow">Tour de table</p>
     <h2>D'où part <span class="mark">chacun</span> ?</h2>
-    {art("depart-samoyede", "Le samoyède au point de départ d'un sentier, devant un panneau.", (100, 150, 560, 330))}
     <div class="cols mt" style="align-items:start">
       <ol class="steps">
         <li class="frag">Avez-vous suivi la journée de mars ?</li>
@@ -324,11 +323,9 @@ slide(f'''    <p class="eyebrow">Tour de table</p>
         <li class="frag">Qu'est-ce qui a <strong>coincé</strong> ?</li>
         <li class="frag">Qu'attendez-vous de ce <strong>parcours</strong> ?</li>
       </ol>
-      <div class="stack">
-        {tip("65 % des utilisateurs de l'IA au travail craignent de prendre du retard s'ils ne s'adaptent pas vite.", "Microsoft, Work Trend Index 2026, mai 2026", "frag")}
-      </div>
+      <div class="qr-ask card sk fill-mint"><figure class="qr"><img src="images/qr-besoins.png" alt="QR code vers le questionnaire de départ"></figure><div><h3>Scanne et réponds</h3><p>Deux minutes, anonyme. Vos réponses s'affichent ensemble sur la slide suivante.</p></div></div>
     </div>''', seq=1, section="9h00 · Point de départ",
- notes="Flèche droite pour faire apparaître les questions une par une. Noter au tableau ce qui a coincé : on s'en sert au moment des limites et des doutes.")
+ notes="Faire scanner le QR code dès l'arrivée : deux minutes, anonyme. Pendant qu'ils répondent, poser les questions à voix haute. Puis passer à la slide suivante : les réponses s'y affichent en direct. Noter ce qui a coincé : on s'en sert au moment des limites et des doutes. Chiffre utile à l'oral : 65 % des utilisateurs de l'IA au travail craignent de prendre du retard s'ils ne s'adaptent pas vite (Microsoft, Work Trend Index 2026).")
 
 FREINS = [("Je ne vois pas à quoi ça me servirait", "71 %", "des entreprises qui n'utilisent pas l'IA n'y voient pas d'utilité.", "Chapitre 3 : l'arbre et vos situations."),
           ("Je ne sais pas m'en servir", "54 %", "citent le manque d'expertise.", "C'est l'objet de ces cinq jours."),
@@ -339,6 +336,22 @@ FREINS = [("Je ne vois pas à quoi ça me servirait", "71 %", "des entreprises q
           ("Et l'écologie ?", "", "Chaque demande consomme de l'énergie dans des centres de données.", "On s'en sert quand ça vaut le coup, pas par réflexe."),
           ("Je n'ai pas le temps", "", "Se former et essayer demande du temps au départ.", "On part de tâches qui en font gagner.")]
 fr = "".join(f'''<div class="frein frein--v2 sk fill-mint frag"><p class="frein-t">«&nbsp;{t}&nbsp;»</p>{f'<p class="frein-n"><b>{n}</b><span>{d}</span></p>' if n else f'<p class="frein-n frein-n--txt">{d}</p>'}<p class="frein-r"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span>{r}</span></p></div>''' for t, n, d, r in FREINS)
+slide(f'''    <h2>Vos réponses, <span class="mark">en direct</span></h2>
+    <div class="besoins-live" data-state="wait">
+      <div class="bl-top">
+        <div class="bl-kpi"><b class="bl-n">0</b><span>réponses</span></div>
+        <div class="bl-kpi"><b class="bl-mars">–</b><span>ont suivi mars</span></div>
+        <div class="bl-kpi"><b class="bl-aise">–</b><span>aisance moyenne sur 5</span></div>
+        <div class="bl-tools"><p class="bl-h">Ce que vous utilisez déjà</p><div class="bl-bars"></div></div>
+      </div>
+      <div class="bl-cols">
+        <div class="bl-col"><p class="bl-h">Ce qui a coincé</p><ul class="bl-coince"></ul></div>
+        <div class="bl-col"><p class="bl-h">Ce que vous attendez</p><ul class="bl-attentes"></ul></div>
+      </div>
+      <p class="bl-status"><button class="bl-refresh sk sk--thin" type="button">Actualiser</button><span class="bl-msg">Les réponses s'affichent quand le deck est ouvert sur claude.ai.</span></p>
+    </div>''', seq=1, section="9h00 · Point de départ",
+ notes="Les réponses du questionnaire de départ, lues en direct dans Airtable (base Grille d'audit, table « Besoins J1 »). Elles se mettent à jour toutes les 30 secondes, ou avec le bouton Actualiser. Ça ne fonctionne que depuis claude.ai, avec ton connecteur Airtable : la première fois, claude.ai te demande d'autoriser la page. Lire deux ou trois attentes à voix haute, et dire ce que la journée va y répondre.")
+
 slide(f'''    <h2>Ce qui freine, <span class="mark mark--blush">le plus souvent</span></h2>
     <p class="howto">Ce qu'on entend, ce que disent les chiffres, et où on y répond aujourd'hui.</p>
     <div class="freins freins--v2">{fr}</div>
@@ -738,7 +751,7 @@ def tree_html(anim=True):
     return f'<div class="tree"><svg class="tree-lines" viewBox="0 0 1390 508" aria-hidden="true">{svg}</svg>{nodes}{leaves}</div>'
 
 slide(f'''    <h2>Quelle brique <span class="mark">pour quelle tâche ?</span></h2>
-    <p class="tree-gate frag" data-step="0"><b class="hand">Avant tout : ai-je le droit ?</b>Données personnelles, clients ou confidentielles : seulement dans un outil validé. Dans le doute, on demande à la référente IA.</p>
+    <p class="tree-gate frag" data-step="0"><b class="hand">Avant tout : ai-je le droit ?</b>Données personnelles, clients ou confidentielles : seulement dans un outil validé. Dans le doute, on demande à Romane, la référente IA.</p>
     {tree_html()}
     <div class="tree-foot">
       <p class="tree-legend"><span><i class="lg-mint"></i>assistant</span><span><i class="lg-lav"></i>automatisation</span><span><i class="lg-blush"></i>agent</span></p>
@@ -1094,7 +1107,7 @@ slide(f'''    <p class="eyebrow">Qui porte quoi</p>
     <div class="pic-row pic-row--top mt">
       <div class="stack-lg">
         <div>{ref}</div>
-        <div class="card sk fill-teal frag"><h3>{icon("users")}La référente IA</h3><p>Elle garde la vue d'ensemble. Les référents de pôle font avancer la grille dans leur équipe.</p></div>
+        <div class="card sk fill-teal frag"><h3>{icon("users")}Romane, la référente IA</h3><p>Elle garde la vue d'ensemble. Les référents de pôle font avancer la grille dans leur équipe.</p></div>
       </div>
       {pic("referents-samoyede", "Trois samoyèdes encordés montent vers un drapeau : métier, processus, technologie, un cap commun.", 680, 383)}
     </div>''', seq=7, section="16h30 · Lancement de l'intersession",
@@ -1119,11 +1132,11 @@ slide(f'''    <p class="eyebrow">Ce soir</p>
     <ul class="checks mt">{gl}</ul>''', seq=7, section="16h30 · Lancement de l'intersession",
  notes="Tour de table de clôture : chacun dit en une phrase ce qu'il sait faire maintenant et ce qu'il va observer dans son travail d'ici janvier. Cocher au fur et à mesure. Revenir sur les attentes notées au tour de table du matin. Ce tour de table sert aussi d'évaluation des acquis.")
 
-slide(f'''    <div class="lockup rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><div><p class="lockup-name">Summit Flow</p><p class="lockup-sub">Marie Jolly · contact@summitflow.fr · summitflow.fr</p></div></div>
+slide(f'''    <div class="lockup lockup--duo rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><img class="partner-logo" src="images/logo-cfd-formation.png" alt="Logo CFD Formation"><div><p class="lockup-name">Summit Flow, pour CFD Formation</p><p class="lockup-sub">Marie Jolly · contact@summitflow.fr · summitflow.fr</p></div></div>
     <div class="cover-body">
       <h1 class="rise">Merci, et <span class="mark">bonne observation</span></h1>
       <p class="lead rise">D'ici le 22 janvier, on observe, on note, on remplit la grille.</p>
-      <div class="sat rise"><figure class="qr qr--todo sat-qr"><p>QR code<br>à ajouter</p></figure><p><b>Votre avis sur la journée</b>Deux minutes avant de partir : le questionnaire de satisfaction.</p></div>
+      <div class="sat rise"><figure class="qr sat-qr"><img src="images/qr-satisfaction.png" alt="QR code vers le questionnaire de satisfaction"></figure><p><b>Votre avis sur la journée</b>Deux minutes avant de partir : le questionnaire de satisfaction.</p></div>
     </div>
     {art("observation-samoyede", "Le samoyède renifle des traces dans la neige, un carnet ouvert à côté.", (40, 0, 980, 640), COVER_RIDGE)}''', cls="slide--cover slide--full", section="Fin du jour 1")
 

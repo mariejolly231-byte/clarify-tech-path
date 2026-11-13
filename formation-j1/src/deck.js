@@ -24,7 +24,9 @@
   // Le vrai logo signe chaque slide : chargé une seule fois, réutilisé en fond par le pied de page
   const logoImg = document.querySelector(".brand-logo");
   if (logoImg) document.documentElement.style.setProperty("--logo", 'url("' + logoImg.src + '")');
-  const LOGO = '<i class="chrome-logo" aria-hidden="true"></i>Summit Flow';
+  const cfdImg = document.querySelector(".partner-logo");
+  if (cfdImg) document.documentElement.style.setProperty("--logo-cfd", 'url("' + cfdImg.src + '")');
+  const LOGO = '<i class="chrome-logo" aria-hidden="true"></i>Summit Flow' + (cfdImg ? '<span class="chrome-for">pour</span><i class="chrome-cfd" role="img" aria-label="CFD Formation"></i>' : "");
 
   function store(key, value) {
     try { if (value === undefined) return localStorage.getItem("sf-j1-" + key); localStorage.setItem("sf-j1-" + key, value); } catch (e) { return null; }
@@ -164,7 +166,7 @@
   };
   // [brique, logique, couleur, pourquoi, module Copilot, catégorie de la carte, libellé court]
   const LEAF = {
-    stop: ["On s'arrête et on vérifie", "", "card", "Données personnelles, clients ou confidentielles : on demande à la référente IA avant d'aller plus loin.", "Avant tout outil : la référente IA", "stop", "on s'arrête"],
+    stop: ["On s'arrête et on vérifie", "", "card", "Données personnelles, clients ou confidentielles : on demande à Romane, la référente IA, avant d'aller plus loin.", "Avant tout outil : la référente IA", "stop", "on s'arrête"],
     prompt: ["Une demande", "Assistant", "mint", "Un besoin ponctuel : tout le contexte tient dans l'échange ou un fichier joint.", "Copilot Chat : une demande, avec un fichier joint si besoin", "assistant", "assistant · Copilot Chat"],
     notes: ["Un bloc-notes", "Notebook", "mint", "Un dossier de documents à croiser pour cette tâche.", "Copilot Notebooks : un bloc-notes avec les documents du dossier", "notebook", "notebook · Notebooks"],
     cowork: ["Cowork", "Agent, selon la licence", "blush", "Plusieurs étapes et plusieurs applications : Copilot enchaîne pour toi.", "Copilot Cowork, s'il est activé chez vous", "agent", "agent · Cowork"],
@@ -359,6 +361,53 @@
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
   }));
+
+  // Réponses du questionnaire de départ, lues en direct dans Airtable par le connecteur de la personne qui projette
+  (function besoinsLive() {
+    const box = document.querySelector(".besoins-live");
+    if (!box) return;
+    const F = { pole: "fldoW8l2Qh7qO8poF", mars: "fldLDwnp2ch4Sjh8x", outils: "fldSf3gee0RGkF7Tw", aise: "fldxxYJdpOWBacX2X", coince: "fld7miCxbFLxeMo9D", attente: "fldPYi3CjB9jAXYuX" };
+    const INPUT = { baseId: "appnUIHs250UX7TC8", tableId: "tble4jIBtv1FNKHHa", pageSize: 200 };
+    const TOOLS = ["Copilot", "ChatGPT", "Claude", "Gemini", "Le Chat (Mistral)", "Aucun"];
+    const $ = (c) => box.querySelector(c), msg = $(".bl-msg");
+    const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    function render(payload, cache) {
+      const recs = ((payload && payload.records) || []).map((r) => r.cellValuesByFieldId || {});
+      const n = recs.length;
+      $(".bl-n").textContent = n;
+      const mars = recs.filter((r) => r[F.mars] && r[F.mars].name === "Oui").length;
+      $(".bl-mars").textContent = n ? Math.round(mars / n * 100) + " %" : "–";
+      const notes = recs.map((r) => r[F.aise]).filter((v) => typeof v === "number");
+      $(".bl-aise").textContent = notes.length ? (notes.reduce((a, b) => a + b, 0) / notes.length).toFixed(1).replace(".", ",") : "–";
+      const counts = Object.fromEntries(TOOLS.map((t) => [t, 0]));
+      recs.forEach((r) => (r[F.outils] || []).forEach((o) => { if (o && o.name in counts) counts[o.name]++; }));
+      const max = Math.max(1, ...Object.values(counts));
+      $(".bl-bars").innerHTML = TOOLS.map((t) => `<div class="bl-bar"><span class="bl-l">${esc(t)}</span><span class="bl-track"><i style="width:${counts[t] / max * 100}%"></i></span><b>${counts[t]}</b></div>`).join("");
+      const list = (k, el) => { const items = recs.map((r) => (r[k] || "").trim()).filter(Boolean).slice(-6).reverse(); $(el).innerHTML = items.length ? items.map((t) => `<li>${esc(t.length > 160 ? t.slice(0, 157) + "…" : t)}</li>`).join("") : '<li class="bl-empty">En attente des premières réponses</li>'; };
+      list(F.coince, ".bl-coince"); list(F.attente, ".bl-attentes");
+      box.dataset.state = "live";
+      const when = cache && cache.storedAt ? new Date(cache.storedAt) : new Date();
+      msg.textContent = "Mis à jour à " + when.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }) + " · se met à jour toute seule toutes les 30 secondes.";
+    }
+    function fail(err) {
+      const c = err && err.code;
+      const txt = { server_not_connected: "Ajoute le connecteur Airtable dans claude.ai, Paramètres, Connecteurs.", needs_reauth: "Reconnecte Airtable dans claude.ai, Paramètres, Connecteurs.", not_in_manifest: "La page n'a pas l'autorisation de lire Airtable : autorise-la depuis claude.ai.", approval_required: "Clique sur Actualiser pour autoriser la page à lire les réponses.", server_unavailable: "Airtable ne répond pas pour l'instant : nouvel essai dans 30 secondes.", selection_required: "Choisis ton compte Airtable dans la fenêtre de claude.ai." }[c] || "Impossible de lire les réponses pour l'instant.";
+      msg.textContent = txt;
+      if (["server_not_connected", "needs_reauth", "not_in_manifest", "blocked_by_policy"].includes(c)) box.dataset.state = "off";
+    }
+    let mcp = null;
+    (async () => {
+      try { if (window.claude && window.claude.use) mcp = await window.claude.use("mcp"); } catch (e) { mcp = null; }
+      if (!mcp) { box.dataset.state = "off"; return; }
+      msg.textContent = "Lecture des réponses…";
+      mcp.watchTool("Airtable", "list_records_for_table", INPUT, (ev) => { if (ev.type === "data") render(ev.result.payload, ev.result.cache); else fail(ev.error); }, { refetchInterval: 30000 });
+    })();
+    $(".bl-refresh").addEventListener("click", async () => {
+      if (!mcp) { msg.textContent = "Les réponses s'affichent quand le deck est ouvert sur claude.ai."; return; }
+      msg.textContent = "Actualisation…";
+      try { const r = await mcp.callTool("Airtable", "list_records_for_table", INPUT, { cache: { refresh: true } }); render(r.payload, null); } catch (e) { fail(e); }
+    });
+  })();
 
   // Plein écran : bloqué quand le deck est affiché dans une page qui ne l'autorise pas
   function full() {

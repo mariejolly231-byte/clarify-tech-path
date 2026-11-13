@@ -142,12 +142,27 @@
         <li class="frag">Qu'est-ce qui a <strong>coincé</strong> ?</li>
         <li class="frag">Qu'attendez-vous de ce <strong>parcours</strong> ?</li>
       </ol>
-      <div class="stack">
-        <aside class="tip sk sk--thin frag"><svg class="bulb" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 4c-9 0-15 7-15 15 0 6 3 9 6 13 1.5 2 2 4 2 6h14c0-2 .5-4 2-6 3-4 6-7 6-13 0-8-6-15-15-15z" fill="#D6F1E6" stroke="#1F2A2E" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 42h12M15 47h10" stroke="#1F2A2E" stroke-width="2.5" stroke-linecap="round"/><path d="M20 20v12M16 24l4 4 4-4" stroke="#0B4F5C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><p class="tip-txt">65 % des utilisateurs de l'IA au travail craignent de prendre du retard s'ils ne s'adaptent pas vite.</p><p class="tip-src">Source : <a class="src-link" href="https://www.microsoft.com/en-us/worklab/work-trend-index/agents-human-agency-and-the-opportunity-for-every-organization" target="_blank" rel="noopener">Microsoft, Work Trend Index 2026, mai 2026</a></p></div></aside>
-      </div>
+      <div class="qr-ask card sk fill-mint"><figure class="qr"><img src="images/qr-besoins.png" alt="QR code vers le questionnaire de départ"></figure><div><h3>Scanne et réponds</h3><p>Deux minutes, anonyme. Vos réponses s'affichent ensemble sur la slide suivante.</p></div></div>
     </div>
-    <figure class="art" style="right:100px;bottom:150px;width:560px;height:330px"><img class="art-media" src="images/depart-samoyede.png" alt="Le samoyède au point de départ d'un sentier, devant un panneau."></figure>
-    <aside class="notes">Flèche droite pour faire apparaître les questions une par une. Noter au tableau ce qui a coincé : on s'en sert au moment des limites et des doutes.</aside>
+    <aside class="notes">Faire scanner le QR code dès l'arrivée : deux minutes, anonyme. Pendant qu'ils répondent, poser les questions à voix haute. Puis passer à la slide suivante : les réponses s'y affichent en direct. Noter ce qui a coincé : on s'en sert au moment des limites et des doutes. Chiffre utile à l'oral : 65 % des utilisateurs de l'IA au travail craignent de prendre du retard s'ils ne s'adaptent pas vite (Microsoft, Work Trend Index 2026).</aside>
+  </section>
+
+  <section class="slide " data-seq="1" data-section="Chapitre 1 · Point de départ" aria-roledescription="slide">
+    <h2>Vos réponses, <span class="mark">en direct</span></h2>
+    <div class="besoins-live" data-state="wait">
+      <div class="bl-top">
+        <div class="bl-kpi"><b class="bl-n">0</b><span>réponses</span></div>
+        <div class="bl-kpi"><b class="bl-mars">–</b><span>ont suivi mars</span></div>
+        <div class="bl-kpi"><b class="bl-aise">–</b><span>aisance moyenne sur 5</span></div>
+        <div class="bl-tools"><p class="bl-h">Ce que vous utilisez déjà</p><div class="bl-bars"></div></div>
+      </div>
+      <div class="bl-cols">
+        <div class="bl-col"><p class="bl-h">Ce qui a coincé</p><ul class="bl-coince"></ul></div>
+        <div class="bl-col"><p class="bl-h">Ce que vous attendez</p><ul class="bl-attentes"></ul></div>
+      </div>
+      <p class="bl-status"><button class="bl-refresh sk sk--thin" type="button">Actualiser</button><span class="bl-msg">Les réponses s'affichent quand le deck est ouvert sur claude.ai.</span></p>
+    </div>
+    <aside class="notes">Les réponses du questionnaire de départ, lues en direct dans Airtable (base Grille d'audit, table « Besoins J1 »). Elles se mettent à jour toutes les 30 secondes, ou avec le bouton Actualiser. Ça ne fonctionne que depuis claude.ai, avec ton connecteur Airtable : la première fois, claude.ai te demande d'autoriser la page. Lire deux ou trois attentes à voix haute, et dire ce que la journée va y répondre.</aside>
   </section>
 
   <section class="slide " data-seq="1" data-section="Chapitre 1 · Point de départ" aria-roledescription="slide">
@@ -514,7 +529,7 @@
 
   <section class="slide " data-seq="3" data-section="Chapitre 3 · Quand utiliser quoi" aria-roledescription="slide">
     <h2>Quelle brique <span class="mark">pour quelle tâche ?</span></h2>
-    <p class="tree-gate frag" data-step="0"><b class="hand">Avant tout : ai-je le droit ?</b>Données personnelles, clients ou confidentielles : seulement dans un outil validé. Dans le doute, on demande à la référente IA.</p>
+    <p class="tree-gate frag" data-step="0"><b class="hand">Avant tout : ai-je le droit ?</b>Données personnelles, clients ou confidentielles : seulement dans un outil validé. Dans le doute, on demande à Romane, la référente IA.</p>
     <div class="tree"><svg class="tree-lines" viewBox="0 0 1390 508" aria-hidden="true"><g class="frag" data-step="1"><path d="M150 250.0 H164 V250.0 H175"/></g><g class="frag" data-step="2"><path d="M380 250.0 H394 V101.0 H410"/><text x="418" y="54.0" class="tl">non</text><path d="M600 101.0 H614 V31.0 H1050"/><path d="M600 101.0 H614 V101.0 H1050"/><path d="M600 101.0 H614 V171.0 H1050"/></g><g class="frag" data-step="3"><path d="M380 250.0 H394 V267.0 H410"/><text x="418" y="212.0" class="tl">oui</text><path d="M600 267.0 H614 V267.0 H1050"/><text x="1044" y="259.0" text-anchor="end" class="tl">oui</text></g><g class="frag" data-step="4"><path d="M600 267.0 H614 V338.0 H630"/><text x="638" y="289.0" class="tl">non</text><path d="M820 338.0 H834 V337.0 H1050"/><text x="1044" y="329.0" text-anchor="end" class="tl">oui</text></g><g class="frag" data-step="5"><path d="M820 338.0 H834 V408.0 H848"/><text x="856" y="359.0" class="tl">non</text><path d="M1004 408.0 H1018 V407.0 H1050"/><text x="1044" y="399.0" text-anchor="end" class="tl">non</text><path d="M1004 408.0 H1018 V477.0 H1050"/><text x="1044" y="469.0" text-anchor="end" class="tl">oui</text></g></svg><div class="tnode tnode--root frag" data-node="root" data-step="1" style="left:0px;top:200px;width:150px;height:100px"><span>Une tâche à réaliser</span></div><div class="tnode frag" data-node="q1" data-step="1" style="left:175px;top:185px;width:205px;height:130px"><span>Vais-je la refaire souvent, de la même façon ?</span></div><div class="tnode frag" data-node="qc" data-step="2" style="left:410px;top:61px;width:190px;height:80px"><span>De quel contexte a-t-elle besoin ?</span></div><div class="tnode frag" data-node="qj" data-step="3" style="left:410px;top:219px;width:190px;height:96px"><span>Règles stables, rien à interpréter ?</span></div><div class="tnode frag" data-node="qa" data-step="4" style="left:630px;top:296px;width:190px;height:84px"><span>Doit-elle se lancer seule, à heure fixe ?</span></div><div class="tnode frag" data-node="qt" data-step="5" style="left:848px;top:366px;width:156px;height:84px"><span>Consignes et documents partagés ?</span></div><div class="tleaf fill-mint frag" data-leaf="prompt" data-step="2" style="left:1050px;top:0px;width:340px;height:62px"><b class="hand">Une demande</b><span>Tout tient dans l'échange ou un fichier</span></div><div class="tleaf fill-mint frag" data-leaf="notes" data-step="2" style="left:1050px;top:70px;width:340px;height:62px"><b class="hand">Un bloc-notes</b><span>Plusieurs documents à croiser</span></div><div class="tleaf fill-blush frag tleaf--check" data-leaf="cowork" data-step="2" style="left:1050px;top:140px;width:340px;height:62px"><b class="hand">Cowork, à vérifier</b><span>Plusieurs étapes, plusieurs applications</span></div><div class="tleaf fill-lav frag" data-leaf="flux" data-step="3" style="left:1050px;top:236px;width:340px;height:62px"><b class="hand">Une automatisation simple</b><span>Une règle Outlook, des règles fixes</span></div><div class="tleaf fill-blush frag" data-leaf="plan" data-step="4" style="left:1050px;top:306px;width:340px;height:62px"><b class="hand">Une demande planifiée</b><span>Elle se relance seule, chaque jour ou semaine</span></div><div class="tleaf fill-mint frag" data-leaf="req" data-step="5" style="left:1050px;top:376px;width:340px;height:62px"><b class="hand">Une requête enregistrée</b><span>Ta méthode, rappelée quand tu veux</span></div><div class="tleaf fill-mint frag" data-leaf="agent" data-step="5" style="left:1050px;top:446px;width:340px;height:62px"><b class="hand">Un agent Copilot</b><span>Agent Builder : un assistant dédié, partagé</span></div></div>
     <div class="tree-foot">
       <p class="tree-legend"><span><i class="lg-mint"></i>assistant</span><span><i class="lg-lav"></i>automatisation</span><span><i class="lg-blush"></i>agent</span></p>
@@ -853,7 +868,7 @@
     <div class="pic-row pic-row--top mt">
       <div class="stack-lg">
         <div><div class="fill-line rise"><span>Commerce</span><span class="f" contenteditable="true" data-k="ref-0" data-ph="nom à écrire en séance"></span></div><div class="fill-line rise"><span>RH et comptabilité</span><span class="f" contenteditable="true" data-k="ref-1" data-ph="nom à écrire en séance"></span></div><div class="fill-line rise"><span>Communication</span><span class="f" contenteditable="true" data-k="ref-2" data-ph="nom à écrire en séance"></span></div></div>
-        <div class="card sk fill-mint frag"><h3><svg aria-hidden="true"><use href="#i-users"/></svg>La référente IA</h3><p>Elle garde la vue d'ensemble. Les référents de pôle font avancer la grille dans leur équipe.</p></div>
+        <div class="card sk fill-mint frag"><h3><svg aria-hidden="true"><use href="#i-users"/></svg>Romane, la référente IA</h3><p>Elle garde la vue d'ensemble. Les référents de pôle font avancer la grille dans leur équipe.</p></div>
       </div>
       <figure class="pic" style="width:680px;height:383px;"><img src="images/referents-samoyede.png" alt="Trois samoyèdes encordés montent vers un drapeau : métier, processus, technologie, un cap commun."></figure>
     </div>
@@ -882,11 +897,11 @@
   </section>
 
   <section class="slide slide--cover slide--full" data-section="Fin du jour 1" aria-roledescription="slide">
-    <div class="lockup rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><div><p class="lockup-name">Summit Flow</p><p class="lockup-sub">Marie Jolly · contact@summitflow.fr · summitflow.fr</p></div></div>
+    <div class="lockup lockup--duo rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><img class="partner-logo" src="images/logo-cfd-formation.png" alt="Logo CFD Formation"><div><p class="lockup-name">Summit Flow, pour CFD Formation</p><p class="lockup-sub">Marie Jolly · contact@summitflow.fr · summitflow.fr</p></div></div>
     <div class="cover-body">
       <h1 class="rise">Merci, et <span class="mark">bonne observation</span></h1>
       <p class="lead rise">D'ici le 22 janvier, on observe, on note, on remplit la grille.</p>
-      <div class="sat rise"><figure class="qr qr--todo sat-qr"><p>QR code<br>à ajouter</p></figure><p><b>Votre avis sur la journée</b>Deux minutes avant de partir : le questionnaire de satisfaction.</p></div>
+      <div class="sat rise"><figure class="qr sat-qr"><img src="images/qr-satisfaction.png" alt="QR code vers le questionnaire de satisfaction"></figure><p><b>Votre avis sur la journée</b>Deux minutes avant de partir : le questionnaire de satisfaction.</p></div>
     </div>
     <svg class="cover-ridge illu" viewBox="0 0 900 360" aria-hidden="true">
       <path data-d="0.9" d="M20 340 L250 150 L360 240 L560 40 L700 190 L780 130 L890 260 L890 340 Z" fill="#D6F1E6" filter="url(#rough)"/>
