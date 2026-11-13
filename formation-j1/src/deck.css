@@ -413,7 +413,7 @@ kbd { font-family: var(--font-body); font-weight: 700; background: #fff; border:
   .slide.is-active .rise, .slide.is-active .mark::before, .live::before { animation: none; }
 }
 
-@page { size: 1920px 1080px; margin: 0; }
+@page { size: 508mm 285.75mm; margin: 0; }
 @media print {
   html, body { background: #fff; overflow: visible; height: auto; }
   .viewport { position: static; display: block; }
@@ -543,7 +543,7 @@ body.tool-spot .spot { opacity: 1; }
   .slide.is-active, .slide.is-active .eyebrow, .slide.is-active h2, .slide.is-active .num, .slide.is-active .art, .slide.is-active .art img.art-media { animation: none; }
   .frag { filter: none; }
 }
-@page { size: 1920px 1080px; margin: 0; }
+@page { size: 508mm 285.75mm; margin: 0; }
 @media print {
   .slide { transform: none !important; animation: none !important; }
   .slide * { animation: none !important; }

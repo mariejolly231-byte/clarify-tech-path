@@ -430,7 +430,23 @@
       } catch (e) { if (!e || e.code !== "declined") toast("Export indisponible ici : ouvre le deck dans ton navigateur, puis Exporter en PDF.", 5000); }
       return;
     }
-    toast("Dans la fenêtre qui s'ouvre : « Enregistrer au format PDF », marges aucune, arrière-plans cochés.", 5000);
+    // Hors de claude.ai : le PDF complet est intégré au fichier, une slide entière par page, quel que soit le navigateur
+    const src = document.getElementById("pdf-deck");
+    let blob = null;
+    if (src) {
+      const bin = atob(src.textContent.trim()), bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      blob = new Blob([bytes], { type: "application/pdf" });
+    } else {
+      try { const r = await fetch("jour1-deck.pdf"); if (r.ok) blob = await r.blob(); } catch (e) { blob = null; }
+    }
+    if (blob) {
+      const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "deck-jour1-lagarrigue.pdf";
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      toast("PDF téléchargé : une slide entière par page.");
+      return;
+    }
+    toast("Dans la fenêtre qui s'ouvre : « Enregistrer au format PDF », format paysage, marges aucune, arrière-plans cochés.", 5000);
     setTimeout(() => window.print(), 700);
   }
   document.addEventListener("deck:full", full);
