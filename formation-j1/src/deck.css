@@ -1299,3 +1299,7 @@ a.src-link:hover { text-decoration: underline; text-decoration-thickness: 1px; t
 /* Logo CFD Formation dans le pied de page de chaque slide (intervention en sous-traitance) */
 .chrome-for { margin: 0 10px 0 14px; font-weight: 500; color: var(--muted); }
 .chrome-cfd { display: inline-block; width: 92px; height: 46px; background: var(--logo-cfd) left center / contain no-repeat; vertical-align: middle; }
+.chrome-cfd { width: 84px; height: 44px; margin-right: 8px; }
+.chrome-x { margin: 0 14px; font-weight: 400; color: var(--muted); }
+.chrome-for { display: none; }
+.chrome-cfd { width: 66px; height: 48px; margin-right: 10px; background-position: center; }

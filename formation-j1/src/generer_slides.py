@@ -234,9 +234,9 @@ def chapter_slide(n):
 
 # ---------- 9h00 Point de départ ----------
 slide(f'''    <div class="lockup lockup--duo rise">
-      <img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow">
       <img class="partner-logo" src="images/logo-cfd-formation.png" alt="Logo CFD Formation">
-      <div><p class="lockup-name">Summit Flow, pour CFD Formation</p><p class="lockup-sub">Formation Automatisation et IA agentique</p></div>
+      <img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow">
+      <div><p class="lockup-name">CFD × Summit Flow</p><p class="lockup-sub">Formation Automatisation et IA agentique</p></div>
     </div>
     <div class="cover-body">
       <h1 class="rise"><span class="l">Assistant, automatisation, agent :</span> <span class="l">savoir quoi utiliser, <span class="mark">et quand</span></span></h1>
@@ -1132,7 +1132,7 @@ slide(f'''    <p class="eyebrow">Ce soir</p>
     <ul class="checks mt">{gl}</ul>''', seq=7, section="16h30 · Lancement de l'intersession",
  notes="Tour de table de clôture : chacun dit en une phrase ce qu'il sait faire maintenant et ce qu'il va observer dans son travail d'ici janvier. Cocher au fur et à mesure. Revenir sur les attentes notées au tour de table du matin. Ce tour de table sert aussi d'évaluation des acquis.")
 
-slide(f'''    <div class="lockup lockup--duo rise"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><img class="partner-logo" src="images/logo-cfd-formation.png" alt="Logo CFD Formation"><div><p class="lockup-name">Summit Flow, pour CFD Formation</p><p class="lockup-sub">Marie Jolly · contact@summitflow.fr · summitflow.fr</p></div></div>
+slide(f'''    <div class="lockup lockup--duo rise"><img class="partner-logo" src="images/logo-cfd-formation.png" alt="Logo CFD Formation"><img class="brand-logo" src="images/logo-summit-flow.png" alt="Logo Summit Flow"><div><p class="lockup-name">CFD × Summit Flow</p><p class="lockup-sub">Marie Jolly · contact@summitflow.fr · summitflow.fr</p></div></div>
     <div class="cover-body">
       <h1 class="rise">Merci, et <span class="mark">bonne observation</span></h1>
       <p class="lead rise">D'ici le 22 janvier, on observe, on note, on remplit la grille.</p>

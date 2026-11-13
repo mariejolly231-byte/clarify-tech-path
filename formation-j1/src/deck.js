@@ -26,7 +26,7 @@
   if (logoImg) document.documentElement.style.setProperty("--logo", 'url("' + logoImg.src + '")');
   const cfdImg = document.querySelector(".partner-logo");
   if (cfdImg) document.documentElement.style.setProperty("--logo-cfd", 'url("' + cfdImg.src + '")');
-  const LOGO = '<i class="chrome-logo" aria-hidden="true"></i>Summit Flow' + (cfdImg ? '<span class="chrome-for">pour</span><i class="chrome-cfd" role="img" aria-label="CFD Formation"></i>' : "");
+  const LOGO = (cfdImg ? '<i class="chrome-cfd" aria-hidden="true"></i>CFD<span class="chrome-x">×</span>' : "") + '<i class="chrome-logo" aria-hidden="true"></i>Summit Flow';
 
   function store(key, value) {
     try { if (value === undefined) return localStorage.getItem("sf-j1-" + key); localStorage.setItem("sf-j1-" + key, value); } catch (e) { return null; }
