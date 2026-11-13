@@ -372,6 +372,8 @@
     const $ = (c) => box.querySelector(c), msg = $(".bl-msg");
     const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
     function render(payload, cache) {
+      if (typeof payload === "string") { try { payload = JSON.parse(payload); } catch (e) { msg.textContent = "Réponse d'Airtable illisible : " + payload.slice(0, 140); return; } }
+      if (!payload || !Array.isArray(payload.records)) { msg.textContent = "Airtable a répondu sans liste de réponses : vérifie la base et la table « Besoins J1 »."; return; }
       const recs = ((payload && payload.records) || []).map((r) => r.cellValuesByFieldId || {});
       const n = recs.length;
       $(".bl-n").textContent = n;
@@ -391,14 +393,15 @@
     }
     function fail(err) {
       const c = err && err.code;
-      const txt = { server_not_connected: "Ajoute le connecteur Airtable dans claude.ai, Paramètres, Connecteurs.", needs_reauth: "Reconnecte Airtable dans claude.ai, Paramètres, Connecteurs.", not_in_manifest: "La page n'a pas l'autorisation de lire Airtable : autorise-la depuis claude.ai.", approval_required: "Clique sur Actualiser pour autoriser la page à lire les réponses.", server_unavailable: "Airtable ne répond pas pour l'instant : nouvel essai dans 30 secondes.", selection_required: "Choisis ton compte Airtable dans la fenêtre de claude.ai." }[c] || "Impossible de lire les réponses pour l'instant.";
-      msg.textContent = txt;
+      const txt = { server_not_connected: "Ajoute le connecteur Airtable dans claude.ai, Paramètres, Connecteurs.", needs_reauth: "Reconnecte Airtable dans claude.ai, Paramètres, Connecteurs.", not_in_manifest: "La page n'a pas l'autorisation de lire Airtable : autorise-la depuis claude.ai.", approval_required: "Clique sur Actualiser pour autoriser la page à lire les réponses.", server_unavailable: "Airtable ne répond pas pour l'instant : nouvel essai dans 30 secondes.", selection_required: "Tu as plusieurs connecteurs Airtable : choisis-en un dans la fenêtre de claude.ai, puis Actualiser.", tool_error: "Airtable refuse la lecture : vérifie que ton compte a accès à la base « Grille d'audit ».", not_granted: "Cette vue ne permet pas d'utiliser tes connecteurs : ouvre le deck depuis claude.ai, connectée à ton compte.", capability_disabled: "Cette vue ne permet pas d'utiliser tes connecteurs : ouvre le deck depuis claude.ai, connectée à ton compte." }[c] || "Impossible de lire les réponses pour l'instant.";
+      // Le code reste affiché en petit : c'est lui qui dit quoi réparer
+      msg.textContent = txt + (c ? " [" + c + (c === "tool_error" || !txt.indexOf("Impossible") ? " : " + String(err.message || "").slice(0, 120) : "") + "]" : "");
       if (["server_not_connected", "needs_reauth", "not_in_manifest", "blocked_by_policy"].includes(c)) box.dataset.state = "off";
     }
     let mcp = null;
     (async () => {
       try { if (window.claude && window.claude.use) mcp = await window.claude.use("mcp"); } catch (e) { mcp = null; }
-      if (!mcp) { box.dataset.state = "off"; return; }
+      if (!mcp) { box.dataset.state = "off"; msg.textContent = "Connecteurs indisponibles dans cette vue : ouvre le deck sur claude.ai, connectée à ton compte, pas en navigation privée ni depuis le fichier."; return; }
       msg.textContent = "Lecture des réponses…";
       mcp.watchTool("Airtable", "list_records_for_table", INPUT, (ev) => { if (ev.type === "data") render(ev.result.payload, ev.result.cache); else fail(ev.error); }, { refetchInterval: 30000 });
     })();
