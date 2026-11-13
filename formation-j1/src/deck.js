@@ -412,7 +412,8 @@
     const KEY = "sf-j1-airtable", URL_API = "https://api.airtable.com/v0/" + INPUT.baseId + "/" + INPUT.tableId + "?pageSize=100&returnFieldsByFieldId=true";
     const keyBox = $(".bl-key"), keyIn = $(".bl-key input");
     let timer = null;
-    const getKey = () => { try { return localStorage.getItem(KEY) || ""; } catch (e) { return ""; } };
+    // Clé intégrée seulement dans la copie personnelle du deck (jamais dans le dépôt ni dans le lien public)
+    const getKey = () => { let k = ""; try { k = localStorage.getItem(KEY) || ""; } catch (e) { k = ""; } const emb = document.getElementById("airtable-key"); return k || (emb ? emb.textContent.trim() : ""); };
     async function readDirect() {
       const k = getKey();
       if (!k) { keyBox.hidden = false; box.dataset.state = "off"; msg.textContent = "Colle ta clé Airtable (lecture seule) pour afficher les réponses en direct."; return; }
@@ -431,6 +432,7 @@
       } catch (e) { msg.textContent = "Pas de réponse d'Airtable (réseau ?) : nouvel essai dans 30 secondes."; }
     }
     function direct() {
+      if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", direct, { once: true }); return; }
       readDirect();
       clearInterval(timer); timer = setInterval(() => { if (!document.hidden) readDirect(); }, 30000);
     }
